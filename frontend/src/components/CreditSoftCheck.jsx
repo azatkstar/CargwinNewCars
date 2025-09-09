@@ -211,7 +211,7 @@ const CreditSoftCheck = () => {
                       <SelectItem value="good">Хороший (700-749)</SelectItem>
                       <SelectItem value="fair">Удовлетворительный (650-699)</SelectItem>
                       <SelectItem value="poor">Плохой (600-649)</SelectItem>
-                      <SelectItem value="bad">Очень плохой (<600)</SelectItem>
+                      <SelectItem value="bad">Очень плохой (&lt;600)</SelectItem>
                       <SelectItem value="unknown">Не знаю</SelectItem>
                     </SelectContent>
                   </Select>
