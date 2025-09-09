@@ -137,20 +137,12 @@ const FOMOTicker = () => {
             <div 
               className="bg-white h-1 rounded-full transition-all duration-4000 ease-linear"
               style={{ 
-                width: `${((currentMessage + 1) / messages.length) * 100}%`,
-                animation: 'progress 4s linear infinite'
+                width: `${((currentMessage + 1) / messages.length) * 100}%`
               }}
             />
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes progress {
-          0% { width: 0%; }
-          100% { width: 100%; }
-        }
-      `}</style>
     </>
   );
 };
