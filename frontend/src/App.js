@@ -4,9 +4,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import OffersSection from "./components/OffersSection";
+import DropSubscription from "./components/DropSubscription";
 import CoverageMap from "./components/CoverageMap";
 import HowItWorks from "./components/HowItWorks";
 import TrustManifest from "./components/TrustManifest";
+import Reviews from "./components/Reviews";
+import FAQ from "./components/FAQ";
+import CreditSoftCheck from "./components/CreditSoftCheck";
+import Footer from "./components/Footer";
+import FOMOTicker from "./components/FOMOTicker";
 
 const Home = () => {
   return (
@@ -14,26 +20,18 @@ const Home = () => {
       <Header />
       <Hero />
       <OffersSection />
+      <DropSubscription />
       <CoverageMap />
       <HowItWorks />
       <TrustManifest />
+      <Reviews />
+      <FAQ />
+      <CreditSoftCheck />
+      <Footer />
+      <FOMOTicker />
       
-      {/* Placeholder sections for remaining components */}
-      <div id="reviews" className="h-96 bg-gray-100 flex items-center justify-center">
-        <p className="text-gray-500">Reviews section - будет добавлена в следующем файле</p>
-      </div>
-      
-      <div id="faq" className="h-96 bg-white flex items-center justify-center">
-        <p className="text-gray-500">FAQ section - будет добавлена в следующем файле</p>
-      </div>
-      
-      <div id="credit" className="h-96 bg-gray-50 flex items-center justify-center">
-        <p className="text-gray-500">Credit soft-check - будет добавлена в следующем файле</p>
-      </div>
-      
-      <div id="drop" className="h-96 bg-white flex items-center justify-center">
-        <p className="text-gray-500">Drop subscription - будет добавлена в следующем файле</p>
-      </div>
+      {/* Add bottom padding to account for FOMO ticker */}
+      <div className="h-16 lg:h-12" />
     </div>
   );
 };
