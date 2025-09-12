@@ -263,8 +263,12 @@ async def get_admin_lots(
         if make and make != "all":
             filtered_lots = [lot for lot in filtered_lots if lot["make"] == make]
             
-        if year:
-            filtered_lots = [lot for lot in filtered_lots if lot["year"] == year]
+        if year and year != "all":
+            try:
+                year_int = int(year)
+                filtered_lots = [lot for lot in filtered_lots if lot["year"] == year_int]
+            except ValueError:
+                pass
             
         if isWeeklyDrop and isWeeklyDrop != "all":
             is_drop = isWeeklyDrop == "true"
