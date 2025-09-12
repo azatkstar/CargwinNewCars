@@ -336,7 +336,12 @@ async def create_lot(lot_data: dict):
             "description": lot_data.get('description', ''),
             "tags": lot_data.get('tags', []),
             "isWeeklyDrop": lot_data.get('isWeeklyDrop', False),
-            "images": lot_data.get('images', []),
+            "images": lot_data.get('images', []) if lot_data.get('images') else [
+                {
+                    "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
+                    "alt": f"{lot_data.get('year', '')} {lot_data.get('make', '')} {lot_data.get('model', '')} — предпросмотр"
+                }
+            ],
             "fomo": lot_data.get('fomo', {}),
             "seo": lot_data.get('seo', {}),
             "publishAt": lot_data.get('publishAt'),
