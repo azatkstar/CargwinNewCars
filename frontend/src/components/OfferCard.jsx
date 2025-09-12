@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
-import { Clock, Eye, TrendingUp, Car, DollarSign } from 'lucide-react';
+import { Clock, Eye, TrendingUp, Car, DollarSign, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { formatPrice, formatTimeRemaining, calculateMonthlyPayment } from '../utils/timer';
 import { getFOMOCounters } from '../mock';
 
@@ -42,12 +43,6 @@ const OfferCard = ({ offer }) => {
     offer.finance.apr,
     offer.finance.termMonths
   );
-
-  const handleReserve = () => {
-    // Mock form submission
-    console.log('Reserving offer:', offer.id);
-    alert('Форма бронирования будет добавлена на следующем этапе');
-  };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -185,14 +180,30 @@ const OfferCard = ({ offer }) => {
           </div>
         </div>
 
-        {/* CTA Button */}
-        <Button 
-          onClick={handleReserve}
-          className="w-full bg-red-600 hover:bg-red-700 text-white py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-          size="lg"
-        >
-          Забронировать цену
-        </Button>
+        {/* CTA Buttons */}
+        <div className="space-y-3">
+          <Button 
+            asChild
+            className="w-full bg-red-600 hover:bg-red-700 text-white py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+            size="lg"
+          >
+            <Link to={`/car/${offer.id}`}>
+              Смотреть подробнее
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Link>
+          </Button>
+          
+          <Button 
+            variant="outline"
+            className="w-full border-red-600 text-red-600 hover:bg-red-50"
+            onClick={() => {
+              // Mock reservation action
+              alert('Функция бронирования будет добавлена в backend');
+            }}
+          >
+            Забронировать цену
+          </Button>
+        </div>
 
         {/* Disclaimer */}
         <div className="mt-4 text-xs text-gray-500 leading-relaxed">

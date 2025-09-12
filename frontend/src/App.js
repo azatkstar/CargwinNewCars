@@ -13,6 +13,7 @@ import FAQ from "./components/FAQ";
 import CreditSoftCheck from "./components/CreditSoftCheck";
 import Footer from "./components/Footer";
 import FOMOTicker from "./components/FOMOTicker";
+import CarDetail from "./pages/CarDetail";
 
 const Home = () => {
   return (
@@ -41,9 +42,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/car/:carId" element={<CarDetail />} />
         </Routes>
       </BrowserRouter>
     </div>
