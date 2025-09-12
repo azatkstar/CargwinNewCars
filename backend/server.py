@@ -29,6 +29,7 @@ api_router = APIRouter(prefix="/api")
 
 # In-memory storage for demo (in production use database)
 lots_storage = {}
+preview_tokens = {}  # Store preview tokens with lot data
 
 
 # Define Models
