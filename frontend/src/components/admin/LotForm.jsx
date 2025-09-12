@@ -109,6 +109,7 @@ const LotForm = () => {
     }
     if (!lot.trim) newErrors.trim = 'Комплектация обязательна';
     if (lot.msrp < 1000) newErrors.msrp = 'MSRP должно быть не менее $1,000';
+    if (lot.discount < 0) newErrors.discount = 'Скидка не может быть отрицательной';
     if (lot.discount > lot.msrp) newErrors.discount = 'Скидка не может превышать MSRP';
     if (lot.description.length < 140) newErrors.description = 'Описание должно содержать минимум 140 символов';
     if (lot.images.length === 0) newErrors.images = 'Необходимо загрузить хотя бы одно изображение';
