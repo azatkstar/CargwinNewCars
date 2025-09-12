@@ -300,34 +300,65 @@ async def get_admin_lots(
         raise HTTPException(status_code=500, detail="Failed to fetch lots")
 
 @api_router.post("/admin/lots")
-async def create_lot(lot_data: LotCreate):
+async def create_lot(lot_data: dict):
     """Create new lot"""
     try:
-        # Generate slug
-        slug = f"{lot_data.year}-{lot_data.make}-{lot_data.model}-{lot_data.trim}".lower().replace(" ", "-")
+        # Generate ID and slug
+        lot_id = str(uuid.uuid4())
+        
+        # Extract data safely
+        make = lot_data.get('make', '')
+        model = lot_data.get('model', '')
+        year = lot_data.get('year', 2024)
+        trim = lot_data.get('trim', '')
+        
+        slug = f"{year}-{make}-{model}-{trim}".lower().replace(" ", "-").replace("--", "-")
         
         new_lot = {
-            "id": str(uuid.uuid4()),
+            "id": lot_id,
             "slug": slug,
-            **lot_data.dict(),
+            "status": lot_data.get('status', 'draft'),
+            "make": make,
+            "model": model,
+            "year": year,
+            "trim": trim,
+            "vin": lot_data.get('vin', ''),
+            "drivetrain": lot_data.get('drivetrain', 'FWD'),
+            "engine": lot_data.get('engine', ''),
+            "transmission": lot_data.get('transmission', 'AT'),
+            "exteriorColor": lot_data.get('exteriorColor', ''),
+            "interiorColor": lot_data.get('interiorColor', ''),
+            "msrp": lot_data.get('msrp', 0),
+            "discount": lot_data.get('discount', 0),
+            "feesHint": lot_data.get('feesHint', 0),
+            "state": lot_data.get('state', 'CA'),
+            "description": lot_data.get('description', ''),
+            "tags": lot_data.get('tags', []),
+            "isWeeklyDrop": lot_data.get('isWeeklyDrop', False),
+            "images": lot_data.get('images', []),
+            "fomo": lot_data.get('fomo', {}),
+            "seo": lot_data.get('seo', {}),
+            "publishAt": lot_data.get('publishAt'),
             "createdAt": datetime.utcnow().isoformat(),
-            "updatedAt": datetime.utcnow().isoformat()
+            "updatedAt": datetime.utcnow().isoformat(),
+            "archivedAt": None
         }
         
-        logger.info(f"Creating new lot: {new_lot['id']}")
+        # Store in memory
+        lots_storage[lot_id] = new_lot
         
-        # In production, save to database
-        # await db.lots.insert_one(new_lot)
+        logger.info(f"Creating new lot: {lot_id} - {make} {model} {year}")
         
         return {
             "ok": True,
-            "id": new_lot["id"],
+            "id": lot_id,
             "data": new_lot
         }
         
     except Exception as e:
         logger.error(f"Create lot error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to create lot")
+        logger.error(f"Lot data received: {lot_data}")
+        raise HTTPException(status_code=500, detail=f"Failed to create lot: {str(e)}")
 
 @api_router.get("/admin/lots/{lot_id}")
 async def get_lot(lot_id: str):
