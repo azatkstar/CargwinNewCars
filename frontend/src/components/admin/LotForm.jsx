@@ -227,15 +227,50 @@ const LotForm = () => {
     }
   };
 
-  const handlePreview = () => {
-    // Generate preview token and open preview
-    const timestamp = Date.now();
-    const randomStr = Math.random().toString(36).substr(2, 9);
-    const previewToken = `${timestamp}-${randomStr}`;
-    const previewUrl = `/preview/${previewToken}`;
-    
-    console.log('Opening preview:', previewUrl);
-    window.open(previewUrl, '_blank');
+  const handlePreview = async () => {
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      
+      // If editing existing lot, create preview token for saved lot
+      if (isEditing && id) {
+        const response = await fetch(`${BACKEND_URL}/api/admin/lots/${id}/preview`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          const previewUrl = `/preview/${data.token}`;
+          console.log('Opening preview for saved lot:', previewUrl);
+          window.open(previewUrl, '_blank');
+        } else {
+          console.error('Failed to create preview token for saved lot');
+          alert('Ошибка создания предпросмотра. Сначала сохраните лот.');
+        }
+      } else {
+        // For new/unsaved lot, send current form data
+        const response = await fetch(`${BACKEND_URL}/api/admin/lots/preview-unsaved`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(lot)
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          const previewUrl = `/preview/${data.token}`;
+          console.log('Opening preview for unsaved lot:', previewUrl);
+          window.open(previewUrl, '_blank');
+        } else {
+          console.error('Failed to create preview token for unsaved lot');
+          alert('Ошибка создания предпросмотра. Проверьте данные лота.');
+        }
+      }
+    } catch (error) {
+      console.error('Preview error:', error);
+      alert('Ошибка создания предпросмотра. Попробуйте позже.');
+    }
   };
 
   if (loading) {
