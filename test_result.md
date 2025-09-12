@@ -151,20 +151,17 @@ frontend:
         agent: "main"
         comment: "Fixed by using Math.abs() for discount display"
 
-  - task: "Improve backend lot creation and update validation"
-    implemented: true
-    working: true
-    file: "/app/backend/server.py"
+  - task: "Fix lot preview functionality to show actual lot data"
+    implemented: false
+    working: false
+    file: "/app/backend/server.py, /app/frontend/src/components/admin/LotForm.jsx, /app/frontend/src/pages/PreviewLot.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-      - working: true
+      - working: false
         agent: "main"
-        comment: "Added validation to ensure positive values for msrp, discount, and feesHint. Improved update_lot and get_lot functions to work with in-memory storage"
-      - working: true
-        agent: "testing"
-        comment: "VALIDATION TESTING COMPLETED: All backend validation rules working correctly. Tested edge cases: zero discount (0->0), positive discount (5000->5000), negative discount (-1000->0). The max(0, value) validation in create_lot and update_lot functions properly prevents negative values for msrp, discount, and feesHint. Update functionality preserves existing data while applying new values with validation. All pricing calculations accurate."
+        comment: "User reported: Created 2025 Chevrolet Colorado but preview shows Honda Accord. Preview function returns hardcoded mock data instead of actual lot data"
 
 metadata:
   created_by: "main_agent"
