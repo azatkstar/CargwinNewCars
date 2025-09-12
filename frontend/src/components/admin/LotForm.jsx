@@ -175,34 +175,48 @@ const LotForm = () => {
 
     setSaving(true);
     try {
-      const url = isEditing ? `/api/admin/lots/${id}` : '/api/admin/lots';
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const url = isEditing ? `${BACKEND_URL}/api/admin/lots/${id}` : `${BACKEND_URL}/api/admin/lots`;
       const method = isEditing ? 'PATCH' : 'POST';
       
       const payload = { ...lot };
       if (action === 'publish') payload.status = 'published';
       if (action === 'schedule' && lot.publishAt) payload.status = 'scheduled';
 
+      console.log('Saving lot:', payload);
+
       const response = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload),
+        credentials: 'include'
       });
+
+      console.log('Save response status:', response.status);
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Lot saved:', data);
+        console.log('Lot saved successfully:', data);
         
         if (action === 'publish') {
           alert('Лот успешно опубликован!');
         } else if (action === 'schedule') {
           alert('Лот запланирован к публикации!');
         } else {
-          alert('Лот сохранен!');
+          alert('Лот сохранен успешно!');
         }
         
-        if (!isEditing) {
+        // Navigate back to lots list after successful save
+        setTimeout(() => {
           navigate('/admin/lots');
-        }
+        }, 1000);
+      } else {
+        const errorData = await response.json();
+        console.error('Save error response:', errorData);
+        throw new Error(errorData.detail || 'Ошибка сервера');
       }
     } catch (error) {
       console.error('Save failed:', error);
