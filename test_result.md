@@ -119,8 +119,8 @@ backend:
 
 frontend:
   - task: "Fix negative discount validation display in LotForm"
-    implemented: false
-    working: false
+    implemented: true
+    working: true
     file: "/app/frontend/src/components/admin/LotForm.jsx"
     stuck_count: 1
     priority: "high"
@@ -129,10 +129,13 @@ frontend:
       - working: false
         agent: "main"
         comment: "Found the issue - forced minus sign before formatPrice(lot.discount) causing --$3500 display when discount is negative"
+      - working: true
+        agent: "main"
+        comment: "Fixed by using Math.abs() for discount display and adding validation to ensure discount is always positive"
 
   - task: "Fix negative discount display in LotsList"
-    implemented: false
-    working: false
+    implemented: true
+    working: true
     file: "/app/frontend/src/components/admin/LotsList.jsx"
     stuck_count: 0
     priority: "medium"
@@ -141,6 +144,21 @@ frontend:
       - working: false
         agent: "main"
         comment: "Same issue as LotForm - forced minus sign before formatPrice causes double minus"
+      - working: true
+        agent: "main"
+        comment: "Fixed by using Math.abs() for discount display"
+
+  - task: "Improve backend lot creation and update validation"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added validation to ensure positive values for msrp, discount, and feesHint. Improved update_lot and get_lot functions to work with in-memory storage"
 
 metadata:
   created_by: "main_agent"
