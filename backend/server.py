@@ -197,6 +197,9 @@ async def get_admin_lots(
 ):
     """Get lots for admin panel with filtering"""
     try:
+        # Get lots from storage + mock data
+        stored_lots = list(lots_storage.values())
+        
         # Mock lots data
         mock_lots = [
             {
