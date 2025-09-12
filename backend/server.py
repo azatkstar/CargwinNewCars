@@ -27,6 +27,9 @@ app = FastAPI()
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
+# In-memory storage for demo (in production use database)
+lots_storage = {}
+
 
 # Define Models
 class StatusCheck(BaseModel):
