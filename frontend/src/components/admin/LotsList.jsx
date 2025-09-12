@@ -41,17 +41,34 @@ const LotsList = () => {
   const fetchLots = async () => {
     setLoading(true);
     try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
       const params = new URLSearchParams({
-        page: pagination.page,
-        limit: pagination.limit,
-        ...filters
+        page: pagination.page.toString(),
+        limit: pagination.limit.toString(),
+        search: filters.search || '',
+        status: filters.status || 'all',
+        make: filters.make || 'all',
+        year: filters.year || 'all',
+        isWeeklyDrop: filters.isWeeklyDrop || 'all'
       });
 
-      const response = await fetch(`/api/admin/lots?${params}`);
-      const data = await response.json();
+      console.log('Fetching lots with params:', params.toString());
+
+      const response = await fetch(`${BACKEND_URL}/api/admin/lots?${params}`, {
+        credentials: 'include'
+      });
       
-      setLots(data.items || []);
-      setPagination(prev => ({ ...prev, total: data.total || 0 }));
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Lots fetched successfully:', data);
+        setLots(data.items || []);
+        setPagination(prev => ({ ...prev, total: data.total || 0 }));
+      } else {
+        console.error('Fetch lots error:', response.status);
+        // Use mock data as fallback
+        setLots(mockLots);
+        setPagination(prev => ({ ...prev, total: mockLots.length }));
+      }
     } catch (error) {
       console.error('Failed to fetch lots:', error);
       // Mock data fallback
