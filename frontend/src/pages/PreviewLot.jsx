@@ -25,29 +25,25 @@ const PreviewLot = () => {
   const fetchPreviewData = async () => {
     setLoading(true);
     try {
-      // Mock preview data based on token
-      const mockLot = {
-        id: 'preview-lot',
-        title: '2024 Honda Accord LX',
-        msrp: 28900,
-        fleet: 25800,
-        savings: 3100,
-        stockLeft: 1,
-        image: "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxuZXclMjBjYXJ8ZW58MHx8fHwxNzU3NDQxNzA1fDA&ixlib=rb-4.1.0&q=85",
-        dealer: "City Honda, OC",
-        endsAt: new Date(Date.now() + 52 * 60 * 60 * 1000),
-        addonsAvg: 3445,
-        lease: { 
-          termMonths: 36, 
-          milesPerYear: 10000, 
-          dueAtSigning: 2800, 
-          monthly: 310, 
-          incentives: 1800 
-        },
-        finance: { 
-          apr: 3.5, 
-          termMonths: 60, 
-          downPayment: 2500 
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/preview/${token}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        setLotData(data);
+        setError(null);
+      } else if (response.status === 404) {
+        setError('Предпросмотр не найден или истек срок действия');
+      } else {
+        setError('Ошибка загрузки предпросмотра');
+      }
+    } catch (error) {
+      console.error('Failed to fetch preview data:', error);
+      setError('Ошибка загрузки данных предпросмотра');
+    } finally {
+      setLoading(false);
+    }
+  }; 
         },
         gallery: [
           "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxuZXclMjBjYXJ8ZW58MHx8fHwxNzU3NDQxNzA1fDA&ixlib=rb-4.1.0&q=85",
