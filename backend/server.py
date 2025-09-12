@@ -37,6 +37,59 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Admin Models
+class MagicLinkRequest(BaseModel):
+    email: str
+
+class LotCreate(BaseModel):
+    make: str
+    model: str
+    year: int
+    trim: str
+    vin: Optional[str] = ""
+    drivetrain: str = "FWD"
+    engine: Optional[str] = ""
+    transmission: str = "AT"
+    exteriorColor: Optional[str] = ""
+    interiorColor: Optional[str] = ""
+    msrp: int
+    discount: int = 0
+    feesHint: int = 0
+    state: str = "CA"
+    description: str
+    tags: List[str] = []
+    isWeeklyDrop: bool = False
+    status: str = "draft"
+
+class Lot(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    slug: str
+    status: str
+    make: str
+    model: str
+    year: int
+    trim: str
+    vin: Optional[str] = ""
+    drivetrain: str
+    engine: Optional[str] = ""
+    transmission: str
+    exteriorColor: Optional[str] = ""
+    interiorColor: Optional[str] = ""
+    msrp: int
+    discount: int
+    feesHint: int
+    state: str
+    description: str
+    tags: List[str]
+    isWeeklyDrop: bool
+    images: List[Dict[str, Any]] = []
+    fomo: Dict[str, Any] = {}
+    seo: Dict[str, Any] = {}
+    publishAt: Optional[datetime] = None
+    createdAt: datetime = Field(default_factory=datetime.utcnow)
+    updatedAt: datetime = Field(default_factory=datetime.utcnow)
+    archivedAt: Optional[datetime] = None
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
