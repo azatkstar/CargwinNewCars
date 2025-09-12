@@ -43,37 +43,6 @@ const PreviewLot = () => {
     } finally {
       setLoading(false);
     }
-  }; 
-        },
-        gallery: [
-          "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxuZXclMjBjYXJ8ZW58MHx8fHwxNzU3NDQxNzA1fDA&ixlib=rb-4.1.0&q=85",
-          "https://images.unsplash.com/photo-1712885046114-5ea81a2f7555?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxjYXIlMjBzdHVkaW98ZW58MHx8fHwxNzU3NDQxNzE1fDA&ixlib=rb-4.1.0&q=85",
-          "https://images.pexels.com/photos/720815/pexels-photo-720815.jpeg",
-          "https://images.pexels.com/photos/244818/pexels-photo-244818.jpeg"
-        ],
-        specs: {
-          year: '2024',
-          make: 'Honda',
-          model: 'Accord',
-          trim: 'LX',
-          engine: '1.5L Turbo I4',
-          transmission: 'CVT',
-          drivetrain: 'FWD',
-          exteriorColor: 'Белый жемчуг',
-          interiorColor: 'Чёрная кожа',
-          vin: `1HGCV${Math.random().toString(36).substr(2, 12).toUpperCase()}`
-        },
-        isDrop: true, // Preview as drop item
-        description: "Это предпросмотр лота в админ-панели. В реальном окружении здесь будет отображаться актуальная информация о лоте перед публикацией."
-      };
-
-      setLotData(mockLot);
-    } catch (error) {
-      console.error('Failed to fetch preview data:', error);
-      setError('Не удалось загрузить данные предпросмотра');
-    } finally {
-      setLoading(false);
-    }
   };
 
   if (loading) {
