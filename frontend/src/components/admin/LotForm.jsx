@@ -214,7 +214,12 @@ const LotForm = () => {
 
   const handlePreview = () => {
     // Generate preview token and open preview
-    const previewUrl = `/preview/${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const timestamp = Date.now();
+    const randomStr = Math.random().toString(36).substr(2, 9);
+    const previewToken = `${timestamp}-${randomStr}`;
+    const previewUrl = `/preview/${previewToken}`;
+    
+    console.log('Opening preview:', previewUrl);
     window.open(previewUrl, '_blank');
   };
 
