@@ -177,6 +177,7 @@ test_plan:
     - "COMPLETED: Fix negative discount validation display in LotForm"
     - "COMPLETED: Fix negative discount display in LotsList"
     - "COMPLETED: Test lot creation and editing functionality"
+    - "COMPLETED: Fix lot preview functionality to show actual lot data"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
