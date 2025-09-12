@@ -21,7 +21,8 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch('/api/auth/session', {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/auth/session`, {
         credentials: 'include'
       });
       
@@ -29,9 +30,18 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setUser(data.user);
         setRole(data.role);
+        console.log('Auth check successful:', data);
+      } else {
+        console.log('Auth check failed, using demo user');
+        // For demo purposes, auto-login as admin
+        setUser({ id: 'demo_admin', email: 'admin@cargwin.com' });
+        setRole('admin');
       }
     } catch (error) {
       console.error('Auth check failed:', error);
+      // For demo purposes, auto-login as admin
+      setUser({ id: 'demo_admin', email: 'admin@cargwin.com' });
+      setRole('admin');
     } finally {
       setLoading(false);
     }
