@@ -1,0 +1,65 @@
+{
+  "admin": {
+    "login": {
+      "title": "Вход в админ-панель",
+      "subtitle": "CargwinNewCar Administration",
+      "email_label": "Email адрес",
+      "email_placeholder": "admin@cargwin.com",
+      "send_link": "Отправить magic-link",
+      "sending": "Отправляем...",
+      "success": "Ссылка отправлена на email",
+      "error": "Ошибка отправки"
+    },
+    "nav": {
+      "lots": "Лоты",
+      "settings": "Настройки",
+      "audit": "Аудит",
+      "logout": "Выход"
+    },
+    "lots": {
+      "title": "Управление лотами",
+      "create_new": "Создать лот",
+      "search_placeholder": "Поиск по марке, модели, VIN...",
+      "filter_status": "Статус",
+      "filter_make": "Марка",
+      "filter_year": "Год",
+      "filter_weekly_drop": "Дроп недели",
+      "batch_actions": "Массовые действия",
+      "publish_selected": "Опубликовать выбранные",
+      "archive_selected": "Архивировать выбранные",
+      "delete_selected": "Удалить выбранные",
+      "export_selected": "Экспорт выбранных",
+      "import_csv": "Импорт CSV/XLSX",
+      "total_lots": "Всего лотов",
+      "selected_lots": "Выбрано"
+    },
+    "lot_form": {
+      "tabs": {
+        "basic": "Основное",
+        "media": "Медиа",
+        "pricing": "Цены/OTD",
+        "weekly_drop": "Дроп недели",
+        "fomo": "FOMO",
+        "seo": "SEO",
+        "technical": "Техническое"
+      }
+    },
+    "actions": {
+      "save": "Сохранить",
+      "save_draft": "Сохранить как черновик",
+      "preview": "Предпросмотр",
+      "schedule": "Запланировать",
+      "publish": "Опубликовать",
+      "archive": "Архивировать",
+      "delete": "Удалить",
+      "cancel": "Отмена"
+    },
+    "status": {
+      "draft": "Черновик",
+      "scheduled": "Запланирован",
+      "published": "Опубликован",
+      "archived": "Архивирован",
+      "deleted": "Удален"
+    }
+  }
+}
