@@ -14,6 +14,8 @@ import CreditSoftCheck from "./components/CreditSoftCheck";
 import Footer from "./components/Footer";
 import FOMOTicker from "./components/FOMOTicker";
 import CarDetail from "./pages/CarDetail";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import { AuthProvider } from "./hooks/useAuth";
 
 const Home = () => {
   return (
@@ -41,10 +43,13 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/car/:carId" element={<CarDetail />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/car/:carId" element={<CarDetail />} />
+            <Route path="/admin/*" element={<AdminDashboard />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );
