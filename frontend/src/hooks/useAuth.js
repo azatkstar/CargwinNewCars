@@ -48,16 +48,33 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email) => {
-    const response = await fetch('/api/auth/magic', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    });
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/auth/magic`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
 
-    const data = await response.json();
-    return data;
+      const data = await response.json();
+      
+      if (data.ok) {
+        // For demo, immediately set user as authenticated
+        let role = 'viewer';
+        if (email.includes('admin@')) role = 'admin';
+        else if (email.includes('editor@')) role = 'editor';
+        
+        setUser({ id: 'demo_user', email });
+        setRole(role);
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Login error:', error);
+      return { ok: false, error: 'Network error' };
+    }
   };
 
   const logout = async () => {
