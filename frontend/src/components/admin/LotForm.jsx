@@ -591,7 +591,7 @@ const LotForm = () => {
                     type="number"
                     min="0"
                     value={lot.discount}
-                    onChange={(e) => handleInputChange('discount', parseInt(e.target.value) || 0)}
+                    onChange={(e) => handleInputChange('discount', Math.abs(parseInt(e.target.value) || 0))}
                     className={errors.discount ? 'border-red-500' : ''}
                   />
                   {errors.discount && <p className="text-sm text-red-600 mt-1">{errors.discount}</p>}
