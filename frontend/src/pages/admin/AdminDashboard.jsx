@@ -1,0 +1,40 @@
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import AdminLogin from './AdminLogin';
+import AdminLayout from '../../components/admin/AdminLayout';
+import LotsList from '../../components/admin/LotsList';
+import LotForm from '../../components/admin/LotForm';
+import AdminSettings from './AdminSettings';
+import AuditLog from './AuditLog';
+
+const AdminDashboard = () => {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <AdminLogin />;
+  }
+
+  return (
+    <AdminLayout>
+      <Routes>
+        <Route path="/" element={<Navigate to="/admin/lots" replace />} />
+        <Route path="/lots" element={<LotsList />} />
+        <Route path="/lots/new" element={<LotForm />} />
+        <Route path="/lots/:id/edit" element={<LotForm />} />
+        <Route path="/settings" element={<AdminSettings />} />
+        <Route path="/audit" element={<AuditLog />} />
+      </Routes>
+    </AdminLayout>
+  );
+};
+
+export default AdminDashboard;
