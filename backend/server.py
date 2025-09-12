@@ -423,14 +423,34 @@ async def update_lot(lot_id: str, lot_data: dict):
     try:
         logger.info(f"Updating lot: {lot_id}")
         
-        # In production, update in database
-        # await db.lots.update_one({"id": lot_id}, {"$set": lot_data})
+        # Check if lot exists in storage
+        if lot_id not in lots_storage:
+            raise HTTPException(status_code=404, detail="Lot not found")
+        
+        # Get existing lot
+        existing_lot = lots_storage[lot_id]
+        
+        # Update with new data, ensuring positive values for prices
+        updated_lot = {
+            **existing_lot,
+            **lot_data,
+            "msrp": max(0, lot_data.get('msrp', existing_lot.get('msrp', 0))),
+            "discount": max(0, lot_data.get('discount', existing_lot.get('discount', 0))),
+            "feesHint": max(0, lot_data.get('feesHint', existing_lot.get('feesHint', 0))),
+            "updatedAt": datetime.utcnow().isoformat()
+        }
+        
+        # Store updated lot
+        lots_storage[lot_id] = updated_lot
         
         return {
             "ok": True,
-            "message": "Lot updated successfully"
+            "message": "Lot updated successfully",
+            "data": updated_lot
         }
         
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Update lot error: {e}")
         raise HTTPException(status_code=500, detail="Failed to update lot")
