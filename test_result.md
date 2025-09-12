@@ -178,3 +178,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Identified root cause of negative discount validation issue. The problem is forced minus sign before formatPrice() function. Will fix both LotForm.jsx and LotsList.jsx files."
+  - agent: "main"
+    message: "COMPLETED: Fixed negative discount validation display issue in both frontend components and added backend validation to ensure positive values. Ready for testing."
