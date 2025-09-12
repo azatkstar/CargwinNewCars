@@ -563,6 +563,18 @@ async def get_preview_lot(token: str):
             "fleet": lot_data.get('msrp', 0) - lot_data.get('discount', 0),
             "savings": lot_data.get('discount', 0),
             "description": lot_data.get('description', 'Это предпросмотр лота из админ-панели.'),
+            "image": (lot_data.get('images', []) if lot_data.get('images') else [
+                {
+                    "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
+                    "alt": f"{lot_data.get('year', '')} {lot_data.get('make', '')} {lot_data.get('model', '')} — предпросмотр"
+                }
+            ])[0]["url"],
+            "gallery": [img["url"] for img in (lot_data.get('images', []) if lot_data.get('images') else [
+                {
+                    "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
+                    "alt": f"{lot_data.get('year', '')} {lot_data.get('make', '')} {lot_data.get('model', '')} — предпросмотр"
+                }
+            ])],
             "specs": {
                 "year": str(lot_data.get('year', '')),
                 "make": lot_data.get('make', ''),
@@ -587,7 +599,24 @@ async def get_preview_lot(token: str):
             "stockLeft": 1,
             "dealer": "Fleet Preview",
             "endsAt": datetime.utcnow() + timedelta(hours=48),
-            "addonsAvg": lot_data.get('feesHint', 0)
+            "addonsAvg": lot_data.get('feesHint', 0),
+            "lease": {
+                "termMonths": 36,
+                "milesPerYear": 10000,
+                "dueAtSigning": 2800,
+                "monthly": 310,
+                "incentives": 1800
+            },
+            "finance": {
+                "apr": 3.5,
+                "termMonths": 60,
+                "downPayment": 2500,
+                "monthlyPayment": 520
+            },
+            "cash": {
+                "incentives": 2500,
+                "total": lot_data.get('msrp', 0) - lot_data.get('discount', 0)
+            }
         }
         
         logger.info(f"Preview requested for token: {token}, lot: {lot_data.get('make', '')} {lot_data.get('model', '')}")
