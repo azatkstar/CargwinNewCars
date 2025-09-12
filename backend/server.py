@@ -107,6 +107,290 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
+# Admin Authentication Routes
+@api_router.post("/auth/magic")
+async def magic_link_auth(request: MagicLinkRequest):
+    """Send magic link (mock implementation)"""
+    try:
+        # Determine role based on email
+        role = "viewer"
+        if "admin@" in request.email:
+            role = "admin"
+        elif "editor@" in request.email:
+            role = "editor"
+        
+        # Log the magic link request
+        logger.info(f"Magic link requested for: {request.email} (role: {role})")
+        
+        # In production, you would:
+        # 1. Generate secure token
+        # 2. Send email with magic link
+        # 3. Store token in database
+        
+        return {"ok": True, "message": "Magic link sent successfully"}
+    except Exception as e:
+        logger.error(f"Magic link error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to send magic link")
+
+@api_router.post("/auth/session")
+async def check_session(response: Response):
+    """Check if user has valid session (mock implementation)"""
+    try:
+        # Mock authenticated user for demo
+        mock_user = {
+            "id": "user_123",
+            "email": "admin@cargwin.com",
+            "role": "admin"
+        }
+        
+        # In production, verify JWT token from httpOnly cookie
+        return {
+            "user": {
+                "id": mock_user["id"],
+                "email": mock_user["email"]
+            },
+            "role": mock_user["role"]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+
+@api_router.get("/auth/session")
+async def get_session():
+    """Get current session (mock implementation)"""
+    try:
+        # Mock authenticated user for demo
+        mock_user = {
+            "id": "user_123",
+            "email": "admin@cargwin.com",
+            "role": "admin"
+        }
+        
+        return {
+            "user": {
+                "id": mock_user["id"],
+                "email": mock_user["email"]
+            },
+            "role": mock_user["role"]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+
+@api_router.post("/auth/logout")
+async def logout(response: Response):
+    """Logout user"""
+    # In production, clear httpOnly cookie
+    return {"ok": True, "message": "Logged out successfully"}
+
+# Admin Lots Routes
+@api_router.get("/admin/lots")
+async def get_admin_lots(
+    page: int = 1,
+    limit: int = 20,
+    search: Optional[str] = None,
+    status: Optional[str] = None,
+    make: Optional[str] = None,
+    year: Optional[int] = None,
+    isWeeklyDrop: Optional[str] = None
+):
+    """Get lots for admin panel with filtering"""
+    try:
+        # Mock lots data
+        mock_lots = [
+            {
+                "id": "lot-1",
+                "slug": "2024-honda-accord-lx-cv123",
+                "status": "published",
+                "make": "Honda",
+                "model": "Accord",
+                "year": 2024,
+                "trim": "LX",
+                "vin": "1HGCV1F30NA123456",
+                "drivetrain": "FWD",
+                "engine": "1.5L Turbo I4",
+                "transmission": "CVT",
+                "exteriorColor": "White Pearl",
+                "interiorColor": "Black Leather",
+                "msrp": 28900,
+                "discount": 3100,
+                "feesHint": 3445,
+                "state": "CA",
+                "description": "Новый Honda Accord 2024 года в комплектации LX.",
+                "tags": ["sedan", "2024", "honda"],
+                "isWeeklyDrop": True,
+                "images": [{"url": "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1", "alt": "Honda Accord 2024"}],
+                "createdAt": "2025-01-10T08:00:00Z",
+                "updatedAt": "2025-01-10T10:30:00Z"
+            },
+            {
+                "id": "lot-2",
+                "slug": "2025-kia-niro-ev-wind-ab456",
+                "status": "draft",
+                "make": "Kia",
+                "model": "Niro EV",
+                "year": 2025,
+                "trim": "Wind FWD",
+                "vin": "5XYP0DAE5RG456789",
+                "drivetrain": "FWD",
+                "engine": "Electric",
+                "transmission": "Single-speed",
+                "exteriorColor": "Gravity Gray",
+                "interiorColor": "Black Cloth",
+                "msrp": 41225,
+                "discount": 5725,
+                "feesHint": 3860,
+                "state": "CA",
+                "description": "Новый электрический кроссовер Kia Niro EV 2025 года.",
+                "tags": ["electric", "2025", "kia"],
+                "isWeeklyDrop": False,
+                "images": [{"url": "https://images.unsplash.com/photo-1714008384412-97137b26ab42", "alt": "Kia Niro EV 2025"}],
+                "createdAt": "2025-01-10T09:00:00Z",
+                "updatedAt": "2025-01-10T09:15:00Z"
+            }
+        ]
+        
+        # Apply filters
+        filtered_lots = mock_lots.copy()
+        
+        if search:
+            filtered_lots = [lot for lot in filtered_lots if 
+                           search.lower() in lot["make"].lower() or 
+                           search.lower() in lot["model"].lower() or 
+                           search.lower() in lot.get("vin", "").lower()]
+        
+        if status and status != "all":
+            filtered_lots = [lot for lot in filtered_lots if lot["status"] == status]
+            
+        if make and make != "all":
+            filtered_lots = [lot for lot in filtered_lots if lot["make"] == make]
+            
+        if year:
+            filtered_lots = [lot for lot in filtered_lots if lot["year"] == year]
+            
+        if isWeeklyDrop and isWeeklyDrop != "all":
+            is_drop = isWeeklyDrop == "true"
+            filtered_lots = [lot for lot in filtered_lots if lot["isWeeklyDrop"] == is_drop]
+        
+        # Pagination
+        start_idx = (page - 1) * limit
+        end_idx = start_idx + limit
+        paginated_lots = filtered_lots[start_idx:end_idx]
+        
+        return {
+            "items": paginated_lots,
+            "total": len(filtered_lots),
+            "page": page,
+            "limit": limit
+        }
+        
+    except Exception as e:
+        logger.error(f"Get admin lots error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch lots")
+
+@api_router.post("/admin/lots")
+async def create_lot(lot_data: LotCreate):
+    """Create new lot"""
+    try:
+        # Generate slug
+        slug = f"{lot_data.year}-{lot_data.make}-{lot_data.model}-{lot_data.trim}".lower().replace(" ", "-")
+        
+        new_lot = {
+            "id": str(uuid.uuid4()),
+            "slug": slug,
+            **lot_data.dict(),
+            "createdAt": datetime.utcnow().isoformat(),
+            "updatedAt": datetime.utcnow().isoformat()
+        }
+        
+        logger.info(f"Creating new lot: {new_lot['id']}")
+        
+        # In production, save to database
+        # await db.lots.insert_one(new_lot)
+        
+        return {
+            "ok": True,
+            "id": new_lot["id"],
+            "data": new_lot
+        }
+        
+    except Exception as e:
+        logger.error(f"Create lot error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create lot")
+
+@api_router.get("/admin/lots/{lot_id}")
+async def get_lot(lot_id: str):
+    """Get single lot for editing"""
+    try:
+        # Mock lot data
+        mock_lot = {
+            "id": lot_id,
+            "slug": "2024-honda-accord-lx-cv123",
+            "status": "published",
+            "make": "Honda",
+            "model": "Accord",
+            "year": 2024,
+            "trim": "LX",
+            "vin": "1HGCV1F30NA123456",
+            "drivetrain": "FWD",
+            "engine": "1.5L Turbo I4",
+            "transmission": "CVT",
+            "exteriorColor": "White Pearl",
+            "interiorColor": "Black Leather",
+            "msrp": 28900,
+            "discount": 3100,
+            "feesHint": 3445,
+            "state": "CA",
+            "description": "Новый Honda Accord 2024 года в комплектации LX. Экономичный и надежный седан с современными технологиями безопасности Honda Sensing.",
+            "tags": ["sedan", "2024", "honda", "reliable"],
+            "isWeeklyDrop": True,
+            "images": [
+                {
+                    "id": "img_1",
+                    "url": "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1",
+                    "alt": "2024 Honda Accord LX — вид спереди",
+                    "ratio": "16:9",
+                    "width": 1920,
+                    "height": 1080,
+                    "isHero": True
+                }
+            ],
+            "fomo": {
+                "mode": "deterministic",
+                "viewers": 32,
+                "confirms15": 7
+            },
+            "seo": {
+                "title": "Honda Accord LX 2024 - Fleet предложение | CargwinNewCar",
+                "description": "Эксклюзивное fleet-предложение на Honda Accord LX 2024. Экономия $3,100. Без допов и торгов.",
+                "noindex": False
+            },
+            "createdAt": "2025-01-10T08:00:00Z",
+            "updatedAt": "2025-01-10T10:30:00Z"
+        }
+        
+        return mock_lot
+        
+    except Exception as e:
+        logger.error(f"Get lot error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch lot")
+
+@api_router.patch("/admin/lots/{lot_id}")
+async def update_lot(lot_id: str, lot_data: dict):
+    """Update existing lot"""
+    try:
+        logger.info(f"Updating lot: {lot_id}")
+        
+        # In production, update in database
+        # await db.lots.update_one({"id": lot_id}, {"$set": lot_data})
+        
+        return {
+            "ok": True,
+            "message": "Lot updated successfully"
+        }
+        
+    except Exception as e:
+        logger.error(f"Update lot error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update lot")
+
 # Include the router in the main app
 app.include_router(api_router)
 
