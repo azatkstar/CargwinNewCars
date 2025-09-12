@@ -186,11 +186,11 @@ async def logout(response: Response):
 async def get_admin_lots(
     page: int = 1,
     limit: int = 20,
-    search: Optional[str] = None,
-    status: Optional[str] = None,
-    make: Optional[str] = None,
-    year: Optional[int] = None,
-    isWeeklyDrop: Optional[str] = None
+    search: Optional[str] = "",
+    status: Optional[str] = "all",
+    make: Optional[str] = "all", 
+    year: Optional[str] = "all",
+    isWeeklyDrop: Optional[str] = "all"
 ):
     """Get lots for admin panel with filtering"""
     try:
