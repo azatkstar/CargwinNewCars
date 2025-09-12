@@ -254,8 +254,11 @@ async def get_admin_lots(
             }
         ]
         
+        # Combine stored lots with mock lots
+        all_lots = stored_lots + mock_lots
+        
         # Apply filters
-        filtered_lots = mock_lots.copy()
+        filtered_lots = all_lots.copy()
         
         if search:
             filtered_lots = [lot for lot in filtered_lots if 
