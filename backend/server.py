@@ -460,45 +460,131 @@ async def update_lot(lot_id: str, lot_data: dict):
         logger.error(f"Update lot error: {e}")
         raise HTTPException(status_code=500, detail="Failed to update lot")
 
+@api_router.post("/admin/lots/{lot_id}/preview")
+async def create_preview_token(lot_id: str):
+    """Create preview token for a lot"""
+    try:
+        # Check if lot exists in storage or generate from the lot_id data
+        lot_data = None
+        if lot_id in lots_storage:
+            lot_data = lots_storage[lot_id]
+        else:
+            # If lot not in storage, this might be a new unsaved lot
+            # Return an error to indicate that lot should be saved first
+            raise HTTPException(status_code=400, detail="Lot must be saved before preview")
+        
+        # Generate preview token
+        timestamp = datetime.utcnow().timestamp()
+        import hashlib
+        token_string = f"{lot_id}-{timestamp}"
+        preview_token = hashlib.md5(token_string.encode()).hexdigest()[:16]
+        
+        # Store preview data with 2 hour expiry
+        preview_tokens[preview_token] = {
+            "lot_data": lot_data,
+            "created_at": datetime.utcnow(),
+            "expires_at": datetime.utcnow() + timedelta(hours=2),
+            "lot_id": lot_id
+        }
+        
+        logger.info(f"Created preview token: {preview_token} for lot: {lot_id}")
+        
+        return {
+            "ok": True,
+            "token": preview_token,
+            "expires_at": preview_tokens[preview_token]["expires_at"].isoformat()
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Create preview token error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create preview token")
+
+@api_router.post("/admin/lots/preview-unsaved")
+async def create_preview_for_unsaved_lot(lot_data: dict):
+    """Create preview token for unsaved lot data"""
+    try:
+        # Generate preview token
+        timestamp = datetime.utcnow().timestamp()
+        import hashlib
+        token_string = f"unsaved-{timestamp}"
+        preview_token = hashlib.md5(token_string.encode()).hexdigest()[:16]
+        
+        # Store preview data with 2 hour expiry
+        preview_tokens[preview_token] = {
+            "lot_data": lot_data,
+            "created_at": datetime.utcnow(),
+            "expires_at": datetime.utcnow() + timedelta(hours=2),
+            "lot_id": None
+        }
+        
+        logger.info(f"Created preview token for unsaved lot: {preview_token}")
+        
+        return {
+            "ok": True,
+            "token": preview_token,
+            "expires_at": preview_tokens[preview_token]["expires_at"].isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Create preview token for unsaved lot error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create preview token")
+
 @api_router.get("/preview/{token}")
 async def get_preview_lot(token: str):
     """Get lot data for preview by token"""
     try:
-        # Mock preview data (in production, validate token and get lot data)
-        mock_preview_lot = {
+        # Check if token exists and is not expired
+        if token not in preview_tokens:
+            raise HTTPException(status_code=404, detail="Preview token not found")
+        
+        preview_data = preview_tokens[token]
+        
+        # Check if token is expired
+        if datetime.utcnow() > preview_data["expires_at"]:
+            # Clean up expired token
+            del preview_tokens[token]
+            raise HTTPException(status_code=404, detail="Preview token expired")
+        
+        lot_data = preview_data["lot_data"]
+        
+        # Format lot data for car detail page
+        formatted_lot = {
             "id": f"preview-{token}",
-            "title": "2024 Honda Accord LX (Предпросмотр)",
-            "slug": "2024-honda-accord-lx-preview",
-            "msrp": 28900,
-            "fleet": 25800,
-            "savings": 3100,
-            "description": "Это предпросмотр лота из админ-панели. Страница показывает, как будет выглядеть лот после публикации.",
+            "title": f"{lot_data.get('year', '')} {lot_data.get('make', '')} {lot_data.get('model', '')} {lot_data.get('trim', '')} (Предпросмотр)",
+            "slug": f"{lot_data.get('year', '')}-{lot_data.get('make', '').lower()}-{lot_data.get('model', '').lower()}-{lot_data.get('trim', '').lower()}-preview",
+            "msrp": lot_data.get('msrp', 0),
+            "fleet": lot_data.get('msrp', 0) - lot_data.get('discount', 0),
+            "savings": lot_data.get('discount', 0),
+            "description": lot_data.get('description', 'Это предпросмотр лота из админ-панели.'),
             "specs": {
-                "year": "2024",
-                "make": "Honda", 
-                "model": "Accord",
-                "trim": "LX",
-                "engine": "1.5L Turbo I4",
-                "transmission": "CVT",
-                "drivetrain": "FWD",
-                "exteriorColor": "Белый жемчуг",
-                "interiorColor": "Чёрная кожа",
-                "vin": "1HGCV1F30NA123456"
+                "year": str(lot_data.get('year', '')),
+                "make": lot_data.get('make', ''),
+                "model": lot_data.get('model', ''),
+                "trim": lot_data.get('trim', ''),
+                "engine": lot_data.get('engine', ''),
+                "transmission": lot_data.get('transmission', ''),
+                "drivetrain": lot_data.get('drivetrain', ''), 
+                "exteriorColor": lot_data.get('exteriorColor', ''),
+                "interiorColor": lot_data.get('interiorColor', ''),
+                "vin": lot_data.get('vin', '')
             },
-            "images": [
-                {
-                    "url": "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1",
-                    "alt": "Honda Accord 2024 - предпросмотр"
-                }
-            ],
+            "images": lot_data.get('images', []),
             "isPreview": True,
             "previewToken": token,
-            "isDrop": True
+            "isDrop": lot_data.get('isWeeklyDrop', False),
+            "stockLeft": 1,
+            "dealer": "Fleet Preview",
+            "endsAt": datetime.utcnow() + timedelta(hours=48),
+            "addonsAvg": lot_data.get('feesHint', 0)
         }
         
-        logger.info(f"Preview requested for token: {token}")
-        return mock_preview_lot
+        logger.info(f"Preview requested for token: {token}, lot: {lot_data.get('make', '')} {lot_data.get('model', '')}")
+        return formatted_lot
         
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Preview error: {e}")
         raise HTTPException(status_code=404, detail="Preview not found or expired")
