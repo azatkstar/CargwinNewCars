@@ -351,7 +351,7 @@ const LotsList = () => {
                       <div className="font-semibold">{formatPrice(lot.msrp - lot.discount)}</div>
                       {lot.discount > 0 && (
                         <div className="text-sm text-green-600">
-                          -{formatPrice(lot.discount)}
+                          -{formatPrice(Math.abs(lot.discount))}
                         </div>
                       )}
                     </div>
