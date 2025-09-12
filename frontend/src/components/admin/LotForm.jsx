@@ -623,7 +623,7 @@ const LotForm = () => {
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-red-600">
-                        -{formatPrice(lot.discount)}
+                        {formatPrice(Math.abs(lot.discount))}
                       </div>
                       <div className="text-sm text-gray-600">Скидка</div>
                     </div>
