@@ -101,3 +101,62 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "У нас была проблема - не сохранялись новые спецпредложения. Проблема с отрицательной валидацией скидки показывающей значения как '-$3,500' или '-$4,500' в форме создания лота."
+
+backend:
+  - task: "Fix lot creation/saving backend endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Backend endpoints for lot CRUD operations are implemented with in-memory storage"
+
+frontend:
+  - task: "Fix negative discount validation display in LotForm"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "Found the issue - forced minus sign before formatPrice(lot.discount) causing --$3500 display when discount is negative"
+
+  - task: "Fix negative discount display in LotsList"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/components/admin/LotsList.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "Same issue as LotForm - forced minus sign before formatPrice causes double minus"
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Fix negative discount validation display in LotForm"
+    - "Fix negative discount display in LotsList"
+    - "Test lot creation and editing functionality"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Identified root cause of negative discount validation issue. The problem is forced minus sign before formatPrice() function. Will fix both LotForm.jsx and LotsList.jsx files."
