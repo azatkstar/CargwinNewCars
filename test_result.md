@@ -152,16 +152,19 @@ frontend:
         comment: "Fixed by using Math.abs() for discount display"
 
   - task: "Fix lot preview functionality to show actual lot data"
-    implemented: false
-    working: false
-    file: "/app/backend/server.py, /app/frontend/src/components/admin/LotForm.jsx, /app/frontend/src/pages/PreviewLot.jsx"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
         comment: "User reported: Created 2025 Chevrolet Colorado but preview shows Honda Accord. Preview function returns hardcoded mock data instead of actual lot data"
+      - working: true
+        agent: "testing"
+        comment: "COMPREHENSIVE PREVIEW TESTING COMPLETED: All preview endpoints working perfectly. Tested POST /api/admin/lots/preview-unsaved with Chevrolet Colorado 2025 Z71 data and GET /api/preview/{token}. Key findings: 1) Preview token creation successful 2) Preview data correctly shows Chevrolet Colorado (NOT Honda Accord) 3) Fleet price calculation accurate (38500 - 4200 = 34300) 4) All Chevrolet specs preserved (make, model, year, trim, engine, drivetrain, transmission, colors, VIN) 5) Preview-specific fields working (isPreview=true, previewToken match) 6) Description preservation working 7) Invalid token handling working (404 response). The reported issue appears to be resolved - preview now shows correct Chevrolet Colorado data instead of Honda Accord."
 
 metadata:
   created_by: "main_agent"
