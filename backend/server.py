@@ -364,7 +364,11 @@ async def create_lot(lot_data: dict):
 async def get_lot(lot_id: str):
     """Get single lot for editing"""
     try:
-        # Mock lot data
+        # Check if lot exists in storage
+        if lot_id in lots_storage:
+            return lots_storage[lot_id]
+        
+        # If not in storage, return mock data for demo
         mock_lot = {
             "id": lot_id,
             "slug": "2024-honda-accord-lx-cv123",
