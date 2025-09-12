@@ -391,6 +391,49 @@ async def update_lot(lot_id: str, lot_data: dict):
         logger.error(f"Update lot error: {e}")
         raise HTTPException(status_code=500, detail="Failed to update lot")
 
+@api_router.get("/preview/{token}")
+async def get_preview_lot(token: str):
+    """Get lot data for preview by token"""
+    try:
+        # Mock preview data (in production, validate token and get lot data)
+        mock_preview_lot = {
+            "id": f"preview-{token}",
+            "title": "2024 Honda Accord LX (Предпросмотр)",
+            "slug": "2024-honda-accord-lx-preview",
+            "msrp": 28900,
+            "fleet": 25800,
+            "savings": 3100,
+            "description": "Это предпросмотр лота из админ-панели. Страница показывает, как будет выглядеть лот после публикации.",
+            "specs": {
+                "year": "2024",
+                "make": "Honda", 
+                "model": "Accord",
+                "trim": "LX",
+                "engine": "1.5L Turbo I4",
+                "transmission": "CVT",
+                "drivetrain": "FWD",
+                "exteriorColor": "Белый жемчуг",
+                "interiorColor": "Чёрная кожа",
+                "vin": "1HGCV1F30NA123456"
+            },
+            "images": [
+                {
+                    "url": "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1",
+                    "alt": "Honda Accord 2024 - предпросмотр"
+                }
+            ],
+            "isPreview": True,
+            "previewToken": token,
+            "isDrop": True
+        }
+        
+        logger.info(f"Preview requested for token: {token}")
+        return mock_preview_lot
+        
+    except Exception as e:
+        logger.error(f"Preview error: {e}")
+        raise HTTPException(status_code=404, detail="Preview not found or expired")
+
 # Include the router in the main app
 app.include_router(api_router)
 
