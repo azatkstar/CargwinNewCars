@@ -41,6 +41,14 @@ from auth import (
     User
 )
 
+# Import file storage modules
+from file_storage import (
+    FileStorageManager,
+    get_file_storage_manager,
+    ImageAsset
+)
+from fastapi.staticfiles import StaticFiles
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
