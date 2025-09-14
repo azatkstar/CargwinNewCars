@@ -102,8 +102,14 @@ class CacheManager:
     
     async def set(self, key: str, value: Any, ttl: int = 3600) -> bool:
         """Set value in cache with TTL"""
-        if not self.enabled or not self.redis:
-            return False
+        if not self.enabled:
+            # Use memory cache as fallback
+            self._memory_cache[key] = value
+            return True
+            
+        if not self.redis:
+            self._memory_cache[key] = value
+            return True
         
         try:
             cache_key = self._make_key(key)
@@ -117,7 +123,9 @@ class CacheManager:
             
         except Exception as e:
             logger.error(f"Cache set error for key {key}: {e}")
-            return False
+            # Fallback to memory cache
+            self._memory_cache[key] = value
+            return True
     
     async def delete(self, key: str) -> bool:
         """Delete key from cache"""
