@@ -59,6 +59,10 @@ from file_storage import (
 )
 from fastapi.staticfiles import StaticFiles
 
+# Import monitoring
+from monitoring import setup_logging, get_metrics_collector, HealthChecker
+from performance import initialize_performance, cleanup_performance
+
 # Load environment variables
 from dotenv import load_dotenv
 load_dotenv()
