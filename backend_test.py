@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 # Get backend URL from environment
-BACKEND_URL = "https://carbuy-portal.preview.emergentagent.com/api"
+BACKEND_URL = "https://dealership-dev.preview.emergentagent.com/api"
 
 class BackendTester:
     def __init__(self):
@@ -528,7 +528,7 @@ class BackendTester:
             
             # Test actual GET request with custom headers
             headers = {
-                "Origin": "https://carbuy-portal.preview.emergentagent.com",
+                "Origin": "https://dealership-dev.preview.emergentagent.com",
                 "Content-Type": "application/json"
             }
             
