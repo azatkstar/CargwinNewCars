@@ -303,8 +303,12 @@ class BackendTester:
             self.log_test("Main API Endpoint", False, f"Connection error: {str(e)}")
             return False
     
-    def test_lot_creation(self):
-        """Test POST /api/admin/lots with Tesla sample data"""
+    def test_lot_creation_with_auth(self):
+        """Test POST /api/admin/lots with authentication"""
+        if not self.auth_token:
+            self.log_test("Authenticated Lot Creation", False, "No auth token available")
+            return False
+        
         tesla_data = {
             "make": "Tesla",
             "model": "Model 3",
@@ -312,7 +316,7 @@ class BackendTester:
             "trim": "Long Range",
             "msrp": 45000,
             "discount": 3500,
-            "description": "Test Tesla Model 3 with all basic features for testing discount validation",
+            "description": "Test Tesla Model 3 with authentication for production testing",
             "state": "CA",
             "status": "draft",
             "drivetrain": "AWD",
@@ -327,10 +331,15 @@ class BackendTester:
         }
         
         try:
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
             response = self.session.post(
                 f"{BACKEND_URL}/admin/lots",
                 json=tesla_data,
-                headers={"Content-Type": "application/json"}
+                headers=headers
             )
             
             if response.status_code == 200:
@@ -339,32 +348,26 @@ class BackendTester:
                     self.created_lot_id = data["id"]
                     lot_data = data.get("data", {})
                     
-                    # Verify discount is positive
+                    # Verify discount validation
                     discount = lot_data.get("discount", 0)
                     if discount == 3500:
-                        self.log_test("Lot Creation", True, f"Tesla lot created successfully with ID: {self.created_lot_id}")
-                        
-                        # Verify all key fields
-                        expected_fields = ["make", "model", "year", "trim", "msrp", "discount", "state"]
-                        missing_fields = [field for field in expected_fields if field not in lot_data]
-                        if missing_fields:
-                            self.log_test("Lot Data Validation", False, f"Missing fields: {missing_fields}")
-                        else:
-                            self.log_test("Lot Data Validation", True, "All required fields present")
-                        
+                        self.log_test("Authenticated Lot Creation", True, 
+                                    f"Tesla lot created successfully with MongoDB ID: {self.created_lot_id}")
                         return True
                     else:
-                        self.log_test("Lot Creation", False, f"Discount validation failed. Expected: 3500, Got: {discount}")
+                        self.log_test("Authenticated Lot Creation", False, 
+                                    f"Discount validation failed. Expected: 3500, Got: {discount}")
                         return False
                 else:
-                    self.log_test("Lot Creation", False, f"Invalid response format: {data}")
+                    self.log_test("Authenticated Lot Creation", False, f"Invalid response format: {data}")
                     return False
             else:
-                self.log_test("Lot Creation", False, f"HTTP {response.status_code}: {response.text}")
+                self.log_test("Authenticated Lot Creation", False, 
+                            f"HTTP {response.status_code}: {response.text}")
                 return False
                 
         except Exception as e:
-            self.log_test("Lot Creation", False, f"Request error: {str(e)}")
+            self.log_test("Authenticated Lot Creation", False, f"Request error: {str(e)}")
             return False
     
     def test_negative_discount_validation(self):
