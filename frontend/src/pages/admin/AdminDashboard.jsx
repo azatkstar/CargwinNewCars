@@ -28,6 +28,7 @@ const AdminDashboard = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/admin/lots" replace />} />
         <Route path="/lots" element={<LotsList />} />
+        <Route path="/lots/*" element={<LotsList />} />
         <Route path="/lots/new" element={<LotForm />} />
         <Route path="/lots/:id/edit" element={<LotForm />} />
         <Route path="/settings" element={<AdminSettings />} />
