@@ -203,9 +203,9 @@ frontend:
     implemented: true
     working: false
     file: "/app/frontend/src/components/admin/LotForm.jsx"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
@@ -213,6 +213,9 @@ frontend:
       - working: false
         agent: "main"
         comment: "PARTIAL FIX: Updated fetchLot to use correct backend URL and removed fallback to Honda Accord mock data. Backend endpoint returns correct Chevrolet data but frontend form not populating fields properly. May be CORS issue or data format mismatch."
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL BUG CONFIRMED: Backend issue identified. When requesting GET /api/admin/lots/ef4cdb7f-1bca-4076-b059-5063e41770dd (Chevrolet Colorado), backend returns Honda Accord 2024 data instead. Root cause: In server.py get_lot() function (lines 369-428), when lot_id not found in lots_storage, it returns hardcoded Honda Accord mock data instead of 404. The Chevrolet Colorado lot was created earlier but lost due to in-memory storage reset. Backend CRUD operations work correctly for existing lots in storage."
 
 metadata:
   created_by: "main_agent"
