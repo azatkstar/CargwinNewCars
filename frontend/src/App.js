@@ -52,6 +52,7 @@ function App() {
             <Route path="/preview/:token" element={<PreviewLot />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/lots" element={<AdminDashboard />} />
+            <Route path="/admin/lots/*" element={<AdminDashboard />} />
             <Route path="/admin/lots/new" element={<AdminDashboard />} />
             <Route path="/admin/lots/:id/edit" element={<AdminDashboard />} />
             <Route path="/admin/settings" element={<AdminDashboard />} />
