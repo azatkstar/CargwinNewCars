@@ -167,9 +167,11 @@ async def get_users_repo() -> UserRepository:
 async def get_audit_repo() -> AuditRepository:
     return get_audit_repository()
 
-# In-memory storage for demo (in production use database)
+# DEPRECATED: In-memory storage (replaced by MongoDB in production)
+# These are kept for backward compatibility during transition
 lots_storage = {}
 preview_tokens = {}  # Store preview tokens with lot data
+# TODO: Remove after full MongoDB integration is confirmed working
 
 
 # Define Models
