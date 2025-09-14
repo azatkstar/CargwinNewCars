@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import FOMOTicker from "./components/FOMOTicker";
 import CarDetail from "./pages/CarDetail";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminLogin from "./pages/admin/AdminLogin";
 import PreviewLot from "./pages/PreviewLot";
 import { AuthProvider } from "./hooks/useAuth";
 
