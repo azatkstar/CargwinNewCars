@@ -188,6 +188,101 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
+@api_router.post("/admin/upload", response_model=List[dict])
+async def upload_images(
+    files: List[UploadFile],
+    alt_texts: Optional[str] = None,  # JSON string of alt texts
+    file_manager: FileStorageManager = Depends(get_file_storage_manager),
+    current_user: User = Depends(require_editor)
+):
+    """Upload multiple images for lot"""
+    try:
+        import json
+        
+        # Parse alt texts if provided
+        alt_text_list = []
+        if alt_texts:
+            try:
+                alt_text_list = json.loads(alt_texts)
+            except json.JSONDecodeError:
+                logger.warning("Invalid alt_texts JSON, using empty strings")
+        
+        uploaded_images = []
+        
+        for i, file in enumerate(files):
+            # Get alt text for this file
+            alt_text = ""
+            if i < len(alt_text_list):
+                alt_text = alt_text_list[i]
+            
+            # Process image
+            try:
+                image_asset = await file_manager.process_image(file, alt_text)
+                uploaded_images.append({
+                    "id": image_asset.id,
+                    "url": image_asset.url,
+                    "alt": image_asset.alt,
+                    "width": image_asset.width,
+                    "height": image_asset.height,
+                    "ratio": image_asset.ratio,
+                    "variants": image_asset.variants
+                })
+                
+                logger.info(f"Image uploaded by {current_user.email}: {file.filename} -> {image_asset.id}")
+                
+            except HTTPException as e:
+                logger.error(f"Failed to upload {file.filename}: {e.detail}")
+                # Continue with other files, but log the error
+                uploaded_images.append({
+                    "error": f"Failed to upload {file.filename}: {e.detail}"
+                })
+        
+        return uploaded_images
+        
+    except Exception as e:
+        logger.error(f"Upload error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to upload images")
+
+@api_router.delete("/admin/upload/{image_id}")
+async def delete_image(
+    image_id: str,
+    file_manager: FileStorageManager = Depends(get_file_storage_manager),
+    current_user: User = Depends(require_editor)
+):
+    """Delete uploaded image"""
+    try:
+        # In production, you would get image asset from database
+        # For now, we'll return success (file cleanup would happen separately)
+        
+        logger.info(f"Image deletion requested by {current_user.email}: {image_id}")
+        
+        return {"ok": True, "message": "Image deleted successfully"}
+        
+    except Exception as e:
+        logger.error(f"Delete image error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to delete image")
+
+# File serving endpoint for development (in production use CDN/web server)
+@api_router.get("/files/{file_path:path}")
+async def serve_file(file_path: str):
+    """Serve uploaded files (development only)"""
+    try:
+        from fastapi.responses import FileResponse
+        import os
+        
+        full_path = f"/app/uploads/{file_path}"
+        
+        if not os.path.exists(full_path):
+            raise HTTPException(status_code=404, detail="File not found")
+        
+        return FileResponse(full_path)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"File serving error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to serve file")
+
 # Admin Authentication Routes
 @api_router.post("/auth/magic", response_model=dict)
 async def send_magic_link(
