@@ -14,8 +14,8 @@ const CarSpecs = ({ car }) => {
     { label: 'Трансмиссия', value: car.specs.transmission, icon: Zap },
     { label: 'Привод', value: car.specs.drivetrain, icon: Zap },
     { label: 'Цвет кузова', value: car.specs.exteriorColor, icon: Palette },
-    { label: 'Цвет салона', value: car.specs.interiorColor, icon: Palette },
-    { label: 'VIN', value: car.specs.vin, icon: FileText }
+    { label: 'Цвет салона', value: car.specs.interiorColor, icon: Palette }
+    // VIN removed - now in footer for compliance
   ];
 
   // Calculate known add-ons for this specific model
