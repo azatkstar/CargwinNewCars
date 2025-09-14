@@ -94,8 +94,17 @@ export const AuthProvider = ({ children }) => {
         if (email.includes('admin@')) role = 'admin';
         else if (email.includes('editor@')) role = 'editor';
         
-        setUser({ id: 'demo_user', email });
-        setRole(role);
+        const authData = {
+          user: { id: 'demo_user', email },
+          role: role
+        };
+        
+        setUser(authData.user);
+        setRole(authData.role);
+        
+        // Persist auth state
+        localStorage.setItem('cargwin_auth', JSON.stringify(authData));
+        console.log('Login successful, auth persisted:', authData);
       }
       
       return data;
