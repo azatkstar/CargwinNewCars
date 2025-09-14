@@ -396,16 +396,15 @@ frontend:
 
 test_plan:
   current_focus:
-    - "CRITICAL: Fix frontend routing system - all routes redirect to homepage"
+    - "COMPLETED: Fix server imports and startup/shutdown events ✅"
+    - "Test updated backend with MongoDB integration and fixed imports"
+    - "Fix frontend routing system - all routes redirect to homepage"
     - "After routing fixed: Test VIN hiding functionality on public pages"
-    - "After routing fixed: Test 'Опубликовать сейчас' and 'Дублировать' buttons in admin panel"
-    - "After routing fixed: Test MSRP field improvements"
-    - "After routing fixed: Test public car pages with Chevrolet Colorado data"
-    - "After routing fixed: Test preview functionality"
+    - "After routing fixed: Test admin panel features"
   stuck_tasks: 
     - "Frontend routing system completely broken"
   test_all: false
-  test_priority: "critical_routing_fix_first"
+  test_priority: "backend_first_then_routing_fix"
 
 agent_communication:
   - agent: "main"
@@ -418,3 +417,5 @@ agent_communication:
     message: "READY FOR COMPREHENSIVE FRONTEND TESTING: All requested features implemented. Public car page /car/2025-chevrolet-colorado-zr2-crew-cab-medium-bed-4zr works correctly. Admin panel has new buttons and functionality. Test lot ID: b5bc4802-821a-478c-b4bb-f0a974ef23a7"
   - agent: "testing"
     message: "CRITICAL FRONTEND ROUTING ISSUE DISCOVERED: All routes (/car/*, /admin/*) redirect to homepage instead of showing proper pages. Backend API works correctly and returns proper Chevrolet Colorado data (created lot ID: c66503c7-e55a-4c3c-8874-cdd59f75626d), but frontend routing is completely broken. This prevents testing of all implemented features including VIN hiding, admin buttons, and car detail pages."
+  - agent: "main"
+    message: "CRITICAL SERVER STARTUP ISSUES RESOLVED: Fixed aioredis import conflict in performance.py, corrected datetime usage, and ensured all modules import successfully. Backend server now starts properly with MongoDB, JWT auth, and performance optimizations initialized. Ready for comprehensive backend testing."
