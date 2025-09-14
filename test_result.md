@@ -204,15 +204,18 @@ frontend:
 
   - task: "Fix MSRP field to be normal input"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/admin/LotForm.jsx"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "COMPLETED: Changed MSRP field from 0 default to empty string, added placeholder, improved input handling."
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - admin routes redirect to homepage instead of showing admin forms. Backend API works correctly, but frontend routing prevents access to admin forms to test MSRP field improvements."
 
   - task: "Fix lot editing to show correct lot data instead of Honda Accord"
     implemented: true
