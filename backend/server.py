@@ -241,110 +241,31 @@ async def logout(response: Response):
 async def get_admin_lots(
     page: int = 1,
     limit: int = 20,
-    search: Optional[str] = "",
-    status: Optional[str] = "all",
-    make: Optional[str] = "all", 
-    year: Optional[str] = "all",
-    isWeeklyDrop: Optional[str] = "all"
+    status: Optional[str] = None,
+    make: Optional[str] = None,
+    model: Optional[str] = None,
+    lot_repo: LotRepository = Depends(get_lots_repo)
 ):
-    """Get lots for admin panel with filtering"""
+    """Get lots for admin dashboard with pagination and filtering"""
     try:
-        # Get lots from storage + mock data
-        stored_lots = list(lots_storage.values())
+        skip = (page - 1) * limit
         
-        # Mock lots data
-        mock_lots = [
-            {
-                "id": "lot-1",
-                "slug": "2024-honda-accord-lx-cv123",
-                "status": "published",
-                "make": "Honda",
-                "model": "Accord",
-                "year": 2024,
-                "trim": "LX",
-                "vin": "1HGCV1F30NA123456",
-                "drivetrain": "FWD",
-                "engine": "1.5L Turbo I4",
-                "transmission": "CVT",
-                "exteriorColor": "White Pearl",
-                "interiorColor": "Black Leather",
-                "msrp": 28900,
-                "discount": 3100,
-                "feesHint": 3445,
-                "state": "CA",
-                "description": "Новый Honda Accord 2024 года в комплектации LX.",
-                "tags": ["sedan", "2024", "honda"],
-                "isWeeklyDrop": True,
-                "images": [{"url": "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1", "alt": "Honda Accord 2024"}],
-                "createdAt": "2025-01-10T08:00:00Z",
-                "updatedAt": "2025-01-10T10:30:00Z"
-            },
-            {
-                "id": "lot-2",
-                "slug": "2025-kia-niro-ev-wind-ab456",
-                "status": "draft",
-                "make": "Kia",
-                "model": "Niro EV",
-                "year": 2025,
-                "trim": "Wind FWD",
-                "vin": "5XYP0DAE5RG456789",
-                "drivetrain": "FWD",
-                "engine": "Electric",
-                "transmission": "Single-speed",
-                "exteriorColor": "Gravity Gray",
-                "interiorColor": "Black Cloth",
-                "msrp": 41225,
-                "discount": 5725,
-                "feesHint": 3860,
-                "state": "CA",
-                "description": "Новый электрический кроссовер Kia Niro EV 2025 года.",
-                "tags": ["electric", "2025", "kia"],
-                "isWeeklyDrop": False,
-                "images": [{"url": "https://images.unsplash.com/photo-1714008384412-97137b26ab42", "alt": "Kia Niro EV 2025"}],
-                "createdAt": "2025-01-10T09:00:00Z",
-                "updatedAt": "2025-01-10T09:15:00Z"
-            }
-        ]
+        lots = await lot_repo.get_lots(
+            skip=skip, 
+            limit=limit, 
+            status=status,
+            make=make,
+            model=model
+        )
         
-        # Combine stored lots with mock lots
-        all_lots = stored_lots + mock_lots
-        
-        # Apply filters
-        filtered_lots = all_lots.copy()
-        
-        if search:
-            filtered_lots = [lot for lot in filtered_lots if 
-                           search.lower() in lot["make"].lower() or 
-                           search.lower() in lot["model"].lower() or 
-                           search.lower() in lot.get("vin", "").lower()]
-        
-        if status and status != "all":
-            filtered_lots = [lot for lot in filtered_lots if lot["status"] == status]
-            
-        if make and make != "all":
-            filtered_lots = [lot for lot in filtered_lots if lot["make"] == make]
-            
-        if year and year != "all":
-            try:
-                year_int = int(year)
-                filtered_lots = [lot for lot in filtered_lots if lot["year"] == year_int]
-            except ValueError:
-                pass
-            
-        if isWeeklyDrop and isWeeklyDrop != "all":
-            is_drop = isWeeklyDrop == "true"
-            filtered_lots = [lot for lot in filtered_lots if lot["isWeeklyDrop"] == is_drop]
-        
-        # Pagination
-        start_idx = (page - 1) * limit
-        end_idx = start_idx + limit
-        paginated_lots = filtered_lots[start_idx:end_idx]
+        total = await lot_repo.get_total_count(status=status)
         
         return {
-            "items": paginated_lots,
-            "total": len(filtered_lots),
+            "items": lots,
+            "total": total,
             "page": page,
-            "limit": limit
+            "limit": limit,
+            "pages": (total + limit - 1) // limit
         }
         
     except Exception as e:
