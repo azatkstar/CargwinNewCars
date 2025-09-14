@@ -129,17 +129,24 @@ class CacheManager:
     
     async def delete(self, key: str) -> bool:
         """Delete key from cache"""
-        if not self.enabled or not self.redis:
-            return False
+        if not self.enabled:
+            # Use memory cache as fallback
+            return self._memory_cache.pop(key, None) is not None
+            
+        if not self.redis:
+            return self._memory_cache.pop(key, None) is not None
         
         try:
             cache_key = self._make_key(key)
             deleted = await self.redis.delete(cache_key)
+            # Also remove from memory cache
+            self._memory_cache.pop(key, None)
             return deleted > 0
             
         except Exception as e:
             logger.error(f"Cache delete error for key {key}: {e}")
-            return False
+            # Fallback to memory cache
+            return self._memory_cache.pop(key, None) is not None
     
     async def clear_pattern(self, pattern: str) -> int:
         """Clear all keys matching pattern"""
