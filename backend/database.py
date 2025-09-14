@@ -372,18 +372,18 @@ async def initialize_repositories():
 
 def get_lot_repository() -> LotRepository:
     """Get lot repository instance"""
-    if not lot_repo:
+    if lot_repo is None:
         raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
     return lot_repo
 
 def get_user_repository() -> UserRepository:
     """Get user repository instance"""
-    if not user_repo:
+    if user_repo is None:
         raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
     return user_repo
 
 def get_audit_repository() -> AuditRepository:
     """Get audit repository instance"""
-    if not audit_repo:
+    if audit_repo is None:
         raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
     return audit_repo
