@@ -151,35 +151,53 @@ frontend:
         agent: "main"
         comment: "Fixed by using Math.abs() for discount display"
 
-  - task: "Fix public car pages to show real lot data instead of mock"
+  - task: "Hide VIN code properly in all components"
     implemented: true
     working: true
-    file: "/app/frontend/src/pages/CarDetail.jsx, /app/backend/server.py"
+    file: "/app/frontend/src/components/car-detail/CarSpecs.jsx, /app/frontend/src/components/Footer.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-      - working: false
-        agent: "main"
-        comment: "User reported: Public car page /car/2025-chevrolet-colorado-zr2-crew-cab-medium-bed-4zr not working. CarDetail.jsx uses mock data instead of real backend data."
       - working: true
         agent: "main"
-        comment: "COMPLETED: Added GET /api/cars/{car_slug} endpoint and updated CarDetail.jsx to fetch real data. Public page now shows correct Chevrolet Colorado ZR2 data with proper prices and specs."
+        comment: "COMPLETED: Removed VIN from CarSpecs.jsx display, kept hidden VIN in Footer. VIN no longer visible to users."
 
-  - task: "Hide VIN code by moving to footer with background color text"
+  - task: "Add publish now functionality"
     implemented: true
     working: true
-    file: "/app/frontend/src/components/car-detail/CarHero.jsx, /app/frontend/src/components/Footer.jsx, /app/frontend/src/pages/CarDetail.jsx"
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-      - working: false
-        agent: "main"
-        comment: "User requested: Move VIN code to bottom of site and make text color match background to hide it"
       - working: true
         agent: "main"
-        comment: "COMPLETED: Removed VIN from CarHero display, added hidden VIN to Footer with background color matching text color for SEO/compliance purposes."
+        comment: "COMPLETED: Added 'Опубликовать сейчас' button that publishes immediately without waiting for Monday."
+
+  - task: "Add lot duplication functionality"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Added 'Дублировать' button that creates copy of lot with modified data for quick similar car additions."
+
+  - task: "Fix MSRP field to be normal input"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Changed MSRP field from 0 default to empty string, added placeholder, improved input handling."
 
   - task: "Fix lot editing to show correct lot data instead of Honda Accord"
     implemented: true
