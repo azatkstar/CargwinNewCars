@@ -69,6 +69,9 @@ cors_origins = os.getenv("CORS_ORIGINS", "*").split(",")
 # Create API router
 api_router = APIRouter(prefix="/api")
 
+# Mount static files for uploads
+app.mount("/uploads", StaticFiles(directory="/app/uploads"), name="uploads")
+
 # Startup and shutdown events
 @app.on_event("startup")
 async def startup_event():
