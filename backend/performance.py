@@ -8,7 +8,17 @@ from typing import Optional, Dict, Any, Union, Callable
 import json
 import hashlib
 from datetime import datetime, timedelta, timezone
-import aioredis
+try:
+    import aioredis
+    REDIS_AVAILABLE = True
+except ImportError:
+    REDIS_AVAILABLE = False
+    aioredis = None
+except Exception as e:
+    # Handle known aioredis TimeoutError issue
+    logging.getLogger(__name__).warning(f"Redis disabled due to import error: {e}")
+    REDIS_AVAILABLE = False
+    aioredis = None
 from functools import wraps
 import time
 
