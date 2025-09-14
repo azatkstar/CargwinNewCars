@@ -226,6 +226,22 @@ const LotForm = () => {
     }
   };
 
+  const handleDuplicate = () => {
+    const duplicatedLot = {
+      ...lot,
+      id: undefined, // Remove ID to create new lot
+      slug: `${lot.slug}-copy-${Date.now()}`, // Add suffix to slug
+      make: lot.make + ' (копия)',
+      status: 'draft',
+      createdAt: null,
+      updatedAt: null
+    };
+    setLot(duplicatedLot);
+    // Change URL to creation mode
+    window.history.pushState({}, '', '/admin/lots/new');
+    alert('Лот дублирован! Отредактируйте данные и сохраните как новый лот.');
+  };
+
   const handlePreview = async () => {
     try {
       const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
