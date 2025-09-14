@@ -174,15 +174,18 @@ frontend:
 
   - task: "Add publish now functionality"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/admin/LotForm.jsx"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "COMPLETED: Added 'Опубликовать сейчас' button that publishes immediately without waiting for Monday."
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - admin routes redirect to homepage instead of showing admin forms. Backend API works correctly, but frontend routing prevents access to admin forms to test publish now button."
 
   - task: "Add lot duplication functionality"
     implemented: true
