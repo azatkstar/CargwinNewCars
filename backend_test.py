@@ -973,6 +973,8 @@ class BackendTester:
             ("MongoDB Integration", self.test_mongodb_integration),
             ("Authentication System", self.test_authentication_system),
             ("Admin Access Control", self.test_admin_access_control),
+            ("Role-Based Access Control", self.test_role_based_access_control),
+            ("Database Lot Operations", self.test_database_lot_operations),
             ("Monitoring Features", self.test_monitoring_features),
             ("Performance Optimizations", self.test_performance_optimizations),
             ("Error Handling", self.test_error_handling),
