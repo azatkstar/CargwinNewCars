@@ -141,6 +141,12 @@ const Footer = ({ hiddenVin = null }) => {
               Изображения автомобилей могут не отражать точную комплектацию. 
               Мы не передаём ваши персональные данные третьим лицам без вашего согласия.
             </p>
+            {/* Hidden VIN for SEO/compliance purposes */}
+            {hiddenVin && (
+              <div className="text-gray-900 bg-gray-900 opacity-0 select-none text-xs mt-2" style={{color: 'rgb(17, 24, 39)', backgroundColor: 'rgb(17, 24, 39)'}}>
+                Vehicle Identification Number: {hiddenVin}
+              </div>
+            )}
           </div>
         </div>
       </div>
