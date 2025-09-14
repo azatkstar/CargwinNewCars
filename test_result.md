@@ -159,15 +159,18 @@ frontend:
 
   - task: "Hide VIN code properly in all components"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/car-detail/CarSpecs.jsx, /app/frontend/src/components/Footer.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "COMPLETED: Removed VIN from CarSpecs.jsx display, kept hidden VIN in Footer. VIN no longer visible to users."
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - car detail routes redirect to homepage instead of showing car detail page. Backend API returns correct Chevrolet Colorado data with VIN, but frontend routing prevents access to car detail pages to verify VIN hiding."
 
   - task: "Add publish now functionality"
     implemented: true
