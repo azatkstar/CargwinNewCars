@@ -370,8 +370,18 @@ class BackendTester:
             self.log_test("Authenticated Lot Creation", False, f"Request error: {str(e)}")
             return False
     
-    def test_negative_discount_validation(self):
-        """Test that negative discounts are converted to positive"""
+    def test_discount_validation_comprehensive(self):
+        """Test comprehensive discount validation including negative values"""
+        if not self.auth_token:
+            self.log_test("Discount Validation", False, "No auth token available")
+            return False
+        
+        headers = {
+            "Authorization": f"Bearer {self.auth_token}",
+            "Content-Type": "application/json"
+        }
+        
+        # Test 1: Negative discount should be converted to 0
         negative_discount_data = {
             "make": "Honda",
             "model": "Civic",
@@ -387,7 +397,7 @@ class BackendTester:
             response = self.session.post(
                 f"{BACKEND_URL}/admin/lots",
                 json=negative_discount_data,
-                headers={"Content-Type": "application/json"}
+                headers=headers
             )
             
             if response.status_code == 200:
@@ -395,18 +405,56 @@ class BackendTester:
                 lot_data = data.get("data", {})
                 discount = lot_data.get("discount", 0)
                 
-                if discount == 0:  # Backend should convert negative to 0 using max(0, value)
-                    self.log_test("Negative Discount Validation", True, "Negative discount correctly converted to 0")
-                    return True
+                if discount == 0:  # Backend should convert negative to 0
+                    self.log_test("Negative Discount Validation", True, 
+                                "Negative discount correctly converted to 0")
+                    
+                    # Test 2: Positive discount should be preserved
+                    positive_discount_data = {
+                        "make": "BMW",
+                        "model": "X3",
+                        "year": 2024,
+                        "trim": "xDrive30i",
+                        "msrp": 50000,
+                        "discount": 5000,  # Positive discount
+                        "description": "Test positive discount preservation",
+                        "state": "CA"
+                    }
+                    
+                    response2 = self.session.post(
+                        f"{BACKEND_URL}/admin/lots",
+                        json=positive_discount_data,
+                        headers=headers
+                    )
+                    
+                    if response2.status_code == 200:
+                        data2 = response2.json()
+                        lot_data2 = data2.get("data", {})
+                        discount2 = lot_data2.get("discount", 0)
+                        
+                        if discount2 == 5000:
+                            self.log_test("Discount Validation", True, 
+                                        "Comprehensive discount validation working: negative→0, positive preserved")
+                            return True
+                        else:
+                            self.log_test("Discount Validation", False, 
+                                        f"Positive discount not preserved. Expected: 5000, Got: {discount2}")
+                            return False
+                    else:
+                        self.log_test("Discount Validation", False, 
+                                    f"Positive discount test failed: HTTP {response2.status_code}")
+                        return False
                 else:
-                    self.log_test("Negative Discount Validation", False, f"Expected discount: 0, Got: {discount}")
+                    self.log_test("Discount Validation", False, 
+                                f"Negative discount not handled. Expected: 0, Got: {discount}")
                     return False
             else:
-                self.log_test("Negative Discount Validation", False, f"HTTP {response.status_code}: {response.text}")
+                self.log_test("Discount Validation", False, 
+                            f"Negative discount test failed: HTTP {response.status_code}")
                 return False
                 
         except Exception as e:
-            self.log_test("Negative Discount Validation", False, f"Request error: {str(e)}")
+            self.log_test("Discount Validation", False, f"Discount validation test error: {str(e)}")
             return False
     
     def test_lot_listing(self):
