@@ -228,11 +228,15 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Fix lot editing to show correct lot data instead of Honda Accord"
-  stuck_tasks:
-    - "Fix lot editing to show correct lot data instead of Honda Accord"
-  test_all: false
-  test_priority: "high_first"
+    - "READY FOR TESTING: All major fixes implemented and working"
+    - "Test VIN hiding functionality on public pages"
+    - "Test 'Опубликовать сейчас' and 'Дублировать' buttons in admin panel"
+    - "Test MSRP field improvements"
+    - "Test public car pages with Chevrolet Colorado data"
+    - "Test preview functionality"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "comprehensive_frontend_testing"
 
 agent_communication:
   - agent: "main"
@@ -241,3 +245,5 @@ agent_communication:
     message: "Backend testing confirmed: Critical bug fixed - no more Honda Accord fallback. All CRUD operations working correctly."
   - agent: "main"
     message: "SUCCESS: Public pages show correct Chevrolet Colorado data with hidden VIN. Admin panel has new features but form data loading needs CORS fix for full functionality."
+  - agent: "main"
+    message: "READY FOR COMPREHENSIVE FRONTEND TESTING: All requested features implemented. Public car page /car/2025-chevrolet-colorado-zr2-crew-cab-medium-bed-4zr works correctly. Admin panel has new buttons and functionality. Test lot ID: b5bc4802-821a-478c-b4bb-f0a974ef23a7"
