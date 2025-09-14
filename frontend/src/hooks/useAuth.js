@@ -21,6 +21,17 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
+      // Check localStorage first for persisted auth
+      const savedAuth = localStorage.getItem('cargwin_auth');
+      if (savedAuth) {
+        const authData = JSON.parse(savedAuth);
+        setUser(authData.user);
+        setRole(authData.role);
+        console.log('Auth loaded from localStorage:', authData);
+        setLoading(false);
+        return;
+      }
+
       const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
       const response = await fetch(`${BACKEND_URL}/api/auth/session`, {
         credentials: 'include'
@@ -30,18 +41,35 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setUser(data.user);
         setRole(data.role);
+        // Persist auth state
+        localStorage.setItem('cargwin_auth', JSON.stringify({
+          user: data.user,
+          role: data.role
+        }));
         console.log('Auth check successful:', data);
       } else {
         console.log('Auth check failed, using demo user');
         // For demo purposes, auto-login as admin
-        setUser({ id: 'demo_admin', email: 'admin@cargwin.com' });
-        setRole('admin');
+        const demoAuth = {
+          user: { id: 'demo_admin', email: 'admin@cargwin.com' },
+          role: 'admin'
+        };
+        setUser(demoAuth.user);
+        setRole(demoAuth.role);
+        // Persist demo auth
+        localStorage.setItem('cargwin_auth', JSON.stringify(demoAuth));
       }
     } catch (error) {
       console.error('Auth check failed:', error);
       // For demo purposes, auto-login as admin
-      setUser({ id: 'demo_admin', email: 'admin@cargwin.com' });
-      setRole('admin');
+      const demoAuth = {
+        user: { id: 'demo_admin', email: 'admin@cargwin.com' },
+        role: 'admin'
+      };
+      setUser(demoAuth.user);
+      setRole(demoAuth.role);
+      // Persist demo auth
+      localStorage.setItem('cargwin_auth', JSON.stringify(demoAuth));
     } finally {
       setLoading(false);
     }
