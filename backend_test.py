@@ -311,21 +311,259 @@ class BackendTester:
             self.log_test("Pricing Calculations", False, f"Request error: {str(e)}")
             return False
     
+    def test_chevrolet_colorado_exists(self):
+        """Test that Chevrolet Colorado lot exists in storage"""
+        chevrolet_id = "ef4cdb7f-1bca-4076-b059-5063e41770dd"
+        
+        try:
+            # First check in lot listing
+            response = self.session.get(f"{BACKEND_URL}/admin/lots")
+            
+            if response.status_code == 200:
+                data = response.json()
+                items = data.get("items", [])
+                
+                # Look for Chevrolet Colorado in the list
+                chevrolet_found = False
+                chevrolet_lot = None
+                
+                for lot in items:
+                    if (lot.get("make", "").lower() == "chevrolet" and 
+                        lot.get("model", "").lower() == "colorado"):
+                        chevrolet_found = True
+                        chevrolet_lot = lot
+                        break
+                    elif lot.get("id") == chevrolet_id:
+                        chevrolet_found = True
+                        chevrolet_lot = lot
+                        break
+                
+                if chevrolet_found:
+                    self.log_test("Chevrolet Colorado Exists", True, 
+                                f"Found Chevrolet Colorado: {chevrolet_lot.get('year', '')} {chevrolet_lot.get('make', '')} {chevrolet_lot.get('model', '')} {chevrolet_lot.get('trim', '')}")
+                    return True, chevrolet_lot
+                else:
+                    self.log_test("Chevrolet Colorado Exists", False, "Chevrolet Colorado not found in lot listing")
+                    return False, None
+            else:
+                self.log_test("Chevrolet Colorado Exists", False, f"Failed to get lot listing: HTTP {response.status_code}")
+                return False, None
+                
+        except Exception as e:
+            self.log_test("Chevrolet Colorado Exists", False, f"Request error: {str(e)}")
+            return False, None
+    
+    def test_specific_chevrolet_lot_retrieval(self):
+        """Test GET /api/admin/lots/ef4cdb7f-1bca-4076-b059-5063e41770dd"""
+        chevrolet_id = "ef4cdb7f-1bca-4076-b059-5063e41770dd"
+        
+        try:
+            response = self.session.get(f"{BACKEND_URL}/admin/lots/{chevrolet_id}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Check if this returns Chevrolet Colorado data or Honda Accord data
+                make = data.get("make", "").lower()
+                model = data.get("model", "").lower()
+                
+                if make == "chevrolet" and model == "colorado":
+                    self.log_test("Specific Chevrolet Lot Retrieval", True, 
+                                f"Correctly returned Chevrolet Colorado data: {data.get('year', '')} {data.get('make', '')} {data.get('model', '')} {data.get('trim', '')}")
+                    return True, data
+                elif make == "honda" and model == "accord":
+                    self.log_test("Specific Chevrolet Lot Retrieval", False, 
+                                f"BUG CONFIRMED: Requested Chevrolet Colorado but got Honda Accord data instead")
+                    return False, data
+                else:
+                    self.log_test("Specific Chevrolet Lot Retrieval", False, 
+                                f"Unexpected data returned: {data.get('make', '')} {data.get('model', '')}")
+                    return False, data
+                    
+            elif response.status_code == 404:
+                self.log_test("Specific Chevrolet Lot Retrieval", False, 
+                            f"Chevrolet Colorado lot not found (404) - lot may not exist in storage")
+                return False, None
+            else:
+                self.log_test("Specific Chevrolet Lot Retrieval", False, 
+                            f"HTTP {response.status_code}: {response.text}")
+                return False, None
+                
+        except Exception as e:
+            self.log_test("Specific Chevrolet Lot Retrieval", False, f"Request error: {str(e)}")
+            return False, None
+    
+    def test_chevrolet_lot_update(self):
+        """Test PATCH /api/admin/lots/ef4cdb7f-1bca-4076-b059-5063e41770dd"""
+        chevrolet_id = "ef4cdb7f-1bca-4076-b059-5063e41770dd"
+        
+        # First check if lot exists
+        exists, lot_data = self.test_specific_chevrolet_lot_retrieval()
+        if not exists:
+            self.log_test("Chevrolet Lot Update", False, "Cannot test update - lot doesn't exist or returns wrong data")
+            return False
+        
+        # Test update with some modified data
+        update_data = {
+            "discount": 4200,
+            "description": "Updated 2025 Chevrolet Colorado Z71 - Test Update",
+            "exteriorColor": "Summit White"
+        }
+        
+        try:
+            response = self.session.patch(
+                f"{BACKEND_URL}/admin/lots/{chevrolet_id}",
+                json=update_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                if data.get("ok"):
+                    updated_lot = data.get("data", {})
+                    
+                    # Verify the update worked and still returns Chevrolet data
+                    if (updated_lot.get("make", "").lower() == "chevrolet" and 
+                        updated_lot.get("model", "").lower() == "colorado" and
+                        updated_lot.get("discount") == 4200):
+                        self.log_test("Chevrolet Lot Update", True, 
+                                    "Chevrolet Colorado updated successfully with correct data")
+                        return True
+                    else:
+                        self.log_test("Chevrolet Lot Update", False, 
+                                    f"Update failed or returned wrong data: {updated_lot.get('make', '')} {updated_lot.get('model', '')}")
+                        return False
+                else:
+                    self.log_test("Chevrolet Lot Update", False, f"Update failed: {data}")
+                    return False
+                    
+            elif response.status_code == 404:
+                self.log_test("Chevrolet Lot Update", False, "Lot not found for update (404)")
+                return False
+            else:
+                self.log_test("Chevrolet Lot Update", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Chevrolet Lot Update", False, f"Request error: {str(e)}")
+            return False
+    
+    def test_data_structure_for_frontend(self):
+        """Test that lot data structure is correct for frontend form consumption"""
+        chevrolet_id = "ef4cdb7f-1bca-4076-b059-5063e41770dd"
+        
+        try:
+            response = self.session.get(f"{BACKEND_URL}/admin/lots/{chevrolet_id}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Check for all required fields that frontend form needs
+                required_fields = [
+                    "make", "model", "year", "trim", "msrp", "discount", 
+                    "drivetrain", "engine", "transmission", "exteriorColor", 
+                    "interiorColor", "state", "description", "vin", "feesHint"
+                ]
+                
+                missing_fields = []
+                type_issues = []
+                
+                for field in required_fields:
+                    if field not in data:
+                        missing_fields.append(field)
+                    else:
+                        # Check data types
+                        value = data[field]
+                        if field in ["year", "msrp", "discount", "feesHint"] and not isinstance(value, (int, float)):
+                            type_issues.append(f"{field}: expected number, got {type(value)}")
+                        elif field in ["make", "model", "trim", "drivetrain", "engine", "transmission", 
+                                     "exteriorColor", "interiorColor", "state", "description", "vin"] and not isinstance(value, str):
+                            type_issues.append(f"{field}: expected string, got {type(value)}")
+                
+                if missing_fields:
+                    self.log_test("Data Structure Validation", False, 
+                                f"Missing required fields: {missing_fields}")
+                    return False
+                elif type_issues:
+                    self.log_test("Data Structure Validation", False, 
+                                f"Data type issues: {type_issues}")
+                    return False
+                else:
+                    self.log_test("Data Structure Validation", True, 
+                                "All required fields present with correct data types")
+                    return True
+                    
+            else:
+                self.log_test("Data Structure Validation", False, 
+                            f"Cannot validate structure - HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Data Structure Validation", False, f"Request error: {str(e)}")
+            return False
+    
+    def test_cors_and_request_handling(self):
+        """Test CORS headers and request handling"""
+        try:
+            # Test with OPTIONS request (preflight)
+            response = self.session.options(f"{BACKEND_URL}/admin/lots")
+            
+            cors_headers = {
+                "Access-Control-Allow-Origin": response.headers.get("Access-Control-Allow-Origin"),
+                "Access-Control-Allow-Methods": response.headers.get("Access-Control-Allow-Methods"),
+                "Access-Control-Allow-Headers": response.headers.get("Access-Control-Allow-Headers"),
+                "Access-Control-Allow-Credentials": response.headers.get("Access-Control-Allow-Credentials")
+            }
+            
+            # Check if CORS headers are present
+            cors_configured = any(header for header in cors_headers.values())
+            
+            if cors_configured:
+                self.log_test("CORS Configuration", True, 
+                            f"CORS headers present: {cors_headers}")
+            else:
+                self.log_test("CORS Configuration", False, 
+                            "No CORS headers found - may cause frontend issues")
+            
+            # Test actual GET request with custom headers
+            headers = {
+                "Origin": "https://carbuy-portal.preview.emergentagent.com",
+                "Content-Type": "application/json"
+            }
+            
+            response = self.session.get(f"{BACKEND_URL}/admin/lots", headers=headers)
+            
+            if response.status_code == 200:
+                self.log_test("Request Handling", True, "Backend handles requests with custom headers correctly")
+                return True
+            else:
+                self.log_test("Request Handling", False, f"Request failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("CORS and Request Handling", False, f"Request error: {str(e)}")
+            return False
+
     def run_all_tests(self):
         """Run all backend tests"""
         print("=" * 60)
-        print("CARGWIN BACKEND API TESTING")
+        print("CARGWIN BACKEND API TESTING - CHEVROLET COLORADO FOCUS")
         print("=" * 60)
         print(f"Testing backend at: {BACKEND_URL}")
+        print("Focus: Admin lot editing functionality for Chevrolet Colorado")
         print()
         
         tests = [
             ("Main API Endpoint", self.test_main_endpoint),
+            ("Chevrolet Colorado Exists", lambda: self.test_chevrolet_colorado_exists()[0]),
+            ("Specific Chevrolet Lot Retrieval", lambda: self.test_specific_chevrolet_lot_retrieval()[0]),
+            ("Chevrolet Lot Update", self.test_chevrolet_lot_update),
+            ("Data Structure Validation", self.test_data_structure_for_frontend),
+            ("CORS and Request Handling", self.test_cors_and_request_handling),
+            ("Lot Listing", self.test_lot_listing),
             ("Lot Creation", self.test_lot_creation),
             ("Negative Discount Validation", self.test_negative_discount_validation),
-            ("Lot Listing", self.test_lot_listing),
-            ("Single Lot Retrieval", self.test_single_lot_retrieval),
-            ("Lot Update", self.test_lot_update),
             ("Pricing Calculations", self.test_pricing_calculations)
         ]
         
