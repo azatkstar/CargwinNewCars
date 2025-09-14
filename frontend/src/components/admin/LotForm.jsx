@@ -340,6 +340,15 @@ const LotForm = () => {
                 >
                   {t('admin.actions.publish')}
                 </Button>
+                
+                <Button
+                  onClick={() => handleSave('publish-now')}
+                  disabled={saving}
+                  className="bg-green-600 hover:bg-green-700 text-white"
+                >
+                  <RefreshCw className="w-4 h-4 mr-2" />
+                  Опубликовать сейчас
+                </Button>
               </>
             )}
           </div>
