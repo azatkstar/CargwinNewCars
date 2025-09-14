@@ -247,3 +247,5 @@ agent_communication:
     message: "SUCCESS: Public pages show correct Chevrolet Colorado data with hidden VIN. Admin panel has new features but form data loading needs CORS fix for full functionality."
   - agent: "main"
     message: "READY FOR COMPREHENSIVE FRONTEND TESTING: All requested features implemented. Public car page /car/2025-chevrolet-colorado-zr2-crew-cab-medium-bed-4zr works correctly. Admin panel has new buttons and functionality. Test lot ID: b5bc4802-821a-478c-b4bb-f0a974ef23a7"
+  - agent: "testing"
+    message: "CRITICAL FRONTEND ROUTING ISSUE DISCOVERED: All routes (/car/*, /admin/*) redirect to homepage instead of showing proper pages. Backend API works correctly and returns proper Chevrolet Colorado data (created lot ID: c66503c7-e55a-4c3c-8874-cdd59f75626d), but frontend routing is completely broken. This prevents testing of all implemented features including VIN hiding, admin buttons, and car detail pages."
