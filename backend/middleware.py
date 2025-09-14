@@ -200,10 +200,13 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
     
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
         if request.url.path == "/health":
+            from config import get_settings
+            settings = get_settings()
             return JSONResponse({
                 "status": "healthy",
                 "timestamp": datetime.now(timezone.utc).isoformat(),
-                "version": settings.PROJECT_VERSION
+                "version": settings.PROJECT_VERSION,
+                "environment": settings.ENVIRONMENT
             })
         
         return await call_next(request)
