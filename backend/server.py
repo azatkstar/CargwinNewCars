@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Response, Cookie
+from fastapi import FastAPI, APIRouter, HTTPException, Response, Cookie, Depends
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -11,6 +11,20 @@ from typing import List, Optional, Dict, Any
 import uuid
 from datetime import datetime, timedelta
 import json
+import hashlib
+
+# Import database modules
+from database import (
+    connect_to_mongo, 
+    close_mongo_connection, 
+    initialize_repositories,
+    get_lot_repository,
+    get_user_repository,
+    get_audit_repository,
+    LotRepository,
+    UserRepository,
+    AuditRepository
+)
 
 
 ROOT_DIR = Path(__file__).parent
