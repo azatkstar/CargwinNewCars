@@ -372,57 +372,14 @@ async def get_lot(lot_id: str):
     try:
         # Check if lot exists in storage
         if lot_id in lots_storage:
+            logger.info(f"Found lot in storage: {lot_id}")
             return lots_storage[lot_id]
+        else:
+            logger.warning(f"Lot not found in storage: {lot_id}")
+            raise HTTPException(status_code=404, detail=f"Lot {lot_id} not found")
         
-        # If not in storage, return mock data for demo
-        mock_lot = {
-            "id": lot_id,
-            "slug": "2024-honda-accord-lx-cv123",
-            "status": "published",
-            "make": "Honda",
-            "model": "Accord",
-            "year": 2024,
-            "trim": "LX",
-            "vin": "1HGCV1F30NA123456",
-            "drivetrain": "FWD",
-            "engine": "1.5L Turbo I4",
-            "transmission": "CVT",
-            "exteriorColor": "White Pearl",
-            "interiorColor": "Black Leather",
-            "msrp": 28900,
-            "discount": 3100,
-            "feesHint": 3445,
-            "state": "CA",
-            "description": "Новый Honda Accord 2024 года в комплектации LX. Экономичный и надежный седан с современными технологиями безопасности Honda Sensing.",
-            "tags": ["sedan", "2024", "honda", "reliable"],
-            "isWeeklyDrop": True,
-            "images": [
-                {
-                    "id": "img_1",
-                    "url": "https://images.unsplash.com/photo-1614687153862-b0e115ebcef1",
-                    "alt": "2024 Honda Accord LX — вид спереди",
-                    "ratio": "16:9",
-                    "width": 1920,
-                    "height": 1080,
-                    "isHero": True
-                }
-            ],
-            "fomo": {
-                "mode": "deterministic",
-                "viewers": 32,
-                "confirms15": 7
-            },
-            "seo": {
-                "title": "Honda Accord LX 2024 - Fleet предложение | CargwinNewCar",
-                "description": "Эксклюзивное fleet-предложение на Honda Accord LX 2024. Экономия $3,100. Без допов и торгов.",
-                "noindex": False
-            },
-            "createdAt": "2025-01-10T08:00:00Z",
-            "updatedAt": "2025-01-10T10:30:00Z"
-        }
-        
-        return mock_lot
-        
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Get lot error: {e}")
         raise HTTPException(status_code=500, detail="Failed to fetch lot")
