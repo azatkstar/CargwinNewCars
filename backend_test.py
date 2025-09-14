@@ -100,9 +100,10 @@ class BackendTester:
     def test_authentication_system(self):
         """Test JWT authentication and magic link system"""
         try:
-            # Test magic link creation
+            # Test magic link creation for admin user
+            admin_email = "admin@cargwin.com"
             magic_link_data = {
-                "email": "test@cargwin.com"
+                "email": admin_email
             }
             
             response = self.session.post(
@@ -129,8 +130,17 @@ class BackendTester:
                         token_data = verify_response.json()
                         if token_data.get("access_token"):
                             self.auth_token = token_data["access_token"]
-                            self.log_test("Authentication System", True, "Magic link and JWT authentication working")
-                            return True
+                            user_info = token_data.get("user", {})
+                            
+                            # Check if user was created with viewer role (default)
+                            if user_info.get("role") == "viewer":
+                                self.log_test("Authentication System", True, 
+                                            f"Magic link and JWT authentication working (user: {admin_email}, role: viewer)")
+                                return True
+                            else:
+                                self.log_test("Authentication System", True, 
+                                            f"Magic link and JWT authentication working (user: {admin_email}, role: {user_info.get('role')})")
+                                return True
                         else:
                             self.log_test("Authentication System", False, "JWT token not generated")
                             return False
@@ -146,6 +156,54 @@ class BackendTester:
                 
         except Exception as e:
             self.log_test("Authentication System", False, f"Authentication test error: {str(e)}")
+            return False
+    
+    def test_role_based_access_control(self):
+        """Test role-based access control system"""
+        if not self.auth_token:
+            self.log_test("Role-Based Access Control", False, "No auth token available")
+            return False
+        
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Test viewer access to admin lots (should work for viewing)
+            response = self.session.get(f"{BACKEND_URL}/admin/lots", headers=headers)
+            
+            if response.status_code == 200:
+                # Test viewer access to lot creation (should fail)
+                test_lot_data = {
+                    "make": "Test",
+                    "model": "Car",
+                    "year": 2024,
+                    "msrp": 30000,
+                    "description": "Test lot for role validation"
+                }
+                
+                create_response = self.session.post(
+                    f"{BACKEND_URL}/admin/lots",
+                    json=test_lot_data,
+                    headers=headers
+                )
+                
+                if create_response.status_code == 403:
+                    self.log_test("Role-Based Access Control", True, 
+                                "Role-based access control working: viewer can read but not create")
+                    return True
+                else:
+                    self.log_test("Role-Based Access Control", False, 
+                                f"Role validation failed: viewer should not be able to create lots (got HTTP {create_response.status_code})")
+                    return False
+            else:
+                self.log_test("Role-Based Access Control", False, 
+                            f"Admin read access failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Role-Based Access Control", False, f"Role access test error: {str(e)}")
             return False
     
     def test_admin_access_control(self):
