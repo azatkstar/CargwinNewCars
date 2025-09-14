@@ -151,23 +151,41 @@ frontend:
         agent: "main"
         comment: "Fixed by using Math.abs() for discount display"
 
-  - task: "Fix lot preview functionality to show actual lot data"
-    implemented: true
-    working: true
-    file: "/app/backend/server.py, /app/frontend/src/components/admin/LotForm.jsx, /app/frontend/src/pages/PreviewLot.jsx"
+  - task: "Fix public car pages to show real lot data instead of mock"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/pages/CarDetail.jsx, /app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: false
         agent: "main"
-        comment: "User reported: Created 2025 Chevrolet Colorado but preview shows Honda Accord. Preview function returns hardcoded mock data instead of actual lot data"
-      - working: true
-        agent: "testing"
-        comment: "COMPREHENSIVE PREVIEW TESTING COMPLETED: All preview endpoints working perfectly. Tested POST /api/admin/lots/preview-unsaved with Chevrolet Colorado 2025 Z71 data and GET /api/preview/{token}. Key findings: 1) Preview token creation successful 2) Preview data correctly shows Chevrolet Colorado (NOT Honda Accord) 3) Fleet price calculation accurate (38500 - 4200 = 34300) 4) All Chevrolet specs preserved (make, model, year, trim, engine, drivetrain, transmission, colors, VIN) 5) Preview-specific fields working (isPreview=true, previewToken match) 6) Description preservation working 7) Invalid token handling working (404 response). The reported issue appears to be resolved - preview now shows correct Chevrolet Colorado data instead of Honda Accord."
-      - working: true
+        comment: "User reported: Public car page /car/2025-chevrolet-colorado-zr2-crew-cab-medium-bed-4zr not working. CarDetail.jsx uses mock data instead of real backend data."
+
+  - task: "Hide VIN code by moving to footer with background color text"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/components/car-detail/CarHero.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: false
         agent: "main"
-        comment: "COMPLETED: Preview functionality fixed. Backend now creates real preview tokens with lot data. Preview shows correct Chevrolet Colorado 2025 Z71 data instead of Honda Accord. All pricing calculations correct."
+        comment: "User requested: Move VIN code to bottom of site and make text color match background to hide it"
+
+  - task: "Fix lot editing to show correct lot data instead of Honda Accord"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "User reported: When editing Chevrolet Colorado in admin panel, it opens Honda Accord 2024 instead. fetchLot function falls back to hardcoded Honda Accord mock data."
 
 metadata:
   created_by: "main_agent"
