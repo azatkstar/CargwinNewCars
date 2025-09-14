@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for CargwinNewCar
-Tests lot creation, management, and discount validation functionality
+Backend API Testing for CargwinNewCar - Production Ready Testing
+Tests server startup, MongoDB integration, authentication, monitoring, and all core functionality
 """
 
 import requests
 import json
 import sys
+import time
 from datetime import datetime
 
 # Get backend URL from environment
