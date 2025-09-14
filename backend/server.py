@@ -352,70 +352,57 @@ async def get_admin_lots(
         raise HTTPException(status_code=500, detail="Failed to fetch lots")
 
 @api_router.post("/admin/lots")
-async def create_lot(lot_data: dict):
+async def create_lot(
+    lot_data: dict, 
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    audit_repo: AuditRepository = Depends(get_audit_repo)
+):
     """Create new lot"""
     try:
-        # Generate ID and slug
-        lot_id = str(uuid.uuid4())
+        logger.info(f"Creating new lot: {lot_data.get('make', '')} {lot_data.get('model', '')} {lot_data.get('year', '')}")
         
-        # Extract data safely
-        make = lot_data.get('make', '')
-        model = lot_data.get('model', '')
-        year = lot_data.get('year', 2024)
-        trim = lot_data.get('trim', '')
+        # Validate required fields
+        required_fields = ['make', 'model', 'year']
+        for field in required_fields:
+            if not lot_data.get(field):
+                raise HTTPException(status_code=400, detail=f"Field '{field}' is required")
         
-        slug = f"{year}-{make}-{model}-{trim}".lower().replace(" ", "-").replace("--", "-")
+        # Ensure positive values for prices
+        lot_data['msrp'] = max(0, lot_data.get('msrp', 0))
+        lot_data['discount'] = max(0, lot_data.get('discount', 0))
+        lot_data['fees_hint'] = max(0, lot_data.get('feesHint', 0))
         
-        new_lot = {
-            "id": lot_id,
-            "slug": slug,
-            "status": lot_data.get('status', 'draft'),
-            "make": make,
-            "model": model,
-            "year": year,
-            "trim": trim,
-            "vin": lot_data.get('vin', ''),
-            "drivetrain": lot_data.get('drivetrain', 'FWD'),
-            "engine": lot_data.get('engine', ''),
-            "transmission": lot_data.get('transmission', 'AT'),
-            "exteriorColor": lot_data.get('exteriorColor', ''),
-            "interiorColor": lot_data.get('interiorColor', ''),
-            "msrp": max(0, lot_data.get('msrp', 0)),
-            "discount": max(0, lot_data.get('discount', 0)),
-            "feesHint": max(0, lot_data.get('feesHint', 0)),
-            "state": lot_data.get('state', 'CA'),
-            "description": lot_data.get('description', ''),
-            "tags": lot_data.get('tags', []),
-            "isWeeklyDrop": lot_data.get('isWeeklyDrop', False),
-            "images": lot_data.get('images', []) if lot_data.get('images') else [
-                {
-                    "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
-                    "alt": f"{lot_data.get('year', '')} {lot_data.get('make', '')} {lot_data.get('model', '')} — предпросмотр"
-                }
-            ],
-            "fomo": lot_data.get('fomo', {}),
-            "seo": lot_data.get('seo', {}),
-            "publishAt": lot_data.get('publishAt'),
-            "createdAt": datetime.utcnow().isoformat(),
-            "updatedAt": datetime.utcnow().isoformat(),
-            "archivedAt": None
-        }
+        # Generate default images if none provided
+        if not lot_data.get('images'):
+            lot_data['images'] = [{
+                "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
+                "alt": f"{lot_data.get('year', '')} {lot_data.get('make', '')} {lot_data.get('model', '')} — предпросмотр"
+            }]
         
-        # Store in memory
-        lots_storage[lot_id] = new_lot
+        # Create lot in database
+        lot_id = await lot_repo.create_lot(lot_data)
+        created_lot = await lot_repo.get_lot_by_id(lot_id)
         
-        logger.info(f"Creating new lot: {lot_id} - {make} {model} {year}")
+        # Log audit trail
+        await audit_repo.log_action({
+            "user_email": "system",  # TODO: Get from auth context
+            "action": "create",
+            "resource_type": "lot",
+            "resource_id": lot_id,
+            "changes": lot_data
+        })
         
         return {
             "ok": True,
             "id": lot_id,
-            "data": new_lot
+            "data": created_lot
         }
         
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Create lot error: {e}")
-        logger.error(f"Lot data received: {lot_data}")
-        raise HTTPException(status_code=500, detail=f"Failed to create lot: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to create lot")
 
 @api_router.get("/admin/lots/{lot_id}")
 async def get_lot(lot_id: str):
