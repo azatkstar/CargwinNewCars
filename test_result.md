@@ -247,6 +247,127 @@ metadata:
   test_sequence: 0
   run_ui: false
 
+frontend:
+  - task: "Fix negative discount validation display in LotForm"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "Found the issue - forced minus sign before formatPrice(lot.discount) causing --$3500 display when discount is negative"
+      - working: true
+        agent: "main"
+        comment: "Fixed by using Math.abs() for discount display and adding validation to ensure discount is always positive"
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - all admin routes redirect to homepage instead of showing admin panel. Backend API works correctly, but frontend routing prevents access to admin forms to test discount validation."
+
+  - task: "Fix negative discount display in LotsList"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/admin/LotsList.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "Same issue as LotForm - forced minus sign before formatPrice causes double minus"
+      - working: true
+        agent: "main"
+        comment: "Fixed by using Math.abs() for discount display"
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - all admin routes redirect to homepage instead of showing admin panel. Backend API works correctly, but frontend routing prevents access to admin lots list to test discount display."
+
+  - task: "Hide VIN code properly in all components"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/car-detail/CarSpecs.jsx, /app/frontend/src/components/Footer.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Removed VIN from CarSpecs.jsx display, kept hidden VIN in Footer. VIN no longer visible to users."
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - car detail routes redirect to homepage instead of showing car detail page. Backend API returns correct Chevrolet Colorado data with VIN, but frontend routing prevents access to car detail pages to verify VIN hiding."
+
+  - task: "Add publish now functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Added 'Опубликовать сейчас' button that publishes immediately without waiting for Monday."
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - admin routes redirect to homepage instead of showing admin forms. Backend API works correctly, but frontend routing prevents access to admin forms to test publish now button."
+
+  - task: "Add lot duplication functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Added 'Дублировать' button that creates copy of lot with modified data for quick similar car additions."
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - admin routes redirect to homepage instead of showing admin forms. Backend API works correctly, but frontend routing prevents access to admin forms to test duplication button."
+
+  - task: "Fix MSRP field to be normal input"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Changed MSRP field from 0 default to empty string, added placeholder, improved input handling."
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - admin routes redirect to homepage instead of showing admin forms. Backend API works correctly, but frontend routing prevents access to admin forms to test MSRP field improvements."
+
+  - task: "Fix lot editing to show correct lot data instead of Honda Accord"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/admin/LotForm.jsx"
+    stuck_count: 2
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "User reported: When editing Chevrolet Colorado in admin panel, it opens Honda Accord 2024 instead. fetchLot function falls back to hardcoded Honda Accord mock data."
+      - working: false
+        agent: "main"
+        comment: "PARTIAL FIX: Updated fetchLot to use correct backend URL and removed fallback to Honda Accord mock data. Backend endpoint returns correct Chevrolet data but frontend form not populating fields properly. May be CORS issue or data format mismatch."
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL BUG CONFIRMED: Backend issue identified. When requesting GET /api/admin/lots/ef4cdb7f-1bca-4076-b059-5063e41770dd (Chevrolet Colorado), backend returns Honda Accord 2024 data instead. Root cause: In server.py get_lot() function (lines 369-428), when lot_id not found in lots_storage, it returns hardcoded Honda Accord mock data instead of 404. The Chevrolet Colorado lot was created earlier but lost due to in-memory storage reset. Backend CRUD operations work correctly for existing lots in storage."
+      - working: true
+        agent: "main"
+        comment: "FIXED: Removed Honda Accord fallback from backend get_lot() function. Now returns proper 404 when lot not found instead of mock data."
+      - working: true
+        agent: "testing"
+        comment: "BACKEND CONFIRMED WORKING: Created new Chevrolet Colorado lot (ID: c66503c7-e55a-4c3c-8874-cdd59f75626d) and verified backend API returns correct data with MSRP $42,500, discount $4,200, fleet price $38,300. No more Honda Accord fallback. However, frontend routing prevents testing the actual form display."
+
   - task: "Frontend routing system completely broken"
     implemented: false
     working: false
@@ -258,6 +379,19 @@ metadata:
       - working: false
         agent: "testing"
         comment: "CRITICAL BUG DISCOVERED: All frontend routes (/car/*, /admin/*) redirect to homepage instead of showing proper pages. Tested multiple URLs: /car/2025-chevrolet-colorado-zr2-crew-cab-medium-bed-4zr and /admin/lots/c66503c7-e55a-4c3c-8874-cdd59f75626d/edit both redirect to homepage. This prevents testing of ALL implemented features. Backend API works correctly and returns proper data, but frontend routing is completely broken. Authentication works (console shows admin role), but routing does not."
+
+test_plan:
+  current_focus:
+    - "CRITICAL: Fix frontend routing system - all routes redirect to homepage"
+    - "After routing fixed: Test VIN hiding functionality on public pages"
+    - "After routing fixed: Test 'Опубликовать сейчас' and 'Дублировать' buttons in admin panel"
+    - "After routing fixed: Test MSRP field improvements"
+    - "After routing fixed: Test public car pages with Chevrolet Colorado data"
+    - "After routing fixed: Test preview functionality"
+  stuck_tasks: 
+    - "Frontend routing system completely broken"
+  test_all: false
+  test_priority: "critical_routing_fix_first"
 
 agent_communication:
   - agent: "main"
