@@ -247,17 +247,17 @@ metadata:
   test_sequence: 0
   run_ui: false
 
-test_plan:
-  current_focus:
-    - "READY FOR TESTING: All major fixes implemented and working"
-    - "Test VIN hiding functionality on public pages"
-    - "Test 'Опубликовать сейчас' and 'Дублировать' buttons in admin panel"
-    - "Test MSRP field improvements"
-    - "Test public car pages with Chevrolet Colorado data"
-    - "Test preview functionality"
-  stuck_tasks: []
-  test_all: true
-  test_priority: "comprehensive_frontend_testing"
+  - task: "Frontend routing system completely broken"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/App.js, React Router configuration"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL BUG DISCOVERED: All frontend routes (/car/*, /admin/*) redirect to homepage instead of showing proper pages. Tested multiple URLs: /car/2025-chevrolet-colorado-zr2-crew-cab-medium-bed-4zr and /admin/lots/c66503c7-e55a-4c3c-8874-cdd59f75626d/edit both redirect to homepage. This prevents testing of ALL implemented features. Backend API works correctly and returns proper data, but frontend routing is completely broken. Authentication works (console shows admin role), but routing does not."
 
 agent_communication:
   - agent: "main"
