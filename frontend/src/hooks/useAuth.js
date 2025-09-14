@@ -125,6 +125,9 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setUser(null);
       setRole(null);
+      // Clear persisted auth
+      localStorage.removeItem('cargwin_auth');
+      console.log('Logout successful, auth cleared');
     }
   };
 
