@@ -152,40 +152,49 @@ frontend:
         comment: "Fixed by using Math.abs() for discount display"
 
   - task: "Fix public car pages to show real lot data instead of mock"
-    implemented: false
-    working: false
+    implemented: true
+    working: true
     file: "/app/frontend/src/pages/CarDetail.jsx, /app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
         comment: "User reported: Public car page /car/2025-chevrolet-colorado-zr2-crew-cab-medium-bed-4zr not working. CarDetail.jsx uses mock data instead of real backend data."
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Added GET /api/cars/{car_slug} endpoint and updated CarDetail.jsx to fetch real data. Public page now shows correct Chevrolet Colorado ZR2 data with proper prices and specs."
 
   - task: "Hide VIN code by moving to footer with background color text"
-    implemented: false
-    working: false
-    file: "/app/frontend/src/components/car-detail/CarHero.jsx"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/car-detail/CarHero.jsx, /app/frontend/src/components/Footer.jsx, /app/frontend/src/pages/CarDetail.jsx"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
         comment: "User requested: Move VIN code to bottom of site and make text color match background to hide it"
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Removed VIN from CarHero display, added hidden VIN to Footer with background color matching text color for SEO/compliance purposes."
 
   - task: "Fix lot editing to show correct lot data instead of Honda Accord"
-    implemented: false
+    implemented: true
     working: false
     file: "/app/frontend/src/components/admin/LotForm.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: true
     status_history:
       - working: false
         agent: "main"
         comment: "User reported: When editing Chevrolet Colorado in admin panel, it opens Honda Accord 2024 instead. fetchLot function falls back to hardcoded Honda Accord mock data."
+      - working: false
+        agent: "main"
+        comment: "PARTIAL FIX: Updated fetchLot to use correct backend URL and removed fallback to Honda Accord mock data. Backend endpoint returns correct Chevrolet data but frontend form not populating fields properly. May be CORS issue or data format mismatch."
 
 metadata:
   created_by: "main_agent"
