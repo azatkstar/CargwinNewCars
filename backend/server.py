@@ -118,20 +118,44 @@ app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads"
 # Startup and shutdown events
 @app.on_event("startup")
 async def startup_event():
-    """Initialize database connection and repositories"""
+    """Initialize all application components"""
     try:
+        # Setup logging first
+        setup_logging(settings.LOG_LEVEL, settings.LOG_FORMAT)
+        logger.info(f"Starting CargwinNewCar API v{settings.PROJECT_VERSION} in {settings.ENVIRONMENT} mode")
+        
+        # Initialize database
         await connect_to_mongo()
         await initialize_repositories()
-        logger.info("Application startup completed successfully")
+        logger.info("Database connections established")
+        
+        # Initialize performance components
+        await initialize_performance()
+        logger.info("Performance optimization initialized")
+        
+        logger.info("🚀 Application startup completed successfully")
+        
     except Exception as e:
-        logger.error(f"Failed to start application: {e}")
+        logger.error(f"❌ Failed to start application: {e}")
         raise
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    """Close database connections"""
-    await close_mongo_connection()
-    logger.info("Application shutdown completed")
+    """Cleanup all application components"""
+    try:
+        # Cleanup performance components
+        await cleanup_performance()
+        logger.info("Performance components cleaned up")
+        
+        # Close database connections
+        await close_mongo_connection()
+        logger.info("Database connections closed")
+        
+        logger.info("✅ Application shutdown completed")
+        
+    except Exception as e:
+        logger.error(f"Error during shutdown: {e}")
+        # Don't raise during shutdown
 
 # Dependency to get repositories
 async def get_lots_repo() -> LotRepository:
