@@ -17,11 +17,57 @@ const CarDetail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock API call to get car details
-    const fetchCarData = () => {
+    fetchCarData();
+  }, [carId]);
+
+  const fetchCarData = async () => {
+    setLoading(true);
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/cars/${carId}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        setCarData(data);
+      } else if (response.status === 404) {
+        // Car not found in backend, show error or redirect
+        console.error('Car not found:', carId);
+        setCarData(null);
+      } else {
+        console.error('Failed to fetch car data:', response.status);
+        // Fallback to mock data as last resort
+        const car = mockOffers.find(offer => offer.id === carId);
+        if (car) {
+          const enhancedCar = {
+            ...car,
+            gallery: [
+              car.image,
+              "https://images.unsplash.com/photo-1712885046114-5ea81a2f7555?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwxfHxjYXIlMjBzdHVkaW98ZW58MHx8fHwxNzU3NDQxNzE1fDA&ixlib=rb-4.1.0&q=85",
+              "https://images.pexels.com/photos/720815/pexels-photo-720815.jpeg",
+              "https://images.pexels.com/photos/244818/pexels-photo-244818.jpeg"
+            ],
+            specs: {
+              year: car.title.split(' ')[0],
+              make: car.title.split(' ')[1],
+              model: car.title.split(' ')[2] + (car.title.split(' ')[3] || ''),
+              trim: car.title.split(' ').slice(3).join(' ') || 'Base',
+              engine: car.id.includes('niro') ? '1.6L Hybrid' : car.id.includes('tacoma') ? '2.4L Turbo I4' : '1.5L Turbo I4',
+              transmission: 'CVT',
+              drivetrain: car.id.includes('tacoma') ? 'RWD' : 'FWD',
+              exteriorColor: 'Белый жемчуг',
+              interiorColor: 'Чёрная кожа',
+              vin: `1HGCV${Math.random().toString(36).substr(2, 12).toUpperCase()}`
+            },
+            isDrop: Math.random() > 0.5
+          };
+          setCarData(enhancedCar);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch car data:', error);
+      // Final fallback to mock data
       const car = mockOffers.find(offer => offer.id === carId);
       if (car) {
-        // Enhance car data with additional details for detail page
         const enhancedCar = {
           ...car,
           gallery: [
@@ -42,15 +88,13 @@ const CarDetail = () => {
             interiorColor: 'Чёрная кожа',
             vin: `1HGCV${Math.random().toString(36).substr(2, 12).toUpperCase()}`
           },
-          isDrop: Math.random() > 0.5 // Randomly mark as drop item
+          isDrop: Math.random() > 0.5
         };
         setCarData(enhancedCar);
       }
-      setLoading(false);
-    };
-
-    fetchCarData();
-  }, [carId]);
+    }
+    setLoading(false);
+  };
 
   if (loading) {
     return (
