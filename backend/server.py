@@ -299,11 +299,12 @@ async def get_admin_lots(
 async def create_lot(
     lot_data: dict, 
     lot_repo: LotRepository = Depends(get_lots_repo),
-    audit_repo: AuditRepository = Depends(get_audit_repo)
+    audit_repo: AuditRepository = Depends(get_audit_repo),
+    current_user: User = Depends(require_editor)  # Require editor role or higher
 ):
     """Create new lot"""
     try:
-        logger.info(f"Creating new lot: {lot_data.get('make', '')} {lot_data.get('model', '')} {lot_data.get('year', '')}")
+        logger.info(f"Creating new lot: {lot_data.get('make', '')} {lot_data.get('model', '')} {lot_data.get('year', '')} by {current_user.email}")
         
         # Validate required fields
         required_fields = ['make', 'model', 'year']
@@ -329,7 +330,7 @@ async def create_lot(
         
         # Log audit trail
         await audit_repo.log_action({
-            "user_email": "system",  # TODO: Get from auth context
+            "user_email": current_user.email,
             "action": "create",
             "resource_type": "lot",
             "resource_id": lot_id,
