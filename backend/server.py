@@ -178,77 +178,85 @@ async def get_status_checks():
     return [StatusCheck(**status_check) for status_check in status_checks]
 
 # Admin Authentication Routes
-@api_router.post("/auth/magic")
-async def magic_link_auth(request: MagicLinkRequest):
-    """Send magic link (mock implementation)"""
+@api_router.post("/auth/magic", response_model=dict)
+async def send_magic_link(
+    magic_request: MagicLinkRequest,
+    user_repo: UserRepository = Depends(get_user_repository),
+    audit_repo: AuditRepository = Depends(get_audit_repository)
+):
+    """Send magic link to user email"""
     try:
-        # Determine role based on email
-        role = "viewer"
-        if "admin@" in request.email:
-            role = "admin"
-        elif "editor@" in request.email:
-            role = "editor"
+        token = await create_magic_link(magic_request.email, user_repo, audit_repo)
         
-        # Log the magic link request
-        logger.info(f"Magic link requested for: {request.email} (role: {role})")
+        # In production, send email with magic link
+        # For development, return the token (remove in production!)
+        magic_link_url = f"https://yourdomain.com/auth/verify?token={token}"
         
-        # In production, you would:
-        # 1. Generate secure token
-        # 2. Send email with magic link
-        # 3. Store token in database
+        logger.info(f"Magic link created for {magic_request.email}")
         
-        return {"ok": True, "message": "Magic link sent successfully"}
+        # For development only - remove in production
+        if os.getenv("ENVIRONMENT") == "development":
+            return {
+                "ok": True,
+                "message": "Magic link sent successfully",
+                "debug_token": token,  # Remove in production
+                "debug_url": magic_link_url  # Remove in production
+            }
+        
+        return {
+            "ok": True,
+            "message": "Magic link sent to your email"
+        }
+        
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Magic link error: {e}")
         raise HTTPException(status_code=500, detail="Failed to send magic link")
 
-@api_router.post("/auth/session")
-async def check_session(response: Response):
-    """Check if user has valid session (mock implementation)"""
+@api_router.post("/auth/verify", response_model=Token)
+async def verify_magic_link_endpoint(
+    verify_request: MagicLinkVerify,
+    user_repo: UserRepository = Depends(get_user_repository),
+    audit_repo: AuditRepository = Depends(get_audit_repository)
+):
+    """Verify magic link and return authentication tokens"""
     try:
-        # Mock authenticated user for demo
-        mock_user = {
-            "id": "user_123",
-            "email": "admin@cargwin.com",
-            "role": "admin"
-        }
+        user = await verify_magic_link(verify_request.token, user_repo, audit_repo)
+        tokens = await create_user_tokens(user)
         
-        # In production, verify JWT token from httpOnly cookie
-        return {
-            "user": {
-                "id": mock_user["id"],
-                "email": mock_user["email"]
-            },
-            "role": mock_user["role"]
-        }
+        logger.info(f"User authenticated successfully: {user.email}")
+        return tokens
+        
+    except HTTPException:
+        raise
     except Exception as e:
-        raise HTTPException(status_code=401, detail="Not authenticated")
+        logger.error(f"Magic link verification error: {e}")
+        raise HTTPException(status_code=500, detail="Authentication failed")
 
-@api_router.get("/auth/session")
-async def get_session():
-    """Get current session (mock implementation)"""
-    try:
-        # Mock authenticated user for demo
-        mock_user = {
-            "id": "user_123",
-            "email": "admin@cargwin.com",
-            "role": "admin"
+@api_router.get("/auth/session", response_model=dict)
+async def get_session(current_user: Optional[User] = Depends(get_current_user)):
+    """Get current user session"""
+    if not current_user:
+        return {"authenticated": False, "user": None}
+    
+    return {
+        "authenticated": True,
+        "user": {
+            "id": current_user.id,
+            "email": current_user.email,
+            "name": current_user.name,
+            "role": current_user.role,
+            "is_active": current_user.is_active
         }
-        
-        return {
-            "user": {
-                "id": mock_user["id"],
-                "email": mock_user["email"]
-            },
-            "role": mock_user["role"]
-        }
-    except Exception as e:
-        raise HTTPException(status_code=401, detail="Not authenticated")
+    }
 
 @api_router.post("/auth/logout")
-async def logout(response: Response):
-    """Logout user"""
-    # In production, clear httpOnly cookie
+async def logout(current_user: Optional[User] = Depends(get_current_user)):
+    """Logout user (client should delete tokens)"""
+    if current_user:
+        logger.info(f"User logged out: {current_user.email}")
+    
     return {"ok": True, "message": "Logged out successfully"}
 
 # Admin Lots Routes
