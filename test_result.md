@@ -189,15 +189,18 @@ frontend:
 
   - task: "Add lot duplication functionality"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/admin/LotForm.jsx"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "COMPLETED: Added 'Дублировать' button that creates copy of lot with modified data for quick similar car additions."
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - admin routes redirect to homepage instead of showing admin forms. Backend API works correctly, but frontend routing prevents access to admin forms to test duplication button."
 
   - task: "Fix MSRP field to be normal input"
     implemented: true
