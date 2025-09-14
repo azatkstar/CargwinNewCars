@@ -28,29 +28,36 @@ logger = logging.getLogger(__name__)
 settings = get_settings()
 
 class CacheManager:
-    """Redis-based caching manager"""
+    """Redis-based caching manager with fallback"""
     
     def __init__(self):
-        self.redis: Optional[aioredis.Redis] = None
-        self.enabled = bool(settings.REDIS_URL)
+        self.redis: Optional[Any] = None
+        self.enabled = bool(settings.REDIS_URL and REDIS_AVAILABLE)
+        self._memory_cache = {}  # Fallback in-memory cache
     
     async def connect(self):
         """Connect to Redis"""
-        if not self.enabled:
+        if not REDIS_AVAILABLE:
+            logger.info("Redis caching disabled - aioredis not available")
+            return
+            
+        if not settings.REDIS_URL:
             logger.info("Redis caching disabled - no REDIS_URL provided")
             return
         
         try:
-            self.redis = aioredis.from_url(
-                settings.REDIS_URL,
-                encoding="utf-8",
-                decode_responses=True,
-                max_connections=20
-            )
-            
-            # Test connection
-            await self.redis.ping()
-            logger.info("Redis cache connected successfully")
+            if aioredis:
+                self.redis = aioredis.from_url(
+                    settings.REDIS_URL,
+                    encoding="utf-8",
+                    decode_responses=True,
+                    max_connections=20
+                )
+                
+                # Test connection
+                await self.redis.ping()
+                self.enabled = True
+                logger.info("Redis cache connected successfully")
             
         except Exception as e:
             logger.error(f"Failed to connect to Redis: {e}")
