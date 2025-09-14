@@ -608,7 +608,9 @@ const LotForm = () => {
                     id="msrp"
                     type="number"
                     min="1000"
-                    value={lot.msrp}
+                    step="100"
+                    placeholder="Введите MSRP"
+                    value={lot.msrp || ''}
                     onChange={(e) => handleInputChange('msrp', parseInt(e.target.value) || 0)}
                     className={errors.msrp ? 'border-red-500' : ''}
                   />
