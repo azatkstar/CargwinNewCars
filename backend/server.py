@@ -35,11 +35,44 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Create the main app without a prefix
-app = FastAPI()
+# Load environment variables
+load_dotenv()
 
-# Create a router with the /api prefix
+app = FastAPI(title="CargwinNewCar API", version="1.0.0")
+
+# CORS configuration
+cors_origins = os.getenv("CORS_ORIGINS", "*").split(",")
+
+# Create API router
 api_router = APIRouter(prefix="/api")
+
+# Startup and shutdown events
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database connection and repositories"""
+    try:
+        await connect_to_mongo()
+        await initialize_repositories()
+        logger.info("Application startup completed successfully")
+    except Exception as e:
+        logger.error(f"Failed to start application: {e}")
+        raise
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Close database connections"""
+    await close_mongo_connection()
+    logger.info("Application shutdown completed")
+
+# Dependency to get repositories
+async def get_lots_repo() -> LotRepository:
+    return get_lot_repository()
+
+async def get_users_repo() -> UserRepository:
+    return get_user_repository()
+
+async def get_audit_repo() -> AuditRepository:
+    return get_audit_repository()
 
 # In-memory storage for demo (in production use database)
 lots_storage = {}
