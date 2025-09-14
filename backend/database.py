@@ -328,6 +328,21 @@ class UserRepository:
         
         result = await self.collection.insert_one(user_data)
         return str(result.inserted_id)
+    
+    async def update_user(self, user_id: str, update_data: Dict[str, Any]) -> bool:
+        """Update user"""
+        try:
+            from bson import ObjectId
+            update_data['updated_at'] = datetime.now(timezone.utc)
+            
+            result = await self.collection.update_one(
+                {"_id": ObjectId(user_id)}, 
+                {"$set": update_data}
+            )
+            return result.modified_count > 0
+        except Exception as e:
+            logger.error(f"Error updating user {user_id}: {e}")
+            return False
 
 class AuditRepository:
     """Repository for audit log operations"""
