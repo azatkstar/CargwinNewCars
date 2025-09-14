@@ -267,7 +267,8 @@ async def get_admin_lots(
     status: Optional[str] = None,
     make: Optional[str] = None,
     model: Optional[str] = None,
-    lot_repo: LotRepository = Depends(get_lots_repo)
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    current_user: User = Depends(require_auth)  # Any authenticated user can view
 ):
     """Get lots for admin dashboard with pagination and filtering"""
     try:
