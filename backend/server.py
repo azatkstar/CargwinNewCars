@@ -405,16 +405,18 @@ async def create_lot(
         raise HTTPException(status_code=500, detail="Failed to create lot")
 
 @api_router.get("/admin/lots/{lot_id}")
-async def get_lot(lot_id: str):
+async def get_lot(
+    lot_id: str, 
+    lot_repo: LotRepository = Depends(get_lots_repo)
+):
     """Get single lot for editing"""
     try:
-        # Check if lot exists in storage
-        if lot_id in lots_storage:
-            logger.info(f"Found lot in storage: {lot_id}")
-            return lots_storage[lot_id]
-        else:
-            logger.warning(f"Lot not found in storage: {lot_id}")
+        lot = await lot_repo.get_lot_by_id(lot_id)
+        if not lot:
             raise HTTPException(status_code=404, detail=f"Lot {lot_id} not found")
+            
+        logger.info(f"Retrieved lot: {lot_id}")
+        return lot
         
     except HTTPException:
         raise
@@ -423,30 +425,45 @@ async def get_lot(lot_id: str):
         raise HTTPException(status_code=500, detail="Failed to fetch lot")
 
 @api_router.patch("/admin/lots/{lot_id}")
-async def update_lot(lot_id: str, lot_data: dict):
+async def update_lot(
+    lot_id: str, 
+    lot_data: dict,
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    audit_repo: AuditRepository = Depends(get_audit_repo)
+):
     """Update existing lot"""
     try:
         logger.info(f"Updating lot: {lot_id}")
         
-        # Check if lot exists in storage
-        if lot_id not in lots_storage:
-            raise HTTPException(status_code=404, detail="Lot not found")
+        # Get existing lot to compare changes
+        existing_lot = await lot_repo.get_lot_by_id(lot_id)
+        if not existing_lot:
+            raise HTTPException(status_code=404, detail=f"Lot {lot_id} not found")
         
-        # Get existing lot
-        existing_lot = lots_storage[lot_id]
+        # Ensure positive values for prices
+        if 'msrp' in lot_data:
+            lot_data['msrp'] = max(0, lot_data['msrp'])
+        if 'discount' in lot_data:
+            lot_data['discount'] = max(0, lot_data['discount'])
+        if 'feesHint' in lot_data:
+            lot_data['fees_hint'] = max(0, lot_data.pop('feesHint'))
         
-        # Update with new data, ensuring positive values for prices
-        updated_lot = {
-            **existing_lot,
-            **lot_data,
-            "msrp": max(0, lot_data.get('msrp', existing_lot.get('msrp', 0))),
-            "discount": max(0, lot_data.get('discount', existing_lot.get('discount', 0))),
-            "feesHint": max(0, lot_data.get('feesHint', existing_lot.get('feesHint', 0))),
-            "updatedAt": datetime.utcnow().isoformat()
-        }
+        # Update lot in database
+        success = await lot_repo.update_lot(lot_id, lot_data)
+        if not success:
+            raise HTTPException(status_code=500, detail="Failed to update lot")
         
-        # Store updated lot
-        lots_storage[lot_id] = updated_lot
+        # Get updated lot
+        updated_lot = await lot_repo.get_lot_by_id(lot_id)
+        
+        # Log audit trail
+        await audit_repo.log_action({
+            "user_email": "system",  # TODO: Get from auth context
+            "action": "update",
+            "resource_type": "lot",
+            "resource_id": lot_id,
+            "changes": lot_data
+        })
         
         return {
             "ok": True,
