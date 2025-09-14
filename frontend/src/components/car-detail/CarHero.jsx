@@ -90,9 +90,6 @@ const CarHero = ({ car }) => {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 {car.title}
               </h1>
-              <p className="text-lg text-gray-600">
-                VIN: {car.specs.vin}
-              </p>
             </div>
 
             {/* Pricing */}
