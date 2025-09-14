@@ -141,11 +141,11 @@ frontend:
 
   - task: "Fix negative discount display in LotsList"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/admin/LotsList.jsx"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
@@ -153,6 +153,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "Fixed by using Math.abs() for discount display"
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - all admin routes redirect to homepage instead of showing admin panel. Backend API works correctly, but frontend routing prevents access to admin lots list to test discount display."
 
   - task: "Hide VIN code properly in all components"
     implemented: true
