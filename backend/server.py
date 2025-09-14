@@ -536,6 +536,91 @@ async def create_preview_for_unsaved_lot(lot_data: dict):
         logger.error(f"Create preview token for unsaved lot error: {e}")
         raise HTTPException(status_code=500, detail="Failed to create preview token")
 
+@api_router.get("/cars/{car_slug}")
+async def get_public_car(car_slug: str):
+    """Get public car data by slug for car detail pages"""
+    try:
+        # First try to find in lots_storage by slug or generated slug pattern
+        matching_lot = None
+        for lot_id, lot_data in lots_storage.items():
+            # Check if slug matches or can be generated from lot data
+            generated_slug = f"{lot_data.get('year', '')}-{lot_data.get('make', '').lower()}-{lot_data.get('model', '').lower()}-{lot_data.get('trim', '').lower()}".replace(' ', '-').replace('--', '-')
+            if (lot_data.get('slug') == car_slug or 
+                generated_slug.replace('-', '') in car_slug.replace('-', '') or
+                car_slug.replace('-', '') in generated_slug.replace('-', '')):
+                matching_lot = lot_data
+                break
+        
+        if matching_lot:
+            # Format for public car detail page
+            public_car = {
+                "id": car_slug,
+                "title": f"{matching_lot.get('year', '')} {matching_lot.get('make', '')} {matching_lot.get('model', '')} {matching_lot.get('trim', '')}",
+                "slug": car_slug,
+                "msrp": matching_lot.get('msrp', 0),
+                "fleet": matching_lot.get('msrp', 0) - matching_lot.get('discount', 0),
+                "savings": matching_lot.get('discount', 0),
+                "stockLeft": 1,
+                "image": (matching_lot.get('images', []) if matching_lot.get('images') else [
+                    {
+                        "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
+                        "alt": f"{matching_lot.get('year', '')} {matching_lot.get('make', '')} {matching_lot.get('model', '')} — вид спереди"
+                    }
+                ])[0]["url"],
+                "dealer": "Fleet Dealer",
+                "endsAt": datetime.utcnow() + timedelta(hours=48),
+                "addonsAvg": matching_lot.get('feesHint', 0),
+                "gallery": [img["url"] for img in (matching_lot.get('images', []) if matching_lot.get('images') else [
+                    {
+                        "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
+                        "alt": f"{matching_lot.get('year', '')} {matching_lot.get('make', '')} {matching_lot.get('model', '')} — вид спереди"
+                    }
+                ])],
+                "specs": {
+                    "year": str(matching_lot.get('year', '')),
+                    "make": matching_lot.get('make', ''),
+                    "model": matching_lot.get('model', ''),
+                    "trim": matching_lot.get('trim', ''),
+                    "engine": matching_lot.get('engine', ''),
+                    "transmission": matching_lot.get('transmission', ''),
+                    "drivetrain": matching_lot.get('drivetrain', ''), 
+                    "exteriorColor": matching_lot.get('exteriorColor', ''),
+                    "interiorColor": matching_lot.get('interiorColor', ''),
+                    "vin": matching_lot.get('vin', '')
+                },
+                "description": matching_lot.get('description', ''),
+                "isDrop": matching_lot.get('isWeeklyDrop', False),
+                "lease": {
+                    "termMonths": 36,
+                    "milesPerYear": 10000,
+                    "dueAtSigning": 2800,
+                    "monthly": 310,
+                    "incentives": 1800
+                },
+                "finance": {
+                    "apr": 3.5,
+                    "termMonths": 60,
+                    "downPayment": 2500,
+                    "monthlyPayment": 520
+                },
+                "cash": {
+                    "incentives": 2500,
+                    "total": matching_lot.get('msrp', 0) - matching_lot.get('discount', 0)
+                }
+            }
+            
+            logger.info(f"Public car requested: {car_slug}, found: {matching_lot.get('make', '')} {matching_lot.get('model', '')}")
+            return public_car
+        else:
+            # Return 404 if car not found
+            raise HTTPException(status_code=404, detail="Car not found")
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get public car error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch car data")
+
 @api_router.get("/preview/{token}")
 async def get_preview_lot(token: str):
     """Get lot data for preview by token"""
