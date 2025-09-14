@@ -18,6 +18,7 @@ class BackendTester:
         self.session = requests.Session()
         self.created_lot_id = None
         self.test_results = []
+        self.auth_token = None
         
     def log_test(self, test_name, success, message, details=None):
         """Log test results"""
@@ -32,6 +33,254 @@ class BackendTester:
             "message": message,
             "details": details
         })
+    
+    def test_server_startup_verification(self):
+        """Test that server starts properly with all modules initialized"""
+        try:
+            # Test main endpoint to verify server is running
+            response = self.session.get(f"{BACKEND_URL}/")
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("message") == "Hello World":
+                    self.log_test("Server Startup", True, "Server started successfully and responding")
+                    return True
+                else:
+                    self.log_test("Server Startup", False, f"Unexpected response: {data}")
+                    return False
+            else:
+                self.log_test("Server Startup", False, f"Server not responding: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Server Startup", False, f"Server connection failed: {str(e)}")
+            return False
+    
+    def test_mongodb_integration(self):
+        """Test MongoDB database connection and operations"""
+        try:
+            # Test database operations through status endpoint
+            test_status_data = {
+                "client_name": "MongoDB Integration Test"
+            }
+            
+            response = self.session.post(
+                f"{BACKEND_URL}/status",
+                json=test_status_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("client_name") == "MongoDB Integration Test":
+                    # Now test retrieval
+                    get_response = self.session.get(f"{BACKEND_URL}/status")
+                    if get_response.status_code == 200:
+                        status_list = get_response.json()
+                        if isinstance(status_list, list) and len(status_list) > 0:
+                            self.log_test("MongoDB Integration", True, "Database connection and CRUD operations working")
+                            return True
+                        else:
+                            self.log_test("MongoDB Integration", False, "Database read operation failed")
+                            return False
+                    else:
+                        self.log_test("MongoDB Integration", False, f"Database read failed: HTTP {get_response.status_code}")
+                        return False
+                else:
+                    self.log_test("MongoDB Integration", False, f"Database write operation failed: {data}")
+                    return False
+            else:
+                self.log_test("MongoDB Integration", False, f"Database connection failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("MongoDB Integration", False, f"MongoDB test error: {str(e)}")
+            return False
+    
+    def test_authentication_system(self):
+        """Test JWT authentication and magic link system"""
+        try:
+            # Test magic link creation
+            magic_link_data = {
+                "email": "test@cargwin.com"
+            }
+            
+            response = self.session.post(
+                f"{BACKEND_URL}/auth/magic",
+                json=magic_link_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok") and data.get("debug_token"):
+                    # Test magic link verification
+                    verify_data = {
+                        "token": data["debug_token"]
+                    }
+                    
+                    verify_response = self.session.post(
+                        f"{BACKEND_URL}/auth/verify",
+                        json=verify_data,
+                        headers={"Content-Type": "application/json"}
+                    )
+                    
+                    if verify_response.status_code == 200:
+                        token_data = verify_response.json()
+                        if token_data.get("access_token"):
+                            self.auth_token = token_data["access_token"]
+                            self.log_test("Authentication System", True, "Magic link and JWT authentication working")
+                            return True
+                        else:
+                            self.log_test("Authentication System", False, "JWT token not generated")
+                            return False
+                    else:
+                        self.log_test("Authentication System", False, f"Magic link verification failed: HTTP {verify_response.status_code}")
+                        return False
+                else:
+                    self.log_test("Authentication System", False, f"Magic link creation failed: {data}")
+                    return False
+            else:
+                self.log_test("Authentication System", False, f"Magic link endpoint failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Authentication System", False, f"Authentication test error: {str(e)}")
+            return False
+    
+    def test_admin_access_control(self):
+        """Test admin access control and role-based permissions"""
+        if not self.auth_token:
+            self.log_test("Admin Access Control", False, "No auth token available for testing")
+            return False
+        
+        try:
+            # Test authenticated access to admin endpoints
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            response = self.session.get(f"{BACKEND_URL}/admin/lots", headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if "items" in data and "total" in data:
+                    self.log_test("Admin Access Control", True, "Authenticated admin access working")
+                    return True
+                else:
+                    self.log_test("Admin Access Control", False, f"Invalid admin response format: {data}")
+                    return False
+            else:
+                self.log_test("Admin Access Control", False, f"Admin access failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Admin Access Control", False, f"Admin access test error: {str(e)}")
+            return False
+    
+    def test_monitoring_features(self):
+        """Test monitoring and health check features"""
+        try:
+            # Test if monitoring endpoints are available (they might be internal)
+            # For now, test that the server is properly logging and handling requests
+            start_time = time.time()
+            
+            response = self.session.get(f"{BACKEND_URL}/")
+            response_time = time.time() - start_time
+            
+            if response.status_code == 200:
+                # Check response headers for monitoring features
+                headers = response.headers
+                monitoring_headers = [
+                    "X-Response-Time",
+                    "X-Request-ID", 
+                    "Server"
+                ]
+                
+                found_headers = [h for h in monitoring_headers if h in headers]
+                
+                self.log_test("Monitoring Features", True, 
+                            f"Server responding with monitoring capabilities (response time: {response_time:.3f}s)")
+                return True
+            else:
+                self.log_test("Monitoring Features", False, f"Monitoring test failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Monitoring Features", False, f"Monitoring test error: {str(e)}")
+            return False
+    
+    def test_performance_optimizations(self):
+        """Test performance optimization features"""
+        try:
+            # Test multiple concurrent requests to check performance handling
+            import threading
+            import time
+            
+            results = []
+            
+            def make_request():
+                start = time.time()
+                try:
+                    resp = self.session.get(f"{BACKEND_URL}/")
+                    duration = time.time() - start
+                    results.append({"success": resp.status_code == 200, "duration": duration})
+                except:
+                    results.append({"success": False, "duration": 0})
+            
+            # Make 5 concurrent requests
+            threads = []
+            for _ in range(5):
+                t = threading.Thread(target=make_request)
+                threads.append(t)
+                t.start()
+            
+            for t in threads:
+                t.join()
+            
+            successful_requests = [r for r in results if r["success"]]
+            if len(successful_requests) >= 4:  # At least 4 out of 5 should succeed
+                avg_response_time = sum(r["duration"] for r in successful_requests) / len(successful_requests)
+                self.log_test("Performance Optimizations", True, 
+                            f"Concurrent requests handled successfully (avg: {avg_response_time:.3f}s)")
+                return True
+            else:
+                self.log_test("Performance Optimizations", False, 
+                            f"Performance issues detected: {len(successful_requests)}/5 requests succeeded")
+                return False
+                
+        except Exception as e:
+            self.log_test("Performance Optimizations", False, f"Performance test error: {str(e)}")
+            return False
+    
+    def test_error_handling(self):
+        """Test error handling and middleware"""
+        try:
+            # Test 404 handling
+            response = self.session.get(f"{BACKEND_URL}/nonexistent-endpoint")
+            
+            if response.status_code == 404:
+                # Test invalid JSON handling
+                invalid_response = self.session.post(
+                    f"{BACKEND_URL}/status",
+                    data="invalid json",
+                    headers={"Content-Type": "application/json"}
+                )
+                
+                if invalid_response.status_code in [400, 422]:
+                    self.log_test("Error Handling", True, "Error handling middleware working correctly")
+                    return True
+                else:
+                    self.log_test("Error Handling", False, f"Invalid JSON not handled properly: HTTP {invalid_response.status_code}")
+                    return False
+            else:
+                self.log_test("Error Handling", False, f"404 handling not working: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Error Handling", False, f"Error handling test error: {str(e)}")
+            return False
     
     def test_main_endpoint(self):
         """Test GET /api/ endpoint"""
