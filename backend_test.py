@@ -457,10 +457,19 @@ class BackendTester:
             self.log_test("Discount Validation", False, f"Discount validation test error: {str(e)}")
             return False
     
-    def test_lot_listing(self):
-        """Test GET /api/admin/lots endpoint"""
+    def test_lot_listing_with_auth(self):
+        """Test GET /api/admin/lots endpoint with authentication"""
+        if not self.auth_token:
+            self.log_test("Authenticated Lot Listing", False, "No auth token available")
+            return False
+        
         try:
-            response = self.session.get(f"{BACKEND_URL}/admin/lots")
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            response = self.session.get(f"{BACKEND_URL}/admin/lots", headers=headers)
             
             if response.status_code == 200:
                 data = response.json()
@@ -470,36 +479,31 @@ class BackendTester:
                 missing_keys = [key for key in required_keys if key not in data]
                 
                 if missing_keys:
-                    self.log_test("Lot Listing", False, f"Missing response keys: {missing_keys}")
+                    self.log_test("Authenticated Lot Listing", False, f"Missing response keys: {missing_keys}")
                     return False
                 
                 items = data.get("items", [])
                 total = data.get("total", 0)
                 
-                if total > 0 and len(items) > 0:
-                    # Check if our created lot is in the list
-                    created_lot_found = False
-                    if self.created_lot_id:
-                        created_lot_found = any(lot.get("id") == self.created_lot_id for lot in items)
-                    
-                    self.log_test("Lot Listing", True, f"Retrieved {len(items)} lots (total: {total})")
-                    
+                self.log_test("Authenticated Lot Listing", True, 
+                            f"Retrieved {len(items)} lots from MongoDB (total: {total})")
+                
+                # Check if our created lot is in the list
+                if self.created_lot_id and items:
+                    created_lot_found = any(lot.get("id") == self.created_lot_id for lot in items)
                     if created_lot_found:
-                        self.log_test("Created Lot in List", True, "Tesla lot found in listing")
-                    elif self.created_lot_id:
-                        self.log_test("Created Lot in List", False, "Tesla lot not found in listing")
-                    
-                    return True
-                else:
-                    self.log_test("Lot Listing", True, "Empty lot list (expected for fresh system)")
-                    return True
+                        self.log_test("Created Lot in MongoDB", True, "Tesla lot found in MongoDB listing")
+                    else:
+                        self.log_test("Created Lot in MongoDB", False, "Tesla lot not found in MongoDB listing")
+                
+                return True
                     
             else:
-                self.log_test("Lot Listing", False, f"HTTP {response.status_code}: {response.text}")
+                self.log_test("Authenticated Lot Listing", False, f"HTTP {response.status_code}: {response.text}")
                 return False
                 
         except Exception as e:
-            self.log_test("Lot Listing", False, f"Request error: {str(e)}")
+            self.log_test("Authenticated Lot Listing", False, f"Request error: {str(e)}")
             return False
     
     def test_single_lot_retrieval(self):
