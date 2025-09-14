@@ -359,10 +359,21 @@ const LotForm = () => {
           
           <div className="flex items-center gap-2">
             {isEditing && hasPermission('editor') && (
-              <Button variant="outline">
-                <Archive className="w-4 h-4 mr-2" />
-                {t('admin.actions.archive')}
-              </Button>
+              <>
+                <Button 
+                  variant="outline"
+                  onClick={handleDuplicate}
+                  disabled={saving}
+                >
+                  <RefreshCw className="w-4 h-4 mr-2" />
+                  Дублировать
+                </Button>
+                
+                <Button variant="outline">
+                  <Archive className="w-4 h-4 mr-2" />
+                  {t('admin.actions.archive')}
+                </Button>
+              </>
             )}
             
             {isEditing && hasPermission('admin') && (
