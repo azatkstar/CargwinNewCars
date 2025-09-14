@@ -225,11 +225,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "COMPLETED: Fix negative discount validation display in LotForm"
-    - "COMPLETED: Fix negative discount display in LotsList"
-    - "COMPLETED: Test lot creation and editing functionality"
-    - "COMPLETED: Fix lot preview functionality to show actual lot data"
-  stuck_tasks: []
+    - "Fix lot editing to show correct lot data instead of Honda Accord"
+  stuck_tasks:
+    - "Fix lot editing to show correct lot data instead of Honda Accord"
   test_all: false
   test_priority: "high_first"
 
