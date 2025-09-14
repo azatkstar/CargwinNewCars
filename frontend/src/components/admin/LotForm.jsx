@@ -74,26 +74,21 @@ const LotForm = () => {
   const fetchLot = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/admin/lots/${id}`);
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/admin/lots/${id}`, {
+        credentials: 'include'
+      });
       if (response.ok) {
         const data = await response.json();
         setLot(data);
+        console.log('Fetched lot data:', data);
+      } else {
+        console.error('Failed to fetch lot - server response:', response.status);
+        setErrors({ general: 'Не удалось загрузить данные лота' });
       }
     } catch (error) {
       console.error('Failed to fetch lot:', error);
-      // Mock data for demo
-      setLot({
-        ...lot,
-        make: 'Honda',
-        model: 'Accord',
-        year: 2024,
-        trim: 'LX',
-        msrp: 28900,
-        discount: 3100,
-        description: 'Новый Honda Accord 2024 года в комплектации LX. Экономичный и надежный седан с современными технологиями.',
-        tags: ['sedan', '2024', 'honda'],
-        feesHint: 3445
-      });
+      setErrors({ general: 'Ошибка подключения к серверу' });
     } finally {
       setLoading(false);
     }
