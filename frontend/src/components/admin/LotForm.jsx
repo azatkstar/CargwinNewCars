@@ -37,7 +37,7 @@ const LotForm = () => {
     transmission: 'AT',
     exteriorColor: '',
     interiorColor: '',
-    msrp: 0,
+    msrp: '',
     discount: 0,
     feesHint: 0,
     state: 'CA',
