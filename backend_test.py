@@ -224,7 +224,7 @@ class BackendTester:
             if response.status_code == 200:
                 data = response.json()
                 if "items" in data and "total" in data:
-                    self.log_test("Admin Access Control", True, "Authenticated admin access working")
+                    self.log_test("Admin Access Control", True, "Authenticated admin access working (viewer can read)")
                     return True
                 else:
                     self.log_test("Admin Access Control", False, f"Invalid admin response format: {data}")
@@ -235,6 +235,56 @@ class BackendTester:
                 
         except Exception as e:
             self.log_test("Admin Access Control", False, f"Admin access test error: {str(e)}")
+            return False
+    
+    def test_database_lot_operations(self):
+        """Test MongoDB lot operations without requiring editor role"""
+        try:
+            # Test that we can retrieve existing lots from MongoDB
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            } if self.auth_token else {}
+            
+            response = self.session.get(f"{BACKEND_URL}/admin/lots", headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                items = data.get("items", [])
+                total = data.get("total", 0)
+                
+                if total > 0 and items:
+                    # Test retrieving a specific lot
+                    first_lot = items[0]
+                    lot_id = first_lot.get("id")
+                    
+                    if lot_id:
+                        lot_response = self.session.get(f"{BACKEND_URL}/admin/lots/{lot_id}", headers=headers)
+                        
+                        if lot_response.status_code == 200:
+                            lot_data = lot_response.json()
+                            if lot_data.get("make") and lot_data.get("model"):
+                                self.log_test("Database Lot Operations", True, 
+                                            f"MongoDB lot operations working: retrieved {lot_data.get('make')} {lot_data.get('model')}")
+                                return True
+                            else:
+                                self.log_test("Database Lot Operations", False, "Retrieved lot missing required fields")
+                                return False
+                        else:
+                            self.log_test("Database Lot Operations", False, f"Single lot retrieval failed: HTTP {lot_response.status_code}")
+                            return False
+                    else:
+                        self.log_test("Database Lot Operations", False, "Lot ID missing from listing")
+                        return False
+                else:
+                    self.log_test("Database Lot Operations", True, "MongoDB connection working (empty database)")
+                    return True
+            else:
+                self.log_test("Database Lot Operations", False, f"Lot listing failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Database Lot Operations", False, f"Database operations test error: {str(e)}")
             return False
     
     def test_monitoring_features(self):
