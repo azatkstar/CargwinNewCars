@@ -177,6 +177,10 @@ const LotForm = () => {
       
       const payload = { ...lot };
       if (action === 'publish') payload.status = 'published';
+      if (action === 'publish-now') {
+        payload.status = 'published';
+        payload.publishAt = new Date().toISOString(); // Publish immediately
+      }
       if (action === 'schedule' && lot.publishAt) payload.status = 'scheduled';
 
       console.log('Saving lot:', payload);
