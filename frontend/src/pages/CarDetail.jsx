@@ -150,7 +150,7 @@ const CarDetail = () => {
       {/* Similar Offers */}
       <SimilarOffers currentCarId={carId} />
       
-      <Footer />
+      <Footer hiddenVin={carData?.specs?.vin} />
       <FOMOTicker />
       
       {/* Add bottom padding for FOMO ticker */}
