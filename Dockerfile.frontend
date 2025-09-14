@@ -1,0 +1,61 @@
+# Multi-stage Docker build for CargwinNewCar Frontend
+FROM node:18-alpine as base
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies stage
+FROM base as dependencies
+
+# Copy package files
+COPY frontend/package.json frontend/yarn.lock ./
+
+# Install dependencies
+RUN yarn install --frozen-lockfile
+
+# Development stage
+FROM dependencies as development
+
+# Copy source code
+COPY frontend/ .
+
+# Expose port
+EXPOSE 3000
+
+# Development command
+CMD ["yarn", "start"]
+
+# Build stage
+FROM dependencies as build
+
+# Copy source code
+COPY frontend/ .
+
+# Build the application
+RUN yarn build
+
+# Production stage
+FROM nginx:alpine as production
+
+# Install curl for health checks
+RUN apk --no-cache add curl
+
+# Copy custom nginx config
+COPY docker/nginx.conf /etc/nginx/nginx.conf
+
+# Copy built application
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Copy environment script
+COPY docker/env-config.sh /docker-entrypoint.d/env-config.sh
+RUN chmod +x /docker-entrypoint.d/env-config.sh
+
+# Expose port
+EXPOSE 80
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost/health || exit 1
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
