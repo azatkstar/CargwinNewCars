@@ -102,9 +102,23 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "У нас была проблема - не сохранялись новые спецпредложения. Проблема с отрицательной валидацией скидки показывающей значения как '-$3,500' или '-$4,500' в форме создания лота."
+user_problem_statement: "У нас была проблема - не сохранялись новые спецпредложения. Проблема с отрицательной валидацией скидки показывающей значения как '-$3,500' или '-$4,500' в форме создания лота. Current focus: Fix server startup/shutdown and imports issues for deployment."
 
 backend:
+  - task: "Fix server imports and startup/shutdown events"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py, /app/backend/performance.py"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "Performance module had aioredis TimeoutError conflict preventing server startup"
+      - working: true
+        agent: "main"
+        comment: "FIXED: Fixed aioredis import issue by adding graceful error handling and fallback to in-memory cache. Fixed datetime.utcnow() to use timezone-aware datetime. All modules now import successfully and server starts without issues."
   - task: "Fix lot creation/saving backend endpoint"
     implemented: true
     working: true
