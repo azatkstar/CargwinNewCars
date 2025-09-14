@@ -26,6 +26,21 @@ from database import (
     AuditRepository
 )
 
+# Import authentication modules
+from auth import (
+    create_magic_link,
+    verify_magic_link,
+    create_user_tokens,
+    get_current_user,
+    require_auth,
+    require_admin,
+    require_editor,
+    MagicLinkRequest,
+    MagicLinkVerify,
+    Token,
+    User
+)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
