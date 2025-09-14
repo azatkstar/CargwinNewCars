@@ -376,11 +376,12 @@ async def update_lot(
     lot_id: str, 
     lot_data: dict,
     lot_repo: LotRepository = Depends(get_lots_repo),
-    audit_repo: AuditRepository = Depends(get_audit_repo)
+    audit_repo: AuditRepository = Depends(get_audit_repo),
+    current_user: User = Depends(require_editor)  # Require editor role or higher
 ):
     """Update existing lot"""
     try:
-        logger.info(f"Updating lot: {lot_id}")
+        logger.info(f"Updating lot: {lot_id} by {current_user.email}")
         
         # Get existing lot to compare changes
         existing_lot = await lot_repo.get_lot_by_id(lot_id)
@@ -405,7 +406,7 @@ async def update_lot(
         
         # Log audit trail
         await audit_repo.log_action({
-            "user_email": "system",  # TODO: Get from auth context
+            "user_email": current_user.email,
             "action": "update",
             "resource_type": "lot",
             "resource_id": lot_id,
