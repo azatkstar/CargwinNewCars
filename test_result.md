@@ -123,11 +123,11 @@ backend:
 frontend:
   - task: "Fix negative discount validation display in LotForm"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/admin/LotForm.jsx"
     stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
@@ -135,6 +135,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "Fixed by using Math.abs() for discount display and adding validation to ensure discount is always positive"
+      - working: "NA"
+        agent: "testing"
+        comment: "CANNOT TEST: Frontend routing broken - all admin routes redirect to homepage instead of showing admin panel. Backend API works correctly, but frontend routing prevents access to admin forms to test discount validation."
 
   - task: "Fix negative discount display in LotsList"
     implemented: true
