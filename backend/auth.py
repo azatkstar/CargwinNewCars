@@ -268,9 +268,9 @@ async def require_auth(current_user: Optional[User] = Depends(get_current_user))
         )
     return current_user
 
-async def require_role(required_role: str):
+def require_role(required_role: str):
     """Create dependency that requires specific role"""
-    async def role_checker(current_user: User = Depends(require_auth)) -> User:
+    def role_checker(current_user: User = Depends(require_auth)) -> User:
         role_hierarchy = {"viewer": 0, "editor": 1, "admin": 2}
         
         user_level = role_hierarchy.get(current_user.role, -1)
