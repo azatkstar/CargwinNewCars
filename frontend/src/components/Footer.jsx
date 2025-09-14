@@ -1,7 +1,7 @@
 import React from 'react';
 import { Car, Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
 
-const Footer = () => {
+const Footer = ({ hiddenVin = null }) => {
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
