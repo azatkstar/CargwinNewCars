@@ -353,7 +353,8 @@ async def create_lot(
 @api_router.get("/admin/lots/{lot_id}")
 async def get_lot(
     lot_id: str, 
-    lot_repo: LotRepository = Depends(get_lots_repo)
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    current_user: User = Depends(require_auth)  # Any authenticated user can view
 ):
     """Get single lot for editing"""
     try:
@@ -361,7 +362,7 @@ async def get_lot(
         if not lot:
             raise HTTPException(status_code=404, detail=f"Lot {lot_id} not found")
             
-        logger.info(f"Retrieved lot: {lot_id}")
+        logger.info(f"Retrieved lot: {lot_id} by {current_user.email}")
         return lot
         
     except HTTPException:
