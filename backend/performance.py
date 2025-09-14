@@ -75,8 +75,12 @@ class CacheManager:
     
     async def get(self, key: str, default: Any = None) -> Any:
         """Get value from cache"""
-        if not self.enabled or not self.redis:
-            return default
+        if not self.enabled:
+            # Use memory cache as fallback
+            return self._memory_cache.get(key, default)
+        
+        if not self.redis:
+            return self._memory_cache.get(key, default)
         
         try:
             cache_key = self._make_key(key)
@@ -93,7 +97,8 @@ class CacheManager:
                 
         except Exception as e:
             logger.error(f"Cache get error for key {key}: {e}")
-            return default
+            # Fallback to memory cache
+            return self._memory_cache.get(key, default)
     
     async def set(self, key: str, value: Any, ttl: int = 3600) -> bool:
         """Set value in cache with TTL"""
