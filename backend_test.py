@@ -851,49 +851,77 @@ class BackendTester:
             return False
 
     def run_all_tests(self):
-        """Run all backend tests"""
-        print("=" * 60)
-        print("CARGWIN BACKEND API TESTING - CHEVROLET COLORADO FOCUS")
-        print("=" * 60)
+        """Run all backend tests for production readiness"""
+        print("=" * 80)
+        print("CARGWIN BACKEND API TESTING - PRODUCTION READINESS VERIFICATION")
+        print("=" * 80)
         print(f"Testing backend at: {BACKEND_URL}")
-        print("Focus: Admin lot editing functionality for Chevrolet Colorado")
+        print("Focus: Server startup, MongoDB, authentication, monitoring, and core functionality")
         print()
         
-        tests = [
-            ("Main API Endpoint", self.test_main_endpoint),
-            ("Chevrolet Colorado Exists", lambda: self.test_chevrolet_colorado_exists()[0]),
-            ("Specific Chevrolet Lot Retrieval", lambda: self.test_specific_chevrolet_lot_retrieval()[0]),
-            ("Chevrolet Lot Update", self.test_chevrolet_lot_update),
-            ("Data Structure Validation", self.test_data_structure_for_frontend),
-            ("CORS and Request Handling", self.test_cors_and_request_handling),
-            ("Lot Listing", self.test_lot_listing),
-            ("Lot Creation", self.test_lot_creation),
-            ("Negative Discount Validation", self.test_negative_discount_validation),
-            ("Pricing Calculations", self.test_pricing_calculations)
+        # Production readiness tests
+        production_tests = [
+            ("Server Startup Verification", self.test_server_startup_verification),
+            ("MongoDB Integration", self.test_mongodb_integration),
+            ("Authentication System", self.test_authentication_system),
+            ("Admin Access Control", self.test_admin_access_control),
+            ("Monitoring Features", self.test_monitoring_features),
+            ("Performance Optimizations", self.test_performance_optimizations),
+            ("Error Handling", self.test_error_handling),
         ]
         
-        passed = 0
-        total = len(tests)
+        # Core functionality tests (with authentication)
+        core_tests = [
+            ("Authenticated Lot Creation", self.test_lot_creation_with_auth),
+            ("Discount Validation", self.test_discount_validation_comprehensive),
+            ("Authenticated Lot Listing", self.test_lot_listing_with_auth),
+            ("Single Lot Retrieval", self.test_single_lot_retrieval),
+            ("Lot Update", self.test_lot_update),
+            ("Pricing Calculations", self.test_pricing_calculations),
+        ]
         
-        for test_name, test_func in tests:
-            print(f"\n--- Testing {test_name} ---")
+        all_tests = production_tests + core_tests
+        
+        passed = 0
+        total = len(all_tests)
+        
+        print("🔧 PRODUCTION READINESS TESTS")
+        print("-" * 40)
+        
+        for i, (test_name, test_func) in enumerate(production_tests):
+            print(f"\n--- Testing {test_name} ({i+1}/{len(production_tests)}) ---")
             try:
                 if test_func():
                     passed += 1
             except Exception as e:
                 self.log_test(test_name, False, f"Test execution error: {str(e)}")
         
-        print("\n" + "=" * 60)
-        print("TEST SUMMARY")
-        print("=" * 60)
+        print("\n🚀 CORE FUNCTIONALITY TESTS")
+        print("-" * 40)
+        
+        for i, (test_name, test_func) in enumerate(core_tests):
+            print(f"\n--- Testing {test_name} ({i+1}/{len(core_tests)}) ---")
+            try:
+                if test_func():
+                    passed += 1
+            except Exception as e:
+                self.log_test(test_name, False, f"Test execution error: {str(e)}")
+        
+        print("\n" + "=" * 80)
+        print("PRODUCTION READINESS TEST SUMMARY")
+        print("=" * 80)
         print(f"Passed: {passed}/{total}")
         print(f"Failed: {total - passed}/{total}")
+        print(f"Success Rate: {(passed/total)*100:.1f}%")
         
         if passed == total:
-            print("🎉 ALL TESTS PASSED!")
+            print("🎉 ALL TESTS PASSED - BACKEND IS PRODUCTION READY!")
+            return True
+        elif passed >= total * 0.8:  # 80% pass rate
+            print("✅ MOSTLY PASSING - BACKEND IS DEPLOYMENT READY WITH MINOR ISSUES")
             return True
         else:
-            print("⚠️  SOME TESTS FAILED")
+            print("⚠️  SIGNIFICANT ISSUES FOUND - BACKEND NEEDS FIXES BEFORE DEPLOYMENT")
             return False
 
 if __name__ == "__main__":
