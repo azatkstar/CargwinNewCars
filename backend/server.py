@@ -1,17 +1,27 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Response, Cookie, Depends, UploadFile
+from fastapi import FastAPI, APIRouter, HTTPException, Request, Depends, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from dotenv import load_dotenv
-from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
-import os
-import logging
-from pathlib import Path
+from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
+import logging
+import os
 import uuid
 from datetime import datetime, timedelta, timezone
-import json
 import hashlib
+import json
+
+# Import configuration and middleware
+from config import get_settings, validate_environment
+from middleware import (
+    SecurityHeadersMiddleware,
+    RateLimitMiddleware,
+    RequestLoggingMiddleware,
+    ErrorHandlingMiddleware,
+    HealthCheckMiddleware,
+    CacheControlMiddleware,
+    CompressionMiddleware,
+    get_cors_config
+)
 
 # Import database modules
 from database import (
@@ -49,28 +59,57 @@ from file_storage import (
 )
 from fastapi.staticfiles import StaticFiles
 
+# Load environment variables
+from dotenv import load_dotenv
+load_dotenv()
+
+# Get settings and validate environment
+settings = get_settings()
+try:
+    validate_environment()
+except ValueError as e:
+    if settings.is_production:
+        raise e
+    else:
+        logging.warning(f"Environment validation warning: {e}")
+
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=getattr(logging, settings.LOG_LEVEL),
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 
 logger = logging.getLogger(__name__)
 
+# Create FastAPI app
+app = FastAPI(
+    title=settings.PROJECT_TITLE,
+    version=settings.PROJECT_VERSION,
+    docs_url="/docs" if settings.DOCS_ENABLED else None,
+    redoc_url="/redoc" if settings.DOCS_ENABLED else None
+)
 
-# Load environment variables
-load_dotenv()
+# Add middleware (order matters!)
+app.add_middleware(CompressionMiddleware)
+app.add_middleware(CacheControlMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(ErrorHandlingMiddleware)
+app.add_middleware(RequestLoggingMiddleware)
+app.add_middleware(HealthCheckMiddleware)
 
-app = FastAPI(title="CargwinNewCar API", version="1.0.0")
+# Add rate limiting for production
+if settings.is_production:
+    app.add_middleware(RateLimitMiddleware)
 
 # CORS configuration
-cors_origins = os.getenv("CORS_ORIGINS", "*").split(",")
+cors_config = get_cors_config()
+app.add_middleware(CORSMiddleware, **cors_config)
 
 # Create API router
-api_router = APIRouter(prefix="/api")
+api_router = APIRouter(prefix=settings.API_V1_PREFIX)
 
 # Mount static files for uploads
-app.mount("/uploads", StaticFiles(directory="/app/uploads"), name="uploads")
+app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 
 # Startup and shutdown events
 @app.on_event("startup")
