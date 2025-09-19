@@ -54,7 +54,11 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
-  "offers": {
+  "fomo": {
+    "viewing_now": "{{count}} people viewing {{model}} now",
+    "confirmed_price": "Price confirmed in 15 min: {{count}} — {{model}}",
+    "stock_left": "{{count}} left — {{model}}"
+  },
     "title": "Current Offers",
     "subtitle": "Exclusive deals on premium vehicles",
     "fleet_price": "Fleet Price",
