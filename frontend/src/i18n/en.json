@@ -48,7 +48,11 @@
     "benefit3_title": "LA local expertise:",
     "benefit3_description": "clear terms, no forced add-ons.",
     "important_notice": "Important: Approval subject to credit qualification.",
-    "learn_next_drop": "Learn About Next Drop"
+    "learn_next_drop": "Learn About Next Drop",
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes",
+    "seconds": "seconds"
   },
   "offers": {
     "title": "Current Offers",
