@@ -54,7 +54,11 @@
     "minutes": "минут",
     "seconds": "секунд"
   },
-  "offers": {
+  "fomo": {
+    "viewing_now": "Сейчас {{count}} человек смотрят {{model}}",
+    "confirmed_price": "За 15 мин зафиксировали цену: {{count}} — {{model}}",
+    "stock_left": "Осталось {{count}} шт — {{model}}"
+  },
     "title": "Текущие предложения",
     "subtitle": "Эксклюзивные предложения на премиальные автомобили",
     "fleet_price": "Флит-цена",
