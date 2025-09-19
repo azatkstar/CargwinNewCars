@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, TrendingUp, Car } from 'lucide-react';
 import { getFOMOCounters } from '../mock';
+import { useI18n } from '../hooks/useI18n';
 
 const FOMOTicker = () => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const { t } = useI18n();
 
   const carModels = [
     'Honda Accord 2024',
@@ -24,7 +26,7 @@ const FOMOTicker = () => {
       // Viewing message
       messages.push({
         icon: Eye,
-        text: `Сейчас ${counters.viewers} человек смотрят ${model}`,
+        text: t('fomo.viewing_now', { count: counters.viewers, model }),
         type: 'viewing',
         color: 'text-blue-600'
       });
@@ -32,7 +34,7 @@ const FOMOTicker = () => {
       // Confirmed message
       messages.push({
         icon: TrendingUp,
-        text: `За 15 мин зафиксировали цену: ${counters.confirmed} — ${model}`,
+        text: t('fomo.confirmed_price', { count: counters.confirmed, model }),
         type: 'confirmed',
         color: 'text-green-600'
       });
@@ -42,7 +44,7 @@ const FOMOTicker = () => {
         const stockLeft = Math.floor(Math.random() * 3) + 1;
         messages.push({
           icon: Car,
-          text: `Осталось ${stockLeft} шт — ${model}`,
+          text: t('fomo.stock_left', { count: stockLeft, model }),
           type: 'stock',
           color: 'text-red-600'
         });
