@@ -81,25 +81,25 @@ const Hero = () => {
                 <div className="text-2xl md:text-3xl font-bold text-red-600">
                   {timeRemaining.days}
                 </div>
-                <div className="text-xs text-gray-500">дней</div>
+                <div className="text-xs text-gray-500">{t('hero.days')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-red-600">
                   {timeRemaining.hours}
                 </div>
-                <div className="text-xs text-gray-500">часов</div>
+                <div className="text-xs text-gray-500">{t('hero.hours')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-red-600">
                   {timeRemaining.minutes}
                 </div>
-                <div className="text-xs text-gray-500">минут</div>
+                <div className="text-xs text-gray-500">{t('hero.minutes')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-red-600">
                   {timeRemaining.seconds}
                 </div>
-                <div className="text-xs text-gray-500">секунд</div>
+                <div className="text-xs text-gray-500">{t('hero.seconds')}</div>
               </div>
             </div>
           </div>
