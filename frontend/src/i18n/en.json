@@ -54,13 +54,20 @@
     "minutes": "minutes",
     "seconds": "seconds"
   },
-  "fomo": {
-    "viewing_now": "{{count}} people viewing {{model}} now",
-    "confirmed_price": "Price confirmed in 15 min: {{count}} — {{model}}",
-    "stock_left": "{{count}} left — {{model}}"
-  },
-    "title": "Current Offers",
+  "offers": {
+    "title": "Current Fleet Offers",
     "subtitle": "Exclusive deals on premium vehicles",
+    "sort_by": "Sort by:",
+    "sort_savings": "Maximum savings",
+    "sort_price": "Minimum price", 
+    "sort_brand": "Alphabetical",
+    "subscribe_title": "Subscribe to New Drops",
+    "subscribe_subtitle": "Get notified about new fleet offers first",
+    "your_email": "Your email",
+    "subscribe_button": "Subscribe to Drops",
+    "subscribed": "✓ Subscribed!",
+    "privacy_notice": "We don't share your data with dealers. Unsubscribe anytime.",
+    "disclaimer": "Important note: All payments are approximate and depend on credit history, down payment, loan term and other factors. Final terms are determined by the dealer after credit approval. Offers valid until specified date or while supplies last.",
     "fleet_price": "Fleet Price",
     "msrp": "MSRP",
     "savings": "You Save",
@@ -68,6 +75,71 @@
     "down_payment": "Down Payment",
     "view_details": "View Details",
     "configure": "Configure"
+  },
+  "fomo": {
+    "viewing_now": "{{count}} people viewing {{model}} now",
+    "confirmed_price": "Price confirmed in 15 min: {{count}} — {{model}}",
+    "stock_left": "{{count}} left — {{model}}"
+  },
+  "how_it_works": {
+    "title": "How It Works",
+    "subtitle": "Simple 3-step process — from selection to getting your car",
+    "step1_title": "Choose Your Car",
+    "step1_description": "Access to closed fleet prices with VIN and exact offer expiration date",
+    "step1_detail1": "Real VIN numbers",
+    "step1_detail2": "Dealer-confirmed prices",
+    "step1_detail3": "Clear time frames",
+    "step2_title": "Reserve Price Online",
+    "step2_description": "No add-ons — we show average amounts by models and remove them",
+    "step2_detail1": "No hidden fees",
+    "step2_detail2": "Transparent pricing",
+    "step2_detail3": "Fixed price without haggling",
+    "step3_title": "Pick Up Ready Car",
+    "step3_description": "After 100% agreement on terms, come to dealer for fully prepared car",
+    "step3_detail1": "One contact with dealer",
+    "step3_detail2": "Ready-to-deliver car",
+    "step3_detail3": "Minimum time at dealer",
+    "important_condition": "⚠️ Important Condition",
+    "credit_notice": "Car financing is subject to suitable credit history. We do a preliminary soft check that doesn't affect your credit score.",
+    "stat1_number": "15 minutes",
+    "stat1_description": "Average time to reserve price",
+    "stat2_number": "$0",
+    "stat2_description": "Hidden fees and forced add-ons",
+    "stat3_number": "1 contact",
+    "stat3_description": "With dealer after terms agreement"
+  },
+  "trust": {
+    "badge": "Trust Manifesto",
+    "title": "Our Commitments to You",
+    "subtitle": "We built our business on trust and transparency. Every promise is our reputation.",
+    "point1_title": "Only Real Offers",
+    "point1_description": "VIN numbers confirmed by dealers. No bait-and-switch or fake prices.",
+    "point1_highlight": "Verified VINs",
+    "point2_title": "No Hidden Fees or Add-ons",
+    "point2_description": "What you see is what you pay. No surprises at the last moment.",
+    "point2_highlight": "Transparent Price",
+    "point3_title": "Fixed Price — No Haggling",
+    "point3_description": "Don't waste time negotiating. The price is already the best possible.",
+    "point3_highlight": "No Haggling",
+    "point4_title": "Data Confidentiality",
+    "point4_description": "We don't share your contacts with dealers for cold calls. Only agreed contact.",
+    "point4_highlight": "Privacy Protection",
+    "point5_title": "Deposit Return Guarantee",
+    "point5_description": "Deposit returned in full if you decline before signing documents.",
+    "point5_highlight": "100% Return",
+    "point6_title": "24/7 Support",
+    "point6_description": "We answer questions within 15 minutes any time of day or night.",
+    "point6_highlight": "Response ≤ 15 min",
+    "stat1_number": "2,847",
+    "stat1_description": "Happy customers",
+    "stat2_number": "$4.2M",
+    "stat2_description": "Saved by customers",
+    "stat3_number": "98.4%",
+    "stat3_description": "Recommend to friends",
+    "stat4_number": "12min",
+    "stat4_description": "Average support response",
+    "privacy_title": "Our Privacy Guarantee",
+    "privacy_description": "We never share your contact information with dealers for cold calls. Contact with dealer happens only after you 100% agree on all deal terms. This means one call, one meeting, one dealer — and your new car is ready for delivery."
   },
   "car_detail": {
     "specifications": "Specifications",
@@ -115,36 +187,6 @@
       "subtitle": "Get notified of new weekly drops",
       "email": "Email Address",
       "subscribe": "Subscribe"
-    }
-  },
-  "trust": {
-    "title": "Why Trust CargwinNewCar?",
-    "transparency": {
-      "title": "100% Transparent Pricing",
-      "description": "See actual fleet prices. No hidden fees or dealer markup."
-    },
-    "quality": {
-      "title": "Quality Guaranteed",
-      "description": "All vehicles undergo thorough inspection and come with warranty."
-    },
-    "support": {
-      "title": "Expert Support",
-      "description": "Our team of automotive experts is here to help you every step of the way."
-    }
-  },
-  "how_it_works": {
-    "title": "How It Works",
-    "step1": {
-      "title": "Browse Weekly Drops",
-      "description": "Every Monday, we release new exclusive deals"
-    },
-    "step2": {
-      "title": "Reserve Your Car",
-      "description": "Secure your vehicle with a refundable deposit"
-    },
-    "step3": {
-      "title": "Complete Purchase",
-      "description": "Finalize your purchase with transparent pricing"
     }
   },
   "admin": {
