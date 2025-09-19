@@ -1,43 +1,46 @@
 import React from 'react';
 import { Shield, DollarSign, Clock, Lock, RotateCcw, Headphones, CheckCircle } from 'lucide-react';
+import { useI18n } from '../hooks/useI18n';
 
 const TrustManifest = () => {
+  const { t } = useI18n();
+  
   const trustPoints = [
     {
       icon: CheckCircle,
-      title: 'Только реальные предложения',
-      description: 'VIN номера подтверждены дилерами. Никаких приманок или фейковых цен.',
-      highlight: 'Проверенные VIN'
+      title: t('trust.point1_title'),
+      description: t('trust.point1_description'),
+      highlight: t('trust.point1_highlight')
     },
     {
       icon: DollarSign,
-      title: 'Без скрытых платежей и допов',
-      description: 'То, что вы видите — то и платите. Никаких сюрпризов в последний момент.',
-      highlight: 'Прозрачная цена'
+      title: t('trust.point2_title'),
+      description: t('trust.point2_description'),
+      highlight: t('trust.point2_highlight')
     },
     {
       icon: Clock,
-      title: 'Фиксированная цена — без торгов',
-      description: 'Не тратьте время на переговоры. Цена уже лучшая из возможных.',
-      highlight: 'Без торгов'
+      title: t('trust.point3_title'),
+      description: t('trust.point3_description'),
+      highlight: t('trust.point3_highlight')
     },
     {
       icon: Lock,
-      title: 'Конфиденциальность данных',
-      description: 'Мы не передаём ваши контакты дилерам для обзвонов. Только согласованный контакт.',
-      highlight: 'Защита приватности'
+      title: t('trust.point4_title'),
+      description: t('trust.point4_description'),
+      highlight: t('trust.point4_highlight')
     },
     {
       icon: RotateCcw,
-      title: 'Гарантия возврата депозита',
-      description: 'Депозит возвращается полностью, если вы откажетесь до подписания документов.',
-      highlight: '100% возврат'
+      title: t('trust.point5_title'),
+      description: t('trust.point5_description'),
+      highlight: t('trust.point5_highlight')
     },
     {
       icon: Headphones,
-      title: 'Поддержка 24/7',
-      description: 'Отвечаем на вопросы в течение 15 минут в любое время дня и ночи.',
-      highlight: 'Ответ ≤ 15 минут'
+      title: t('trust.point6_title'),
+      description: t('trust.point6_description'),
+      highlight: t('trust.point6_highlight')
     }
   ];
 
@@ -48,15 +51,15 @@ const TrustManifest = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-green-200">
             <Shield className="w-4 h-4" />
-            Манифест доверия
+            {t('trust.badge')}
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Наши обязательства перед вами
+            {t('trust.title')}
           </h2>
           
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Мы построили бизнес на доверии и прозрачности. Каждое обещание — это наша репутация.
+            {t('trust.subtitle')}
           </p>
         </div>
 
@@ -102,37 +105,37 @@ const TrustManifest = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold text-red-600 mb-2">
-                2,847
+                {t('trust.stat1_number')}
               </div>
               <div className="text-sm text-gray-600">
-                Довольных клиентов
+                {t('trust.stat1_description')}
               </div>
             </div>
             
             <div>
               <div className="text-3xl font-bold text-green-600 mb-2">
-                $4.2M
+                {t('trust.stat2_number')}
               </div>
               <div className="text-sm text-gray-600">
-                Сэкономлено клиентами
+                {t('trust.stat2_description')}
               </div>
             </div>
             
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">
-                98.4%
+                {t('trust.stat3_number')}
               </div>
               <div className="text-sm text-gray-600">
-                Рекомендуют друзьям
+                {t('trust.stat3_description')}
               </div>
             </div>
             
             <div>
               <div className="text-3xl font-bold text-purple-600 mb-2">
-                12мин
+                {t('trust.stat4_number')}
               </div>
               <div className="text-sm text-gray-600">
-                Средний ответ поддержки
+                {t('trust.stat4_description')}
               </div>
             </div>
           </div>
@@ -144,12 +147,10 @@ const TrustManifest = () => {
             <Lock className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
             <div>
               <h3 className="font-bold text-blue-900 mb-2">
-                Наша гарантия конфиденциальности
+                {t('trust.privacy_title')}
               </h3>
               <p className="text-blue-800 leading-relaxed">
-                <strong>Мы никогда не передаём ваши контактные данные дилерам для обзвонов.</strong> 
-                Контакт с дилером происходит только после того, как вы на 100% согласовали все условия сделки. 
-                Это означает один звонок, одну встречу, один дилер — и ваш новый автомобиль готов к выдаче.
+                <strong>{t('trust.privacy_description')}</strong>
               </p>
             </div>
           </div>
