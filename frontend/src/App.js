@@ -18,6 +18,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
 import PreviewLot from "./pages/PreviewLot";
 import { AuthProvider } from "./hooks/useAuth";
+import { I18nProvider } from "./hooks/useI18n";
 
 const Home = () => {
   return (
