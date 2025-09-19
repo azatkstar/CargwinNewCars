@@ -71,10 +71,13 @@
     "fleet_price": "Fleet Price",
     "msrp": "MSRP",
     "savings": "You Save",
-    "monthly": "Monthly",
-    "down_payment": "Down Payment",
+    "monthly": "monthly",
+    "down_payment": "down payment",
     "view_details": "View Details",
-    "configure": "Configure"
+    "configure": "Configure",
+    "lease_options": "Lease",
+    "finance_options": "Finance", 
+    "cash_options": "Cash"
   },
   "fomo": {
     "viewing_now": "{{count}} people viewing {{model}} now",
