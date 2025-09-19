@@ -5,12 +5,14 @@ import { Input } from './ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { mockOffers } from '../mock';
 import { Mail, Phone } from 'lucide-react';
+import { useI18n } from '../hooks/useI18n';
 
 const OffersSection = () => {
   const [sortBy, setSortBy] = useState('savings');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const { t } = useI18n();
 
   const sortedOffers = [...mockOffers].sort((a, b) => {
     switch (sortBy) {
@@ -41,10 +43,10 @@ const OffersSection = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Текущие Fleet-предложения
+            {t('offers.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Эксклюзивные цены от дилеров Лос-Анджелеса. Без торгов, без допов, без обзвонов.
+            {t('offers.subtitle')}
           </p>
         </div>
 
@@ -52,16 +54,16 @@ const OffersSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Сортировать по:
+              {t('offers.sort_by')}
             </label>
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Выберите сортировку" />
+                <SelectValue placeholder="Select sorting" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="savings">Максимальная экономия</SelectItem>
-                <SelectItem value="price">Минимальная цена</SelectItem>
-                <SelectItem value="brand">По алфавиту</SelectItem>
+                <SelectItem value="savings">{t('offers.sort_savings')}</SelectItem>
+                <SelectItem value="price">{t('offers.sort_price')}</SelectItem>
+                <SelectItem value="brand">{t('offers.sort_brand')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -78,10 +80,10 @@ const OffersSection = () => {
         <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
           <div className="text-center mb-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              Подписаться на новые дропы
+              {t('offers.subscribe_title')}
             </h3>
             <p className="text-gray-600">
-              Получайте уведомления о новых fleet-предложениях первыми
+              {t('offers.subscribe_subtitle')}
             </p>
           </div>
 
@@ -91,7 +93,7 @@ const OffersSection = () => {
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   type="email"
-                  placeholder="Ваш email"
+                  placeholder={t('offers.your_email')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
@@ -114,19 +116,19 @@ const OffersSection = () => {
               disabled={(!email && !phone) || subscribed}
               className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {subscribed ? '✓ Подписка оформлена!' : 'Подписаться на дропы'}
+              {subscribed ? t('offers.subscribed') : t('offers.subscribe_button')}
             </Button>
           </form>
 
           <p className="text-xs text-gray-500 mt-4 text-center">
-            Мы не передаём ваши данные дилерам. Отписаться можно в любой момент.
+            {t('offers.privacy_notice')}
           </p>
         </div>
 
         {/* Disclaimer */}
         <div className="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
           <p className="text-sm text-blue-800 leading-relaxed">
-            <strong>Важное примечание:</strong> Все платежи являются приблизительными и зависят от кредитной истории, первоначального взноса, срока кредитования и других факторов. Финальные условия определяются дилером после одобрения кредита. Предложения действительны до указанной даты или до окончания наличия автомобилей.
+            <strong>{t('offers.disclaimer')}</strong>
           </p>
         </div>
       </div>
