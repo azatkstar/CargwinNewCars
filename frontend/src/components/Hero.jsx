@@ -111,7 +111,7 @@ const Hero = () => {
               size="lg" 
               className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
-              Смотреть текущие дропы
+              {t('hero.cta')}
               <ChevronDown className="ml-2 w-5 h-5" />
             </Button>
             <Button 
@@ -120,14 +120,14 @@ const Hero = () => {
               size="lg"
               className="border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300"
             >
-              Узнать о следующем дропе
+              Learn About Next Drop
             </Button>
           </div>
 
           {/* Important Notice */}
           <div className="max-w-2xl mx-auto">
             <p className="text-sm text-gray-600 bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <strong>Важно:</strong> оформление при условии подходящей кредитной истории.
+              <strong>Important:</strong> Approval subject to credit qualification.
             </p>
           </div>
         </div>
