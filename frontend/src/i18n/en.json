@@ -39,7 +39,16 @@
     "cta": "View This Week's Drop",
     "weekly_drop": "Weekly Drop",
     "ending_in": "Ending in",
-    "cars_available": "cars available"
+    "cars_available": "cars available",
+    "savings_highlight": "Save up to $7,000",
+    "benefit1_title": "New exclusive drops every week.",
+    "benefit1_description": "First come, first served.",
+    "benefit2_title": "We don't share your data with dealers for cold calls.",
+    "benefit2_description": "Contact only with one dealer after 100% deal confirmation.",
+    "benefit3_title": "LA local expertise:",
+    "benefit3_description": "clear terms, no forced add-ons.",
+    "important_notice": "Important: Approval subject to credit qualification.",
+    "learn_next_drop": "Learn About Next Drop"
   },
   "offers": {
     "title": "Current Offers",
