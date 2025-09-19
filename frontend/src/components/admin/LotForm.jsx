@@ -84,11 +84,11 @@ const LotForm = () => {
         console.log('Fetched lot data:', data);
       } else {
         console.error('Failed to fetch lot - server response:', response.status);
-        setErrors({ general: 'Не удалось загрузить данные лота' });
+        setErrors({ general: t('admin.messages.load_error') });
       }
     } catch (error) {
       console.error('Failed to fetch lot:', error);
-      setErrors({ general: 'Ошибка подключения к серверу' });
+      setErrors({ general: t('admin.messages.connection_error') });
     } finally {
       setLoading(false);
     }
@@ -97,23 +97,23 @@ const LotForm = () => {
   const validateLot = () => {
     const newErrors = {};
 
-    if (!lot.make) newErrors.make = 'Марка обязательна';
-    if (!lot.model) newErrors.model = 'Модель обязательна';
+    if (!lot.make) newErrors.make = t('admin.validation.make_required');
+    if (!lot.model) newErrors.model = t('admin.validation.model_required');
     if (lot.year < 2015 || lot.year > new Date().getFullYear() + 1) {
-      newErrors.year = 'Год должен быть между 2015 и ' + (new Date().getFullYear() + 1);
+      newErrors.year = t('admin.validation.year_range') + (new Date().getFullYear() + 1);
     }
-    if (!lot.trim) newErrors.trim = 'Комплектация обязательна';
-    if (lot.msrp < 1000) newErrors.msrp = 'MSRP должно быть не менее $1,000';
-    if (lot.discount < 0) newErrors.discount = 'Скидка не может быть отрицательной';
-    if (lot.discount > lot.msrp) newErrors.discount = 'Скидка не может превышать MSRP';
-    if (lot.description.length < 140) newErrors.description = 'Описание должно содержать минимум 140 символов';
-    if (lot.images.length === 0) newErrors.images = 'Необходимо загрузить хотя бы одно изображение';
-    if (lot.vin && lot.vin.length !== 17) newErrors.vin = 'VIN должен содержать 17 символов';
+    if (!lot.trim) newErrors.trim = t('admin.validation.trim_required');
+    if (lot.msrp < 1000) newErrors.msrp = t('admin.validation.msrp_minimum');
+    if (lot.discount < 0) newErrors.discount = t('admin.validation.discount_negative');
+    if (lot.discount > lot.msrp) newErrors.discount = t('admin.validation.discount_exceeds');
+    if (lot.description.length < 140) newErrors.description = t('admin.validation.description_minimum');
+    if (lot.images.length === 0) newErrors.images = t('admin.validation.images_required');
+    if (lot.vin && lot.vin.length !== 17) newErrors.vin = t('admin.validation.vin_length');
 
     // FOMO validation
     if (lot.fomo.mode === 'static') {
-      if (lot.fomo.viewers < 3) newErrors.fomoViewers = 'Минимальное значение: 3';
-      if (lot.fomo.confirms15 < 3) newErrors.fomoConfirms = 'Минимальное значение: 3';
+      if (lot.fomo.viewers < 3) newErrors.fomoViewers = t('admin.validation.fomo_viewers_minimum');
+      if (lot.fomo.confirms15 < 3) newErrors.fomoConfirms = t('admin.validation.fomo_confirms_minimum');
     }
 
     setErrors(newErrors);
@@ -202,11 +202,11 @@ const LotForm = () => {
         console.log('Lot saved successfully:', data);
         
         if (action === 'publish') {
-          alert('Лот успешно опубликован!');
+          alert(t('admin.messages.publish_success'));
         } else if (action === 'schedule') {
-          alert('Лот запланирован к публикации!');
+          alert(t('admin.messages.schedule_success'));
         } else {
-          alert('Лот сохранен успешно!');
+          alert(t('admin.messages.save_success'));
         }
         
         // Navigate back to lots list after successful save
@@ -216,11 +216,11 @@ const LotForm = () => {
       } else {
         const errorData = await response.json();
         console.error('Save error response:', errorData);
-        throw new Error(errorData.detail || 'Ошибка сервера');
+        throw new Error(errorData.detail || 'Server error');
       }
     } catch (error) {
       console.error('Save failed:', error);
-      alert('Ошибка сохранения: ' + error.message);
+      alert(t('admin.messages.save_error') + error.message);
     } finally {
       setSaving(false);
     }
@@ -231,7 +231,7 @@ const LotForm = () => {
       ...lot,
       id: undefined, // Remove ID to create new lot
       slug: `${lot.slug}-copy-${Date.now()}`, // Add suffix to slug
-      make: lot.make + ' (копия)',
+      make: lot.make + ' (copy)',
       status: 'draft',
       createdAt: null,
       updatedAt: null
@@ -239,7 +239,7 @@ const LotForm = () => {
     setLot(duplicatedLot);
     // Change URL to creation mode
     window.history.pushState({}, '', '/admin/lots/new');
-    alert('Лот дублирован! Отредактируйте данные и сохраните как новый лот.');
+    alert(t('admin.messages.duplicate_success'));
   };
 
   const handlePreview = async () => {
@@ -261,7 +261,7 @@ const LotForm = () => {
           window.open(previewUrl, '_blank');
         } else {
           console.error('Failed to create preview token for saved lot');
-          alert('Ошибка создания предпросмотра. Сначала сохраните лот.');
+          alert(t('admin.messages.preview_token_error'));
         }
       } else {
         // For new/unsaved lot, send current form data
@@ -279,12 +279,12 @@ const LotForm = () => {
           window.open(previewUrl, '_blank');
         } else {
           console.error('Failed to create preview token for unsaved lot');
-          alert('Ошибка создания предпросмотра. Проверьте данные лота.');
+          alert(t('admin.messages.preview_error'));
         }
       }
     } catch (error) {
       console.error('Preview error:', error);
-      alert('Ошибка создания предпросмотра. Попробуйте позже.');
+      alert(t('admin.messages.preview_error'));
     }
   };
 
@@ -302,7 +302,7 @@ const LotForm = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">
-            {isEditing ? 'Редактирование лота' : 'Создание лота'}
+            {isEditing ? t('admin.lot_form.title_edit') : t('admin.lot_form.title_create')}
           </h1>
           {lot.slug && (
             <p className="text-gray-600 mt-1">Slug: {lot.slug}</p>
@@ -330,7 +330,7 @@ const LotForm = () => {
               className="bg-red-600 hover:bg-red-700"
             >
               <Save className="w-4 h-4 mr-2" />
-              {saving ? 'Сохранение...' : t('admin.actions.save')}
+              {saving ? t('admin.actions.saving') : t('admin.actions.save')}
             </Button>
             
             <Button
@@ -367,7 +367,7 @@ const LotForm = () => {
                   className="bg-green-600 hover:bg-green-700 text-white"
                 >
                   <RefreshCw className="w-4 h-4 mr-2" />
-                  Опубликовать сейчас
+                  {t('admin.actions.publish_now')}
                 </Button>
               </>
             )}
@@ -382,7 +382,7 @@ const LotForm = () => {
                   disabled={saving}
                 >
                   <RefreshCw className="w-4 h-4 mr-2" />
-                  Дублировать
+                  {t('admin.actions.duplicate')}
                 </Button>
                 
                 <Button variant="outline">
@@ -423,13 +423,13 @@ const LotForm = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Car className="w-5 h-5" />
-                Основная информация
+                {t('admin.lot_form.basic_info')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div>
-                  <Label htmlFor="make">Марка *</Label>
+                  <Label htmlFor="make">{t('admin.lot_form.make')} *</Label>
                   <Input
                     id="make"
                     value={lot.make}
@@ -440,7 +440,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="model">Модель *</Label>
+                  <Label htmlFor="model">{t('admin.lot_form.model')} *</Label>
                   <Input
                     id="model"
                     value={lot.model}
@@ -451,7 +451,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="year">Год *</Label>
+                  <Label htmlFor="year">{t('admin.lot_form.year')} *</Label>
                   <Input
                     id="year"
                     type="number"
@@ -465,7 +465,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="trim">Комплектация *</Label>
+                  <Label htmlFor="trim">{t('admin.lot_form.trim')} *</Label>
                   <Input
                     id="trim"
                     value={lot.trim}
@@ -478,7 +478,7 @@ const LotForm = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
-                  <Label htmlFor="vin">VIN</Label>
+                  <Label htmlFor="vin">{t('admin.lot_form.vin')}</Label>
                   <Input
                     id="vin"
                     value={lot.vin}
@@ -490,7 +490,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="drivetrain">Привод</Label>
+                  <Label htmlFor="drivetrain">{t('admin.lot_form.drivetrain')}</Label>
                   <Select value={lot.drivetrain} onValueChange={(value) => handleInputChange('drivetrain', value)}>
                     <SelectTrigger>
                       <SelectValue />
@@ -505,7 +505,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="transmission">Трансмиссия</Label>
+                  <Label htmlFor="transmission">{t('admin.lot_form.transmission')}</Label>
                   <Select value={lot.transmission} onValueChange={(value) => handleInputChange('transmission', value)}>
                     <SelectTrigger>
                       <SelectValue />
@@ -522,7 +522,7 @@ const LotForm = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <Label htmlFor="engine">Двигатель</Label>
+                  <Label htmlFor="engine">{t('admin.lot_form.engine')}</Label>
                   <Input
                     id="engine"
                     value={lot.engine}
@@ -532,7 +532,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="exteriorColor">Цвет кузова</Label>
+                  <Label htmlFor="exteriorColor">{t('admin.lot_form.exterior_color')}</Label>
                   <Input
                     id="exteriorColor"
                     value={lot.exteriorColor}
@@ -541,7 +541,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="interiorColor">Цвет салона</Label>
+                  <Label htmlFor="interiorColor">{t('admin.lot_form.interior_color')}</Label>
                   <Input
                     id="interiorColor"
                     value={lot.interiorColor}
@@ -551,7 +551,7 @@ const LotForm = () => {
               </div>
 
               <div>
-                <Label htmlFor="description">Описание *</Label>
+                <Label htmlFor="description">{t('admin.lot_form.description')} *</Label>
                 <Textarea
                   id="description"
                   value={lot.description}
@@ -560,14 +560,14 @@ const LotForm = () => {
                   className={errors.description ? 'border-red-500' : ''}
                 />
                 <div className="flex justify-between text-sm text-gray-500 mt-1">
-                  <span>{lot.description.length}/140 символов минимум</span>
+                  <span>{lot.description.length}/140 {t('admin.lot_form.min_chars')}</span>
                   {errors.description && <span className="text-red-600">{errors.description}</span>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="tags">Теги (через запятую)</Label>
+                  <Label htmlFor="tags">{t('admin.lot_form.tags')}</Label>
                   <Input
                     id="tags"
                     value={lot.tags.join(', ')}
@@ -577,7 +577,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="state">Штат</Label>
+                  <Label htmlFor="state">{t('admin.lot_form.state')}</Label>
                   <Select value={lot.state} onValueChange={(value) => handleInputChange('state', value)}>
                     <SelectTrigger>
                       <SelectValue />
@@ -600,7 +600,7 @@ const LotForm = () => {
                   disabled={!lot.make || !lot.model || !lot.year}
                 >
                   <RefreshCw className="w-4 h-4 mr-2" />
-                  Сгенерировать slug
+                  {t('admin.lot_form.generate_slug')}
                 </Button>
                 {lot.slug && (
                   <Badge variant="outline" className="font-mono">
@@ -618,7 +618,7 @@ const LotForm = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Image className="w-5 h-5" />
-                Медиа файлы
+                {t('admin.lot_form.media_files')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -637,19 +637,19 @@ const LotForm = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <DollarSign className="w-5 h-5" />
-                Ценообразование
+                {t('admin.lot_form.pricing_info')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <Label htmlFor="msrp">MSRP *</Label>
+                  <Label htmlFor="msrp">{t('admin.lot_form.msrp')} *</Label>
                   <Input
                     id="msrp"
                     type="number"
                     min="1000"
                     step="100"
-                    placeholder="Введите MSRP"
+                    placeholder={t('admin.lot_form.msrp')}
                     value={lot.msrp || ''}
                     onChange={(e) => handleInputChange('msrp', parseInt(e.target.value) || 0)}
                     className={errors.msrp ? 'border-red-500' : ''}
@@ -658,7 +658,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="discount">Скидка</Label>
+                  <Label htmlFor="discount">{t('admin.lot_form.discount')}</Label>
                   <Input
                     id="discount"
                     type="number"
@@ -671,7 +671,7 @@ const LotForm = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="feesHint">Известные допы в США</Label>
+                  <Label htmlFor="feesHint">{t('admin.lot_form.known_fees')}</Label>
                   <Input
                     id="feesHint"
                     type="number"
@@ -680,7 +680,7 @@ const LotForm = () => {
                     onChange={(e) => handleInputChange('feesHint', parseInt(e.target.value) || 0)}
                   />
                   <p className="text-xs text-gray-500 mt-1">
-                    Средняя сумма навязанных допов для данной модели
+                    {t('admin.lot_form.known_fees_hint')}
                   </p>
                 </div>
               </div>
@@ -692,19 +692,19 @@ const LotForm = () => {
                       <div className="text-2xl font-bold text-gray-900">
                         {formatPrice(lot.msrp)}
                       </div>
-                      <div className="text-sm text-gray-600">MSRP</div>
+                      <div className="text-sm text-gray-600">{t('admin.lot_form.msrp')}</div>
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-red-600">
                         {formatPrice(Math.abs(lot.discount))}
                       </div>
-                      <div className="text-sm text-gray-600">Скидка</div>
+                      <div className="text-sm text-gray-600">{t('admin.lot_form.discount')}</div>
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-green-600">
                         {formatPrice(lot.msrp - lot.discount)}
                       </div>
-                      <div className="text-sm text-gray-600">Fleet-цена</div>
+                      <div className="text-sm text-gray-600">{t('admin.lot_form.fleet_price')}</div>
                     </div>
                   </div>
                 </div>
@@ -724,7 +724,7 @@ const LotForm = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Clock className="w-5 h-5" />
-                Дроп недели
+                {t('admin.lot_form.tabs.weekly_drop')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -734,13 +734,13 @@ const LotForm = () => {
                   checked={lot.isWeeklyDrop}
                   onCheckedChange={(checked) => handleInputChange('isWeeklyDrop', checked)}
                 />
-                <Label htmlFor="weekly-drop">Включить дроп недели</Label>
+                <Label htmlFor="weekly-drop">{t('admin.lot_form.weekly_drop_enable')}</Label>
               </div>
               
               {lot.isWeeklyDrop && (
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <p className="text-sm text-blue-800">
-                    Лот будет отмечен как "Дроп недели" и получит специальное оформление
+                    {t('admin.lot_form.weekly_drop_notice')}
                   </p>
                 </div>
               )}
@@ -751,19 +751,19 @@ const LotForm = () => {
         {/* Continue with other tabs... */}
         <TabsContent value="fomo">
           <div className="text-center py-8 text-gray-500">
-            FOMO настройки - в разработке
+            {t('admin.lot_form.fomo_settings')}
           </div>
         </TabsContent>
 
         <TabsContent value="seo">
           <div className="text-center py-8 text-gray-500">
-            SEO настройки - в разработке
+            {t('admin.lot_form.seo_settings')}
           </div>
         </TabsContent>
 
         <TabsContent value="technical">
           <div className="text-center py-8 text-gray-500">
-            Технические настройки - в разработке
+            {t('admin.lot_form.technical_settings')}
           </div>
         </TabsContent>
       </Tabs>
