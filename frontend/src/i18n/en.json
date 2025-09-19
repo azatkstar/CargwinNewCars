@@ -1,0 +1,270 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
+    "close": "Close",
+    "select": "Select",
+    "all": "All",
+    "none": "None",
+    "yes": "Yes",
+    "no": "No",
+    "required": "Required",
+    "optional": "Optional",
+    "language": "Language"
+  },
+  "navigation": {
+    "offers": "Offers",
+    "drop": "Drop",
+    "coverage": "Coverage",
+    "how_it_works": "How It Works",
+    "trust": "Trust",
+    "reviews": "Reviews",
+    "credit": "Credit",
+    "faq": "FAQ",
+    "view_offers": "View Offers"
+  },
+  "hero": {
+    "title": "Weekly Car Drops with Real Fleet Pricing",
+    "subtitle": "Get access to exclusive deals on new cars with transparent fleet pricing. No hidden fees, no dealer markup.",
+    "cta": "View This Week's Drop",
+    "weekly_drop": "Weekly Drop",
+    "ending_in": "Ending in",
+    "cars_available": "cars available"
+  },
+  "offers": {
+    "title": "Current Offers",
+    "subtitle": "Exclusive deals on premium vehicles",
+    "fleet_price": "Fleet Price",
+    "msrp": "MSRP",
+    "savings": "You Save",
+    "monthly": "Monthly",
+    "down_payment": "Down Payment",
+    "view_details": "View Details",
+    "configure": "Configure"
+  },
+  "car_detail": {
+    "specifications": "Specifications",
+    "year": "Year",
+    "make": "Make",
+    "model": "Model",
+    "trim": "Trim",
+    "engine": "Engine",
+    "transmission": "Transmission",
+    "drivetrain": "Drivetrain",
+    "exterior_color": "Exterior Color",
+    "interior_color": "Interior Color",
+    "description": "Description",
+    "pricing": "Pricing",
+    "calculate_otd": "Calculate OTD Price",
+    "lease_options": "Lease Options",
+    "finance_options": "Finance Options",
+    "cash_options": "Cash Options",
+    "similar_offers": "Similar Offers",
+    "contact_dealer": "Contact Dealer",
+    "schedule_test_drive": "Schedule Test Drive"
+  },
+  "forms": {
+    "contact_form": {
+      "title": "Contact Us",
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "message": "Message",
+      "send": "Send Message"
+    },
+    "credit_check": {
+      "title": "Quick Credit Check",
+      "subtitle": "Get pre-approved in minutes",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "ssn": "SSN (last 4 digits)",
+      "annual_income": "Annual Income",
+      "check_credit": "Check Credit"
+    },
+    "subscription": {
+      "title": "Subscribe to Drops",
+      "subtitle": "Get notified of new weekly drops",
+      "email": "Email Address",
+      "subscribe": "Subscribe"
+    }
+  },
+  "trust": {
+    "title": "Why Trust CargwinNewCar?",
+    "transparency": {
+      "title": "100% Transparent Pricing",
+      "description": "See actual fleet prices. No hidden fees or dealer markup."
+    },
+    "quality": {
+      "title": "Quality Guaranteed",
+      "description": "All vehicles undergo thorough inspection and come with warranty."
+    },
+    "support": {
+      "title": "Expert Support",
+      "description": "Our team of automotive experts is here to help you every step of the way."
+    }
+  },
+  "how_it_works": {
+    "title": "How It Works",
+    "step1": {
+      "title": "Browse Weekly Drops",
+      "description": "Every Monday, we release new exclusive deals"
+    },
+    "step2": {
+      "title": "Reserve Your Car",
+      "description": "Secure your vehicle with a refundable deposit"
+    },
+    "step3": {
+      "title": "Complete Purchase",
+      "description": "Finalize your purchase with transparent pricing"
+    }
+  },
+  "admin": {
+    "login": {
+      "title": "Admin Panel Login",
+      "subtitle": "CargwinNewCar Administration",
+      "email_label": "Email Address",
+      "email_placeholder": "admin@cargwin.com",
+      "send_link": "Send Magic Link",
+      "sending": "Sending...",
+      "success": "Link sent to email",
+      "error": "Failed to send"
+    },
+    "nav": {
+      "lots": "Lots",
+      "settings": "Settings",
+      "audit": "Audit",
+      "logout": "Logout"
+    },
+    "lots": {
+      "title": "Lot Management",
+      "create_new": "Create Lot",
+      "search_placeholder": "Search by make, model, VIN...",
+      "filter_status": "Status",
+      "filter_make": "Make",
+      "filter_year": "Year",
+      "filter_weekly_drop": "Weekly Drop",
+      "batch_actions": "Batch Actions",
+      "publish_selected": "Publish Selected",
+      "archive_selected": "Archive Selected",
+      "delete_selected": "Delete Selected",
+      "export_selected": "Export Selected",
+      "import_csv": "Import CSV/XLSX",
+      "total_lots": "Total Lots",
+      "selected_lots": "Selected"
+    },
+    "lot_form": {
+      "title_edit": "Edit Lot",
+      "title_create": "Create Lot",
+      "tabs": {
+        "basic": "Basic",
+        "media": "Media",
+        "pricing": "Pricing/OTD",
+        "weekly_drop": "Weekly Drop",
+        "fomo": "FOMO",
+        "seo": "SEO",
+        "technical": "Technical"
+      },
+      "basic_info": "Basic Information",
+      "media_files": "Media Files",
+      "pricing_info": "Pricing",
+      "make": "Make",
+      "model": "Model",
+      "year": "Year",
+      "trim": "Trim",
+      "vin": "VIN",
+      "drivetrain": "Drivetrain",
+      "engine": "Engine",
+      "transmission": "Transmission",
+      "exterior_color": "Exterior Color",
+      "interior_color": "Interior Color",
+      "description": "Description",
+      "tags": "Tags (comma separated)",
+      "state": "State",
+      "msrp": "MSRP",
+      "discount": "Discount",
+      "known_fees": "Known Additional Fees in USA",
+      "known_fees_hint": "Average additional fees for this model",
+      "fleet_price": "Fleet Price",
+      "generate_slug": "Generate Slug",
+      "min_chars": "minimum characters",
+      "weekly_drop_enable": "Enable Weekly Drop",
+      "weekly_drop_notice": "Lot will be marked as 'Weekly Drop' and get special styling",
+      "fomo_settings": "FOMO Settings - In Development",
+      "seo_settings": "SEO Settings - In Development",
+      "technical_settings": "Technical Settings - In Development"
+    },
+    "actions": {
+      "save": "Save",
+      "save_draft": "Save as Draft",
+      "preview": "Preview",
+      "schedule": "Schedule",
+      "publish": "Publish",
+      "publish_now": "Publish Now",
+      "archive": "Archive",
+      "delete": "Delete",
+      "duplicate": "Duplicate",
+      "cancel": "Cancel",
+      "saving": "Saving..."
+    },
+    "status": {
+      "draft": "Draft",
+      "scheduled": "Scheduled",
+      "published": "Published",
+      "archived": "Archived",
+      "deleted": "Deleted"
+    },
+    "messages": {
+      "save_success": "Lot saved successfully!",
+      "publish_success": "Lot published successfully!",
+      "schedule_success": "Lot scheduled for publication!",
+      "duplicate_success": "Lot duplicated! Edit the data and save as a new lot.",
+      "load_error": "Failed to load lot data",
+      "connection_error": "Server connection error",
+      "save_error": "Save error: ",
+      "preview_error": "Preview error. Please try again later.",
+      "preview_token_error": "Failed to create preview. Please save the lot first."
+    },
+    "validation": {
+      "make_required": "Make is required",
+      "model_required": "Model is required",
+      "year_range": "Year must be between 2015 and ",
+      "trim_required": "Trim is required",
+      "msrp_minimum": "MSRP must be at least $1,000",
+      "discount_negative": "Discount cannot be negative",
+      "discount_exceeds": "Discount cannot exceed MSRP",
+      "description_minimum": "Description must contain at least 140 characters",
+      "images_required": "At least one image is required",
+      "vin_length": "VIN must contain 17 characters",
+      "fomo_viewers_minimum": "Minimum value: 3",
+      "fomo_confirms_minimum": "Minimum value: 3"
+    }
+  },
+  "footer": {
+    "company": "CargwinNewCar",
+    "description": "Your trusted partner for transparent car deals",
+    "links": {
+      "about": "About",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "instagram": "Instagram"
+    },
+    "copyright": "© 2024 CargwinNewCar. All rights reserved."
+  }
+}
