@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { ChevronDown, Shield, Clock, MapPin } from 'lucide-react';
 import { getNextMondayMidnight, formatTimeRemaining } from '../utils/timer';
+import { useI18n } from '../hooks/useI18n';
 
 const Hero = () => {
   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const { t } = useI18n();
 
   useEffect(() => {
     const updateTimer = () => {
@@ -36,18 +38,18 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-red-100">
             <Shield className="w-4 h-4" />
-            Только для Лос-Анджелеса
+            Los Angeles Only
           </div>
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            Закрытые fleet-предложения
-            <br />
-            <span className="text-red-600">для Лос-Анджелеса</span>
+            {t('hero.title')}
           </h1>
 
-          {/* Savings Highlight */}
-          <div className="text-2xl md:text-3xl font-semibold text-green-600 mb-8">
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            {t('hero.subtitle')}
+          </p>
             Экономия до $7,000
           </div>
 
