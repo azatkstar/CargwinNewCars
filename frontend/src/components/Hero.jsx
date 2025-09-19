@@ -120,14 +120,14 @@ const Hero = () => {
               size="lg"
               className="border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300"
             >
-              Learn About Next Drop
+              {t('hero.learn_next_drop')}
             </Button>
           </div>
 
           {/* Important Notice */}
           <div className="max-w-2xl mx-auto">
             <p className="text-sm text-gray-600 bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <strong>Important:</strong> Approval subject to credit qualification.
+              <strong>{t('hero.important_notice')}</strong>
             </p>
           </div>
         </div>
