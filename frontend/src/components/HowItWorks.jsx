@@ -1,39 +1,42 @@
 import React from 'react';
 import { Search, Lock, Car, ArrowRight } from 'lucide-react';
+import { useI18n } from '../hooks/useI18n';
 
 const HowItWorks = () => {
+  const { t } = useI18n();
+  
   const steps = [
     {
       id: 1,
       icon: Search,
-      title: 'Выберите автомобиль',
-      description: 'Доступ к закрытым fleet-ценам с VIN и точным сроком действия предложения',
+      title: t('how_it_works.step1_title'),
+      description: t('how_it_works.step1_description'),
       details: [
-        'Реальные VIN номера',
-        'Подтверждённые дилером цены',
-        'Чёткие временные рамки'
+        t('how_it_works.step1_detail1'),
+        t('how_it_works.step1_detail2'),
+        t('how_it_works.step1_detail3')
       ]
     },
     {
       id: 2,
       icon: Lock,
-      title: 'Забронируйте цену онлайн',
-      description: 'Никаких допов — мы показываем средние суммы по моделям и убираем их',
+      title: t('how_it_works.step2_title'),
+      description: t('how_it_works.step2_description'),
       details: [
-        'Без скрытых доплат',
-        'Прозрачное ценообразование',
-        'Фиксированная цена без торгов'
+        t('how_it_works.step2_detail1'),
+        t('how_it_works.step2_detail2'),
+        t('how_it_works.step2_detail3')
       ]
     },
     {
       id: 3,
       icon: Car,
-      title: 'Забирайте готовый автомобиль',
-      description: 'После 100% согласования условий приезжаете к дилеру за полностью готовым автомобилем',
+      title: t('how_it_works.step3_title'),
+      description: t('how_it_works.step3_description'),
       details: [
-        'Один контакт с дилером',
-        'Готовый к выдаче автомобиль',
-        'Минимум времени у дилера'
+        t('how_it_works.step3_detail1'),
+        t('how_it_works.step3_detail2'),
+        t('how_it_works.step3_detail3')
       ]
     }
   ];
@@ -44,10 +47,10 @@ const HowItWorks = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Как это работает
+            {t('how_it_works.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Простой процесс из трёх шагов — от выбора до получения автомобиля
+            {t('how_it_works.subtitle')}
           </p>
         </div>
 
@@ -109,11 +112,10 @@ const HowItWorks = () => {
         <div className="mt-16 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
           <div className="text-center">
             <p className="text-yellow-800 font-medium mb-2">
-              ⚠️ Важное условие
+              {t('how_it_works.important_condition')}
             </p>
             <p className="text-yellow-700">
-              Оформление автомобиля происходит при условии подходящей кредитной истории. 
-              Мы делаем предварительную мягкую проверку (soft-check), которая не влияет на ваш кредитный рейтинг.
+              {t('how_it_works.credit_notice')}
             </p>
           </div>
         </div>
@@ -122,28 +124,28 @@ const HowItWorks = () => {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center p-6 bg-white rounded-lg border border-gray-200">
             <div className="text-2xl font-bold text-red-600 mb-2">
-              15 минут
+              {t('how_it_works.stat1_number')}
             </div>
             <div className="text-sm text-gray-600">
-              Среднее время на бронирование цены
+              {t('how_it_works.stat1_description')}
             </div>
           </div>
           
           <div className="text-center p-6 bg-white rounded-lg border border-gray-200">
             <div className="text-2xl font-bold text-green-600 mb-2">
-              $0
+              {t('how_it_works.stat2_number')}
             </div>
             <div className="text-sm text-gray-600">
-              Скрытых доплат и навязанных допов
+              {t('how_it_works.stat2_description')}
             </div>
           </div>
           
           <div className="text-center p-6 bg-white rounded-lg border border-gray-200">
             <div className="text-2xl font-bold text-blue-600 mb-2">
-              1 контакт
+              {t('how_it_works.stat3_number')}
             </div>
             <div className="text-sm text-gray-600">
-              С дилером после согласования условий
+              {t('how_it_works.stat3_description')}
             </div>
           </div>
         </div>
