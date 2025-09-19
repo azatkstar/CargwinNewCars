@@ -50,21 +50,23 @@ const Hero = () => {
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             {t('hero.subtitle')}
           </p>
-            Экономия до $7,000
+          {/* Savings Highlight */}
+          <div className="text-2xl md:text-3xl font-semibold text-green-600 mb-8">
+            Save up to $7,000
           </div>
 
           {/* Key Benefits */}
           <div className="max-w-4xl mx-auto space-y-4 mb-8">
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              <strong>Каждую неделю новые эксклюзивные дропы.</strong> Кто успел — тот и забрал.
+              <strong>New exclusive drops every week.</strong> First come, first served.
             </p>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               <Shield className="w-5 h-5 inline mr-2 text-blue-600" />
-              <strong>Мы не передаём ваши данные дилерам для обзвонов.</strong> Контакт — только с одним дилером после 100% согласования сделки.
+              <strong>We don't share your data with dealers for cold calls.</strong> Contact only with one dealer after 100% deal confirmation.
             </p>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               <MapPin className="w-5 h-5 inline mr-2 text-green-600" />
-              <strong>Локальная экспертиза ЛА:</strong> чёткие условия, без навязанных допов.
+              <strong>LA local expertise:</strong> clear terms, no forced add-ons.
             </p>
           </div>
 
@@ -72,7 +74,7 @@ const Hero = () => {
           <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 p-6 mb-8">
             <div className="flex items-center justify-center gap-2 mb-4">
               <Clock className="w-5 h-5 text-red-600" />
-              <span className="text-sm font-medium text-gray-600">Следующий дроп через:</span>
+              <span className="text-sm font-medium text-gray-600">{t('hero.ending_in')}:</span>
             </div>
             <div className="grid grid-cols-4 gap-4" data-countdown="weekly-drop">
               <div className="text-center">
