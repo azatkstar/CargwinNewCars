@@ -52,21 +52,21 @@ const Hero = () => {
           </p>
           {/* Savings Highlight */}
           <div className="text-2xl md:text-3xl font-semibold text-green-600 mb-8">
-            Save up to $7,000
+            {t('hero.savings_highlight')}
           </div>
 
           {/* Key Benefits */}
           <div className="max-w-4xl mx-auto space-y-4 mb-8">
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              <strong>New exclusive drops every week.</strong> First come, first served.
+              <strong>{t('hero.benefit1_title')}</strong> {t('hero.benefit1_description')}
             </p>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               <Shield className="w-5 h-5 inline mr-2 text-blue-600" />
-              <strong>We don't share your data with dealers for cold calls.</strong> Contact only with one dealer after 100% deal confirmation.
+              <strong>{t('hero.benefit2_title')}</strong> {t('hero.benefit2_description')}
             </p>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               <MapPin className="w-5 h-5 inline mr-2 text-green-600" />
-              <strong>LA local expertise:</strong> clear terms, no forced add-ons.
+              <strong>{t('hero.benefit3_title')}</strong> {t('hero.benefit3_description')}
             </p>
           </div>
 
