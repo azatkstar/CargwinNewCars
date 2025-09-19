@@ -6,11 +6,13 @@ import { Clock, Eye, TrendingUp, Car, DollarSign, ArrowRight } from 'lucide-reac
 import { Link } from 'react-router-dom';
 import { formatPrice, formatTimeRemaining, calculateMonthlyPayment } from '../utils/timer';
 import { getFOMOCounters } from '../mock';
+import { useI18n } from '../hooks/useI18n';
 
 const OfferCard = ({ offer }) => {
   const [paymentMode, setPaymentMode] = useState('lease');
   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [fomoCounters, setFomoCounters] = useState({ viewers: 0, confirmed: 0 });
+  const { t } = useI18n();
 
   useEffect(() => {
     const updateTimer = () => {
@@ -50,7 +52,7 @@ const OfferCard = ({ offer }) => {
       <div className="relative">
         <img 
           src={offer.image} 
-          alt={`${offer.title} — вид спереди`}
+          alt={`${offer.title} — front view`}
           className="w-full h-48 object-cover"
           loading="lazy"
         />
@@ -61,7 +63,7 @@ const OfferCard = ({ offer }) => {
         {/* Timer */}
         <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
           <Clock className="w-4 h-4 inline mr-1" />
-          {timeRemaining.days}д {timeRemaining.hours}ч {timeRemaining.minutes}м
+          {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m
         </div>
       </div>
 
@@ -79,7 +81,7 @@ const OfferCard = ({ offer }) => {
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            Lease
+            {t('offers.lease_options')}
           </button>
           <button
             onClick={() => setPaymentMode('finance')}
@@ -89,7 +91,7 @@ const OfferCard = ({ offer }) => {
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            Finance
+            {t('offers.finance_options')}
           </button>
           <button
             onClick={() => setPaymentMode('cash')}
@@ -99,7 +101,7 @@ const OfferCard = ({ offer }) => {
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            Cash
+            {t('offers.cash_options')}
           </button>
         </div>
 
@@ -107,15 +109,15 @@ const OfferCard = ({ offer }) => {
         {paymentMode === 'lease' && (
           <div className="mb-6">
             <div className="text-3xl font-bold text-gray-900 mb-2">
-              {formatPrice(offer.lease.monthly)}/мес
+              {formatPrice(offer.lease.monthly)}/{t('offers.monthly')}
             </div>
             <div className="text-sm text-gray-600 mb-3">
-              +{formatPrice(offer.lease.dueAtSigning)} первый взнос • {offer.lease.termMonths} мес / {offer.lease.milesPerYear.toLocaleString()} миль
+              +{formatPrice(offer.lease.dueAtSigning)} {t('offers.down_payment')} • {offer.lease.termMonths} months / {offer.lease.milesPerYear.toLocaleString()} miles
             </div>
             {offer.lease.incentives > 0 && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
                 <div className="text-sm font-medium text-green-800">
-                  Скидки и льготы: {formatPrice(offer.lease.incentives)}
+                  Discounts & incentives: {formatPrice(offer.lease.incentives)}
                 </div>
               </div>
             )}
@@ -125,10 +127,10 @@ const OfferCard = ({ offer }) => {
         {paymentMode === 'finance' && (
           <div className="mb-6">
             <div className="text-3xl font-bold text-gray-900 mb-2">
-              {formatPrice(financeMonthly)}/мес
+              {formatPrice(financeMonthly)}/{t('offers.monthly')}
             </div>
             <div className="text-sm text-gray-600">
-              {offer.finance.apr}% APR • {offer.finance.termMonths} мес • Первый взнос {formatPrice(offer.finance.downPayment)}
+              {offer.finance.apr}% APR • {offer.finance.termMonths} months • {t('offers.down_payment')} {formatPrice(offer.finance.downPayment)}
             </div>
           </div>
         )}
@@ -140,10 +142,10 @@ const OfferCard = ({ offer }) => {
             </div>
             <div className="space-y-1">
               <div className="text-sm text-gray-500 line-through">
-                MSRP {formatPrice(offer.msrp)}
+                {t('offers.msrp')} {formatPrice(offer.msrp)}
               </div>
               <div className="text-sm font-medium text-green-600">
-                Экономия: {formatPrice(offer.savings)} ({savingsPercentage}%)
+                {t('offers.savings')}: {formatPrice(offer.savings)} ({savingsPercentage}%)
               </div>
             </div>
           </div>
@@ -154,20 +156,20 @@ const OfferCard = ({ offer }) => {
           <div className="flex items-start gap-2 text-sm text-orange-700 bg-orange-50 p-3 rounded-lg border border-orange-200">
             <DollarSign className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>
-              По этой модели дилеры в ЛА обычно навешивают допов на {formatPrice(offer.addonsAvg)}. У нас — $0.
+              For this model, LA dealers usually add ${formatPrice(offer.addonsAvg)} in add-ons. With us — $0.
             </span>
           </div>
 
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Eye className="w-4 h-4 text-blue-500" />
-            <span data-fomo-viewers>Сейчас просматривают: {fomoCounters.viewers} человек</span>
+            <span data-fomo-viewers>Currently viewing: {fomoCounters.viewers} people</span>
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-1">
                 <Car className="w-4 h-4 text-red-500" />
-                Осталось: {offer.stockLeft} шт
+                Left: {offer.stockLeft} units
               </span>
               <span className="text-gray-500">{stockPercentage}%</span>
             </div>
@@ -176,7 +178,7 @@ const OfferCard = ({ offer }) => {
 
           <div className="flex items-center gap-2 text-sm text-green-600">
             <TrendingUp className="w-4 h-4" />
-            <span data-fomo-confirms>За 15 минут зафиксировали цену: {fomoCounters.confirmed}</span>
+            <span data-fomo-confirms>Price locked in 15 min: {fomoCounters.confirmed}</span>
           </div>
         </div>
 
@@ -188,7 +190,7 @@ const OfferCard = ({ offer }) => {
             size="lg"
           >
             <Link to={`/car/${offer.id}`}>
-              Смотреть подробнее
+              {t('offers.view_details')}
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
@@ -198,20 +200,20 @@ const OfferCard = ({ offer }) => {
             className="w-full border-red-600 text-red-600 hover:bg-red-50"
             onClick={() => {
               // Mock reservation action
-              alert('Функция бронирования будет добавлена в backend');
+              alert('Reservation feature will be added to backend');
             }}
           >
-            Забронировать цену
+            Reserve Price
           </Button>
         </div>
 
         {/* Disclaimer */}
         <div className="mt-4 text-xs text-gray-500 leading-relaxed">
           <p className="mb-2">
-            * <strong>Мы не передаём ваши данные дилерам для обзвонов.</strong> Контакт — только с одним дилером после 100% согласования сделки без торгов.
+            * <strong>We don't share your data with dealers for cold calls.</strong> Contact — only with one dealer after 100% deal agreement without haggling.
           </p>
           <p>
-            * Вы приезжаете и забираете полностью готовый автомобиль. Важно: при условии подходящей кредитной истории.
+            * You come and pick up a fully prepared car. Important: subject to suitable credit history.
           </p>
         </div>
       </div>

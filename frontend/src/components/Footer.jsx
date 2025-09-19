@@ -1,10 +1,22 @@
 import React from 'react';
 import { Car, Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
+import { useI18n } from '../hooks/useI18n';
 
 const Footer = ({ hiddenVin = null }) => {
+  const { t } = useI18n();
+  
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const navigationItems = [
+    { label: t('navigation.offers'), id: 'offers' },
+    { label: t('hero.weekly_drop'), id: 'drop' },
+    { label: t('navigation.coverage'), id: 'coverage' },
+    { label: t('navigation.how_it_works'), id: 'how-it-works' },
+    { label: t('navigation.reviews'), id: 'reviews' },
+    { label: t('navigation.faq'), id: 'faq' }
+  ];
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -20,14 +32,13 @@ const Footer = ({ hiddenVin = null }) => {
             </div>
             
             <p className="text-gray-300 leading-relaxed mb-6">
-              Закрытые fleet-предложения для жителей Лос-Анджелеса. 
-              Без торгов, без допов, без обзвонов.
+              {t('footer.description')}
             </p>
 
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-gray-300">
                 <MapPin className="w-4 h-4 text-red-400" />
-                <span className="text-sm">Лос-Анджелес, Калифорния</span>
+                <span className="text-sm">Los Angeles, California</span>
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <Phone className="w-4 h-4 text-red-400" />
@@ -42,16 +53,9 @@ const Footer = ({ hiddenVin = null }) => {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Навигация</h3>
+            <h3 className="text-lg font-semibold mb-6">Navigation</h3>
             <ul className="space-y-3">
-              {[
-                { label: 'Предложения', id: 'offers' },
-                { label: 'Дроп недели', id: 'drop' },
-                { label: 'Покрытие', id: 'coverage' },
-                { label: 'Как работает', id: 'how-it-works' },
-                { label: 'Отзывы', id: 'reviews' },
-                { label: 'FAQ', id: 'faq' }
-              ].map((item) => (
+              {navigationItems.map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
@@ -66,33 +70,33 @@ const Footer = ({ hiddenVin = null }) => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Услуги</h3>
+            <h3 className="text-lg font-semibold mb-6">Services</h3>
             <ul className="space-y-3 text-gray-300">
-              <li>Fleet-предложения</li>
-              <li>Кредитная проверка</li>
-              <li>Консультации по финансированию</li>
-              <li>Помощь в выборе авто</li>
-              <li>Поддержка 24/7</li>
+              <li>Fleet Offers</li>
+              <li>Credit Check</li>
+              <li>Financing Consultation</li>
+              <li>Car Selection Help</li>
+              <li>24/7 Support</li>
             </ul>
           </div>
 
           {/* Legal & Social */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Правовая информация</h3>
+            <h3 className="text-lg font-semibold mb-6">Legal Information</h3>
             <ul className="space-y-3 text-gray-300 mb-6">
               <li>
                 <a href="#" className="hover:text-white transition-colors duration-200">
-                  Политика конфиденциальности
+                  {t('footer.links.privacy')}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-white transition-colors duration-200">
-                  Условия использования
+                  {t('footer.links.terms')}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-white transition-colors duration-200">
-                  Отказ от ответственности
+                  Disclaimer
                 </a>
               </li>
               <li>
@@ -104,7 +108,7 @@ const Footer = ({ hiddenVin = null }) => {
 
             {/* Social Links */}
             <div>
-              <h4 className="font-semibold mb-4">Мы в соцсетях</h4>
+              <h4 className="font-semibold mb-4">Follow Us</h4>
               <div className="flex gap-4">
                 <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors duration-200">
                   <Instagram className="w-5 h-5" />
@@ -124,22 +128,22 @@ const Footer = ({ hiddenVin = null }) => {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-gray-400 text-sm">
-              © 2025 CargwinNewCar. Все права защищены.
+              {t('footer.copyright')}
             </div>
             
             <div className="text-gray-400 text-sm text-center md:text-right">
-              <p>Лицензированный дилер автомобилей в Калифорнии</p>
+              <p>Licensed car dealer in California</p>
               <p>DRE# 12345678 | Dealer License# ABC123</p>
             </div>
           </div>
           
           <div className="mt-6 text-xs text-gray-500 leading-relaxed">
             <p>
-              <strong>Важные примечания:</strong> Все цены и платежи являются приблизительными и зависят от кредитной истории, 
-              первоначального взноса, срока финансирования и других факторов. Предложения действительны для квалифицированных покупателей. 
-              Мы не гарантируем одобрение кредита. Финальные условия определяются кредитором. 
-              Изображения автомобилей могут не отражать точную комплектацию. 
-              Мы не передаём ваши персональные данные третьим лицам без вашего согласия.
+              <strong>Important notes:</strong> All prices and payments are approximate and depend on credit history, 
+              down payment, financing term and other factors. Offers valid for qualified buyers. 
+              We do not guarantee credit approval. Final terms are determined by the lender. 
+              Car images may not reflect exact configuration. 
+              We do not share your personal data with third parties without your consent.
             </p>
             {/* Hidden VIN for SEO/compliance purposes */}
             {hiddenVin && (
