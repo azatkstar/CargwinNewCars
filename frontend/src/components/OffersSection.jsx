@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OfferCard from './OfferCard';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -12,9 +12,37 @@ const OffersSection = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [offers, setOffers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { t } = useI18n();
 
-  const sortedOffers = [...mockOffers].sort((a, b) => {
+  // Fetch offers from API
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        setLoading(true);
+        const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+        const response = await fetch(`${BACKEND_URL}/api/cars`);
+        
+        if (response.ok) {
+          const data = await response.json();
+          setOffers(data);
+        } else {
+          console.error('Failed to fetch offers, using mock data');
+          setOffers(mockOffers);
+        }
+      } catch (error) {
+        console.error('Error fetching offers:', error);
+        setOffers(mockOffers);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOffers();
+  }, []);
+
+  const sortedOffers = [...offers].sort((a, b) => {
     switch (sortBy) {
       case 'savings':
         return b.savings - a.savings;
