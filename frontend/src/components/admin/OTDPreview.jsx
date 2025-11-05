@@ -55,7 +55,7 @@ const OTDPreview = ({ msrp, state = 'CA' }) => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Calculator className="w-5 h-5" />
-          Предпросмотр OTD цены
+          OTD Price Preview
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
