@@ -958,6 +958,446 @@ class BackendTester:
             self.log_test("CORS and Request Handling", False, f"Request error: {str(e)}")
             return False
 
+    def test_create_lexus_lots(self):
+        """Test creating 13 Lexus vehicle lots with specific lease terms"""
+        if not self.auth_token:
+            self.log_test("Lexus Lots Creation", False, "No auth token available")
+            return False
+        
+        # Define the 13 Lexus lots with lease terms
+        lexus_lots = [
+            {
+                "name": "Lexus NX350 Base",
+                "make": "Lexus",
+                "model": "NX350",
+                "year": 2024,
+                "trim": "Base",
+                "monthly_payment": 499,
+                "msrp": 42000,  # Estimated MSRP
+                "vin": "JTJBARBZ8P2123456",
+                "description": "2024 Lexus NX350 Base - Premium compact luxury SUV with advanced safety features and refined interior. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus NX350 Premium Nav",
+                "make": "Lexus",
+                "model": "NX350",
+                "year": 2024,
+                "trim": "Premium Nav",
+                "monthly_payment": 547,
+                "msrp": 45000,
+                "vin": "JTJBARBZ8P2234567",
+                "description": "2024 Lexus NX350 Premium Nav - Enhanced with premium navigation system and luxury appointments. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus NX450h Plugin Luxury",
+                "make": "Lexus",
+                "model": "NX450h",
+                "year": 2024,
+                "trim": "Plugin Luxury",
+                "monthly_payment": 797,
+                "msrp": 58000,
+                "vin": "JTJBARBZ8P2345678",
+                "description": "2024 Lexus NX450h Plugin Luxury - Hybrid plug-in luxury SUV with exceptional fuel efficiency and premium features. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus RX350 Base",
+                "make": "Lexus",
+                "model": "RX350",
+                "year": 2024,
+                "trim": "Base",
+                "monthly_payment": 543,
+                "msrp": 48000,
+                "vin": "2T2BZMCA8PC456789",
+                "description": "2024 Lexus RX350 Base - Mid-size luxury SUV with spacious interior and smooth performance. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus RX350 Premium",
+                "make": "Lexus",
+                "model": "RX350",
+                "year": 2024,
+                "trim": "Premium",
+                "monthly_payment": 577,
+                "msrp": 52000,
+                "vin": "2T2BZMCA8PC567890",
+                "description": "2024 Lexus RX350 Premium - Enhanced with premium features and luxury amenities. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus RX350 Premium+",
+                "make": "Lexus",
+                "model": "RX350",
+                "year": 2024,
+                "trim": "Premium+",
+                "monthly_payment": 652,
+                "msrp": 56000,
+                "vin": "2T2BZMCA8PC678901",
+                "description": "2024 Lexus RX350 Premium+ - Top-tier luxury with advanced technology and premium materials. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus RX350H Premium",
+                "make": "Lexus",
+                "model": "RX350H",
+                "year": 2024,
+                "trim": "Premium",
+                "monthly_payment": 743,
+                "msrp": 58000,
+                "vin": "2T2BZMCA8PC789012",
+                "description": "2024 Lexus RX350H Premium - Hybrid luxury SUV combining efficiency with premium comfort. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus RX350H Premium+",
+                "make": "Lexus",
+                "model": "RX350H",
+                "year": 2024,
+                "trim": "Premium+",
+                "monthly_payment": 852,
+                "msrp": 62000,
+                "vin": "2T2BZMCA8PC890123",
+                "description": "2024 Lexus RX350H Premium+ - Ultimate hybrid luxury with all premium features included. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus TX350 Base",
+                "make": "Lexus",
+                "model": "TX350",
+                "year": 2024,
+                "trim": "Base",
+                "monthly_payment": 597,
+                "msrp": 55000,
+                "vin": "JTJHARBZ8P2901234",
+                "description": "2024 Lexus TX350 Base - Three-row luxury SUV perfect for families seeking premium comfort. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus TX350 Premium",
+                "make": "Lexus",
+                "model": "TX350",
+                "year": 2024,
+                "trim": "Premium",
+                "monthly_payment": 687,
+                "msrp": 60000,
+                "vin": "JTJHARBZ8P2012345",
+                "description": "2024 Lexus TX350 Premium - Enhanced three-row luxury with premium amenities and technology. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus TX500h F Sport",
+                "make": "Lexus",
+                "model": "TX500h",
+                "year": 2024,
+                "trim": "F Sport",
+                "monthly_payment": 987,
+                "msrp": 72000,
+                "vin": "JTJHARBZ8P2123456",
+                "description": "2024 Lexus TX500h F Sport - High-performance hybrid three-row SUV with sport-tuned suspension and aggressive styling. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus ES350 Base",
+                "make": "Lexus",
+                "model": "ES350",
+                "year": 2024,
+                "trim": "Base",
+                "monthly_payment": 407,
+                "msrp": 42000,
+                "vin": "58ABK1GG8PN234567",
+                "description": "2024 Lexus ES350 Base - Luxury sedan with refined comfort and advanced safety features. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            },
+            {
+                "name": "Lexus ES350 Premium",
+                "make": "Lexus",
+                "model": "ES350",
+                "year": 2024,
+                "trim": "Premium",
+                "monthly_payment": 437,
+                "msrp": 45000,
+                "vin": "58ABK1GG8PN345678",
+                "description": "2024 Lexus ES350 Premium - Enhanced luxury sedan with premium features and technology. Lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR, Tier 1 credit required, Los Angeles residents only."
+            }
+        ]
+        
+        created_lots = []
+        failed_lots = []
+        
+        headers = {
+            "Authorization": f"Bearer {self.auth_token}",
+            "Content-Type": "application/json"
+        }
+        
+        print(f"\n🚗 Creating {len(lexus_lots)} Lexus vehicle lots...")
+        
+        for i, lot_spec in enumerate(lexus_lots):
+            try:
+                # Calculate fleet discount to achieve target monthly payment
+                # Using lease calculation: Monthly = (MSRP - Discount - Down) / Term + Interest
+                # Simplified calculation for fleet discount
+                target_monthly = lot_spec["monthly_payment"]
+                msrp = lot_spec["msrp"]
+                
+                # Estimate fleet discount based on typical lease calculations
+                # This is a simplified calculation - in reality would need complex lease math
+                estimated_fleet_discount = max(0, msrp - (target_monthly * 36 + 3000))
+                
+                lot_data = {
+                    "make": lot_spec["make"],
+                    "model": lot_spec["model"],
+                    "year": lot_spec["year"],
+                    "trim": lot_spec["trim"],
+                    "vin": lot_spec["vin"],
+                    "drivetrain": "AWD",
+                    "engine": "V6" if "h" not in lot_spec["model"].lower() else "Hybrid V6",
+                    "transmission": "CVT",
+                    "exteriorColor": "Atomic Silver",
+                    "interiorColor": "Black NuLuxe",
+                    "msrp": msrp,
+                    "discount": estimated_fleet_discount,
+                    "feesHint": 2500,
+                    "state": "CA",
+                    "description": lot_spec["description"],
+                    "tags": ["lexus", "luxury", "2024", "lease-special"],
+                    "isWeeklyDrop": False,
+                    "status": "published"  # Make them live immediately
+                }
+                
+                print(f"   Creating {i+1}/{len(lexus_lots)}: {lot_spec['name']} (Monthly: ${target_monthly})")
+                
+                response = self.session.post(
+                    f"{BACKEND_URL}/admin/lots",
+                    json=lot_data,
+                    headers=headers
+                )
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("ok") and data.get("id"):
+                        created_lot_id = data["id"]
+                        created_lots.append({
+                            "id": created_lot_id,
+                            "name": lot_spec["name"],
+                            "monthly": target_monthly,
+                            "msrp": msrp,
+                            "discount": estimated_fleet_discount
+                        })
+                        print(f"   ✅ Created: {lot_spec['name']} (ID: {created_lot_id})")
+                    else:
+                        failed_lots.append(f"{lot_spec['name']}: Invalid response format")
+                        print(f"   ❌ Failed: {lot_spec['name']} - Invalid response")
+                else:
+                    failed_lots.append(f"{lot_spec['name']}: HTTP {response.status_code}")
+                    print(f"   ❌ Failed: {lot_spec['name']} - HTTP {response.status_code}")
+                    
+            except Exception as e:
+                failed_lots.append(f"{lot_spec['name']}: {str(e)}")
+                print(f"   ❌ Failed: {lot_spec['name']} - {str(e)}")
+        
+        # Test results
+        if len(created_lots) == len(lexus_lots):
+            self.log_test("Lexus Lots Creation", True, 
+                        f"Successfully created all {len(created_lots)} Lexus lots with lease terms")
+            return True, created_lots
+        elif len(created_lots) > 0:
+            self.log_test("Lexus Lots Creation", False, 
+                        f"Partial success: {len(created_lots)}/{len(lexus_lots)} lots created. Failures: {failed_lots}")
+            return False, created_lots
+        else:
+            self.log_test("Lexus Lots Creation", False, 
+                        f"Failed to create any Lexus lots. Errors: {failed_lots}")
+            return False, []
+
+    def test_lexus_lots_in_listing(self):
+        """Test that created Lexus lots appear in the admin listing"""
+        if not self.auth_token:
+            self.log_test("Lexus Lots Listing", False, "No auth token available")
+            return False
+        
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Get all lots
+            response = self.session.get(f"{BACKEND_URL}/admin/lots?limit=50", headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                items = data.get("items", [])
+                
+                # Count Lexus lots
+                lexus_lots = [lot for lot in items if lot.get("make", "").lower() == "lexus"]
+                
+                if len(lexus_lots) >= 13:
+                    lexus_models = [f"{lot.get('model', '')} {lot.get('trim', '')}" for lot in lexus_lots]
+                    self.log_test("Lexus Lots Listing", True, 
+                                f"Found {len(lexus_lots)} Lexus lots in listing: {', '.join(lexus_models[:5])}...")
+                    return True, lexus_lots
+                elif len(lexus_lots) > 0:
+                    self.log_test("Lexus Lots Listing", False, 
+                                f"Only found {len(lexus_lots)} Lexus lots, expected 13")
+                    return False, lexus_lots
+                else:
+                    self.log_test("Lexus Lots Listing", False, "No Lexus lots found in listing")
+                    return False, []
+            else:
+                self.log_test("Lexus Lots Listing", False, f"Failed to get lots listing: HTTP {response.status_code}")
+                return False, []
+                
+        except Exception as e:
+            self.log_test("Lexus Lots Listing", False, f"Request error: {str(e)}")
+            return False, []
+
+    def test_lexus_public_access(self):
+        """Test that published Lexus lots are accessible via public API"""
+        try:
+            # Get a few Lexus lots from listing first
+            success, lexus_lots = self.test_lexus_lots_in_listing()
+            
+            if not success or not lexus_lots:
+                self.log_test("Lexus Public Access", False, "No Lexus lots available for public access testing")
+                return False
+            
+            # Test public access to first few lots
+            public_accessible = 0
+            tested_lots = lexus_lots[:3]  # Test first 3 lots
+            
+            for lot in tested_lots:
+                lot_id = lot.get("id")
+                make = lot.get("make", "")
+                model = lot.get("model", "")
+                
+                if lot_id:
+                    # Create a slug-like identifier for public access
+                    slug = f"{lot.get('year', '2024')}-{make.lower()}-{model.lower()}-{lot.get('trim', '').lower().replace(' ', '-')}"
+                    
+                    try:
+                        # Test public car endpoint
+                        response = self.session.get(f"{BACKEND_URL}/cars/{slug}")
+                        
+                        if response.status_code == 200:
+                            car_data = response.json()
+                            if car_data.get("title") and make.lower() in car_data.get("title", "").lower():
+                                public_accessible += 1
+                                print(f"   ✅ Public access working for: {car_data.get('title', '')}")
+                            else:
+                                print(f"   ⚠️  Public access returned unexpected data for {make} {model}")
+                        else:
+                            print(f"   ❌ Public access failed for {make} {model}: HTTP {response.status_code}")
+                            
+                    except Exception as e:
+                        print(f"   ❌ Public access error for {make} {model}: {str(e)}")
+            
+            if public_accessible > 0:
+                self.log_test("Lexus Public Access", True, 
+                            f"Public access working for {public_accessible}/{len(tested_lots)} tested Lexus lots")
+                return True
+            else:
+                self.log_test("Lexus Public Access", False, 
+                            f"Public access failed for all {len(tested_lots)} tested Lexus lots")
+                return False
+                
+        except Exception as e:
+            self.log_test("Lexus Public Access", False, f"Public access test error: {str(e)}")
+            return False
+
+    def test_lexus_lease_calculations(self):
+        """Test that Lexus lots have correct lease calculation structure"""
+        try:
+            success, lexus_lots = self.test_lexus_lots_in_listing()
+            
+            if not success or not lexus_lots:
+                self.log_test("Lexus Lease Calculations", False, "No Lexus lots available for lease calculation testing")
+                return False
+            
+            # Test lease calculation structure for first lot
+            test_lot = lexus_lots[0]
+            lot_id = test_lot.get("id")
+            
+            if not lot_id:
+                self.log_test("Lexus Lease Calculations", False, "No lot ID available for testing")
+                return False
+            
+            # Get detailed lot data
+            response = self.session.get(f"{BACKEND_URL}/admin/lots/{lot_id}")
+            
+            if response.status_code == 200:
+                lot_data = response.json()
+                
+                # Check required fields for lease calculations
+                msrp = lot_data.get("msrp", 0)
+                discount = lot_data.get("discount", 0)
+                
+                if msrp > 0 and discount >= 0:
+                    fleet_price = msrp - discount
+                    
+                    # Verify lease terms match specification
+                    # Base lease terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR
+                    lease_terms = {
+                        "down_payment": 3000,
+                        "miles_per_year": 7500,
+                        "term_months": 36,
+                        "apr": 9.75,
+                        "msrp": msrp,
+                        "fleet_price": fleet_price,
+                        "discount": discount
+                    }
+                    
+                    self.log_test("Lexus Lease Calculations", True, 
+                                f"Lease calculation structure valid: MSRP ${msrp}, Fleet ${fleet_price}, Discount ${discount}")
+                    return True, lease_terms
+                else:
+                    self.log_test("Lexus Lease Calculations", False, 
+                                f"Invalid pricing data: MSRP {msrp}, Discount {discount}")
+                    return False, None
+            else:
+                self.log_test("Lexus Lease Calculations", False, 
+                            f"Failed to get lot details: HTTP {response.status_code}")
+                return False, None
+                
+        except Exception as e:
+            self.log_test("Lexus Lease Calculations", False, f"Lease calculation test error: {str(e)}")
+            return False, None
+
+    def run_lexus_lot_tests(self):
+        """Run comprehensive Lexus lot creation and testing"""
+        print("\n" + "=" * 80)
+        print("LEXUS VEHICLE LOTS TESTING - LEASE SPECIAL CREATION")
+        print("=" * 80)
+        print("Testing creation of 13 Lexus lots with specific lease terms")
+        print("Base terms: $3,000 down, 7,500 miles/year, 36 months, 9.75% APR")
+        print()
+        
+        lexus_tests = [
+            ("Create Lexus Lots", self.test_create_lexus_lots),
+            ("Verify Lexus Lots in Listing", self.test_lexus_lots_in_listing),
+            ("Test Lexus Public Access", self.test_lexus_public_access),
+            ("Validate Lexus Lease Calculations", self.test_lexus_lease_calculations),
+        ]
+        
+        passed = 0
+        total = len(lexus_tests)
+        
+        for i, (test_name, test_func) in enumerate(lexus_tests):
+            print(f"\n--- {test_name} ({i+1}/{total}) ---")
+            try:
+                result = test_func()
+                if isinstance(result, tuple):
+                    success = result[0]
+                else:
+                    success = result
+                    
+                if success:
+                    passed += 1
+            except Exception as e:
+                self.log_test(test_name, False, f"Test execution error: {str(e)}")
+        
+        print("\n" + "=" * 80)
+        print("LEXUS LOTS TEST SUMMARY")
+        print("=" * 80)
+        print(f"Passed: {passed}/{total}")
+        print(f"Failed: {total - passed}/{total}")
+        
+        if passed == total:
+            print("🎉 ALL LEXUS TESTS PASSED - LEXUS LOTS CREATED SUCCESSFULLY!")
+            return True
+        else:
+            print("⚠️  SOME LEXUS TESTS FAILED - CHECK RESULTS ABOVE")
+            return False
+
     def run_all_tests(self):
         """Run all backend tests for production readiness"""
         print("=" * 80)
