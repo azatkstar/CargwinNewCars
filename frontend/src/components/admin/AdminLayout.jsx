@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
-import { Car, Package, Settings, FileText, LogOut, User } from 'lucide-react';
+import { Car, Package, Settings, FileText, LogOut, User, Users, FileCheck } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useI18n } from '../../hooks/useI18n';
 
@@ -14,21 +14,35 @@ const AdminLayout = ({ children }) => {
   const navItems = [
     {
       id: 'lots',
-      label: t('admin.nav.lots'),
+      label: 'Lots Management',
       icon: Package,
       path: '/admin/lots',
       requiredRole: 'viewer'
     },
     {
+      id: 'users',
+      label: 'Users',
+      icon: Users,
+      path: '/admin/users',
+      requiredRole: 'admin'
+    },
+    {
+      id: 'applications',
+      label: 'Applications',
+      icon: FileCheck,
+      path: '/admin/applications',
+      requiredRole: 'admin'
+    },
+    {
       id: 'settings', 
-      label: t('admin.nav.settings'),
+      label: 'Settings',
       icon: Settings,
       path: '/admin/settings',
       requiredRole: 'admin'
     },
     {
       id: 'audit',
-      label: t('admin.nav.audit'),
+      label: 'Audit Log',
       icon: FileText,
       path: '/admin/audit',
       requiredRole: 'viewer'
