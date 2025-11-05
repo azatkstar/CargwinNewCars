@@ -63,7 +63,7 @@ const PreviewLot = () => {
           <AlertTriangle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Preview Error</h1>
           <p className="text-gray-600 mb-4">{error}</p>
-          <p className="text-sm text-gray-500">Возможно, токен предпросмотра истек или неверен</p>
+          <p className="text-sm text-gray-500">Preview token may have expired or is invalid</p>
         </div>
       </div>
     );
