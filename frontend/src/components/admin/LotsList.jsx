@@ -54,22 +54,11 @@ const LotsList = () => {
 
       const response = await api.get('/api/admin/lots', { params });
       
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Lots fetched successfully:', data);
-        setLots(data.items || []);
-        setPagination(prev => ({ ...prev, total: data.total || 0 }));
-      } else {
-        console.error('Fetch lots error:', response.status);
-        // Use mock data as fallback
-        setLots(mockLots);
-        setPagination(prev => ({ ...prev, total: mockLots.length }));
-      }
+      setLots(response.data.items || []);
+      setPagination(prev => ({ ...prev, total: response.data.total || 0 }));
     } catch (error) {
       console.error('Failed to fetch lots:', error);
-      // Mock data fallback
-      setLots(mockLots);
-      setPagination(prev => ({ ...prev, total: mockLots.length }));
+      setLots([]);
     } finally {
       setLoading(false);
     }
