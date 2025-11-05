@@ -60,9 +60,52 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Desktop CTA + Language Switcher */}
+          {/* Desktop CTA + Language Switcher + Auth */}
           <div className="hidden lg:flex items-center gap-3">
             <LanguageSwitcher />
+            
+            {isAuthenticated ? (
+              <div className="relative">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="flex items-center gap-2"
+                >
+                  <User className="w-4 h-4" />
+                  {user?.name || user?.email}
+                </Button>
+                
+                {showUserMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                    <Link
+                      to={isAdmin ? "/admin" : "/dashboard"}
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      {isAdmin ? 'Admin Panel' : 'My Dashboard'}
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/auth">
+                <Button 
+                  variant="outline"
+                  className="flex items-center gap-2"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Login
+                </Button>
+              </Link>
+            )}
+            
             <Button 
               onClick={() => scrollToSection('offers')}
               className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300"
