@@ -172,7 +172,7 @@ const CreditSoftCheck = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="phone">Телефон *</Label>
+                  <Label htmlFor="phone">{t('forms.credit_check.phone')} *</Label>
                   <Input
                     id="phone"
                     type="tel"
