@@ -221,8 +221,9 @@
     "title": "Customer Reviews",
     "subtitle": "Real stories from people who avoided haggling and saved thousands of dollars",
     "saved": "Saved",
-    "instagram_title": "Instagram Reviews",
-    "watch_on_instagram": "Watch on Instagram"
+    "instagram_title": "Video Reviews on Instagram", 
+    "watch_on_instagram": "Watch on Instagram",
+    "share_experience": "Share Your Experience"
   },
   "forms": {
     "contact_form": {
