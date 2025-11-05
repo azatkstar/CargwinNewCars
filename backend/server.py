@@ -576,38 +576,9 @@ async def process_oauth(
         raise HTTPException(status_code=500, detail="Failed to process OAuth session")
 
 @api_router.get("/auth/me", response_model=User)
-async def get_me(
-    request: Request,
-    user_repo: UserRepository = Depends(get_users_repo),
-    session_repo: UserSessionRepository = Depends(get_sessions_repo)
-):
-    """Get current user from session token (cookie or header)"""
-    try:
-        # Try to get session token from cookie first, then from Authorization header
-        session_token = request.cookies.get("session_token")
-        
-        if not session_token:
-            # Try Authorization header as fallback
-            auth_header = request.headers.get("Authorization")
-            if auth_header and auth_header.startswith("Bearer "):
-                session_token = auth_header.replace("Bearer ", "")
-        
-        if not session_token:
-            raise HTTPException(status_code=401, detail="Not authenticated")
-        
-        # Get user from session token
-        user = await get_user_from_session_token(session_token, user_repo, session_repo)
-        
-        if not user:
-            raise HTTPException(status_code=401, detail="Invalid or expired session")
-        
-        return user
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Get me error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to get user")
+async def get_me(current_user: User = Depends(get_current_user)):
+    """Get current user (works with both JWT and OAuth session tokens)"""
+    return current_user
 
 # User Profile Routes
 @api_router.get("/user/profile", response_model=User)
