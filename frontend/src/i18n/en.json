@@ -188,7 +188,7 @@
   "car_detail": {
     "specifications": "Specifications",
     "year": "Year",
-    "make": "Make",
+    "make": "Make", 
     "model": "Model",
     "trim": "Trim",
     "engine": "Engine",
@@ -204,7 +204,9 @@
     "cash_options": "Cash Options",
     "similar_offers": "Similar Offers",
     "contact_dealer": "Contact Dealer",
-    "schedule_test_drive": "Schedule Test Drive"
+    "schedule_test_drive": "Schedule Test Drive",
+    "car_not_found": "Car Not Found",
+    "offer_unavailable": "Offer may no longer be available"
   },
   "faq": {
     "title": "Frequently Asked Questions",
