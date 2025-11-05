@@ -383,20 +383,47 @@ class UserRepository:
         result = await self.collection.insert_one(user_data)
         return str(result.inserted_id)
     
+    async def get_user_by_id(self, user_id: str) -> Optional[Dict[str, Any]]:
+        """Get user by ID"""
+        result = await self.collection.find_one({"_id": user_id})
+        if result:
+            result['id'] = result.pop('_id')
+        return result
+    
     async def update_user(self, user_id: str, update_data: Dict[str, Any]) -> bool:
         """Update user"""
         try:
-            from bson import ObjectId
             update_data['updated_at'] = datetime.now(timezone.utc)
             
             result = await self.collection.update_one(
-                {"_id": ObjectId(user_id)}, 
+                {"_id": user_id}, 
                 {"$set": update_data}
             )
             return result.modified_count > 0
         except Exception as e:
             logger.error(f"Error updating user {user_id}: {e}")
             return False
+    
+    async def get_all_users(self, skip: int = 0, limit: int = 50, role: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get all users with pagination and filtering"""
+        query = {}
+        if role:
+            query['role'] = role
+        
+        cursor = self.collection.find(query).skip(skip).limit(limit).sort("created_at", -1)
+        users = await cursor.to_list(length=limit)
+        
+        for user in users:
+            user['id'] = user.pop('_id')
+        
+        return users
+    
+    async def get_users_count(self, role: Optional[str] = None) -> int:
+        """Get total count of users"""
+        query = {}
+        if role:
+            query['role'] = role
+        return await self.collection.count_documents(query)
 
 class AuditRepository:
     """Repository for audit log operations"""
