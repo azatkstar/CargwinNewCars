@@ -74,7 +74,7 @@ const OTDPreview = ({ msrp, state = 'CA' }) => {
             ) : (
               <Calculator className="w-4 h-4 mr-2" />
             )}
-            Рассчитать OTD
+            Calculate OTD
           </Button>
         </div>
 
