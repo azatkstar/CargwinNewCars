@@ -91,11 +91,11 @@ const CarForms = ({ car }) => {
         console.log('Lead submitted:', leadForm);
         setLeadSubmitted(true);
       } else {
-        throw new Error('Ошибка отправки');
+        throw new Error('Submission failed');
       }
     } catch (error) {
       console.error('Lead submission error:', error);
-      alert('Произошла ошибка. Попробуйте позже.');
+      alert('An error occurred. Please try again later.');
     } finally {
       setLeadLoading(false);
     }
