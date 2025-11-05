@@ -545,8 +545,16 @@ class ApplicationRepository:
             if status == 'contacted':
                 update_data['contacted_at'] = datetime.now(timezone.utc)
             
+            # Handle both ObjectId and string IDs
+            query_id = app_id
+            if len(app_id) == 24 and all(c in '0123456789abcdef' for c in app_id.lower()):
+                try:
+                    query_id = ObjectId(app_id)
+                except:
+                    pass  # Use string ID if ObjectId conversion fails
+            
             result = await self.collection.update_one(
-                {"_id": ObjectId(app_id)},
+                {"_id": query_id},
                 {"$set": update_data}
             )
             return result.modified_count > 0
