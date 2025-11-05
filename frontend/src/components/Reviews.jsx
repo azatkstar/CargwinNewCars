@@ -76,7 +76,7 @@ const Reviews = () => {
         <div className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              Видео-отзывы в Instagram
+              {t('reviews.instagram_title')}
             </h3>
             <p className="text-gray-600">
               Смотрите реальные истории наших клиентов
