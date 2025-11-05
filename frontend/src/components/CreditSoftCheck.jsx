@@ -237,7 +237,7 @@ const CreditSoftCheck = () => {
                 disabled={!isFormValid() || loading}
                 className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed py-3 text-lg font-semibold"
               >
-                {loading ? 'Проверяем...' : 'Получить условия финансирования'}
+                {loading ? t('forms.credit_check.checking') : t('forms.credit_check.get_terms')}
               </Button>
             </form>
 
