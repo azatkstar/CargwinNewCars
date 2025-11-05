@@ -157,6 +157,43 @@ class UserDocument(BaseModel):
             ObjectId: str
         }
 
+class UserSessionDocument(BaseModel):
+    """User session document for OAuth (Emergent Auth)"""
+    user_id: str
+    session_token: str
+    expires_at: datetime
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat(),
+            ObjectId: str
+        }
+
+class ApplicationDocument(BaseModel):
+    """User application for a car lot"""
+    user_id: str
+    lot_id: str
+    status: str = "pending"  # pending, approved, rejected, contacted
+    
+    # Snapshot of user data at time of application
+    user_data: dict = {}
+    lot_data: dict = {}
+    
+    admin_notes: Optional[str] = None
+    contacted_at: Optional[datetime] = None
+    
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat(),
+            ObjectId: str
+        }
+
 class AuditLogDocument(BaseModel):
     """Audit log document model for MongoDB"""
     user_id: Optional[str] = None
