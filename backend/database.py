@@ -597,3 +597,15 @@ def get_audit_repository() -> AuditRepository:
     if audit_repo is None:
         raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
     return audit_repo
+
+def get_session_repository() -> UserSessionRepository:
+    """Get session repository instance"""
+    if session_repo is None:
+        raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
+    return session_repo
+
+def get_application_repository() -> ApplicationRepository:
+    """Get application repository instance"""
+    if application_repo is None:
+        raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
+    return application_repo
