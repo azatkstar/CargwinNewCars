@@ -3,8 +3,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 import { Card, CardContent } from './ui/card';
 import { Shield, Phone } from 'lucide-react';
 import { mockFAQ } from '../mock';
+import { useI18n } from '../hooks/useI18n';
 
 const FAQ = () => {
+  const { t } = useI18n();
   return (
     <section id="faq" className="py-16 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
