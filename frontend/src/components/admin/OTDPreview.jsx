@@ -13,7 +13,8 @@ const OTDPreview = ({ msrp, state = 'CA' }) => {
 
     setLoading(true);
     try {
-      const response = await fetch('/api/calc', {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/calc`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
