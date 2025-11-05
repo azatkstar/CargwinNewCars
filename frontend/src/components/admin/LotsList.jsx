@@ -97,7 +97,7 @@ const LotsList = () => {
       setSelectedLots([]);
     } catch (error) {
       console.error(`Batch ${action} failed:`, error);
-      alert(`Ошибка выполнения действия: ${error.message}`);
+      alert(`Error performing action: ${error.message}`);
     }
   };
 
