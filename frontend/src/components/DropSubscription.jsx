@@ -160,8 +160,8 @@ const DropSubscription = () => {
                     <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Bell className="w-8 h-8 text-white" />
                     </div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">Подписка оформлена!</h4>
-                    <p className="text-gray-600">Мы уведомим вас о следующем дропе</p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">{t('drop.subscription_complete')}</h4>
+                    <p className="text-gray-600">{t('drop.will_notify')}</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
