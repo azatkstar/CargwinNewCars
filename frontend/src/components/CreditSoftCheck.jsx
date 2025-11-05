@@ -227,8 +227,7 @@ const CreditSoftCheck = () => {
                   onCheckedChange={(checked) => handleInputChange('consent', checked)}
                 />
                 <Label htmlFor="consent" className="text-sm leading-relaxed cursor-pointer">
-                  Я соглашаюсь на проведение мягкой проверки кредитной истории и получение персональных предложений. 
-                  Понимаю, что мои данные не будут переданы дилерам для обзвонов.
+                  {t('forms.credit_check.consent_text')}
                 </Label>
               </div>
 
