@@ -158,7 +158,7 @@ const OTDCalculator = ({ car }) => {
           disabled={!formData.creditScore || loading}
           className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 py-3 text-lg font-semibold"
         >
-          {loading ? 'Рассчитываем...' : 'Рассчитать OTD цену'}
+          {loading ? 'Calculating...' : 'Calculate OTD Price'}
         </Button>
 
         {/* Results */}
