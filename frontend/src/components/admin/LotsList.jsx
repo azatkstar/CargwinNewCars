@@ -88,11 +88,9 @@ const LotsList = () => {
     if (!confirm(confirmMessage)) return;
 
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-      await fetch(`${BACKEND_URL}/api/admin/lots/batch/${action}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lotIds: selectedLots })
+      const api = getApiClient();
+      await api.post(`/api/admin/lots/batch/${action}`, {
+        lotIds: selectedLots
       });
       
       fetchLots();
