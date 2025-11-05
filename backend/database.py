@@ -128,10 +128,25 @@ class LotDocument(BaseModel):
 class UserDocument(BaseModel):
     """User document model for MongoDB"""
     email: str
-    role: str = "viewer"  # admin, editor, viewer
+    role: str = "user"  # admin, editor, user
     name: str = ""
+    picture: str = ""
+    password_hash: Optional[str] = None  # For email/password auth
     is_active: bool = True
+    profile_completed: bool = False
     last_login: Optional[datetime] = None
+    
+    # Credit Application Fields
+    credit_score: Optional[int] = None
+    auto_loan_history: Optional[bool] = None  # Has paid off auto loans
+    employment_type: Optional[str] = None  # 1099, W2, Self-employed
+    annual_income: Optional[int] = None
+    employment_duration_months: Optional[int] = None
+    address: Optional[str] = None
+    residence_duration_months: Optional[int] = None
+    monthly_expenses: Optional[int] = None
+    down_payment_ready: Optional[int] = None
+    
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
