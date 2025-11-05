@@ -47,13 +47,41 @@ class MagicLinkRequest(BaseModel):
 class MagicLinkVerify(BaseModel):
     token: str
 
+class RegisterRequest(BaseModel):
+    email: EmailStr
+    password: str
+    name: str
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+class CompleteProfileRequest(BaseModel):
+    credit_score: int
+    auto_loan_history: bool
+    employment_type: str  # 1099, W2, Self-employed
+    annual_income: int
+    employment_duration_months: int
+    address: str
+    residence_duration_months: int
+    monthly_expenses: int
+    down_payment_ready: int
+
 class User(BaseModel):
     id: str
     email: str
     name: str
     role: str
     is_active: bool
+    profile_completed: bool = False
+    picture: str = ""
     last_login: Optional[datetime] = None
+    
+    # Credit fields (optional for response)
+    credit_score: Optional[int] = None
+    auto_loan_history: Optional[bool] = None
+    employment_type: Optional[str] = None
+    annual_income: Optional[int] = None
 
 # In-memory storage for magic links (in production use Redis)
 magic_links_storage: Dict[str, Dict[str, Any]] = {}
