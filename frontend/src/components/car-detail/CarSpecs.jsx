@@ -6,15 +6,15 @@ import { formatPrice } from '../../utils/timer';
 
 const CarSpecs = ({ car }) => {
   const specs = [
-    { label: 'Год выпуска', value: car.specs.year, icon: Car },
-    { label: 'Марка', value: car.specs.make, icon: Car },
-    { label: 'Модель', value: car.specs.model, icon: Car },
-    { label: 'Комплектация', value: car.specs.trim, icon: Car },
-    { label: 'Двигатель', value: car.specs.engine, icon: Zap },
-    { label: 'Трансмиссия', value: car.specs.transmission, icon: Zap },
-    { label: 'Привод', value: car.specs.drivetrain, icon: Zap },
-    { label: 'Цвет кузова', value: car.specs.exteriorColor, icon: Palette },
-    { label: 'Цвет салона', value: car.specs.interiorColor, icon: Palette }
+    { label: 'Year', value: car.specs.year, icon: Car },
+    { label: 'Make', value: car.specs.make, icon: Car },
+    { label: 'Model', value: car.specs.model, icon: Car },
+    { label: 'Trim', value: car.specs.trim, icon: Car },
+    { label: 'Engine', value: car.specs.engine, icon: Zap },
+    { label: 'Transmission', value: car.specs.transmission, icon: Zap },
+    { label: 'Drivetrain', value: car.specs.drivetrain, icon: Zap },
+    { label: 'Exterior Color', value: car.specs.exteriorColor, icon: Palette },
+    { label: 'Interior Color', value: car.specs.interiorColor, icon: Palette }
     // VIN removed - now in footer for compliance
   ];
 
