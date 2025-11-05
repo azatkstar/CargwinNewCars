@@ -13,6 +13,7 @@ import { mockOffers } from '../mock';
 import { useI18n } from '../hooks/useI18n';
 
 const CarDetail = () => {
+  const { t } = useI18n();
   const { carId } = useParams();
   const [carData, setCarData] = useState(null);
   const [loading, setLoading] = useState(true);
