@@ -133,7 +133,7 @@ const CreditSoftCheck = () => {
               {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="firstName">Имя *</Label>
+                  <Label htmlFor="firstName">{t('forms.credit_check.first_name')} *</Label>
                   <Input
                     id="firstName"
                     type="text"
