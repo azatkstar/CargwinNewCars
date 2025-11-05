@@ -7,8 +7,10 @@ import { Checkbox } from './ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Shield, CreditCard, TrendingUp, AlertCircle } from 'lucide-react';
 import { formatPhoneNumber } from '../utils/timer';
+import { useI18n } from '../hooks/useI18n';
 
 const CreditSoftCheck = () => {
+  const { t } = useI18n();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
