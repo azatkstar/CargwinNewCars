@@ -346,3 +346,165 @@ def get_user_from_request_context(request: Request) -> Optional[User]:
 def set_user_in_request_context(request: Request, user: User):
     """Set user in request context"""
     request.state.user = user
+
+async def register_user(email: str, password: str, name: str, user_repo: UserRepository, audit_repo: AuditRepository) -> User:
+    """Register new user with email and password"""
+    # Check if user already exists
+    existing_user = await user_repo.get_user_by_email(email)
+    if existing_user:
+        raise HTTPException(status_code=400, detail="User with this email already exists")
+    
+    # Hash password
+    password_hash = hash_password(password)
+    
+    # Create user
+    user_data = {
+        "email": email,
+        "password_hash": password_hash,
+        "name": name,
+        "role": "user",
+        "is_active": True,
+        "profile_completed": False,
+        "picture": ""
+    }
+    
+    user_id = await user_repo.create_user(user_data)
+    
+    # Log user creation
+    await audit_repo.log_action({
+        "user_email": email,
+        "action": "user_registered",
+        "resource_type": "user",
+        "resource_id": user_id,
+        "changes": {"email": email, "name": name, "auth_method": "password"}
+    })
+    
+    # Get created user
+    user = await user_repo.get_user_by_email(email)
+    return User(**user)
+
+async def authenticate_user(email: str, password: str, user_repo: UserRepository) -> Optional[User]:
+    """Authenticate user with email and password"""
+    user = await user_repo.get_user_by_email(email)
+    
+    if not user:
+        return None
+    
+    if not user.get('password_hash'):
+        raise HTTPException(status_code=400, detail="This account uses a different login method (Google or Magic Link)")
+    
+    if not verify_password(password, user['password_hash']):
+        return None
+    
+    if not user['is_active']:
+        raise HTTPException(status_code=403, detail="Account is deactivated")
+    
+    # Update last login
+    await user_repo.update_user(user['id'], {"last_login": datetime.now(timezone.utc)})
+    
+    return User(**user)
+
+async def process_oauth_session(session_id: str, user_repo: UserRepository, session_repo, audit_repo: AuditRepository) -> Dict[str, Any]:
+    """Process Emergent OAuth session_id and return session_token + user data"""
+    from database import get_session_repository
+    import httpx
+    
+    session_repo = get_session_repository()
+    
+    # Call Emergent Auth API to get session data
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
+                headers={"X-Session-ID": session_id},
+                timeout=10.0
+            )
+            
+            if response.status_code != 200:
+                raise HTTPException(status_code=400, detail="Invalid session ID")
+            
+            data = response.json()
+            
+            # Extract user data
+            user_id = data.get("id")
+            email = data.get("email")
+            name = data.get("name", "")
+            picture = data.get("picture", "")
+            
+            # Check if user exists
+            existing_user = await user_repo.get_user_by_email(email)
+            
+            if not existing_user:
+                # Create new user
+                user_data = {
+                    "_id": user_id,  # Use Google ID as user ID
+                    "email": email,
+                    "name": name,
+                    "picture": picture,
+                    "role": "user",
+                    "is_active": True,
+                    "profile_completed": False
+                }
+                await user_repo.create_user(user_data)
+                
+                # Log user creation
+                await audit_repo.log_action({
+                    "user_email": email,
+                    "action": "user_registered",
+                    "resource_type": "user",
+                    "resource_id": user_id,
+                    "changes": {"email": email, "name": name, "auth_method": "google_oauth"}
+                })
+                
+                user = await user_repo.get_user_by_email(email)
+            else:
+                user = existing_user
+                user_id = user['id']
+                
+                # Update last login
+                await user_repo.update_user(user_id, {"last_login": datetime.now(timezone.utc)})
+            
+            # Create session token
+            import secrets
+            session_token = secrets.token_urlsafe(32)
+            expires_at = datetime.now(timezone.utc) + timedelta(days=7)
+            
+            # Store session in database
+            session_data = {
+                "user_id": user_id,
+                "session_token": session_token,
+                "expires_at": expires_at
+            }
+            await session_repo.create_session(session_data)
+            
+            # Return session token and user data
+            return {
+                "session_token": session_token,
+                "user": User(**user).dict(),
+                "expires_in": 7 * 24 * 60 * 60  # 7 days in seconds
+            }
+            
+    except httpx.RequestError as e:
+        logger.error(f"Error calling Emergent Auth API: {e}")
+        raise HTTPException(status_code=500, detail="Failed to process OAuth session")
+
+async def get_user_from_session_token(session_token: str, user_repo: UserRepository, session_repo) -> Optional[User]:
+    """Get user from session token (OAuth)"""
+    from database import get_session_repository
+    
+    if not session_repo:
+        session_repo = get_session_repository()
+    
+    # Get session
+    session = await session_repo.get_session_by_token(session_token)
+    
+    if not session:
+        return None
+    
+    # Get user
+    user = await user_repo.get_user_by_id(session['user_id'])
+    
+    if not user:
+        return None
+    
+    return User(**user)
