@@ -54,6 +54,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/car/:carId" element={<CarDetail />} />
+                <Route path="/auth" element={<Auth />} />
                 <Route path="/preview/:token" element={<PreviewLot />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin/*" element={<AdminDashboard />} />
