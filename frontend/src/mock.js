@@ -152,28 +152,28 @@ export const mockInstagramReviews = [
 export const mockFAQ = [
   {
     id: 1,
-    question: "Передаёте ли вы мои данные дилерам?",
-    answer: "Нет, мы не передаём ваши контактные данные дилерам для обзвонов. Контакт происходит только с одним дилером после 100% согласования всех условий сделки."
+    question: "Do you share my data with dealers?",
+    answer: "No, we do not share your contact information with dealers for cold calls. Contact happens only with one dealer after 100% agreement on all deal terms."
   },
   {
     id: 2,
-    question: "Что происходит после бронирования?",
-    answer: "После бронирования мы согласовываем с вами все детали сделки. Только после вашего полного согласия вы приезжаете к дилеру и забираете полностью готовый автомобиль."
+    question: "What happens after booking?",
+    answer: "After booking, we coordinate all deal details with you. Only after your complete agreement do you go to the dealer and pick up a fully prepared car."
   },
   {
     id: 3,
-    question: "Какие условия по кредитной истории?",
-    answer: "Финальные условия финансирования зависят от вашего кредитного профиля. Мы делаем мягкую проверку (soft-check), которая не влияет на ваш кредитный балл."
+    question: "What are the credit history requirements?",
+    answer: "Final financing terms depend on your credit profile. We do a soft check that doesn't affect your credit score."
   },
   {
     id: 4,
-    question: "Можно ли отказаться от сделки?",
-    answer: "Да, вы можете отказаться от сделки в любой момент до подписания документов у дилера. Депозит возвращается полностью."
+    question: "Can I cancel the deal?",
+    answer: "Yes, you can cancel the deal at any time before signing documents at the dealer. Deposit is fully refunded."
   },
   {
     id: 5,
-    question: "Что такое fleet-цены?",
-    answer: "Fleet-цены — это специальные цены для корпоративных клиентов, которые обычно значительно ниже розничных. Мы предоставляем доступ к этим ценам частным покупателям."
+    question: "What are fleet prices?",
+    answer: "Fleet prices are special prices for corporate clients, which are usually significantly lower than retail. We provide access to these prices for private buyers."
   }
 ];
 
