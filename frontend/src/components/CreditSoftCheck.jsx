@@ -248,7 +248,7 @@ const CreditSoftCheck = () => {
               <div className="flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
                 <div className="text-sm text-yellow-800">
-                  <p className="font-medium mb-2">Важные условия:</p>
+                  <p className="font-medium mb-2">{t('forms.credit_check.important_terms')}:</p>
                   <ul className="space-y-1 text-xs">
                     <li>• Мягкая проверка не влияет на ваш кредитный балл</li>
                     <li>• Финальные условия зависят от полной проверки кредитной истории</li>
