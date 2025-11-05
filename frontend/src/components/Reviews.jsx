@@ -121,7 +121,7 @@ const Reviews = () => {
                   >
                     <a href={video.url} target="_blank" rel="noopener noreferrer">
                       <Instagram className="w-4 h-4 mr-2" />
-                      Смотреть в Instagram
+                      {t('reviews.watch_on_instagram')}
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </a>
                   </Button>
