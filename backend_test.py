@@ -1833,5 +1833,14 @@ class BackendTester:
 
 if __name__ == "__main__":
     tester = BackendTester()
-    success = tester.run_all_tests()
+    
+    # Run the specific admin statistics and application management test as requested
+    print("Running Admin Statistics and Application Management Testing...")
+    success = tester.test_admin_statistics_and_applications()
+    
+    if success:
+        print("\n🎉 ADMIN STATISTICS AND APPLICATION MANAGEMENT TESTING COMPLETED SUCCESSFULLY!")
+    else:
+        print("\n❌ ADMIN STATISTICS AND APPLICATION MANAGEMENT TESTING FAILED!")
+    
     sys.exit(0 if success else 1)
