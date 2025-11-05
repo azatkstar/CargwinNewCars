@@ -444,12 +444,170 @@ async def get_session(current_user: Optional[User] = Depends(get_current_user)):
     }
 
 @api_router.post("/auth/logout")
-async def logout(current_user: Optional[User] = Depends(get_current_user)):
-    """Logout user (client should delete tokens)"""
+async def logout(
+    request: Request,
+    session_repo: UserSessionRepository = Depends(get_sessions_repo),
+    current_user: Optional[User] = Depends(get_current_user)
+):
+    """Logout user (delete session and clear cookie)"""
+    # Get session token from cookie
+    session_token = request.cookies.get("session_token")
+    
+    if session_token:
+        # Delete session from database
+        await session_repo.delete_session(session_token)
+    
     if current_user:
         logger.info(f"User logged out: {current_user.email}")
     
-    return {"ok": True, "message": "Logged out successfully"}
+    # Return response with cookie deletion
+    response = JSONResponse({"ok": True, "message": "Logged out successfully"})
+    response.delete_cookie("session_token", path="/", samesite="none", secure=True)
+    
+    return response
+
+@api_router.post("/auth/register", response_model=dict)
+async def register(
+    register_data: RegisterRequest,
+    user_repo: UserRepository = Depends(get_users_repo),
+    audit_repo: AuditRepository = Depends(get_audit_repo)
+):
+    """Register new user with email and password"""
+    try:
+        user = await register_user(
+            register_data.email,
+            register_data.password,
+            register_data.name,
+            user_repo,
+            audit_repo
+        )
+        
+        # Create tokens
+        tokens = create_user_tokens(user.email, user.role)
+        
+        logger.info(f"User registered: {user.email}")
+        
+        return {
+            "ok": True,
+            "message": "User registered successfully",
+            "user": user.dict(),
+            "access_token": tokens['access_token'],
+            "refresh_token": tokens['refresh_token']
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Registration error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to register user")
+
+@api_router.post("/auth/login", response_model=dict)
+async def login(
+    login_data: LoginRequest,
+    user_repo: UserRepository = Depends(get_users_repo)
+):
+    """Login with email and password"""
+    try:
+        user = await authenticate_user(login_data.email, login_data.password, user_repo)
+        
+        if not user:
+            raise HTTPException(status_code=401, detail="Invalid email or password")
+        
+        # Create tokens
+        tokens = create_user_tokens(user.email, user.role)
+        
+        logger.info(f"User logged in: {user.email}")
+        
+        return {
+            "ok": True,
+            "message": "Logged in successfully",
+            "user": user.dict(),
+            "access_token": tokens['access_token'],
+            "refresh_token": tokens['refresh_token']
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Login error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to login")
+
+@api_router.post("/auth/oauth/session")
+async def process_oauth(
+    request: Request,
+    user_repo: UserRepository = Depends(get_users_repo),
+    session_repo: UserSessionRepository = Depends(get_sessions_repo),
+    audit_repo: AuditRepository = Depends(get_audit_repo)
+):
+    """Process OAuth session_id from Emergent Auth and return session_token"""
+    try:
+        body = await request.json()
+        session_id = body.get("session_id")
+        
+        if not session_id:
+            raise HTTPException(status_code=400, detail="session_id is required")
+        
+        # Process OAuth session
+        result = await process_oauth_session(session_id, user_repo, session_repo, audit_repo)
+        
+        # Set session token in httpOnly cookie
+        response = JSONResponse({
+            "ok": True,
+            "user": result['user'],
+            "message": "OAuth session processed successfully"
+        })
+        
+        response.set_cookie(
+            key="session_token",
+            value=result['session_token'],
+            max_age=result['expires_in'],
+            httponly=True,
+            secure=True,
+            samesite="none",
+            path="/"
+        )
+        
+        logger.info(f"OAuth session processed for user: {result['user']['email']}")
+        
+        return response
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"OAuth session error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to process OAuth session")
+
+@api_router.get("/auth/me", response_model=User)
+async def get_me(
+    request: Request,
+    user_repo: UserRepository = Depends(get_users_repo),
+    session_repo: UserSessionRepository = Depends(get_sessions_repo)
+):
+    """Get current user from session token (cookie or header)"""
+    try:
+        # Try to get session token from cookie first, then from Authorization header
+        session_token = request.cookies.get("session_token")
+        
+        if not session_token:
+            # Try Authorization header as fallback
+            auth_header = request.headers.get("Authorization")
+            if auth_header and auth_header.startswith("Bearer "):
+                session_token = auth_header.replace("Bearer ", "")
+        
+        if not session_token:
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        # Get user from session token
+        user = await get_user_from_session_token(session_token, user_repo, session_repo)
+        
+        if not user:
+            raise HTTPException(status_code=401, detail="Invalid or expired session")
+        
+        return user
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get me error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get user")
 
 # Admin Lots Routes
 @api_router.get("/admin/lots")
