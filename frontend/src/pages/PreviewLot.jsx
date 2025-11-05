@@ -33,7 +33,7 @@ const PreviewLot = () => {
         setLotData(data);
         setError(null);
       } else if (response.status === 404) {
-        setError('Предпросмотр не найден или истек срок действия');
+        setError('Preview not found or token expired');
       } else {
         setError('Failed to load preview');
       }
