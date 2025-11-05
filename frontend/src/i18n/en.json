@@ -180,6 +180,13 @@
     "contact_dealer": "Contact Dealer",
     "schedule_test_drive": "Schedule Test Drive"
   },
+  "reviews": {
+    "title": "Customer Reviews",
+    "subtitle": "Real stories from people who avoided haggling and saved thousands of dollars",
+    "saved": "Saved",
+    "instagram_title": "Instagram Reviews",
+    "watch_on_instagram": "Watch on Instagram"
+  },
   "forms": {
     "contact_form": {
       "title": "Contact Us",
