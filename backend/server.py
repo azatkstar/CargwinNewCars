@@ -365,7 +365,7 @@ async def send_magic_link(
         
         # In production, send email with magic link
         # For development, return the token (remove in production!)
-        magic_link_url = f"https://yourdomain.com/auth/verify?token={token}"
+        magic_link_url = f"{settings.FRONTEND_URL}/auth/verify?token={token}"
         
         logger.info(f"Magic link created for {magic_request.email}")
         
