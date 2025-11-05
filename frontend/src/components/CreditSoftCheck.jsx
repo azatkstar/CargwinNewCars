@@ -125,7 +125,7 @@ const CreditSoftCheck = () => {
         <Card className="border-0 shadow-lg">
           <CardHeader>
             <CardTitle className="text-xl font-bold text-gray-900">
-              Предварительная проверка кредита
+              {t('forms.credit_check.subtitle')}
             </CardTitle>
           </CardHeader>
           
