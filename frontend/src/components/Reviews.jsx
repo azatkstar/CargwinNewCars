@@ -187,7 +187,7 @@ const Reviews = () => {
               Помогите другим принять правильное решение — расскажите о своей экономии
             </p>
             <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3">
-              Оставить отзыв
+              {t('reviews.leave_review')}
             </Button>
           </div>
         </div>
