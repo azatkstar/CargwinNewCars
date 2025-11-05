@@ -1474,29 +1474,21 @@ class BackendTester:
                 print(f"   ✅ Initial statistics: Total={initial_stats['total']}, Pending={initial_stats['pending']}, Approved={initial_stats['approved']}, Rejected={initial_stats['rejected']}, Contacted={initial_stats['contacted']}")
                 self.log_test("Initial Application Statistics", True, f"Retrieved statistics: {initial_stats}")
                 
-                # Get first application ID for testing (prefer one owned by user@test.com for step 10)
+                # Get first application ID for testing (prefer ObjectId format for compatibility)
                 test_app_id = None
                 if initial_stats["applications"]:
-                    # First try to find an application owned by user-test-001 (user@test.com)
+                    # Look for an application with ObjectId format (24 hex characters)
                     for app in initial_stats["applications"]:
-                        if app.get("user_id") == "user-test-001":
-                            test_app_id = app.get("id")
-                            print(f"   📝 Using application owned by user@test.com: {test_app_id}")
+                        app_id = app.get("id")
+                        if app_id and len(app_id) == 24 and all(c in '0123456789abcdef' for c in app_id.lower()):
+                            test_app_id = app_id
+                            print(f"   📝 Using ObjectId application for testing: {test_app_id}")
                             break
                     
-                    # If no user@test.com application, look for ObjectId format
-                    if not test_app_id:
-                        for app in initial_stats["applications"]:
-                            app_id = app.get("id")
-                            if app_id and len(app_id) == 24 and all(c in '0123456789abcdef' for c in app_id.lower()):
-                                test_app_id = app_id
-                                print(f"   📝 Using ObjectId application for testing: {test_app_id}")
-                                break
-                    
-                    # If still no suitable application, use the first one
+                    # If no ObjectId found, use the first one but warn
                     if not test_app_id:
                         test_app_id = initial_stats["applications"][0].get("id")
-                        print(f"   ⚠️  Using first available application: {test_app_id}")
+                        print(f"   ⚠️  Using non-ObjectId application (may fail): {test_app_id}")
                 
             else:
                 print(f"   ❌ Failed to get applications: HTTP {response.status_code} - {response.text}")
