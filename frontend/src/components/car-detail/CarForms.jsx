@@ -136,11 +136,11 @@ const CarForms = ({ car }) => {
         console.log('Deal intent submitted:', dealForm);
         setDealSubmitted(true);
       } else {
-        throw new Error('Ошибка отправки');
+        throw new Error('Submission failed');
       }
     } catch (error) {
       console.error('Deal intent submission error:', error);
-      alert('Произошла ошибка. Попробуйте позже.');
+      alert('An error occurred. Please try again later.');
     } finally {
       setDealLoading(false);
     }
