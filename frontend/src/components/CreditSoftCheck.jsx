@@ -160,7 +160,7 @@ const CreditSoftCheck = () => {
               {/* Contact Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="email">Email *</Label>
+                  <Label htmlFor="email">{t('forms.credit_check.email')} *</Label>
                   <Input
                     id="email"
                     type="email"
