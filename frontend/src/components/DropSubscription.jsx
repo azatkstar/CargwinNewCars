@@ -200,7 +200,7 @@ const DropSubscription = () => {
                       disabled={(!email && !phone) || loading}
                       className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed py-3 text-lg font-semibold"
                     >
-                      {loading ? 'Подписываем...' : 'Подписаться на дропы'}
+                      {loading ? t('drop.subscribing') : t('drop.subscribe')}
                     </Button>
                   </form>
                 )}
