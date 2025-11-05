@@ -67,7 +67,8 @@ const CarForms = ({ car }) => {
 
     try {
       // Mock API call
-      const response = await fetch('/api/lead', {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/lead`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
