@@ -124,6 +124,14 @@ def verify_token(token: str) -> Optional[TokenData]:
         logger.warning(f"Token verification failed: {e}")
         return None
 
+def hash_password(password: str) -> str:
+    """Hash password using bcrypt"""
+    return pwd_context.hash(password)
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verify password against hash"""
+    return pwd_context.verify(plain_password, hashed_password)
+
 def generate_magic_link_token() -> str:
     """Generate secure magic link token"""
     return secrets.token_urlsafe(32)
