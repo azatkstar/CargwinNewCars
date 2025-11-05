@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "У нас была проблема - не сохранялись новые спецпредложения. Проблема с отрицательной валидацией скидки показывающей значения как '-$3,500' или '-$4,500' в форме создания лота. Current focus: Fix server startup/shutdown and imports issues for deployment."
+user_problem_statement: "Выложили эти сделки на сайт через админ панель и проверь как все работает. И исправь ошибки. Все на английском. Added 13 Lexus deals to the site via backend API script. Current focus: Verify all Lexus lots are displayed correctly on homepage."
 
 backend:
   - task: "Fix server imports and startup/shutdown events"
