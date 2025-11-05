@@ -207,8 +207,7 @@ const DropSubscription = () => {
 
                 <div className="mt-6 text-xs text-gray-500 text-center leading-relaxed">
                   <p>
-                    Мы отправляем только важные уведомления о новых предложениях. 
-                    Никакого спама. Отписаться можно в любой момент.
+                    {t('drop.no_spam')}
                   </p>
                 </div>
               </CardContent>
