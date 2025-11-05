@@ -202,10 +202,10 @@ def get_auth_token():
             return None
         
         data = response.json()
-        magic_token = data.get("token")
+        magic_token = data.get("debug_token") or data.get("token")
         
         if not magic_token:
-            print(f"❌ No magic token received")
+            print(f"❌ No magic token received. Response: {data}")
             return None
             
         print(f"✅ Magic link token received")
