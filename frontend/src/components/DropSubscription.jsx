@@ -78,7 +78,7 @@ const DropSubscription = () => {
                 <div className="flex items-center justify-center gap-2 mb-6">
                   <Clock className="w-6 h-6 text-red-600" />
                   <h3 className="text-2xl font-bold text-gray-900">
-                    До следующего дропа:
+                    {t('drop.next_drop_in')}
                   </h3>
                 </div>
 
