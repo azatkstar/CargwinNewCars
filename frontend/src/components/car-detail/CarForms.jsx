@@ -186,7 +186,7 @@ const CarForms = ({ car }) => {
       }, 2000);
     } catch (error) {
       console.error('Application submission error:', error);
-      setApplicationError(error.response?.data?.detail || 'Не удалось отправить заявку. Попробуйте позже.');
+      setApplicationError(error.response?.data?.detail || 'Failed to submit application. Please try again later.');
     } finally {
       setApplicationLoading(false);
     }
