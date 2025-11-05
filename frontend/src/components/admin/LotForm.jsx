@@ -163,51 +163,37 @@ const LotForm = () => {
 
     setSaving(true);
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-      const url = isEditing ? `${BACKEND_URL}/api/admin/lots/${id}` : `${BACKEND_URL}/api/admin/lots`;
-      const method = isEditing ? 'PATCH' : 'POST';
+      const api = getApiClient();
       
       const payload = { ...lot };
       if (action === 'publish') payload.status = 'published';
       if (action === 'publish-now') {
         payload.status = 'published';
-        payload.publishAt = new Date().toISOString(); // Publish immediately
+        payload.publishAt = new Date().toISOString();
       }
       if (action === 'schedule' && lot.publishAt) payload.status = 'scheduled';
 
       console.log('Saving lot:', payload);
 
-      const response = await fetch(url, {
-        method,
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(payload),
-        credentials: 'include'
-      });
+      const response = isEditing
+        ? await api.patch(`/api/admin/lots/${id}`, payload)
+        : await api.post(`/api/admin/lots`, payload);
 
-      console.log('Save response status:', response.status);
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Lot saved successfully:', data);
-        
-        if (action === 'publish') {
-          alert(t('admin.messages.publish_success'));
-        } else if (action === 'schedule') {
-          alert(t('admin.messages.schedule_success'));
-        } else {
-          alert(t('admin.messages.save_success'));
-        }
-        
-        // Navigate back to lots list after successful save
-        setTimeout(() => {
-          navigate('/admin/lots');
-        }, 1000);
+      console.log('Lot saved successfully:', response.data);
+      
+      if (action === 'publish') {
+        alert(t('admin.messages.publish_success'));
+      } else if (action === 'schedule') {
+        alert(t('admin.messages.schedule_success'));
       } else {
-        const errorData = await response.json();
-        console.error('Save error response:', errorData);
+        alert(t('admin.messages.save_success'));
+      }
+      
+      setTimeout(() => {
+        navigate('/admin/lots');
+      }, 1000);
+    } catch (error) {
+      console.error('Save error:', error);
         throw new Error(errorData.detail || 'Server error');
       }
     } catch (error) {
