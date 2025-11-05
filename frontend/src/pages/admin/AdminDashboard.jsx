@@ -32,6 +32,8 @@ const AdminDashboard = () => {
         <Route path="lots" element={<LotsList />} />
         <Route path="lots/new" element={<LotForm />} />
         <Route path="lots/:id/edit" element={<LotForm />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="applications" element={<AdminApplications />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="audit" element={<AuditLog />} />
       </Routes>
