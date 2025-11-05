@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, TrendingUp, Car } from 'lucide-react';
+import { Eye, TrendingUp, Car, Settings, X } from 'lucide-react';
 import { getFOMOCounters } from '../mock';
 import { useI18n } from '../hooks/useI18n';
+import { useFOMOSettings } from '../hooks/useFOMOSettings';
+import { Button } from './ui/button';
 
 const FOMOTicker = () => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
   const { t } = useI18n();
+  const { 
+    settings, 
+    updateSettings, 
+    toggleFOMO, 
+    isEnabled, 
+    showViewers, 
+    showConfirmed, 
+    showStock 
+  } = useFOMOSettings();
 
   const carModels = [
     'Honda Accord 2024',
@@ -24,23 +36,27 @@ const FOMOTicker = () => {
       const counters = getFOMOCounters(model.replace(/\s+/g, '-').toLowerCase());
       
       // Viewing message
-      messages.push({
-        icon: Eye,
-        text: t('fomo.viewing_now', { count: counters.viewers, model }),
-        type: 'viewing',
-        color: 'text-blue-600'
-      });
+      if (showViewers) {
+        messages.push({
+          icon: Eye,
+          text: t('fomo.viewing_now', { count: counters.viewers, model }),
+          type: 'viewing',
+          color: 'text-blue-600'
+        });
+      }
       
-      // Confirmed message
-      messages.push({
-        icon: TrendingUp,
-        text: t('fomo.confirmed_price', { count: counters.confirmed, model }),
-        type: 'confirmed',
-        color: 'text-green-600'
-      });
+      // Confirmed message  
+      if (showConfirmed) {
+        messages.push({
+          icon: TrendingUp,
+          text: t('fomo.confirmed_price', { count: counters.confirmed, model }),
+          type: 'confirmed',
+          color: 'text-green-600'
+        });
+      }
       
       // Stock message (random for variety)
-      if (Math.random() > 0.5) {
+      if (showStock && Math.random() > 0.5) {
         const stockLeft = Math.floor(Math.random() * 3) + 1;
         messages.push({
           icon: Car,
@@ -49,6 +65,8 @@ const FOMOTicker = () => {
           color: 'text-red-600'
         });
       }
+      
+      // NO RESERVATION NOTIFICATIONS - Removed as requested
     });
     
     return messages;
