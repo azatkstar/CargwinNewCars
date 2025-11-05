@@ -202,7 +202,7 @@ const CreditSoftCheck = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="creditBand">Кредитный диапазон *</Label>
+                  <Label htmlFor="creditBand">{t('forms.credit_check.credit_range')} *</Label>
                   <Select value={formData.creditBand} onValueChange={(value) => handleInputChange('creditBand', value)}>
                     <SelectTrigger className="mt-1">
                       <SelectValue placeholder="Выберите диапазон" />
