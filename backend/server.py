@@ -631,8 +631,31 @@ async def create_application(
 ):
     """Submit application for a car"""
     try:
-        # Get lot data
-        lot = await lot_repo.get_lot_by_id(lot_id)
+        # Try to find lot by slug first (lot_id might be a slug like "2024-lexus-rx350-premium")
+        # If not found, try by ID
+        lot = None
+        
+        # Search by make, model, year, trim combination (slug format)
+        if '-' in lot_id:
+            # Parse slug: "2024-lexus-rx350-premium"
+            parts = lot_id.split('-')
+            if len(parts) >= 4:
+                year = parts[0]
+                make = parts[1].capitalize()
+                # model and trim are the rest
+                
+                # Find lot by these fields
+                lots = await lot_repo.get_lots(skip=0, limit=100, status="published")
+                for l in lots:
+                    lot_slug = f"{l.get('year', '')}-{l.get('make', '')}-{l.get('model', '')}-{l.get('trim', '')}".lower().replace(' ', '-')
+                    if lot_slug == lot_id:
+                        lot = l
+                        break
+        
+        # If still not found, try by ID
+        if not lot:
+            lot = await lot_repo.get_lot_by_id(lot_id)
+        
         if not lot:
             raise HTTPException(status_code=404, detail="Car not found")
         
