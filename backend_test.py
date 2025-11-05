@@ -1398,6 +1398,399 @@ class BackendTester:
             print("⚠️  SOME LEXUS TESTS FAILED - CHECK RESULTS ABOVE")
             return False
 
+    def test_admin_statistics_and_applications(self):
+        """Test admin API for statistics and application management as requested"""
+        print("\n" + "=" * 80)
+        print("ADMIN STATISTICS AND APPLICATION MANAGEMENT TESTING")
+        print("=" * 80)
+        print("Testing admin login, application statistics, status changes, and user management")
+        print()
+        
+        # Test data
+        admin_credentials = {
+            "email": "admin@test.com",
+            "password": "Admin123!"
+        }
+        
+        user_credentials = {
+            "email": "user@test.com", 
+            "password": "User123!"
+        }
+        
+        # Step 1: Admin Login
+        print("1. Testing admin login...")
+        try:
+            response = self.session.post(
+                f"{BACKEND_URL}/auth/login",
+                json=admin_credentials,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("access_token") and data.get("user", {}).get("role") == "admin":
+                    admin_token = data["access_token"]
+                    print(f"   ✅ Admin login successful: {data['user']['email']} (role: {data['user']['role']})")
+                    self.log_test("Admin Login", True, f"Admin authenticated successfully with role: {data['user']['role']}")
+                else:
+                    print(f"   ❌ Admin login failed: Invalid response or role - {data}")
+                    self.log_test("Admin Login", False, f"Invalid admin response: {data}")
+                    return False
+            else:
+                print(f"   ❌ Admin login failed: HTTP {response.status_code} - {response.text}")
+                self.log_test("Admin Login", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Admin login error: {str(e)}")
+            self.log_test("Admin Login", False, f"Request error: {str(e)}")
+            return False
+        
+        admin_headers = {
+            "Authorization": f"Bearer {admin_token}",
+            "Content-Type": "application/json"
+        }
+        
+        # Step 2: Get initial applications statistics
+        print("\n2. Getting initial application statistics...")
+        try:
+            response = self.session.get(f"{BACKEND_URL}/admin/applications", headers=admin_headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                initial_stats = {
+                    "total": data.get("total", 0),
+                    "applications": data.get("applications", [])
+                }
+                
+                # Count by status
+                status_counts = {"pending": 0, "approved": 0, "rejected": 0, "contacted": 0}
+                for app in initial_stats["applications"]:
+                    status = app.get("status", "pending")
+                    if status in status_counts:
+                        status_counts[status] += 1
+                
+                initial_stats.update(status_counts)
+                
+                print(f"   ✅ Initial statistics: Total={initial_stats['total']}, Pending={initial_stats['pending']}, Approved={initial_stats['approved']}, Rejected={initial_stats['rejected']}, Contacted={initial_stats['contacted']}")
+                self.log_test("Initial Application Statistics", True, f"Retrieved statistics: {initial_stats}")
+                
+                # Get first application ID for testing
+                test_app_id = None
+                if initial_stats["applications"]:
+                    test_app_id = initial_stats["applications"][0].get("id")
+                    print(f"   📝 Using application ID for testing: {test_app_id}")
+                
+            else:
+                print(f"   ❌ Failed to get applications: HTTP {response.status_code} - {response.text}")
+                self.log_test("Initial Application Statistics", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Applications request error: {str(e)}")
+            self.log_test("Initial Application Statistics", False, f"Request error: {str(e)}")
+            return False
+        
+        if not test_app_id:
+            print("   ⚠️  No applications found for testing status changes")
+            self.log_test("Application Status Testing", False, "No applications available for status change testing")
+            return False
+        
+        # Step 3: Change application status to "contacted"
+        print(f"\n3. Changing application {test_app_id} status to 'contacted'...")
+        try:
+            response = self.session.patch(
+                f"{BACKEND_URL}/admin/applications/{test_app_id}/status?status=contacted&admin_notes=Called customer",
+                headers=admin_headers
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok"):
+                    print(f"   ✅ Status changed to 'contacted' successfully")
+                    self.log_test("Change Status to Contacted", True, "Application status updated to contacted")
+                else:
+                    print(f"   ❌ Status change failed: {data}")
+                    self.log_test("Change Status to Contacted", False, f"Status change failed: {data}")
+                    return False
+            else:
+                print(f"   ❌ Status change failed: HTTP {response.status_code} - {response.text}")
+                self.log_test("Change Status to Contacted", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Status change error: {str(e)}")
+            self.log_test("Change Status to Contacted", False, f"Request error: {str(e)}")
+            return False
+        
+        # Step 4: Verify statistics updated after "contacted" status
+        print("\n4. Verifying statistics after 'contacted' status change...")
+        try:
+            response = self.session.get(f"{BACKEND_URL}/admin/applications", headers=admin_headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                contacted_stats = {
+                    "total": data.get("total", 0),
+                    "applications": data.get("applications", [])
+                }
+                
+                # Count by status
+                status_counts = {"pending": 0, "approved": 0, "rejected": 0, "contacted": 0}
+                for app in contacted_stats["applications"]:
+                    status = app.get("status", "pending")
+                    if status in status_counts:
+                        status_counts[status] += 1
+                
+                contacted_stats.update(status_counts)
+                
+                # Verify changes
+                if (contacted_stats["contacted"] == initial_stats["contacted"] + 1 and
+                    contacted_stats["pending"] == initial_stats["pending"] - 1 and
+                    contacted_stats["total"] == initial_stats["total"]):
+                    print(f"   ✅ Statistics updated correctly: Contacted +1, Pending -1, Total unchanged")
+                    self.log_test("Statistics After Contacted", True, f"Statistics correctly updated: {contacted_stats}")
+                else:
+                    print(f"   ❌ Statistics not updated correctly")
+                    print(f"      Expected: Contacted={initial_stats['contacted']+1}, Pending={initial_stats['pending']-1}")
+                    print(f"      Actual: Contacted={contacted_stats['contacted']}, Pending={contacted_stats['pending']}")
+                    self.log_test("Statistics After Contacted", False, f"Statistics mismatch: {contacted_stats}")
+                    return False
+            else:
+                print(f"   ❌ Failed to get updated statistics: HTTP {response.status_code}")
+                self.log_test("Statistics After Contacted", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Statistics verification error: {str(e)}")
+            self.log_test("Statistics After Contacted", False, f"Request error: {str(e)}")
+            return False
+        
+        # Step 5: Change status to "approved"
+        print(f"\n5. Changing application {test_app_id} status to 'approved'...")
+        try:
+            response = self.session.patch(
+                f"{BACKEND_URL}/admin/applications/{test_app_id}/status?status=approved&admin_notes=Approved for financing",
+                headers=admin_headers
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok"):
+                    print(f"   ✅ Status changed to 'approved' successfully")
+                    self.log_test("Change Status to Approved", True, "Application status updated to approved")
+                else:
+                    print(f"   ❌ Status change failed: {data}")
+                    self.log_test("Change Status to Approved", False, f"Status change failed: {data}")
+                    return False
+            else:
+                print(f"   ❌ Status change failed: HTTP {response.status_code} - {response.text}")
+                self.log_test("Change Status to Approved", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Status change error: {str(e)}")
+            self.log_test("Change Status to Approved", False, f"Request error: {str(e)}")
+            return False
+        
+        # Step 6: Verify statistics after "approved" status
+        print("\n6. Verifying statistics after 'approved' status change...")
+        try:
+            response = self.session.get(f"{BACKEND_URL}/admin/applications", headers=admin_headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                approved_stats = {
+                    "total": data.get("total", 0),
+                    "applications": data.get("applications", [])
+                }
+                
+                # Count by status
+                status_counts = {"pending": 0, "approved": 0, "rejected": 0, "contacted": 0}
+                for app in approved_stats["applications"]:
+                    status = app.get("status", "pending")
+                    if status in status_counts:
+                        status_counts[status] += 1
+                
+                approved_stats.update(status_counts)
+                
+                # Verify changes
+                if (approved_stats["approved"] == contacted_stats["approved"] + 1 and
+                    approved_stats["contacted"] == contacted_stats["contacted"] - 1 and
+                    approved_stats["total"] == contacted_stats["total"]):
+                    print(f"   ✅ Statistics updated correctly: Approved +1, Contacted -1, Total unchanged")
+                    self.log_test("Statistics After Approved", True, f"Statistics correctly updated: {approved_stats}")
+                else:
+                    print(f"   ❌ Statistics not updated correctly")
+                    print(f"      Expected: Approved={contacted_stats['approved']+1}, Contacted={contacted_stats['contacted']-1}")
+                    print(f"      Actual: Approved={approved_stats['approved']}, Contacted={approved_stats['contacted']}")
+                    self.log_test("Statistics After Approved", False, f"Statistics mismatch: {approved_stats}")
+                    return False
+            else:
+                print(f"   ❌ Failed to get updated statistics: HTTP {response.status_code}")
+                self.log_test("Statistics After Approved", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Statistics verification error: {str(e)}")
+            self.log_test("Statistics After Approved", False, f"Request error: {str(e)}")
+            return False
+        
+        # Step 7: Get users list
+        print("\n7. Getting users list...")
+        try:
+            response = self.session.get(f"{BACKEND_URL}/admin/users", headers=admin_headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                users_list = data.get("users", [])
+                total_users = data.get("total", 0)
+                
+                print(f"   ✅ Retrieved {len(users_list)} users (total: {total_users})")
+                self.log_test("Get Users List", True, f"Retrieved {len(users_list)} users successfully")
+                
+                # Find a user with role 'user' (not admin@test.com)
+                test_user_id = None
+                test_user_email = None
+                for user in users_list:
+                    if user.get("role") == "user" and user.get("email") != "admin@test.com":
+                        test_user_id = user.get("id")
+                        test_user_email = user.get("email")
+                        print(f"   📝 Found user for role testing: {test_user_email} (ID: {test_user_id})")
+                        break
+                
+                if not test_user_id:
+                    print("   ⚠️  No suitable user found for role change testing")
+                    self.log_test("User Role Testing", False, "No user with 'user' role found for testing")
+                    return False
+                    
+            else:
+                print(f"   ❌ Failed to get users: HTTP {response.status_code} - {response.text}")
+                self.log_test("Get Users List", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Users request error: {str(e)}")
+            self.log_test("Get Users List", False, f"Request error: {str(e)}")
+            return False
+        
+        # Step 8: Change user role
+        print(f"\n8. Changing user {test_user_email} role to 'editor'...")
+        try:
+            response = self.session.patch(
+                f"{BACKEND_URL}/admin/users/{test_user_id}/role?role=editor",
+                headers=admin_headers
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok"):
+                    print(f"   ✅ User role changed to 'editor' successfully")
+                    self.log_test("Change User Role", True, f"User {test_user_email} role updated to editor")
+                else:
+                    print(f"   ❌ Role change failed: {data}")
+                    self.log_test("Change User Role", False, f"Role change failed: {data}")
+                    return False
+            else:
+                print(f"   ❌ Role change failed: HTTP {response.status_code} - {response.text}")
+                self.log_test("Change User Role", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Role change error: {str(e)}")
+            self.log_test("Change User Role", False, f"Request error: {str(e)}")
+            return False
+        
+        # Step 9: Verify role change
+        print(f"\n9. Verifying user role change...")
+        try:
+            response = self.session.get(f"{BACKEND_URL}/admin/users", headers=admin_headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                users_list = data.get("users", [])
+                
+                # Find the updated user
+                updated_user = None
+                for user in users_list:
+                    if user.get("id") == test_user_id:
+                        updated_user = user
+                        break
+                
+                if updated_user and updated_user.get("role") == "editor":
+                    print(f"   ✅ User role successfully changed to 'editor'")
+                    self.log_test("Verify Role Change", True, f"User {test_user_email} role confirmed as editor")
+                else:
+                    print(f"   ❌ Role change not reflected: {updated_user}")
+                    self.log_test("Verify Role Change", False, f"Role change not reflected: {updated_user}")
+                    return False
+            else:
+                print(f"   ❌ Failed to verify role change: HTTP {response.status_code}")
+                self.log_test("Verify Role Change", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Role verification error: {str(e)}")
+            self.log_test("Verify Role Change", False, f"Request error: {str(e)}")
+            return False
+        
+        # Step 10: Test user login and application details
+        print(f"\n10. Testing user login and application details...")
+        try:
+            # Login as regular user
+            response = self.session.post(
+                f"{BACKEND_URL}/auth/login",
+                json=user_credentials,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("access_token"):
+                    user_token = data["access_token"]
+                    print(f"   ✅ User login successful: {data['user']['email']}")
+                    
+                    # Get user's applications
+                    user_headers = {
+                        "Authorization": f"Bearer {user_token}",
+                        "Content-Type": "application/json"
+                    }
+                    
+                    app_response = self.session.get(f"{BACKEND_URL}/applications", headers=user_headers)
+                    
+                    if app_response.status_code == 200:
+                        app_data = app_response.json()
+                        applications = app_data.get("applications", [])
+                        
+                        # Check if we can see the updated application status
+                        updated_app = None
+                        for app in applications:
+                            if app.get("id") == test_app_id:
+                                updated_app = app
+                                break
+                        
+                        if updated_app and updated_app.get("status") == "approved":
+                            print(f"   ✅ Application status visible to user: {updated_app['status']}")
+                            if updated_app.get("admin_notes"):
+                                print(f"   ✅ Admin notes visible: {updated_app['admin_notes']}")
+                            self.log_test("User Application Details", True, "User can see updated application status and admin notes")
+                        else:
+                            print(f"   ⚠️  Application status not updated or not visible to user")
+                            self.log_test("User Application Details", False, f"Application status issue: {updated_app}")
+                    else:
+                        print(f"   ❌ Failed to get user applications: HTTP {app_response.status_code}")
+                        self.log_test("User Application Details", False, f"HTTP {app_response.status_code}: {app_response.text}")
+                        return False
+                else:
+                    print(f"   ❌ User login failed: {data}")
+                    self.log_test("User Login", False, f"User login failed: {data}")
+                    return False
+            else:
+                print(f"   ❌ User login failed: HTTP {response.status_code}")
+                self.log_test("User Login", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ User login/application test error: {str(e)}")
+            self.log_test("User Application Details", False, f"Request error: {str(e)}")
+            return False
+        
+        print("\n" + "=" * 80)
+        print("ADMIN STATISTICS AND APPLICATION MANAGEMENT TESTING COMPLETED")
+        print("=" * 80)
+        
+        return True
+
     def run_all_tests(self):
         """Run all backend tests including Lexus lot creation"""
         print("=" * 80)
