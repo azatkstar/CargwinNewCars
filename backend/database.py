@@ -414,7 +414,7 @@ class UserRepository:
         users = await cursor.to_list(length=limit)
         
         for user in users:
-            user['id'] = user.pop('_id')
+            user['id'] = str(user.pop('_id'))
         
         return users
     
