@@ -154,8 +154,156 @@ const CarForms = ({ car }) => {
     return dealForm.name && dealForm.phone && dealForm.email && dealForm.consent;
   };
 
+  const handleApplicationSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!isAuthenticated) {
+      navigate('/auth');
+      return;
+    }
+
+    if (!user?.profile_completed) {
+      if (confirm('Вам нужно заполнить профиль перед подачей заявки. Перейти к заполнению?')) {
+        navigate('/dashboard/profile');
+      }
+      return;
+    }
+
+    setApplicationLoading(true);
+    setApplicationError('');
+
+    try {
+      const api = getApiClient();
+      await api.post('/api/applications', null, {
+        params: { lot_id: car.id }
+      });
+
+      setApplicationSubmitted(true);
+      
+      // Redirect to dashboard after 2 seconds
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 2000);
+    } catch (error) {
+      console.error('Application submission error:', error);
+      setApplicationError(error.response?.data?.detail || 'Не удалось отправить заявку. Попробуйте позже.');
+    } finally {
+      setApplicationLoading(false);
+    }
+  };
+
   return (
     <div id="car-forms" className="space-y-8">
+      {/* Apply for Financing - для авторизованных пользователей */}
+      {isAuthenticated && user?.profile_completed && (
+        <Card className="border-2 border-green-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-green-100">
+            <CardTitle className="flex items-center gap-2 text-green-900">
+              <CheckCircle className="w-6 h-6" />
+              Apply for Financing
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-6">
+            {applicationSubmitted ? (
+              <div className="text-center py-8">
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Application Submitted!</h3>
+                <p className="text-gray-600">
+                  Your financing application has been received. We'll review it and contact you within 24 hours.
+                </p>
+                <p className="text-sm text-gray-500 mt-4">Redirecting to dashboard...</p>
+              </div>
+            ) : (
+              <div>
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-blue-900">You're Pre-Qualified!</h4>
+                      <p className="text-sm text-blue-800 mt-1">
+                        Based on your credit profile (Score: {user.credit_score}), you qualify for this vehicle.
+                        Submit your application to get final approval.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {applicationError && (
+                  <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm">
+                    {applicationError}
+                  </div>
+                )}
+
+                <div className="space-y-4 mb-6">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span className="text-gray-600">Vehicle:</span>
+                      <p className="font-semibold">{car.title}</p>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Fleet Price:</span>
+                      <p className="font-semibold text-green-600">${car.fleet?.toLocaleString()}</p>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Your Credit Score:</span>
+                      <p className="font-semibold">{user.credit_score}</p>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Annual Income:</span>
+                      <p className="font-semibold">${user.annual_income?.toLocaleString()}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={handleApplicationSubmit}
+                  disabled={applicationLoading}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg font-semibold"
+                >
+                  {applicationLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Submitting...
+                    </>
+                  ) : (
+                    'Submit Application'
+                  )}
+                </Button>
+
+                <p className="text-xs text-gray-500 text-center mt-4">
+                  By submitting, you authorize us to review your credit profile and contact you about financing options.
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Для авторизованных без профиля */}
+      {isAuthenticated && !user?.profile_completed && (
+        <Card className="border-2 border-orange-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-orange-50 to-orange-100">
+            <CardTitle className="flex items-center gap-2 text-orange-900">
+              <AlertCircle className="w-6 h-6" />
+              Complete Your Profile
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <p className="text-gray-700 mb-4">
+              To apply for financing on this vehicle, please complete your credit profile first.
+            </p>
+            <Button
+              onClick={() => navigate('/dashboard/profile')}
+              className="w-full bg-orange-600 hover:bg-orange-700"
+            >
+              Complete Profile Now
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Get Offer Form */}
       <Card className="border-2 border-red-200 shadow-lg">
         <CardHeader>
