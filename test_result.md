@@ -105,6 +105,31 @@
 user_problem_statement: "Выложили эти сделки на сайт через админ панель и проверь как все работает. И исправь ошибки. Все на английском. Added 13 Lexus deals to the site via backend API script. Current focus: Verify all Lexus lots are displayed correctly on homepage."
 
 backend:
+  - task: "Create 13 Lexus lots via API"
+    implemented: true
+    working: true
+    file: "/app/create_lexus_lots.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Created Python script to programmatically add 13 Lexus deals (NX350, NX450h, RX350, RX350H, TX350, TX500h, ES350) with various trims. Script successfully authenticated as admin and created all lots via POST /api/admin/lots endpoint."
+      - working: true
+        agent: "main"
+        comment: "VERIFIED: All 13 Lexus lots successfully created in MongoDB and visible via API endpoint /api/cars. Each lot includes proper lease terms ($407-$987/mo), MSRP ($42k-$75k), and financing details."
+  - task: "Create public API endpoint for car listings"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added new GET /api/cars endpoint to return all published lots formatted for public homepage display. Includes proper data structure with lease, finance, and FOMO data."
   - task: "Fix server imports and startup/shutdown events"
     implemented: true
     working: true
