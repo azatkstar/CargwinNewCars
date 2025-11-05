@@ -140,14 +140,32 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  // Check if user has required permission
+  const hasPermission = (requiredRole) => {
+    if (!user) return false;
+    
+    const roleHierarchy = {
+      'user': 1,
+      'editor': 2,
+      'admin': 3
+    };
+
+    const userLevel = roleHierarchy[user.role] || 0;
+    const requiredLevel = roleHierarchy[requiredRole] || 0;
+
+    return userLevel >= requiredLevel;
+  };
+
   const value = {
     user,
+    role: user?.role,
     loading,
     login,
     register,
     logout,
     processOAuthSession,
     getApiClient,
+    hasPermission,
     isAuthenticated: !!user,
     isAdmin: user?.role === 'admin',
     isEditor: user?.role === 'editor' || user?.role === 'admin'
