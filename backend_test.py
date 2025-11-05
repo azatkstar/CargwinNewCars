@@ -1568,13 +1568,13 @@ class BackendTester:
                 
                 if (contacted_app and contacted_app.get("status") == "contacted" and
                     contacted_stats["total"] == initial_stats["total"]):
-                    print(f"   ✅ Statistics updated correctly: Contacted +1, Pending -1, Total unchanged")
-                    self.log_test("Statistics After Contacted", True, f"Statistics correctly updated: {contacted_stats}")
+                    print(f"   ✅ Application status changed to 'contacted' successfully (was: {initial_app_status})")
+                    self.log_test("Statistics After Contacted", True, f"Application status updated correctly: {contacted_stats}")
                 else:
-                    print(f"   ❌ Statistics not updated correctly")
-                    print(f"      Expected: Contacted={initial_stats['contacted']+1}, Pending={initial_stats['pending']-1}")
-                    print(f"      Actual: Contacted={contacted_stats['contacted']}, Pending={contacted_stats['pending']}")
-                    self.log_test("Statistics After Contacted", False, f"Statistics mismatch: {contacted_stats}")
+                    print(f"   ❌ Application status change failed")
+                    print(f"      Expected: Application {test_app_id} status = 'contacted'")
+                    print(f"      Actual: {contacted_app.get('status') if contacted_app else 'Application not found'}")
+                    self.log_test("Statistics After Contacted", False, f"Status change failed: {contacted_stats}")
                     return False
             else:
                 print(f"   ❌ Failed to get updated statistics: HTTP {response.status_code}")
