@@ -162,7 +162,7 @@ const Reviews = () => {
                 96%
               </div>
               <div className="text-sm text-gray-600">
-                Рекомендуют друзьям
+                {t('reviews.recommend_friends')}
               </div>
             </div>
             
