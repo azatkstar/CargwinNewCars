@@ -53,17 +53,14 @@ const FAQ = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-blue-900 mb-3">
-                  100% гарантия конфиденциальности
+                  {t('faq.privacy_guarantee')}
                 </h3>
                 <p className="text-blue-800 leading-relaxed mb-4">
-                  <strong>Мы никогда не передаём ваши данные дилерам для обзвонов.</strong> 
-                  В отличие от других сайтов, где ваш номер сразу попадает к десяткам дилеров, 
-                  мы связываемся только с одним дилером и только после того, как вы на 100% 
-                  согласовали все условия сделки.
+                  <strong>{t('faq.no_data_sharing')}</strong> {t('faq.privacy_explanation')}
                 </p>
                 <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
                   <p className="text-sm text-blue-700">
-                    <strong>Это означает:</strong> один звонок, одна встреча, один дилер — и ваш новый автомобиль готов к выдаче.
+                    <strong>{t('faq.this_means')}</strong> {t('faq.one_contact_process')}
                   </p>
                 </div>
               </div>
