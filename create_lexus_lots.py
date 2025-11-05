@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 import time
 
 # Backend URL
-BACKEND_URL = "https://lexus-preview.preview.emergentagent.com/api"
+BACKEND_URL = "https://cargwin-newcar.preview.emergentagent.com/api"
 
 # Admin email for authentication
 ADMIN_EMAIL = "admin@cargwin.com"

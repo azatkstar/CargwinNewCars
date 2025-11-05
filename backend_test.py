@@ -11,7 +11,7 @@ import time
 from datetime import datetime
 
 # Get backend URL from environment
-BACKEND_URL = "https://lexus-preview.preview.emergentagent.com/api"
+BACKEND_URL = "https://cargwin-newcar.preview.emergentagent.com/api"
 
 class BackendTester:
     def __init__(self):
@@ -941,7 +941,7 @@ class BackendTester:
             
             # Test actual GET request with custom headers
             headers = {
-                "Origin": "https://lexus-preview.preview.emergentagent.com",
+                "Origin": "https://cargwin-newcar.preview.emergentagent.com",
                 "Content-Type": "application/json"
             }
             

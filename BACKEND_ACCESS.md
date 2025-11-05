@@ -2,7 +2,7 @@
 
 ## ✅ Backend запущен и работает!
 
-**URL:** `https://lexus-preview.preview.emergentagent.com/api`
+**URL:** `https://cargwin-newcar.preview.emergentagent.com/api`
 
 ---
 
@@ -28,7 +28,7 @@ Role: user
 
 ### 1. Получить токен админа
 ```bash
-curl -X POST "https://lexus-preview.preview.emergentagent.com/api/auth/login" \
+curl -X POST "https://cargwin-newcar.preview.emergentagent.com/api/auth/login" \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@test.com","password":"Admin123!"}' | jq '.access_token'
 ```
@@ -36,13 +36,13 @@ curl -X POST "https://lexus-preview.preview.emergentagent.com/api/auth/login" \
 ### 2. Проверить профиль
 ```bash
 # Замените YOUR_TOKEN на полученный токен
-curl -X GET "https://lexus-preview.preview.emergentagent.com/api/auth/me" \
+curl -X GET "https://cargwin-newcar.preview.emergentagent.com/api/auth/me" \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 ### 3. Получить список пользователей (админ)
 ```bash
-curl -X GET "https://lexus-preview.preview.emergentagent.com/api/admin/users" \
+curl -X GET "https://cargwin-newcar.preview.emergentagent.com/api/admin/users" \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
