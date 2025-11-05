@@ -73,7 +73,7 @@ const OTDCalculator = ({ car }) => {
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-2">
           <Calculator className="w-6 h-6 text-red-600" />
-          Калькулятор «Цена под ключ» (OTD)
+          Out-The-Door (OTD) Price Calculator
         </CardTitle>
         <p className="text-gray-600">
           Рассчитайте итоговую стоимость с налогами и сборами
