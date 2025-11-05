@@ -188,7 +188,7 @@ const CreditSoftCheck = () => {
               {/* ZIP and Credit */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="zip">ZIP код *</Label>
+                  <Label htmlFor="zip">{t('forms.credit_check.zip_code')} *</Label>
                   <Input
                     id="zip"
                     type="text"
