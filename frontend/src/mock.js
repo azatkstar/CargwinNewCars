@@ -132,19 +132,19 @@ export const mockInstagramReviews = [
   {
     id: "reel1",
     url: "https://www.instagram.com/reel/DLbaM9wRaRG/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    title: "Отзыв о покупке Tesla Model 3",
+    title: "Tesla Model 3 Purchase Review",
     thumbnail: "https://images.pexels.com/photos/720815/pexels-photo-720815.jpeg"
   },
   {
     id: "reel2", 
     url: "https://www.instagram.com/reel/DLbZqgvxFjY/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    title: "Экономия $6,000 на BMW 3 Series",
+    title: "Saved $6,000 on BMW 3 Series",
     thumbnail: "https://images.pexels.com/photos/244818/pexels-photo-244818.jpeg"
   },
   {
     id: "reel3",
     url: "https://www.instagram.com/reel/DLZCZUzubvg/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
-    title: "Без торгов и допов - мой опыт",
+    title: "No haggling, no add-ons - my experience",
     thumbnail: "https://images.pexels.com/photos/17245476/pexels-photo-17245476.jpeg"
   }
 ];
