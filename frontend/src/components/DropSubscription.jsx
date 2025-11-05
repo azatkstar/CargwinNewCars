@@ -215,19 +215,19 @@ const DropSubscription = () => {
 
             {/* VIP Benefits */}
             <div className="mt-8 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl p-6 border border-yellow-200">
-              <h4 className="text-lg font-bold text-gray-900 mb-4">VIP преимущества подписчиков:</h4>
+              <h4 className="text-lg font-bold text-gray-900 mb-4">{t('drop.vip_benefits')}</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm text-gray-700">
                   <span className="text-yellow-600">⚡</span>
-                  <span>Уведомления за 15 минут до публикации</span>
+                  <span>{t('drop.early_notification')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-700">
                   <span className="text-yellow-600">🎯</span>
-                  <span>Эксклюзивные предложения только для подписчиков</span>
+                  <span>{t('drop.exclusive_offers')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-700">
                   <span className="text-yellow-600">💎</span>
-                  <span>Приоритетное бронирование популярных моделей</span>
+                  <span>{t('drop.priority_booking')}</span>
                 </div>
               </div>
             </div>
