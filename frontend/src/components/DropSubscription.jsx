@@ -111,7 +111,7 @@ const DropSubscription = () => {
 
                 <div className="bg-white rounded-lg p-4 border border-red-200">
                   <p className="text-sm text-gray-700">
-                    <strong>Следующий дроп:</strong> Понедельник, 00:00 по времени Лос-Анджелеса
+                    <strong>{t('drop.next_drop_time')}</strong>
                   </p>
                 </div>
               </CardContent>
