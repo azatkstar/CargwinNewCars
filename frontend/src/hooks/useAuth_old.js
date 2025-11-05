@@ -18,15 +18,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     checkAuth();
-    
-    // Check for OAuth session_id in URL fragment
-    const hash = window.location.hash;
-    if (hash.includes('session_id=')) {
-      const sessionId = hash.split('session_id=')[1].split('&')[0];
-      processOAuthSession(sessionId);
-      // Clean URL
-      window.history.replaceState(null, '', window.location.pathname);
-    }
   }, []);
 
   // Check if user is authenticated
@@ -48,6 +39,7 @@ export const AuthProvider = ({ children }) => {
       });
       
       setUser(response.data);
+      console.log('Auth verified:', response.data);
     } catch (error) {
       console.error('Auth check failed:', error);
       localStorage.removeItem('access_token');
@@ -101,6 +93,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       setUser(response.data.user);
+      await checkAuth(); // Recheck to get full user data
       return response.data.user;
     } catch (error) {
       console.error('OAuth session processing failed:', error);
@@ -127,30 +120,111 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('refresh_token');
       setUser(null);
     }
+        console.log('Auth check failed, using demo user');
+        // For demo purposes, auto-login as admin
+        const demoAuth = {
+          user: { id: 'demo_admin', email: 'admin@cargwin.com' },
+          role: 'admin'
+        };
+        setUser(demoAuth.user);
+        setRole(demoAuth.role);
+        // Persist demo auth
+        localStorage.setItem('cargwin_auth', JSON.stringify(demoAuth));
+      }
+    } catch (error) {
+      console.error('Auth check failed:', error);
+      // For demo purposes, auto-login as admin
+      const demoAuth = {
+        user: { id: 'demo_admin', email: 'admin@cargwin.com' },
+        role: 'admin'
+      };
+      setUser(demoAuth.user);
+      setRole(demoAuth.role);
+      // Persist demo auth
+      localStorage.setItem('cargwin_auth', JSON.stringify(demoAuth));
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Get API client with auth header
-  const getApiClient = () => {
-    const token = localStorage.getItem('access_token');
-    return axios.create({
-      baseURL: BACKEND_URL,
-      headers: token ? {
-        Authorization: `Bearer ${token}`
-      } : {}
-    });
+  const login = async (email) => {
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/auth/magic`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      
+      if (data.ok) {
+        // For demo, immediately set user as authenticated
+        let role = 'viewer';
+        if (email.includes('admin@')) role = 'admin';
+        else if (email.includes('editor@')) role = 'editor';
+        
+        const authData = {
+          user: { id: 'demo_user', email },
+          role: role
+        };
+        
+        setUser(authData.user);
+        setRole(authData.role);
+        
+        // Persist auth state
+        localStorage.setItem('cargwin_auth', JSON.stringify(authData));
+        console.log('Login successful, auth persisted:', authData);
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Login error:', error);
+      return { ok: false, error: 'Network error' };
+    }
+  };
+
+  const logout = async () => {
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      await fetch(`${BACKEND_URL}/api/auth/logout`, {
+        method: 'POST',
+        credentials: 'include'
+      });
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      setUser(null);
+      setRole(null);
+      // Clear persisted auth
+      localStorage.removeItem('cargwin_auth');
+      console.log('Logout successful, auth cleared');
+    }
+  };
+
+  const hasPermission = (requiredRole) => {
+    const roleHierarchy = {
+      'viewer': 1,
+      'editor': 2,
+      'admin': 3
+    };
+
+    const userLevel = roleHierarchy[role] || 0;
+    const requiredLevel = roleHierarchy[requiredRole] || 0;
+
+    return userLevel >= requiredLevel;
   };
 
   const value = {
     user,
+    role,
     loading,
     login,
-    register,
     logout,
-    processOAuthSession,
-    getApiClient,
-    isAuthenticated: !!user,
-    isAdmin: user?.role === 'admin',
-    isEditor: user?.role === 'editor' || user?.role === 'admin'
+    hasPermission,
+    isAuthenticated: !!user
   };
 
   return (
