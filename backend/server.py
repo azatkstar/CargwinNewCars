@@ -513,7 +513,7 @@ async def login(
             raise HTTPException(status_code=401, detail="Invalid email or password")
         
         # Create tokens
-        tokens = create_user_tokens(user.email, user.role)
+        tokens = await create_user_tokens(user)
         
         logger.info(f"User logged in: {user.email}")
         
@@ -521,8 +521,8 @@ async def login(
             "ok": True,
             "message": "Logged in successfully",
             "user": user.dict(),
-            "access_token": tokens['access_token'],
-            "refresh_token": tokens['refresh_token']
+            "access_token": tokens.access_token,
+            "refresh_token": tokens.refresh_token
         }
     except HTTPException:
         raise
