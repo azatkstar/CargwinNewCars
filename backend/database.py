@@ -22,7 +22,9 @@ db = Database()
 async def connect_to_mongo():
     """Create database connection"""
     mongo_url = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
-    db_name = os.environ.get("DB_NAME", "cargwin_production")
+    db_name = os.environ.get("DB_NAME")
+    if not db_name:
+        raise ValueError("DB_NAME environment variable is required")
     
     logger.info(f"Connecting to MongoDB: {mongo_url}")
     
