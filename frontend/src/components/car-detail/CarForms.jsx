@@ -163,7 +163,7 @@ const CarForms = ({ car }) => {
     }
 
     if (!user?.profile_completed) {
-      if (confirm('Вам нужно заполнить профиль перед подачей заявки. Перейти к заполнению?')) {
+      if (confirm('You need to complete your profile before applying. Go to profile completion?')) {
         navigate('/dashboard/profile');
       }
       return;
