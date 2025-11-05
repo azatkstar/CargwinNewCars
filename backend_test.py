@@ -1653,15 +1653,29 @@ class BackendTester:
                 print(f"   ✅ Retrieved {len(users_list)} users (total: {total_users})")
                 self.log_test("Get Users List", True, f"Retrieved {len(users_list)} users successfully")
                 
-                # Find a user with role 'user' (not admin@test.com)
+                # Find a user with role 'user' (not admin@test.com) - prefer string IDs for compatibility
                 test_user_id = None
                 test_user_email = None
+                
+                # First try to find a user with string ID (for compatibility)
                 for user in users_list:
-                    if user.get("role") == "user" and user.get("email") != "admin@test.com":
+                    if (user.get("role") == "user" and 
+                        user.get("email") != "admin@test.com" and
+                        user.get("id") and 
+                        not (len(user.get("id")) == 24 and all(c in '0123456789abcdef' for c in user.get("id").lower()))):
                         test_user_id = user.get("id")
                         test_user_email = user.get("email")
-                        print(f"   📝 Found user for role testing: {test_user_email} (ID: {test_user_id})")
+                        print(f"   📝 Found string ID user for role testing: {test_user_email} (ID: {test_user_id})")
                         break
+                
+                # If no string ID user found, use any user with 'user' role
+                if not test_user_id:
+                    for user in users_list:
+                        if user.get("role") == "user" and user.get("email") != "admin@test.com":
+                            test_user_id = user.get("id")
+                            test_user_email = user.get("email")
+                            print(f"   📝 Found ObjectId user for role testing: {test_user_email} (ID: {test_user_id})")
+                            break
                 
                 if not test_user_id:
                     print("   ⚠️  No suitable user found for role change testing")
