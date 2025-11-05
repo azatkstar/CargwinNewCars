@@ -609,6 +609,111 @@ async def get_me(
         logger.error(f"Get me error: {e}")
         raise HTTPException(status_code=500, detail="Failed to get user")
 
+# User Profile Routes
+@api_router.get("/user/profile", response_model=User)
+async def get_user_profile(current_user: User = Depends(require_auth)):
+    """Get current user profile"""
+    return current_user
+
+@api_router.put("/user/profile", response_model=User)
+async def update_user_profile(
+    profile_data: CompleteProfileRequest,
+    current_user: User = Depends(require_auth),
+    user_repo: UserRepository = Depends(get_users_repo)
+):
+    """Complete/update user profile with credit application data"""
+    try:
+        update_data = {
+            "credit_score": profile_data.credit_score,
+            "auto_loan_history": profile_data.auto_loan_history,
+            "employment_type": profile_data.employment_type,
+            "annual_income": profile_data.annual_income,
+            "employment_duration_months": profile_data.employment_duration_months,
+            "address": profile_data.address,
+            "residence_duration_months": profile_data.residence_duration_months,
+            "monthly_expenses": profile_data.monthly_expenses,
+            "down_payment_ready": profile_data.down_payment_ready,
+            "profile_completed": True
+        }
+        
+        await user_repo.update_user(current_user.id, update_data)
+        
+        # Get updated user
+        updated_user = await user_repo.get_user_by_id(current_user.id)
+        
+        logger.info(f"User profile updated: {current_user.email}")
+        
+        return User(**updated_user)
+        
+    except Exception as e:
+        logger.error(f"Profile update error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update profile")
+
+# Application Routes
+@api_router.post("/applications")
+async def create_application(
+    lot_id: str,
+    current_user: User = Depends(require_auth),
+    app_repo: ApplicationRepository = Depends(get_apps_repo),
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    user_repo: UserRepository = Depends(get_users_repo)
+):
+    """Submit application for a car"""
+    try:
+        # Get lot data
+        lot = await lot_repo.get_lot_by_id(lot_id)
+        if not lot:
+            raise HTTPException(status_code=404, detail="Car not found")
+        
+        # Get user data
+        user_data = await user_repo.get_user_by_id(current_user.id)
+        
+        # Create application
+        app_data = {
+            "user_id": current_user.id,
+            "lot_id": lot_id,
+            "status": "pending",
+            "user_data": {
+                "email": user_data['email'],
+                "name": user_data['name'],
+                "credit_score": user_data.get('credit_score'),
+                "employment_type": user_data.get('employment_type'),
+                "annual_income": user_data.get('annual_income')
+            },
+            "lot_data": {
+                "make": lot.get('make'),
+                "model": lot.get('model'),
+                "year": lot.get('year'),
+                "msrp": lot.get('msrp'),
+                "fleet_price": lot.get('msrp') - lot.get('discount')
+            }
+        }
+        
+        app_id = await app_repo.create_application(app_data)
+        
+        logger.info(f"Application created: {app_id} for user {current_user.email}")
+        
+        return {"ok": True, "application_id": app_id, "message": "Application submitted successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Application creation error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to submit application")
+
+@api_router.get("/applications")
+async def get_my_applications(
+    current_user: User = Depends(require_auth),
+    app_repo: ApplicationRepository = Depends(get_apps_repo)
+):
+    """Get current user's applications"""
+    try:
+        apps = await app_repo.get_applications_by_user(current_user.id)
+        return {"applications": apps, "total": len(apps)}
+    except Exception as e:
+        logger.error(f"Get applications error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get applications")
+
 # Admin Lots Routes
 @api_router.get("/admin/lots")
 async def get_admin_lots(
