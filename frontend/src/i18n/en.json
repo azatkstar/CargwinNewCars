@@ -206,6 +206,17 @@
     "contact_dealer": "Contact Dealer",
     "schedule_test_drive": "Schedule Test Drive"
   },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most important questions about fleet offers and our service",
+    "privacy_guarantee": "100% Privacy Guarantee",
+    "no_data_sharing": "We never share your data with dealers for cold calls.",
+    "privacy_explanation": "Unlike other sites where your number immediately goes to dozens of dealers, we contact only one dealer and only after you 100% agree on all deal terms.",
+    "this_means": "This means:",
+    "one_contact_process": "one call, one meeting, one dealer — and your new car is ready for delivery.",
+    "have_questions": "Still have questions?",
+    "support_response": "Our team answers questions 24/7. Average response — less than 15 minutes."
+  },
   "reviews": {
     "title": "Customer Reviews",
     "subtitle": "Real stories from people who avoided haggling and saved thousands of dollars",
