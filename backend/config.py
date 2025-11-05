@@ -16,8 +16,14 @@ class Settings(BaseModel):
     DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
     
     # Database
-    MONGO_URL: str = os.getenv("MONGO_URL", "mongodb://localhost:27017")
-    DB_NAME: str = os.getenv("DB_NAME", "cargwin_production")
+    MONGO_URL: str = os.getenv("MONGO_URL")
+    DB_NAME: str = os.getenv("DB_NAME")
+    
+    def __post_init__(self):
+        if not self.MONGO_URL:
+            raise ValueError("MONGO_URL environment variable is required")
+        if not self.DB_NAME:
+            raise ValueError("DB_NAME environment variable is required")
     
     # Security
     SECRET_KEY: str = os.getenv("SECRET_KEY", secrets.token_urlsafe(32))
