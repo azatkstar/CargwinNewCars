@@ -68,7 +68,7 @@ services:
       ADMIN_EMAILS: ${ADMIN_EMAILS}
       SENTRY_DSN: ${SENTRY_DSN}
     ports:
-      - "8000:8000"
+      - "8001:8001"
     volumes:
       - uploads_data:/app/uploads
       - ./backend/logs:/app/logs
