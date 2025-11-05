@@ -74,12 +74,12 @@ const FAQ = () => {
             <div className="flex items-center justify-center gap-2 mb-4">
               <Phone className="w-6 h-6 text-red-600" />
               <h3 className="text-2xl font-bold text-gray-900">
-                Остались вопросы?
+                {t('faq.have_questions')}
               </h3>
             </div>
             
             <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              Наша команда отвечает на вопросы 24/7. Средний ответ — менее 15 минут.
+              {t('faq.support_response')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
