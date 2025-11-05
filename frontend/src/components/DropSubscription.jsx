@@ -58,15 +58,15 @@ const DropSubscription = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-red-200">
             <Bell className="w-4 h-4" />
-            Еженедельный дроп
+            {t('drop.weekly_drop')}
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Дроп недели
+            {t('drop.title')}
           </h2>
           
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Каждый понедельник в полночь по Лос-Анджелесу мы публикуем новые эксклюзивные предложения
+            {t('drop.subtitle')}
           </p>
         </div>
 
