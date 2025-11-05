@@ -179,7 +179,7 @@ const DropSubscription = () => {
                     </div>
 
                     <div className="text-center text-sm text-gray-500 font-medium">
-                      или
+                      {t('drop.or')}
                     </div>
 
                     <div>
