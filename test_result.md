@@ -119,6 +119,17 @@ backend:
       - working: true
         agent: "main"
         comment: "VERIFIED: All 13 Lexus lots successfully created in MongoDB and visible via API endpoint /api/cars. Each lot includes proper lease terms ($407-$987/mo), MSRP ($42k-$75k), and financing details."
+  - task: "Admin statistics and application management API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "COMPREHENSIVE ADMIN API TESTING COMPLETED: ✅ Admin Login (admin@test.com) - Authentication successful with proper role verification ✅ Application Statistics - Retrieved and tracked statistics correctly (total, pending, approved, rejected, contacted) ✅ Application Status Changes - Successfully changed application status from 'contacted' to 'approved' with proper admin notes ✅ Statistics Updates - Verified statistics update correctly after each status change ✅ User Management - Retrieved 7 users successfully ✅ User Role Changes - Successfully changed user role from 'user' to 'editor' and verified the change ✅ User Application Access - User can login and see their applications with updated status and admin notes ✅ Authorization - All endpoints properly protected with JWT authentication ✅ Data Persistence - All changes persisted correctly in MongoDB. ALL 10/10 ADMIN API TESTS PASSED!"
   - task: "Create public API endpoint for car listings"
     implemented: true
     working: true
