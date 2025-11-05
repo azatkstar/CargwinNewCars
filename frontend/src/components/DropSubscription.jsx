@@ -119,23 +119,23 @@ const DropSubscription = () => {
 
             {/* What to Expect */}
             <div className="mt-8 space-y-4">
-              <h4 className="text-lg font-bold text-gray-900">Что ожидать в следующем дропе:</h4>
+              <h4 className="text-lg font-bold text-gray-900">{t('drop.what_to_expect')}</h4>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-sm text-gray-700">
                   <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0" />
-                  <span>5-8 новых эксклюзивных предложений</span>
+                  <span>{t('drop.new_offers')}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-700">
                   <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />
-                  <span>Экономия до $8,000 на популярных моделях</span>
+                  <span>{t('drop.savings_up_to')}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-700">
                   <div className="w-2 h-2 bg-purple-500 rounded-full flex-shrink-0" />
-                  <span>Специальные условия лизинга и финансирования</span>
+                  <span>{t('drop.special_terms')}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-700">
                   <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0" />
-                  <span>Ограниченный запас (1-3 автомобиля на модель)</span>
+                  <span>{t('drop.limited_stock')}</span>
                 </div>
               </div>
             </div>
