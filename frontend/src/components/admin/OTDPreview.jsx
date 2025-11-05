@@ -125,7 +125,7 @@ const OTDPreview = ({ msrp, state = 'CA' }) => {
 
         {!otdData && !loading && (
           <div className="text-center py-4 text-gray-500 text-sm">
-            Нажмите "Рассчитать OTD" для предпросмотра итоговой стоимости
+            Click "Calculate OTD" to preview the total cost
           </div>
         )}
       </CardContent>
