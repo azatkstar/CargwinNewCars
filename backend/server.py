@@ -671,6 +671,41 @@ async def create_preview_for_unsaved_lot(lot_data: dict):
         logger.error(f"Create preview token for unsaved lot error: {e}")
         raise HTTPException(status_code=500, detail="Failed to create preview token")
 
+@api_router.get("/cars")
+async def get_public_cars(
+    lot_repo: LotRepository = Depends(get_lots_repo)
+):
+    """Get all published cars for public homepage"""
+    try:
+        # Get all published lots
+        lots = await lot_repo.get_lots(skip=0, limit=100, status="published")
+        
+        # Format for public display
+        public_cars = []
+        for lot in lots:
+            car_slug = f"{lot.get('year', '')}-{lot.get('make', '')}-{lot.get('model', '')}-{lot.get('trim', '')}".lower().replace(' ', '-')
+            
+            public_car = {
+                "id": car_slug,
+                "slug": car_slug,
+                "title": f"{lot.get('year', '')} {lot.get('make', '')} {lot.get('model', '')} {lot.get('trim', '')}",
+                "msrp": lot.get('msrp', 0),
+                "fleet": lot.get('msrp', 0) - lot.get('discount', 0),
+                "savings": lot.get('discount', 0),
+                "stockLeft": 1,
+                "image": (lot.get('images', [{}])[0].get('url', '') if lot.get('images') else ''),
+                "dealer": "Fleet Dealer",
+                "endsAt": (datetime.now(timezone.utc) + timedelta(hours=48)).isoformat(),
+                "lease": lot.get('lease', {}),
+            }
+            public_cars.append(public_car)
+        
+        return public_cars
+        
+    except Exception as e:
+        logger.error(f"Get public cars error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch cars")
+
 @api_router.get("/cars/{car_slug}")
 async def get_public_car(
     car_slug: str,
