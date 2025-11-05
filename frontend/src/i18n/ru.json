@@ -137,14 +137,16 @@
     "exterior_color": "Цвет кузова",
     "interior_color": "Цвет салона",
     "description": "Описание",
-    "pricing": "Ценообразование",
+    "pricing": "Ценообразование", 
     "calculate_otd": "Рассчитать OTD цену",
     "lease_options": "Варианты лизинга",
     "finance_options": "Варианты финансирования",
     "cash_options": "Варианты наличных",
     "similar_offers": "Похожие предложения",
     "contact_dealer": "Связаться с дилером",
-    "schedule_test_drive": "Записаться на тест-драйв"
+    "schedule_test_drive": "Записаться на тест-драйв",
+    "car_not_found": "Автомобиль не найден",
+    "offer_unavailable": "Возможно, предложение уже недоступно"
   },
   "faq": {
     "title": "Часто задаваемые вопросы",
