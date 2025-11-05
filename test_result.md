@@ -410,6 +410,23 @@ frontend:
         agent: "testing"
         comment: "BACKEND CONFIRMED WORKING: Created new Chevrolet Colorado lot (ID: c66503c7-e55a-4c3c-8874-cdd59f75626d) and verified backend API returns correct data with MSRP $42,500, discount $4,200, fleet price $38,300. No more Honda Accord fallback. However, frontend routing prevents testing the actual form display."
 
+  - task: "Connect frontend to real backend API for car listings"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/OffersSection.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "OffersSection was using hardcoded mockOffers data instead of fetching from backend API."
+      - working: true
+        agent: "main"
+        comment: "FIXED: Updated OffersSection to fetch data from GET /api/cars endpoint using useEffect. Added loading state, error handling with fallback to mock data. All 13 Lexus lots now displaying correctly on homepage with proper titles, pricing, and lease terms."
+      - working: true
+        agent: "main"
+        comment: "VERIFIED VIA SCREENSHOTS: Homepage successfully displays all Lexus models: RX350 Premium/Premium+, ES350 Base/Premium, NX450h Plugin Luxury, TX500h F Sport, RX350H Premium/Premium+, TX350 Base/Premium. FOMO counters, pricing, and timers all working."
   - task: "Frontend routing system completely broken"
     implemented: true
     working: true
