@@ -223,9 +223,15 @@
     "title": "Customer Reviews",
     "subtitle": "Real stories from people who avoided haggling and saved thousands of dollars",
     "saved": "Saved",
-    "instagram_title": "Video Reviews on Instagram", 
-    "watch_on_instagram": "Watch on Instagram",
-    "share_experience": "Share Your Experience"
+    "instagram_title": "Video Reviews on Instagram",
+    "watch_on_instagram": "Watch on Instagram", 
+    "share_experience": "Share Your Experience",
+    "average_rating": "Average Rating",
+    "reviews_per_month": "Reviews Per Month",
+    "recommend_friends": "Recommend to Friends",
+    "average_savings": "Average Savings", 
+    "leave_review": "Leave Review",
+    "help_others": "Help others make the right decision — share your savings story"
   },
   "forms": {
     "contact_form": {
