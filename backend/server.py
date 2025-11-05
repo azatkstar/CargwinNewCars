@@ -685,6 +685,24 @@ async def get_public_cars(
         for lot in lots:
             car_slug = f"{lot.get('year', '')}-{lot.get('make', '')}-{lot.get('model', '')}-{lot.get('trim', '')}".lower().replace(' ', '-')
             
+            # Ensure lease and finance objects exist with defaults
+            lease_data = lot.get('lease', {})
+            if not lease_data:
+                lease_data = {
+                    "monthly": 0,
+                    "dueAtSigning": 3000,
+                    "termMonths": 36,
+                    "milesPerYear": 7500
+                }
+            
+            finance_data = lot.get('finance', {})
+            if not finance_data:
+                finance_data = {
+                    "apr": 9.75,
+                    "termMonths": 60,
+                    "downPayment": 3000
+                }
+            
             public_car = {
                 "id": car_slug,
                 "slug": car_slug,
@@ -696,7 +714,8 @@ async def get_public_cars(
                 "image": (lot.get('images', [{}])[0].get('url', '') if lot.get('images') else ''),
                 "dealer": "Fleet Dealer",
                 "endsAt": (datetime.now(timezone.utc) + timedelta(hours=48)).isoformat(),
-                "lease": lot.get('lease', {}),
+                "lease": lease_data,
+                "finance": finance_data,
             }
             public_cars.append(public_car)
         
