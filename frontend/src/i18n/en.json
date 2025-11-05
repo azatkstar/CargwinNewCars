@@ -79,10 +79,25 @@
     "finance_options": "Finance", 
     "cash_options": "Cash"
   },
+  "coverage": {
+    "title": "Service Areas",
+    "subtitle": "We work with verified dealers throughout Los Angeles and surrounding areas",
+    "service_areas": "Service Areas",
+    "full_coverage": "Full Coverage",
+    "partial": "Partial",
+    "by_request": "By Request",
+    "all_dealers_fast": "All dealers, fast delivery",
+    "major_dealers": "Major dealers, 1-2 days",
+    "on_request": "On request, up to 3-5 days",
+    "expanding": "Expanding!",
+    "contact_us": "If your area isn't listed, contact us — we may be able to arrange special delivery."
+  },
   "fomo": {
     "viewing_now": "{{count}} people viewing {{model}} now",
     "confirmed_price": "Price confirmed in 15 min: {{count}} — {{model}}",
-    "stock_left": "{{count}} left — {{model}}"
+    "stock_left": "{{count}} left — {{model}}",
+    "enable_notifications": "Enable FOMO notifications",
+    "disable_notifications": "Disable FOMO notifications"
   },
   "how_it_works": {
     "title": "How It Works",
