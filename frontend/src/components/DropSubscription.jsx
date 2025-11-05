@@ -4,8 +4,10 @@ import { Input } from './ui/input';
 import { Card, CardContent } from './ui/card';
 import { Clock, Mail, Phone, Bell, TrendingUp } from 'lucide-react';
 import { getNextMondayMidnight, formatTimeRemaining, formatPhoneNumber } from '../utils/timer';
+import { useI18n } from '../hooks/useI18n';
 
 const DropSubscription = () => {
+  const { t } = useI18n();
   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
