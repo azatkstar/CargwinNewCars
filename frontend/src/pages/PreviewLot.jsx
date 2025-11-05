@@ -135,7 +135,7 @@ const PreviewLot = () => {
       <div className="fixed bottom-4 right-4 z-50">
         <div className="bg-black/80 text-white px-3 py-2 rounded-lg text-sm font-medium backdrop-blur-sm">
           <Eye className="w-4 h-4 inline mr-2" />
-          Предпросмотр
+          Preview
         </div>
       </div>
     </div>
