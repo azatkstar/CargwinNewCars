@@ -178,6 +178,12 @@ async def get_users_repo() -> UserRepository:
 async def get_audit_repo() -> AuditRepository:
     return get_audit_repository()
 
+async def get_sessions_repo() -> UserSessionRepository:
+    return get_session_repository()
+
+async def get_apps_repo() -> ApplicationRepository:
+    return get_application_repository()
+
 # DEPRECATED: In-memory storage (replaced by MongoDB in production)
 # These are kept for backward compatibility during transition
 lots_storage = {}
