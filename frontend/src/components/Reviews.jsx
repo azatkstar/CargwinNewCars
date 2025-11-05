@@ -184,7 +184,7 @@ const Reviews = () => {
               {t('reviews.share_experience')}
             </h3>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              Помогите другим принять правильное решение — расскажите о своей экономии
+              {t('reviews.help_others')}
             </p>
             <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3">
               {t('reviews.leave_review')}
