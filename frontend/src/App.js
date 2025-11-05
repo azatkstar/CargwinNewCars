@@ -48,15 +48,17 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <I18nProvider>
-          <AuthProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/car/:carId" element={<CarDetail />} />
-              <Route path="/preview/:token" element={<PreviewLot />} />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/admin/*" element={<AdminDashboard />} />
-            </Routes>
-          </AuthProvider>
+          <FOMOSettingsProvider>
+            <AuthProvider>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/car/:carId" element={<CarDetail />} />
+                <Route path="/preview/:token" element={<PreviewLot />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/*" element={<AdminDashboard />} />
+              </Routes>
+            </AuthProvider>
+          </FOMOSettingsProvider>
         </I18nProvider>
       </BrowserRouter>
     </div>
