@@ -87,7 +87,7 @@ const PreviewLot = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-3">
           <Eye className="w-5 h-5 text-yellow-600" />
           <span className="text-yellow-800 font-medium">
-            Режим предпросмотра
+            Preview Mode
           </span>
           <Badge className="bg-yellow-200 text-yellow-800">
             Не индексируется
