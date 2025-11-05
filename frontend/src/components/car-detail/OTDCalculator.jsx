@@ -137,16 +137,16 @@ const OTDCalculator = ({ car }) => {
           </div>
 
           <div>
-            <Label htmlFor="term">Срок кредита (месяцы)</Label>
+            <Label htmlFor="term">Loan Term (months)</Label>
             <Select value={formData.term.toString()} onValueChange={(value) => handleInputChange('term', parseInt(value))}>
               <SelectTrigger className="mt-1">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="36">36 месяцев</SelectItem>
-                <SelectItem value="48">48 месяцев</SelectItem>
-                <SelectItem value="60">60 месяцев</SelectItem>
-                <SelectItem value="72">72 месяца</SelectItem>
+                <SelectItem value="36">36 months</SelectItem>
+                <SelectItem value="48">48 months</SelectItem>
+                <SelectItem value="60">60 months</SelectItem>
+                <SelectItem value="72">72 months</SelectItem>
               </SelectContent>
             </Select>
           </div>
