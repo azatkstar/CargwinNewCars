@@ -74,18 +74,10 @@ const LotForm = () => {
   const fetchLot = async () => {
     setLoading(true);
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-      const response = await fetch(`${BACKEND_URL}/api/admin/lots/${id}`, {
-        credentials: 'include'
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setLot(data);
-        console.log('Fetched lot data:', data);
-      } else {
-        console.error('Failed to fetch lot - server response:', response.status);
-        setErrors({ general: t('admin.messages.load_error') });
-      }
+      const api = getApiClient();
+      const response = await api.get(`/api/admin/lots/${id}`);
+      setLot(response.data);
+      console.log('Fetched lot data:', response.data);
     } catch (error) {
       console.error('Failed to fetch lot:', error);
       setErrors({ general: t('admin.messages.connection_error') });
