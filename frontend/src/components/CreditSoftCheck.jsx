@@ -208,12 +208,12 @@ const CreditSoftCheck = () => {
                       <SelectValue placeholder={t('forms.credit_check.select_range')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="excellent">Отличный (750+)</SelectItem>
-                      <SelectItem value="good">Хороший (700-749)</SelectItem>
-                      <SelectItem value="fair">Удовлетворительный (650-699)</SelectItem>
-                      <SelectItem value="poor">Плохой (600-649)</SelectItem>
-                      <SelectItem value="bad">Очень плохой (&lt;600)</SelectItem>
-                      <SelectItem value="unknown">Не знаю</SelectItem>
+                      <SelectItem value="excellent">{t('forms.credit_check.excellent_credit')}</SelectItem>
+                      <SelectItem value="good">{t('forms.credit_check.good_credit')}</SelectItem>
+                      <SelectItem value="fair">{t('forms.credit_check.fair_credit')}</SelectItem>
+                      <SelectItem value="poor">{t('forms.credit_check.poor_credit')}</SelectItem>
+                      <SelectItem value="bad">{t('forms.credit_check.bad_credit')}</SelectItem>
+                      <SelectItem value="unknown">{t('forms.credit_check.unknown_credit')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
