@@ -187,7 +187,7 @@ const DropSubscription = () => {
                         <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <Input
                           type="tel"
-                          placeholder="(XXX) XXX-XXXX для SMS"
+                          placeholder={t('drop.sms_phone')}
                           value={phone}
                           onChange={handlePhoneChange}
                           className="pl-10"
