@@ -35,11 +35,11 @@ const PreviewLot = () => {
       } else if (response.status === 404) {
         setError('Предпросмотр не найден или истек срок действия');
       } else {
-        setError('Ошибка загрузки предпросмотра');
+        setError('Failed to load preview');
       }
     } catch (error) {
       console.error('Failed to fetch preview data:', error);
-      setError('Ошибка загрузки данных предпросмотра');
+      setError('Error loading preview data');
     } finally {
       setLoading(false);
     }
