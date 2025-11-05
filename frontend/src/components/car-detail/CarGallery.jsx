@@ -50,7 +50,7 @@ const CarGallery = ({ images, title }) => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Галерея фотографий
+            Photo Gallery
           </h2>
           <p className="text-lg text-gray-600">
             Детальные снимки экстерьера и интерьера
