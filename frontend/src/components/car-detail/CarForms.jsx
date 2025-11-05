@@ -527,7 +527,7 @@ const CarForms = ({ car }) => {
 
       {/* Contact Info */}
       <div className="bg-gray-50 rounded-xl p-6">
-        <h3 className="font-semibold text-gray-900 mb-4">Нужна помощь?</h3>
+        <h3 className="font-semibold text-gray-900 mb-4">Need Help?</h3>
         <div className="space-y-2 text-sm text-gray-600">
           <div>📞 Телефон: +1 (747) CARGWIN</div>
           <div>💬 Telegram: @CargwinSupport</div>
