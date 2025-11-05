@@ -445,10 +445,120 @@ class AuditRepository:
         log_data['timestamp'] = datetime.now(timezone.utc)
         await self.collection.insert_one(log_data)
 
+class UserSessionRepository:
+    """Repository for user session operations (OAuth)"""
+    
+    def __init__(self, database: AsyncIOMotorDatabase):
+        self.collection = database.user_sessions
+    
+    async def create_indexes(self):
+        """Create database indexes"""
+        await self.collection.create_index("session_token", unique=True)
+        await self.collection.create_index("user_id")
+        await self.collection.create_index("expires_at")
+        logger.info("Created indexes for user_sessions collection")
+    
+    async def create_session(self, session_data: Dict[str, Any]) -> str:
+        """Create new session"""
+        result = await self.collection.insert_one(session_data)
+        return str(result.inserted_id)
+    
+    async def get_session_by_token(self, session_token: str) -> Optional[Dict[str, Any]]:
+        """Get session by token"""
+        session = await self.collection.find_one({"session_token": session_token})
+        if session:
+            session['id'] = session.pop('_id')
+            # Check if expired
+            if session['expires_at'] < datetime.now(timezone.utc):
+                return None
+        return session
+    
+    async def delete_session(self, session_token: str) -> bool:
+        """Delete session (logout)"""
+        result = await self.collection.delete_one({"session_token": session_token})
+        return result.deleted_count > 0
+
+class ApplicationRepository:
+    """Repository for car loan applications"""
+    
+    def __init__(self, database: AsyncIOMotorDatabase):
+        self.collection = database.applications
+    
+    async def create_indexes(self):
+        """Create database indexes"""
+        await self.collection.create_index("user_id")
+        await self.collection.create_index("lot_id")
+        await self.collection.create_index("status")
+        await self.collection.create_index([("user_id", 1), ("lot_id", 1)])
+        logger.info("Created indexes for applications collection")
+    
+    async def create_application(self, app_data: Dict[str, Any]) -> str:
+        """Create new application"""
+        app_data['created_at'] = datetime.now(timezone.utc)
+        app_data['updated_at'] = datetime.now(timezone.utc)
+        
+        result = await self.collection.insert_one(app_data)
+        return str(result.inserted_id)
+    
+    async def get_applications_by_user(self, user_id: str, skip: int = 0, limit: int = 20) -> List[Dict[str, Any]]:
+        """Get applications for a user"""
+        cursor = self.collection.find({"user_id": user_id}).skip(skip).limit(limit).sort("created_at", -1)
+        apps = await cursor.to_list(length=limit)
+        
+        for app in apps:
+            app['id'] = str(app.pop('_id'))
+        
+        return apps
+    
+    async def get_all_applications(self, skip: int = 0, limit: int = 50, status: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get all applications (admin)"""
+        query = {}
+        if status:
+            query['status'] = status
+        
+        cursor = self.collection.find(query).skip(skip).limit(limit).sort("created_at", -1)
+        apps = await cursor.to_list(length=limit)
+        
+        for app in apps:
+            app['id'] = str(app.pop('_id'))
+        
+        return apps
+    
+    async def update_application_status(self, app_id: str, status: str, admin_notes: Optional[str] = None) -> bool:
+        """Update application status"""
+        try:
+            from bson import ObjectId
+            update_data = {
+                'status': status,
+                'updated_at': datetime.now(timezone.utc)
+            }
+            if admin_notes:
+                update_data['admin_notes'] = admin_notes
+            if status == 'contacted':
+                update_data['contacted_at'] = datetime.now(timezone.utc)
+            
+            result = await self.collection.update_one(
+                {"_id": ObjectId(app_id)},
+                {"$set": update_data}
+            )
+            return result.modified_count > 0
+        except Exception as e:
+            logger.error(f"Error updating application {app_id}: {e}")
+            return False
+    
+    async def get_applications_count(self, status: Optional[str] = None) -> int:
+        """Get total count of applications"""
+        query = {}
+        if status:
+            query['status'] = status
+        return await self.collection.count_documents(query)
+
 # Initialize repositories when database is connected
 lot_repo = None
 user_repo = None
 audit_repo = None
+session_repo = None
+application_repo = None
 
 async def initialize_repositories():
     """Initialize all repositories"""
