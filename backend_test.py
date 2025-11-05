@@ -1641,13 +1641,13 @@ class BackendTester:
                 
                 if (approved_app and approved_app.get("status") == "approved" and
                     approved_stats["total"] == contacted_stats["total"]):
-                    print(f"   ✅ Statistics updated correctly: Approved +1, Contacted -1, Total unchanged")
-                    self.log_test("Statistics After Approved", True, f"Statistics correctly updated: {approved_stats}")
+                    print(f"   ✅ Application status changed to 'approved' successfully")
+                    self.log_test("Statistics After Approved", True, f"Application status updated correctly: {approved_stats}")
                 else:
-                    print(f"   ❌ Statistics not updated correctly")
-                    print(f"      Expected: Approved={contacted_stats['approved']+1}, Contacted={contacted_stats['contacted']-1}")
-                    print(f"      Actual: Approved={approved_stats['approved']}, Contacted={approved_stats['contacted']}")
-                    self.log_test("Statistics After Approved", False, f"Statistics mismatch: {approved_stats}")
+                    print(f"   ❌ Application status change failed")
+                    print(f"      Expected: Application {test_app_id} status = 'approved'")
+                    print(f"      Actual: {approved_app.get('status') if approved_app else 'Application not found'}")
+                    self.log_test("Statistics After Approved", False, f"Status change failed: {approved_stats}")
                     return False
             else:
                 print(f"   ❌ Failed to get updated statistics: HTTP {response.status_code}")
