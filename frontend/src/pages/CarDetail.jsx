@@ -113,8 +113,8 @@ const CarDetail = () => {
         <Header />
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Автомобиль не найден</h1>
-            <p className="text-gray-600">Возможно, предложение уже недоступно</p>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('car_detail.car_not_found')}</h1>
+            <p className="text-gray-600">{t('car_detail.offer_unavailable')}</p>
           </div>
         </div>
       </div>
