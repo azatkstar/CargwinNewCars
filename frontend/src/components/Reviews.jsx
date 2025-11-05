@@ -5,18 +5,21 @@ import { Badge } from './ui/badge';
 import { Star, DollarSign, Instagram, ExternalLink } from 'lucide-react';
 import { mockReviews, mockInstagramReviews } from '../mock';
 import { formatPrice } from '../utils/timer';
+import { useI18n } from '../hooks/useI18n';
 
 const Reviews = () => {
+  const { t } = useI18n();
+  
   return (
     <section id="reviews" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Отзывы клиентов
+            {t('reviews.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Реальные истории людей, которые избежали торгов и сэкономили тысячи долларов
+            {t('reviews.subtitle')}
           </p>
         </div>
 
