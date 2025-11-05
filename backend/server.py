@@ -951,6 +951,111 @@ async def create_preview_for_unsaved_lot(lot_data: dict):
         logger.error(f"Create preview token for unsaved lot error: {e}")
         raise HTTPException(status_code=500, detail="Failed to create preview token")
 
+# Admin User Management Routes
+@api_router.get("/admin/users")
+async def get_all_users(
+    page: int = 1,
+    limit: int = 50,
+    role: Optional[str] = None,
+    current_user: User = Depends(require_admin),
+    user_repo: UserRepository = Depends(get_users_repo)
+):
+    """Get all users (admin only)"""
+    try:
+        skip = (page - 1) * limit
+        users = await user_repo.get_all_users(skip=skip, limit=limit, role=role)
+        total = await user_repo.get_users_count(role=role)
+        
+        return {
+            "users": users,
+            "total": total,
+            "page": page,
+            "limit": limit,
+            "pages": (total + limit - 1) // limit
+        }
+    except Exception as e:
+        logger.error(f"Get users error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get users")
+
+@api_router.patch("/admin/users/{user_id}/role")
+async def update_user_role(
+    user_id: str,
+    role: str,
+    current_user: User = Depends(require_admin),
+    user_repo: UserRepository = Depends(get_users_repo)
+):
+    """Update user role (admin only)"""
+    try:
+        if role not in ["user", "editor", "admin"]:
+            raise HTTPException(status_code=400, detail="Invalid role")
+        
+        success = await user_repo.update_user(user_id, {"role": role})
+        
+        if not success:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        logger.info(f"User {user_id} role updated to {role} by {current_user.email}")
+        
+        return {"ok": True, "message": "User role updated"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Update user role error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update user role")
+
+# Admin Application Management Routes
+@api_router.get("/admin/applications")
+async def get_all_applications(
+    page: int = 1,
+    limit: int = 50,
+    status: Optional[str] = None,
+    current_user: User = Depends(require_admin),
+    app_repo: ApplicationRepository = Depends(get_apps_repo)
+):
+    """Get all applications (admin only)"""
+    try:
+        skip = (page - 1) * limit
+        apps = await app_repo.get_all_applications(skip=skip, limit=limit, status=status)
+        total = await app_repo.get_applications_count(status=status)
+        
+        return {
+            "applications": apps,
+            "total": total,
+            "page": page,
+            "limit": limit,
+            "pages": (total + limit - 1) // limit
+        }
+    except Exception as e:
+        logger.error(f"Get applications error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get applications")
+
+@api_router.patch("/admin/applications/{app_id}/status")
+async def update_application_status(
+    app_id: str,
+    status: str,
+    admin_notes: Optional[str] = None,
+    current_user: User = Depends(require_admin),
+    app_repo: ApplicationRepository = Depends(get_apps_repo)
+):
+    """Update application status (admin only)"""
+    try:
+        if status not in ["pending", "approved", "rejected", "contacted"]:
+            raise HTTPException(status_code=400, detail="Invalid status")
+        
+        success = await app_repo.update_application_status(app_id, status, admin_notes)
+        
+        if not success:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        logger.info(f"Application {app_id} status updated to {status} by {current_user.email}")
+        
+        return {"ok": True, "message": "Application status updated"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Update application status error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update application status")
+
 @api_router.get("/cars")
 async def get_public_cars(
     lot_repo: LotRepository = Depends(get_lots_repo)
