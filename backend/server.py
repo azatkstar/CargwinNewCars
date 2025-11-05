@@ -483,7 +483,7 @@ async def register(
         )
         
         # Create tokens
-        tokens = create_user_tokens(user.email, user.role)
+        tokens = await create_user_tokens(user)
         
         logger.info(f"User registered: {user.email}")
         
@@ -491,8 +491,8 @@ async def register(
             "ok": True,
             "message": "User registered successfully",
             "user": user.dict(),
-            "access_token": tokens['access_token'],
-            "refresh_token": tokens['refresh_token']
+            "access_token": tokens.access_token,
+            "refresh_token": tokens.refresh_token
         }
     except HTTPException:
         raise
