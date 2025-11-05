@@ -222,44 +222,18 @@ const LotForm = () => {
 
   const handlePreview = async () => {
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const api = getApiClient();
       
-      // If editing existing lot, create preview token for saved lot
+      let response;
       if (isEditing && id) {
-        const response = await fetch(`${BACKEND_URL}/api/admin/lots/${id}/preview`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include'
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          const previewUrl = `/preview/${data.token}`;
-          console.log('Opening preview for saved lot:', previewUrl);
-          window.open(previewUrl, '_blank');
-        } else {
-          console.error('Failed to create preview token for saved lot');
-          alert(t('admin.messages.preview_token_error'));
-        }
+        response = await api.post(`/api/admin/lots/${id}/preview`);
       } else {
-        // For new/unsaved lot, send current form data
-        const response = await fetch(`${BACKEND_URL}/api/admin/lots/preview-unsaved`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify(lot)
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          const previewUrl = `/preview/${data.token}`;
-          console.log('Opening preview for unsaved lot:', previewUrl);
-          window.open(previewUrl, '_blank');
-        } else {
-          console.error('Failed to create preview token for unsaved lot');
-          alert(t('admin.messages.preview_error'));
-        }
+        response = await api.post(`/api/admin/lots/preview-unsaved`, lot);
       }
+      
+      const previewUrl = `/preview/${response.data.token}`;
+      console.log('Opening preview:', previewUrl);
+      window.open(previewUrl, '_blank');
     } catch (error) {
       console.error('Preview error:', error);
       alert(t('admin.messages.preview_error'));
