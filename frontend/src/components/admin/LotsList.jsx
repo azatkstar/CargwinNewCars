@@ -31,7 +31,7 @@ const LotsList = () => {
     total: 0
   });
 
-  const { hasPermission } = useAuth();
+  const { hasPermission, getApiClient } = useAuth();
   const { t } = useI18n();
 
   useEffect(() => {
@@ -41,22 +41,18 @@ const LotsList = () => {
   const fetchLots = async () => {
     setLoading(true);
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-      const params = new URLSearchParams({
-        page: pagination.page.toString(),
-        limit: pagination.limit.toString(),
+      const api = getApiClient();
+      const params = {
+        page: pagination.page,
+        limit: pagination.limit,
         search: filters.search || '',
-        status: filters.status || 'all',
-        make: filters.make || 'all',
-        year: filters.year || 'all',
-        isWeeklyDrop: filters.isWeeklyDrop || 'all'
-      });
+        status: filters.status === 'all' ? undefined : filters.status,
+        make: filters.make === 'all' ? undefined : filters.make,
+        year: filters.year === 'all' ? undefined : filters.year,
+        isWeeklyDrop: filters.isWeeklyDrop === 'all' ? undefined : filters.isWeeklyDrop
+      };
 
-      console.log('Fetching lots with params:', params.toString());
-
-      const response = await fetch(`${BACKEND_URL}/api/admin/lots?${params}`, {
-        credentials: 'include'
-      });
+      const response = await api.get('/api/admin/lots', { params });
       
       if (response.ok) {
         const data = await response.json();
