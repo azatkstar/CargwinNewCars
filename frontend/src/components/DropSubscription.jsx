@@ -148,10 +148,10 @@ const DropSubscription = () => {
                 <div className="text-center mb-6">
                   <TrendingUp className="w-12 h-12 text-red-600 mx-auto mb-4" />
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Получайте уведомления первыми
+                    {t('drop.get_notified')}
                   </h3>
                   <p className="text-gray-600">
-                    Подпишитесь и узнавайте о новых дропах за 15 минут до публикации
+                    {t('drop.subscribe_early')}
                   </p>
                 </div>
 
