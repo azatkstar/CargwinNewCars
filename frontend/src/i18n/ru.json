@@ -161,8 +161,9 @@
     "title": "Отзывы клиентов",
     "subtitle": "Реальные истории людей, которые избежали торгов и сэкономили тысячи долларов",
     "saved": "Сэкономил(а)",
-    "instagram_title": "Отзывы в Instagram",
-    "watch_on_instagram": "Смотреть в Instagram"
+    "instagram_title": "Видео-отзывы в Instagram",
+    "watch_on_instagram": "Смотреть в Instagram", 
+    "share_experience": "Поделитесь своим опытом"
   },
   "forms": {
     "contact_form": {
