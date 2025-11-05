@@ -1784,6 +1784,9 @@ class BackendTester:
         elif test_app_user_id == "user-test-002":
             login_credentials = {"email": "testuser2@test.com", "password": "User123!"}
             expected_user = "testuser2@test.com"
+        elif test_app_user_id == "690bd2f8610e6e638456b0ce":  # ObjectId for testuser2@test.com
+            login_credentials = {"email": "testuser2@test.com", "password": "User123!"}
+            expected_user = "testuser2@test.com"
         else:
             print(f"   ⚠️  Unknown application owner: {test_app_user_id}")
             self.log_test("User Application Details", False, f"Unknown application owner: {test_app_user_id}")
