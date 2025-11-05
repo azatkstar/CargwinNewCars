@@ -665,7 +665,7 @@ async def create_application(
         # Create application
         app_data = {
             "user_id": current_user.id,
-            "lot_id": lot_id,
+            "lot_id": lot.get('id') or lot_id,  # Use actual lot ID from database
             "status": "pending",
             "user_data": {
                 "email": user_data['email'],
