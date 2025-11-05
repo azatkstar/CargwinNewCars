@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Checkbox } from '../ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Mail, Phone, User, MessageSquare, Clock } from 'lucide-react';
+import { Mail, Phone, User, MessageSquare, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 import { formatPhoneNumber } from '../../utils/timer';
+import { useAuth } from '../../hooks/useAuth';
 
 const CarForms = ({ car }) => {
+  const { user, isAuthenticated, getApiClient } = useAuth();
+  const navigate = useNavigate();
   const [leadForm, setLeadForm] = useState({
     name: '',
     phone: '',
