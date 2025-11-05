@@ -101,27 +101,27 @@ export const mockOffers = [
 export const mockReviews = [
   {
     id: 1,
-    name: "Анна К.",
+    name: "Anna K.",
     city: "Beverly Hills",
-    text: "Сэкономила $4,200 на Camry 2024. Никаких торгов, никаких допов — просто честная цена. За 20 минут все оформили онлайн.",
+    text: "Saved $4,200 on Camry 2024. No haggling, no add-ons — just honest pricing. Everything arranged online in 20 minutes.",
     rating: 5,
     savings: 4200,
     model: "Toyota Camry 2024"
   },
   {
     id: 2,
-    name: "Михаил Р.",
-    city: "Santa Monica",
-    text: "Боялся покупать авто из-за навязчивых продавцов. Здесь никто не звонил, пока сам не подтвердил. Получил именно ту цену, которую видел на сайте.",
+    name: "Michael R.",
+    city: "Santa Monica", 
+    text: "Was afraid to buy a car because of pushy salespeople. Here no one called until I confirmed myself. Got exactly the price I saw on the website.",
     rating: 5,
     savings: 3650,
     model: "Honda Accord 2024"
   },
   {
     id: 3,
-    name: "Елена Т.",
+    name: "Elena T.",
     city: "Pasadena",
-    text: "Fleet-предложение на Prius оказалось на $5,800 ниже, чем в дилерском центре рядом с домом. Без всяких допов и F&I.",
+    text: "Fleet offer on Prius was $5,800 lower than at the dealership near my house. No add-ons or F&I nonsense.",
     rating: 5,
     savings: 5800,
     model: "Toyota Prius 2024"
