@@ -73,8 +73,8 @@ const PreviewLot = () => {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Лот не найден</h1>
-          <p className="text-gray-600">Предпросмотр недоступен</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Lot Not Found</h1>
+          <p className="text-gray-600">Preview unavailable</p>
         </div>
       </div>
     );
