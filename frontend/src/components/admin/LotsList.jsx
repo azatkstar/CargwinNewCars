@@ -299,7 +299,7 @@ const LotsList = () => {
               <TableRow>
                 <TableCell colSpan={7} className="text-center py-8">
                   <Car className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-500">Лоты не найдены</p>
+                  <p className="text-gray-500">No lots found</p>
                 </TableCell>
               </TableRow>
             ) : (
