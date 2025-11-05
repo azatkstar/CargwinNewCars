@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
-import { Menu, X, Car } from 'lucide-react';
+import { Menu, X, Car, LogIn, User, LogOut } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
+import { useAuth } from '../hooks/useAuth';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = () => {
