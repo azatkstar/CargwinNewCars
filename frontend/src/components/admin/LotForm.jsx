@@ -22,7 +22,7 @@ import OTDPreview from './OTDPreview';
 const LotForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { hasPermission } = useAuth();
+  const { hasPermission, getApiClient } = useAuth();
   const { t } = useI18n();
   const isEditing = !!id;
 
