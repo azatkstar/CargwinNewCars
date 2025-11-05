@@ -163,9 +163,15 @@
     "title": "Отзывы клиентов",
     "subtitle": "Реальные истории людей, которые избежали торгов и сэкономили тысячи долларов",
     "saved": "Сэкономил(а)",
-    "instagram_title": "Видео-отзывы в Instagram",
-    "watch_on_instagram": "Смотреть в Instagram", 
-    "share_experience": "Поделитесь своим опытом"
+    "instagram_title": "Видео-отзывы в Instagram", 
+    "watch_on_instagram": "Смотреть в Instagram",
+    "share_experience": "Поделитесь своим опытом",
+    "average_rating": "Средний рейтинг",
+    "reviews_per_month": "Отзывов за месяц",
+    "recommend_friends": "Рекомендуют друзьям",
+    "average_savings": "Средняя экономия",
+    "leave_review": "Оставить отзыв",
+    "help_others": "Помогите другим принять правильное решение — расскажите о своей экономии"
   },
   "forms": {
     "contact_form": {
