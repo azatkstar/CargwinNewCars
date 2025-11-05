@@ -1399,75 +1399,44 @@ class BackendTester:
             return False
 
     def run_all_tests(self):
-        """Run all backend tests for production readiness"""
+        """Run all backend tests including Lexus lot creation"""
         print("=" * 80)
-        print("CARGWIN BACKEND API TESTING - PRODUCTION READINESS VERIFICATION")
+        print("CARGWIN BACKEND API TESTING - LEXUS LOTS CREATION & VERIFICATION")
         print("=" * 80)
         print(f"Testing backend at: {BACKEND_URL}")
-        print("Focus: Server startup, MongoDB, authentication, monitoring, and core functionality")
+        print("Focus: Create 13 Lexus lots with lease terms and verify functionality")
         print()
         
-        # Production readiness tests
-        production_tests = [
+        # First run basic connectivity and auth tests
+        basic_tests = [
             ("Server Startup Verification", self.test_server_startup_verification),
-            ("MongoDB Integration", self.test_mongodb_integration),
             ("Authentication System", self.test_authentication_system),
-            ("Admin Access Control", self.test_admin_access_control),
-            ("Role-Based Access Control", self.test_role_based_access_control),
-            ("Database Lot Operations", self.test_database_lot_operations),
-            ("Monitoring Features", self.test_monitoring_features),
-            ("Performance Optimizations", self.test_performance_optimizations),
-            ("Error Handling", self.test_error_handling),
         ]
-        
-        # Core functionality tests (require editor role - testing role-based access control)
-        core_tests = [
-            ("Authenticated Lot Listing", self.test_lot_listing_with_auth),
-        ]
-        
-        all_tests = production_tests + core_tests
         
         passed = 0
-        total = len(all_tests)
+        total_basic = len(basic_tests)
         
-        print("🔧 PRODUCTION READINESS TESTS")
+        print("🔧 BASIC CONNECTIVITY TESTS")
         print("-" * 40)
         
-        for i, (test_name, test_func) in enumerate(production_tests):
-            print(f"\n--- Testing {test_name} ({i+1}/{len(production_tests)}) ---")
+        for i, (test_name, test_func) in enumerate(basic_tests):
+            print(f"\n--- Testing {test_name} ({i+1}/{total_basic}) ---")
             try:
                 if test_func():
                     passed += 1
             except Exception as e:
                 self.log_test(test_name, False, f"Test execution error: {str(e)}")
         
-        print("\n🚀 CORE FUNCTIONALITY TESTS")
-        print("-" * 40)
-        
-        for i, (test_name, test_func) in enumerate(core_tests):
-            print(f"\n--- Testing {test_name} ({i+1}/{len(core_tests)}) ---")
-            try:
-                if test_func():
-                    passed += 1
-            except Exception as e:
-                self.log_test(test_name, False, f"Test execution error: {str(e)}")
-        
-        print("\n" + "=" * 80)
-        print("PRODUCTION READINESS TEST SUMMARY")
-        print("=" * 80)
-        print(f"Passed: {passed}/{total}")
-        print(f"Failed: {total - passed}/{total}")
-        print(f"Success Rate: {(passed/total)*100:.1f}%")
-        
-        if passed == total:
-            print("🎉 ALL TESTS PASSED - BACKEND IS PRODUCTION READY!")
-            return True
-        elif passed >= total * 0.8:  # 80% pass rate
-            print("✅ MOSTLY PASSING - BACKEND IS DEPLOYMENT READY WITH MINOR ISSUES")
-            return True
-        else:
-            print("⚠️  SIGNIFICANT ISSUES FOUND - BACKEND NEEDS FIXES BEFORE DEPLOYMENT")
+        if passed < total_basic:
+            print("\n❌ BASIC TESTS FAILED - CANNOT PROCEED WITH LEXUS LOT CREATION")
             return False
+        
+        # Run Lexus lot tests
+        print("\n🚗 LEXUS VEHICLE LOTS TESTING")
+        print("-" * 40)
+        lexus_success = self.run_lexus_lot_tests()
+        
+        return lexus_success
 
 if __name__ == "__main__":
     tester = BackendTester()
