@@ -145,7 +145,7 @@ const CreditSoftCheck = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="lastName">Фамилия *</Label>
+                  <Label htmlFor="lastName">{t('forms.credit_check.last_name')} *</Label>
                   <Input
                     id="lastName"
                     type="text"
