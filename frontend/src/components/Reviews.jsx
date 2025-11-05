@@ -144,7 +144,7 @@ const Reviews = () => {
                 ))}
               </div>
               <div className="text-sm text-gray-600">
-                Средний рейтинг
+                {t('reviews.average_rating')}
               </div>
             </div>
             
