@@ -153,7 +153,7 @@ const Reviews = () => {
                 847
               </div>
               <div className="text-sm text-gray-600">
-                Отзывов за месяц
+                {t('reviews.reviews_per_month')}
               </div>
             </div>
             
