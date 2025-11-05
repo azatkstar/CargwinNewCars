@@ -1474,11 +1474,21 @@ class BackendTester:
                 print(f"   ✅ Initial statistics: Total={initial_stats['total']}, Pending={initial_stats['pending']}, Approved={initial_stats['approved']}, Rejected={initial_stats['rejected']}, Contacted={initial_stats['contacted']}")
                 self.log_test("Initial Application Statistics", True, f"Retrieved statistics: {initial_stats}")
                 
-                # Get first application ID for testing
+                # Get first application ID for testing (prefer ObjectId format)
                 test_app_id = None
                 if initial_stats["applications"]:
-                    test_app_id = initial_stats["applications"][0].get("id")
-                    print(f"   📝 Using application ID for testing: {test_app_id}")
+                    # Look for an application with ObjectId format (24 hex characters)
+                    for app in initial_stats["applications"]:
+                        app_id = app.get("id")
+                        if app_id and len(app_id) == 24 and all(c in '0123456789abcdef' for c in app_id.lower()):
+                            test_app_id = app_id
+                            print(f"   📝 Using ObjectId application for testing: {test_app_id}")
+                            break
+                    
+                    # If no ObjectId found, use the first one but warn
+                    if not test_app_id:
+                        test_app_id = initial_stats["applications"][0].get("id")
+                        print(f"   ⚠️  Using non-ObjectId application (may fail): {test_app_id}")
                 
             else:
                 print(f"   ❌ Failed to get applications: HTTP {response.status_code} - {response.text}")
