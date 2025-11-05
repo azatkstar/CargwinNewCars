@@ -90,7 +90,7 @@ const CreditSoftCheck = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-blue-200">
             <CreditCard className="w-4 h-4" />
-            Мягкая проверка кредита
+            {t('forms.credit_check.soft_check')}
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
