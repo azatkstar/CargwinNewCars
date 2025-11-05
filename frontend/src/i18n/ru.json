@@ -120,6 +120,13 @@
     "contact_dealer": "Связаться с дилером",
     "schedule_test_drive": "Записаться на тест-драйв"
   },
+  "reviews": {
+    "title": "Отзывы клиентов",
+    "subtitle": "Реальные истории людей, которые избежали торгов и сэкономили тысячи долларов",
+    "saved": "Сэкономил(а)",
+    "instagram_title": "Отзывы в Instagram",
+    "watch_on_instagram": "Смотреть в Instagram"
+  },
   "forms": {
     "contact_form": {
       "title": "Связаться с нами",
