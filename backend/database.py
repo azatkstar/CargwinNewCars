@@ -395,8 +395,16 @@ class UserRepository:
         try:
             update_data['updated_at'] = datetime.now(timezone.utc)
             
+            # Handle ObjectId conversion if needed
+            query_id = user_id
+            if len(user_id) == 24 and all(c in '0123456789abcdef' for c in user_id.lower()):
+                try:
+                    query_id = ObjectId(user_id)
+                except:
+                    pass  # Use string ID if ObjectId conversion fails
+            
             result = await self.collection.update_one(
-                {"_id": user_id}, 
+                {"_id": query_id}, 
                 {"$set": update_data}
             )
             return result.modified_count > 0
