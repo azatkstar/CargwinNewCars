@@ -3,9 +3,13 @@ import requests
 import json
 import uuid
 from datetime import datetime, timezone
+import time
 
 # Backend URL
 BACKEND_URL = "https://lexus-preview.preview.emergentagent.com/api"
+
+# Admin email for authentication
+ADMIN_EMAIL = "admin@cargwin.com"
 
 # Lexus lots data based on the provided specifications
 lexus_lots = [
