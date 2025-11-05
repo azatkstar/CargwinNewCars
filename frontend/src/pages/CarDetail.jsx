@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FOMOTicker from '../components/FOMOTicker';
 import { mockOffers } from '../mock';
+import { useI18n } from '../hooks/useI18n';
 
 const CarDetail = () => {
   const { carId } = useParams();
