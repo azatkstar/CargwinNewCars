@@ -30,9 +30,12 @@ const CarForms = ({ car }) => {
 
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [dealSubmitted, setDealSubmitted] = useState(false);
+  const [applicationSubmitted, setApplicationSubmitted] = useState(false);
   const [leadLoading, setLeadLoading] = useState(false);
   const [dealLoading, setDealLoading] = useState(false);
+  const [applicationLoading, setApplicationLoading] = useState(false);
   const [submissionTime, setSubmissionTime] = useState(null);
+  const [applicationError, setApplicationError] = useState('');
 
   // Anti-spam timing gate
   React.useEffect(() => {
