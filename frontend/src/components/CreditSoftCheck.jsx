@@ -98,7 +98,7 @@ const CreditSoftCheck = () => {
           </h2>
           
           <p className="text-lg text-gray-600">
-            Получите персональные предложения без влияния на кредитный рейтинг
+            {t('forms.credit_check.description')}
           </p>
         </div>
 
