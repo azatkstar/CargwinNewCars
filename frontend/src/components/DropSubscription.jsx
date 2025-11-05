@@ -87,25 +87,25 @@ const DropSubscription = () => {
                     <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">
                       {timeRemaining.days}
                     </div>
-                    <div className="text-sm text-gray-600 font-medium">дней</div>
+                    <div className="text-sm text-gray-600 font-medium">{t('hero.days')}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">
                       {timeRemaining.hours}
                     </div>
-                    <div className="text-sm text-gray-600 font-medium">часов</div>
+                    <div className="text-sm text-gray-600 font-medium">{t('hero.hours')}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">
                       {timeRemaining.minutes}
                     </div>
-                    <div className="text-sm text-gray-600 font-medium">минут</div>
+                    <div className="text-sm text-gray-600 font-medium">{t('hero.minutes')}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-4xl md:text-5xl font-bold text-red-600 mb-2">
                       {timeRemaining.seconds}
                     </div>
-                    <div className="text-sm text-gray-600 font-medium">секунд</div>
+                    <div className="text-sm text-gray-600 font-medium">{t('hero.seconds')}</div>
                   </div>
                 </div>
 
