@@ -93,12 +93,75 @@ const FOMOTicker = () => {
 
   const currentMsg = messages[currentMessage];
 
-  if (!isVisible || !currentMsg) return null;
+  // Don't show FOMO ticker if disabled or no messages
+  if (!isVisible || !isEnabled || !currentMsg || messages.length === 0) return null;
 
   const IconComponent = currentMsg.icon;
 
   return (
     <>
+      {/* Settings Panel */}
+      {showSettings && (
+        <div className="fixed bottom-16 right-4 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-64">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-semibold text-gray-900">FOMO Settings</h3>
+            <button
+              onClick={() => setShowSettings(false)}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-700">Enable FOMO</span>
+              <Button
+                variant={isEnabled ? "default" : "outline"}
+                size="sm"
+                onClick={toggleFOMO}
+              >
+                {isEnabled ? t('fomo.disable_notifications') : t('fomo.enable_notifications')}
+              </Button>
+            </div>
+            
+            {isEnabled && (
+              <>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-700">Show viewers</span>
+                  <input
+                    type="checkbox"
+                    checked={settings.showViewers}
+                    onChange={(e) => updateSettings({ showViewers: e.target.checked })}
+                    className="rounded"
+                  />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-700">Show confirmed</span>
+                  <input
+                    type="checkbox"
+                    checked={settings.showConfirmed}
+                    onChange={(e) => updateSettings({ showConfirmed: e.target.checked })}
+                    className="rounded"
+                  />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-700">Show stock</span>
+                  <input
+                    type="checkbox"
+                    checked={settings.showStock}
+                    onChange={(e) => updateSettings({ showStock: e.target.checked })}
+                    className="rounded"
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Desktop Version */}
       <div className="hidden lg:block fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
