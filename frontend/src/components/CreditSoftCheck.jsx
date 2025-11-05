@@ -248,10 +248,10 @@ const CreditSoftCheck = () => {
                 <div className="text-sm text-yellow-800">
                   <p className="font-medium mb-2">{t('forms.credit_check.important_terms')}:</p>
                   <ul className="space-y-1 text-xs">
-                    <li>• Мягкая проверка не влияет на ваш кредитный балл</li>
-                    <li>• Финальные условия зависят от полной проверки кредитной истории</li>
-                    <li>• Мы не передаём ваши контакты дилерам для обзвонов</li>
-                    <li>• Результаты придут на email в течение 15 минут</li>
+                    <li>• {t('forms.credit_check.term1')}</li>
+                    <li>• {t('forms.credit_check.term2')}</li>
+                    <li>• {t('forms.credit_check.term3')}</li>
+                    <li>• {t('forms.credit_check.term4')}</li>
                   </ul>
                 </div>
               </div>
