@@ -64,17 +64,16 @@ const CreditSoftCheck = () => {
               </div>
               
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Проверка завершена!
+                {t('forms.credit_check.check_complete')}
               </h3>
               
               <p className="text-gray-600 mb-6">
-                Мы получили ваши данные и проводим мягкую проверку кредитной истории. 
-                Результаты и персональные предложения будут отправлены на ваш email в течение 15 минут.
+                {t('forms.credit_check.check_results_message')}
               </p>
               
               <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                 <p className="text-sm text-green-800">
-                  <strong>Важно:</strong> Мягкая проверка не влияет на ваш кредитный рейтинг и не видна другим кредиторам.
+                  <strong>{t('forms.credit_check.important')}:</strong> {t('forms.credit_check.soft_check_info')}
                 </p>
               </div>
             </CardContent>
