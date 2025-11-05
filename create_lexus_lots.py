@@ -184,11 +184,77 @@ def create_lot_data(lot_info):
         "updatedAt": datetime.now(timezone.utc).isoformat()
     }
 
+def get_auth_token():
+    """Get authentication token via magic link"""
+    print("🔐 Authenticating...")
+    
+    try:
+        # Step 1: Request magic link
+        response = requests.post(
+            f"{BACKEND_URL}/auth/magic",
+            json={"email": ADMIN_EMAIL},
+            headers={"Content-Type": "application/json"},
+            timeout=30
+        )
+        
+        if response.status_code != 200:
+            print(f"❌ Failed to request magic link: {response.status_code} - {response.text}")
+            return None
+        
+        data = response.json()
+        magic_token = data.get("token")
+        
+        if not magic_token:
+            print(f"❌ No magic token received")
+            return None
+            
+        print(f"✅ Magic link token received")
+        
+        # Step 2: Verify magic link to get JWT
+        time.sleep(1)  # Small delay
+        
+        response = requests.post(
+            f"{BACKEND_URL}/auth/verify",
+            json={"token": magic_token},
+            headers={"Content-Type": "application/json"},
+            timeout=30
+        )
+        
+        if response.status_code != 200:
+            print(f"❌ Failed to verify token: {response.status_code} - {response.text}")
+            return None
+        
+        auth_data = response.json()
+        access_token = auth_data.get("access_token")
+        
+        if not access_token:
+            print(f"❌ No access token received")
+            return None
+        
+        user = auth_data.get("user", {})
+        print(f"✅ Authenticated as {user.get('email')} ({user.get('role')})")
+        return access_token
+        
+    except Exception as e:
+        print(f"❌ Authentication error: {str(e)}")
+        return None
+
 def create_lots():
     """Create all Lexus lots via API"""
-    created_lots = []
+    # First, get authentication token
+    access_token = get_auth_token()
     
-    print(f"Creating {len(lexus_lots)} Lexus lots...")
+    if not access_token:
+        print("\n❌ Authentication failed. Cannot create lots.")
+        return []
+    
+    created_lots = []
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {access_token}"
+    }
+    
+    print(f"\n📦 Creating {len(lexus_lots)} Lexus lots...")
     
     for i, lot_info in enumerate(lexus_lots, 1):
         try:
@@ -197,11 +263,11 @@ def create_lots():
             print(f"\n{i}. Creating {lot_data['year']} {lot_data['make']} {lot_data['model']} {lot_data['trim']}")
             print(f"   Monthly: ${lot_data['lease']['monthly']} | MSRP: ${lot_data['msrp']:,} | Fleet: ${lot_data['msrp'] - lot_data['discount']:,}")
             
-            # Create lot via API
+            # Create lot via API with authentication
             response = requests.post(
                 f"{BACKEND_URL}/admin/lots",
                 json=lot_data,
-                headers={"Content-Type": "application/json"},
+                headers=headers,
                 timeout=30
             )
             
