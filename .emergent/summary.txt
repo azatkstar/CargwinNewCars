@@ -1,83 +1,143 @@
 <analysis>
-The previous AI engineer effectively transitioned the CargwinNewCar application from a functional MVP to a production-ready system. Initially, the work focused on critical bug fixes: resolving a negative discount display in the admin panel and correcting the car preview functionality which showed incorrect mock data. Public car detail pages were then integrated with the backend, VIN display was adjusted for privacy, and new admin features like Publish Now and Duplicate Lot were added. A persistent, though minor, issue with the admin edit form not auto-populating persisted. The final, extensive phase involved a complete refactor for deployment: integrating MongoDB for persistence, implementing JWT-based authentication, building a robust file upload system, setting up environment configuration, Dockerization, monitoring, logging, and performance optimizations. The work culminated in detailed deployment instructions, with the current task focusing on refining backend imports and startup/shutdown processes for a seamless server launch.
+The previous AI engineer successfully stabilized the CargwinNewCar application, moving it from MVP to a production-ready state. Initial efforts addressed critical bugs, integrated public car detail pages with the backend, adjusted VIN display, and enhanced admin functionality. A significant refactor for deployment involved integrating MongoDB, JWT authentication, a file upload system, and comprehensive environment setup, Dockerization, monitoring, logging, and performance optimizations. A persistent minor bug regarding admin form auto-population remained.
+
+The recent focus was on two major areas:
+1.  **Deployment Readiness:** Fixing backend imports (, ), updating startup/shutdown events, resolving hardcoded URLs in magic links and frontend API calls, correcting Docker port configurations, removing optional Redis dependency from requirements, and externalizing the hardcoded database name.
+2.  **Internationalization (I18n):** Implementing English as the default language with Russian as an option. This involved extensive component-by-component translation, fixing JSON parsing errors, and implementing FOMO notification settings. This task faced initial challenges and required multiple iterations due to incomplete translations and user feedback.
+
+The engineer was last attempting to add new car listings (Lexus deals) directly via a backend script, bypassing frontend admin panel issues, after completing the I18n and deployment readiness tasks.
 </analysis>
 
 <product_requirements>
-CargwinNewCar is an MVP for new car sales in the US market, localized in Russian, emphasizing conversion optimization. The **Landing Page** features a Weekly Drop timer, FOMO counters, car offer cards with financing options, trust elements, reviews, FAQ, and forms (soft-check credit, drop subscription) connected to mock API endpoints (, , ). Design mandates agency-quality, glass-morphism, distinct CTAs, and professional imagery. The **Car Detail Page** provides comprehensive car information, including a gallery, specifications, OTD calculator, FOMO, and forms.
+CargwinNewCar is an MVP for new car sales in the US market, localized in Russian (now English by default with Russian option). Its goal is conversion optimization through a rich **Landing Page** featuring a Weekly Drop timer, FOMO counters, car offer cards, financing options, trust elements, reviews, FAQ, and lead generation forms. The **Car Detail Page** provides comprehensive car information (gallery, specs, OTD calculator, FOMO, forms). The **Admin Panel** allows full lifecycle management of car listings (lots) – draft, preview, schedule, publish, archive – with JWT-based magic-link authentication and role-based access. The  data model is extensive, covering car details, pricing, media, FOMO, and SEO. Image uploads are supported, and validations are mandatory for year, MSRP, discount, and VIN.
 
-The **Admin Panel** enables full lifecycle management of car listings (lots) – draft, preview, schedule, publish, archive – with mock magic-link authentication and role-based access. The  data model is extensive, covering car details, pricing, media, FOMO, and SEO. Key features include a lot list, a detailed form (with tabs for various settings), media uploader, OTD calculation preview, and a preview link (). Image uploads () require validation. Mandatory validations cover year, MSRP, discount, and VIN.
-
-Recent work addressed a bug where new special offers were not saving, fixing negative discount display, incorrect car data in preview and admin edit views, and adjusting VIN display. The current focus is preparing the application for production deployment, transitioning from in-memory mocks to a full MongoDB backend, JWT authentication, and a file upload system, along with complete server deployment instructions.
+Recent work included fixing a negative discount display, incorrect car data in preview, adjusting VIN display, and preparing the app for production by moving from mocks to MongoDB, JWT authentication, and a file upload system. The most recent major feature was full internationalization with English as the default language.
 </product_requirements>
 
 <key_technical_concepts>
 -   **Full-Stack**: React (Frontend), FastAPI (Backend), MongoDB (Database).
--   **UI/Styling**: Shadcn UI, Tailwind CSS, Lucide React.
--   **Routing/State**: React Router DOM, React Context ().
+-   **UI/Styling**: Shadcn UI, Tailwind CSS.
+-   **Routing/State**: React Router DOM, React Context (, , ).
 -   **API/Data**: Axios, Pydantic, UUIDs.
 -   **Auth**: JWT, Magic-link, Role-based access control.
 -   **Deployment**: Docker, Docker Compose, Nginx, Environment Variables.
--   **Backend Utilities**: Pillow (image processing), Redis (caching).
--   **Security**: CORS, Rate limiting, Security headers.
+-   **Backend Utilities**: Pillow (image processing).
+-   **Security**: CORS, Rate limiting.
+-   **Internationalization**:  hook, , .
 </key_technical_concepts>
 
 <code_architecture>
 
 
-
-**Key Files and Changes:**
-
-*   **/app/backend/server.py**: The central FastAPI backend.
-    *   **Summary**: Coordinates all backend functionality, now integrating MongoDB, JWT authentication, and file storage.
-    *   **Changes**: Replaced in-memory lot storage with  for MongoDB persistence. Integrated  for real JWT authentication and role-based access to admin endpoints. Integrated  for image uploads. Included , , ,  for production readiness. Public and admin lot endpoints modified for MongoDB.
-*   **/app/backend/database.py** (NEW): Handles MongoDB connection and data models.
-    *   **Summary**: Defines Pydantic models for , , , , . Manages MongoDB connection, provides  pattern for CRUD, and handles slug generation.
-    *   **Changes**: Created to establish a persistent data layer.
-*   **/app/backend/auth.py** (NEW): Implements JWT-based authentication.
-    *   **Summary**: Provides secure magic-link authentication, JWT token handling, user management, and role-based authorization for protected endpoints.
-    *   **Changes**: Developed to replace mock authentication.
-*   **/app/backend/file_storage.py** (NEW): Manages file uploads and image processing.
-    *   **Summary**: Handles local image storage, creates various image sizes (thumbnail, hero), performs security validation, and uses Pillow for image manipulation.
-    *   **Changes**: Created to handle actual image file management.
-*   **/app/backend/config.py**, **/app/backend/middleware.py**, **/app/backend/monitoring.py**, **/app/backend/performance.py** (NEW): Support for production environment.
-    *   **Summary**: Centralized configuration, security middleware (CORS, rate limiting), structured logging, and performance optimizations (caching, connection pooling).
-    *   **Changes**: Created as part of the production readiness effort.
-*   **/app/frontend/src/App.js**: Main React application.
-    *   **Summary**: Manages routing and provides global context (e.g., ).
-    *   **Changes**: Updated to ensure correct routing for public () and admin pages, including fixes for incorrect redirects.
-*   **/app/frontend/src/pages/CarDetail.jsx**: Public car detail page.
-    *   **Summary**: Displays detailed information about a car.
-    *   **Changes**: Modified to fetch data from the new backend endpoint () and passes VIN to .
-*   **/app/frontend/src/pages/PreviewLot.jsx**: Admin lot preview page.
-    *   **Summary**: Allows administrators to view a lot before publishing.
-    *   **Changes**: Updated to fetch real lot data from the backend's preview token endpoint.
-*   **/app/frontend/src/components/admin/LotForm.jsx**: Admin lot creation/edit form.
-    *   **Summary**: The primary interface for managing lot details.
-    *   **Changes**: Corrected negative discount display. Updated  to use the correct backend URL and removed mock data fallbacks. Added Publish Now and Duplicate buttons. Adjusted MSRP input behavior.
-*   **/app/frontend/src/components/car-detail/CarSpecs.jsx**: Car specifications display.
-    *   **Summary**: Shows a car's technical specs.
-    *   **Changes**: Removed VIN display from this component.
-*   **/app/frontend/src/components/Footer.jsx**: Application footer.
-    *   **Summary**: Provides general site information.
-    *   **Changes**: Modified to accept and discreetly display VIN (hidden via CSS color) for compliance.
-*   **Docker and Deployment Files** (, , , , , , , ):
-    *   **Summary**: These files define the containerized application environment, orchestration, web server, and automated deployment scripts.
-    *   **Changes**: Created to enable robust, production-ready deployment.
-
+-   ****: Central FastAPI backend.
+    -   **Summary**: Coordinates backend functionality, handling MongoDB, JWT auth, and file storage.
+    -   **Changes**: Imports for , , ,  were refined. A  due to duplicate  imports from  and  was fixed by aliasing. A  endpoint was added. The magic link URL was updated to use  from . Uvicorn bind port was corrected to .
+-   ****: Centralized environment configuration.
+    -   **Summary**: Manages environment variables and settings.
+    -   **Changes**: Added  and  to be retrieved from environment variables.
+-   ****: Handles MongoDB connection and data models.
+    -   **Summary**: Establishes persistent data layer, defines Pydantic models.
+    -   **Changes**: Modified to use  from environment variables instead of hardcoding.
+-   ****: Performance optimizations module.
+    -   **Summary**: Implements caching and connection pooling using Redis.
+    -   **Changes**: Fixed  by aliasing  to avoid conflict with . Redis dependency made optional.
+-   ****: Python dependencies.
+    -   **Summary**: Lists all Python packages required for the backend.
+    -   **Changes**:  dependency was removed to make it optional.
+-   ****: Main React application.
+    -   **Summary**: Manages routing and provides global contexts.
+    -   **Changes**: Integrated  and  to support internationalization and FOMO settings.
+-   ****: Custom hook for internationalization.
+    -   **Summary**: Provides the  function for translations and language switching.
+    -   **Changes**: Updated to manage  and  and provide locale context.
+-   **** (NEW): Custom hook for FOMO settings.
+    -   **Summary**: Manages FOMO ticker visibility and message types.
+    -   **Changes**: Created to allow dynamic control over FOMO notifications.
+-   **** (NEW): English translation file.
+    -   **Summary**: Stores all English strings for the frontend.
+    -   **Changes**: Created and extensively populated with translations for all major components.
+-   ****: Russian translation file.
+    -   **Summary**: Stores all Russian strings for the frontend.
+    -   **Changes**: Existing entries were reviewed, expanded, and a JSON parsing error was fixed.
+-   ****: Application header.
+    -   **Summary**: Contains navigation and language switcher.
+    -   **Changes**: Integrated  for language selection and dynamic translation of navigation elements.
+-   ****: Hero section of the landing page.
+    -   **Summary**: Displays key promotional content, timer, and CTAs.
+    -   **Changes**: All hardcoded Russian texts replaced with  calls for internationalization.
+-   ****: Displays FOMO messages.
+    -   **Summary**: Shows real-time scarcity/activity messages.
+    -   **Changes**: Integrated  to make just booked notifications optional and configurable via an admin panel. All hardcoded Russian messages were translated.
+-   ****: Displays car offers.
+    -   **Summary**: Section presenting available car deals.
+    -   **Changes**: All hardcoded Russian texts (titles, sorting, subscription, disclaimer) replaced with  calls.
+-   ****: Explains the process.
+    -   **Summary**: Describes the steps for car acquisition.
+    -   **Changes**: All hardcoded Russian texts translated.
+-   ****: Displays trust elements.
+    -   **Summary**: Builds user confidence through trust points.
+    -   **Changes**: All hardcoded Russian texts translated.
+-   ****: Individual car offer card.
+    -   **Summary**: Displays details of a single car offer.
+    -   **Changes**: All hardcoded Russian texts translated.
+-   ****: Application footer.
+    -   **Summary**: Provides general site information.
+    -   **Changes**: All hardcoded Russian texts translated.
+-   ****: Credit pre-qualification form.
+    -   **Summary**: Form for users to check financing terms.
+    -   **Changes**: All hardcoded Russian texts (field labels, placeholders, terms, benefits, buttons) translated.
+-   ****: Email subscription form.
+    -   **Summary**: Form to subscribe to new car drops.
+    -   **Changes**: All hardcoded Russian texts translated.
+-   ****: Frequently Asked Questions section.
+    -   **Summary**: Provides answers to common user questions.
+    -   **Changes**: All hardcoded Russian texts translated.
+-   ****: User reviews section.
+    -   **Summary**: Displays user testimonials and rating information.
+    -   **Changes**: All hardcoded Russian texts (ratings, statistics, Leave Review, Share Your Experience) translated. Mock review data in  was also translated to English names and texts.
+-   ****: Public car detail page.
+    -   **Summary**: Displays detailed information about a car.
+    -   **Changes**: Translated Car Not Found and related messages.
+-   ****: Admin panel for listing lots.
+    -   **Summary**: Shows a list of car lots for admin management.
+    -   **Changes**: Updated batch action API calls to use .
+-   ****: Authentication hook.
+    -   **Summary**: Manages user authentication state and actions.
+    -   **Changes**: Updated logout API calls to use .
+-   ****: Car detail page forms.
+    -   **Summary**: Contains lead generation and deal intent forms.
+    -   **Changes**: Updated API calls for  and  to use .
+-   ****: Admin OTD calculator preview.
+    -   **Summary**: Previews On-The-Deal calculations for lots.
+    -   **Changes**: Updated API call for  to use .
+-   ****: Dockerfile for the backend service.
+    -   **Summary**: Defines the backend container image.
+    -   **Changes**: Corrected  port to  and  bind address to . Updated HEALTHCHECK to include .
+-   ****: Docker Compose configuration.
+    -   **Summary**: Orchestrates multi-container Docker application.
+    -   **Changes**: Updated backend port mapping to . Added  to Redis service health check. Default  in environment variables was refined.
+-   **** (NEW): Python script.
+    -   **Summary**: Script to programmatically add car lots to the backend database via API.
+    -   **Changes**: Created by the engineer to bypass frontend admin panel issues for lot creation.
 </code_architecture>
 
 <pending_tasks>
 -   **Admin Edit Form Population**: Frontend form fields (Make, Model, VIN, Tags) are not automatically populated from the backend when editing a lot.
--   **Full Backend Integration**: Remaining mock API endpoints for forms (, , etc.) need to be fully integrated with the FastAPI backend.
+-   **Full Backend Integration**: Remaining mock API endpoints for forms (, , etc.) need to be fully integrated with the FastAPI backend (although some have been partially updated to use the correct URL structure, their backend logic might still be mock-based).
 -   **Audit Log Implementation**: Finalize the comprehensive audit log, populating it with all system actions.
 -   **Import/Export**: Implement CSV/XLSX lot import/export features.
 -   **Advanced FOMO & External Integrations**: Implement advanced FOMO settings and integrate external services like VIN decoder and tax/fees tables.
+-   **Lexus Lot Creation**: The script for adding Lexus deals () has been created but not yet executed or verified.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary, the AI engineer was addressing the user's request, What else can you fix to make deployment easy? (Chat 473). This shifted the focus to refining the application for a smoother production deployment. The specific task being worked on, as indicated by the last tool call (Chat 475), is to **fix imports and dependencies in  and update startup/shutdown events for all components** (Chat 476). This involves ensuring that all newly integrated modules (like , , , ) are correctly imported and initialized/de-initialized within the FastAPI application lifecycle. This crucial step aims to minimize potential runtime errors or misconfigurations during server startup or shutdown in a production environment, ensuring the deployment process is robust and error-free.
+Immediately before this summary request, the AI engineer was tasked by the user to Выложили эти сделки на сайт через админ панель и проверь как все работает. и исправь ошибки. Все на английском (Post these deals on the site through the admin panel and check how everything works. And fix errors. All in English). The user provided specific Lexus car deal details.
+
+The engineer attempted to navigate to the  panel using a frontend testing tool, but encountered  errors, suggesting issues with the testing environment's ability to interact with the frontend. To bypass this, the engineer decided to create the car lots directly via the backend API.
+
+The precise work being done at the last message was the creation of a Python script, , designed to programmatically add the specified Lexus car deals to the application's backend database through the API, as the frontend admin panel was inaccessible via the testing agent. The script has been successfully created, but not yet executed or verified.
 </current_work>
 
 <optional_next_step>
-Complete the corrections for imports and dependencies in  and ensure all startup/shutdown events are correctly implemented.
+Execute the  script to add the specified Lexus deals to the database via the backend API.
 </optional_next_step>

@@ -5,7 +5,7 @@ import uuid
 from datetime import datetime, timezone
 
 # Backend URL
-BACKEND_URL = "https://dealership-dev.preview.emergentagent.com/api"
+BACKEND_URL = "https://lexus-preview.preview.emergentagent.com/api"
 
 # Lexus lots data based on the provided specifications
 lexus_lots = [
