@@ -171,7 +171,7 @@ const Reviews = () => {
                 $5,200
               </div>
               <div className="text-sm text-gray-600">
-                Средняя экономия
+                {t('reviews.average_savings')}
               </div>
             </div>
           </div>
