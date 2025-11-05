@@ -45,7 +45,7 @@ const Reviews = () => {
                   <div className="flex items-center gap-2 text-green-800">
                     <DollarSign className="w-4 h-4" />
                     <span className="font-semibold">
-                      Сэкономил(а): {formatPrice(review.savings)}
+                      {t('reviews.saved')}: {formatPrice(review.savings)}
                     </span>
                   </div>
                   <div className="text-sm text-green-600 mt-1">
