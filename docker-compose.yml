@@ -59,7 +59,7 @@ services:
       JWT_SECRET_KEY: ${JWT_SECRET_KEY}
       CORS_ORIGINS: ${CORS_ORIGINS:-https://yourdomain.com}
       FRONTEND_URL: ${FRONTEND_URL:-https://yourdomain.com}
-      REDIS_URL: redis://redis:6379/0
+      # REDIS_URL: redis://redis:6379/0  # Optional - Emergent doesn't provide Redis
       SMTP_HOST: ${SMTP_HOST}
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_USERNAME: ${SMTP_USERNAME}
