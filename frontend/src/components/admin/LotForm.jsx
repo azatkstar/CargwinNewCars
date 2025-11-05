@@ -193,12 +193,8 @@ const LotForm = () => {
         navigate('/admin/lots');
       }, 1000);
     } catch (error) {
-      console.error('Save error:', error);
-        throw new Error(errorData.detail || 'Server error');
-      }
-    } catch (error) {
       console.error('Save failed:', error);
-      alert(t('admin.messages.save_error') + error.message);
+      alert(t('admin.messages.save_error') + (error.response?.data?.detail || error.message));
     } finally {
       setSaving(false);
     }
