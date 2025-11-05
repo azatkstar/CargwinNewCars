@@ -76,7 +76,7 @@ const CarHero = ({ car }) => {
                   </div>
                   <div className="flex items-center gap-2 text-green-600">
                     <TrendingUp className="w-4 h-4" />
-                    <span>Подтвердили: {fomoCounters.confirmed}</span>
+                    <span>Confirmed: {fomoCounters.confirmed}</span>
                   </div>
                 </div>
               </div>
