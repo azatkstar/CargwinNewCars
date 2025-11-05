@@ -1769,11 +1769,33 @@ class BackendTester:
         
         # Step 10: Test user login and application details
         print(f"\n10. Testing user login and application details...")
+        
+        # Find which user owns the test application
+        test_app_user_id = None
+        for app in initial_stats["applications"]:
+            if app.get("id") == test_app_id:
+                test_app_user_id = app.get("user_id")
+                break
+        
+        # Determine correct user credentials based on the application owner
+        if test_app_user_id == "user-test-001":
+            login_credentials = user_credentials  # user@test.com
+            expected_user = "user@test.com"
+        elif test_app_user_id == "user-test-002":
+            login_credentials = {"email": "testuser2@test.com", "password": "User123!"}
+            expected_user = "testuser2@test.com"
+        else:
+            print(f"   ⚠️  Unknown application owner: {test_app_user_id}")
+            self.log_test("User Application Details", False, f"Unknown application owner: {test_app_user_id}")
+            return False
+        
+        print(f"   📝 Testing with application owner: {expected_user}")
+        
         try:
-            # Login as regular user
+            # Login as the application owner
             response = self.session.post(
                 f"{BACKEND_URL}/auth/login",
-                json=user_credentials,
+                json=login_credentials,
                 headers={"Content-Type": "application/json"}
             )
             
