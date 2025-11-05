@@ -234,15 +234,16 @@
       "send": "Send Message"
     },
     "credit_check": {
-      "title": "Quick Credit Check",
-      "subtitle": "Get pre-approved in minutes",
+      "title": "Learn Your Financing Terms",
+      "subtitle": "Preliminary Credit Check",
       "first_name": "First Name",
-      "last_name": "Last Name",
+      "last_name": "Last Name",  
       "email": "Email",
       "phone": "Phone",
       "ssn": "SSN (last 4 digits)",
       "annual_income": "Annual Income",
-      "check_credit": "Check Credit"
+      "check_credit": "Check Credit",
+      "important_terms": "Important Terms"
     },
     "subscription": {
       "title": "Subscribe to Drops",
