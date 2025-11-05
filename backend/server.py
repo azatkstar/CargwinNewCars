@@ -31,9 +31,13 @@ from database import (
     get_lot_repository,
     get_user_repository,
     get_audit_repository,
+    get_session_repository,
+    get_application_repository,
     LotRepository,
     UserRepository,
-    AuditRepository
+    AuditRepository,
+    UserSessionRepository,
+    ApplicationRepository
 )
 
 # Import authentication modules
@@ -45,8 +49,15 @@ from auth import (
     require_auth,
     require_admin,
     require_editor,
+    register_user,
+    authenticate_user,
+    process_oauth_session,
+    get_user_from_session_token,
     MagicLinkRequest,
     MagicLinkVerify,
+    RegisterRequest,
+    LoginRequest,
+    CompleteProfileRequest,
     Token,
     User
 )
