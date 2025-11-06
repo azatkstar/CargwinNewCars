@@ -425,7 +425,7 @@ const CarForms = ({ car }) => {
                 disabled={!isLeadFormValid() || leadLoading}
                 className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 py-3 text-lg font-semibold"
               >
-                {leadLoading ? 'Отправляем...' : 'Получить предложение'}
+                {leadLoading ? 'Submitting...' : 'Get Offer'}
               </Button>
             </form>
           )}
