@@ -338,7 +338,7 @@ const CarForms = ({ car }) => {
           ) : (
             <form onSubmit={submitLead} className="space-y-4">
               <div>
-                <Label htmlFor="lead-name">Имя *</Label>
+                <Label htmlFor="lead-name">Name *</Label>
                 <div className="relative mt-1">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <Input
@@ -347,14 +347,14 @@ const CarForms = ({ car }) => {
                     value={leadForm.name}
                     onChange={(e) => handleLeadInputChange('name', e.target.value)}
                     className="pl-10"
-                    placeholder="Ваше имя"
+                    placeholder="Your name"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="lead-phone">Телефон *</Label>
+                <Label htmlFor="lead-phone">Phone *</Label>
                 <div className="relative mt-1">
                   <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <Input
