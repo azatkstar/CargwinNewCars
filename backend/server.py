@@ -1472,12 +1472,6 @@ async def search_car_images(
     except Exception as e:
         logger.error(f"Image search error: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to search images: {str(e)}")
-        }
-        
-        # Normalize state code
-        state_upper = state.upper()
-        
-        if state_upper not in TAX_FEES_TABLE:
             # Return default/generic if state not found
             return {
                 "state_code": state_upper,
