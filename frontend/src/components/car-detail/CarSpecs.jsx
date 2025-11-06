@@ -36,7 +36,7 @@ const CarSpecs = ({ car }) => {
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-2">
             <Car className="w-6 h-6 text-red-600" />
-            Технические характеристики
+            Vehicle Specifications
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -66,7 +66,7 @@ const CarSpecs = ({ car }) => {
         <CardHeader>
           <CardTitle className="text-xl font-bold text-orange-900 flex items-center gap-2">
             <DollarSign className="w-6 h-6 text-orange-600" />
-            Известные допы в США
+            Typical Dealer Add-Ons in USA
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -77,7 +77,7 @@ const CarSpecs = ({ car }) => {
                   {car.specs.make} {car.specs.model} {car.specs.year}
                 </span>
                 <Badge className="bg-orange-100 text-orange-800">
-                  Средний показатель
+                  Average Amount
                 </Badge>
               </div>
               
@@ -86,24 +86,24 @@ const CarSpecs = ({ car }) => {
               </div>
               
               <p className="text-sm text-gray-700 mb-4">
-                Типичные навязанные допы и финансовые продукты в дилерских центрах США для данной модели
+                Typical forced add-ons and financial products at US dealerships for this model
               </p>
 
               <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex justify-between">
-                  <span>Защитные покрытия</span>
+                  <span>Paint/fabric protection</span>
                   <span>$800-1,200</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Расширенная гарантия</span>
+                  <span>Extended warranty</span>
                   <span>$1,500-2,500</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>GAP страховка</span>
+                  <span>GAP insurance</span>
                   <span>$400-800</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Услуги F&I отдела</span>
+                  <span>F&I department fees</span>
                   <span>$300-700</span>
                 </div>
               </div>
@@ -115,11 +115,11 @@ const CarSpecs = ({ car }) => {
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
                 <span className="font-semibold text-green-900">
-                  У нас: $0 навязанных допов
+                  Ours: $0 forced add-ons
                 </span>
               </div>
               <p className="text-sm text-green-800">
-                Мы показываем честную fleet-цену без скрытых доплат и навязывания дополнительных услуг
+                We show honest fleet pricing with no hidden fees or forced upsells
               </p>
             </div>
           </div>

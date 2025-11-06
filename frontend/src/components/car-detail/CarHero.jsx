@@ -49,7 +49,7 @@ const CarHero = ({ car }) => {
           <div className="relative">
             <img 
               src={car.image}
-              alt={`${car.title} — вид спереди`}
+              alt={`${car.title} — front view`}
               className="w-full h-auto rounded-2xl shadow-2xl"
               loading="eager"
             />
@@ -61,7 +61,7 @@ const CarHero = ({ car }) => {
               </Badge>
               {car.isDrop && (
                 <Badge className="bg-red-600 text-white text-sm px-3 py-1">
-                  Дроп недели
+                  Weekly Drop
                 </Badge>
               )}
             </div>
@@ -72,7 +72,7 @@ const CarHero = ({ car }) => {
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2 text-blue-600">
                     <Eye className="w-4 h-4" />
-                    <span>Смотрят: {fomoCounters.viewers}</span>
+                    <span>Viewing: {fomoCounters.viewers}</span>
                   </div>
                   <div className="flex items-center gap-2 text-green-600">
                     <TrendingUp className="w-4 h-4" />
@@ -99,19 +99,19 @@ const CarHero = ({ car }) => {
                   MSRP {formatPrice(car.msrp)}
                 </span>
                 <Badge className="bg-red-100 text-red-800">
-                  Скидка {formatPrice(car.savings)}
+                  Save {formatPrice(car.savings)}
                 </Badge>
               </div>
               
               <div className="space-y-2">
                 <div className="text-2xl font-semibold text-gray-900">
-                  Fleet-цена: {formatPrice(car.fleet)}
+                  Fleet Price: {formatPrice(car.fleet)}
                 </div>
                 <div className="text-3xl font-bold text-red-600">
-                  OTD цена: {formatPrice(otdPrice)}
+                  OTD Price: {formatPrice(otdPrice)}
                 </div>
                 <p className="text-sm text-gray-600">
-                  * Включает налоги и сборы для CA
+                  * Includes taxes and fees for CA
                 </p>
               </div>
             </div>
@@ -121,24 +121,24 @@ const CarHero = ({ car }) => {
               <div className="bg-red-50 border border-red-200 rounded-xl p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <Clock className="w-5 h-5 text-red-600" />
-                  <span className="font-semibold text-red-900">До конца дропа:</span>
+                  <span className="font-semibold text-red-900">Time Until Drop Ends:</span>
                 </div>
                 <div className="grid grid-cols-4 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-red-600">{timeRemaining.days}</div>
-                    <div className="text-xs text-red-700">дней</div>
+                    <div className="text-xs text-red-700">days</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-red-600">{timeRemaining.hours}</div>
-                    <div className="text-xs text-red-700">часов</div>
+                    <div className="text-xs text-red-700">hours</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-red-600">{timeRemaining.minutes}</div>
-                    <div className="text-xs text-red-700">минут</div>
+                    <div className="text-xs text-red-700">minutes</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-red-600">{timeRemaining.seconds}</div>
-                    <div className="text-xs text-red-700">секунд</div>
+                    <div className="text-xs text-red-700">seconds</div>
                   </div>
                 </div>
               </div>
@@ -149,14 +149,14 @@ const CarHero = ({ car }) => {
               <div className="flex items-center gap-3 text-sm text-green-700 bg-green-50 p-3 rounded-lg">
                 <Shield className="w-5 h-5" />
                 <span>
-                  <strong>Без навязанных допов:</strong> обычно добавляют {formatPrice(car.addonsAvg)} — у нас $0
+                  <strong>No forced add-ons:</strong> dealers typically add {formatPrice(car.addonsAvg)} — ours $0
                 </span>
               </div>
               
               <div className="text-sm text-gray-600">
-                ✓ Цена зафиксирована без торгов<br/>
-                ✓ Данные не передаём дилерам для обзвонов<br/>
-                ✓ Контакт только после 100% согласования условий
+                ✓ Price locked in — no haggling<br/>
+                ✓ Your data never shared with dealers for cold calls<br/>
+                ✓ Contact only after 100% terms agreement
               </div>
             </div>
 
@@ -166,7 +166,7 @@ const CarHero = ({ car }) => {
               size="lg"
               className="w-full bg-red-600 hover:bg-red-700 text-white py-4 text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Получить предложение
+              Get This Deal
             </Button>
           </div>
         </div>

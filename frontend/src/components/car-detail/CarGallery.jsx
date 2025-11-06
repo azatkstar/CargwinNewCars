@@ -5,7 +5,7 @@ const CarGallery = ({ images, title }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const imageTypes = ['Экстерьер спереди', 'Экстерьер сбоку', 'Интерьер', 'Приборная панель'];
+  const imageTypes = ['Exterior Front', 'Exterior Side', 'Interior', 'Dashboard'];
 
   const openModal = (index) => {
     setSelectedImage(index);
@@ -53,7 +53,7 @@ const CarGallery = ({ images, title }) => {
             Photo Gallery
           </h2>
           <p className="text-lg text-gray-600">
-            Детальные снимки экстерьера и интерьера
+            Detailed exterior and interior shots
           </p>
         </div>
 
@@ -67,7 +67,7 @@ const CarGallery = ({ images, title }) => {
             >
               <img
                 src={image}
-                alt={`${title} — ${imageTypes[index] || 'дополнительное фото'}`}
+                alt={`${title} — ${imageTypes[index] || 'additional photo'}`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
               />
@@ -78,7 +78,7 @@ const CarGallery = ({ images, title }) => {
               {/* Image Type Label */}
               <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
                 <span className="text-sm font-medium text-gray-900">
-                  {imageTypes[index] || `Фото ${index + 1}`}
+                  {imageTypes[index] || `Photo ${index + 1}`}
                 </span>
               </div>
 
@@ -126,17 +126,17 @@ const CarGallery = ({ images, title }) => {
               {/* Image */}
               <img
                 src={images[selectedImage]}
-                alt={`${title} — ${imageTypes[selectedImage] || 'фото'}`}
+                alt={`${title} — ${imageTypes[selectedImage] || 'photo'}`}
                 className="w-full h-full object-contain rounded-lg"
               />
 
               {/* Image Info */}
               <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2">
                 <div className="font-semibold text-gray-900">
-                  {imageTypes[selectedImage] || `Фото ${selectedImage + 1}`}
+                  {imageTypes[selectedImage] || `Photo ${selectedImage + 1}`}
                 </div>
                 <div className="text-sm text-gray-600">
-                  {selectedImage + 1} из {images.length}
+                  {selectedImage + 1} of {images.length}
                 </div>
               </div>
             </div>

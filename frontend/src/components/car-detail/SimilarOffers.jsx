@@ -39,7 +39,7 @@ const SimilarOffers = ({ currentCarId }) => {
         <div className="relative aspect-[4/3] overflow-hidden">
           <img 
             src={car.image}
-            alt={`${car.title} — похожее предложение`}
+            alt={`${car.title} — similar offer`}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
           />
@@ -87,7 +87,7 @@ const SimilarOffers = ({ currentCarId }) => {
             </div>
             
             <div className="text-sm text-green-600 font-medium">
-              Экономия: {formatPrice(car.savings)}
+              Save: {formatPrice(car.savings)}
             </div>
           </div>
 
@@ -95,11 +95,11 @@ const SimilarOffers = ({ currentCarId }) => {
           <div className="space-y-2 mb-6">
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Car className="w-4 h-4" />
-              <span>Осталось: {car.stockLeft} шт</span>
+              <span>Left: {car.stockLeft} units</span>
             </div>
             
             <div className="text-sm text-orange-700 bg-orange-50 p-2 rounded-lg">
-              Без допов на {formatPrice(car.addonsAvg)}
+              No add-ons worth {formatPrice(car.addonsAvg)}
             </div>
           </div>
 
@@ -109,7 +109,7 @@ const SimilarOffers = ({ currentCarId }) => {
             className="w-full bg-gray-900 hover:bg-gray-800 text-white group-hover:bg-red-600 group-hover:hover:bg-red-700 transition-all duration-300"
           >
             <Link to={`/car/${car.id}`}>
-              Смотреть подробнее
+              View Details
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
@@ -131,7 +131,7 @@ const SimilarOffers = ({ currentCarId }) => {
             Similar Offers
           </h2>
           <p className="text-lg text-gray-600">
-            Другие fleet-предложения, которые могут вас заинтересовать
+            Other fleet deals that might interest you
           </p>
         </div>
 
@@ -151,7 +151,7 @@ const SimilarOffers = ({ currentCarId }) => {
             className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3"
           >
             <Link to="/">
-              Смотреть все предложения
+              View All Offers
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
