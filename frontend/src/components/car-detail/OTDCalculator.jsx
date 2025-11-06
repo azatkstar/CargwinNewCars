@@ -213,14 +213,14 @@ const OTDCalculator = ({ car }) => {
           <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 border border-green-200">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="w-5 h-5 text-green-600" />
-              <h3 className="text-lg font-bold text-gray-900">Результаты расчета</h3>
+              <h3 className="text-lg font-bold text-gray-900">Calculation Results</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Left Column */}
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-700">Fleet-цена:</span>
+                  <span className="text-gray-700">Fleet Price:</span>
                   <span className="font-semibold">{formatPrice(car.fleet)}</span>
                 </div>
                 <div className="flex justify-between">
