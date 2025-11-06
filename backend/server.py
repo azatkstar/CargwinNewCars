@@ -1800,7 +1800,10 @@ async def get_public_car(
             "cash": {
                 "incentives": 2500,
                 "total": lot.get('msrp', 0) - lot.get('discount', 0)
-            }
+            },
+            "competitor_prices": lot.get('competitor_prices', {}),
+            "fees_hint": lot.get('fees_hint', 0),
+            "state": lot.get('state', 'CA')
         }
         
         logger.info(f"Public car requested: {car_slug}, found: {lot.get('make', '')} {lot.get('model', '')}")
