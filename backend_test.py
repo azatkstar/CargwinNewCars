@@ -2556,13 +2556,13 @@ class BackendTester:
 if __name__ == "__main__":
     tester = BackendTester()
     
-    # Run the critical fixes tests as requested
-    print("Running Backend Testing - Phase 1 Critical Fixes...")
-    success = tester.run_critical_fixes_tests()
+    # Run Phase 2 new features tests as requested
+    print("Running Backend Testing - Phase 2 New Features...")
+    success = tester.run_phase2_tests()
     
     if success:
-        print("\n🎉 ALL CRITICAL FIXES TESTING COMPLETED SUCCESSFULLY!")
+        print("\n🎉 ALL PHASE 2 FEATURES TESTING COMPLETED SUCCESSFULLY!")
     else:
-        print("\n❌ CRITICAL FIXES TESTING FOUND ISSUES!")
+        print("\n❌ PHASE 2 FEATURES TESTING FOUND ISSUES!")
     
     sys.exit(0 if success else 1)
