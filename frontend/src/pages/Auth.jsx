@@ -78,7 +78,8 @@ const Auth = () => {
 
   const handleGoogleLogin = () => {
     const redirectUrl = encodeURIComponent(window.location.origin + '/dashboard');
-    window.location.href = `https://auth.emergentagent.com/?redirect=${redirectUrl}`;
+    const authUrl = process.env.REACT_APP_EMERGENT_AUTH_URL || 'https://auth.emergentagent.com';
+    window.location.href = `${authUrl}/?redirect=${redirectUrl}`;
   };
 
   return (
