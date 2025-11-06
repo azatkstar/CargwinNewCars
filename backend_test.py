@@ -2519,6 +2519,151 @@ class BackendTester:
             print("⚠️  PHASE 2 FEATURES NEED ATTENTION")
             return False
 
+    def test_add_competitor_prices_demo(self):
+        """Test adding competitor prices to 2024-lexus-rx350-premium for price comparison demo"""
+        if not self.auth_token:
+            self.log_test("Add Competitor Prices Demo", False, "No auth token available")
+            return False
+        
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Step 1: Find the 2024-lexus-rx350-premium lot
+            lot_slug = "2024-lexus-rx350-premium"
+            
+            # First try to get it directly by slug
+            response = self.session.get(f"{BACKEND_URL}/admin/lots/{lot_slug}", headers=headers)
+            
+            lot_data = None
+            lot_id = None
+            
+            if response.status_code == 200:
+                lot_data = response.json()
+                lot_id = lot_slug
+                self.log_test("Find RX350 Premium Lot", True, f"Found lot by slug: {lot_data.get('make', '')} {lot_data.get('model', '')} {lot_data.get('trim', '')}")
+            else:
+                # If not found by slug, search in the listing
+                list_response = self.session.get(f"{BACKEND_URL}/admin/lots?limit=100", headers=headers)
+                
+                if list_response.status_code == 200:
+                    lots_data = list_response.json()
+                    items = lots_data.get("items", [])
+                    
+                    # Look for RX350 Premium
+                    for lot in items:
+                        if (lot.get("make", "").lower() == "lexus" and 
+                            lot.get("model", "").lower() == "rx350" and 
+                            lot.get("trim", "").lower() == "premium" and
+                            lot.get("year") == 2024):
+                            lot_data = lot
+                            lot_id = lot.get("id")
+                            self.log_test("Find RX350 Premium Lot", True, f"Found lot in listing: ID {lot_id}")
+                            break
+                    
+                    if not lot_data:
+                        self.log_test("Find RX350 Premium Lot", False, "2024 Lexus RX350 Premium not found in lots")
+                        return False
+                else:
+                    self.log_test("Find RX350 Premium Lot", False, f"Failed to get lots listing: HTTP {list_response.status_code}")
+                    return False
+            
+            # Step 2: Get current lot data to preserve all fields
+            if lot_id != lot_slug:
+                # Get full lot data if we only have summary from listing
+                full_response = self.session.get(f"{BACKEND_URL}/admin/lots/{lot_id}", headers=headers)
+                if full_response.status_code == 200:
+                    lot_data = full_response.json()
+                else:
+                    self.log_test("Get Full Lot Data", False, f"Failed to get full lot data: HTTP {full_response.status_code}")
+                    return False
+            
+            # Step 3: Add competitor prices while preserving all existing fields
+            competitor_prices = {
+                "autobandit": {
+                    "monthly": 950,
+                    "dueAtSigning": 4500,
+                    "term": 36,
+                    "updatedAt": "2025-01-20T12:00:00Z"
+                },
+                "dealerAverage": {
+                    "monthly": 1050,
+                    "dueAtSigning": 5000,
+                    "term": 36
+                }
+            }
+            
+            # Create update payload with only the competitor_prices field
+            update_payload = {
+                "competitor_prices": competitor_prices
+            }
+            
+            # Step 4: Update the lot with competitor prices
+            update_response = self.session.patch(
+                f"{BACKEND_URL}/admin/lots/{lot_id}",
+                json=update_payload,
+                headers=headers
+            )
+            
+            if update_response.status_code == 200:
+                update_data = update_response.json()
+                
+                if update_data.get("ok"):
+                    updated_lot = update_data.get("data", {})
+                    
+                    # Verify competitor prices were added
+                    saved_competitor_prices = updated_lot.get("competitor_prices", {})
+                    
+                    if (saved_competitor_prices.get("autobandit", {}).get("monthly") == 950 and
+                        saved_competitor_prices.get("dealerAverage", {}).get("monthly") == 1050):
+                        
+                        # Calculate savings vs competitors
+                        current_monthly = updated_lot.get("lease", {}).get("monthly", 577)  # Get actual monthly or use default
+                        autobandit_savings = 950 - current_monthly
+                        dealer_savings = 1050 - current_monthly
+                        
+                        self.log_test("Add Competitor Prices Demo", True, 
+                                    f"Successfully added competitor prices to RX350 Premium. Savings: ${autobandit_savings}/mo vs AutoBandit, ${dealer_savings}/mo vs dealers")
+                        
+                        # Step 5: Verify the lot still has all original data
+                        verify_response = self.session.get(f"{BACKEND_URL}/admin/lots/{lot_id}", headers=headers)
+                        
+                        if verify_response.status_code == 200:
+                            verify_data = verify_response.json()
+                            
+                            # Check that original fields are preserved
+                            original_fields_preserved = (
+                                verify_data.get("make") == lot_data.get("make") and
+                                verify_data.get("model") == lot_data.get("model") and
+                                verify_data.get("trim") == lot_data.get("trim") and
+                                verify_data.get("msrp") == lot_data.get("msrp")
+                            )
+                            
+                            if original_fields_preserved:
+                                self.log_test("Preserve Original Data", True, "All original lot fields preserved after competitor price update")
+                                return True
+                            else:
+                                self.log_test("Preserve Original Data", False, "Some original lot fields were modified unexpectedly")
+                                return False
+                        else:
+                            self.log_test("Verify Updated Lot", False, f"Failed to verify updated lot: HTTP {verify_response.status_code}")
+                            return False
+                    else:
+                        self.log_test("Add Competitor Prices Demo", False, f"Competitor prices not saved correctly: {saved_competitor_prices}")
+                        return False
+                else:
+                    self.log_test("Add Competitor Prices Demo", False, f"Update failed: {update_data}")
+                    return False
+            else:
+                self.log_test("Add Competitor Prices Demo", False, f"Update request failed: HTTP {update_response.status_code} - {update_response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Add Competitor Prices Demo", False, f"Test error: {str(e)}")
+            return False
+
     def run_all_tests(self):
         """Run all backend tests including Lexus lot creation"""
         print("=" * 80)
