@@ -1385,61 +1385,6 @@ async def get_all_tax_fees():
         logger.error(f"VIN decode error: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to decode VIN: {str(e)}")
 
-                    'model': str(row.get('Model', '')),
-                    'year': int(row.get('Year', datetime.now(timezone.utc).year)),
-                    'trim': str(row.get('Trim', '')),
-                    'vin': str(row.get('VIN', '')),
-                    'msrp': int(row.get('MSRP', 0)),
-                    'discount': int(row.get('Discount', 0)),
-                    'drivetrain': str(row.get('Drivetrain', 'FWD')),
-                    'engine': str(row.get('Engine', '')),
-                    'transmission': str(row.get('Transmission', 'AT')),
-                    'exterior_color': str(row.get('Exterior Color', '')),
-                    'interior_color': str(row.get('Interior Color', '')),
-                    'state': str(row.get('State', 'CA')),
-                    'description': str(row.get('Description', '')),
-                    'tags': str(row.get('Tags', '')).split(',') if row.get('Tags') else [],
-                    'is_weekly_drop': bool(row.get('Weekly Drop', False)),
-                    'status': str(row.get('Status', 'draft')),
-                    'fees_hint': int(row.get('Fees Hint', 0)) if 'Fees Hint' in row else 0
-                }
-                
-                # Generate default images
-                lot_data['images'] = [{
-                    "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
-                    "alt": f"{lot_data['year']} {lot_data['make']} {lot_data['model']}"
-                }]
-                
-                # Create lot
-                lot_id = await lot_repo.create_lot(lot_data)
-                imported_count += 1
-                
-                # Log audit
-                await audit_repo.log_action({
-                    "user_email": current_user.email,
-                    "action": "import",
-                    "resource_type": "lot",
-                    "resource_id": lot_id,
-                    "changes": {"source": "xlsx_import", "row": index + 1}
-                })
-                
-            except Exception as e:
-                errors.append(f"Row {index + 1}: {str(e)}")
-                logger.error(f"Import error on row {index + 1}: {e}")
-        
-        logger.info(f"Imported {imported_count} lots from Excel by {current_user.email}")
-        
-        return {
-            "ok": True,
-            "imported": imported_count,
-            "total_rows": len(df),
-            "errors": errors
-        }
-        
-    except Exception as e:
-        logger.error(f"Import XLSX error: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to import Excel: {str(e)}")
-
 
 @api_router.post("/admin/lots/{lot_id}/preview")
 async def create_preview_token(lot_id: str):
