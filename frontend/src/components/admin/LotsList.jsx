@@ -101,6 +101,35 @@ const LotsList = () => {
     }
   };
 
+  const downloadExport = async (format) => {
+    try {
+      const api = getApiClient();
+      const params = {
+        status: filters.status === 'all' ? undefined : filters.status
+      };
+
+      const response = await api.get(`/api/admin/lots/export/${format}`, {
+        params,
+        responseType: 'blob'
+      });
+
+      // Create download link
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `lots_export_${new Date().toISOString().split('T')[0]}.${format}`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+
+      alert(`Successfully exported ${lots.length} lots`);
+    } catch (error) {
+      console.error(`Export ${format} failed:`, error);
+      alert(`Error exporting: ${error.message}`);
+    }
+  };
+
   const getStatusBadge = (status) => {
     const statusConfig = {
       draft: { color: 'bg-gray-100 text-gray-800', label: t('admin.status.draft') },
