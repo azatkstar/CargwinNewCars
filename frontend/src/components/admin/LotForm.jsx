@@ -41,6 +41,10 @@ const LotForm = () => {
     discount: 0,
     feesHint: 0,
     state: 'CA',
+    competitorPrices: {
+      autobandit: { monthly: 0, dueAtSigning: 0, term: 36, updatedAt: '' },
+      dealerAverage: { monthly: 0, dueAtSigning: 0, term: 36 }
+    },
     description: '',
     tags: [],
     isWeeklyDrop: false,
