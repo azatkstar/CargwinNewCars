@@ -466,14 +466,56 @@ const LotForm = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <Label htmlFor="vin">{t('admin.lot_form.vin')}</Label>
-                  <Input
-                    id="vin"
-                    value={lot.vin}
-                    onChange={(e) => handleInputChange('vin', e.target.value.toUpperCase())}
-                    maxLength={17}
-                    className={errors.vin ? 'border-red-500' : ''}
-                  />
+                  <div className="flex gap-2">
+                    <Input
+                      id="vin"
+                      value={lot.vin}
+                      onChange={(e) => handleInputChange('vin', e.target.value.toUpperCase())}
+                      maxLength={17}
+                      className={errors.vin ? 'border-red-500' : ''}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={async () => {
+                        if (!lot.vin || lot.vin.length !== 17) {
+                          alert('Please enter a 17-character VIN first');
+                          return;
+                        }
+                        try {
+                          const api = getApiClient();
+                          const response = await api.get(`/api/admin/vin/decode/${lot.vin}`);
+                          const decoded = response.data.decoded;
+                          
+                          // Auto-fill fields from VIN decode
+                          if (decoded.make) handleInputChange('make', decoded.make);
+                          if (decoded.model) handleInputChange('model', decoded.model);
+                          if (decoded.year) handleInputChange('year', parseInt(decoded.year));
+                          if (decoded.trim) handleInputChange('trim', decoded.trim);
+                          if (decoded.drivetrain) {
+                            const driveMap = {
+                              'AWD': 'AWD',
+                              '4WD': 'AWD', 
+                              'FWD': 'FWD',
+                              'RWD': 'RWD'
+                            };
+                            const drive = driveMap[decoded.drivetrain.toUpperCase()] || 'FWD';
+                            handleInputChange('drivetrain', drive);
+                          }
+                          
+                          alert('VIN decoded successfully! Fields auto-populated.');
+                        } catch (error) {
+                          console.error('VIN decode error:', error);
+                          alert('Failed to decode VIN: ' + (error.response?.data?.detail || error.message));
+                        }
+                      }}
+                      disabled={!lot.vin || lot.vin.length !== 17}
+                    >
+                      Decode VIN
+                    </Button>
+                  </div>
                   {errors.vin && <p className="text-sm text-red-600 mt-1">{errors.vin}</p>}
+                  <p className="text-xs text-gray-500 mt-1">17 characters. Click "Decode VIN" to auto-populate fields.</p>
                 </div>
 
                 <div>
