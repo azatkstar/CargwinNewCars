@@ -66,6 +66,7 @@ class CompleteProfileRequest(BaseModel):
     residence_duration_months: int
     monthly_expenses: int
     down_payment_ready: int
+    ssn: Optional[str] = None  # Social Security Number (encrypted)
 
 class User(BaseModel):
     id: str
