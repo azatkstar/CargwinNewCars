@@ -1472,22 +1472,6 @@ async def search_car_images(
     except Exception as e:
         logger.error(f"Image search error: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to search images: {str(e)}")
-
-                "doc_fee": 150,
-                "local_tax_note": "Local sales tax up to 3.9%",
-                "total_estimate_note": "RTA tax may apply in some areas"
-            },
-            "OR": {
-                "state_code": "OR",
-                "state_name": "Oregon",
-                "sales_tax_rate": 0.0,  # No sales tax in Oregon
-                "dmv_registration": 122.0,
-                "title_fee": 77.0,
-                "doc_fee": 115,
-                "plate_fee": 25.0,
-                "local_tax_note": "No sales tax in Oregon",
-                "total_estimate_note": "One of few states without sales tax"
-            }
         }
         
         # Normalize state code
