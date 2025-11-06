@@ -127,6 +127,25 @@ const CarDetail = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>{carData.title} - Exclusive Fleet Pricing | CargwinNewCar</title>
+        <meta name="description" content={`Get exclusive fleet pricing on ${carData.title}. MSRP $${carData.msrp?.toLocaleString()}, Fleet Price $${carData.fleet?.toLocaleString()}. Save $${carData.savings?.toLocaleString()} with transparent pricing.`} />
+        
+        {/* Open Graph */}
+        <meta property="og:type" content="product" />
+        <meta property="og:title" content={`${carData.title} - Fleet Pricing`} />
+        <meta property="og:description" content={`Save $${carData.savings?.toLocaleString()} on ${carData.title}. Starting at $${carData.lease?.monthly}/month.`} />
+        <meta property="og:image" content={carData.image || carData.gallery?.[0]} />
+        <meta property="og:price:amount" content={carData.fleet} />
+        <meta property="og:price:currency" content="USD" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${carData.title} - Fleet Pricing`} />
+        <meta name="twitter:description" content={`Save $${carData.savings?.toLocaleString()}. Starting at $${carData.lease?.monthly}/month.`} />
+        <meta name="twitter:image" content={carData.image || carData.gallery?.[0]} />
+      </Helmet>
+      
       <Header />
       
       {/* Car Hero Section */}
