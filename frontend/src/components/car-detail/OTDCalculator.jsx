@@ -142,7 +142,7 @@ const OTDCalculator = ({ car }) => {
           </div>
 
           <div>
-            <Label htmlFor="state">Штат</Label>
+            <Label htmlFor="state">State</Label>
             <Select value={formData.state} onValueChange={(value) => handleInputChange('state', value)}>
               <SelectTrigger className="mt-1">
                 <SelectValue />
@@ -157,23 +157,23 @@ const OTDCalculator = ({ car }) => {
           </div>
 
           <div>
-            <Label htmlFor="creditScore">Кредитный рейтинг</Label>
+            <Label htmlFor="creditScore">Credit Score</Label>
             <Select value={formData.creditScore} onValueChange={(value) => handleInputChange('creditScore', value)}>
               <SelectTrigger className="mt-1">
-                <SelectValue placeholder="Выберите диапазон" />
+                <SelectValue placeholder="Select range" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="excellent">Отличный (750+)</SelectItem>
-                <SelectItem value="good">Хороший (700-749)</SelectItem>
-                <SelectItem value="fair">Удовлетворительный (650-699)</SelectItem>
-                <SelectItem value="poor">Плохой (600-649)</SelectItem>
-                <SelectItem value="bad">Очень плохой (&lt;600)</SelectItem>
+                <SelectItem value="excellent">Excellent (750+)</SelectItem>
+                <SelectItem value="good">Good (700-749)</SelectItem>
+                <SelectItem value="fair">Fair (650-699)</SelectItem>
+                <SelectItem value="poor">Poor (600-649)</SelectItem>
+                <SelectItem value="bad">Very Poor (&lt;600)</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <Label htmlFor="downPayment">Первоначальный взнос ($)</Label>
+            <Label htmlFor="downPayment">Down Payment ($)</Label>
             <Input
               id="downPayment"
               type="number"
