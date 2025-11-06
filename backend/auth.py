@@ -412,10 +412,15 @@ async def process_oauth_session(session_id: str, user_repo: UserRepository, sess
     session_repo = get_session_repository()
     
     # Call Emergent Auth API to get session data
+    emergent_auth_api = os.environ.get(
+        "EMERGENT_AUTH_API_URL",
+        "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data"
+    )
+    
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(
-                "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
+                emergent_auth_api,
                 headers={"X-Session-ID": session_id},
                 timeout=10.0
             )
