@@ -386,9 +386,17 @@ class UserRepository:
     
     async def get_user_by_id(self, user_id: str) -> Optional[Dict[str, Any]]:
         """Get user by ID"""
-        result = await self.collection.find_one({"_id": user_id})
+        # Handle ObjectId conversion if needed
+        query_id = user_id
+        if len(user_id) == 24 and all(c in '0123456789abcdef' for c in user_id.lower()):
+            try:
+                query_id = ObjectId(user_id)
+            except:
+                pass  # Use string ID if ObjectId conversion fails
+        
+        result = await self.collection.find_one({"_id": query_id})
         if result:
-            result['id'] = result.pop('_id')
+            result['id'] = str(result.pop('_id'))
         return result
     
     async def update_user(self, user_id: str, update_data: Dict[str, Any]) -> bool:
