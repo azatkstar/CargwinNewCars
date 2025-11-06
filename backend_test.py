@@ -2704,16 +2704,64 @@ class BackendTester:
         
         return lexus_success
 
+    def run_competitor_prices_demo_test(self):
+        """Run specific test for adding competitor prices demo"""
+        print("\n" + "=" * 80)
+        print("COMPETITOR PRICES DEMO TESTING")
+        print("=" * 80)
+        print("Testing addition of competitor prices to 2024 Lexus RX350 Premium")
+        print()
+        
+        # First ensure we have authentication
+        auth_tests = [
+            ("Server Startup Verification", self.test_server_startup_verification),
+            ("Authentication System", self.test_authentication_system),
+        ]
+        
+        passed = 0
+        total_auth = len(auth_tests)
+        
+        for i, (test_name, test_func) in enumerate(auth_tests):
+            print(f"\n--- {test_name} ({i+1}/{total_auth}) ---")
+            try:
+                if test_func():
+                    passed += 1
+            except Exception as e:
+                self.log_test(test_name, False, f"Test execution error: {str(e)}")
+        
+        if passed < total_auth:
+            print("\n❌ AUTHENTICATION FAILED - CANNOT PROCEED WITH COMPETITOR PRICES TEST")
+            return False
+        
+        # Run the competitor prices demo test
+        print("\n💰 COMPETITOR PRICES DEMO TEST")
+        print("-" * 40)
+        
+        demo_success = self.test_add_competitor_prices_demo()
+        
+        # Print summary
+        print("\n" + "=" * 80)
+        print("COMPETITOR PRICES DEMO TEST SUMMARY")
+        print("=" * 80)
+        
+        for result in self.test_results:
+            status = "✅ PASS" if result["success"] else "❌ FAIL"
+            print(f"{status} {result['test']}: {result['message']}")
+        
+        if demo_success:
+            print("\n🎉 COMPETITOR PRICES DEMO TEST COMPLETED SUCCESSFULLY!")
+            print("✅ Lot updated with competitor_prices")
+            print("✅ Price comparison feature ready for demo")
+        else:
+            print("\n❌ COMPETITOR PRICES DEMO TEST FAILED!")
+        
+        return demo_success
+
 if __name__ == "__main__":
     tester = BackendTester()
     
-    # Run Phase 2 new features tests as requested
-    print("Running Backend Testing - Phase 2 New Features...")
-    success = tester.run_phase2_tests()
-    
-    if success:
-        print("\n🎉 ALL PHASE 2 FEATURES TESTING COMPLETED SUCCESSFULLY!")
-    else:
-        print("\n❌ PHASE 2 FEATURES TESTING FOUND ISSUES!")
+    # Run competitor prices demo test as requested
+    print("Running Competitor Prices Demo Test...")
+    success = tester.run_competitor_prices_demo_test()
     
     sys.exit(0 if success else 1)
