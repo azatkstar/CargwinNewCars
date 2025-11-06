@@ -225,11 +225,35 @@ const OTDCalculator = ({ car }) => {
                   <span className="font-semibold">{formatPrice(car.fleet)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">Налог ({formData.state}):</span>
+                  <span className="text-gray-700">
+                    Sales Tax ({results.taxData?.salesTaxRate || '7.25'}% - {results.taxData?.stateName || formData.state}):
+                  </span>
                   <span className="font-semibold">{formatPrice(results.tax)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Сборы DMV/Doc:</span>
+                {results.taxData && (
+                  <>
+                    <div className="flex justify-between text-sm text-gray-600">
+                      <span className="pl-3">• DMV Registration:</span>
+                      <span>{formatPrice(results.taxData.dmvFees)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-600">
+                      <span className="pl-3">• Title Fee:</span>
+                      <span>{formatPrice(results.taxData.titleFee)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-600">
+                      <span className="pl-3">• Doc Fee:</span>
+                      <span>{formatPrice(results.taxData.docFee)}</span>
+                    </div>
+                    {results.taxData.otherFees > 0 && (
+                      <div className="flex justify-between text-sm text-gray-600">
+                        <span className="pl-3">• Other Fees:</span>
+                        <span>{formatPrice(results.taxData.otherFees)}</span>
+                      </div>
+                    )}
+                  </>
+                )}
+                <div className="flex justify-between font-medium">
+                  <span className="text-gray-700">Total Fees:</span>
                   <span className="font-semibold">{formatPrice(results.fees)}</span>
                 </div>
                 <div className="border-t pt-3">
