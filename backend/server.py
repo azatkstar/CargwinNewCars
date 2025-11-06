@@ -1513,30 +1513,6 @@ async def search_car_images(
         logger.error(f"Get tax/fees error: {e}")
         raise HTTPException(status_code=500, detail="Failed to get tax and fees")
 
-@api_router.get("/tax-fees")
-async def get_all_tax_fees():
-    """Get tax and fees for all available states"""
-    try:
-        # Return list of all supported states
-        states = ["CA", "TX", "FL", "NY", "AZ", "NV", "WA", "OR"]
-        result = []
-        
-        for state in states:
-            state_data = await get_tax_fees(state)
-            result.append(state_data)
-        
-        return {"states": result, "total": len(result)}
-        
-    except Exception as e:
-        logger.error(f"Get all tax/fees error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to get tax and fees")
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"VIN decode error: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to decode VIN: {str(e)}")
-
 
 @api_router.post("/admin/lots/{lot_id}/preview")
 async def create_preview_token(lot_id: str):
