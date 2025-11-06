@@ -604,6 +604,7 @@ async def update_user_profile(
             "residence_duration_months": profile_data.residence_duration_months,
             "monthly_expenses": profile_data.monthly_expenses,
             "down_payment_ready": profile_data.down_payment_ready,
+            "ssn": profile_data.ssn,  # Store encrypted SSN
             "profile_completed": True
         }
         
