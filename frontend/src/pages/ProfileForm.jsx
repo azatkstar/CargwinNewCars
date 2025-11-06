@@ -25,7 +25,8 @@ const ProfileForm = () => {
     address: user?.address || '',
     residence_duration_months: user?.residence_duration_months || '',
     monthly_expenses: user?.monthly_expenses || '',
-    down_payment_ready: user?.down_payment_ready || ''
+    down_payment_ready: user?.down_payment_ready || '',
+    ssn: user?.ssn || ''
   });
 
   useEffect(() => {
