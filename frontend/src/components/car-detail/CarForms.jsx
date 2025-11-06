@@ -106,12 +106,12 @@ const CarForms = ({ car }) => {
     
     // Anti-spam timing check
     if (Date.now() - submissionTime < 1500) {
-      alert('Пожалуйста, подождите немного перед отправкой');
+      alert('Please wait a moment before submitting');
       return;
     }
 
     if (!dealForm.consent) {
-      alert('Необходимо согласие на обработку данных');
+      alert('Consent to data processing is required');
       return;
     }
 
