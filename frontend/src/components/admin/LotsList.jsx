@@ -156,14 +156,32 @@ const LotsList = () => {
           </p>
         </div>
         
-        {hasPermission('editor') && (
-          <Button asChild className="bg-red-600 hover:bg-red-700">
-            <Link to="/admin/lots/new">
-              <Plus className="w-4 h-4 mr-2" />
-              {t('admin.lots.create_new')}
-            </Link>
-          </Button>
-        )}
+        <div className="flex items-center gap-2">
+          {hasPermission('editor') && (
+            <>
+              <Button 
+                variant="outline"
+                onClick={() => downloadExport('csv')}
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Export CSV
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={() => downloadExport('xlsx')}
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Export Excel
+              </Button>
+              <Button asChild className="bg-red-600 hover:bg-red-700">
+                <Link to="/admin/lots/new">
+                  <Plus className="w-4 h-4 mr-2" />
+                  {t('admin.lots.create_new')}
+                </Link>
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Filters */}
