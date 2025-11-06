@@ -45,7 +45,9 @@ frontend/.env.production.local
 
 # Backend specific
 backend/__pycache__
+backend/**/__pycache__
 backend/*.pyc
+backend/**/*.pyc
 backend/*.pyo
 backend/*.pyd
 backend/.Python
@@ -55,6 +57,8 @@ backend/.venv
 backend/.pytest_cache
 backend/.mypy_cache
 backend/.ruff_cache
+**/__pycache__
+**/*.pyc
 
 # Uploads (will be mounted or in separate storage)
 uploads/
