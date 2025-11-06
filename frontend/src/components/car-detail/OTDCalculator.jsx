@@ -60,6 +60,44 @@ const OTDCalculator = ({ car }) => {
 
       setResults({
         estOtdoor,
+        tax: salesTax,
+        fees: totalFees,
+        apr,
+        monthlyPayment,
+        taxData: {
+          salesTaxRate: taxData.sales_tax_rate,
+          dmvFees,
+          titleFee,
+          docFee,
+          otherFees,
+          stateName: taxData.state_name,
+          localTaxNote: taxData.local_tax_note
+        }
+      });
+      
+      setLoading(false);
+    } catch (error) {
+      console.error('Tax calculation error:', error);
+      // Fallback to default calculation
+      const baseTax = car.fleet * 0.0725;
+      const fees = 500;
+      const estOtdoor = car.fleet + baseTax + fees;
+      
+      let apr = 4.5;
+      if (formData.creditScore === 'excellent') apr = 2.9;
+      else if (formData.creditScore === 'good') apr = 3.5;
+      else if (formData.creditScore === 'fair') apr = 5.5;
+      else if (formData.creditScore === 'poor') apr = 7.5;
+      else if (formData.creditScore === 'bad') apr = 12.0;
+
+      const monthlyPayment = calculateMonthlyPayment(
+        estOtdoor - formData.downPayment,
+        apr,
+        formData.term
+      );
+
+      setResults({
+        estOtdoor,
         tax: baseTax,
         fees,
         apr,
@@ -67,7 +105,8 @@ const OTDCalculator = ({ car }) => {
       });
       
       setLoading(false);
-    }, 2000);
+    }
+  };
   };
 
   const calculateMonthlyPayment = (principal, apr, termMonths) => {
