@@ -1115,6 +1115,78 @@ async def import_lots_xlsx(
                 # Map Excel columns to lot data
                 lot_data = {
                     'make': str(row.get('Make', '')),
+
+@api_router.get("/admin/vin/decode/{vin}")
+async def decode_vin(
+    vin: str,
+    current_user: User = Depends(require_editor)
+):
+    """Decode VIN using NHTSA API (free, US vehicles)"""
+    try:
+        import httpx
+        
+        if len(vin) != 17:
+            raise HTTPException(status_code=400, detail="VIN must be 17 characters")
+        
+        # Call NHTSA API
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/{vin}?format=json",
+                timeout=10.0
+            )
+            
+            if response.status_code != 200:
+                raise HTTPException(status_code=502, detail="VIN decoder service unavailable")
+            
+            data = response.json()
+            results = data.get('Results', [])
+            
+            # Extract useful fields
+            decoded = {}
+            field_map = {
+                'Make': 'make',
+                'Model': 'model',
+                'Model Year': 'year',
+                'Trim': 'trim',
+                'Vehicle Type': 'vehicle_type',
+                'Body Class': 'body_class',
+                'Drive Type': 'drivetrain',
+                'Engine Number of Cylinders': 'engine_cylinders',
+                'Displacement (L)': 'displacement',
+                'Fuel Type - Primary': 'fuel_type',
+                'Transmission Style': 'transmission',
+                'Doors': 'doors',
+                'Plant City': 'plant_city',
+                'Plant Country': 'plant_country',
+                'Error Code': 'error_code',
+                'Error Text': 'error_text'
+            }
+            
+            for result in results:
+                variable = result.get('Variable')
+                value = result.get('Value')
+                
+                if variable in field_map and value and value != 'Not Applicable':
+                    decoded[field_map[variable]] = value
+            
+            # Check for errors
+            if decoded.get('error_code') not in ['0', None]:
+                logger.warning(f"VIN decode warning for {vin}: {decoded.get('error_text')}")
+            
+            logger.info(f"Decoded VIN {vin} by {current_user.email}")
+            
+            return {
+                "vin": vin,
+                "decoded": decoded,
+                "source": "NHTSA"
+            }
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"VIN decode error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to decode VIN: {str(e)}")
+
                     'model': str(row.get('Model', '')),
                     'year': int(row.get('Year', datetime.now(timezone.utc).year)),
                     'trim': str(row.get('Trim', '')),
