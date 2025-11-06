@@ -206,11 +206,12 @@ const ProfileForm = () => {
                     <Select
                       value={formData.employment_type}
                       onValueChange={(value) => handleChange('employment_type', value)}
+                      required
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select..." />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent position="popper" sideOffset={5}>
                         <SelectItem value="W2">W2 Employee</SelectItem>
                         <SelectItem value="1099">1099 Contractor</SelectItem>
                         <SelectItem value="Self-employed">Self-employed</SelectItem>
