@@ -107,11 +107,51 @@ The application is now ready for deployment. All identified issues have been res
 
 ---
 
+### 5. **Hardcoded Emergent Auth URLs** ✅ FIXED
+**Problem:**
+- Frontend had hardcoded Emergent Auth URL in Auth.jsx
+- Backend had hardcoded Emergent Auth API URL in auth.py
+- Not configurable for different environments
+
+**Solution:**
+- Moved URLs to environment variables
+- Frontend: `REACT_APP_EMERGENT_AUTH_URL`
+- Backend: `EMERGENT_AUTH_API_URL`
+- Added default values for backward compatibility
+
+**Files Modified:**
+- `/app/frontend/src/pages/Auth.jsx` - Use env variable for auth URL
+- `/app/backend/auth.py` - Use env variable for API URL
+- `/app/frontend/.env` - Added REACT_APP_EMERGENT_AUTH_URL
+- `/app/backend/.env` - Added EMERGENT_AUTH_API_URL
+- `/app/backend/.env.production` - Added default values and notes
+- `/app/docker/env-config.sh` - Include auth URL in runtime config
+
+---
+
+### 6. **CORS Configuration for Production** ✅ UPDATED
+**Problem:**
+- .env.production template didn't include Emergent deployment domain pattern
+
+**Solution:**
+- Updated CORS_ORIGINS template to include `https://{app_name}.emergent.host`
+- Added helpful comments for production configuration
+
+**Files Modified:**
+- `/app/backend/.env.production` - Updated CORS_ORIGINS template
+
+---
+
 ## Files Changed Summary:
 
 1. `/app/frontend/package.json` - Switched to react-scripts, added babel plugin
-2. `/app/docker/nginx.conf` - Fixed backend port from 8000 to 8001
-3. `/app/.dockerignore` - Created comprehensive ignore rules
+2. `/app/frontend/src/pages/Auth.jsx` - Made Emergent Auth URL configurable
+3. `/app/backend/auth.py` - Made Emergent Auth API URL configurable
+4. `/app/docker/nginx.conf` - Fixed backend port from 8000 to 8001
+5. `/app/docker/env-config.sh` - Added auth URL to runtime config
+6. `/app/frontend/.env` - Added REACT_APP_EMERGENT_AUTH_URL
+7. `/app/backend/.env` - Added EMERGENT_AUTH_API_URL
+8. `/app/backend/.env.production` - Updated CORS and added auth URL
 
 ## Files Created:
 
