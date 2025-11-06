@@ -160,15 +160,35 @@ const ProfileForm = () => {
                     <Select
                       value={formData.auto_loan_history.toString()}
                       onValueChange={(value) => handleChange('auto_loan_history', value === 'true')}
+                      required
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select..." />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent position="popper" sideOffset={5}>
                         <SelectItem value="true">Yes</SelectItem>
                         <SelectItem value="false">No</SelectItem>
                       </SelectContent>
                     </Select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Social Security Number (SSN) *</label>
+                  <Input
+                    type="password"
+                    placeholder="XXX-XX-XXXX"
+                    value={formData.ssn}
+                    onChange={(e) => handleChange('ssn', e.target.value)}
+                    maxLength="11"
+                    required
+                  />
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-3 mt-2">
+                    <p className="text-xs text-blue-900">
+                      🔒 <strong>Your security is our priority.</strong> Your SSN is encrypted with bank-level security (AES-256) 
+                      and used solely for credit verification. We never share your information with third parties. 
+                      This data is required by federal law for identity verification and credit checks.
+                    </p>
                   </div>
                 </div>
               </div>
