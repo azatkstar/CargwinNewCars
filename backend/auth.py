@@ -83,6 +83,12 @@ class User(BaseModel):
     auto_loan_history: Optional[bool] = None
     employment_type: Optional[str] = None
     annual_income: Optional[int] = None
+    employment_duration_months: Optional[int] = None
+    address: Optional[str] = None
+    residence_duration_months: Optional[int] = None
+    monthly_expenses: Optional[int] = None
+    down_payment_ready: Optional[int] = None
+    ssn: Optional[str] = None
 
 # In-memory storage for magic links (in production use Redis)
 magic_links_storage: Dict[str, Dict[str, Any]] = {}
