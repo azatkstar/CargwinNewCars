@@ -264,6 +264,22 @@ const LotsList = () => {
                   {t('admin.lots.delete_selected')}
                 </Button>
               )}
+              <Button 
+                size="sm" 
+                variant="outline"
+                onClick={() => handleBatchAction('export')}
+              >
+                <Download className="w-4 h-4 mr-1" />
+                {t('admin.lots.export_selected')}
+              </Button>
+              <Button 
+                size="sm" 
+                variant="outline"
+                onClick={() => handleBatchAction('import')}
+              >
+                <Upload className="w-4 h-4 mr-1" />
+                {t('admin.lots.import_lots')}
+              </Button>
             </div>
           </div>
         </div>
