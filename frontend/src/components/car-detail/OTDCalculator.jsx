@@ -29,11 +29,20 @@ const OTDCalculator = ({ car }) => {
   const calculateOTD = async () => {
     setLoading(true);
     
-    // Mock API call - simulate calculation
-    setTimeout(() => {
-      const baseTax = car.fleet * 0.0825; // CA sales tax
-      const fees = 500; // DMV and doc fees
-      const estOtdoor = car.fleet + baseTax + fees;
+    try {
+      // Fetch real tax/fees data from API
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+      const response = await fetch(`${backendUrl}/api/tax-fees/${formData.state}`);
+      const taxData = await response.json();
+      
+      // Calculate tax and fees
+      const salesTax = car.fleet * (taxData.sales_tax_rate / 100);
+      const dmvFees = taxData.dmv_registration || 0;
+      const titleFee = taxData.title_fee || 0;
+      const docFee = taxData.doc_fee || 0;
+      const otherFees = (taxData.tire_fee || 0) + (taxData.smog_fee || 0) + (taxData.inspection_fee || 0);
+      const totalFees = dmvFees + titleFee + docFee + otherFees;
+      const estOtdoor = car.fleet + salesTax + totalFees;
       
       // APR based on credit score
       let apr = 4.5;
