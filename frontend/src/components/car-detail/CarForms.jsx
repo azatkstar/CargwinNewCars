@@ -326,12 +326,12 @@ const CarForms = ({ car }) => {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Request Submitted!</h3>
               <p className="text-gray-600 mb-4">
-                Мы свяжемся с вами в течение 15 минут с персональным предложением
+                We'll contact you within 15 minutes with a personalized offer
               </p>
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-sm text-blue-800">
-                  <strong>Важно:</strong> Мы не передаём ваши данные дилерам для обзвонов. 
-                  Контакт произойдёт только после согласования всех условий.
+                  <strong>Important:</strong> We don't share your data with dealers for cold calling. 
+                  Contact will only occur after all terms are agreed upon.
                 </p>
               </div>
             </div>
