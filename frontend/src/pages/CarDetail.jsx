@@ -141,6 +141,9 @@ const CarDetail = () => {
           <div className="lg:col-span-2 space-y-12">
             <CarSpecs car={carData} />
             <OTDCalculator car={carData} />
+            
+            {/* Price Comparison - Only show if competitor data exists */}
+            <PriceComparison car={carData} />
           </div>
           
           {/* Right Column - Forms */}
