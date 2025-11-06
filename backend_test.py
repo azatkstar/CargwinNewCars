@@ -2255,13 +2255,13 @@ class BackendTester:
 if __name__ == "__main__":
     tester = BackendTester()
     
-    # Run the specific admin statistics and application management test as requested
-    print("Running Admin Statistics and Application Management Testing...")
-    success = tester.test_admin_statistics_and_applications()
+    # Run the critical fixes tests as requested
+    print("Running Backend Testing - Phase 1 Critical Fixes...")
+    success = tester.run_critical_fixes_tests()
     
     if success:
-        print("\n🎉 ADMIN STATISTICS AND APPLICATION MANAGEMENT TESTING COMPLETED SUCCESSFULLY!")
+        print("\n🎉 ALL CRITICAL FIXES TESTING COMPLETED SUCCESSFULLY!")
     else:
-        print("\n❌ ADMIN STATISTICS AND APPLICATION MANAGEMENT TESTING FAILED!")
+        print("\n❌ CRITICAL FIXES TESTING FOUND ISSUES!")
     
     sys.exit(0 if success else 1)
