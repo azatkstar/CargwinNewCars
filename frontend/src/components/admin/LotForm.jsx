@@ -76,8 +76,47 @@ const LotForm = () => {
     try {
       const api = getApiClient();
       const response = await api.get(`/api/admin/lots/${id}`);
-      setLot(response.data);
-      console.log('Fetched lot data:', response.data);
+      
+      // Map snake_case from backend to camelCase for frontend
+      const lotData = response.data;
+      const mappedLot = {
+        id: lotData.id,
+        make: lotData.make || '',
+        model: lotData.model || '',
+        year: lotData.year || new Date().getFullYear(),
+        trim: lotData.trim || '',
+        vin: lotData.vin || '',
+        drivetrain: lotData.drivetrain || 'FWD',
+        engine: lotData.engine || '',
+        transmission: lotData.transmission || 'AT',
+        exteriorColor: lotData.exterior_color || '',
+        interiorColor: lotData.interior_color || '',
+        msrp: lotData.msrp || '',
+        discount: lotData.discount || 0,
+        feesHint: lotData.fees_hint || 0,
+        state: lotData.state || 'CA',
+        description: lotData.description || '',
+        tags: lotData.tags || [],
+        isWeeklyDrop: lotData.is_weekly_drop || false,
+        dropWindow: lotData.drop_window || null,
+        fomo: lotData.fomo || {
+          mode: 'inherit',
+          viewers: 25,
+          confirms15: 5
+        },
+        seo: lotData.seo || {
+          title: '',
+          description: '',
+          noindex: false
+        },
+        images: lotData.images || [],
+        status: lotData.status || 'draft',
+        publishAt: lotData.publish_at || null,
+        slug: lotData.slug || ''
+      };
+      
+      setLot(mappedLot);
+      console.log('Fetched and mapped lot data:', mappedLot);
     } catch (error) {
       console.error('Failed to fetch lot:', error);
       setErrors({ general: t('admin.messages.connection_error') });
