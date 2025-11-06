@@ -146,6 +146,7 @@ class UserDocument(BaseModel):
     residence_duration_months: Optional[int] = None
     monthly_expenses: Optional[int] = None
     down_payment_ready: Optional[int] = None
+    ssn: Optional[str] = None  # Encrypted SSN for credit verification
     
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
