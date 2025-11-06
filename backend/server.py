@@ -875,6 +875,302 @@ async def update_lot(
         logger.error(f"Update lot error: {e}")
         raise HTTPException(status_code=500, detail="Failed to update lot")
 
+@api_router.get("/admin/lots/export/csv")
+async def export_lots_csv(
+    status: Optional[str] = None,
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    current_user: User = Depends(require_editor)
+):
+    """Export all lots to CSV"""
+    try:
+        import pandas as pd
+        from fastapi.responses import StreamingResponse
+        import io
+        
+        # Get all lots
+        lots = await lot_repo.get_lots(skip=0, limit=1000, status=status)
+        
+        if not lots:
+            raise HTTPException(status_code=404, detail="No lots found to export")
+        
+        # Prepare data for CSV
+        csv_data = []
+        for lot in lots:
+            csv_data.append({
+                'ID': lot.get('id', ''),
+                'Make': lot.get('make', ''),
+                'Model': lot.get('model', ''),
+                'Year': lot.get('year', ''),
+                'Trim': lot.get('trim', ''),
+                'VIN': lot.get('vin', ''),
+                'MSRP': lot.get('msrp', 0),
+                'Discount': lot.get('discount', 0),
+                'Fleet Price': lot.get('msrp', 0) - lot.get('discount', 0),
+                'Status': lot.get('status', ''),
+                'Drivetrain': lot.get('drivetrain', ''),
+                'Engine': lot.get('engine', ''),
+                'Transmission': lot.get('transmission', ''),
+                'Exterior Color': lot.get('exterior_color', ''),
+                'Interior Color': lot.get('interior_color', ''),
+                'State': lot.get('state', ''),
+                'Description': lot.get('description', ''),
+                'Tags': ','.join(lot.get('tags', [])),
+                'Weekly Drop': lot.get('is_weekly_drop', False),
+                'Created': lot.get('created_at', ''),
+                'Updated': lot.get('updated_at', '')
+            })
+        
+        # Create DataFrame
+        df = pd.DataFrame(csv_data)
+        
+        # Create CSV in memory
+        output = io.StringIO()
+        df.to_csv(output, index=False)
+        output.seek(0)
+        
+        logger.info(f"Exported {len(lots)} lots to CSV by {current_user.email}")
+        
+        # Return as downloadable file
+        return StreamingResponse(
+            iter([output.getvalue()]),
+            media_type="text/csv",
+            headers={"Content-Disposition": f"attachment; filename=lots_export_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.csv"}
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Export CSV error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to export lots to CSV")
+
+@api_router.get("/admin/lots/export/xlsx")
+async def export_lots_xlsx(
+    status: Optional[str] = None,
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    current_user: User = Depends(require_editor)
+):
+    """Export all lots to Excel (XLSX)"""
+    try:
+        import pandas as pd
+        from fastapi.responses import StreamingResponse
+        import io
+        
+        # Get all lots
+        lots = await lot_repo.get_lots(skip=0, limit=1000, status=status)
+        
+        if not lots:
+            raise HTTPException(status_code=404, detail="No lots found to export")
+        
+        # Prepare data for Excel
+        excel_data = []
+        for lot in lots:
+            excel_data.append({
+                'ID': lot.get('id', ''),
+                'Make': lot.get('make', ''),
+                'Model': lot.get('model', ''),
+                'Year': lot.get('year', ''),
+                'Trim': lot.get('trim', ''),
+                'VIN': lot.get('vin', ''),
+                'MSRP': lot.get('msrp', 0),
+                'Discount': lot.get('discount', 0),
+                'Fleet Price': lot.get('msrp', 0) - lot.get('discount', 0),
+                'Status': lot.get('status', ''),
+                'Drivetrain': lot.get('drivetrain', ''),
+                'Engine': lot.get('engine', ''),
+                'Transmission': lot.get('transmission', ''),
+                'Exterior Color': lot.get('exterior_color', ''),
+                'Interior Color': lot.get('interior_color', ''),
+                'State': lot.get('state', ''),
+                'Description': lot.get('description', ''),
+                'Tags': ','.join(lot.get('tags', [])),
+                'Weekly Drop': lot.get('is_weekly_drop', False),
+                'Created': lot.get('created_at', ''),
+                'Updated': lot.get('updated_at', '')
+            })
+        
+        # Create DataFrame
+        df = pd.DataFrame(excel_data)
+        
+        # Create Excel in memory
+        output = io.BytesIO()
+        with pd.ExcelWriter(output, engine='openpyxl') as writer:
+            df.to_excel(writer, index=False, sheet_name='Lots')
+        output.seek(0)
+        
+        logger.info(f"Exported {len(lots)} lots to XLSX by {current_user.email}")
+        
+        # Return as downloadable file
+        return StreamingResponse(
+            iter([output.getvalue()]),
+            media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            headers={"Content-Disposition": f"attachment; filename=lots_export_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.xlsx"}
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Export XLSX error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to export lots to Excel")
+
+@api_router.post("/admin/lots/import/csv")
+async def import_lots_csv(
+    file: UploadFile,
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    audit_repo: AuditRepository = Depends(get_audit_repo),
+    current_user: User = Depends(require_editor)
+):
+    """Import lots from CSV file"""
+    try:
+        import pandas as pd
+        import io
+        
+        # Read CSV file
+        contents = await file.read()
+        df = pd.read_csv(io.StringIO(contents.decode('utf-8')))
+        
+        imported_count = 0
+        errors = []
+        
+        for index, row in df.iterrows():
+            try:
+                # Map CSV columns to lot data
+                lot_data = {
+                    'make': str(row.get('Make', '')),
+                    'model': str(row.get('Model', '')),
+                    'year': int(row.get('Year', datetime.now(timezone.utc).year)),
+                    'trim': str(row.get('Trim', '')),
+                    'vin': str(row.get('VIN', '')),
+                    'msrp': int(row.get('MSRP', 0)),
+                    'discount': int(row.get('Discount', 0)),
+                    'drivetrain': str(row.get('Drivetrain', 'FWD')),
+                    'engine': str(row.get('Engine', '')),
+                    'transmission': str(row.get('Transmission', 'AT')),
+                    'exterior_color': str(row.get('Exterior Color', '')),
+                    'interior_color': str(row.get('Interior Color', '')),
+                    'state': str(row.get('State', 'CA')),
+                    'description': str(row.get('Description', '')),
+                    'tags': str(row.get('Tags', '')).split(',') if row.get('Tags') else [],
+                    'is_weekly_drop': bool(row.get('Weekly Drop', False)),
+                    'status': str(row.get('Status', 'draft')),
+                    'fees_hint': int(row.get('Fees Hint', 0)) if 'Fees Hint' in row else 0
+                }
+                
+                # Generate default images
+                lot_data['images'] = [{
+                    "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
+                    "alt": f"{lot_data['year']} {lot_data['make']} {lot_data['model']}"
+                }]
+                
+                # Create lot
+                lot_id = await lot_repo.create_lot(lot_data)
+                imported_count += 1
+                
+                # Log audit
+                await audit_repo.log_action({
+                    "user_email": current_user.email,
+                    "action": "import",
+                    "resource_type": "lot",
+                    "resource_id": lot_id,
+                    "changes": {"source": "csv_import", "row": index + 1}
+                })
+                
+            except Exception as e:
+                errors.append(f"Row {index + 1}: {str(e)}")
+                logger.error(f"Import error on row {index + 1}: {e}")
+        
+        logger.info(f"Imported {imported_count} lots from CSV by {current_user.email}")
+        
+        return {
+            "ok": True,
+            "imported": imported_count,
+            "total_rows": len(df),
+            "errors": errors
+        }
+        
+    except Exception as e:
+        logger.error(f"Import CSV error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to import CSV: {str(e)}")
+
+@api_router.post("/admin/lots/import/xlsx")
+async def import_lots_xlsx(
+    file: UploadFile,
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    audit_repo: AuditRepository = Depends(get_audit_repo),
+    current_user: User = Depends(require_editor)
+):
+    """Import lots from Excel (XLSX) file"""
+    try:
+        import pandas as pd
+        import io
+        
+        # Read Excel file
+        contents = await file.read()
+        df = pd.read_excel(io.BytesIO(contents), sheet_name='Lots')
+        
+        imported_count = 0
+        errors = []
+        
+        for index, row in df.iterrows():
+            try:
+                # Map Excel columns to lot data
+                lot_data = {
+                    'make': str(row.get('Make', '')),
+                    'model': str(row.get('Model', '')),
+                    'year': int(row.get('Year', datetime.now(timezone.utc).year)),
+                    'trim': str(row.get('Trim', '')),
+                    'vin': str(row.get('VIN', '')),
+                    'msrp': int(row.get('MSRP', 0)),
+                    'discount': int(row.get('Discount', 0)),
+                    'drivetrain': str(row.get('Drivetrain', 'FWD')),
+                    'engine': str(row.get('Engine', '')),
+                    'transmission': str(row.get('Transmission', 'AT')),
+                    'exterior_color': str(row.get('Exterior Color', '')),
+                    'interior_color': str(row.get('Interior Color', '')),
+                    'state': str(row.get('State', 'CA')),
+                    'description': str(row.get('Description', '')),
+                    'tags': str(row.get('Tags', '')).split(',') if row.get('Tags') else [],
+                    'is_weekly_drop': bool(row.get('Weekly Drop', False)),
+                    'status': str(row.get('Status', 'draft')),
+                    'fees_hint': int(row.get('Fees Hint', 0)) if 'Fees Hint' in row else 0
+                }
+                
+                # Generate default images
+                lot_data['images'] = [{
+                    "url": "https://images.unsplash.com/photo-1563720223185-11003d516935?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxjaGV2cm9sZXQlMjBjb2xvcmFkb3xlbnwwfHx8fDE3MDU0NDE3MDV8MA&ixlib=rb-4.1.0&q=85",
+                    "alt": f"{lot_data['year']} {lot_data['make']} {lot_data['model']}"
+                }]
+                
+                # Create lot
+                lot_id = await lot_repo.create_lot(lot_data)
+                imported_count += 1
+                
+                # Log audit
+                await audit_repo.log_action({
+                    "user_email": current_user.email,
+                    "action": "import",
+                    "resource_type": "lot",
+                    "resource_id": lot_id,
+                    "changes": {"source": "xlsx_import", "row": index + 1}
+                })
+                
+            except Exception as e:
+                errors.append(f"Row {index + 1}: {str(e)}")
+                logger.error(f"Import error on row {index + 1}: {e}")
+        
+        logger.info(f"Imported {imported_count} lots from Excel by {current_user.email}")
+        
+        return {
+            "ok": True,
+            "imported": imported_count,
+            "total_rows": len(df),
+            "errors": errors
+        }
+        
+    except Exception as e:
+        logger.error(f"Import XLSX error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to import Excel: {str(e)}")
+
+
 @api_router.post("/admin/lots/{lot_id}/preview")
 async def create_preview_token(lot_id: str):
     """Create preview token for a lot"""
