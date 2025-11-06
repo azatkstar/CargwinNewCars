@@ -1321,6 +1321,101 @@ async def get_tax_fees(state: str):
                 "sales_tax_rate": 6.5,
                 "dmv_registration": 75.0,
                 "title_fee": 15.0,
+
+@api_router.get("/admin/search-car-images")
+async def search_car_images(
+    make: str,
+    model: str,
+    year: int,
+    trim: Optional[str] = None,
+    current_user: User = Depends(require_editor)
+):
+    """Search for car images from multiple sources"""
+    try:
+        import httpx
+        
+        results = {
+            "make": make,
+            "model": model,
+            "year": year,
+            "trim": trim,
+            "images": []
+        }
+        
+        # Build search query
+        search_query = f"{year} {make} {model}"
+        if trim:
+            search_query += f" {trim}"
+        
+        # Try Unsplash API (free, high quality)
+        try:
+            async with httpx.AsyncClient() as client:
+                # Unsplash requires API key, but we'll use search without it for demo
+                unsplash_url = "https://api.unsplash.com/search/photos"
+                params = {
+                    "query": search_query + " car",
+                    "per_page": 10,
+                    "orientation": "landscape"
+                }
+                
+                # If you have Unsplash API key, add it here
+                unsplash_key = os.environ.get("UNSPLASH_ACCESS_KEY")
+                if unsplash_key:
+                    headers = {"Authorization": f"Client-ID {unsplash_key}"}
+                    response = await client.get(unsplash_url, params=params, headers=headers, timeout=10.0)
+                    
+                    if response.status_code == 200:
+                        data = response.json()
+                        for photo in data.get("results", [])[:5]:
+                            results["images"].append({
+                                "url": photo["urls"]["regular"],
+                                "thumb": photo["urls"]["thumb"],
+                                "source": "unsplash",
+                                "alt": f"{year} {make} {model}",
+                                "photographer": photo.get("user", {}).get("name"),
+                                "width": photo.get("width"),
+                                "height": photo.get("height")
+                            })
+        except Exception as e:
+            logger.warning(f"Unsplash search failed: {e}")
+        
+        # Fallback: Generate placeholder images with text
+        if len(results["images"]) == 0:
+            # Use placeholder service
+            placeholder_images = [
+                {
+                    "url": f"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80",  # Generic car
+                    "thumb": f"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=200&q=80",
+                    "source": "unsplash_fallback",
+                    "alt": f"{year} {make} {model}",
+                    "note": "Generic car image - please upload actual photos"
+                },
+                {
+                    "url": f"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+                    "thumb": f"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=200&q=80",
+                    "source": "unsplash_fallback",
+                    "alt": f"{year} {make} {model} exterior",
+                    "note": "Generic exterior view"
+                },
+                {
+                    "url": f"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80",
+                    "thumb": f"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",
+                    "source": "unsplash_fallback",
+                    "alt": f"{year} {make} {model} front view",
+                    "note": "Generic front view"
+                }
+            ]
+            results["images"] = placeholder_images
+            results["note"] = "No specific images found. Using generic car photos."
+        
+        logger.info(f"Found {len(results['images'])} images for {search_query} by {current_user.email}")
+        
+        return results
+        
+    except Exception as e:
+        logger.error(f"Image search error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to search images: {str(e)}")
+
                 "doc_fee": 150,
                 "local_tax_note": "Local sales tax up to 3.9%",
                 "total_estimate_note": "RTA tax may apply in some areas"
