@@ -402,10 +402,11 @@ const LotForm = () => {
 
       {/* Form Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-7">
+        <TabsList className="grid w-full grid-cols-8">
           <TabsTrigger value="basic">{t('admin.lot_form.tabs.basic')}</TabsTrigger>
           <TabsTrigger value="media">{t('admin.lot_form.tabs.media')}</TabsTrigger>
           <TabsTrigger value="pricing">{t('admin.lot_form.tabs.pricing')}</TabsTrigger>
+          <TabsTrigger value="comparison">💰 Comparison</TabsTrigger>
           <TabsTrigger value="weekly-drop">{t('admin.lot_form.tabs.weekly_drop')}</TabsTrigger>
           <TabsTrigger value="fomo">{t('admin.lot_form.tabs.fomo')}</TabsTrigger>
           <TabsTrigger value="seo">{t('admin.lot_form.tabs.seo')}</TabsTrigger>
