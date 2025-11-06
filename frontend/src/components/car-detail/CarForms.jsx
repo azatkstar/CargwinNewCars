@@ -437,10 +437,10 @@ const CarForms = ({ car }) => {
         <CardHeader>
           <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
             <Clock className="w-5 h-5 text-blue-600" />
-            Уточнить наличие
+            Check Availability
           </CardTitle>
           <p className="text-gray-600">
-            Быстрая проверка доступности автомобиля
+            Quick check on vehicle availability
           </p>
         </CardHeader>
         
