@@ -2212,6 +2212,307 @@ class BackendTester:
             print("❌ CRITICAL ISSUES FOUND - Fixes needed")
             return False
 
+    def test_vin_decoder_api(self):
+        """Test VIN Decoder API - Phase 2 Feature"""
+        if not self.auth_token:
+            self.log_test("VIN Decoder API", False, "No auth token available")
+            return False
+        
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Test Case 1: Valid Honda Accord VIN
+            honda_vin = "1HGCM82633A123456"
+            response = self.session.get(f"{BACKEND_URL}/admin/vin/decode/{honda_vin}", headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                decoded = data.get("decoded", {})
+                
+                if decoded.get("make") and decoded.get("model"):
+                    self.log_test("VIN Decoder - Valid Honda VIN", True, 
+                                f"Decoded: {decoded.get('make')} {decoded.get('model')} {decoded.get('year', '')}")
+                    
+                    # Test Case 2: Valid Toyota Corolla VIN
+                    toyota_vin = "5YFBURHE5HP123456"
+                    response2 = self.session.get(f"{BACKEND_URL}/admin/vin/decode/{toyota_vin}", headers=headers)
+                    
+                    if response2.status_code == 200:
+                        data2 = response2.json()
+                        decoded2 = data2.get("decoded", {})
+                        
+                        if decoded2.get("make") and decoded2.get("model"):
+                            # Test Case 3: Invalid VIN (less than 17 chars)
+                            invalid_vin = "1HGCM82633A12"  # Only 13 characters
+                            response3 = self.session.get(f"{BACKEND_URL}/admin/vin/decode/{invalid_vin}", headers=headers)
+                            
+                            if response3.status_code == 400:
+                                self.log_test("VIN Decoder API", True, 
+                                            "All VIN decoder tests passed: valid VINs decoded, invalid VIN rejected")
+                                return True
+                            else:
+                                self.log_test("VIN Decoder API", False, 
+                                            f"Invalid VIN not rejected properly: HTTP {response3.status_code}")
+                                return False
+                        else:
+                            self.log_test("VIN Decoder API", False, 
+                                        f"Toyota VIN decode failed: {decoded2}")
+                            return False
+                    else:
+                        self.log_test("VIN Decoder API", False, 
+                                    f"Toyota VIN decode request failed: HTTP {response2.status_code}")
+                        return False
+                else:
+                    self.log_test("VIN Decoder API", False, 
+                                f"Honda VIN decode failed: {decoded}")
+                    return False
+            else:
+                self.log_test("VIN Decoder API", False, 
+                            f"VIN decoder endpoint failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("VIN Decoder API", False, f"VIN decoder test error: {str(e)}")
+            return False
+
+    def test_tax_fees_api(self):
+        """Test Tax/Fees Tables API - Phase 2 Feature"""
+        try:
+            # Test Case 1: Get California tax data
+            response_ca = self.session.get(f"{BACKEND_URL}/tax-fees/CA")
+            
+            if response_ca.status_code == 200:
+                ca_data = response_ca.json()
+                required_fields = ["state_code", "state_name", "sales_tax_rate", "dmv_registration", "title_fee", "doc_fee"]
+                
+                if all(field in ca_data for field in required_fields):
+                    if ca_data.get("state_code") == "CA" and ca_data.get("sales_tax_rate") == 7.25:
+                        # Test Case 2: Get Texas tax data
+                        response_tx = self.session.get(f"{BACKEND_URL}/tax-fees/TX")
+                        
+                        if response_tx.status_code == 200:
+                            tx_data = response_tx.json()
+                            
+                            if tx_data.get("state_code") == "TX" and tx_data.get("sales_tax_rate") == 6.25:
+                                # Test Case 3: Get Florida tax data
+                                response_fl = self.session.get(f"{BACKEND_URL}/tax-fees/FL")
+                                
+                                if response_fl.status_code == 200:
+                                    fl_data = response_fl.json()
+                                    
+                                    if fl_data.get("state_code") == "FL" and fl_data.get("sales_tax_rate") == 6.0:
+                                        # Test Case 4: Unsupported state (should return defaults)
+                                        response_zz = self.session.get(f"{BACKEND_URL}/tax-fees/ZZ")
+                                        
+                                        if response_zz.status_code == 200:
+                                            zz_data = response_zz.json()
+                                            
+                                            if zz_data.get("state_code") == "ZZ" and "note" in zz_data:
+                                                # Test Case 5: Get all states
+                                                response_all = self.session.get(f"{BACKEND_URL}/tax-fees")
+                                                
+                                                if response_all.status_code == 200:
+                                                    all_data = response_all.json()
+                                                    
+                                                    if "states" in all_data and len(all_data["states"]) >= 8:
+                                                        self.log_test("Tax/Fees API", True, 
+                                                                    f"All tax/fees tests passed: CA({ca_data['sales_tax_rate']}%), TX({tx_data['sales_tax_rate']}%), FL({fl_data['sales_tax_rate']}%), {len(all_data['states'])} states total")
+                                                        return True
+                                                    else:
+                                                        self.log_test("Tax/Fees API", False, 
+                                                                    f"All states endpoint failed: {all_data}")
+                                                        return False
+                                                else:
+                                                    self.log_test("Tax/Fees API", False, 
+                                                                f"All states request failed: HTTP {response_all.status_code}")
+                                                    return False
+                                            else:
+                                                self.log_test("Tax/Fees API", False, 
+                                                            f"Unsupported state not handled properly: {zz_data}")
+                                                return False
+                                        else:
+                                            self.log_test("Tax/Fees API", False, 
+                                                        f"Unsupported state request failed: HTTP {response_zz.status_code}")
+                                            return False
+                                    else:
+                                        self.log_test("Tax/Fees API", False, 
+                                                    f"Florida tax data incorrect: {fl_data}")
+                                        return False
+                                else:
+                                    self.log_test("Tax/Fees API", False, 
+                                                f"Florida tax request failed: HTTP {response_fl.status_code}")
+                                    return False
+                            else:
+                                self.log_test("Tax/Fees API", False, 
+                                            f"Texas tax data incorrect: {tx_data}")
+                                return False
+                        else:
+                            self.log_test("Tax/Fees API", False, 
+                                        f"Texas tax request failed: HTTP {response_tx.status_code}")
+                            return False
+                    else:
+                        self.log_test("Tax/Fees API", False, 
+                                    f"California tax data incorrect: {ca_data}")
+                        return False
+                else:
+                    self.log_test("Tax/Fees API", False, 
+                                f"Missing required fields in CA data: {ca_data}")
+                    return False
+            else:
+                self.log_test("Tax/Fees API", False, 
+                            f"California tax request failed: HTTP {response_ca.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Tax/Fees API", False, f"Tax/fees test error: {str(e)}")
+            return False
+
+    def test_audit_logs_api(self):
+        """Test Audit Logs API - Phase 2 Feature"""
+        if not self.auth_token:
+            self.log_test("Audit Logs API", False, "No auth token available")
+            return False
+        
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Test Case 1: Get audit logs (basic)
+            response = self.session.get(f"{BACKEND_URL}/admin/audit-logs", headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                required_fields = ["logs", "total", "page", "limit"]
+                
+                if all(field in data for field in required_fields):
+                    logs = data.get("logs", [])
+                    
+                    # Test Case 2: Test pagination
+                    response_page = self.session.get(f"{BACKEND_URL}/admin/audit-logs?page=1&limit=20", headers=headers)
+                    
+                    if response_page.status_code == 200:
+                        page_data = response_page.json()
+                        
+                        if page_data.get("page") == 1 and page_data.get("limit") == 20:
+                            # Test Case 3: Test filtering by resource_type
+                            response_filter = self.session.get(f"{BACKEND_URL}/admin/audit-logs?resource_type=lot", headers=headers)
+                            
+                            if response_filter.status_code == 200:
+                                filter_data = response_filter.json()
+                                
+                                # Test Case 4: Test filtering by action
+                                response_action = self.session.get(f"{BACKEND_URL}/admin/audit-logs?action=create", headers=headers)
+                                
+                                if response_action.status_code == 200:
+                                    action_data = response_action.json()
+                                    
+                                    # Verify logs are in descending timestamp order (if any logs exist)
+                                    action_logs = action_data.get("logs", [])
+                                    timestamp_order_correct = True
+                                    
+                                    if len(action_logs) > 1:
+                                        for i in range(len(action_logs) - 1):
+                                            current_log = action_logs[i]
+                                            next_log = action_logs[i + 1]
+                                            
+                                            # Check if timestamps are in descending order
+                                            current_time = current_log.get("timestamp", "")
+                                            next_time = next_log.get("timestamp", "")
+                                            
+                                            if current_time < next_time:
+                                                timestamp_order_correct = False
+                                                break
+                                    
+                                    if timestamp_order_correct:
+                                        self.log_test("Audit Logs API", True, 
+                                                    f"All audit logs tests passed: {data['total']} total logs, pagination working, filtering working, timestamp order correct")
+                                        return True
+                                    else:
+                                        self.log_test("Audit Logs API", False, 
+                                                    "Logs not in descending timestamp order")
+                                        return False
+                                else:
+                                    self.log_test("Audit Logs API", False, 
+                                                f"Action filtering failed: HTTP {response_action.status_code}")
+                                    return False
+                            else:
+                                self.log_test("Audit Logs API", False, 
+                                            f"Resource type filtering failed: HTTP {response_filter.status_code}")
+                                return False
+                        else:
+                            self.log_test("Audit Logs API", False, 
+                                        f"Pagination parameters not working: {page_data}")
+                            return False
+                    else:
+                        self.log_test("Audit Logs API", False, 
+                                    f"Pagination request failed: HTTP {response_page.status_code}")
+                        return False
+                else:
+                    self.log_test("Audit Logs API", False, 
+                                f"Missing required fields in audit logs response: {data}")
+                    return False
+            else:
+                self.log_test("Audit Logs API", False, 
+                            f"Audit logs request failed: HTTP {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Audit Logs API", False, f"Audit logs test error: {str(e)}")
+            return False
+
+    def run_phase2_tests(self):
+        """Run Phase 2 new features tests"""
+        print("\n" + "=" * 80)
+        print("PHASE 2 NEW FEATURES TESTING")
+        print("=" * 80)
+        print("Testing VIN Decoder, Tax/Fees Tables, and Audit Logs APIs")
+        print()
+        
+        phase2_tests = [
+            ("VIN Decoder API", self.test_vin_decoder_api),
+            ("Tax/Fees Tables API", self.test_tax_fees_api),
+            ("Audit Logs API", self.test_audit_logs_api),
+        ]
+        
+        passed = 0
+        total = len(phase2_tests)
+        
+        for i, (test_name, test_func) in enumerate(phase2_tests):
+            print(f"\n--- {test_name} ({i+1}/{total}) ---")
+            try:
+                if test_func():
+                    passed += 1
+            except Exception as e:
+                self.log_test(test_name, False, f"Test execution error: {str(e)}")
+        
+        # Print summary
+        print("\n" + "=" * 80)
+        print("PHASE 2 FEATURES TEST SUMMARY")
+        print("=" * 80)
+        
+        success_rate = (passed / total) * 100
+        
+        # Show only Phase 2 test results
+        phase2_results = [r for r in self.test_results if any(test_name in r["test"] for test_name, _ in phase2_tests)]
+        
+        for result in phase2_results:
+            status = "✅ PASS" if result["success"] else "❌ FAIL"
+            print(f"{status} {result['test']}: {result['message']}")
+        
+        print(f"\nPhase 2 Result: {passed}/{total} tests passed ({success_rate:.1f}%)")
+        
+        if passed == total:
+            print("🎉 PHASE 2 FEATURES ARE WORKING CORRECTLY!")
+            return True
+        else:
+            print("⚠️  PHASE 2 FEATURES NEED ATTENTION")
+            return False
+
     def run_all_tests(self):
         """Run all backend tests including Lexus lot creation"""
         print("=" * 80)
