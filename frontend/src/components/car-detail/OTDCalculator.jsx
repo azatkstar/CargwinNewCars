@@ -257,7 +257,7 @@ const OTDCalculator = ({ car }) => {
                 </div>
                 <div className="border-t pt-3">
                   <div className="flex justify-between">
-                    <span className="text-lg font-bold text-gray-900">Итого OTD:</span>
+                    <span className="text-lg font-bold text-gray-900">Total OTD:</span>
                     <span className="text-lg font-bold text-green-600">{formatPrice(results.estOtdoor)}</span>
                   </div>
                 </div>
@@ -270,17 +270,17 @@ const OTDCalculator = ({ car }) => {
                   <span className="font-semibold">{results.apr}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">Первый взнос:</span>
+                  <span className="text-gray-700">Down Payment:</span>
                   <span className="font-semibold">{formatPrice(formData.downPayment)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">Срок:</span>
-                  <span className="font-semibold">{formData.term} мес.</span>
+                  <span className="text-gray-700">Term:</span>
+                  <span className="font-semibold">{formData.term} months</span>
                 </div>
                 <div className="border-t pt-3">
                   <div className="flex justify-between">
-                    <span className="text-lg font-bold text-gray-900">Ежемесячно:</span>
-                    <span className="text-lg font-bold text-blue-600">{formatPrice(results.monthlyPayment)}/мес</span>
+                    <span className="text-lg font-bold text-gray-900">Monthly:</span>
+                    <span className="text-lg font-bold text-blue-600">{formatPrice(results.monthlyPayment)}/mo</span>
                   </div>
                 </div>
               </div>
