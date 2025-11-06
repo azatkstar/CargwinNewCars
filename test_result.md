@@ -172,6 +172,45 @@ backend:
       - working: true
         agent: "testing"
         comment: "COMPREHENSIVE TESTING COMPLETED: All backend API endpoints working perfectly. Tested: GET /api/ (root endpoint), POST /api/admin/lots (lot creation with Tesla sample data), GET /api/admin/lots (lot listing), GET /api/admin/lots/{id} (single lot retrieval), PATCH /api/admin/lots/{id} (lot updates). All discount validation working correctly - negative discounts converted to 0, positive discounts preserved. MSRP and pricing calculations accurate. In-memory storage functioning properly. Created Tesla Model 3 lot with $3500 discount, updated to $4000, all operations successful."
+  - task: "User Profile with SSN Field"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py, /app/backend/auth.py, /app/backend/database.py"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL BUG FOUND: PUT /api/user/profile endpoint failing with HTTP 500 error. Root cause: User model missing SSN field and get_user_by_id method not handling ObjectId conversion properly."
+      - working: true
+        agent: "testing"
+        comment: "FIXED: Updated User model in auth.py to include all profile fields (ssn, employment_duration_months, address, residence_duration_months, monthly_expenses, down_payment_ready). Fixed get_user_by_id method in database.py to properly handle ObjectId conversion. Profile update now works correctly with all fields including SSN storage."
+  - task: "Application Submission with Slug"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL BUG FOUND: POST /api/applications endpoint failing with HTTP 500 error when using slug format. Root cause: get_user_by_id method returning None due to ObjectId conversion issue."
+      - working: true
+        agent: "testing"
+        comment: "FIXED: Application submission now works correctly with slug format (e.g., '2024-lexus-es350-premium'). The endpoint properly finds lots by slug, creates applications with correct lot data, and stores user information. Tested successfully with Lexus ES350 application."
+  - task: "JWT Authentication Flow"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py, /app/backend/auth.py"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "COMPREHENSIVE JWT TESTING COMPLETED: ✅ User Registration - POST /api/auth/register creates users with JWT tokens ✅ User Login - POST /api/auth/login authenticates with email/password and returns JWT ✅ Protected Endpoint Access - JWT tokens work correctly for accessing /api/user/profile ✅ Token Validation - Proper authentication flow from registration → login → protected access. All authentication endpoints working correctly."
 
 frontend:
   - task: "Fix negative discount validation display in LotForm"
