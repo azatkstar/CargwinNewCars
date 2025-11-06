@@ -99,6 +99,10 @@ const LotForm = () => {
         discount: lotData.discount || 0,
         feesHint: lotData.fees_hint || 0,
         state: lotData.state || 'CA',
+        competitorPrices: lotData.competitor_prices || {
+          autobandit: { monthly: 0, dueAtSigning: 0, term: 36, updatedAt: '' },
+          dealerAverage: { monthly: 0, dueAtSigning: 0, term: 36 }
+        },
         description: lotData.description || '',
         tags: lotData.tags || [],
         isWeeklyDrop: lotData.is_weekly_drop || false,
