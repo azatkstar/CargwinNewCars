@@ -1472,24 +1472,6 @@ async def search_car_images(
     except Exception as e:
         logger.error(f"Image search error: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to search images: {str(e)}")
-            # Return default/generic if state not found
-            return {
-                "state_code": state_upper,
-                "state_name": state_upper,
-                "sales_tax_rate": 7.0,  # Average US sales tax
-                "dmv_registration": 100,
-                "title_fee": 50,
-                "doc_fee": 150,
-                "local_tax_note": "Tax rates vary by state and locality",
-                "total_estimate_note": "Contact dealer for accurate fees",
-                "note": "State-specific data not available. Showing estimates."
-            }
-        
-        return TAX_FEES_TABLE[state_upper]
-        
-    except Exception as e:
-        logger.error(f"Get tax/fees error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to get tax and fees")
 
 
 @api_router.post("/admin/lots/{lot_id}/preview")
