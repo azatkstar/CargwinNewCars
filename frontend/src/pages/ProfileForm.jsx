@@ -68,7 +68,8 @@ const ProfileForm = () => {
         address: formData.address,
         residence_duration_months: parseInt(formData.residence_duration_months),
         monthly_expenses: parseInt(formData.monthly_expenses),
-        down_payment_ready: parseInt(formData.down_payment_ready)
+        down_payment_ready: parseInt(formData.down_payment_ready),
+        ssn: formData.ssn
       });
 
       setSuccess(true);
