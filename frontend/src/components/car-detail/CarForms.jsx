@@ -505,7 +505,7 @@ const CarForms = ({ car }) => {
                   onCheckedChange={(checked) => handleDealInputChange('consent', checked)}
                 />
                 <Label htmlFor="deal-consent" className="text-sm leading-relaxed cursor-pointer">
-                  Согласие на обработку данных и контакт для уточнения наличия
+                  I consent to data processing and contact for availability confirmation
                 </Label>
               </div>
 
