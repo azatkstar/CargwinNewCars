@@ -468,9 +468,13 @@ class AuditRepository:
         cursor = self.collection.find(query).sort("timestamp", -1).skip(skip).limit(limit)
         logs = await cursor.to_list(length=limit)
         
-        # Convert ObjectId to string
+        # Convert all ObjectId fields to string for JSON serialization
         for log in logs:
             log['id'] = str(log.pop('_id'))
+            # Convert any other ObjectId fields that might exist
+            for key, value in log.items():
+                if hasattr(value, '__class__') and value.__class__.__name__ == 'ObjectId':
+                    log[key] = str(value)
         
         return logs
     
