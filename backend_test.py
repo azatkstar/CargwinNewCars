@@ -1867,6 +1867,351 @@ class BackendTester:
         
         return True
 
+    def test_user_registration(self):
+        """Test user registration with email and password"""
+        try:
+            # Generate unique email for testing
+            timestamp = int(time.time())
+            test_email = f"testuser{timestamp}@test.com"
+            
+            register_data = {
+                "email": test_email,
+                "password": "TestPassword123!",
+                "name": "Test User Auto"
+            }
+            
+            response = self.session.post(
+                f"{BACKEND_URL}/auth/register",
+                json=register_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok") and data.get("access_token"):
+                    self.auth_token = data["access_token"]
+                    user_data = data.get("user", {})
+                    
+                    self.log_test("User Registration", True, 
+                                f"User registered successfully: {test_email}")
+                    return True, test_email, data["access_token"]
+                else:
+                    self.log_test("User Registration", False, f"Registration failed: {data}")
+                    return False, None, None
+            else:
+                self.log_test("User Registration", False, f"HTTP {response.status_code}: {response.text}")
+                return False, None, None
+                
+        except Exception as e:
+            self.log_test("User Registration", False, f"Registration error: {str(e)}")
+            return False, None, None
+    
+    def test_user_login(self):
+        """Test user login with email and password"""
+        # First register a user
+        success, email, _ = self.test_user_registration()
+        if not success:
+            self.log_test("User Login", False, "Cannot test login - registration failed")
+            return False, None
+        
+        try:
+            login_data = {
+                "email": email,
+                "password": "TestPassword123!"
+            }
+            
+            response = self.session.post(
+                f"{BACKEND_URL}/auth/login",
+                json=login_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok") and data.get("access_token"):
+                    self.auth_token = data["access_token"]
+                    user_data = data.get("user", {})
+                    
+                    self.log_test("User Login", True, 
+                                f"User logged in successfully: {email}")
+                    return True, data["access_token"]
+                else:
+                    self.log_test("User Login", False, f"Login failed: {data}")
+                    return False, None
+            else:
+                self.log_test("User Login", False, f"HTTP {response.status_code}: {response.text}")
+                return False, None
+                
+        except Exception as e:
+            self.log_test("User Login", False, f"Login error: {str(e)}")
+            return False, None
+    
+    def test_user_profile_with_ssn(self):
+        """Test user profile update with SSN field"""
+        if not self.auth_token:
+            # Try to get auth token first
+            success, token = self.test_user_login()
+            if not success:
+                self.log_test("User Profile with SSN", False, "No auth token available")
+                return False
+        
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Test profile update with all fields including SSN
+            profile_data = {
+                "credit_score": 720,
+                "auto_loan_history": True,
+                "employment_type": "W2",
+                "annual_income": 75000,
+                "employment_duration_months": 24,
+                "address": "123 Main St, Los Angeles, CA 90001",
+                "residence_duration_months": 36,
+                "monthly_expenses": 2500,
+                "down_payment_ready": 5000,
+                "ssn": "123-45-6789"
+            }
+            
+            response = self.session.put(
+                f"{BACKEND_URL}/user/profile",
+                json=profile_data,
+                headers=headers
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Verify profile_completed is true and SSN is stored
+                if (data.get("profile_completed") == True and 
+                    data.get("ssn") == "123-45-6789" and
+                    data.get("credit_score") == 720):
+                    
+                    self.log_test("User Profile with SSN", True, 
+                                "Profile updated successfully with SSN and all fields")
+                    return True
+                else:
+                    self.log_test("User Profile with SSN", False, 
+                                f"Profile update incomplete: profile_completed={data.get('profile_completed')}, ssn={data.get('ssn')}")
+                    return False
+            else:
+                self.log_test("User Profile with SSN", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_test("User Profile with SSN", False, f"Profile update error: {str(e)}")
+            return False
+    
+    def test_application_submission_with_slug(self):
+        """Test application submission using slug format"""
+        if not self.auth_token:
+            # Try to get auth token first
+            success, token = self.test_user_login()
+            if not success:
+                self.log_test("Application Submission with Slug", False, "No auth token available")
+                return False
+        
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.auth_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # First get published lots to find a slug
+            cars_response = self.session.get(f"{BACKEND_URL}/cars")
+            
+            if cars_response.status_code != 200:
+                self.log_test("Application Submission with Slug", False, "Cannot get published cars for testing")
+                return False
+            
+            cars = cars_response.json()
+            if not cars:
+                self.log_test("Application Submission with Slug", False, "No published cars available for testing")
+                return False
+            
+            # Use first car's slug
+            test_car = cars[0]
+            car_slug = test_car.get("slug") or test_car.get("id")
+            
+            if not car_slug:
+                self.log_test("Application Submission with Slug", False, "No valid slug found in car data")
+                return False
+            
+            # Submit application using slug
+            response = self.session.post(
+                f"{BACKEND_URL}/applications?lot_id={car_slug}",
+                headers=headers
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok") and data.get("application_id"):
+                    
+                    # Verify application was created with correct lot data
+                    app_id = data["application_id"]
+                    
+                    # Get user's applications to verify
+                    apps_response = self.session.get(f"{BACKEND_URL}/applications", headers=headers)
+                    
+                    if apps_response.status_code == 200:
+                        apps_data = apps_response.json()
+                        applications = apps_data.get("applications", [])
+                        
+                        # Find our application
+                        created_app = None
+                        for app in applications:
+                            if app.get("id") == app_id:
+                                created_app = app
+                                break
+                        
+                        if created_app and created_app.get("lot_data"):
+                            lot_data = created_app["lot_data"]
+                            self.log_test("Application Submission with Slug", True, 
+                                        f"Application created successfully using slug '{car_slug}' for {lot_data.get('make', '')} {lot_data.get('model', '')}")
+                            return True
+                        else:
+                            self.log_test("Application Submission with Slug", False, 
+                                        "Application created but lot data not properly stored")
+                            return False
+                    else:
+                        self.log_test("Application Submission with Slug", True, 
+                                    f"Application created successfully using slug '{car_slug}' (ID: {app_id})")
+                        return True
+                else:
+                    self.log_test("Application Submission with Slug", False, f"Application creation failed: {data}")
+                    return False
+            else:
+                self.log_test("Application Submission with Slug", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Application Submission with Slug", False, f"Application submission error: {str(e)}")
+            return False
+    
+    def test_jwt_authentication_flow(self):
+        """Test complete JWT authentication flow"""
+        try:
+            # Test 1: Registration
+            timestamp = int(time.time())
+            test_email = f"jwttest{timestamp}@test.com"
+            
+            register_data = {
+                "email": test_email,
+                "password": "JWTTest123!",
+                "name": "JWT Test User"
+            }
+            
+            register_response = self.session.post(
+                f"{BACKEND_URL}/auth/register",
+                json=register_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if register_response.status_code != 200:
+                self.log_test("JWT Authentication Flow", False, "Registration step failed")
+                return False
+            
+            register_data_resp = register_response.json()
+            if not register_data_resp.get("access_token"):
+                self.log_test("JWT Authentication Flow", False, "No JWT token returned from registration")
+                return False
+            
+            # Test 2: Login
+            login_data = {
+                "email": test_email,
+                "password": "JWTTest123!"
+            }
+            
+            login_response = self.session.post(
+                f"{BACKEND_URL}/auth/login",
+                json=login_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if login_response.status_code != 200:
+                self.log_test("JWT Authentication Flow", False, "Login step failed")
+                return False
+            
+            login_data_resp = login_response.json()
+            jwt_token = login_data_resp.get("access_token")
+            
+            if not jwt_token:
+                self.log_test("JWT Authentication Flow", False, "No JWT token returned from login")
+                return False
+            
+            # Test 3: Use JWT token to access protected endpoint
+            headers = {
+                "Authorization": f"Bearer {jwt_token}",
+                "Content-Type": "application/json"
+            }
+            
+            protected_response = self.session.get(f"{BACKEND_URL}/user/profile", headers=headers)
+            
+            if protected_response.status_code == 200:
+                profile_data = protected_response.json()
+                if profile_data.get("email") == test_email:
+                    self.log_test("JWT Authentication Flow", True, 
+                                "Complete JWT flow working: registration → login → protected access")
+                    return True
+                else:
+                    self.log_test("JWT Authentication Flow", False, "JWT token access returned wrong user data")
+                    return False
+            else:
+                self.log_test("JWT Authentication Flow", False, f"Protected endpoint access failed: HTTP {protected_response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("JWT Authentication Flow", False, f"JWT authentication flow error: {str(e)}")
+            return False
+
+    def run_critical_fixes_tests(self):
+        """Run tests for the three critical fixes"""
+        print("\n" + "=" * 80)
+        print("BACKEND TESTING - PHASE 1 CRITICAL FIXES")
+        print("=" * 80)
+        print("Testing: User Profile with SSN, Application Submission with Slug, Authentication Flow")
+        print()
+        
+        # Define critical fix tests
+        tests = [
+            ("JWT Authentication Flow", self.test_jwt_authentication_flow),
+            ("User Profile with SSN Field", self.test_user_profile_with_ssn),
+            ("Application Submission with Slug", self.test_application_submission_with_slug),
+        ]
+        
+        passed = 0
+        total = len(tests)
+        
+        for i, (test_name, test_func) in enumerate(tests):
+            print(f"\n--- {test_name} ({i+1}/{total}) ---")
+            try:
+                if test_func():
+                    passed += 1
+            except Exception as e:
+                self.log_test(test_name, False, f"Test execution error: {str(e)}")
+        
+        # Print summary
+        print("\n" + "=" * 80)
+        print("CRITICAL FIXES TEST SUMMARY")
+        print("=" * 80)
+        
+        success_rate = (passed / total) * 100
+        
+        for result in self.test_results[-total:]:  # Show only the latest results
+            status = "✅ PASS" if result["success"] else "❌ FAIL"
+            print(f"{status} {result['test']}")
+        
+        print(f"\nCritical Fixes Results: {passed}/{total} tests passed ({success_rate:.1f}%)")
+        
+        if passed == total:
+            print("🎉 ALL CRITICAL FIXES WORKING!")
+            return True
+        else:
+            print("❌ CRITICAL ISSUES FOUND - Fixes needed")
+            return False
+
     def run_all_tests(self):
         """Run all backend tests including Lexus lot creation"""
         print("=" * 80)
