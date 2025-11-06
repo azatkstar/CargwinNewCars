@@ -386,7 +386,7 @@ const CarForms = ({ car }) => {
               </div>
 
               <div>
-                <Label htmlFor="lead-message">Сообщение (опционально)</Label>
+                <Label htmlFor="lead-message">Message (optional)</Label>
                 <div className="relative mt-1">
                   <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                   <Textarea
@@ -394,7 +394,7 @@ const CarForms = ({ car }) => {
                     value={leadForm.message}
                     onChange={(e) => handleLeadInputChange('message', e.target.value)}
                     className="pl-10 min-h-[100px]"
-                    placeholder="Дополнительные пожелания или вопросы..."
+                    placeholder="Additional requests or questions..."
                   />
                 </div>
               </div>
@@ -406,8 +406,8 @@ const CarForms = ({ car }) => {
                   onCheckedChange={(checked) => handleLeadInputChange('consent', checked)}
                 />
                 <Label htmlFor="lead-consent" className="text-sm leading-relaxed cursor-pointer">
-                  Я соглашаюсь на обработку персональных данных и получение коммерческих предложений. 
-                  Понимаю, что мои данные не будут переданы дилерам для обзвонов.
+                  I agree to personal data processing and receiving commercial offers. 
+                  I understand that my data will not be shared with dealers for cold calls.
                 </Label>
               </div>
 
