@@ -450,9 +450,9 @@ const CarForms = ({ car }) => {
               <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Запрос отправлен!</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Request Received!</h3>
               <p className="text-gray-600">
-                Проверяем наличие и свяжемся с вами в течение 5 минут
+                We'll check availability and contact you shortly
               </p>
             </div>
           ) : (
