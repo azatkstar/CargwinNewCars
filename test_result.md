@@ -570,6 +570,10 @@ test_plan:
 
 agent_communication:
   - agent: "main"
+    message: "🔍 QA AUDIT P0 CRITICAL ISSUES INVESTIGATION STARTED: Working on fixing 4 critical issues identified in production site audit: 1) Car detail page routing broken 2) Authentication API 401 errors 3) Navigation anchor links not working 4) Data mismatch (BMW instead of Lexus)"
+  - agent: "main"
+    message: "✅ P0 #1 ROOT CAUSE IDENTIFIED - Car Detail Routing: Routes /car/:carId and /cars/:carId are correctly defined in App.js (lines 58-59). Issue is that production site loads OLD JavaScript bundle (main.4df087a3.js) from before routes were added. Local dev environment has correct code. SOLUTION: User needs to click Deploy button in Emergent platform to push changes to production URL (takes ~10 min, costs 50 credits/month). I cannot trigger deployment, only user can."
+  - agent: "main"
     message: "COMPLETED ALL MAJOR FIXES: 1) VIN hidden from CarSpecs display ✅ 2) Added 'Опубликовать сейчас' button ✅ 3) Added 'Дублировать' functionality ✅ 4) Fixed MSRP field input ✅ 5) Removed Honda Accord fallback from backend ✅"
   - agent: "testing"
     message: "Backend testing confirmed: Critical bug fixed - no more Honda Accord fallback. All CRUD operations working correctly."
