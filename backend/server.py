@@ -1181,6 +1181,143 @@ async def decode_vin(
                 "source": "NHTSA"
             }
             
+
+@api_router.get("/tax-fees/{state}")
+async def get_tax_fees(state: str):
+    """Get tax and fees for a specific state"""
+    try:
+        # Tax and fees table (simplified for US states)
+        TAX_FEES_TABLE = {
+            "CA": {
+                "state_code": "CA",
+                "state_name": "California",
+                "sales_tax_rate": 7.25,  # Base rate, local tax may add more
+                "dmv_registration": 65,
+                "title_fee": 23,
+                "doc_fee": 85,
+                "tire_fee": 8.75,
+                "smog_fee": 25,
+                "local_tax_note": "Local tax rates vary by county (typically 1-2.5%)",
+                "total_estimate_note": "Total may vary based on county and city"
+            },
+            "TX": {
+                "state_code": "TX",
+                "state_name": "Texas",
+                "sales_tax_rate": 6.25,
+                "dmv_registration": 51.75,
+                "title_fee": 33,
+                "doc_fee": 150,
+                "inspection_fee": 25.50,
+                "local_tax_note": "Local tax up to 2%",
+                "total_estimate_note": "County fees may apply"
+            },
+            "FL": {
+                "state_code": "FL",
+                "state_name": "Florida",
+                "sales_tax_rate": 6.0,
+                "dmv_registration": 225,
+                "title_fee": 75.75,
+                "doc_fee": 199,
+                "local_tax_note": "County surtax 0.5-1.5%",
+                "total_estimate_note": "Initial registration fee is higher"
+            },
+            "NY": {
+                "state_code": "NY",
+                "state_name": "New York",
+                "sales_tax_rate": 4.0,
+                "dmv_registration": 32.50,
+                "title_fee": 50,
+                "doc_fee": 175,
+                "plate_fee": 25,
+                "local_tax_note": "Local sales tax 4-4.875%",
+                "total_estimate_note": "NYC has additional fees"
+            },
+            "AZ": {
+                "state_code": "AZ",
+                "state_name": "Arizona",
+                "sales_tax_rate": 5.6,
+                "dmv_registration": 8.0,
+                "title_fee": 4.0,
+                "doc_fee": 85,
+                "air_quality_fee": 1.50,
+                "local_tax_note": "County tax 0.7-5.6%",
+                "total_estimate_note": "Vehicle license tax (VLT) varies by vehicle value"
+            },
+            "NV": {
+                "state_code": "NV",
+                "state_name": "Nevada",
+                "sales_tax_rate": 6.85,
+                "dmv_registration": 33.0,
+                "title_fee": 28.25,
+                "doc_fee": 199,
+                "emissions_fee": 11.50,
+                "local_tax_note": "County tax 1.15-1.53%",
+                "total_estimate_note": "Governmental services tax applies"
+            },
+            "WA": {
+                "state_code": "WA",
+                "state_name": "Washington",
+                "sales_tax_rate": 6.5,
+                "dmv_registration": 75.0,
+                "title_fee": 15.0,
+                "doc_fee": 150,
+                "local_tax_note": "Local sales tax up to 3.9%",
+                "total_estimate_note": "RTA tax may apply in some areas"
+            },
+            "OR": {
+                "state_code": "OR",
+                "state_name": "Oregon",
+                "sales_tax_rate": 0.0,  # No sales tax in Oregon
+                "dmv_registration": 122.0,
+                "title_fee": 77.0,
+                "doc_fee": 115,
+                "plate_fee": 25.0,
+                "local_tax_note": "No sales tax in Oregon",
+                "total_estimate_note": "One of few states without sales tax"
+            }
+        }
+        
+        # Normalize state code
+        state_upper = state.upper()
+        
+        if state_upper not in TAX_FEES_TABLE:
+            # Return default/generic if state not found
+            return {
+                "state_code": state_upper,
+                "state_name": state_upper,
+                "sales_tax_rate": 7.0,  # Average US sales tax
+                "dmv_registration": 100,
+                "title_fee": 50,
+                "doc_fee": 150,
+                "local_tax_note": "Tax rates vary by state and locality",
+                "total_estimate_note": "Contact dealer for accurate fees",
+                "note": "State-specific data not available. Showing estimates."
+            }
+        
+        return TAX_FEES_TABLE[state_upper]
+        
+    except Exception as e:
+        logger.error(f"Get tax/fees error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get tax and fees")
+
+@api_router.get("/tax-fees")
+async def get_all_tax_fees():
+    """Get tax and fees for all available states"""
+    try:
+        # Return list of all supported states
+        states = ["CA", "TX", "FL", "NY", "AZ", "NV", "WA", "OR"]
+        result = []
+        
+        for state in states:
+            state_data = await get_tax_fees(state)
+            result.append(state_data)
+        
+        return {"states": result, "total": len(result)}
+        
+    except Exception as e:
+        logger.error(f"Get all tax/fees error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get tax and fees")
+
     except HTTPException:
         raise
     except Exception as e:
