@@ -287,12 +287,16 @@ const OTDCalculator = ({ car }) => {
               </div>
             </div>
 
-            <div className="mt-6 bg-white/50 rounded-lg p-4">
+            <div className="mt-6 bg-white/50 rounded-lg p-4 space-y-2">
               <p className="text-sm text-gray-700">
-                <strong>Примечание:</strong> Расчет является предварительным. Итоговые условия зависят от 
-                одобрения кредита и могут отличаться. Точные условия будут предоставлены после проверки 
-                кредитной истории.
+                <strong>Note:</strong> This calculation is preliminary. Final terms depend on credit approval and may vary.
+                Exact terms will be provided after credit history verification.
               </p>
+              {results.taxData?.localTaxNote && (
+                <p className="text-xs text-gray-600">
+                  <strong>Tax Info:</strong> {results.taxData.localTaxNote}
+                </p>
+              )}
             </div>
           </div>
         )}
