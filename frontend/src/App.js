@@ -50,25 +50,27 @@ const Home = () => {
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <I18nProvider>
-          <FOMOSettingsProvider>
-            <AuthProvider>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/car/:carId" element={<CarDetail />} />
-                <Route path="/cars/:carId" element={<CarDetail />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/dashboard/profile" element={<ProfileForm />} />
-                <Route path="/preview/:token" element={<PreviewLot />} />
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin/*" element={<AdminDashboard />} />
-              </Routes>
-            </AuthProvider>
-          </FOMOSettingsProvider>
-        </I18nProvider>
-      </BrowserRouter>
+      <HelmetProvider>
+        <BrowserRouter>
+          <I18nProvider>
+            <FOMOSettingsProvider>
+              <AuthProvider>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/car/:carId" element={<CarDetail />} />
+                  <Route path="/cars/:carId" element={<CarDetail />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/dashboard/profile" element={<ProfileForm />} />
+                  <Route path="/preview/:token" element={<PreviewLot />} />
+                  <Route path="/admin/login" element={<AdminLogin />} />
+                  <Route path="/admin/*" element={<AdminDashboard />} />
+                </Routes>
+              </AuthProvider>
+            </FOMOSettingsProvider>
+          </I18nProvider>
+        </BrowserRouter>
+      </HelmetProvider>
     </div>
   );
 }
