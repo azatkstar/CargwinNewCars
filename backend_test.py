@@ -2473,6 +2473,12 @@ class BackendTester:
         print("Testing VIN Decoder, Tax/Fees Tables, and Audit Logs APIs")
         print()
         
+        # First authenticate to get token for protected endpoints
+        print("--- Authentication Setup ---")
+        auth_success = self.test_authentication_system()
+        if not auth_success:
+            print("❌ Authentication failed - cannot test protected endpoints")
+        
         phase2_tests = [
             ("VIN Decoder API", self.test_vin_decoder_api),
             ("Tax/Fees Tables API", self.test_tax_fees_api),
