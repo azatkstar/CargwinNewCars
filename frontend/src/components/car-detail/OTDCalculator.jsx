@@ -123,7 +123,7 @@ const OTDCalculator = ({ car }) => {
           Out-The-Door (OTD) Price Calculator
         </CardTitle>
         <p className="text-gray-600">
-          Рассчитайте итоговую стоимость с налогами и сборами
+          Calculate final price including taxes and fees
         </p>
       </CardHeader>
       
