@@ -523,7 +523,7 @@ const CarForms = ({ car }) => {
                 disabled={!isDealFormValid() || dealLoading}
                 className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
               >
-                {dealLoading ? 'Проверяем...' : 'Уточнить наличие'}
+                {dealLoading ? 'Submitting...' : 'Check Availability'}
               </Button>
             </form>
           )}
