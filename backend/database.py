@@ -469,14 +469,31 @@ class AuditRepository:
         logs = await cursor.to_list(length=limit)
         
         # Convert all ObjectId fields to string for JSON serialization
-        for log in logs:
-            log['id'] = str(log.pop('_id'))
-            # Convert any other ObjectId fields that might exist
-            for key, value in log.items():
-                if hasattr(value, '__class__') and value.__class__.__name__ == 'ObjectId':
-                    log[key] = str(value)
+        def convert_objectids(obj):
+            """Recursively convert ObjectId to string in nested structures"""
+            if isinstance(obj, dict):
+                result = {}
+                for key, value in obj.items():
+                    if key == '_id':
+                        result['id'] = str(value)
+                    elif hasattr(value, '__class__') and value.__class__.__name__ == 'ObjectId':
+                        result[key] = str(value)
+                    elif isinstance(value, (dict, list)):
+                        result[key] = convert_objectids(value)
+                    else:
+                        result[key] = value
+                return result
+            elif isinstance(obj, list):
+                return [convert_objectids(item) for item in obj]
+            elif hasattr(obj, '__class__') and obj.__class__.__name__ == 'ObjectId':
+                return str(obj)
+            else:
+                return obj
         
-        return logs
+        # Convert all logs
+        converted_logs = [convert_objectids(log) for log in logs]
+        
+        return converted_logs
     
     async def get_logs_count(self, filters: Dict[str, Any] = None) -> int:
         """Get total count of audit logs"""
