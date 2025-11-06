@@ -29,15 +29,17 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <Hero />
-      <OffersSection />
-      <DropSubscription />
-      <CoverageMap />
-      <HowItWorks />
-      <TrustManifest />
-      <Reviews />
-      <FAQ />
-      <CreditSoftCheck />
+      <main role="main">
+        <Hero />
+        <OffersSection />
+        <DropSubscription />
+        <CoverageMap />
+        <HowItWorks />
+        <TrustManifest />
+        <Reviews />
+        <FAQ />
+        <CreditSoftCheck />
+      </main>
       <Footer />
       <FOMOTicker />
       
