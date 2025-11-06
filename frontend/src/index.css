@@ -16,6 +16,24 @@ code {
         monospace;
 }
 
+/* Accessibility: Ensure touch targets meet minimum size requirements */
+@layer components {
+  button, 
+  a.button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    @apply min-h-[44px] min-w-[44px] sm:min-h-[36px] sm:min-w-auto;
+  }
+  
+  /* Ensure interactive elements have proper ARIA labels */
+  input:not([aria-label]):not([aria-labelledby]),
+  select:not([aria-label]):not([aria-labelledby]),
+  textarea:not([aria-label]):not([aria-labelledby]) {
+    /* These should have labels in HTML */
+  }
+}
+
 
 
 @layer base {
