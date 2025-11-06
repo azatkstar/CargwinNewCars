@@ -311,10 +311,10 @@ const CarForms = ({ car }) => {
         <CardHeader>
           <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
             <Mail className="w-5 h-5 text-red-600" />
-            Получить предложение
+            Get Your Offer
           </CardTitle>
           <p className="text-gray-600">
-            Персональное предложение с учётом ваших потребностей
+            Personalized offer tailored to your needs
           </p>
         </CardHeader>
         
