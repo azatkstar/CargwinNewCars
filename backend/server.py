@@ -1321,6 +1321,63 @@ async def get_tax_fees(state: str):
                 "sales_tax_rate": 6.5,
                 "dmv_registration": 75.0,
                 "title_fee": 15.0,
+                "doc_fee": 150,
+                "local_tax_note": "Local sales tax up to 3.9%",
+                "total_estimate_note": "RTA tax may apply in some areas"
+            },
+            "OR": {
+                "state_code": "OR",
+                "state_name": "Oregon",
+                "sales_tax_rate": 0.0,  # No sales tax in Oregon
+                "dmv_registration": 122.0,
+                "title_fee": 77.0,
+                "doc_fee": 115,
+                "plate_fee": 25.0,
+                "local_tax_note": "No sales tax in Oregon",
+                "total_estimate_note": "One of few states without sales tax"
+            }
+        }
+        
+        # Normalize state code
+        state_upper = state.upper()
+        
+        if state_upper not in TAX_FEES_TABLE:
+            # Return default/generic if state not found
+            return {
+                "state_code": state_upper,
+                "state_name": state_upper,
+                "sales_tax_rate": 7.0,  # Average US sales tax
+                "dmv_registration": 100,
+                "title_fee": 50,
+                "doc_fee": 150,
+                "local_tax_note": "Tax rates vary by state and locality",
+                "total_estimate_note": "Contact dealer for accurate fees",
+                "note": "State-specific data not available. Showing estimates."
+            }
+        
+        return TAX_FEES_TABLE[state_upper]
+        
+    except Exception as e:
+        logger.error(f"Get tax/fees error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get tax and fees")
+
+@api_router.get("/tax-fees")
+async def get_all_tax_fees():
+    """Get tax and fees for all available states"""
+    try:
+        # Return list of all supported states
+        states = ["CA", "TX", "FL", "NY", "AZ", "NV", "WA", "OR"]
+        result = []
+        
+        for state in states:
+            state_data = await get_tax_fees(state)
+            result.append(state_data)
+        
+        return {"states": result, "total": len(result)}
+        
+    except Exception as e:
+        logger.error(f"Get all tax/fees error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get tax and fees")
 
 @api_router.get("/admin/search-car-images")
 async def search_car_images(
