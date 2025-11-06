@@ -96,6 +96,13 @@ class LotDocument(BaseModel):
     fees_hint: int = 0
     state: str = "CA"
     
+    # Competitor Pricing (for price comparison)
+    competitor_prices: Dict[str, Any] = Field(default_factory=dict)
+    # Example: {
+    #   "autobandit": {"monthly": 850, "due_at_signing": 3500, "term": 36, "updated_at": "2025-01-20"},
+    #   "dealer_average": {"monthly": 900, "due_at_signing": 4000, "term": 36}
+    # }
+    
     # Content
     description: str = ""
     tags: List[str] = []
