@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Выложили эти сделки на сайт через админ панель и проверь как все работает. И исправь ошибки. Все на английском. Added 13 Lexus deals to the site via backend API script. Current focus: Verify all Lexus lots are displayed correctly on homepage."
+user_problem_statement: "Add competitor prices demo to 2024-lexus-rx350-premium to show price comparison function. Steps: 1) Login as admin, 2) GET /api/admin/lots/2024-lexus-rx350-premium, 3) PATCH with competitor_prices field containing AutoBandit and dealer average pricing data."
 
 backend:
   - task: "Create 13 Lexus lots via API"
