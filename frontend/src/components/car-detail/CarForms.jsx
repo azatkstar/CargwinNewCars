@@ -451,9 +451,12 @@ const CarForms = ({ car }) => {
                 <Clock className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Request Received!</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-4">
                 We'll check availability and contact you shortly
               </p>
+              <div className="text-sm text-gray-600">
+                Estimated response time: 5-10 minutes
+              </div>
             </div>
           ) : (
             <form onSubmit={submitDealIntent} className="space-y-4">
