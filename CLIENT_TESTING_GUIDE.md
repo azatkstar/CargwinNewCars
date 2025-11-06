@@ -2,7 +2,7 @@
 
 ## 🌐 URL приложения
 ```
-https://cargwin-newcar.preview.emergentagent.com
+https://autosales-platform-1.preview.emergentagent.com
 ```
 
 ---
@@ -10,7 +10,7 @@ https://cargwin-newcar.preview.emergentagent.com
 ## 📋 Сценарий 1: Новый пользователь (полный путь)
 
 ### Шаг 1: Просмотр главной страницы (гость)
-1. Откройте https://cargwin-newcar.preview.emergentagent.com
+1. Откройте https://autosales-platform-1.preview.emergentagent.com
 2. **Что проверить:**
    - ✅ Таймер "Weekly Drop" отсчитывает время
    - ✅ FOMO уведомления бегут сверху ("Just booked", "X watching")
