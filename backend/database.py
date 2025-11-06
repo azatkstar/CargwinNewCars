@@ -461,6 +461,23 @@ class AuditRepository:
         """Log an action"""
         log_data['timestamp'] = datetime.now(timezone.utc)
         await self.collection.insert_one(log_data)
+    
+    async def get_logs(self, skip: int = 0, limit: int = 50, filters: Dict[str, Any] = None) -> List[Dict[str, Any]]:
+        """Get audit logs with pagination and filters"""
+        query = filters or {}
+        cursor = self.collection.find(query).sort("timestamp", -1).skip(skip).limit(limit)
+        logs = await cursor.to_list(length=limit)
+        
+        # Convert ObjectId to string
+        for log in logs:
+            log['id'] = str(log.pop('_id'))
+        
+        return logs
+    
+    async def get_logs_count(self, filters: Dict[str, Any] = None) -> int:
+        """Get total count of audit logs"""
+        query = filters or {}
+        return await self.collection.count_documents(query)
 
 class UserSessionRepository:
     """Repository for user session operations (OAuth)"""
