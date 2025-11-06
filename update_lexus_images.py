@@ -63,10 +63,13 @@ async def update_images():
     for slug, image_url in LEXUS_IMAGES.items():
         print(f"\n🔄 Updating {slug}...")
         
-        # Find and update the lot
+        # Find and update the lot - update both 'image' field and 'images' array
         result = await lots_collection.update_one(
             {"slug": slug},
-            {"$set": {"image": image_url}}
+            {"$set": {
+                "image": image_url,
+                "images": [{"url": image_url, "alt": f"Professional photo of {slug}"}]
+            }}
         )
         
         if result.matched_count > 0:
