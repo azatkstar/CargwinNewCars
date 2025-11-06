@@ -1347,6 +1347,45 @@ async def update_application_status(
         logger.error(f"Update application status error: {e}")
         raise HTTPException(status_code=500, detail="Failed to update application status")
 
+@api_router.get("/admin/audit-logs")
+async def get_audit_logs(
+    page: int = 1,
+    limit: int = 50,
+    resource_type: Optional[str] = None,
+    action: Optional[str] = None,
+    user_email: Optional[str] = None,
+    current_user: User = Depends(require_admin),
+    audit_repo: AuditRepository = Depends(get_audit_repo)
+):
+    """Get audit logs (admin only)"""
+    try:
+        skip = (page - 1) * limit
+        
+        # Build filter
+        filter_dict = {}
+        if resource_type:
+            filter_dict['resource_type'] = resource_type
+        if action:
+            filter_dict['action'] = action
+        if user_email:
+            filter_dict['user_email'] = user_email
+        
+        # Get logs from audit repository
+        logs = await audit_repo.get_logs(skip=skip, limit=limit, filters=filter_dict)
+        total = await audit_repo.get_logs_count(filters=filter_dict)
+        
+        return {
+            "logs": logs,
+            "total": total,
+            "page": page,
+            "limit": limit,
+            "pages": (total + limit - 1) // limit
+        }
+    except Exception as e:
+        logger.error(f"Get audit logs error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get audit logs")
+
+
 @api_router.get("/cars")
 async def get_public_cars(
     lot_repo: LotRepository = Depends(get_lots_repo)
