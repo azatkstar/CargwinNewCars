@@ -107,7 +107,6 @@ const OTDCalculator = ({ car }) => {
       setLoading(false);
     }
   };
-  };
 
   const calculateMonthlyPayment = (principal, apr, termMonths) => {
     const monthlyRate = apr / 100 / 12;
