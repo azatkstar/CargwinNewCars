@@ -14,7 +14,16 @@ const Header = () => {
   const navigate = useNavigate();
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    // If not on homepage, navigate there first
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation and scroll
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }
     setIsMenuOpen(false);
   };
 
