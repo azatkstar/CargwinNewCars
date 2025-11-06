@@ -1236,6 +1236,12 @@ async def decode_vin(
                 "source": "NHTSA"
             }
             
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"VIN decode error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to decode VIN: {str(e)}")
+
 
 @api_router.get("/tax-fees/{state}")
 async def get_tax_fees(state: str):
