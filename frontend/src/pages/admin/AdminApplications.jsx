@@ -252,6 +252,17 @@ const AdminApplications = () => {
       </Card>
 
       {/* Application Details (expandable rows could be added here) */}
+      
+      {/* Approve Application Modal */}
+      <ApproveApplicationModal
+        isOpen={showApproveModal}
+        onClose={() => {
+          setShowApproveModal(false);
+          setSelectedApp(null);
+        }}
+        application={selectedApp}
+        onSuccess={fetchApplications}
+      />
     </div>
   );
 };
