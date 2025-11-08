@@ -709,6 +709,202 @@ async def get_my_applications(
         logger.error(f"Get applications error: {e}")
         raise HTTPException(status_code=500, detail="Failed to get applications")
 
+
+# ============================================
+# Reservation Routes
+# ============================================
+
+def get_reservations_repo(request: Request = None):
+    """Dependency for reservation repository"""
+    from database import get_reservation_repository
+    return get_reservation_repository()
+
+@api_router.post("/reservations")
+async def create_reservation(
+    lot_slug: str,
+    reserved_price: float,
+    monthly_payment: float,
+    due_at_signing: float,
+    current_user: User = Depends(require_auth),
+    reservation_repo: ReservationRepository = Depends(get_reservations_repo),
+    lot_repo: LotRepository = Depends(get_lots_repo)
+):
+    """Create a price reservation for a car"""
+    try:
+        # Find lot by slug
+        lots = await lot_repo.get_lots(skip=0, limit=100, status="published")
+        lot = None
+        for l in lots:
+            lot_slug_check = f"{l.get('year', '')}-{l.get('make', '')}-{l.get('model', '')}-{l.get('trim', '')}".lower().replace(' ', '-')
+            if lot_slug_check == lot_slug:
+                lot = l
+                break
+        
+        if not lot:
+            raise HTTPException(status_code=404, detail="Car not found")
+        
+        # Check if user already has an active reservation for this lot
+        existing = await reservation_repo.get_reservations_by_user(current_user.id, status="active")
+        for res in existing:
+            if res['lot_slug'] == lot_slug:
+                raise HTTPException(status_code=400, detail="You already have an active reservation for this vehicle")
+        
+        # Create reservation (expires in 48 hours)
+        from datetime import timedelta
+        reservation_data = {
+            "user_id": current_user.id,
+            "lot_id": lot.get('id', ''),
+            "lot_slug": lot_slug,
+            "reserved_price": reserved_price,
+            "monthly_payment": monthly_payment,
+            "due_at_signing": due_at_signing,
+            "status": "active",
+            "expires_at": datetime.now(timezone.utc) + timedelta(hours=48)
+        }
+        
+        reservation_id = await reservation_repo.create_reservation(reservation_data)
+        
+        logger.info(f"Reservation created: {reservation_id} for user {current_user.email}")
+        
+        return {
+            "ok": True,
+            "reservation_id": reservation_id,
+            "message": "Price reserved for 48 hours",
+            "expires_at": reservation_data['expires_at'].isoformat()
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Reservation creation error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create reservation")
+
+@api_router.get("/reservations")
+async def get_my_reservations(
+    current_user: User = Depends(require_auth),
+    reservation_repo: ReservationRepository = Depends(get_reservations_repo)
+):
+    """Get current user's reservations"""
+    try:
+        # Expire old reservations first
+        await reservation_repo.expire_old_reservations()
+        
+        # Get all reservations
+        reservations = await reservation_repo.get_reservations_by_user(current_user.id)
+        
+        return {"reservations": reservations, "total": len(reservations)}
+    except Exception as e:
+        logger.error(f"Get reservations error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get reservations")
+
+@api_router.delete("/reservations/{reservation_id}")
+async def cancel_reservation(
+    reservation_id: str,
+    current_user: User = Depends(require_auth),
+    reservation_repo: ReservationRepository = Depends(get_reservations_repo)
+):
+    """Cancel a reservation"""
+    try:
+        # Get reservation
+        reservation = await reservation_repo.get_reservation_by_id(reservation_id)
+        
+        if not reservation:
+            raise HTTPException(status_code=404, detail="Reservation not found")
+        
+        # Check ownership
+        if reservation['user_id'] != current_user.id:
+            raise HTTPException(status_code=403, detail="Not authorized")
+        
+        # Update status
+        success = await reservation_repo.update_reservation_status(reservation_id, "cancelled")
+        
+        if success:
+            return {"ok": True, "message": "Reservation cancelled"}
+        else:
+            raise HTTPException(status_code=500, detail="Failed to cancel reservation")
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Cancel reservation error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to cancel reservation")
+
+@api_router.post("/reservations/{reservation_id}/convert")
+async def convert_reservation_to_application(
+    reservation_id: str,
+    current_user: User = Depends(require_auth),
+    reservation_repo: ReservationRepository = Depends(get_reservations_repo),
+    app_repo: ApplicationRepository = Depends(get_apps_repo),
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    user_repo: UserRepository = Depends(get_users_repo)
+):
+    """Convert reservation to application"""
+    try:
+        # Get reservation
+        reservation = await reservation_repo.get_reservation_by_id(reservation_id)
+        
+        if not reservation:
+            raise HTTPException(status_code=404, detail="Reservation not found")
+        
+        # Check ownership
+        if reservation['user_id'] != current_user.id:
+            raise HTTPException(status_code=403, detail="Not authorized")
+        
+        # Check if not expired
+        if reservation['status'] != 'active':
+            raise HTTPException(status_code=400, detail="Reservation is not active")
+        
+        if reservation['expires_at'] < datetime.now(timezone.utc):
+            raise HTTPException(status_code=400, detail="Reservation has expired")
+        
+        # Get lot and user data
+        lot = await lot_repo.get_lot_by_id(reservation['lot_id'])
+        user_data = await user_repo.get_user_by_id(current_user.id)
+        
+        if not lot:
+            raise HTTPException(status_code=404, detail="Car not found")
+        
+        # Create application
+        app_data = {
+            "user_id": current_user.id,
+            "lot_id": reservation['lot_id'],
+            "status": "pending",
+            "user_data": {
+                "email": user_data['email'],
+                "name": user_data['name'],
+                "credit_score": user_data.get('credit_score'),
+                "employment_type": user_data.get('employment_type'),
+                "annual_income": user_data.get('annual_income')
+            },
+            "lot_data": {
+                "make": lot.get('make'),
+                "model": lot.get('model'),
+                "year": lot.get('year'),
+                "msrp": lot.get('msrp'),
+                "fleet_price": reservation['reserved_price']
+            }
+        }
+        
+        app_id = await app_repo.create_application(app_data)
+        
+        # Update reservation status
+        await reservation_repo.update_reservation_status(reservation_id, "converted", app_id)
+        
+        logger.info(f"Reservation {reservation_id} converted to application {app_id}")
+        
+        return {
+            "ok": True,
+            "application_id": app_id,
+            "message": "Application submitted successfully"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Convert reservation error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to convert reservation")
+
+
 # Admin Lots Routes
 @api_router.get("/admin/lots")
 async def get_admin_lots(
