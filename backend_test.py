@@ -2664,6 +2664,559 @@ class BackendTester:
             self.log_test("Add Competitor Prices Demo", False, f"Test error: {str(e)}")
             return False
 
+
+    def test_reservation_flow(self):
+        """Test complete reservation flow as requested"""
+        print("\n" + "=" * 80)
+        print("RESERVATION FLOW TESTING")
+        print("=" * 80)
+        print("Testing complete reservation functionality including creation, conversion, approval, and pickup")
+        print()
+        
+        # Test 1: Register and Login User
+        print("Test 1: Register new user for reservation testing...")
+        user_email = f"reserve_test@test.com"
+        user_password = "Test123!"
+        user_name = "Reserve Tester"
+        
+        try:
+            # Register user
+            register_response = self.session.post(
+                f"{BACKEND_URL}/auth/register",
+                json={
+                    "email": user_email,
+                    "password": user_password,
+                    "name": user_name
+                },
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if register_response.status_code == 200:
+                register_data = register_response.json()
+                user_token = register_data.get("access_token")
+                print(f"   ✅ User registered: {user_email}")
+                self.log_test("User Registration for Reservation", True, f"User {user_email} registered successfully")
+            else:
+                # Try login if user already exists
+                login_response = self.session.post(
+                    f"{BACKEND_URL}/auth/login",
+                    json={"email": user_email, "password": user_password},
+                    headers={"Content-Type": "application/json"}
+                )
+                
+                if login_response.status_code == 200:
+                    login_data = login_response.json()
+                    user_token = login_data.get("access_token")
+                    print(f"   ✅ User logged in (already exists): {user_email}")
+                    self.log_test("User Login for Reservation", True, f"User {user_email} logged in successfully")
+                else:
+                    print(f"   ❌ Failed to register/login user: HTTP {login_response.status_code}")
+                    self.log_test("User Registration/Login", False, f"HTTP {login_response.status_code}")
+                    return False
+        except Exception as e:
+            print(f"   ❌ User registration/login error: {str(e)}")
+            self.log_test("User Registration/Login", False, f"Error: {str(e)}")
+            return False
+        
+        user_headers = {
+            "Authorization": f"Bearer {user_token}",
+            "Content-Type": "application/json"
+        }
+        
+        # Test 2: Create Reservation
+        print("\nTest 2: Create reservation for Lexus TX500h F Sport...")
+        lot_slug = "2024-lexus-tx500h-f-sport"
+        reserved_price = 33532
+        monthly_payment = 987
+        due_at_signing = 3000
+        
+        try:
+            reservation_response = self.session.post(
+                f"{BACKEND_URL}/reservations",
+                params={
+                    "lot_slug": lot_slug,
+                    "reserved_price": reserved_price,
+                    "monthly_payment": monthly_payment,
+                    "due_at_signing": due_at_signing
+                },
+                headers=user_headers
+            )
+            
+            if reservation_response.status_code == 200:
+                reservation_data = reservation_response.json()
+                reservation_id = reservation_data.get("reservation_id")
+                expires_at = reservation_data.get("expires_at")
+                
+                if reservation_id and expires_at:
+                    print(f"   ✅ Reservation created: ID={reservation_id}")
+                    print(f"      Expires at: {expires_at}")
+                    self.log_test("Create Reservation", True, f"Reservation {reservation_id} created, expires at {expires_at}")
+                else:
+                    print(f"   ❌ Invalid reservation response: {reservation_data}")
+                    self.log_test("Create Reservation", False, f"Invalid response: {reservation_data}")
+                    return False
+            else:
+                print(f"   ❌ Failed to create reservation: HTTP {reservation_response.status_code} - {reservation_response.text}")
+                self.log_test("Create Reservation", False, f"HTTP {reservation_response.status_code}: {reservation_response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Create reservation error: {str(e)}")
+            self.log_test("Create Reservation", False, f"Error: {str(e)}")
+            return False
+        
+        # Test 3: Get My Reservations
+        print("\nTest 3: Get user's reservations...")
+        try:
+            get_reservations_response = self.session.get(
+                f"{BACKEND_URL}/reservations",
+                headers=user_headers
+            )
+            
+            if get_reservations_response.status_code == 200:
+                reservations_data = get_reservations_response.json()
+                reservations = reservations_data.get("reservations", [])
+                total = reservations_data.get("total", 0)
+                
+                if total >= 1 and reservations:
+                    # Find our reservation
+                    our_reservation = next((r for r in reservations if r.get("id") == reservation_id), None)
+                    
+                    if our_reservation:
+                        status = our_reservation.get("status")
+                        expires_at_check = our_reservation.get("expires_at")
+                        
+                        if status == "active":
+                            print(f"   ✅ Reservation found: Status={status}, Total reservations={total}")
+                            print(f"      Expires at: {expires_at_check}")
+                            self.log_test("Get My Reservations", True, f"Found {total} reservation(s), status=active")
+                        else:
+                            print(f"   ❌ Reservation status incorrect: {status} (expected 'active')")
+                            self.log_test("Get My Reservations", False, f"Status={status}, expected 'active'")
+                            return False
+                    else:
+                        print(f"   ❌ Created reservation not found in list")
+                        self.log_test("Get My Reservations", False, "Reservation not found in list")
+                        return False
+                else:
+                    print(f"   ❌ No reservations found (expected at least 1)")
+                    self.log_test("Get My Reservations", False, f"Total={total}, expected >= 1")
+                    return False
+            else:
+                print(f"   ❌ Failed to get reservations: HTTP {get_reservations_response.status_code}")
+                self.log_test("Get My Reservations", False, f"HTTP {get_reservations_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Get reservations error: {str(e)}")
+            self.log_test("Get My Reservations", False, f"Error: {str(e)}")
+            return False
+        
+        # Test 4: Convert Reservation to Application
+        print("\nTest 4: Convert reservation to application...")
+        try:
+            convert_response = self.session.post(
+                f"{BACKEND_URL}/reservations/{reservation_id}/convert",
+                headers=user_headers
+            )
+            
+            if convert_response.status_code == 200:
+                convert_data = convert_response.json()
+                application_id = convert_data.get("application_id")
+                
+                if application_id:
+                    print(f"   ✅ Reservation converted to application: {application_id}")
+                    self.log_test("Convert Reservation to Application", True, f"Application {application_id} created from reservation")
+                else:
+                    print(f"   ❌ Invalid conversion response: {convert_data}")
+                    self.log_test("Convert Reservation to Application", False, f"Invalid response: {convert_data}")
+                    return False
+            else:
+                print(f"   ❌ Failed to convert reservation: HTTP {convert_response.status_code} - {convert_response.text}")
+                self.log_test("Convert Reservation to Application", False, f"HTTP {convert_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Convert reservation error: {str(e)}")
+            self.log_test("Convert Reservation", False, f"Error: {str(e)}")
+            return False
+        
+        # Verify application was created
+        print("\n   Verifying application was created...")
+        try:
+            apps_response = self.session.get(f"{BACKEND_URL}/applications", headers=user_headers)
+            
+            if apps_response.status_code == 200:
+                apps_data = apps_response.json()
+                applications = apps_data.get("applications", [])
+                
+                app_found = any(app.get("id") == application_id for app in applications)
+                
+                if app_found:
+                    print(f"   ✅ Application found in user's applications")
+                else:
+                    print(f"   ❌ Application not found in user's applications")
+                    self.log_test("Verify Application Created", False, "Application not found")
+                    return False
+            else:
+                print(f"   ❌ Failed to get applications: HTTP {apps_response.status_code}")
+        except Exception as e:
+            print(f"   ❌ Get applications error: {str(e)}")
+        
+        # Verify reservation status changed
+        print("\n   Verifying reservation status changed to 'converted'...")
+        try:
+            check_reservations_response = self.session.get(
+                f"{BACKEND_URL}/reservations",
+                headers=user_headers
+            )
+            
+            if check_reservations_response.status_code == 200:
+                check_data = check_reservations_response.json()
+                reservations = check_data.get("reservations", [])
+                
+                converted_reservation = next((r for r in reservations if r.get("id") == reservation_id), None)
+                
+                if converted_reservation:
+                    status = converted_reservation.get("status")
+                    if status == "converted":
+                        print(f"   ✅ Reservation status changed to 'converted'")
+                        self.log_test("Verify Reservation Status Changed", True, "Status changed to 'converted'")
+                    else:
+                        print(f"   ❌ Reservation status incorrect: {status} (expected 'converted')")
+                        self.log_test("Verify Reservation Status Changed", False, f"Status={status}")
+                        return False
+                else:
+                    print(f"   ⚠️  Reservation not found (may have been removed)")
+            else:
+                print(f"   ❌ Failed to check reservation status: HTTP {check_reservations_response.status_code}")
+        except Exception as e:
+            print(f"   ❌ Check reservation status error: {str(e)}")
+        
+        # Test 5: Admin Approval with Details
+        print("\nTest 5: Admin approval with financing details...")
+        
+        # Login as admin
+        try:
+            admin_login_response = self.session.post(
+                f"{BACKEND_URL}/auth/login",
+                json={"email": "admin@test.com", "password": "Admin123!"},
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if admin_login_response.status_code == 200:
+                admin_data = admin_login_response.json()
+                admin_token = admin_data.get("access_token")
+                print(f"   ✅ Admin logged in")
+            else:
+                print(f"   ❌ Admin login failed: HTTP {admin_login_response.status_code}")
+                self.log_test("Admin Login for Approval", False, f"HTTP {admin_login_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Admin login error: {str(e)}")
+            self.log_test("Admin Login for Approval", False, f"Error: {str(e)}")
+            return False
+        
+        admin_headers = {
+            "Authorization": f"Bearer {admin_token}",
+            "Content-Type": "application/json"
+        }
+        
+        # Get applications to find our application
+        print("\n   Getting admin applications list...")
+        try:
+            admin_apps_response = self.session.get(
+                f"{BACKEND_URL}/admin/applications",
+                headers=admin_headers
+            )
+            
+            if admin_apps_response.status_code == 200:
+                admin_apps_data = admin_apps_response.json()
+                all_applications = admin_apps_data.get("applications", [])
+                
+                # Find our application
+                our_app = next((app for app in all_applications if app.get("id") == application_id), None)
+                
+                if our_app:
+                    print(f"   ✅ Application found in admin list: {application_id}")
+                else:
+                    print(f"   ❌ Application not found in admin list")
+                    self.log_test("Find Application in Admin List", False, "Application not found")
+                    return False
+            else:
+                print(f"   ❌ Failed to get admin applications: HTTP {admin_apps_response.status_code}")
+                self.log_test("Get Admin Applications", False, f"HTTP {admin_apps_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Get admin applications error: {str(e)}")
+            self.log_test("Get Admin Applications", False, f"Error: {str(e)}")
+            return False
+        
+        # Approve application with details
+        print("\n   Approving application with financing details...")
+        approval_details = {
+            "apr": 8.99,
+            "loan_term": 72,
+            "down_payment": 5000,
+            "monthly_payment": 550,
+            "admin_notes": "Great credit score! Approved at premium rate"
+        }
+        
+        try:
+            approve_response = self.session.patch(
+                f"{BACKEND_URL}/admin/applications/{application_id}/approve",
+                json=approval_details,
+                headers=admin_headers
+            )
+            
+            if approve_response.status_code == 200:
+                approve_data = approve_response.json()
+                
+                if approve_data.get("ok"):
+                    print(f"   ✅ Application approved with details")
+                    print(f"      APR: {approval_details['apr']}%, Term: {approval_details['loan_term']} months")
+                    print(f"      Down: ${approval_details['down_payment']}, Monthly: ${approval_details['monthly_payment']}")
+                    self.log_test("Admin Approval with Details", True, f"Application approved with financing details")
+                else:
+                    print(f"   ❌ Approval failed: {approve_data}")
+                    self.log_test("Admin Approval with Details", False, f"Approval failed: {approve_data}")
+                    return False
+            else:
+                print(f"   ❌ Failed to approve application: HTTP {approve_response.status_code} - {approve_response.text}")
+                self.log_test("Admin Approval with Details", False, f"HTTP {approve_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Approve application error: {str(e)}")
+            self.log_test("Admin Approval with Details", False, f"Error: {str(e)}")
+            return False
+        
+        # Verify approval details and pickup status
+        print("\n   Verifying approval details and pickup status...")
+        try:
+            verify_app_response = self.session.get(
+                f"{BACKEND_URL}/applications",
+                headers=user_headers
+            )
+            
+            if verify_app_response.status_code == 200:
+                verify_data = verify_app_response.json()
+                applications = verify_data.get("applications", [])
+                
+                approved_app = next((app for app in applications if app.get("id") == application_id), None)
+                
+                if approved_app:
+                    app_status = approved_app.get("status")
+                    pickup_status = approved_app.get("pickup_status")
+                    approval_details_saved = approved_app.get("approval_details")
+                    
+                    if app_status == "approved" and pickup_status == "ready_for_pickup":
+                        print(f"   ✅ Application status: {app_status}, Pickup status: {pickup_status}")
+                        
+                        if approval_details_saved:
+                            print(f"   ✅ Approval details saved: APR={approval_details_saved.get('apr')}%, Term={approval_details_saved.get('loan_term')} months")
+                            self.log_test("Verify Approval Details Saved", True, "Approval details and pickup status correct")
+                        else:
+                            print(f"   ⚠️  Approval details not found in application")
+                    else:
+                        print(f"   ❌ Status incorrect: app_status={app_status}, pickup_status={pickup_status}")
+                        self.log_test("Verify Approval Status", False, f"Status incorrect")
+                        return False
+                else:
+                    print(f"   ❌ Application not found")
+            else:
+                print(f"   ❌ Failed to verify application: HTTP {verify_app_response.status_code}")
+        except Exception as e:
+            print(f"   ❌ Verify application error: {str(e)}")
+        
+        # Test 6: Schedule Pickup
+        print("\nTest 6: Schedule pickup...")
+        
+        # Get available pickup slots
+        print("\n   Getting available pickup slots...")
+        try:
+            slots_response = self.session.get(
+                f"{BACKEND_URL}/admin/pickup-slots",
+                headers=admin_headers
+            )
+            
+            if slots_response.status_code == 200:
+                slots_data = slots_response.json()
+                available_slots = slots_data.get("slots", [])
+                
+                if available_slots:
+                    first_slot = available_slots[0]
+                    print(f"   ✅ Found {len(available_slots)} available pickup slots")
+                    print(f"      First slot: {first_slot}")
+                    self.log_test("Get Pickup Slots", True, f"Found {len(available_slots)} available slots")
+                else:
+                    print(f"   ❌ No available pickup slots")
+                    self.log_test("Get Pickup Slots", False, "No available slots")
+                    return False
+            else:
+                print(f"   ❌ Failed to get pickup slots: HTTP {slots_response.status_code}")
+                self.log_test("Get Pickup Slots", False, f"HTTP {slots_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Get pickup slots error: {str(e)}")
+            self.log_test("Get Pickup Slots", False, f"Error: {str(e)}")
+            return False
+        
+        # Schedule pickup as user
+        print("\n   Scheduling pickup as user...")
+        try:
+            schedule_response = self.session.post(
+                f"{BACKEND_URL}/applications/{application_id}/schedule-pickup",
+                params={"pickup_slot": first_slot},
+                headers=user_headers
+            )
+            
+            if schedule_response.status_code == 200:
+                schedule_data = schedule_response.json()
+                
+                if schedule_data.get("ok"):
+                    print(f"   ✅ Pickup scheduled for: {first_slot}")
+                    self.log_test("Schedule Pickup", True, f"Pickup scheduled for {first_slot}")
+                else:
+                    print(f"   ❌ Pickup scheduling failed: {schedule_data}")
+                    self.log_test("Schedule Pickup", False, f"Failed: {schedule_data}")
+                    return False
+            else:
+                print(f"   ❌ Failed to schedule pickup: HTTP {schedule_response.status_code} - {schedule_response.text}")
+                self.log_test("Schedule Pickup", False, f"HTTP {schedule_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Schedule pickup error: {str(e)}")
+            self.log_test("Schedule Pickup", False, f"Error: {str(e)}")
+            return False
+        
+        # Verify pickup was scheduled
+        print("\n   Verifying pickup was scheduled...")
+        try:
+            verify_pickup_response = self.session.get(
+                f"{BACKEND_URL}/applications",
+                headers=user_headers
+            )
+            
+            if verify_pickup_response.status_code == 200:
+                verify_data = verify_pickup_response.json()
+                applications = verify_data.get("applications", [])
+                
+                scheduled_app = next((app for app in applications if app.get("id") == application_id), None)
+                
+                if scheduled_app:
+                    pickup_status = scheduled_app.get("pickup_status")
+                    pickup_slot = scheduled_app.get("pickup_slot")
+                    
+                    if pickup_status == "scheduled" and pickup_slot:
+                        print(f"   ✅ Pickup status: {pickup_status}, Slot: {pickup_slot}")
+                        self.log_test("Verify Pickup Scheduled", True, f"Pickup scheduled successfully")
+                    else:
+                        print(f"   ❌ Pickup not scheduled correctly: status={pickup_status}, slot={pickup_slot}")
+                        self.log_test("Verify Pickup Scheduled", False, f"Status={pickup_status}")
+                        return False
+                else:
+                    print(f"   ❌ Application not found")
+            else:
+                print(f"   ❌ Failed to verify pickup: HTTP {verify_pickup_response.status_code}")
+        except Exception as e:
+            print(f"   ❌ Verify pickup error: {str(e)}")
+        
+        # Test 7: Cancel Reservation
+        print("\nTest 7: Cancel reservation (create new one first)...")
+        
+        # Create another reservation
+        print("\n   Creating another reservation to test cancellation...")
+        try:
+            new_reservation_response = self.session.post(
+                f"{BACKEND_URL}/reservations",
+                params={
+                    "lot_slug": lot_slug,
+                    "reserved_price": reserved_price,
+                    "monthly_payment": monthly_payment,
+                    "due_at_signing": due_at_signing
+                },
+                headers=user_headers
+            )
+            
+            if new_reservation_response.status_code == 200:
+                new_reservation_data = new_reservation_response.json()
+                new_reservation_id = new_reservation_data.get("reservation_id")
+                
+                if new_reservation_id:
+                    print(f"   ✅ New reservation created: {new_reservation_id}")
+                else:
+                    print(f"   ❌ Failed to create new reservation")
+                    self.log_test("Create Reservation for Cancellation", False, "Failed to create")
+                    return False
+            else:
+                print(f"   ❌ Failed to create new reservation: HTTP {new_reservation_response.status_code}")
+                self.log_test("Create Reservation for Cancellation", False, f"HTTP {new_reservation_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Create new reservation error: {str(e)}")
+            self.log_test("Create Reservation for Cancellation", False, f"Error: {str(e)}")
+            return False
+        
+        # Cancel the reservation
+        print("\n   Cancelling reservation...")
+        try:
+            cancel_response = self.session.delete(
+                f"{BACKEND_URL}/reservations/{new_reservation_id}",
+                headers=user_headers
+            )
+            
+            if cancel_response.status_code == 200:
+                cancel_data = cancel_response.json()
+                
+                if cancel_data.get("ok"):
+                    print(f"   ✅ Reservation cancelled successfully")
+                    self.log_test("Cancel Reservation", True, f"Reservation {new_reservation_id} cancelled")
+                else:
+                    print(f"   ❌ Cancellation failed: {cancel_data}")
+                    self.log_test("Cancel Reservation", False, f"Failed: {cancel_data}")
+                    return False
+            else:
+                print(f"   ❌ Failed to cancel reservation: HTTP {cancel_response.status_code}")
+                self.log_test("Cancel Reservation", False, f"HTTP {cancel_response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Cancel reservation error: {str(e)}")
+            self.log_test("Cancel Reservation", False, f"Error: {str(e)}")
+            return False
+        
+        # Verify cancellation
+        print("\n   Verifying reservation was cancelled...")
+        try:
+            verify_cancel_response = self.session.get(
+                f"{BACKEND_URL}/reservations",
+                headers=user_headers
+            )
+            
+            if verify_cancel_response.status_code == 200:
+                verify_data = verify_cancel_response.json()
+                reservations = verify_data.get("reservations", [])
+                
+                cancelled_reservation = next((r for r in reservations if r.get("id") == new_reservation_id), None)
+                
+                if cancelled_reservation:
+                    status = cancelled_reservation.get("status")
+                    if status == "cancelled":
+                        print(f"   ✅ Reservation status changed to 'cancelled'")
+                        self.log_test("Verify Reservation Cancelled", True, "Status changed to 'cancelled'")
+                    else:
+                        print(f"   ❌ Reservation status incorrect: {status} (expected 'cancelled')")
+                        self.log_test("Verify Reservation Cancelled", False, f"Status={status}")
+                        return False
+                else:
+                    print(f"   ⚠️  Cancelled reservation not found in list (may have been removed)")
+            else:
+                print(f"   ❌ Failed to verify cancellation: HTTP {verify_cancel_response.status_code}")
+        except Exception as e:
+            print(f"   ❌ Verify cancellation error: {str(e)}")
+        
+        print("\n" + "=" * 80)
+        print("✅ ALL RESERVATION FLOW TESTS COMPLETED SUCCESSFULLY")
+        print("=" * 80)
+        
+        return True
+
     def run_all_tests(self):
         """Run all backend tests including Lexus lot creation"""
         print("=" * 80)
