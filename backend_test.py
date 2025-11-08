@@ -3074,9 +3074,12 @@ class BackendTester:
         # Schedule pickup as user
         print("\n   Scheduling pickup as user...")
         try:
+            # Extract datetime string from slot dictionary
+            pickup_datetime = first_slot.get('datetime') if isinstance(first_slot, dict) else first_slot
+            
             schedule_response = self.session.post(
                 f"{BACKEND_URL}/applications/{application_id}/schedule-pickup",
-                params={"pickup_slot": first_slot},
+                params={"pickup_slot": pickup_datetime},
                 headers=user_headers
             )
             
@@ -3084,8 +3087,8 @@ class BackendTester:
                 schedule_data = schedule_response.json()
                 
                 if schedule_data.get("ok"):
-                    print(f"   ✅ Pickup scheduled for: {first_slot}")
-                    self.log_test("Schedule Pickup", True, f"Pickup scheduled for {first_slot}")
+                    print(f"   ✅ Pickup scheduled for: {pickup_datetime}")
+                    self.log_test("Schedule Pickup", True, f"Pickup scheduled for {pickup_datetime}")
                 else:
                     print(f"   ❌ Pickup scheduling failed: {schedule_data}")
                     self.log_test("Schedule Pickup", False, f"Failed: {schedule_data}")
