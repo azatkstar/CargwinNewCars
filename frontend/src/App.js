@@ -69,6 +69,10 @@ function App() {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/dashboard/profile" element={<ProfileForm />} />
                   <Route path="/dashboard/schedule-pickup/:applicationId" element={<SchedulePickup />} />
+                  <Route path="/terms" element={<TermsOfService />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/disclaimer" element={<Disclaimer />} />
+                  <Route path="/ccpa-rights" element={<CCPARights />} />
                   <Route path="/preview/:token" element={<PreviewLot />} />
                   <Route path="/admin/login" element={<AdminLogin />} />
                   <Route path="/admin/*" element={<AdminDashboard />} />
