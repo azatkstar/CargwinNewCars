@@ -759,10 +759,11 @@ user_repo = None
 audit_repo = None
 session_repo = None
 application_repo = None
+reservation_repo = None
 
 async def initialize_repositories():
     """Initialize all repositories"""
-    global lot_repo, user_repo, audit_repo, session_repo, application_repo
+    global lot_repo, user_repo, audit_repo, session_repo, application_repo, reservation_repo
     
     database = get_database()
     lot_repo = LotRepository(database)
@@ -770,6 +771,7 @@ async def initialize_repositories():
     audit_repo = AuditRepository(database)
     session_repo = UserSessionRepository(database)
     application_repo = ApplicationRepository(database)
+    reservation_repo = ReservationRepository(database)
     
     # Create indexes
     await lot_repo.create_indexes()
@@ -777,6 +779,7 @@ async def initialize_repositories():
     await audit_repo.create_indexes()
     await session_repo.create_indexes()
     await application_repo.create_indexes()
+    await reservation_repo.create_indexes()
     
     logger.info("Repositories initialized successfully")
 
