@@ -855,8 +855,15 @@ async def convert_reservation_to_application(
         if reservation['status'] != 'active':
             raise HTTPException(status_code=400, detail="Reservation is not active")
         
-        if reservation['expires_at'] < datetime.now(timezone.utc):
-            raise HTTPException(status_code=400, detail="Reservation has expired")
+        # Handle timezone-aware comparison
+        expires_at = reservation['expires_at']
+        if isinstance(expires_at, datetime):
+            # Make timezone-aware if needed
+            if expires_at.tzinfo is None:
+                expires_at = expires_at.replace(tzinfo=timezone.utc)
+            
+            if expires_at < datetime.now(timezone.utc):
+                raise HTTPException(status_code=400, detail="Reservation has expired")
         
         # Get lot and user data
         lot = await lot_repo.get_lot_by_id(reservation['lot_id'])
