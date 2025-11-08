@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 const Dashboard = () => {
   const { user, getApiClient, isAuthenticated } = useAuth();
   const [applications, setApplications] = useState([]);
+  const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -20,8 +21,30 @@ const Dashboard = () => {
       return;
     }
     
-    fetchApplications();
+    fetchData();
   }, [isAuthenticated]);
+
+  const fetchData = async () => {
+    try {
+      const api = getApiClient();
+      
+      // Fetch applications
+      const appsResponse = await api.get('/api/applications');
+      setApplications(appsResponse.data.applications || []);
+      
+      // Fetch reservations
+      try {
+        const resResponse = await api.get('/api/reservations');
+        setReservations(resResponse.data.reservations || []);
+      } catch (err) {
+        console.error('Failed to fetch reservations:', err);
+      }
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchApplications = async () => {
     try {
