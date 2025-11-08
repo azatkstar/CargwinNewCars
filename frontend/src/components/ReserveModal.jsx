@@ -50,7 +50,8 @@ const ReserveModal = ({ isOpen, onClose, offer, paymentMode = 'lease' }) => {
           lot_slug: offer.slug || offer.id,
           reserved_price: offer.fleet || offer.msrp,
           monthly_payment: monthlyPayment,
-          due_at_signing: dueAtSigning
+          due_at_signing: dueAtSigning,
+          deposit_paid: false  // Резервация без депозита (до 5 человек)
         })
       });
 
