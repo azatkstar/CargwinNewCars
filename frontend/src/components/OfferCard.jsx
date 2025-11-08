@@ -200,14 +200,19 @@ const OfferCard = ({ offer }) => {
           <Button 
             variant="outline"
             className="w-full border-red-600 text-red-600 hover:bg-red-50"
-            onClick={() => {
-              // Mock reservation action
-              alert('Reservation feature will be added to backend');
-            }}
+            onClick={() => setShowReserveModal(true)}
           >
             Reserve Price
           </Button>
         </div>
+
+        {/* Reserve Modal */}
+        <ReserveModal
+          isOpen={showReserveModal}
+          onClose={() => setShowReserveModal(false)}
+          offer={offer}
+          paymentMode={paymentMode}
+        />
 
         {/* Disclaimer */}
         <div className="mt-4 text-xs text-gray-500 leading-relaxed">
