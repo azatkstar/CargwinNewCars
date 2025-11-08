@@ -659,6 +659,100 @@ class ApplicationRepository:
             query['status'] = status
         return await self.collection.count_documents(query)
 
+class ReservationRepository:
+    """Repository for car reservations"""
+    
+    def __init__(self, database: AsyncIOMotorDatabase):
+        self.collection = database.reservations
+    
+    async def create_indexes(self):
+        """Create database indexes"""
+        await self.collection.create_index("user_id")
+        await self.collection.create_index("lot_id")
+        await self.collection.create_index("lot_slug")
+        await self.collection.create_index("status")
+        await self.collection.create_index("expires_at")
+        await self.collection.create_index([("user_id", 1), ("lot_id", 1)])
+        logger.info("Created indexes for reservations collection")
+    
+    async def create_reservation(self, reservation_data: Dict[str, Any]) -> str:
+        """Create new reservation"""
+        reservation_data['created_at'] = datetime.now(timezone.utc)
+        
+        result = await self.collection.insert_one(reservation_data)
+        return str(result.inserted_id)
+    
+    async def get_reservations_by_user(self, user_id: str, status: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get reservations for a user"""
+        query = {"user_id": user_id}
+        if status:
+            query['status'] = status
+        
+        cursor = self.collection.find(query).sort("created_at", -1)
+        reservations = await cursor.to_list(length=None)
+        
+        for res in reservations:
+            res['id'] = str(res.pop('_id'))
+        
+        return reservations
+    
+    async def get_reservation_by_id(self, reservation_id: str) -> Optional[Dict[str, Any]]:
+        """Get reservation by ID"""
+        try:
+            from bson import ObjectId
+            query_id = reservation_id
+            
+            # Try ObjectId conversion for MongoDB IDs
+            if len(reservation_id) == 24 and all(c in '0123456789abcdef' for c in reservation_id.lower()):
+                try:
+                    query_id = ObjectId(reservation_id)
+                except:
+                    pass
+            
+            reservation = await self.collection.find_one({"_id": query_id})
+            if reservation:
+                reservation['id'] = str(reservation.pop('_id'))
+            return reservation
+        except Exception as e:
+            logger.error(f"Error getting reservation {reservation_id}: {e}")
+            return None
+    
+    async def update_reservation_status(self, reservation_id: str, status: str, application_id: Optional[str] = None) -> bool:
+        """Update reservation status"""
+        try:
+            from bson import ObjectId
+            query_id = reservation_id
+            
+            if len(reservation_id) == 24 and all(c in '0123456789abcdef' for c in reservation_id.lower()):
+                try:
+                    query_id = ObjectId(reservation_id)
+                except:
+                    pass
+            
+            update_data = {'status': status}
+            if application_id:
+                update_data['application_id'] = application_id
+            
+            result = await self.collection.update_one(
+                {"_id": query_id},
+                {"$set": update_data}
+            )
+            return result.modified_count > 0
+        except Exception as e:
+            logger.error(f"Error updating reservation {reservation_id}: {e}")
+            return False
+    
+    async def expire_old_reservations(self) -> int:
+        """Expire reservations that have passed their expiration time"""
+        result = await self.collection.update_many(
+            {
+                "status": "active",
+                "expires_at": {"$lt": datetime.now(timezone.utc)}
+            },
+            {"$set": {"status": "expired"}}
+        )
+        return result.modified_count
+
 # Initialize repositories when database is connected
 lot_repo = None
 user_repo = None
