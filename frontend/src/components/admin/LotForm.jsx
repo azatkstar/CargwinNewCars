@@ -98,6 +98,7 @@ const LotForm = () => {
         interiorColor: lotData.interior_color || '',
         msrp: lotData.msrp || '',
         discount: lotData.discount || 0,
+        dealer_addons: lotData.dealer_addons || 0,
         feesHint: lotData.fees_hint || 0,
         state: lotData.state || 'CA',
         competitorPrices: lotData.competitor_prices || {
