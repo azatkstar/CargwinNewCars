@@ -2723,6 +2723,19 @@ class BackendTester:
             "Content-Type": "application/json"
         }
         
+        # Clean up any existing reservations for this user
+        print("\n   Cleaning up any existing reservations...")
+        try:
+            cleanup_response = self.session.get(f"{BACKEND_URL}/reservations", headers=user_headers)
+            if cleanup_response.status_code == 200:
+                existing_reservations = cleanup_response.json().get("reservations", [])
+                for res in existing_reservations:
+                    if res.get("status") == "active":
+                        self.session.delete(f"{BACKEND_URL}/reservations/{res['id']}", headers=user_headers)
+                        print(f"   🗑️  Cancelled existing reservation: {res['id']}")
+        except Exception as e:
+            print(f"   ⚠️  Cleanup warning: {str(e)}")
+        
         # Test 2: Create Reservation
         print("\nTest 2: Create reservation for Lexus TX500h F Sport...")
         lot_slug = "2024-lexus-tx500h-f-sport"
