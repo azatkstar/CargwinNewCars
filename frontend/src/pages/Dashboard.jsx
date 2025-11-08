@@ -147,6 +147,81 @@ const Dashboard = () => {
           </Card>
         </div>
 
+        {/* Active Reservations */}
+        {reservations.filter(r => r.status === 'active').length > 0 && (
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle>Active Reservations</CardTitle>
+              <CardDescription>Your reserved prices (valid for 48 hours)</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {reservations.filter(r => r.status === 'active').map((reservation) => (
+                  <div key={reservation.id} className="border rounded-lg p-4 bg-white hover:shadow-md transition-shadow">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h3 className="font-semibold text-gray-900">
+                          {reservation.lot_slug?.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                        </h3>
+                        <p className="text-sm text-gray-600">Reserved Price: ${reservation.reserved_price?.toLocaleString()}</p>
+                      </div>
+                      <Badge className="bg-blue-100 text-blue-800">
+                        <Clock className="w-3 h-3 mr-1" />
+                        Reserved
+                      </Badge>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 mt-3 text-sm">
+                      <div>
+                        <span className="text-gray-600">Monthly Payment:</span>
+                        <p className="font-semibold">${reservation.monthly_payment}/mo</p>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Due at Signing:</span>
+                        <p className="font-semibold">${reservation.due_at_signing?.toLocaleString()}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-3 text-xs text-gray-500">
+                      Expires: {new Date(reservation.expires_at).toLocaleString()}
+                    </div>
+                    
+                    <div className="flex gap-2 mt-4">
+                      <Button
+                        size="sm"
+                        className="flex-1 bg-red-600 hover:bg-red-700"
+                        onClick={async () => {
+                          const api = getApiClient();
+                          const response = await api.post(`/api/reservations/${reservation.id}/convert`);
+                          if (response.data.ok) {
+                            alert('Successfully converted to application!');
+                            fetchData();
+                          }
+                        }}
+                      >
+                        Apply for Financing
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={async () => {
+                          if (confirm('Cancel this reservation?')) {
+                            const api = getApiClient();
+                            await api.delete(`/api/reservations/${reservation.id}`);
+                            fetchData();
+                          }
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Applications List */}
         <Card>
           <CardHeader>
