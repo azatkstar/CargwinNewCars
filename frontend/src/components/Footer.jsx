@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Car, Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
