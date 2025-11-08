@@ -33,11 +33,13 @@ from database import (
     get_audit_repository,
     get_session_repository,
     get_application_repository,
+    get_reservation_repository,
     LotRepository,
     UserRepository,
     AuditRepository,
     UserSessionRepository,
-    ApplicationRepository
+    ApplicationRepository,
+    ReservationRepository
 )
 
 # Import authentication modules
