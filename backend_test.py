@@ -2964,7 +2964,7 @@ class BackendTester:
         
         # Approve application with details
         print("\n   Approving application with financing details...")
-        approval_details = {
+        approval_params = {
             "apr": 8.99,
             "loan_term": 72,
             "down_payment": 5000,
@@ -2975,7 +2975,7 @@ class BackendTester:
         try:
             approve_response = self.session.patch(
                 f"{BACKEND_URL}/admin/applications/{application_id}/approve",
-                json=approval_details,
+                params=approval_params,
                 headers=admin_headers
             )
             
@@ -2984,8 +2984,8 @@ class BackendTester:
                 
                 if approve_data.get("ok"):
                     print(f"   ✅ Application approved with details")
-                    print(f"      APR: {approval_details['apr']}%, Term: {approval_details['loan_term']} months")
-                    print(f"      Down: ${approval_details['down_payment']}, Monthly: ${approval_details['monthly_payment']}")
+                    print(f"      APR: {approval_params['apr']}%, Term: {approval_params['loan_term']} months")
+                    print(f"      Down: ${approval_params['down_payment']}, Monthly: ${approval_params['monthly_payment']}")
                     self.log_test("Admin Approval with Details", True, f"Application approved with financing details")
                 else:
                     print(f"   ❌ Approval failed: {approve_data}")
