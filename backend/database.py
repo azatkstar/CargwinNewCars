@@ -189,11 +189,47 @@ class ApplicationDocument(BaseModel):
     user_data: dict = {}
     lot_data: dict = {}
     
+    # Approval details (filled by admin when approving)
+    approval_details: Optional[Dict[str, Any]] = None  # {apr, money_factor, loan_term, down_payment, monthly_payment, approved_by, approved_at}
+    
+    # Pickup management
+    pickup_status: str = "pending"  # pending, ready_for_pickup, scheduled, completed
+    pickup_slot: Optional[datetime] = None
+    contract_sent: bool = False
+    contract_signed: bool = False
+    contract_sent_at: Optional[datetime] = None
+    
     admin_notes: Optional[str] = None
     contacted_at: Optional[datetime] = None
     
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat(),
+            ObjectId: str
+        }
+
+class ReservationDocument(BaseModel):
+    """User reservation for a car lot - holds price for limited time"""
+    user_id: str
+    lot_id: str
+    lot_slug: str
+    
+    # Price snapshot at time of reservation
+    reserved_price: float
+    monthly_payment: float
+    due_at_signing: float
+    
+    status: str = "active"  # active, expired, converted, cancelled
+    expires_at: datetime
+    
+    # If converted to application
+    application_id: Optional[str] = None
+    
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
     class Config:
         arbitrary_types_allowed = True
