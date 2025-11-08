@@ -38,7 +38,6 @@ const Home = () => {
         <TrustManifest />
         <Reviews />
         <FAQ />
-        <CreditSoftCheck />
       </main>
       <Footer />
       <FOMOTicker />
