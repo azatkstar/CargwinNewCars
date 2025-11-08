@@ -86,24 +86,24 @@ const Footer = ({ hiddenVin = null }) => {
             <h3 className="text-lg font-semibold mb-6">Legal Information</h3>
             <ul className="space-y-3 text-gray-300 mb-6">
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-200">
-                  {t('footer.links.privacy')}
-                </a>
+                <Link to="/privacy" className="hover:text-white transition-colors duration-200">
+                  Privacy Policy
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-200">
-                  {t('footer.links.terms')}
-                </a>
+                <Link to="/terms" className="hover:text-white transition-colors duration-200">
+                  Terms of Service
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-200">
+                <Link to="/disclaimer" className="hover:text-white transition-colors duration-200">
                   Disclaimer
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-200">
+                <Link to="/ccpa-rights" className="hover:text-white transition-colors duration-200">
                   CCPA Rights
-                </a>
+                </Link>
               </li>
             </ul>
 
