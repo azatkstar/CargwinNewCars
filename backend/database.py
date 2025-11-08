@@ -224,7 +224,11 @@ class ReservationDocument(BaseModel):
     monthly_payment: float
     due_at_signing: float
     
-    status: str = "active"  # active, expired, converted, cancelled
+    # Deposit management (до 5 резерваций, авто исчезает когда кто-то платит депозит)
+    deposit_paid: bool = False
+    deposit_amount: float = 97.49
+    
+    status: str = "active"  # active, expired, converted, cancelled, deposit_paid
     expires_at: datetime
     
     # If converted to application
