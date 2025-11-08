@@ -64,6 +64,7 @@ function App() {
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/dashboard/profile" element={<ProfileForm />} />
+                  <Route path="/dashboard/schedule-pickup/:applicationId" element={<SchedulePickup />} />
                   <Route path="/preview/:token" element={<PreviewLot />} />
                   <Route path="/admin/login" element={<AdminLogin />} />
                   <Route path="/admin/*" element={<AdminDashboard />} />
