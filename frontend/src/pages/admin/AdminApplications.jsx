@@ -7,12 +7,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../components/ui/table';
 import { Search, FileText, CheckCircle, Clock, XCircle, Phone } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
+import ApproveApplicationModal from './ApproveApplicationModal';
 
 const AdminApplications = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('all');
   const [pagination, setPagination] = useState({ page: 1, limit: 20, total: 0 });
+  const [selectedApp, setSelectedApp] = useState(null);
+  const [showApproveModal, setShowApproveModal] = useState(false);
   const { getApiClient } = useAuth();
 
   useEffect(() => {
