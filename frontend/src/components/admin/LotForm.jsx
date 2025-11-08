@@ -756,6 +756,22 @@ const LotForm = () => {
                 </div>
 
                 <div>
+                  <Label htmlFor="dealer_addons">Typical Dealer Add-ons ($) *</Label>
+                  <Input
+                    id="dealer_addons"
+                    type="number"
+                    min="0"
+                    placeholder="e.g., 5000"
+                    value={lot.dealer_addons || ''}
+                    onChange={(e) => handleInputChange('dealer_addons', parseInt(e.target.value) || 0)}
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    What LA dealers typically charge in add-ons for this model
+                  </p>
+                </div>
+
+                <div>
                   <Label htmlFor="feesHint">{t('admin.lot_form.known_fees')}</Label>
                   <Input
                     id="feesHint"
