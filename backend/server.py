@@ -1847,6 +1847,194 @@ async def update_application_status(
         logger.error(f"Update application status error: {e}")
         raise HTTPException(status_code=500, detail="Failed to update application status")
 
+
+@api_router.patch("/admin/applications/{app_id}/approve")
+async def approve_application_with_details(
+    app_id: str,
+    apr: Optional[float] = None,
+    money_factor: Optional[float] = None,
+    loan_term: int = 60,
+    down_payment: float = 3000,
+    monthly_payment: float = 0,
+    admin_notes: Optional[str] = None,
+    current_user: User = Depends(require_admin),
+    app_repo: ApplicationRepository = Depends(get_apps_repo)
+):
+    """Approve application with financing details (admin only)"""
+    try:
+        from bson import ObjectId
+        
+        # Validate inputs
+        if apr is None and money_factor is None:
+            raise HTTPException(status_code=400, detail="Either APR or money_factor is required")
+        
+        if monthly_payment <= 0:
+            raise HTTPException(status_code=400, detail="Monthly payment must be greater than 0")
+        
+        # Prepare approval details
+        approval_details = {
+            "apr": apr,
+            "money_factor": money_factor,
+            "loan_term": loan_term,
+            "down_payment": down_payment,
+            "monthly_payment": monthly_payment,
+            "approved_by": current_user.email,
+            "approved_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        # Update application
+        query_id = app_id
+        if len(app_id) == 24 and all(c in '0123456789abcdef' for c in app_id.lower()):
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        update_data = {
+            'status': 'approved',
+            'approval_details': approval_details,
+            'pickup_status': 'ready_for_pickup',
+            'updated_at': datetime.now(timezone.utc)
+        }
+        
+        if admin_notes:
+            update_data['admin_notes'] = admin_notes
+        
+        from database import get_database
+        db = get_database()
+        result = await db.applications.update_one(
+            {"_id": query_id},
+            {"$set": update_data}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        logger.info(f"Application {app_id} approved with details by {current_user.email}")
+        
+        return {
+            "ok": True,
+            "message": "Application approved with financing details",
+            "approval_details": approval_details
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Approve application error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to approve application")
+
+@api_router.post("/applications/{app_id}/schedule-pickup")
+async def schedule_pickup(
+    app_id: str,
+    pickup_slot: str,  # ISO datetime string
+    current_user: User = Depends(require_auth),
+    app_repo: ApplicationRepository = Depends(get_apps_repo)
+):
+    """Schedule pickup time for approved application"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        # Parse datetime
+        try:
+            pickup_datetime = datetime.fromisoformat(pickup_slot.replace('Z', '+00:00'))
+        except:
+            raise HTTPException(status_code=400, detail="Invalid datetime format")
+        
+        # Get application
+        db = get_database()
+        query_id = app_id
+        if len(app_id) == 24 and all(c in '0123456789abcdef' for c in app_id.lower()):
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        app = await db.applications.find_one({"_id": query_id})
+        
+        if not app:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        # Check ownership
+        if app['user_id'] != current_user.id:
+            raise HTTPException(status_code=403, detail="Not authorized")
+        
+        # Check if approved
+        if app.get('status') != 'approved':
+            raise HTTPException(status_code=400, detail="Application must be approved first")
+        
+        # Update pickup slot
+        result = await db.applications.update_one(
+            {"_id": query_id},
+            {"$set": {
+                "pickup_slot": pickup_datetime,
+                "pickup_status": "scheduled",
+                "updated_at": datetime.now(timezone.utc)
+            }}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=500, detail="Failed to schedule pickup")
+        
+        logger.info(f"Pickup scheduled for application {app_id} at {pickup_slot}")
+        
+        return {
+            "ok": True,
+            "message": "Pickup time scheduled successfully",
+            "pickup_slot": pickup_datetime.isoformat()
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Schedule pickup error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to schedule pickup")
+
+@api_router.get("/admin/pickup-slots")
+async def get_available_pickup_slots(
+    date: Optional[str] = None,  # ISO date string YYYY-MM-DD
+    current_user: User = Depends(require_admin)
+):
+    """Get available pickup slots (admin only)"""
+    try:
+        from datetime import timedelta
+        
+        # Parse date or use today
+        if date:
+            try:
+                base_date = datetime.fromisoformat(date).date()
+            except:
+                raise HTTPException(status_code=400, detail="Invalid date format")
+        else:
+            base_date = datetime.now(timezone.utc).date()
+        
+        # Generate available slots (9 AM to 5 PM, every hour) for next 14 days
+        slots = []
+        for day_offset in range(14):
+            current_date = base_date + timedelta(days=day_offset)
+            
+            # Skip Sundays
+            if current_date.weekday() == 6:
+                continue
+            
+            for hour in range(9, 17):  # 9 AM to 5 PM
+                slot_time = datetime.combine(current_date, datetime.min.time().replace(hour=hour, tzinfo=timezone.utc))
+                slots.append({
+                    "datetime": slot_time.isoformat(),
+                    "display": slot_time.strftime("%A, %B %d at %I:%M %p"),
+                    "available": True  # In real app, check against bookings
+                })
+        
+        return {"slots": slots}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get pickup slots error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get pickup slots")
+
+
 @api_router.get("/admin/audit-logs")
 async def get_audit_logs(
     page: int = 1,
