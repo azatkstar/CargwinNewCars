@@ -3313,8 +3313,8 @@ class BackendTester:
 if __name__ == "__main__":
     tester = BackendTester()
     
-    # Run competitor prices demo test as requested
-    print("Running Competitor Prices Demo Test...")
-    success = tester.run_competitor_prices_demo_test()
+    # Run reservation flow test as requested
+    print("Running Reservation Flow Test...")
+    success = tester.test_reservation_flow()
     
     sys.exit(0 if success else 1)
