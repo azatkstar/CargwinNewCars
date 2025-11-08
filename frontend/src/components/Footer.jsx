@@ -39,7 +39,7 @@ const Footer = ({ hiddenVin = null }) => {
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-gray-300">
                 <MapPin className="w-4 h-4 text-red-400" />
-                <span className="text-sm">Los Angeles, California</span>
+                <span className="text-sm">2855 Michelle Dr, Office 180, Irvine, CA 92606</span>
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <Phone className="w-4 h-4 text-red-400" />
