@@ -167,17 +167,6 @@ const OfferCard = ({ offer }) => {
             <span data-fomo-viewers>Currently viewing: {fomoCounters.viewers} people</span>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-1">
-                <Car className="w-4 h-4 text-red-500" />
-                Left: {offer.stockLeft} units
-              </span>
-              <span className="text-gray-500">{stockPercentage}%</span>
-            </div>
-            <Progress value={stockPercentage} className="h-2" />
-          </div>
-
           <div className="flex items-center gap-2 text-sm text-green-600">
             <TrendingUp className="w-4 h-4" />
             <span data-fomo-confirms>Price locked in 15 min: {fomoCounters.confirmed}</span>
