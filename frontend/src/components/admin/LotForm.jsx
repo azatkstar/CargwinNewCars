@@ -209,6 +209,20 @@ const LotForm = () => {
       return;
     }
 
+    // Additional validation for publishing
+    if (action === 'publish' || action === 'publish-now') {
+      if (!lot.lease || lot.lease.monthly <= 0) {
+        alert('Lease monthly payment is required and must be greater than $0 before publishing');
+        setActiveTab('pricing');
+        return;
+      }
+      if (!lot.dealer_addons || lot.dealer_addons <= 0) {
+        alert('Dealer add-ons amount is required before publishing');
+        setActiveTab('pricing');
+        return;
+      }
+    }
+
     setSaving(true);
     try {
       const api = getApiClient();
