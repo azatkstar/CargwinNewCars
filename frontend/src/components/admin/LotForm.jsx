@@ -267,15 +267,22 @@ const LotForm = () => {
       ...lot,
       id: undefined, // Remove ID to create new lot
       slug: `${lot.slug}-copy-${Date.now()}`, // Add suffix to slug
-      make: lot.make + ' (copy)',
+      model: lot.model + ' Copy',
       status: 'draft',
       createdAt: null,
-      updatedAt: null
+      updatedAt: null,
+      // Keep all images, pricing, competitor prices, FOMO settings
+      images: [...(lot.images || [])],
+      competitorPrices: {...(lot.competitorPrices || {})},
+      fomo: {...(lot.fomo || {})},
+      lease: {...(lot.lease || {})},
+      finance: {...(lot.finance || {})}
     };
     setLot(duplicatedLot);
+    setIsEditing(false); // Set to creation mode
     // Change URL to creation mode
     window.history.pushState({}, '', '/admin/lots/new');
-    alert(t('admin.messages.duplicate_success'));
+    alert('Lot duplicated successfully! You can now edit and save as new listing.');
   };
 
   const handlePreview = async () => {
