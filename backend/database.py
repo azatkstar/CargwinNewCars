@@ -812,3 +812,9 @@ def get_application_repository() -> ApplicationRepository:
     if application_repo is None:
         raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
     return application_repo
+
+def get_reservation_repository() -> ReservationRepository:
+    """Get reservation repository instance"""
+    if reservation_repo is None:
+        raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
+    return reservation_repo
