@@ -213,20 +213,34 @@ const AdminApplications = () => {
                         </span>
                       </TableCell>
                       <TableCell>
-                        <Select
-                          value={app.status}
-                          onValueChange={(newStatus) => handleStatusChange(app.id, newStatus)}
-                        >
-                          <SelectTrigger className="w-36">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="pending">Pending</SelectItem>
-                            <SelectItem value="contacted">Contacted</SelectItem>
-                            <SelectItem value="approved">Approved</SelectItem>
-                            <SelectItem value="rejected">Rejected</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <div className="flex gap-2">
+                          {app.status === 'pending' && (
+                            <Button
+                              size="sm"
+                              className="bg-green-600 hover:bg-green-700"
+                              onClick={() => {
+                                setSelectedApp(app);
+                                setShowApproveModal(true);
+                              }}
+                            >
+                              Approve with Details
+                            </Button>
+                          )}
+                          <Select
+                            value={app.status}
+                            onValueChange={(newStatus) => handleStatusChange(app.id, newStatus)}
+                          >
+                            <SelectTrigger className="w-36">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="pending">Pending</SelectItem>
+                              <SelectItem value="contacted">Contacted</SelectItem>
+                              <SelectItem value="approved">Approved</SelectItem>
+                              <SelectItem value="rejected">Rejected</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
