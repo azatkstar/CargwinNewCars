@@ -718,7 +718,6 @@ async def get_my_applications(
 
 def get_reservations_repo(request: Request = None):
     """Dependency for reservation repository"""
-    from database import get_reservation_repository
     return get_reservation_repository()
 
 @api_router.post("/reservations")
