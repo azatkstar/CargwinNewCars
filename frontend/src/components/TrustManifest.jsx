@@ -71,11 +71,11 @@ const TrustManifest = () => {
             return (
               <div 
                 key={index}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 hover:border-red-200 group"
+                className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 hover:border-green-200 group"
               >
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center group-hover:bg-red-700 transition-colors duration-300">
+                    <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center group-hover:bg-green-700 transition-colors duration-300">
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
                   </div>
@@ -85,7 +85,7 @@ const TrustManifest = () => {
                       <h3 className="font-bold text-gray-900 text-sm">
                         {point.title}
                       </h3>
-                      <span className="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-medium">
+                      <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-medium">
                         {point.highlight}
                       </span>
                     </div>
