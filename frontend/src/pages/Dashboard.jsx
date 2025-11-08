@@ -249,7 +249,7 @@ const Dashboard = () => {
               <div className="space-y-4">
                 {applications.map((app) => (
                   <div key={app.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div className="flex items-start justify-between">
+                    <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900">
                           {app.lot_data?.year} {app.lot_data?.make} {app.lot_data?.model}
@@ -260,16 +260,103 @@ const Dashboard = () => {
                         <p className="text-xs text-gray-500 mt-1">
                           Applied: {new Date(app.created_at).toLocaleDateString()}
                         </p>
-                        {app.admin_notes && (
-                          <p className="text-sm text-blue-600 mt-2 italic">
-                            Note: {app.admin_notes}
-                          </p>
-                        )}
                       </div>
                       <div>
                         {getStatusBadge(app.status)}
                       </div>
                     </div>
+                    
+                    {/* Approval Details */}
+                    {app.approval_details && (
+                      <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                        <h4 className="font-semibold text-green-900 mb-3 flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4" />
+                          Financing Approved
+                        </h4>
+                        <div className="grid grid-cols-2 gap-3 text-sm">
+                          {app.approval_details.apr && (
+                            <div>
+                              <span className="text-gray-600">APR:</span>
+                              <p className="font-semibold">{app.approval_details.apr}%</p>
+                            </div>
+                          )}
+                          {app.approval_details.money_factor && (
+                            <div>
+                              <span className="text-gray-600">Money Factor:</span>
+                              <p className="font-semibold">{app.approval_details.money_factor}</p>
+                            </div>
+                          )}
+                          <div>
+                            <span className="text-gray-600">Term:</span>
+                            <p className="font-semibold">{app.approval_details.loan_term} months</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">Down Payment:</span>
+                            <p className="font-semibold">${app.approval_details.down_payment?.toLocaleString()}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">Monthly Payment:</span>
+                            <p className="font-semibold text-green-700">${app.approval_details.monthly_payment}/mo</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">Approved:</span>
+                            <p className="font-semibold text-xs">{new Date(app.approval_details.approved_at).toLocaleDateString()}</p>
+                          </div>
+                        </div>
+                        
+                        {/* Contract Status */}
+                        <div className="mt-3 pt-3 border-t border-green-200">
+                          {app.contract_sent ? (
+                            <div className="text-sm text-green-700">
+                              ✓ Contract sent to your email
+                            </div>
+                          ) : (
+                            <div className="text-sm text-gray-600">
+                              Contract will be sent by the bank within 24 hours
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Pickup Section */}
+                        {app.pickup_status === 'ready_for_pickup' && !app.pickup_slot && (
+                          <Button
+                            className="w-full mt-4 bg-green-600 hover:bg-green-700"
+                            onClick={() => navigate(`/dashboard/schedule-pickup/${app.id}`)}
+                          >
+                            Schedule Pickup Time
+                          </Button>
+                        )}
+                        
+                        {app.pickup_slot && (
+                          <div className="mt-4 p-3 bg-white rounded border border-green-300">
+                            <p className="text-sm font-semibold text-green-900">
+                              Pickup Scheduled:
+                            </p>
+                            <p className="text-sm text-gray-700">
+                              {new Date(app.pickup_slot).toLocaleString('en-US', {
+                                weekday: 'long',
+                                month: 'long',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: '2-digit'
+                              })}
+                            </p>
+                            <p className="text-xs text-gray-500 mt-1">
+                              Location: 2855 Michelle Dr, Irvine, CA 92606 (Office 180)
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    
+                    {/* Admin Notes */}
+                    {app.admin_notes && (
+                      <div className="mt-3 p-3 bg-blue-50 rounded border border-blue-200">
+                        <p className="text-sm text-blue-900">
+                          <strong>Note from team:</strong> {app.admin_notes}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
