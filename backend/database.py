@@ -93,6 +93,7 @@ class LotDocument(BaseModel):
     # Pricing
     msrp: int = 0
     discount: int = 0
+    dealer_addons: int = 0  # Required field - typical dealer add-ons for this model
     fees_hint: int = 0
     state: str = "CA"
     
