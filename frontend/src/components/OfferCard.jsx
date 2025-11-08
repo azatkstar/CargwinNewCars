@@ -158,7 +158,7 @@ const OfferCard = ({ offer }) => {
           <div className="flex items-start gap-2 text-sm text-orange-700 bg-orange-50 p-3 rounded-lg border border-orange-200">
             <DollarSign className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>
-              For this model, LA dealers usually add ${formatPrice(offer.addonsAvg)} in add-ons. With us — $0.
+              For this model, LA dealers usually add ${(offer.dealer_addons || 0).toLocaleString()} in add-ons. With us — $0.
             </span>
           </div>
 
