@@ -2130,6 +2130,7 @@ async def get_public_cars(
                 "msrp": lot.get('msrp', 0),
                 "fleet": lot.get('msrp', 0) - lot.get('discount', 0),
                 "savings": lot.get('discount', 0),
+                "dealer_addons": lot.get('dealer_addons', 0),
                 "stockLeft": 1,
                 "image": (lot.get('images', [{}])[0].get('url', '') if lot.get('images') else ''),
                 "dealer": "Fleet Dealer",
