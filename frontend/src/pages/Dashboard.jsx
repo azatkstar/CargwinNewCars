@@ -249,6 +249,29 @@ const Dashboard = () => {
               <div className="space-y-4">
                 {applications.map((app) => (
                   <div key={app.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                    {/* Application Progress Bar */}
+                    <div className="mb-4">
+                      <div className="flex justify-between text-xs text-gray-600 mb-2">
+                        <span>Application Progress</span>
+                        <span>{getProgressStep(app.status)} of 5</span>
+                      </div>
+                      <div className="flex gap-1">
+                        {['pending', 'contacted', 'approved', 'contract_sent', 'completed'].map((step, idx) => (
+                          <div
+                            key={step}
+                            className={`h-2 flex-1 rounded ${
+                              getProgressStep(app.status) > idx ? 'bg-green-600' : 'bg-gray-200'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>Submitted</span>
+                        <span>Approved</span>
+                        <span>Ready</span>
+                      </div>
+                    </div>
+                    
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900">
