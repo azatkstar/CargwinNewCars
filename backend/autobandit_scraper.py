@@ -66,7 +66,7 @@ class AutoBanditScraper:
                             'found': True
                         }
             
-            print(f"  ⚠️  No matching vehicles found on AutoBandit")
+            print("  ⚠️  No matching vehicles found on AutoBandit")
             return None
             
         except requests.RequestException as e:
@@ -183,16 +183,16 @@ async def auto_update_lot_images():
             print(f"  💾 Updated lot: {slug}\n")
         else:
             failed_count += 1
-            print(f"  ⚠️  No images found, using fallback\n")
+            print("  ⚠️  No images found, using fallback\n")
             
             # Fallback: Use professional stock photos via vision API
             # (Already implemented in admin panel via "Search Images" button)
     
     print("\n" + "="*70)
-    print(f"📊 Summary:")
+    print("📊 Summary:")
     print(f"  ✅ Updated: {updated_count} lots")
     print(f"  ⚠️  Failed: {failed_count} lots")
-    print(f"  💡 For failed lots, use Admin Panel > Edit Lot > Search Images")
+    print("  💡 For failed lots, use Admin Panel > Edit Lot > Search Images")
     print("="*70)
     
     client.close()
