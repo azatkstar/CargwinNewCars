@@ -424,6 +424,47 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Document Center */}
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="w-5 h-5" />
+              Document Center
+            </CardTitle>
+            <CardDescription>All your documents in one place</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {applications.filter(app => app.status === 'approved').map((app) => (
+                <div key={app.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                  <div>
+                    <p className="font-medium text-sm">
+                      {app.lot_data?.year} {app.lot_data?.make} {app.lot_data?.model}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {app.contract_sent ? 'Contract sent to email' : 'Preparing documents...'}
+                    </p>
+                  </div>
+                  <Button size="sm" variant="outline" disabled={!app.contract_sent}>
+                    <Download className="w-4 h-4 mr-2" />
+                    Download
+                  </Button>
+                </div>
+              ))}
+              {applications.filter(app => app.status === 'approved').length === 0 && (
+                <p className="text-sm text-gray-500 text-center py-4">
+                  No documents available yet
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Referral Program */}
+        <div className="mt-6">
+          <ReferralProgram />
+        </div>
       </div>
 
       <Footer />
