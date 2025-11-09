@@ -165,6 +165,11 @@ async def shutdown_event():
         await cleanup_performance()
         logger.info("Performance components cleaned up")
         
+        # Stop background tasks
+        from background_tasks import stop_background_tasks
+        await stop_background_tasks()
+        logger.info("Background tasks stopped")
+        
         # Close database connections
         await close_mongo_connection()
         logger.info("Database connections closed")
