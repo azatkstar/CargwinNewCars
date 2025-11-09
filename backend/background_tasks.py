@@ -15,36 +15,14 @@ _should_run = False
 
 async def archive_expired_offers():
     """
-    Archive offers that have expired (after 48 hours from publish_at or endsAt)
-    Also archive offers where a user paid deposit
+    Archive offers strategically:
+    - Offers auto-renew every 48 hours by default (stay published)
+    - Archive only if: user paid deposit OR manually set to archive
     """
     try:
         db = get_database()
         lots_collection = db.lots
         reservations_collection = db.reservations
-        
-        # Find published lots that are older than 48 hours
-        cutoff_time = datetime.now(timezone.utc) - timedelta(hours=48)
-        
-        # Find lots to archive
-        result = await lots_collection.update_many(
-            {
-                "status": "published",
-                "$or": [
-                    {"publish_at": {"$lt": cutoff_time}},
-                    {"created_at": {"$lt": cutoff_time}}
-                ]
-            },
-            {
-                "$set": {
-                    "status": "archived",
-                    "archived_at": datetime.now(timezone.utc)
-                }
-            }
-        )
-        
-        if result.modified_count > 0:
-            logger.info(f"📦 Auto-archived {result.modified_count} expired offers")
         
         # Archive lots where someone paid reservation deposit
         # Find reservations with deposit_paid = True
@@ -52,11 +30,12 @@ async def archive_expired_offers():
             {"deposit_paid": True, "status": "active"}
         ).to_list(length=None)
         
+        archived_count = 0
         for res in paid_reservations:
             lot_slug = res.get('lot_slug')
             if lot_slug:
-                await lots_collection.update_one(
-                    {"slug": lot_slug},
+                result = await lots_collection.update_one(
+                    {"slug": lot_slug, "status": "published"},
                     {
                         "$set": {
                             "status": "sold",
@@ -64,9 +43,14 @@ async def archive_expired_offers():
                         }
                     }
                 )
-                logger.info(f"🎉 Archived lot {lot_slug} - deposit paid")
+                if result.modified_count > 0:
+                    archived_count += 1
+                    logger.info(f"🎉 Archived lot {lot_slug} - deposit paid")
         
-        # Expire old reservations
+        if archived_count > 0:
+            logger.info(f"📦 Auto-archived {archived_count} sold offers")
+        
+        # Expire old reservations (but don't archive lots)
         expired_result = await reservations_collection.update_many(
             {
                 "status": "active",
@@ -77,6 +61,9 @@ async def archive_expired_offers():
         
         if expired_result.modified_count > 0:
             logger.info(f"⏰ Expired {expired_result.modified_count} old reservations")
+        
+        # Note: Lots auto-renew by default and stay published
+        # Admin must manually archive if needed
             
     except Exception as e:
         logger.error(f"Error in archive_expired_offers: {e}")
