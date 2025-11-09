@@ -1688,6 +1688,95 @@ async def search_car_images(
         raise HTTPException(status_code=500, detail=f"Failed to search images: {str(e)}")
 
 
+@api_router.post("/admin/lots/{lot_id}/fetch-autobandit-images")
+async def fetch_autobandit_images(
+    lot_id: str,
+    current_user: User = Depends(require_editor),
+    lot_repo: LotRepository = Depends(get_lots_repo)
+):
+    """Fetch images from AutoBandit for a specific lot"""
+    try:
+        # Get lot data
+        lot = await lot_repo.get_lot_by_id(lot_id)
+        if not lot:
+            raise HTTPException(status_code=404, detail="Lot not found")
+        
+        make = lot.get('make', '')
+        model = lot.get('model', '')
+        year = lot.get('year', '')
+        
+        # Import and use scraper
+        import sys
+        sys.path.append('/app/backend')
+        from autobandit_scraper import AutoBanditScraper
+        
+        scraper = AutoBanditScraper()
+        result = scraper.search_vehicle(make, model, year)
+        
+        if result and result.get('images'):
+            images = result['images']
+            
+            # Update lot with scraped images
+            image_objects = [{"url": img, "alt": f"{year} {make} {model}"} for img in images]
+            
+            from database import get_database
+            db = get_database()
+            
+            await db.lots.update_one(
+                {"_id": lot['_id']},
+                {"$set": {
+                    "images": image_objects,
+                    "image": images[0]
+                }}
+            )
+            
+            logger.info(f"Updated lot {lot_id} with {len(images)} images from AutoBandit")
+            
+            return {
+                "ok": True,
+                "images_found": len(images),
+                "images": images,
+                "message": f"Successfully fetched {len(images)} images from AutoBandit"
+            }
+        else:
+            return {
+                "ok": False,
+                "message": "No matching images found on AutoBandit",
+                "suggestion": "Use the Search Images button to find professional stock photos"
+            }
+        
+    except Exception as e:
+        logger.error(f"AutoBandit fetch error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to fetch images: {str(e)}")
+
+@api_router.post("/admin/sync-all-autobandit-images")
+async def sync_all_autobandit_images(
+    current_user: User = Depends(require_admin)
+):
+    """Sync images from AutoBandit for all lots (admin only)"""
+    try:
+        import sys
+        sys.path.append('/app/backend')
+        
+        # Run the scraper asynchronously
+        from autobandit_scraper import auto_update_lot_images
+        
+        # This runs in background
+        import asyncio
+        asyncio.create_task(auto_update_lot_images())
+        
+        return {
+            "ok": True,
+            "message": "AutoBandit image sync started in background",
+            "note": "Check logs for progress"
+        }
+        
+    except Exception as e:
+        logger.error(f"Sync all images error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to start sync: {str(e)}")
+
+
+
 @api_router.post("/admin/lots/{lot_id}/preview")
 async def create_preview_token(lot_id: str):
     """Create preview token for a lot"""
