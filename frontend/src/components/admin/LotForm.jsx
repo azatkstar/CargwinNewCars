@@ -860,6 +860,144 @@ const LotForm = () => {
                 msrp={lot.msrp - lot.discount}
                 state={lot.state}
               />
+              
+              {/* Lease and Finance Calculator */}
+              <Card className="mt-6">
+                <CardHeader>
+                  <CardTitle>Payment Calculator</CardTitle>
+                  <CardDescription>Configure lease and finance options</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Tabs defaultValue="lease" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2">
+                      <TabsTrigger value="lease">Lease</TabsTrigger>
+                      <TabsTrigger value="finance">Finance</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="lease" className="space-y-4 mt-4">
+                      <div className="bg-blue-50 p-3 rounded text-sm text-blue-900">
+                        💡 Lease uses <strong>Money Factor</strong> (Interest Rate ÷ 2400)
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="lease_monthly">Monthly Payment ($) *</Label>
+                          <Input
+                            id="lease_monthly"
+                            type="number"
+                            min="0"
+                            placeholder="e.g., 499"
+                            value={lot.lease?.monthly || ''}
+                            onChange={(e) => {
+                              const newLease = {...(lot.lease || {}), monthly: parseInt(e.target.value) || 0};
+                              handleInputChange('lease', newLease);
+                            }}
+                            required
+                          />
+                        </div>
+                        
+                        <div>
+                          <Label htmlFor="lease_due">Due at Signing ($)</Label>
+                          <Input
+                            id="lease_due"
+                            type="number"
+                            min="0"
+                            value={lot.lease?.dueAtSigning || 3000}
+                            onChange={(e) => {
+                              const newLease = {...(lot.lease || {}), dueAtSigning: parseInt(e.target.value) || 0};
+                              handleInputChange('lease', newLease);
+                            }}
+                          />
+                        </div>
+                        
+                        <div>
+                          <Label htmlFor="lease_term">Term (months)</Label>
+                          <Input
+                            id="lease_term"
+                            type="number"
+                            value={lot.lease?.termMonths || 36}
+                            onChange={(e) => {
+                              const newLease = {...(lot.lease || {}), termMonths: parseInt(e.target.value) || 36};
+                              handleInputChange('lease', newLease);
+                            }}
+                          />
+                        </div>
+                        
+                        <div>
+                          <Label htmlFor="lease_miles">Miles/Year</Label>
+                          <Input
+                            id="lease_miles"
+                            type="number"
+                            value={lot.lease?.milesPerYear || 7500}
+                            onChange={(e) => {
+                              const newLease = {...(lot.lease || {}), milesPerYear: parseInt(e.target.value) || 7500};
+                              handleInputChange('lease', newLease);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="finance" className="space-y-4 mt-4">
+                      <div className="bg-green-50 p-3 rounded text-sm text-green-900">
+                        💡 Finance uses <strong>APR</strong> (Annual Percentage Rate)
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="finance_apr">APR (%)</Label>
+                          <Input
+                            id="finance_apr"
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            placeholder="e.g., 9.75"
+                            value={lot.finance?.apr || ''}
+                            onChange={(e) => {
+                              const newFinance = {...(lot.finance || {}), apr: parseFloat(e.target.value) || 0};
+                              handleInputChange('finance', newFinance);
+                            }}
+                          />
+                        </div>
+                        
+                        <div>
+                          <Label htmlFor="finance_term">Term (months)</Label>
+                          <Input
+                            id="finance_term"
+                            type="number"
+                            value={lot.finance?.termMonths || 60}
+                            onChange={(e) => {
+                              const newFinance = {...(lot.finance || {}), termMonths: parseInt(e.target.value) || 60};
+                              handleInputChange('finance', newFinance);
+                            }}
+                          />
+                        </div>
+                        
+                        <div>
+                          <Label htmlFor="finance_down">Down Payment ($)</Label>
+                          <Input
+                            id="finance_down"
+                            type="number"
+                            min="0"
+                            value={lot.finance?.downPayment || 3000}
+                            onChange={(e) => {
+                              const newFinance = {...(lot.finance || {}), downPayment: parseInt(e.target.value) || 0};
+                              handleInputChange('finance', newFinance);
+                            }}
+                          />
+                        </div>
+                        
+                        <div className="flex items-end">
+                          <div className="text-sm text-gray-600">
+                            Money Factor = APR ÷ 2400<br/>
+                            {lot.finance?.apr ? `= ${(lot.finance.apr / 2400).toFixed(5)}` : ''}
+                          </div>
+                        </div>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </CardContent>
+              </Card>
             </CardContent>
           </Card>
         </TabsContent>
