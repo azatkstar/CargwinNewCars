@@ -7,6 +7,8 @@ import Hero from "./components/Hero";
 import OffersSection from "./components/OffersSection";
 import DropSubscription from "./components/DropSubscription";
 import CoverageMap from "./components/CoverageMap";
+import InstantQuoteTool from "./components/InstantQuoteTool";
+import RecentActivity from "./components/RecentActivity";
 import HowItWorks from "./components/HowItWorks";
 import TrustManifest from "./components/TrustManifest";
 import Reviews from "./components/Reviews";
