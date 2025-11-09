@@ -130,6 +130,17 @@ const LotForm = () => {
           description: '',
           noindex: false
         },
+        lease: lotData.lease || {
+          monthly: 0,
+          dueAtSigning: 3000,
+          termMonths: 36,
+          milesPerYear: 7500
+        },
+        finance: lotData.finance || {
+          apr: 9.75,
+          termMonths: 60,
+          downPayment: 3000
+        },
         images: lotData.images || [],
         status: lotData.status || 'draft',
         publishAt: lotData.publish_at || null,
