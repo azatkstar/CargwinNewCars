@@ -16,6 +16,7 @@ import FAQ from "./components/FAQ";
 import CreditSoftCheck from "./components/CreditSoftCheck";
 import Footer from "./components/Footer";
 import FOMOTicker from "./components/FOMOTicker";
+import LiveChatWidget from "./components/LiveChatWidget";
 import CarDetail from "./pages/CarDetail";
 import PreviewLot from "./pages/PreviewLot";
 import Auth from "./pages/Auth";
