@@ -75,6 +75,17 @@ const Dashboard = () => {
     );
   };
 
+  const getProgressStep = (status) => {
+    const steps = {
+      'pending': 1,
+      'contacted': 2,
+      'approved': 3,
+      'contract_sent': 4,
+      'completed': 5
+    };
+    return steps[status] || 1;
+  };
+
   const needsProfileCompletion = !user?.profile_completed;
 
   return (
