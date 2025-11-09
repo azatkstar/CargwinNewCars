@@ -704,51 +704,87 @@ const LotForm = () => {
                   <Image className="w-5 h-5" />
                   {t('admin.lot_form.media_files')}
                 </div>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={async () => {
-                    if (!lot.make || !lot.model || !lot.year) {
-                      alert('Please fill in Make, Model, and Year fields first');
-                      return;
-                    }
-                    try {
-                      const api = getApiClient();
-                      const params = {
-                        make: lot.make,
-                        model: lot.model,
-                        year: lot.year,
-                        trim: lot.trim || undefined
-                      };
-                      const response = await api.get('/api/admin/search-car-images', { params });
-                      const imageData = response.data;
-                      
-                      if (imageData.images && imageData.images.length > 0) {
-                        // Map found images to lot format
-                        const newImages = imageData.images.map(img => ({
-                          url: img.url,
-                          alt: img.alt || `${lot.year} ${lot.make} ${lot.model}`
-                        }));
-                        
-                        // Add to existing images
-                        handleInputChange('images', [...lot.images, ...newImages]);
-                        alert(`Found ${newImages.length} images! ${imageData.note || ''}`);
-                      } else {
-                        alert('No images found for this vehicle');
+                <div className="flex gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={async () => {
+                      if (!lot.id && !isEditing) {
+                        alert('Please save the lot first before fetching AutoBandit images');
+                        return;
                       }
-                    } catch (error) {
-                      console.error('Image search error:', error);
-                      alert('Failed to search images: ' + (error.response?.data?.detail || error.message));
-                    }
-                  }}
-                  disabled={!lot.make || !lot.model || !lot.year}
-                >
-                  <Search className="w-4 h-4 mr-2" />
-                  Auto-Find Images
-                </Button>
+                      if (!lot.make || !lot.model || !lot.year) {
+                        alert('Please fill in Make, Model, and Year fields first');
+                        return;
+                      }
+                      try {
+                        const api = getApiClient();
+                        const response = await api.post(`/api/admin/lots/${id}/fetch-autobandit-images`);
+                        
+                        if (response.data.ok) {
+                          // Reload lot to get new images
+                          await fetchLot();
+                          alert(response.data.message);
+                        } else {
+                          alert(response.data.message + '\n' + (response.data.suggestion || ''));
+                        }
+                      } catch (error) {
+                        console.error('AutoBandit fetch error:', error);
+                        alert('Failed to fetch from AutoBandit. Try Auto-Find Images instead.');
+                      }
+                    }}
+                    disabled={!isEditing || !lot.make || !lot.model || !lot.year}
+                  >
+                    🤖 AutoBandit Images
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={async () => {
+                      if (!lot.make || !lot.model || !lot.year) {
+                        alert('Please fill in Make, Model, and Year fields first');
+                        return;
+                      }
+                      try {
+                        const api = getApiClient();
+                        const params = {
+                          make: lot.make,
+                          model: lot.model,
+                          year: lot.year,
+                          trim: lot.trim || undefined
+                        };
+                        const response = await api.get('/api/admin/search-car-images', { params });
+                        const imageData = response.data;
+                        
+                        if (imageData.images && imageData.images.length > 0) {
+                          // Map found images to lot format
+                          const newImages = imageData.images.map(img => ({
+                            url: img.url,
+                            alt: img.alt || `${lot.year} ${lot.make} ${lot.model}`
+                          }));
+                          
+                          // Add to existing images
+                          handleInputChange('images', [...lot.images, ...newImages]);
+                          alert(`Found ${newImages.length} images! ${imageData.note || ''}`);
+                        } else {
+                          alert('No images found for this vehicle');
+                        }
+                      } catch (error) {
+                        console.error('Image search error:', error);
+                        alert('Failed to search images: ' + (error.response?.data?.detail || error.message));
+                      }
+                    }}
+                    disabled={!lot.make || !lot.model || !lot.year}
+                  >
+                    <Search className="w-4 h-4 mr-2" />
+                    Auto-Find Images
+                  </Button>
+                </div>
               </CardTitle>
               <p className="text-sm text-gray-500 mt-2">
-                Click "Auto-Find Images" to search for photos from AutoBandit and free sources
+                🤖 AutoBandit: scrape similar vehicles | 🔍 Auto-Find: professional stock photos
               </p>
             </CardHeader>
             <CardContent>
