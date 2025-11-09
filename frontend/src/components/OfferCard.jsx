@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
-import { Clock, Eye, TrendingUp, Car, DollarSign, ArrowRight } from 'lucide-react';
+import { Clock, Eye, TrendingUp, Car, DollarSign, ArrowRight, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { formatPrice, formatTimeRemaining, calculateMonthlyPayment } from '../utils/timer';
 import { getFOMOCounters } from '../mock';
 import { useI18n } from '../hooks/useI18n';
 import ReserveModal from './ReserveModal';
+import PriceBreakdownModal from './PriceBreakdownModal';
 
 const OfferCard = ({ offer }) => {
   const [paymentMode, setPaymentMode] = useState('lease');
   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [fomoCounters, setFomoCounters] = useState({ viewers: 0, confirmed: 0 });
   const [showReserveModal, setShowReserveModal] = useState(false);
+  const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const { t } = useI18n();
 
   useEffect(() => {
