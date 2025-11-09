@@ -190,12 +190,28 @@ const OfferCard = ({ offer }) => {
           
           <Button 
             variant="outline"
+            className="w-full border-green-600 text-green-700 hover:bg-green-50 flex items-center justify-center gap-2"
+            onClick={() => setShowPriceBreakdown(true)}
+          >
+            <FileText className="w-4 h-4" />
+            See Full Price Breakdown
+          </Button>
+          
+          <Button 
+            variant="outline"
             className="w-full border-red-600 text-red-600 hover:bg-red-50"
             onClick={() => setShowReserveModal(true)}
           >
             Reserve Price
           </Button>
         </div>
+
+        {/* Price Breakdown Modal */}
+        <PriceBreakdownModal
+          isOpen={showPriceBreakdown}
+          onClose={() => setShowPriceBreakdown(false)}
+          car={offer}
+        />
 
         {/* Reserve Modal */}
         <ReserveModal
