@@ -223,13 +223,13 @@ const LotForm = () => {
 
     // Additional validation for publishing
     if (action === 'publish' || action === 'publish-now') {
-      if (!lot.lease || lot.lease.monthly <= 0) {
-        alert('Lease monthly payment is required and must be greater than $0 before publishing');
+      if (!lot.lease || !lot.lease.monthly || lot.lease.monthly <= 0) {
+        alert('Lease monthly payment is required and must be greater than $0 before publishing. Please fill in Pricing/OTD tab.');
         setActiveTab('pricing');
         return;
       }
       if (!lot.dealer_addons || lot.dealer_addons <= 0) {
-        alert('Dealer add-ons amount is required before publishing');
+        alert('Dealer add-ons amount is required before publishing. Please fill in Pricing/OTD tab.');
         setActiveTab('pricing');
         return;
       }
