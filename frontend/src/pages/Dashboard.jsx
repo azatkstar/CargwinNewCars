@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { User, FileText, CheckCircle, Clock, XCircle, Settings } from 'lucide-react';
+import { User, FileText, CheckCircle, Clock, XCircle, Settings, Download } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
+import ReferralProgram from '../components/ReferralProgram';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
