@@ -6,6 +6,8 @@ import { Badge } from '../components/ui/badge';
 import { User, FileText, CheckCircle, Clock, XCircle, Settings, Download } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import ReferralProgram from '../components/ReferralProgram';
+import SavingsCalculator from '../components/SavingsCalculator';
+import PreApprovalCheck from '../components/PreApprovalCheck';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
