@@ -470,6 +470,14 @@ const Dashboard = () => {
         <div className="mt-6">
           <ReferralProgram />
         </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            <SavingsCalculator />
+            <PreApprovalCheck />
+          </div>
+        </div>
       </div>
 
       <Footer />
