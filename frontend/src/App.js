@@ -14,6 +14,7 @@ import TrustManifest from "./components/TrustManifest";
 import Reviews from "./components/Reviews";
 import FAQ from "./components/FAQ";
 import CreditSoftCheck from "./components/CreditSoftCheck";
+import CompareVehicles from "./components/CompareVehicles";
 import Footer from "./components/Footer";
 import FOMOTicker from "./components/FOMOTicker";
 import LiveChatWidget from "./components/LiveChatWidget";
