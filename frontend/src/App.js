@@ -40,8 +40,19 @@ const Home = () => {
       <main role="main">
         <Hero />
         <OffersSection />
-        <InstantQuoteTool />
-        <RecentActivity />
+        
+        {/* Instant Quote & Recent Activity in grid */}
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <InstantQuoteTool />
+            </div>
+            <div>
+              <RecentActivity />
+            </div>
+          </div>
+        </div>
+        
         <DropSubscription />
         <CoverageMap />
         <HowItWorks />
