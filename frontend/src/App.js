@@ -39,6 +39,8 @@ const Home = () => {
       <main role="main">
         <Hero />
         <OffersSection />
+        <InstantQuoteTool />
+        <RecentActivity />
         <DropSubscription />
         <CoverageMap />
         <HowItWorks />
