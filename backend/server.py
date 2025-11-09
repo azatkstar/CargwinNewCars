@@ -146,6 +146,11 @@ async def startup_event():
         await initialize_performance()
         logger.info("Performance optimization initialized")
         
+        # Start background tasks for auto-archiving
+        from background_tasks import start_background_tasks
+        await start_background_tasks()
+        logger.info("Background tasks started")
+        
         logger.info("🚀 Application startup completed successfully")
         
     except Exception as e:
