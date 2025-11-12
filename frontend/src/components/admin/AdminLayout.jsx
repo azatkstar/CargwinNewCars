@@ -34,6 +34,13 @@ const AdminLayout = ({ children }) => {
       requiredRole: 'admin'
     },
     {
+      id: 'finance-manager',
+      label: 'Finance Manager',
+      icon: DollarSign,
+      path: '/admin/finance-manager',
+      requiredRole: 'finance_manager'
+    },
+    {
       id: 'settings', 
       label: 'Settings',
       icon: Settings,
