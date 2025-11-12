@@ -14,7 +14,7 @@ import TrustManifest from "./components/TrustManifest";
 import Reviews from "./components/Reviews";
 import FAQ from "./components/FAQ";
 import TrustFAQ from "./components/TrustFAQ";
-import CreditSoftCheck from "./components/CreditSoftCheck";
+import ProcessSteps from "./components/ProcessSteps";
 import CompareVehicles from "./components/CompareVehicles";
 import Footer from "./components/Footer";
 import FOMOTicker from "./components/FOMOTicker";
