@@ -18,6 +18,38 @@ const ProfileForm = () => {
   const totalSteps = 5;
   const navigate = useNavigate();
 
+  // Validation for current step
+  const validateStep = (step) => {
+    switch(step) {
+      case 1: // Credit
+        return formData.credit_score >= 300 && formData.credit_score <= 850;
+      case 2: // Employment
+        return formData.employment_type && formData.employer_name && formData.monthly_income_pretax > 0;
+      case 3: // Personal
+        return formData.date_of_birth && formData.drivers_license_number && formData.phone;
+      case 4: // Address
+        return formData.current_address && formData.current_address_duration_months >= 0;
+      case 5: // Review
+        return true;
+      default:
+        return false;
+    }
+  };
+
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      setCurrentStep(Math.min(currentStep + 1, totalSteps));
+      window.scrollTo(0, 0);
+    } else {
+      setError('Please fill all required fields before proceeding');
+    }
+  };
+
+  const handlePrevious = () => {
+    setCurrentStep(Math.max(currentStep - 1, 1));
+    window.scrollTo(0, 0);
+  };
+
   const [formData, setFormData] = useState({
     // Credit
     credit_score: user?.credit_score || '',
