@@ -146,6 +146,31 @@ const ProfileForm = () => {
             <CardDescription>
               Help us pre-qualify you for the best financing options. All information is secure and confidential.
             </CardDescription>
+            
+            {/* Progress Indicator */}
+            <div className="mt-6">
+              <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <span>Step {currentStep} of {totalSteps}</span>
+                <span>{Math.round((currentStep / totalSteps) * 100)}% Complete</span>
+              </div>
+              <div className="flex gap-1">
+                {[1, 2, 3, 4, 5].map((step) => (
+                  <div
+                    key={step}
+                    className={`h-2 flex-1 rounded ${
+                      step <= currentStep ? 'bg-green-600' : 'bg-gray-200'
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-between text-xs text-gray-500 mt-2">
+                <span>Credit</span>
+                <span>Employment</span>
+                <span>Personal</span>
+                <span>Address</span>
+                <span>Review</span>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
