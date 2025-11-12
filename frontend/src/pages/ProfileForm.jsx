@@ -17,13 +17,33 @@ const ProfileForm = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    // Credit
     credit_score: user?.credit_score || '',
     auto_loan_history: user?.auto_loan_history || false,
+    
+    // Employment (expanded)
     employment_type: user?.employment_type || '',
+    employer_name: user?.employer_name || '',
+    job_title: user?.job_title || '',
+    time_at_job_months: user?.time_at_job_months || '',
+    monthly_income_pretax: user?.monthly_income_pretax || '',
     annual_income: user?.annual_income || '',
     employment_duration_months: user?.employment_duration_months || '',
+    
+    // Personal
+    date_of_birth: user?.date_of_birth || '',
+    drivers_license_number: user?.drivers_license_number || '',
+    immigration_status: user?.immigration_status || '',
+    phone: user?.phone || '',
+    
+    // Address
+    current_address: user?.current_address || '',
+    current_address_duration_months: user?.current_address_duration_months || '',
+    previous_address: user?.previous_address || '',
     address: user?.address || '',
     residence_duration_months: user?.residence_duration_months || '',
+    
+    // Financial
     monthly_expenses: user?.monthly_expenses || '',
     down_payment_ready: user?.down_payment_ready || '',
     ssn: user?.ssn || ''
