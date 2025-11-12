@@ -382,20 +382,26 @@ const ProfileForm = () => {
                     <Input
                       type="text"
                       placeholder="123 Main St, Los Angeles, CA 90001"
-                      value={formData.address}
-                      onChange={(e) => handleChange('address', e.target.value)}
+                      value={formData.current_address || formData.address}
+                      onChange={(e) => {
+                        handleChange('current_address', e.target.value);
+                        handleChange('address', e.target.value);
+                      }}
                       required
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">Time at Address (months) *</label>
+                      <label className="text-sm font-medium">Time at Current Address (months) *</label>
                       <Input
                         type="number"
                         placeholder="e.g. 36"
-                        value={formData.residence_duration_months}
-                        onChange={(e) => handleChange('residence_duration_months', e.target.value)}
+                        value={formData.current_address_duration_months || formData.residence_duration_months}
+                        onChange={(e) => {
+                          handleChange('current_address_duration_months', e.target.value);
+                          handleChange('residence_duration_months', e.target.value);
+                        }}
                         required
                       />
                     </div>
@@ -412,6 +418,23 @@ const ProfileForm = () => {
                       <p className="text-xs text-gray-500">Amount you can put down</p>
                     </div>
                   </div>
+
+                  {/* Previous Address - only if < 24 months at current */}
+                  {formData.current_address_duration_months < 24 && (
+                    <div className="space-y-2 bg-yellow-50 p-4 rounded border border-yellow-200">
+                      <label className="text-sm font-medium">Previous Address *</label>
+                      <Input
+                        type="text"
+                        placeholder="Previous address (required if < 2 years at current)"
+                        value={formData.previous_address}
+                        onChange={(e) => handleChange('previous_address', e.target.value)}
+                        required
+                      />
+                      <p className="text-xs text-yellow-700">
+                        Required because you've lived at current address less than 2 years
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
 
