@@ -162,7 +162,6 @@ const CarDetail = () => {
           {/* Left Column - Specs & Calculator */}
           <div className="lg:col-span-2 space-y-12">
             <CarSpecs car={carData} />
-            <OTDCalculator car={carData} />
             
             {/* Price Comparison - Only show if competitor data exists */}
             <PriceComparison car={carData} />
@@ -171,8 +170,9 @@ const CarDetail = () => {
             <AlternativeVehicles selectedCar={carData} />
           </div>
           
-          {/* Right Column - Forms */}
+          {/* Right Column - Calculator & Forms */}
           <div className="space-y-8">
+            <BuildYourLeaseCalculator car={carData} />
             <CarForms car={carData} />
             <ModelSubscriptions carMake={carData.specs?.make || carData.make} carModel={carData.specs?.model || carData.model} />
           </div>
