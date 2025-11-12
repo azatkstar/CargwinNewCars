@@ -211,8 +211,19 @@ class ApplicationDocument(BaseModel):
     user_data: dict = {}
     lot_data: dict = {}
     
-    # Approval details (filled by admin when approving)
+    # Alternative vehicles (auto-suggested or manager-suggested)
+    alternatives: List[Dict[str, Any]] = []  # [{type: 'cheaper/similar/luxury', lot_id, suggested_by: 'auto/manager'}]
+    
+    # Trade-in information
+    trade_in: Optional[Dict[str, Any]] = None  # {vin, year, make, model, mileage, condition, kbb_value, photos: []}
+    
+    # Approval details (filled by admin/finance_manager when approving)
     approval_details: Optional[Dict[str, Any]] = None  # {apr, money_factor, loan_term, down_payment, monthly_payment, approved_by, approved_at}
+    
+    # Finance Manager fields
+    prescoring_data: Optional[Dict[str, Any]] = None  # {score, history, recommendations, checked_at, checked_by}
+    verified_income: Optional[int] = None  # Подтвержденный доход (заполняет менеджер)
+    manager_comments: Optional[str] = None  # Комментарии менеджера
     
     # Pickup management
     pickup_status: str = "pending"  # pending, ready_for_pickup, scheduled, completed
@@ -220,6 +231,9 @@ class ApplicationDocument(BaseModel):
     contract_sent: bool = False
     contract_signed: bool = False
     contract_sent_at: Optional[datetime] = None
+    
+    # Notifications sent
+    notifications_sent: List[Dict[str, Any]] = []  # [{type: 'email/sms', status, sent_at, message}]
     
     admin_notes: Optional[str] = None
     contacted_at: Optional[datetime] = None
