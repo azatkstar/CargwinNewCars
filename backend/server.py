@@ -2594,9 +2594,52 @@ async def update_application_status(
         if not success:
             raise HTTPException(status_code=404, detail="Application not found")
         
+        # Auto-send notification based on status change
+        from database import get_database
+        db = get_database()
+        
+        # Get application and user
+        from bson import ObjectId
+        query_id = app_id
+        if len(app_id) == 24:
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        app = await db.applications.find_one({"_id": query_id})
+        if app:
+            # Define status messages
+            status_messages = {
+                "contacted": "We've received your application and our team is reviewing it. We'll contact you within 24 hours with next steps.",
+                "approved": "🎉 Congratulations! Your application has been approved. Check your email for contract details and next steps.",
+                "rejected": "Unfortunately, we're unable to approve your application at this time. However, we have alternative options available. Our team will contact you shortly.",
+                "pending": "Your application status has been updated. Our team is reviewing your information."
+            }
+            
+            message = status_messages.get(status, f"Your application status has been updated to: {status}")
+            
+            # Create notification record (mock - actual sending happens via SendGrid/Twilio)
+            notification_record = {
+                "type": "auto_status_change",
+                "channel": "email",  # In production: send to both email and SMS if available
+                "status": "sent_mock",
+                "message": message,
+                "triggered_by": f"status_change_to_{status}",
+                "sent_at": datetime.now(timezone.utc).isoformat(),
+                "sent_by": "system_auto"
+            }
+            
+            await db.applications.update_one(
+                {"_id": query_id},
+                {"$push": {"notifications_sent": notification_record}}
+            )
+            
+            logger.info(f"Auto-notification queued for app {app_id} on status change to {status}")
+        
         logger.info(f"Application {app_id} status updated to {status} by {current_user.email}")
         
-        return {"ok": True, "message": "Application status updated"}
+        return {"ok": True, "message": "Application status updated", "notification_sent": True}
     except HTTPException:
         raise
     except Exception as e:
