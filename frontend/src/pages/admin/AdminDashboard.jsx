@@ -8,6 +8,7 @@ import LotForm from '../../components/admin/LotForm';
 import AdminUsers from './AdminUsers';
 import AdminApplications from './AdminApplications';
 import FinanceManagerDashboard from './FinanceManagerDashboard';
+import AnalyticsDashboard from './AnalyticsDashboard';
 import AdminSettings from './AdminSettings';
 import AuditLog from './AuditLog';
 
