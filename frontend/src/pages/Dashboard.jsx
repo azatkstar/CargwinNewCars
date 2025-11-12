@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 import ReferralProgram from '../components/ReferralProgram';
 import SavingsCalculator from '../components/SavingsCalculator';
 import PreApprovalCheck from '../components/PreApprovalCheck';
+import TradeInForm from '../components/TradeInForm';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
