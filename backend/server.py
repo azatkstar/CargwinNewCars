@@ -1394,6 +1394,57 @@ class BatchLotActionRequest(BaseModel):
     """Request model for batch lot actions"""
     lotIds: List[str]
 
+
+
+class CompleteProfileRequest(BaseModel):
+    """Extended user profile request for fleet department"""
+    # Credit fields
+    credit_score: Optional[int] = None
+    auto_loan_history: Optional[bool] = None
+    
+    # Employment (expanded)
+    employment_type: Optional[str] = None  # self, 1099, W2, other
+    employer_name: Optional[str] = None
+    job_title: Optional[str] = None
+    time_at_job_months: Optional[int] = None
+    monthly_income_pretax: Optional[int] = None
+    annual_income: Optional[int] = None
+    employment_duration_months: Optional[int] = None
+    
+    # Personal
+    date_of_birth: Optional[str] = None
+    drivers_license_number: Optional[str] = None
+    immigration_status: Optional[str] = None  # green_card, citizen, asylum
+    phone: Optional[str] = None
+    
+    # Address
+    current_address: Optional[str] = None
+    current_address_duration_months: Optional[int] = None
+    previous_address: Optional[str] = None
+    address: Optional[str] = None  # Legacy
+    residence_duration_months: Optional[int] = None
+    
+    # Financial
+    monthly_expenses: Optional[int] = None
+    down_payment_ready: Optional[int] = None
+    ssn: Optional[str] = None
+
+class TradeInRequest(BaseModel):
+    """Trade-in vehicle information"""
+    vin: str
+    year: int
+    make: str
+    model: str
+    mileage: int
+    condition: str  # excellent, good, fair, poor
+    photos: List[str] = []
+
+class AlternativeVehicleRequest(BaseModel):
+    """Alternative vehicle suggestion"""
+    application_id: str
+    lot_ids: List[str]  # Up to 3 alternatives
+    reason: Optional[str] = None
+
 @api_router.post("/admin/lots/batch/{action}")
 async def batch_lot_action(
     action: str,
