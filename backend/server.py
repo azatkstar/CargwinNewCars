@@ -1389,6 +1389,80 @@ async def import_lots_xlsx(
         raise HTTPException(status_code=500, detail=f"Failed to import Excel: {str(e)}")
 
 
+
+@api_router.post("/admin/lots/batch/{action}")
+async def batch_lot_action(
+    action: str,
+    lotIds: List[str],
+    current_user: User = Depends(require_admin),
+    lot_repo: LotRepository = Depends(get_lots_repo)
+):
+    """Perform batch action on multiple lots (admin only)"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        if action not in ['archive', 'delete', 'publish', 'unpublish']:
+            raise HTTPException(status_code=400, detail=f"Invalid action: {action}")
+        
+        if not lotIds or len(lotIds) == 0:
+            raise HTTPException(status_code=400, detail="No lots selected")
+        
+        db = get_database()
+        lots_collection = db.lots
+        
+        # Convert lot IDs to ObjectId if needed
+        object_ids = []
+        for lot_id in lotIds:
+            try:
+                if len(lot_id) == 24 and all(c in '0123456789abcdef' for c in lot_id.lower()):
+                    object_ids.append(ObjectId(lot_id))
+                else:
+                    object_ids.append(lot_id)
+            except:
+                object_ids.append(lot_id)
+        
+        # Perform action
+        update_data = {}
+        if action == 'archive':
+            update_data = {
+                'status': 'archived',
+                'archived_at': datetime.now(timezone.utc)
+            }
+        elif action == 'delete':
+            update_data = {
+                'status': 'deleted',
+                'archived_at': datetime.now(timezone.utc)
+            }
+        elif action == 'publish':
+            update_data = {
+                'status': 'published',
+                'publish_at': datetime.now(timezone.utc)
+            }
+        elif action == 'unpublish':
+            update_data = {'status': 'draft'}
+        
+        # Update all selected lots
+        result = await lots_collection.update_many(
+            {'_id': {'$in': object_ids}},
+            {'$set': update_data}
+        )
+        
+        logger.info(f"Batch {action} performed by {current_user.email} on {result.modified_count} lots")
+        
+        return {
+            'ok': True,
+            'modified': result.modified_count,
+            'message': f'{result.modified_count} lots {action}d successfully'
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Batch action error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to perform batch action: {str(e)}")
+
+
 @api_router.get("/admin/vin/decode/{vin}")
 async def decode_vin(
     vin: str,
