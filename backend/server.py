@@ -280,10 +280,14 @@ async def create_status_check(input: StatusCheckCreate):
     return status_obj
 
 @api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
+async def get_status_checks(
+    skip: int = 0,
+    limit: int = 100
+):
+    """Get status checks with pagination"""
     from database import get_database
     db = get_database()
-    status_checks = await db.status_checks.find().to_list(1000)
+    status_checks = await db.status_checks.find().sort('timestamp', -1).skip(skip).limit(limit).to_list(limit)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
 @api_router.post("/admin/upload", response_model=List[dict])
