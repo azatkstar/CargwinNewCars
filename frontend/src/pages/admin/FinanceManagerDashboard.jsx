@@ -284,6 +284,9 @@ const FinanceManagerDashboard = () => {
                           <p className="text-sm text-gray-700">{app.manager_comments}</p>
                         </div>
                       )}
+                      
+                      {/* Notification History */}
+                      <NotificationHistory applicationId={app.id} />
                     </div>
                   )}
                 </CardContent>
