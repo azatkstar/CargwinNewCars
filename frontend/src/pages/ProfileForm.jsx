@@ -4,8 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { ArrowLeft, CheckCircle, DollarSign, Home, Briefcase } from 'lucide-react';
+import { ArrowLeft, CheckCircle, DollarSign, Home, Briefcase, Shield } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
+import SecurityTrustBanner from '../components/SecurityTrustBanner';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
