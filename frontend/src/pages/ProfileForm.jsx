@@ -14,6 +14,8 @@ const ProfileForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 5;
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
