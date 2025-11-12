@@ -2268,13 +2268,25 @@ async def get_auto_alternatives(
         if not app:
             raise HTTPException(status_code=404, detail="Application not found")
         
-        # Get selected car details
-        selected_lot = await db.lots.find_one({"_id": app['lot_id']})
-        if not selected_lot:
-            raise HTTPException(status_code=404, detail="Original lot not found")
+        # Get selected car details - handle both string and ObjectId lot_id
+        lot_id_query = app['lot_id']
+        if len(app['lot_id']) == 24 and all(c in '0123456789abcdef' for c in app['lot_id'].lower()):
+            try:
+                lot_id_query = ObjectId(app['lot_id'])
+            except:
+                pass
         
-        selected_price = selected_lot.get('msrp', 0) - selected_lot.get('discount', 0)
-        selected_monthly = selected_lot.get('lease', {}).get('monthly', 0)
+        selected_lot = await db.lots.find_one({"_id": lot_id_query})
+        if not selected_lot:
+            # Try by slug if ObjectId failed
+            selected_lot = await db.lots.find_one({"slug": app.get('lot_data', {}).get('slug', '')})
+        
+        if not selected_lot:
+            # Can't find original lot, but we can still suggest alternatives based on lot_data
+            logger.warning(f"Original lot not found for app {app_id}, using lot_data")
+            selected_monthly = 500  # Default
+        else:
+            selected_monthly = selected_lot.get('lease', {}).get('monthly', 0)
         
         # Find alternatives
         all_lots = await db.lots.find({"status": "published"}).to_list(length=100)
