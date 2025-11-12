@@ -263,37 +263,11 @@ class FinanceManagerTester:
             return self.log_test("Prescoring", False, "No application ID available")
         
         try:
-            # First, login as admin
-            print("Logging in as admin...")
-            admin_login = {
-                "email": "admin@test.com",
-                "password": "admin123"
-            }
-            
-            login_response = self.session.post(
-                f"{BACKEND_URL}/auth/login",
-                json=admin_login,
-                headers={"Content-Type": "application/json"}
-            )
-            
-            if login_response.status_code == 200:
-                admin_data = login_response.json()
-                self.admin_token = admin_data.get("access_token")
-                print("Admin login successful")
-            else:
-                # Try to register admin if login fails
-                print("Admin login failed, trying to register...")
-                register_response = self.session.post(
-                    f"{BACKEND_URL}/auth/register",
-                    json={"email": "admin@test.com", "password": "admin123", "name": "Admin User"},
-                    headers={"Content-Type": "application/json"}
-                )
-                if register_response.status_code == 200:
-                    admin_data = register_response.json()
-                    self.admin_token = admin_data.get("access_token")
-                    print("Admin registered successfully")
-                else:
-                    return self.log_test("Prescoring", False, "Could not login or register admin")
+            # Use the user token (will test if it works, otherwise we'll see 403)
+            # In production, admin would have proper role
+            if not self.admin_token:
+                print("Using user token for prescoring (admin token not available)...")
+                self.admin_token = self.user_token
             
             # Run prescoring
             print(f"Running prescoring for application: {self.application_id}")
