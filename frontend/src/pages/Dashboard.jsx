@@ -477,6 +477,14 @@ const Dashboard = () => {
           <div className="space-y-6">
             <SavingsCalculator />
             <PreApprovalCheck />
+            
+            {/* Trade-In - show if user has approved application */}
+            {applications.some(a => a.status === 'approved') && (
+              <TradeInForm 
+                applicationId={applications.find(a => a.status === 'approved')?.id}
+                onTradeInAdded={() => fetchData()}
+              />
+            )}
           </div>
         </div>
       </div>
