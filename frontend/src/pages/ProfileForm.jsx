@@ -503,24 +503,56 @@ const ProfileForm = () => {
                   )}
                 </div>
               </div>
+              )}
 
-              {/* Submit Button */}
+              {/* Step 5: Review */}
+              {currentStep === 5 && (
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg text-gray-900 mb-4">Review Your Information</h3>
+                  <div className="bg-gray-50 p-4 rounded space-y-3 text-sm">
+                    <div><strong>Credit Score:</strong> {formData.credit_score}</div>
+                    <div><strong>Employer:</strong> {formData.employer_name}</div>
+                    <div><strong>Monthly Income:</strong> ${formData.monthly_income_pretax?.toLocaleString()}</div>
+                    <div><strong>Employment Type:</strong> {formData.employment_type}</div>
+                    <div><strong>Address:</strong> {formData.current_address}</div>
+                    <div><strong>Immigration:</strong> {formData.immigration_status}</div>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    Please review your information. Click "Submit" to save your profile.
+                  </p>
+                </div>
+              )}
+
+              {/* Navigation Buttons */}
               <div className="flex gap-4 pt-4">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => navigate('/dashboard')}
-                  className="flex-1"
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  disabled={loading}
-                  className="flex-1 bg-red-600 hover:bg-red-700"
-                >
-                  {loading ? 'Saving...' : 'Save Profile'}
-                </Button>
+                {currentStep > 1 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handlePrevious}
+                    className="flex-1"
+                  >
+                    ← Previous
+                  </Button>
+                )}
+                
+                {currentStep < totalSteps ? (
+                  <Button
+                    type="button"
+                    onClick={handleNext}
+                    className="flex-1 bg-red-600 hover:bg-red-700"
+                  >
+                    Next →
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="flex-1 bg-green-600 hover:bg-green-700"
+                  >
+                    {loading ? 'Saving...' : '✓ Submit Profile'}
+                  </Button>
+                )}
               </div>
 
               <p className="text-xs text-gray-500 text-center">
