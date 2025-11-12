@@ -59,6 +59,7 @@ const Home = () => {
         <CoverageMap />
         <HowItWorks />
         <TrustManifest />
+        <TrustFAQ />
         <Reviews />
         <FAQ />
       </main>
