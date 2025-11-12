@@ -2836,7 +2836,28 @@ async def update_application_status(
             notification_record = {
                 "type": "auto_status_change",
                 "channel": "email",  # In production: send to both email and SMS if available
-
+                "status": "sent_mock",
+                "message": message,
+                "triggered_by": f"status_change_to_{status}",
+                "sent_at": datetime.now(timezone.utc).isoformat(),
+                "sent_by": "system_auto"
+            }
+            
+            await db.applications.update_one(
+                {"_id": query_id},
+                {"$push": {"notifications_sent": notification_record}}
+            )
+            
+            logger.info(f"Auto-notification queued for app {app_id} on status change to {status}")
+        
+        logger.info(f"Application {app_id} status updated to {status} by {current_user.email}")
+        
+        return {"ok": True, "message": "Application status updated", "notification_sent": True}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Update application status error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update application status")
 
 @api_router.get("/admin/applications/{app_id}/notifications")
 async def get_application_notifications(
@@ -2874,29 +2895,6 @@ async def get_application_notifications(
     except Exception as e:
         logger.error(f"Get notifications error: {e}")
         raise HTTPException(status_code=500, detail="Failed to get notifications")
-
-                "status": "sent_mock",
-                "message": message,
-                "triggered_by": f"status_change_to_{status}",
-                "sent_at": datetime.now(timezone.utc).isoformat(),
-                "sent_by": "system_auto"
-            }
-            
-            await db.applications.update_one(
-                {"_id": query_id},
-                {"$push": {"notifications_sent": notification_record}}
-            )
-            
-            logger.info(f"Auto-notification queued for app {app_id} on status change to {status}")
-        
-        logger.info(f"Application {app_id} status updated to {status} by {current_user.email}")
-        
-        return {"ok": True, "message": "Application status updated", "notification_sent": True}
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Update application status error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to update application status")
 
 
 @api_router.patch("/admin/applications/{app_id}/approve")
