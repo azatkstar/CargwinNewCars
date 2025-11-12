@@ -58,6 +58,7 @@ const Home = () => {
         <DropSubscription />
         <CoverageMap />
         <HowItWorks />
+        <ProcessSteps />
         <TrustManifest />
         <TrustFAQ />
         <Reviews />
