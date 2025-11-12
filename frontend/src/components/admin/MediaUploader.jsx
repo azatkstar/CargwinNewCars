@@ -73,20 +73,6 @@ const MediaUploader = ({ images = [], onChange, error }) => {
       setUploading(false);
     }
   };
-          sourceMeta: {
-            license: 'uploaded',
-            originalName: file.name
-          }
-        }));
-
-        onChange([...images, ...newImages]);
-        setUploading(false);
-      }, 2000);
-    } catch (error) {
-      console.error('Upload failed:', error);
-      setUploading(false);
-    }
-  };
 
   const handleFileInput = (e) => {
     if (e.target.files) {
