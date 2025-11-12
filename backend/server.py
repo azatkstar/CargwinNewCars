@@ -2488,6 +2488,201 @@ async def create_subscription(
     telegram_id: Optional[str] = None,
     notify_email: bool = True,
     notify_sms: bool = False,
+
+
+# ============================================
+# Document Upload & Management
+# ============================================
+
+@api_router.post("/applications/{app_id}/upload-document")
+async def upload_document(
+    app_id: str,
+    file: UploadFile,
+    doc_type: str,
+    current_user: User = Depends(require_auth),
+    file_manager: FileStorageManager = Depends(get_file_storage_manager)
+):
+    """Upload document for application"""
+    try:
+        # Save file
+        file_path = await file_manager.save_file(file, category='documents')
+        
+        # Add to application documents array
+        from database import get_database
+        from bson import ObjectId
+        db = get_database()
+        
+        query_id = app_id
+        if len(app_id) == 24:
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        doc_record = {
+            "type": doc_type,
+            "filename": file.filename,
+            "url": file_path,
+            "uploaded_at": datetime.now(timezone.utc).isoformat(),
+            "uploaded_by": current_user.id
+        }
+        
+        await db.applications.update_one(
+            {"_id": query_id},
+            {"$push": {"documents": doc_record}}
+        )
+        
+        logger.info(f"Document uploaded for app {app_id}: {doc_type}")
+        
+        return {"ok": True, "url": file_path, "message": "Document uploaded"}
+        
+    except Exception as e:
+        logger.error(f"Document upload error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to upload document")
+
+# ============================================
+# Appointment Scheduling
+# ============================================
+
+@api_router.post("/appointments")
+async def create_appointment(
+    application_id: str,
+    appointment_type: str,
+    date: str,
+    time: str,
+    current_user: User = Depends(require_auth)
+):
+    """Schedule appointment for test drive, pickup, or video call"""
+    try:
+        from database import get_database
+        db = get_database()
+        
+        appointment_data = {
+            "application_id": application_id,
+            "user_id": current_user.id,
+            "type": appointment_type,  # pickup, video, test_drive
+            "date": date,
+            "time": time,
+            "status": "scheduled",
+            "created_at": datetime.now(timezone.utc)
+        }
+        
+        result = await db.appointments.insert_one(appointment_data)
+        
+        logger.info(f"Appointment scheduled: {appointment_type} on {date} {time}")
+        
+        return {
+            "ok": True,
+            "appointment_id": str(result.inserted_id),
+            "message": f"{appointment_type} scheduled for {date} at {time}"
+        }
+        
+    except Exception as e:
+        logger.error(f"Appointment scheduling error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to schedule appointment")
+
+# ============================================
+# Bulk Operations for Finance Manager
+# ============================================
+
+@api_router.post("/admin/applications/bulk/prescoring")
+async def bulk_prescoring(
+    application_ids: List[str],
+    current_user: User = Depends(require_auth)
+):
+    """Run prescoring for multiple applications at once"""
+    try:
+        if current_user.role not in ['finance_manager', 'admin']:
+            raise HTTPException(status_code=403, detail="Finance Manager access required")
+        
+        from database import get_database
+        from bson import ObjectId
+        db = get_database()
+        
+        results = []
+        for app_id in application_ids[:20]:  # Limit to 20 at a time
+            try:
+                query_id = ObjectId(app_id) if len(app_id) == 24 else app_id
+                app = await db.applications.find_one({"_id": query_id})
+                
+                if app:
+                    user = await db.users.find_one({"_id": app['user_id']})
+                    credit_score = user.get('credit_score', 650)
+                    income = user.get('monthly_income_pretax', 0) or (user.get('annual_income', 0) / 12 if user.get('annual_income') else 0)
+                    
+                    mock_prescoring = {
+                        "credit_score": credit_score,
+                        "credit_tier": "Tier 1" if credit_score >= 720 else "Tier 2" if credit_score >= 680 else "Tier 3",
+                        "approval_probability": "High" if credit_score >= 700 else "Medium" if credit_score >= 650 else "Low",
+                        "max_approved_amount": int(income * 36 * 0.15) if income else 30000,
+                        "checked_at": datetime.now(timezone.utc).isoformat(),
+                        "checked_by": current_user.email
+                    }
+                    
+                    await db.applications.update_one(
+                        {"_id": query_id},
+                        {"$set": {"prescoring_data": mock_prescoring}}
+                    )
+                    
+                    results.append({"app_id": app_id, "success": True})
+            except Exception as e:
+                results.append({"app_id": app_id, "success": False, "error": str(e)})
+        
+        success_count = sum(1 for r in results if r['success'])
+        
+        logger.info(f"Bulk prescoring: {success_count}/{len(application_ids)} completed")
+        
+        return {
+            "ok": True,
+            "total": len(application_ids),
+            "success": success_count,
+            "results": results
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Bulk prescoring error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to run bulk prescoring")
+
+@api_router.get("/admin/applications/export/excel")
+async def export_applications_excel(
+    status: Optional[str] = None,
+    current_user: User = Depends(require_auth)
+):
+    """Export applications to Excel"""
+    try:
+        from database import get_database
+        db = get_database()
+        
+        query = {}
+        if status and status != 'all':
+            query['status'] = status
+        
+        apps = await db.applications.find(query).to_list(length=1000)
+        
+        # Convert to CSV-like format (in production: use openpyxl for real Excel)
+        csv_data = "ID,Customer,Email,Vehicle,Status,Credit Score,Income,Applied Date\\n"
+        
+        for app in apps:
+            csv_data += f"{app.get('_id', '')},{app.get('user_data', {}).get('name', '')},"
+            csv_data += f"{app.get('user_data', {}).get('email', '')},{app.get('lot_data', {}).get('year', '')} {app.get('lot_data', {}).get('make', '')},"
+            csv_data += f"{app.get('status', '')},{app.get('user_data', {}).get('credit_score', '')},"
+            csv_data += f"{app.get('user_data', {}).get('annual_income', '')},{app.get('created_at', '')}\\n"
+        
+        logger.info(f"Exported {len(apps)} applications to Excel")
+        
+        return {
+            "ok": True,
+            "data": csv_data,
+            "count": len(apps),
+            "message": "Export ready"
+        }
+        
+    except Exception as e:
+        logger.error(f"Export error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to export")
+
     notify_telegram: bool = False,
     current_user: User = Depends(require_auth)
 ):
