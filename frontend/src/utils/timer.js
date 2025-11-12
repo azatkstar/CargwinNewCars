@@ -19,7 +19,14 @@ export const getNextMondayMidnight = () => {
 // Format time remaining
 export const formatTimeRemaining = (targetDate) => {
   const now = new Date();
-  const diff = targetDate - now;
+  const target = typeof targetDate === 'string' ? new Date(targetDate) : targetDate;
+  
+  // Validate date
+  if (!target || isNaN(target.getTime())) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+  
+  const diff = target - now;
   
   if (diff <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
