@@ -34,12 +34,14 @@ from database import (
     get_session_repository,
     get_application_repository,
     get_reservation_repository,
+    get_subscription_repository,
     LotRepository,
     UserRepository,
     AuditRepository,
     UserSessionRepository,
     ApplicationRepository,
-    ReservationRepository
+    ReservationRepository,
+    SubscriptionRepository
 )
 
 # Import authentication modules
