@@ -255,7 +255,10 @@ const ProfileForm = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Social Security Number (SSN) *</label>
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <Shield className="w-4 h-4 text-green-600" />
+                    Social Security Number (SSN) *
+                  </label>
                   <Input
                     type="password"
                     placeholder="XXX-XX-XXXX"
@@ -263,15 +266,12 @@ const ProfileForm = () => {
                     onChange={(e) => handleChange('ssn', e.target.value)}
                     maxLength="11"
                     required
+                    className="border-2 border-green-300"
                   />
-                  <div className="bg-blue-50 border-l-4 border-blue-500 p-3 mt-2">
-                    <p className="text-xs text-blue-900">
-                      🔒 <strong>Your security is our priority.</strong> Your SSN is encrypted with bank-level security (AES-256) 
-                      and used solely for credit verification. We never share your information with third parties. 
-                      This data is required by federal law for identity verification and credit checks.
-                    </p>
-                  </div>
                 </div>
+                
+                {/* Security Trust Banner for SSN */}
+                <SecurityTrustBanner context="ssn_input" />
               </div>
               )}
 
