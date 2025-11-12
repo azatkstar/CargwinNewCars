@@ -167,6 +167,9 @@ const CarDetail = () => {
             {/* Price Comparison - Only show if competitor data exists */}
             <PriceComparison car={carData} />
             
+            {/* Lease vs Finance Comparison */}
+            <LeaseVsFinanceComparison car={carData} />
+            
             {/* Alternative Vehicles - auto-suggested */}
             <AlternativeVehicles selectedCar={carData} />
           </div>
