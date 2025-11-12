@@ -174,6 +174,7 @@ const CarDetail = () => {
           {/* Right Column - Forms */}
           <div className="space-y-8">
             <CarForms car={carData} />
+            <ModelSubscriptions carMake={carData.specs?.make || carData.make} carModel={carData.specs?.model || carData.model} />
           </div>
         </div>
       </div>
