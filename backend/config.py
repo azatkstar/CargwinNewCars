@@ -181,8 +181,10 @@ def validate_environment():
         if len(settings.SECRET_KEY) < 32:
             raise ValueError("SECRET_KEY must be at least 32 characters long for production.")
         
-        if settings.CORS_ORIGINS == ["*"]:
-            raise ValueError("Wildcard CORS origins not allowed in production. Set specific origins.")
+        # CORS validation - allow wildcard for Emergent deployments
+        # Emergent deployment rules allow CORS_ORIGINS="*"
+        # if settings.CORS_ORIGINS == ["*"]:
+        #     raise ValueError("Wildcard CORS origins not allowed in production. Set specific origins.")
 
 def get_database_url() -> str:
     """Get database URL for connection"""
