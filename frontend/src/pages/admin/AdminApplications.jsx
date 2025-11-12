@@ -215,24 +215,48 @@ const AdminApplications = () => {
                         </span>
                       </TableCell>
                       <TableCell>
-                        <div className="flex gap-2">
-                          {app.status === 'pending' && (
-                            <Button
-                              size="sm"
-                              className="bg-green-600 hover:bg-green-700"
-                              onClick={() => {
-                                setSelectedApp(app);
-                                setShowApproveModal(true);
-                              }}
-                            >
-                              Approve with Details
-                            </Button>
-                          )}
+                        <div className="flex flex-col gap-2">
+                          <div className="flex gap-2">
+                            {app.status === 'pending' && (
+                              <>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  className="text-xs"
+                                  onClick={async () => {
+                                    try {
+                                      const api = getApiClient();
+                                      const response = await api.post(`/api/applications/${app.id}/prescoring`);
+                                      if (response.data.ok) {
+                                        alert('Prescoring completed!');
+                                        fetchApplications();
+                                      }
+                                    } catch (error) {
+                                      alert('Prescoring failed: ' + (error.response?.data?.detail || error.message));
+                                    }
+                                  }}
+                                >
+                                  🔍 Prescore
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  className="bg-green-600 hover:bg-green-700 text-xs"
+                                  onClick={() => {
+                                    setSelectedApp(app);
+                                    setShowApproveModal(true);
+                                  }}
+                                >
+                                  Approve
+                                </Button>
+                              </>
+                            )}
+                            <CopyToFleetButton application={app} user={app.user_data} />
+                          </div>
                           <Select
                             value={app.status}
                             onValueChange={(newStatus) => handleStatusChange(app.id, newStatus)}
                           >
-                            <SelectTrigger className="w-36">
+                            <SelectTrigger className="w-full">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
