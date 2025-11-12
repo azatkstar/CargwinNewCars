@@ -257,6 +257,40 @@ class ReservationDocument(BaseModel):
     # Price snapshot at time of reservation
     reserved_price: float
     monthly_payment: float
+
+
+class SubscriptionDocument(BaseModel):
+    """User subscription to specific car models or makes"""
+    user_id: str
+    email: Optional[str] = None
+    phone: Optional[str] = None  # For SMS
+    telegram_id: Optional[str] = None
+    
+    # Subscription filters
+    makes: List[str] = []  # ['Lexus', 'BMW']
+    models: List[str] = []  # ['RX350', 'ES350']
+    max_price: Optional[int] = None
+    
+    # Notification preferences
+    notify_email: bool = True
+    notify_sms: bool = False
+    notify_telegram: bool = False
+    
+    # Triggers
+    notify_on_new_listing: bool = True
+    notify_on_price_drop: bool = True
+    price_drop_threshold: int = 500  # Notify if price drops by $500+
+    
+    is_active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat(),
+            ObjectId: str
+        }
+
     due_at_signing: float
     
     # Deposit management (до 5 резерваций, авто исчезает когда кто-то платит депозит)
