@@ -765,7 +765,8 @@ class SubscriptionRepository:
     async def create_indexes(self):
         """Create database indexes"""
         await self.collection.create_index("user_id")
-        await self.collection.create_index([("makes", 1), ("models", 1)])
+        # Don't create compound index on makes+models (parallel arrays issue)
+        # await self.collection.create_index([("makes", 1), ("models", 1)])
         await self.collection.create_index("is_active")
         logger.info("Created indexes for subscriptions collection")
     
