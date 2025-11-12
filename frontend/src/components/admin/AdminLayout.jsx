@@ -41,6 +41,13 @@ const AdminLayout = ({ children }) => {
       requiredRole: 'finance_manager'
     },
     {
+      id: 'analytics',
+      label: 'Analytics',
+      icon: TrendingUp,
+      path: '/admin/analytics',
+      requiredRole: 'finance_manager'
+    },
+    {
       id: 'settings', 
       label: 'Settings',
       icon: Settings,
