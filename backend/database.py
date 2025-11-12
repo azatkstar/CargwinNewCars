@@ -923,6 +923,14 @@ async def initialize_repositories():
     await lot_repo.create_indexes()
     await user_repo.create_indexes()
     await audit_repo.create_indexes()
+
+
+def get_subscription_repository() -> SubscriptionRepository:
+    """Get subscription repository instance"""
+    if subscription_repo is None:
+        raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
+    return subscription_repo
+
     await session_repo.create_indexes()
     await application_repo.create_indexes()
     await reservation_repo.create_indexes()
