@@ -2535,55 +2535,10 @@ async def delete_subscription(
         logger.error(f"Delete subscription error: {e}")
         raise HTTPException(status_code=500, detail="Failed to unsubscribe")
 
-    try:
-        from bson import ObjectId
-        from database import get_database
-        
-        db = get_database()
-        
-        # Get application and user
-        query_id = app_id
-        if len(app_id) == 24:
-            try:
-                query_id = ObjectId(app_id)
-            except:
-                pass
-        
-        app = await db.applications.find_one({"_id": query_id})
-        if not app:
-            raise HTTPException(status_code=404, detail="Application not found")
-        
-        # Mock notification (in production: SendGrid/Twilio)
-        notification_record = {
-            "type": notification_type,
-            "status": "sent_mock",
-            "message": message,
-            "sent_at": datetime.now(timezone.utc).isoformat(),
-            "sent_by": current_user.email
-        }
-        
-        # Add to notifications array
-        result = await db.applications.update_one(
-            {"_id": query_id},
-            {"$push": {"notifications_sent": notification_record}}
-        )
-        
-        logger.info(f"Mock notification sent for app {app_id}: {notification_type}")
-        
-        return {
-            "ok": True,
-            "message": f"Mock {notification_type} notification sent",
-            "note": "Integration with SendGrid/Twilio pending"
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Send notification error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to send notification")
 
-    try:
-        if role not in ["user", "editor", "admin"]:
+# ============================================
+# Admin User Management Routes
+# ============================================
             raise HTTPException(status_code=400, detail="Invalid role")
         
         success = await user_repo.update_user(user_id, {"role": role})
