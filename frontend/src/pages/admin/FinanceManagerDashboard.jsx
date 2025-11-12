@@ -187,13 +187,102 @@ const FinanceManagerDashboard = () => {
                   </div>
 
                   {/* Expanded Details */}
-                  {selectedApp?.id === app.id && app.prescoring_data && (
-                    <div className="mt-4 pt-4 border-t">
-                      <PrescoringPanel 
-                        applicationId={app.id}
-                        prescoring={app.prescoring_data}
-                        onRunPrescoring={() => runPrescoring(app.id)}
-                      />
+                  {selectedApp?.id === app.id && (
+                    <div className="mt-4 pt-4 border-t space-y-4">
+                      {/* Prescoring */}
+                      {app.prescoring_data ? (
+                        <PrescoringPanel 
+                          applicationId={app.id}
+                          prescoring={app.prescoring_data}
+                          onRunPrescoring={() => runPrescoring(app.id)}
+                        />
+                      ) : (
+                        <div className="bg-yellow-50 p-4 rounded border border-yellow-200">
+                          <p className="text-sm text-yellow-900">
+                            Prescoring not run yet. Click "Run Prescoring" to see credit details.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {/* Employment Details */}
+                      <Card className="bg-gray-50">
+                        <CardHeader>
+                          <CardTitle className="text-sm">Employment & Income</CardTitle>
+                        </CardHeader>
+                        <CardContent className="text-sm space-y-2">
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <span className="text-gray-600">Employer:</span>
+                              <p className="font-medium">{app.user_data?.employer_name || 'N/A'}</p>
+                            </div>
+                            <div>
+                              <span className="text-gray-600">Job Title:</span>
+                              <p className="font-medium">{app.user_data?.job_title || 'N/A'}</p>
+                            </div>
+                            <div>
+                              <span className="text-gray-600">Employment Type:</span>
+                              <p className="font-medium">{app.user_data?.employment_type || 'N/A'}</p>
+                            </div>
+                            <div>
+                              <span className="text-gray-600">Time at Job:</span>
+                              <p className="font-medium">{app.user_data?.time_at_job_months || 'N/A'} months</p>
+                            </div>
+                            <div>
+                              <span className="text-gray-600">Monthly Income (Pre-tax):</span>
+                              <p className="font-medium">${(app.user_data?.monthly_income_pretax || 0).toLocaleString()}</p>
+                            </div>
+                            <div>
+                              <span className="text-gray-600">Annual Income:</span>
+                              <p className="font-medium">${(app.user_data?.annual_income || 0).toLocaleString()}</p>
+                            </div>
+                            {app.verified_income && (
+                              <div className="col-span-2 bg-green-50 p-2 rounded">
+                                <span className="text-gray-600">✓ Verified Income:</span>
+                                <p className="font-bold text-green-700">${app.verified_income.toLocaleString()}</p>
+                              </div>
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                      
+                      {/* Trade-In */}
+                      {app.trade_in && (
+                        <Card className="bg-blue-50">
+                          <CardHeader>
+                            <CardTitle className="text-sm">Trade-In Vehicle</CardTitle>
+                          </CardHeader>
+                          <CardContent className="text-sm">
+                            <div className="grid grid-cols-2 gap-3">
+                              <div>
+                                <span className="text-gray-600">Vehicle:</span>
+                                <p className="font-medium">
+                                  {app.trade_in.year} {app.trade_in.make} {app.trade_in.model}
+                                </p>
+                              </div>
+                              <div>
+                                <span className="text-gray-600">VIN:</span>
+                                <p className="font-medium">{app.trade_in.vin}</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-600">Mileage:</span>
+                                <p className="font-medium">{app.trade_in.mileage?.toLocaleString()} miles</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-600">KBB Value:</span>
+                                <p className="font-bold text-blue-700">${app.trade_in.kbb_value?.toLocaleString()}</p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
+                      
+                      {/* Manager Comments */}
+                      {app.manager_comments && (
+                        <div className="bg-yellow-50 p-4 rounded border border-yellow-200">
+                          <p className="text-sm font-medium text-yellow-900 mb-1">Manager Comments:</p>
+                          <p className="text-sm text-gray-700">{app.manager_comments}</p>
+                        </div>
+                      )}
                     </div>
                   )}
                 </CardContent>
