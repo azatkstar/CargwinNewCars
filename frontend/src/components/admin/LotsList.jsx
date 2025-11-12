@@ -426,11 +426,53 @@ const LotsList = () => {
                         </Link>
                       </Button>
                       {hasPermission('editor') && (
-                        <Button size="sm" variant="ghost" asChild>
-                          <Link to={`/admin/lots/${lot.id}/edit`}>
-                            <Edit className="w-4 h-4" />
-                          </Link>
-                        </Button>
+                        <>
+                          <Button size="sm" variant="ghost" asChild>
+                            <Link to={`/admin/lots/${lot.id}/edit`}>
+                              <Edit className="w-4 h-4" />
+                            </Link>
+                          </Button>
+                          {lot.status === 'published' && (
+                            <Button 
+                              size="sm" 
+                              variant="ghost"
+                              onClick={async () => {
+                                if (confirm('Archive this lot?')) {
+                                  try {
+                                    const api = getApiClient();
+                                    await api.post(`/api/admin/lots/batch/archive`, {
+                                      lotIds: [lot.id]
+                                    });
+                                    fetchLots();
+                                  } catch (error) {
+                                    alert('Failed to archive: ' + error.message);
+                                  }
+                                }
+                              }}
+                            >
+                              <Archive className="w-4 h-4 text-yellow-600" />
+                            </Button>
+                          )}
+                          <Button 
+                            size="sm" 
+                            variant="ghost"
+                            onClick={async () => {
+                              if (confirm('Delete this lot permanently?')) {
+                                try {
+                                  const api = getApiClient();
+                                  await api.post(`/api/admin/lots/batch/delete`, {
+                                    lotIds: [lot.id]
+                                  });
+                                  fetchLots();
+                                } catch (error) {
+                                  alert('Failed to delete: ' + error.message);
+                                }
+                              }
+                            }}
+                          >
+                            <Trash2 className="w-4 h-4 text-red-600" />
+                          </Button>
+                        </>
                       )}
                     </div>
                   </TableCell>
