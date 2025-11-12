@@ -2720,44 +2720,6 @@ async def export_applications_excel(
         logger.error(f"Export error: {e}")
         raise HTTPException(status_code=500, detail="Failed to export")
 
-    notify_telegram: bool = False,
-    current_user: User = Depends(require_auth)
-):
-    """Subscribe to model alerts"""
-    try:
-        from database import get_subscription_repository
-        sub_repo = get_subscription_repository()
-        
-        sub_data = {
-            "user_id": current_user.id,
-            "email": email or current_user.email,
-            "phone": phone,
-            "telegram_id": telegram_id,
-            "makes": makes,
-            "models": models,
-            "max_price": max_price,
-            "notify_email": notify_email,
-            "notify_sms": notify_sms,
-            "notify_telegram": notify_telegram,
-            "notify_on_new_listing": True,
-            "notify_on_price_drop": True,
-            "is_active": True
-        }
-        
-        sub_id = await sub_repo.create_subscription(sub_data)
-        
-        logger.info(f"Subscription created for {current_user.email}: {makes}, {models}")
-        
-        return {
-            "ok": True,
-            "subscription_id": sub_id,
-            "message": f"Subscribed to {', '.join(makes + models)}"
-        }
-        
-    except Exception as e:
-        logger.error(f"Create subscription error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to create subscription")
-
 @api_router.get("/subscriptions")
 async def get_my_subscriptions(
     current_user: User = Depends(require_auth)
