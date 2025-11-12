@@ -57,6 +57,7 @@ class LoginRequest(BaseModel):
     password: str
 
 class CompleteProfileRequest(BaseModel):
+    # Required fields
     credit_score: int
     auto_loan_history: bool
     employment_type: str  # 1099, W2, Self-employed
@@ -67,6 +68,19 @@ class CompleteProfileRequest(BaseModel):
     monthly_expenses: int
     down_payment_ready: int
     ssn: Optional[str] = None  # Social Security Number (encrypted)
+    
+    # New Finance Manager fields (optional)
+    employer_name: Optional[str] = None
+    job_title: Optional[str] = None
+    time_at_job_months: Optional[int] = None
+    monthly_income_pretax: Optional[int] = None
+    date_of_birth: Optional[str] = None
+    drivers_license_number: Optional[str] = None
+    immigration_status: Optional[str] = None  # green_card, citizen, asylum
+    phone: Optional[str] = None
+    current_address: Optional[str] = None
+    current_address_duration_months: Optional[int] = None
+    previous_address: Optional[str] = None
 
 class User(BaseModel):
     id: str
