@@ -35,6 +35,7 @@ const AdminDashboard = () => {
         <Route path="lots/:id/edit" element={<LotForm />} />
         <Route path="users" element={<AdminUsers />} />
         <Route path="applications" element={<AdminApplications />} />
+        <Route path="finance-manager" element={<FinanceManagerDashboard />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="audit" element={<AuditLog />} />
       </Routes>
