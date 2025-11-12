@@ -2174,6 +2174,98 @@ async def add_trade_in(
 async def run_prescoring(
     app_id: str,
     current_user: User = Depends(require_auth)  # finance_manager or admin
+
+
+@api_router.get("/applications/{app_id}/auto-alternatives")
+async def get_auto_alternatives(
+    app_id: str,
+    current_user: User = Depends(require_auth)
+):
+    """Get automatically suggested alternative vehicles"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        db = get_database()
+        
+        # Get application
+        query_id = app_id
+        if len(app_id) == 24:
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        app = await db.applications.find_one({"_id": query_id})
+        if not app:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        # Get selected car details
+        selected_lot = await db.lots.find_one({"_id": app['lot_id']})
+        if not selected_lot:
+            raise HTTPException(status_code=404, detail="Original lot not found")
+        
+        selected_price = selected_lot.get('msrp', 0) - selected_lot.get('discount', 0)
+        selected_monthly = selected_lot.get('lease', {}).get('monthly', 0)
+        
+        # Find alternatives
+        all_lots = await db.lots.find({"status": "published"}).to_list(length=100)
+        
+        alternatives = {"cheaper": None, "similar": None, "luxury": None}
+        
+        for lot in all_lots:
+            if str(lot['_id']) == app['lot_id']:
+                continue
+            
+            lot_price = lot.get('msrp', 0) - lot.get('discount', 0)
+            lot_monthly = lot.get('lease', {}).get('monthly', 0)
+            
+            # Cheaper: 20-40% less
+            if not alternatives['cheaper'] and lot_monthly < selected_monthly * 0.8:
+                alternatives['cheaper'] = {
+                    "type": "cheaper",
+                    "lot_id": str(lot['_id']),
+                    "slug": lot.get('slug'),
+                    "title": f"{lot['year']} {lot['make']} {lot['model']}",
+                    "monthly": lot_monthly,
+                    "savings_vs_original": selected_monthly - lot_monthly
+                }
+            
+            # Similar: different brand, ±10% price
+            if not alternatives['similar'] and lot.get('make') != selected_lot.get('make'):
+                if abs(lot_monthly - selected_monthly) / selected_monthly <= 0.10:
+                    alternatives['similar'] = {
+                        "type": "similar",
+                        "lot_id": str(lot['_id']),
+                        "slug": lot.get('slug'),
+                        "title": f"{lot['year']} {lot['make']} {lot['model']}",
+                        "monthly": lot_monthly,
+                        "price_diff": lot_monthly - selected_monthly
+                    }
+            
+            # Luxury: 30-60% more expensive
+            if not alternatives['luxury'] and lot_monthly > selected_monthly * 1.3:
+                alternatives['luxury'] = {
+                    "type": "luxury",
+                    "lot_id": str(lot['_id']),
+                    "slug": lot.get('slug'),
+                    "title": f"{lot['year']} {lot['make']} {lot['model']}",
+                    "monthly": lot_monthly,
+                    "upgrade_cost": lot_monthly - selected_monthly
+                }
+        
+        return {
+            "ok": True,
+            "alternatives": alternatives,
+            "count": sum(1 for v in alternatives.values() if v is not None)
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Auto alternatives error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to generate alternatives")
+
 ):
     """Run prescoring check (mock - 700credit/eLAND integration)"""
     try:
