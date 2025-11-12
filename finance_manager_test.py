@@ -494,8 +494,8 @@ class FinanceManagerTester:
         print("TEST 9: Send Notification")
         print("="*80)
         
-        if not self.application_id or not self.admin_token:
-            return self.log_test("Notifications", False, "No application ID or admin token available")
+        if not self.application_id or not self.user_token:
+            return self.log_test("Notifications", False, "No application ID or user token available")
         
         try:
             notification_data = {
@@ -507,7 +507,7 @@ class FinanceManagerTester:
             response = self.session.post(
                 f"{BACKEND_URL}/applications/{self.application_id}/send-notification",
                 params=notification_data,
-                headers={"Authorization": f"Bearer {self.admin_token}"}
+                headers={"Authorization": f"Bearer {self.user_token}"}
             )
             
             if response.status_code == 200:
