@@ -1019,6 +1019,25 @@ async def create_lot(
             "changes": lot_data
         })
         
+        # Notify subscribers if lot is published
+        if lot_data.get('status') == 'published':
+            from database import get_subscription_repository
+            try:
+                sub_repo = get_subscription_repository()
+                make = lot_data.get('make', '')
+                model = lot_data.get('model', '')
+                fleet_price = lot_data.get('msrp', 0) - lot_data.get('discount', 0)
+                
+                # Find matching subscriptions
+                matching_subs = await sub_repo.find_matching_subscriptions(make, model, fleet_price)
+                
+                if matching_subs:
+                    logger.info(f"Found {len(matching_subs)} subscribers for new {make} {model}")
+                    # In production: send actual notifications via SendGrid/Twilio/Telegram
+                    # For now: just log
+            except Exception as e:
+                logger.warning(f"Subscription notification error: {e}")
+        
         return {
             "ok": True,
             "id": lot_id,
