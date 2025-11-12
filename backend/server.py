@@ -2027,6 +2027,323 @@ async def update_user_role(
     user_repo: UserRepository = Depends(get_users_repo)
 ):
     """Update user role (admin only)"""
+
+
+# ============================================
+# Finance Manager Routes
+# ============================================
+
+@api_router.post("/applications/{app_id}/add-alternatives")
+async def add_alternative_vehicles(
+    app_id: str,
+    request: AlternativeVehicleRequest,
+    current_user: User = Depends(require_auth)  # finance_manager or admin
+):
+    """Add alternative vehicle suggestions to application"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        # Check permissions
+        if current_user.role not in ['finance_manager', 'admin', 'editor']:
+            raise HTTPException(status_code=403, detail="Insufficient permissions")
+        
+        db = get_database()
+        
+        # Get application
+        query_id = app_id
+        if len(app_id) == 24 and all(c in '0123456789abcdef' for c in app_id.lower()):
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        # Build alternatives array
+        alternatives = []
+        for lot_id in request.lot_ids[:3]:  # Max 3
+            lot = await db.lots.find_one({"_id": ObjectId(lot_id) if len(lot_id) == 24 else lot_id})
+            if lot:
+                alternatives.append({
+                    "lot_id": str(lot['_id']),
+                    "lot_slug": lot.get('slug', ''),
+                    "title": f"{lot.get('year')} {lot.get('make')} {lot.get('model')}",
+                    "monthly": lot.get('lease', {}).get('monthly', 0),
+                    "suggested_by": current_user.email,
+                    "suggested_at": datetime.now(timezone.utc).isoformat(),
+                    "reason": request.reason
+                })
+        
+        # Update application
+        result = await db.applications.update_one(
+            {"_id": query_id},
+            {"$set": {
+                "alternatives": alternatives,
+                "updated_at": datetime.now(timezone.utc)
+            }}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        logger.info(f"Added {len(alternatives)} alternatives to application {app_id}")
+        
+        return {
+            "ok": True,
+            "alternatives_added": len(alternatives),
+            "message": "Alternatives added successfully"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Add alternatives error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to add alternatives")
+
+@api_router.post("/applications/{app_id}/trade-in")
+async def add_trade_in(
+    app_id: str,
+    trade_in: TradeInRequest,
+    current_user: User = Depends(require_auth)
+):
+    """Add trade-in vehicle to application"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        db = get_database()
+        
+        # Mock KBB valuation (in production: call KBB API)
+        # For now, simple formula based on year and mileage
+        current_year = datetime.now().year
+        age = current_year - trade_in.year
+        base_depreciation = 0.15 * age  # 15% per year
+        mileage_depreciation = (trade_in.mileage / 100000) * 0.20  # 20% at 100k miles
+        condition_multiplier = {
+            'excellent': 1.0,
+            'good': 0.90,
+            'fair': 0.75,
+            'poor': 0.60
+        }.get(trade_in.condition, 0.80)
+        
+        # Estimate base value (this would come from KBB)
+        estimated_base = 30000  # Mock base value
+        estimated_value = int(estimated_base * (1 - base_depreciation - mileage_depreciation) * condition_multiplier)
+        
+        trade_in_data = {
+            "vin": trade_in.vin,
+            "year": trade_in.year,
+            "make": trade_in.make,
+            "model": trade_in.model,
+            "mileage": trade_in.mileage,
+            "condition": trade_in.condition,
+            "photos": trade_in.photos,
+            "kbb_value": estimated_value,
+            "kbb_note": "Mock valuation - KBB API not integrated",
+            "added_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        # Update application
+        query_id = app_id
+        if len(app_id) == 24:
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        result = await db.applications.update_one(
+            {"_id": query_id},
+            {"$set": {"trade_in": trade_in_data}}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        return {
+            "ok": True,
+            "trade_in_value": estimated_value,
+            "message": "Trade-in added successfully"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Add trade-in error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to add trade-in")
+
+@api_router.post("/applications/{app_id}/prescoring")
+async def run_prescoring(
+    app_id: str,
+    current_user: User = Depends(require_auth)  # finance_manager or admin
+):
+    """Run prescoring check (mock - 700credit/eLAND integration)"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        # Check permissions
+        if current_user.role not in ['finance_manager', 'admin']:
+            raise HTTPException(status_code=403, detail="Finance Manager access required")
+        
+        db = get_database()
+        
+        # Get application
+        query_id = app_id
+        if len(app_id) == 24:
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        app = await db.applications.find_one({"_id": query_id})
+        if not app:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        # Get user data
+        user = await db.users.find_one({"_id": app['user_id']})
+        
+        # Mock prescoring results (in production: call 700credit API)
+        credit_score = user.get('credit_score', 650)
+        income = user.get('monthly_income_pretax', 0) or user.get('annual_income', 0) / 12
+        
+        # Calculate debt-to-income, approval probability
+        mock_prescoring = {
+            "credit_score": credit_score,
+            "credit_tier": "Tier 1" if credit_score >= 720 else "Tier 2" if credit_score >= 680 else "Tier 3",
+            "payment_history": "Good" if credit_score >= 700 else "Fair",
+            "debt_to_income_ratio": 0.35,  # Mock
+            "open_accounts": 5,  # Mock
+            "recent_inquiries": 2,  # Mock
+            "approval_probability": "High" if credit_score >= 700 else "Medium" if credit_score >= 650 else "Low",
+            "recommended_down_payment": 3000 if credit_score >= 700 else 5000,
+            "max_approved_amount": int(income * 36 * 0.15),  # 15% of gross for car payment
+            "notes": "Mock data - 700credit API not integrated",
+            "checked_at": datetime.now(timezone.utc).isoformat(),
+            "checked_by": current_user.email
+        }
+        
+        # Save prescoring data
+        result = await db.applications.update_one(
+            {"_id": query_id},
+            {"$set": {"prescoring_data": mock_prescoring}}
+        )
+        
+        logger.info(f"Prescoring completed for application {app_id} by {current_user.email}")
+        
+        return {
+            "ok": True,
+            "prescoring": mock_prescoring,
+            "message": "Prescoring completed (mock data)"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Prescoring error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to run prescoring")
+
+@api_router.patch("/admin/applications/{app_id}/finance-manager-update")
+async def finance_manager_update(
+    app_id: str,
+    verified_income: Optional[int] = None,
+    manager_comments: Optional[str] = None,
+    current_user: User = Depends(require_auth)
+):
+    """Update application with finance manager fields"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        if current_user.role not in ['finance_manager', 'admin']:
+            raise HTTPException(status_code=403, detail="Finance Manager access required")
+        
+        db = get_database()
+        
+        update_data = {}
+        if verified_income is not None:
+            update_data['verified_income'] = verified_income
+        if manager_comments:
+            update_data['manager_comments'] = manager_comments
+        
+        update_data['updated_at'] = datetime.now(timezone.utc)
+        
+        query_id = app_id
+        if len(app_id) == 24:
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        result = await db.applications.update_one(
+            {"_id": query_id},
+            {"$set": update_data}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        return {"ok": True, "message": "Application updated"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Finance manager update error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update application")
+
+@api_router.post("/applications/{app_id}/send-notification")
+async def send_status_notification(
+    app_id: str,
+    notification_type: str,  # email, sms
+    message: str,
+    current_user: User = Depends(require_auth)
+):
+    """Send notification to customer (mock - no actual sending)"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        db = get_database()
+        
+        # Get application and user
+        query_id = app_id
+        if len(app_id) == 24:
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        app = await db.applications.find_one({"_id": query_id})
+        if not app:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        # Mock notification (in production: SendGrid/Twilio)
+        notification_record = {
+            "type": notification_type,
+            "status": "sent_mock",
+            "message": message,
+            "sent_at": datetime.now(timezone.utc).isoformat(),
+            "sent_by": current_user.email
+        }
+        
+        # Add to notifications array
+        result = await db.applications.update_one(
+            {"_id": query_id},
+            {"$push": {"notifications_sent": notification_record}}
+        )
+        
+        logger.info(f"Mock notification sent for app {app_id}: {notification_type}")
+        
+        return {
+            "ok": True,
+            "message": f"Mock {notification_type} notification sent",
+            "note": "Integration with SendGrid/Twilio pending"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Send notification error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to send notification")
+
     try:
         if role not in ["user", "editor", "admin"]:
             raise HTTPException(status_code=400, detail="Invalid role")
