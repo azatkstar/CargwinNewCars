@@ -476,6 +476,7 @@ const Dashboard = () => {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            <CallbackRequest />
             <SavingsCalculator />
             <PreApprovalCheck />
             
