@@ -6,6 +6,7 @@ import asyncio
 import logging
 from datetime import datetime, timezone, timedelta
 from database import get_database
+from notifications import notify_subscriber
 
 logger = logging.getLogger(__name__)
 
