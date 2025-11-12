@@ -931,13 +931,6 @@ def get_subscription_repository() -> SubscriptionRepository:
         raise RuntimeError("Repositories not initialized. Call initialize_repositories() first.")
     return subscription_repo
 
-    await session_repo.create_indexes()
-    await application_repo.create_indexes()
-    await reservation_repo.create_indexes()
-    await subscription_repo.create_indexes()
-    
-    logger.info("Repositories initialized successfully")
-
 def get_lot_repository() -> LotRepository:
     """Get lot repository instance"""
     if lot_repo is None:
