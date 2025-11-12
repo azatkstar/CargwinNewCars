@@ -89,6 +89,15 @@ class FinanceManagerTester:
         
         try:
             profile_data = {
+                # Required fields
+                "credit_score": 720,
+                "auto_loan_history": True,
+                "employment_duration_months": 36,
+                "address": "123 Main St, Los Angeles, CA 90001",
+                "residence_duration_months": 18,
+                "monthly_expenses": 2500,
+                "down_payment_ready": 5000,
+                # New Finance Manager fields
                 "employer_name": "Tech Corp",
                 "job_title": "Software Engineer",
                 "time_at_job_months": 36,
