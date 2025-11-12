@@ -314,7 +314,7 @@ async def require_auth(current_user: Optional[User] = Depends(get_current_user))
 def require_role(required_role: str):
     """Create dependency that requires specific role"""
     def role_checker(current_user: User = Depends(require_auth)) -> User:
-        role_hierarchy = {"viewer": 0, "editor": 1, "admin": 2}
+        role_hierarchy = {"user": 0, "finance_manager": 1, "editor": 2, "admin": 3}
         
         user_level = role_hierarchy.get(current_user.role, -1)
         required_level = role_hierarchy.get(required_role, 999)
@@ -330,6 +330,7 @@ def require_role(required_role: str):
 # Role-specific dependencies
 require_admin = require_role("admin")
 require_editor = require_role("editor")
+require_finance_manager = require_role("finance_manager")
 
 # Utility functions for cleanup
 async def cleanup_expired_magic_links():
