@@ -8,6 +8,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { Search, FileText, CheckCircle, Clock, XCircle, Phone } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import ApproveApplicationModal from './ApproveApplicationModal';
+import CopyToFleetButton from '../../components/CopyToFleetButton';
+import PrescoringPanel from '../../components/PrescoringPanel';
 
 const AdminApplications = () => {
   const [applications, setApplications] = useState([]);
