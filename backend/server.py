@@ -2388,6 +2388,105 @@ async def send_status_notification(
     current_user: User = Depends(require_auth)
 ):
     """Send notification to customer (mock - no actual sending)"""
+
+
+# ============================================
+# Subscription Routes (Model Alerts)
+# ============================================
+
+def get_subscriptions_repo():
+    """Dependency for subscription repository"""
+    from database import get_subscription_repository
+    return get_subscription_repository()
+
+@api_router.post("/subscriptions")
+async def create_subscription(
+    makes: List[str] = [],
+    models: List[str] = [],
+    max_price: Optional[int] = None,
+    email: Optional[str] = None,
+    phone: Optional[str] = None,
+    telegram_id: Optional[str] = None,
+    notify_email: bool = True,
+    notify_sms: bool = False,
+    notify_telegram: bool = False,
+    current_user: User = Depends(require_auth)
+):
+    """Subscribe to model alerts"""
+    try:
+        from database import get_subscription_repository
+        sub_repo = get_subscription_repository()
+        
+        sub_data = {
+            "user_id": current_user.id,
+            "email": email or current_user.email,
+            "phone": phone,
+            "telegram_id": telegram_id,
+            "makes": makes,
+            "models": models,
+            "max_price": max_price,
+            "notify_email": notify_email,
+            "notify_sms": notify_sms,
+            "notify_telegram": notify_telegram,
+            "notify_on_new_listing": True,
+            "notify_on_price_drop": True,
+            "is_active": True
+        }
+        
+        sub_id = await sub_repo.create_subscription(sub_data)
+        
+        logger.info(f"Subscription created for {current_user.email}: {makes}, {models}")
+        
+        return {
+            "ok": True,
+            "subscription_id": sub_id,
+            "message": f"Subscribed to {', '.join(makes + models)}"
+        }
+        
+    except Exception as e:
+        logger.error(f"Create subscription error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create subscription")
+
+@api_router.get("/subscriptions")
+async def get_my_subscriptions(
+    current_user: User = Depends(require_auth)
+):
+    """Get user's active subscriptions"""
+    try:
+        from database import get_subscription_repository
+        sub_repo = get_subscription_repository()
+        
+        subs = await sub_repo.get_subscriptions_by_user(current_user.id)
+        
+        return {"subscriptions": subs, "total": len(subs)}
+        
+    except Exception as e:
+        logger.error(f"Get subscriptions error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get subscriptions")
+
+@api_router.delete("/subscriptions/{sub_id}")
+async def delete_subscription(
+    sub_id: str,
+    current_user: User = Depends(require_auth)
+):
+    """Unsubscribe from model alerts"""
+    try:
+        from database import get_subscription_repository
+        sub_repo = get_subscription_repository()
+        
+        success = await sub_repo.delete_subscription(sub_id)
+        
+        if success:
+            return {"ok": True, "message": "Unsubscribed successfully"}
+        else:
+            raise HTTPException(status_code=404, detail="Subscription not found")
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete subscription error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to unsubscribe")
+
     try:
         from bson import ObjectId
         from database import get_database
