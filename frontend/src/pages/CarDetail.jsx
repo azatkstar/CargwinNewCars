@@ -9,6 +9,7 @@ import CarForms from '../components/car-detail/CarForms';
 import SimilarOffers from '../components/car-detail/SimilarOffers';
 import PriceComparison from '../components/car-detail/PriceComparison';
 import AlternativeVehicles from '../components/AlternativeVehicles';
+import ModelSubscriptions from '../components/ModelSubscriptions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FOMOTicker from '../components/FOMOTicker';
