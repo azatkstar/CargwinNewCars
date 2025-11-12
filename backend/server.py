@@ -2537,25 +2537,8 @@ async def delete_subscription(
 
 
 # ============================================
-# Admin User Management Routes
-# ============================================
-            raise HTTPException(status_code=400, detail="Invalid role")
-        
-        success = await user_repo.update_user(user_id, {"role": role})
-        
-        if not success:
-            raise HTTPException(status_code=404, detail="User not found")
-        
-        logger.info(f"User {user_id} role updated to {role} by {current_user.email}")
-        
-        return {"ok": True, "message": "User role updated"}
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Update user role error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to update user role")
-
 # Admin Application Management Routes
+# ============================================
 @api_router.get("/admin/applications")
 async def get_all_applications(
     page: int = 1,
