@@ -8,6 +8,7 @@ import { Shield, TrendingUp, Users, DollarSign, Search } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import PrescoringPanel from '../../components/PrescoringPanel';
 import CopyToFleetButton from '../../components/CopyToFleetButton';
+import NotificationHistory from '../../components/NotificationHistory';
 
 const FinanceManagerDashboard = () => {
   const [applications, setApplications] = useState([]);
