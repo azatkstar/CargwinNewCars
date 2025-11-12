@@ -35,19 +35,44 @@ const MediaUploader = ({ images = [], onChange, error }) => {
       const formData = new FormData();
       Array.from(files).forEach(file => {
         if (file.size <= 10 * 1024 * 1024) { // 10MB limit
-          formData.append('images', file);
+          formData.append('files', file);
         }
       });
 
-      // Mock upload
-      setTimeout(() => {
-        const newImages = Array.from(files).map((file, index) => ({
-          id: `img_${Date.now()}_${index}`,
-          url: URL.createObjectURL(file),
-          alt: '',
-          ratio: '16:9',
-          width: 1920,
-          height: 1080,
+      // Upload to backend
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const token = localStorage.getItem('access_token');
+      
+      const response = await fetch(`${BACKEND_URL}/api/admin/upload`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        const uploadedImages = await response.json();
+        
+        // Add uploaded images to existing ones
+        const newImages = uploadedImages.map(img => ({
+          url: img.url,
+          alt: img.alt || '',
+          width: img.width || 1920,
+          height: img.height || 1080
+        }));
+        
+        onChange([...images, ...newImages]);
+      } else {
+        throw new Error('Upload failed');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('Failed to upload images: ' + error.message);
+    } finally {
+      setUploading(false);
+    }
+  };
           sourceMeta: {
             license: 'uploaded',
             originalName: file.name
