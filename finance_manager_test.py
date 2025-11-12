@@ -45,10 +45,35 @@ class FinanceManagerTester:
         print("="*80)
         
         try:
-            # Register new user
+            # Try to login first
             timestamp = int(datetime.now().timestamp())
-            register_data = {
+            login_data = {
                 "email": f"finmanager_test@test.com",
+                "password": "Test123!"
+            }
+            
+            print(f"Trying to login: {login_data['email']}")
+            response = self.session.post(
+                f"{BACKEND_URL}/auth/login",
+                json=login_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("access_token"):
+                    self.user_token = data["access_token"]
+                    self.user_id = data.get("user", {}).get("id")
+                    return self.log_test(
+                        "User Login", 
+                        True, 
+                        f"User logged in successfully: {login_data['email']}"
+                    )
+            
+            # If login fails, try to register
+            print(f"Login failed, trying to register new user...")
+            register_data = {
+                "email": f"finmanager_test_{timestamp}@test.com",
                 "password": "Test123!",
                 "name": "Finance Manager Test"
             }
