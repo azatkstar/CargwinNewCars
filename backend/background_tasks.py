@@ -81,9 +81,8 @@ async def archive_expired_offers():
                 if sub.get('max_price') and fleet_price > sub['max_price']:
                     continue
                 
-                # Log notification (in production: send via SendGrid/Twilio/Telegram)
-                logger.info(f"📧 Would notify {sub.get('email')} about new {make} {model} at ${monthly}/mo")
-                # TODO: Actual notification sending when API keys are configured
+                # Send actual notification
+                await notify_subscriber(sub, lot, 'new_listing')
         
         # Expire old reservations (but don't archive lots)
         expired_result = await reservations_collection.update_many(
