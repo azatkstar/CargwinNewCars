@@ -136,7 +136,7 @@ class LotDocument(BaseModel):
 class UserDocument(BaseModel):
     """User document model for MongoDB"""
     email: str
-    role: str = "user"  # admin, editor, user
+    role: str = "user"  # admin, editor, user, finance_manager
     name: str = ""
     picture: str = ""
     password_hash: Optional[str] = None  # For email/password auth
@@ -144,17 +144,38 @@ class UserDocument(BaseModel):
     profile_completed: bool = False
     last_login: Optional[datetime] = None
     
-    # Credit Application Fields
+    # Credit Application Fields (filled during registration/profile)
     credit_score: Optional[int] = None
     auto_loan_history: Optional[bool] = None  # Has paid off auto loans
-    employment_type: Optional[str] = None  # 1099, W2, Self-employed
+    employment_type: Optional[str] = None  # self, 1099, W2, other
+    employer_name: Optional[str] = None
+    job_title: Optional[str] = None
+    time_at_job_months: Optional[int] = None
+    monthly_income_pretax: Optional[int] = None  # Average for 6 months before taxes
     annual_income: Optional[int] = None
     employment_duration_months: Optional[int] = None
-    address: Optional[str] = None
+    
+    # Personal Info
+    date_of_birth: Optional[str] = None  # YYYY-MM-DD
+    drivers_license_number: Optional[str] = None
+    immigration_status: Optional[str] = None  # green_card, citizen, asylum, other
+    
+    # Address Info
+    current_address: Optional[str] = None
+    current_address_duration_months: Optional[int] = None
+    previous_address: Optional[str] = None  # Required if current < 24 months
+    
+    # Contact & Financial
+    phone: Optional[str] = None
+    address: Optional[str] = None  # Legacy field
     residence_duration_months: Optional[int] = None
     monthly_expenses: Optional[int] = None
     down_payment_ready: Optional[int] = None
     ssn: Optional[str] = None  # Encrypted SSN for credit verification
+    
+    # Finance Manager Fields
+    verified_income: Optional[int] = None  # Подтвержденный доход
+    manager_notes: Optional[str] = None  # Комментарий менеджера
     
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
