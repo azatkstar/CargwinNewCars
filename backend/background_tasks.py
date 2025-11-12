@@ -18,11 +18,13 @@ async def archive_expired_offers():
     Archive offers strategically:
     - Offers auto-renew every 48 hours by default (stay published)
     - Archive only if: user paid deposit OR manually set to archive
+    - Check for price drops and notify subscribers
     """
     try:
         db = get_database()
         lots_collection = db.lots
         reservations_collection = db.reservations
+        subscriptions_collection = db.subscriptions
         
         # Archive lots where someone paid reservation deposit
         # Find reservations with deposit_paid = True
@@ -49,6 +51,38 @@ async def archive_expired_offers():
         
         if archived_count > 0:
             logger.info(f"📦 Auto-archived {archived_count} sold offers")
+        
+        # Check for new published lots and notify subscribers
+        # Get lots published in last hour
+        one_hour_ago = datetime.now(timezone.utc) - timedelta(hours=1)
+        new_lots = await lots_collection.find({
+            "status": "published",
+            "created_at": {"$gte": one_hour_ago}
+        }).to_list(length=None)
+        
+        for lot in new_lots:
+            make = lot.get('make', '')
+            model = lot.get('model', '')
+            fleet_price = lot.get('msrp', 0) - lot.get('discount', 0)
+            monthly = lot.get('lease', {}).get('monthly', 0)
+            
+            # Find matching subscriptions
+            matching_subs = await subscriptions_collection.find({
+                "is_active": True,
+                "$or": [
+                    {"makes": make},
+                    {"models": model}
+                ]
+            }).to_list(length=None)
+            
+            # Filter by max_price
+            for sub in matching_subs:
+                if sub.get('max_price') and fleet_price > sub['max_price']:
+                    continue
+                
+                # Log notification (in production: send via SendGrid/Twilio/Telegram)
+                logger.info(f"📧 Would notify {sub.get('email')} about new {make} {model} at ${monthly}/mo")
+                # TODO: Actual notification sending when API keys are configured
         
         # Expire old reservations (but don't archive lots)
         expired_result = await reservations_collection.update_many(
