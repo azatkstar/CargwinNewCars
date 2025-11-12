@@ -2642,6 +2642,45 @@ async def update_application_status(
             notification_record = {
                 "type": "auto_status_change",
                 "channel": "email",  # In production: send to both email and SMS if available
+
+
+@api_router.get("/admin/applications/{app_id}/notifications")
+async def get_application_notifications(
+    app_id: str,
+    current_user: User = Depends(require_auth)
+):
+    """Get notification history for an application"""
+    try:
+        from bson import ObjectId
+        from database import get_database
+        
+        db = get_database()
+        
+        query_id = app_id
+        if len(app_id) == 24:
+            try:
+                query_id = ObjectId(app_id)
+            except:
+                pass
+        
+        app = await db.applications.find_one({"_id": query_id})
+        if not app:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        notifications = app.get('notifications_sent', [])
+        
+        return {
+            "ok": True,
+            "notifications": notifications,
+            "total": len(notifications)
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get notifications error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get notifications")
+
                 "status": "sent_mock",
                 "message": message,
                 "triggered_by": f"status_change_to_{status}",
