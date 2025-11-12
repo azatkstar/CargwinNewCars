@@ -8,6 +8,7 @@ import BuildYourLeaseCalculator from '../components/BuildYourLeaseCalculator';
 import CarForms from '../components/car-detail/CarForms';
 import SimilarOffers from '../components/car-detail/SimilarOffers';
 import PriceComparison from '../components/car-detail/PriceComparison';
+import LeaseVsFinanceComparison from '../components/LeaseVsFinanceComparison';
 import AlternativeVehicles from '../components/AlternativeVehicles';
 import ModelSubscriptions from '../components/ModelSubscriptions';
 import Header from '../components/Header';
