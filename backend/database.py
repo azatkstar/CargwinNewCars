@@ -754,6 +754,76 @@ class ReservationRepository:
         reservation_data['created_at'] = datetime.now(timezone.utc)
         
         result = await self.collection.insert_one(reservation_data)
+
+
+class SubscriptionRepository:
+    """Repository for user subscriptions"""
+    
+    def __init__(self, database: AsyncIOMotorDatabase):
+        self.collection = database.subscriptions
+    
+    async def create_indexes(self):
+        """Create database indexes"""
+        await self.collection.create_index("user_id")
+        await self.collection.create_index([("makes", 1), ("models", 1)])
+        await self.collection.create_index("is_active")
+        logger.info("Created indexes for subscriptions collection")
+    
+    async def create_subscription(self, sub_data: Dict[str, Any]) -> str:
+        """Create new subscription"""
+        sub_data['created_at'] = datetime.now(timezone.utc)
+        result = await self.collection.insert_one(sub_data)
+        return str(result.inserted_id)
+    
+    async def get_subscriptions_by_user(self, user_id: str) -> List[Dict[str, Any]]:
+        """Get user's active subscriptions"""
+        cursor = self.collection.find({"user_id": user_id, "is_active": True})
+        subs = await cursor.to_list(length=None)
+        
+        for sub in subs:
+            sub['id'] = str(sub.pop('_id'))
+        
+        return subs
+    
+    async def delete_subscription(self, sub_id: str) -> bool:
+        """Delete subscription"""
+        try:
+            from bson import ObjectId
+            query_id = sub_id
+            if len(sub_id) == 24:
+                try:
+                    query_id = ObjectId(sub_id)
+                except:
+                    pass
+            
+            result = await self.collection.delete_one({"_id": query_id})
+            return result.deleted_count > 0
+        except:
+            return False
+    
+    async def find_matching_subscriptions(self, make: str, model: str, price: int) -> List[Dict[str, Any]]:
+        """Find subscriptions that match new listing"""
+        query = {
+            "is_active": True,
+            "$or": [
+                {"makes": make},
+                {"models": model}
+            ]
+        }
+        
+        # Filter by max price if set
+        cursor = self.collection.find(query)
+        subs = await cursor.to_list(length=None)
+        
+        # Filter by price
+        matching = []
+        for sub in subs:
+            if sub.get('max_price') is None or price <= sub['max_price']:
+                sub['id'] = str(sub.pop('_id'))
+                matching.append(sub)
+        
+        return matching
+
         return str(result.inserted_id)
     
     async def get_reservations_by_user(self, user_id: str, status: Optional[str] = None) -> List[Dict[str, Any]]:
