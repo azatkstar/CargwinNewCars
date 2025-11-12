@@ -234,9 +234,53 @@ const ProfileForm = () => {
                       <SelectContent position="popper" sideOffset={5}>
                         <SelectItem value="W2">W2 Employee</SelectItem>
                         <SelectItem value="1099">1099 Contractor</SelectItem>
-                        <SelectItem value="Self-employed">Self-employed</SelectItem>
+                        <SelectItem value="self">Self-employed</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Employer Name *</label>
+                    <Input
+                      placeholder="Company name"
+                      value={formData.employer_name}
+                      onChange={(e) => handleChange('employer_name', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Job Title *</label>
+                    <Input
+                      placeholder="e.g., Software Engineer"
+                      value={formData.job_title}
+                      onChange={(e) => handleChange('job_title', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Time at Current Job (months) *</label>
+                    <Input
+                      type="number"
+                      placeholder="e.g. 24"
+                      value={formData.time_at_job_months}
+                      onChange={(e) => handleChange('time_at_job_months', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Monthly Income (Pre-tax, 6mo avg) *</label>
+                    <Input
+                      type="number"
+                      placeholder="e.g. 6250"
+                      value={formData.monthly_income_pretax}
+                      onChange={(e) => handleChange('monthly_income_pretax', e.target.value)}
+                      required
+                    />
+                    <p className="text-xs text-gray-500">Before taxes, average last 6 months</p>
                   </div>
 
                   <div className="space-y-2">
@@ -252,17 +296,6 @@ const ProfileForm = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Time at Current Job (months) *</label>
-                    <Input
-                      type="number"
-                      placeholder="e.g. 24"
-                      value={formData.employment_duration_months}
-                      onChange={(e) => handleChange('employment_duration_months', e.target.value)}
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
                     <label className="text-sm font-medium">Monthly Expenses *</label>
                     <Input
                       type="number"
@@ -272,6 +305,66 @@ const ProfileForm = () => {
                       required
                     />
                     <p className="text-xs text-gray-500">Rent, utilities, etc.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Personal Information Section */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 border-b pb-2">
+                  <CheckCircle className="w-5 h-5 text-gray-600" />
+                  <h3 className="font-semibold text-gray-900">Personal Information</h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Date of Birth *</label>
+                    <Input
+                      type="date"
+                      value={formData.date_of_birth}
+                      onChange={(e) => handleChange('date_of_birth', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Driver's License Number *</label>
+                    <Input
+                      placeholder="CA DL number"
+                      value={formData.drivers_license_number}
+                      onChange={(e) => handleChange('drivers_license_number', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Phone Number *</label>
+                    <Input
+                      type="tel"
+                      placeholder="(XXX) XXX-XXXX"
+                      value={formData.phone}
+                      onChange={(e) => handleChange('phone', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Immigration Status *</label>
+                    <Select
+                      value={formData.immigration_status}
+                      onValueChange={(value) => handleChange('immigration_status', value)}
+                      required
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="citizen">US Citizen</SelectItem>
+                        <SelectItem value="green_card">Green Card</SelectItem>
+                        <SelectItem value="asylum">Asylum</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
