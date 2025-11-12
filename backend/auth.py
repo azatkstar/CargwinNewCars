@@ -103,6 +103,19 @@ class User(BaseModel):
     monthly_expenses: Optional[int] = None
     down_payment_ready: Optional[int] = None
     ssn: Optional[str] = None
+    
+    # New Finance Manager fields (optional for response)
+    employer_name: Optional[str] = None
+    job_title: Optional[str] = None
+    time_at_job_months: Optional[int] = None
+    monthly_income_pretax: Optional[int] = None
+    date_of_birth: Optional[str] = None
+    drivers_license_number: Optional[str] = None
+    immigration_status: Optional[str] = None
+    phone: Optional[str] = None
+    current_address: Optional[str] = None
+    current_address_duration_months: Optional[int] = None
+    previous_address: Optional[str] = None
 
 # In-memory storage for magic links (in production use Redis)
 magic_links_storage: Dict[str, Dict[str, Any]] = {}
