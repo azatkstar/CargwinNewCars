@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import CarHero from '../components/car-detail/CarHero';
 import CarGallery from '../components/car-detail/CarGallery';
 import CarSpecs from '../components/car-detail/CarSpecs';
-import OTDCalculator from '../components/car-detail/OTDCalculator';
+import BuildYourLeaseCalculator from '../components/BuildYourLeaseCalculator';
 import CarForms from '../components/car-detail/CarForms';
 import SimilarOffers from '../components/car-detail/SimilarOffers';
 import PriceComparison from '../components/car-detail/PriceComparison';
