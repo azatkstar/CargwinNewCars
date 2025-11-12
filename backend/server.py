@@ -1390,10 +1390,14 @@ async def import_lots_xlsx(
 
 
 
+class BatchLotActionRequest(BaseModel):
+    """Request model for batch lot actions"""
+    lotIds: List[str]
+
 @api_router.post("/admin/lots/batch/{action}")
 async def batch_lot_action(
     action: str,
-    lotIds: List[str],
+    request: BatchLotActionRequest,
     current_user: User = Depends(require_admin),
     lot_repo: LotRepository = Depends(get_lots_repo)
 ):
@@ -1405,6 +1409,7 @@ async def batch_lot_action(
         if action not in ['archive', 'delete', 'publish', 'unpublish']:
             raise HTTPException(status_code=400, detail=f"Invalid action: {action}")
         
+        lotIds = request.lotIds
         if not lotIds or len(lotIds) == 0:
             raise HTTPException(status_code=400, detail="No lots selected")
         
