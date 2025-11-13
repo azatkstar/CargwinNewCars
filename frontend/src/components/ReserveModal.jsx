@@ -76,11 +76,13 @@ const ReserveModal = ({ isOpen, onClose, offer, paymentMode = 'lease' }) => {
           navigate('/dashboard');
         }, 2000);
       } else {
-        setError(data.detail || 'Failed to reserve price');
+        const errorMsg = data.detail || data.message || 'Failed to reserve price';
+        console.error('Reservation failed:', data);
+        setError(errorMsg);
       }
     } catch (err) {
       console.error('Reservation error:', err);
-      setError('Network error. Please try again.');
+      setError(`Network error: ${err.message || 'Please try again'}`);
     } finally {
       setLoading(false);
     }
