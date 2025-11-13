@@ -113,7 +113,7 @@ const BuildYourLeaseCalculator = ({ car, zipCode = '90210' }) => {
   if (!calculated) return null;
 
   return (
-    <Card className="border-2 border-green-300 bg-gradient-to-br from-green-50 to-white sticky top-4">
+    <Card className="border-2 border-green-300 bg-gradient-to-br from-green-50 to-white">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
