@@ -173,14 +173,24 @@ const MediaUploader = ({ images = [], onChange, error }) => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {images.map((image, index) => (
-              <div key={image.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+              <div key={image.id || image.url || index} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                 {/* Image Preview */}
                 <div className="relative aspect-video bg-gray-100">
-                  <img 
-                    src={image.url}
-                    alt={image.alt || `Изображение ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
+                  {image.url ? (
+                    <img 
+                      src={image.url}
+                      alt={image.alt || `Изображение ${index + 1}`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        console.error('Image failed to load:', image.url);
+                        e.target.src = 'https://via.placeholder.com/800x450?text=Image+Not+Available';
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <ImageIcon className="w-12 h-12" />
+                    </div>
+                  )}
                   
                   {/* Hero Badge */}
                   {image.isHero && (
