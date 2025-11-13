@@ -22,6 +22,7 @@ const ReserveModal = ({ isOpen, onClose, offer, paymentMode = 'lease' }) => {
   const handleReserve = async () => {
     // Check if user is logged in
     if (!user) {
+      onClose();
       navigate('/auth');
       return;
     }
@@ -33,12 +34,24 @@ const ReserveModal = ({ isOpen, onClose, offer, paymentMode = 'lease' }) => {
       const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
       const token = localStorage.getItem('access_token');
 
+      if (!token) {
+        setError('Please login first');
+        onClose();
+        navigate('/auth');
+        return;
+      }
+
       // Get payment details based on mode
       const monthlyPayment = paymentMode === 'lease' 
         ? offer.lease?.monthly || 0 
         : calculateFinancePayment(offer);
       
       const dueAtSigning = offer.lease?.dueAtSigning || 3000;
+
+      if (!offer.slug && !offer.id) {
+        setError('Invalid offer - missing ID');
+        return;
+      }
 
       const response = await fetch(`${BACKEND_URL}/api/reservations`, {
         method: 'POST',
