@@ -40,7 +40,7 @@ const RecentActivity = () => {
       recent.push({
         name,
         city,
-        car: `2024 ${car.model}`,
+        car: `2026 ${car.model}`,  // Changed to 2026
         action,
         savings: car.savings,
         time: minutesAgo < 60 ? `${minutesAgo} min ago` : 'Today'
