@@ -19,6 +19,12 @@ const ReserveModal = ({ isOpen, onClose, offer, paymentMode = 'lease' }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  // Safety check
+  if (!offer) {
+    console.error('ReserveModal: offer is undefined');
+    return null;
+  }
+
   const handleReserve = async () => {
     // Check if user is logged in
     if (!user) {
