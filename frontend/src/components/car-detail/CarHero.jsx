@@ -48,10 +48,14 @@ const CarHero = ({ car }) => {
           {/* Left - Image */}
           <div className="relative">
             <img 
-              src={car.image}
+              src={car.image || car.gallery?.[0] || 'https://via.placeholder.com/800x600?text=No+Image'}
               alt={`${car.title} — front view`}
               className="w-full h-auto rounded-2xl shadow-2xl"
               loading="eager"
+              onError={(e) => {
+                console.error('Hero image failed to load:', car.image);
+                e.target.src = 'https://via.placeholder.com/800x600?text=Image+Loading+Error';
+              }}
             />
             
             {/* Badges */}
