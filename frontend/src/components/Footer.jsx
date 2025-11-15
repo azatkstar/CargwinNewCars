@@ -29,7 +29,7 @@ const Footer = ({ hiddenVin = null }) => {
               <div className="bg-red-600 p-2 rounded-lg">
                 <Car className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold">CargwinNewCar</span>
+              <span className="text-xl font-bold">hunter.lease</span>
             </div>
             
             <p className="text-gray-300 leading-relaxed mb-6">
