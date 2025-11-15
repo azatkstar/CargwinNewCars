@@ -55,10 +55,14 @@ const OfferCard = ({ offer }) => {
       {/* Image and Badge */}
       <div className="relative">
         <img 
-          src={offer.image} 
+          src={offer.image || 'https://via.placeholder.com/600x400?text=No+Image'} 
           alt={`${offer.title} — front view`}
           className="w-full h-48 object-cover"
           loading="lazy"
+          onError={(e) => {
+            console.error('Offer card image failed:', offer.image);
+            e.target.src = 'https://via.placeholder.com/600x400?text=Image+Error';
+          }}
         />
         <Badge className="absolute top-4 left-4 bg-green-600 text-white">
           Verified Fleet Deal
