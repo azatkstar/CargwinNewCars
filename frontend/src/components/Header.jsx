@@ -49,12 +49,12 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="bg-red-600 p-2 rounded-lg">
               <Car className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">CargwinNewCar</span>
-          </div>
+            <span className="text-xl font-bold text-gray-900">hunter.lease</span>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6">
