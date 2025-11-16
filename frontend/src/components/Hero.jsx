@@ -124,10 +124,23 @@ const Hero = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               onClick={scrollToOffers}
               size="lg" 
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-lg"
+            >
+              🔥 See Current Deals
+            </Button>
+            <Button 
+              onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+              size="lg" 
+              variant="outline"
+              className="border-2 border-gray-300 px-8 py-6 text-lg font-semibold rounded-xl"
+            >
+              How It Works
+            </Button>
+          </div>
               className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
               {t('hero.cta')}
