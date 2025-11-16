@@ -1821,22 +1821,22 @@ async def search_car_images(
             # Use placeholder service
             placeholder_images = [
                 {
-                    "url": f"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80",  # Generic car
-                    "thumb": f"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=200&q=80",
+                    "url": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80",  # Generic car
+                    "thumb": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=200&q=80",
                     "source": "unsplash_fallback",
                     "alt": f"{year} {make} {model}",
                     "note": "Generic car image - please upload actual photos"
                 },
                 {
-                    "url": f"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
-                    "thumb": f"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=200&q=80",
+                    "url": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+                    "thumb": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=200&q=80",
                     "source": "unsplash_fallback",
                     "alt": f"{year} {make} {model} exterior",
                     "note": "Generic exterior view"
                 },
                 {
-                    "url": f"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80",
-                    "thumb": f"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",
+                    "url": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80",
+                    "thumb": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",
                     "source": "unsplash_fallback",
                     "alt": f"{year} {make} {model} front view",
                     "note": "Generic front view"
@@ -2475,7 +2475,6 @@ async def send_status_notification(
 
 def get_subscriptions_repo():
     """Dependency for subscription repository"""
-    from database import get_subscription_repository
     return get_subscription_repository()
 
 @api_router.post("/subscriptions")
