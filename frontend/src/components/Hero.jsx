@@ -89,40 +89,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Next Drop Timer */}
-          <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 p-6 mb-8">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Clock className="w-5 h-5 text-red-600" />
-              <span className="text-sm font-medium text-gray-600">{t('hero.ending_in')}:</span>
-            </div>
-            <div className="grid grid-cols-4 gap-4" data-countdown="weekly-drop">
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-red-600">
-                  {timeRemaining.days}
-                </div>
-                <div className="text-xs text-gray-500">{t('hero.days')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-red-600">
-                  {timeRemaining.hours}
-                </div>
-                <div className="text-xs text-gray-500">{t('hero.hours')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-red-600">
-                  {timeRemaining.minutes}
-                </div>
-                <div className="text-xs text-gray-500">{t('hero.minutes')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-red-600">
-                  {timeRemaining.seconds}
-                </div>
-                <div className="text-xs text-gray-500">{t('hero.seconds')}</div>
-              </div>
-            </div>
-          </div>
-
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
@@ -141,27 +107,11 @@ const Hero = () => {
               How It Works
             </Button>
           </div>
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              {t('hero.cta')}
-              <ChevronDown className="ml-2 w-5 h-5" />
-            </Button>
-            <Button 
-              onClick={scrollToDrop}
-              variant="outline" 
-              size="lg"
-              className="border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300"
-            >
-              {t('hero.learn_next_drop')}
-            </Button>
-          </div>
-
-          {/* Important Notice */}
-          <div className="max-w-2xl mx-auto">
-            <p className="text-sm text-gray-600 bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <strong>{t('hero.important_notice')}</strong>
-            </p>
-          </div>
+          
+          {/* Trust Line */}
+          <p className="text-sm text-gray-500 mt-8">
+            Updated monthly with fresh dealer inventory. Verified offers only.
+          </p>
         </div>
       </div>
 
