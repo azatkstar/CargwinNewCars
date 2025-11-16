@@ -71,10 +71,11 @@ const OffersSection = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('offers.title')}
+            🔥 Current Dump Offers
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {t('offers.subtitle')}
+            Real deals from dealers who need to move inventory fast. Updated monthly.
+            All prices include taxes and fees - what you see is what you pay.
           </p>
         </div>
 
