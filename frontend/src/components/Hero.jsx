@@ -37,37 +37,56 @@ const Hero = () => {
         <div className="text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-red-100">
-            <Shield className="w-4 h-4" />
-            Los Angeles Only
+            <MapPin className="w-4 h-4" />
+            Los Angeles & Southern California
           </div>
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            {t('hero.title')}
+            Real Dealer Dump Offers.<br />No BS.
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            {t('hero.subtitle')}
+            We hunt down the best lease deals in LA so you don't have to.
+            Only real offers. Only transparent pricing.
           </p>
-          {/* Savings Highlight */}
-          <div className="text-2xl md:text-3xl font-semibold text-green-600 mb-8">
-            {t('hero.savings_highlight')}
+
+          {/* Why Dealers Work With Us */}
+          <div className="max-w-4xl mx-auto bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
+            <h3 className="font-bold text-lg text-blue-900 mb-3">
+              Why Dealers Give Us Their Best Prices
+            </h3>
+            <p className="text-gray-700 text-left">
+              Dealers need to move inventory fast - especially end-of-month, overstocked models, and last year's stock.
+              We help them sell quickly to qualified buyers. You get dump pricing. They clear their lot.
+              Everyone wins. <strong>That's why our prices beat regular retail by $5K-$15K.</strong>
+            </p>
           </div>
 
-          {/* Key Benefits */}
-          <div className="max-w-4xl mx-auto space-y-4 mb-8">
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              <strong>{t('hero.benefit1_title')}</strong> {t('hero.benefit1_description')}
-            </p>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              <Shield className="w-5 h-5 inline mr-2 text-blue-600" />
-              <strong>{t('hero.benefit2_title')}</strong> {t('hero.benefit2_description')}
-            </p>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              <MapPin className="w-5 h-5 inline mr-2 text-green-600" />
-              <strong>{t('hero.benefit3_title')}</strong> {t('hero.benefit3_description')}
-            </p>
+          {/* Key Benefits - Honest & Direct */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="text-3xl mb-3">✓</div>
+              <h3 className="font-bold mb-2">Real Prices</h3>
+              <p className="text-sm text-gray-600">
+                No "starting at" games. You see the actual monthly payment with your credit score.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="text-3xl mb-3">🔒</div>
+              <h3 className="font-bold mb-2">Your Data Is Safe</h3>
+              <p className="text-sm text-gray-600">
+                Soft check only. We don't share your SSN with dealers until you approve the deal.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="text-3xl mb-3">⚡</div>
+              <h3 className="font-bold mb-2">Fast & Easy</h3>
+              <p className="text-sm text-gray-600">
+                Book in minutes. Pick up in 0-2 days. Everything online. No dealer visits until delivery.
+              </p>
+            </div>
           </div>
 
           {/* Next Drop Timer */}
