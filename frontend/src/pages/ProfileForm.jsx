@@ -304,6 +304,9 @@ const ProfileForm = () => {
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
+                    <p className="text-xs text-blue-600">
+                      💡 Lenders prefer W2. Self-employed may need tax returns.
+                    </p>
                   </div>
 
                   <div className="space-y-2">
@@ -314,6 +317,10 @@ const ProfileForm = () => {
                       onChange={(e) => handleChange('employer_name', e.target.value)}
                       required
                     />
+                    <p className="text-xs text-blue-600">
+                      💡 Used to verify employment stability.
+                    </p>
+                  </div>
                   </div>
 
                   <div className="space-y-2">
