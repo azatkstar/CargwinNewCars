@@ -24,6 +24,21 @@ const AutoBanditStyleCalculator = ({ car }) => {
     'tier4': { label: 'Good 680-699', moneyFactorBase: 0.00227 }
   };
 
+
+  const fetchTaxRate = async (zip) => {
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/tax-rate/${zip}`);
+      if (response.ok) {
+        const data = await response.json();
+        setTaxRate(data.tax_rate);
+      }
+    } catch (error) {
+      console.error('Tax rate lookup failed:', error);
+    }
+  };
+
+
   // Term options (как AutoBandit)
   const termOptions = [
     { months: 24, label: '24 months' },
