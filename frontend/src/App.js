@@ -31,6 +31,7 @@ import Disclaimer from "./pages/Disclaimer";
 import CCPARights from "./pages/CCPARights";
 import AboutUs from "./pages/AboutUs";
 import WhatToExpect from "./pages/WhatToExpect";
+import EarlyAccess from "./pages/EarlyAccess";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
 import { AuthProvider } from "./hooks/useAuth";
