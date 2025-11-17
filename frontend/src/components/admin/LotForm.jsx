@@ -18,6 +18,7 @@ import { useI18n } from '../../hooks/useI18n';
 import { formatPrice } from '../../utils/timer';
 import MediaUploader from './MediaUploader';
 import OTDPreview from './OTDPreview';
+import ModelTemplateSelector from './ModelTemplateSelector';
 
 const LotForm = () => {
   const { id } = useParams();
