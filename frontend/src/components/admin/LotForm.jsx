@@ -81,6 +81,7 @@ const LotForm = () => {
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('basic');
   const [errors, setErrors] = useState({});
+  const [showTemplateSelector, setShowTemplateSelector] = useState(false);
 
   useEffect(() => {
     if (isEditing) {
