@@ -167,6 +167,49 @@ const CarDetail = () => {
             {/* Price Comparison - Only show if competitor data exists */}
             <PriceComparison car={carData} />
             
+            {/* Who This Offer Is For */}
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-300 rounded-xl p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                ✓ Who This Offer Is For
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold">✓</span>
+                  <div>
+                    <strong>California Residents Only</strong>
+                    <p className="text-sm text-gray-600">Must have valid CA address and CA driver's license</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold">✓</span>
+                  <div>
+                    <strong>Credit Score 720+ (Tier 1)</strong>
+                    <p className="text-sm text-gray-600">Lower scores may qualify with higher rate or more down payment</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold">✓</span>
+                  <div>
+                    <strong>Annual Income $60K+ Recommended</strong>
+                    <p className="text-sm text-gray-600">Based on typical approval for this payment range</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold">✓</span>
+                  <div>
+                    <strong>Valid Driver's License & Insurance</strong>
+                    <p className="text-sm text-gray-600">Required before delivery - bring proof of insurance</p>
+                  </div>
+                </li>
+              </ul>
+              <div className="mt-4 p-3 bg-yellow-50 rounded border border-yellow-300">
+                <p className="text-xs text-yellow-900">
+                  <strong>Note:</strong> If you don't meet all requirements, we can often find alternative vehicles 
+                  that fit your profile. Contact us for options.
+                </p>
+              </div>
+            </div>
+            
             {/* Lease vs Finance Comparison */}
             <LeaseVsFinanceComparison car={carData} />
             
