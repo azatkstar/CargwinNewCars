@@ -9,6 +9,7 @@ import uuid
 from datetime import datetime, timedelta, timezone
 import hashlib
 import json
+import socketio
 
 # Import configuration and middleware
 from config import get_settings, validate_environment
