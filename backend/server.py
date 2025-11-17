@@ -2678,6 +2678,62 @@ async def bulk_prescoring(
     except HTTPException:
         raise
     except Exception as e:
+
+
+@api_router.post("/applications/{app_id}/invite-cosigner")
+async def invite_cosigner(
+    app_id: str,
+    phone: str,
+    current_user: User = Depends(require_auth)
+):
+    """Send SMS invite to co-signer"""
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        if current_user.role not in ['finance_manager', 'admin']:
+            raise HTTPException(status_code=403, detail="Finance Manager access required")
+        
+        # Generate unique invite link
+        import uuid
+        invite_token = str(uuid.uuid4())
+        invite_link = f"https://hunter.lease/cosigner-signup?token={invite_token}&app={app_id}"
+        
+        # Mock SMS sending (in production: Twilio)
+        sms_message = f"hunter.lease: You've been invited as co-signer. Complete profile: {invite_link}"
+        
+        logger.info(f"Co-signer invite sent to {phone} for app {app_id}")
+        logger.info(f"Mock SMS: {sms_message}")
+        
+        # Save invite to database
+        db = get_database()
+        query_id = ObjectId(app_id) if len(app_id) == 24 else app_id
+        
+        await db.applications.update_one(
+            {"_id": query_id},
+            {"$set": {
+                "cosigner_invite": {
+                    "phone": phone,
+                    "token": invite_token,
+                    "invited_at": datetime.now(timezone.utc).isoformat(),
+                    "invited_by": current_user.email,
+                    "status": "pending"
+                }
+            }}
+        )
+        
+        return {
+            "ok": True,
+            "message": "Co-signer invite sent (mock)",
+            "invite_link": invite_link
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Co-signer invite error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to send invite")
+
         logger.error(f"Bulk prescoring error: {e}")
         raise HTTPException(status_code=500, detail="Failed to run bulk prescoring")
 
