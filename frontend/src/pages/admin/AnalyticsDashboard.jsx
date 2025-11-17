@@ -293,9 +293,3 @@ const AnalyticsDashboard = () => {
 };
 
 export default AnalyticsDashboard;
-      </div>
-    </div>
-  );
-};
-
-export default AnalyticsDashboard;
