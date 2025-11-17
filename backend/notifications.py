@@ -20,14 +20,15 @@ async def send_email(to_email: str, subject: str, body: str) -> bool:
     try:
         if not SENDGRID_API_KEY:
             logger.warning(f"SendGrid API key not configured - mock email to {to_email}")
+            logger.info(f"📧 Mock email: {subject}")
             return True  # Mock success
         
-        # TODO: Integrate SendGrid
+        # TODO: Real SendGrid integration
         # from sendgrid import SendGridAPIClient
         # from sendgrid.helpers.mail import Mail
         # 
         # message = Mail(
-        #     from_email='noreply@cargwin.com',
+        #     from_email='noreply@hunter.lease',
         #     to_emails=to_email,
         #     subject=subject,
         #     html_content=body
