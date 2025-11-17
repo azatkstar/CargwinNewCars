@@ -15,6 +15,7 @@ const OffersSection = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeFilters, setActiveFilters] = useState(null);
   const { t } = useI18n();
 
   // Fetch offers from API
