@@ -261,9 +261,8 @@ const CarDetail = () => {
             <AlternativeVehicles selectedCar={carData} />
           </div>
           
-          {/* Right Column - Calculator & Forms */}
+          {/* Right Column - Forms Only */}
           <div className="space-y-8">
-            <BuildYourLeaseCalculator car={carData} />
             <CarForms car={carData} />
             <ModelSubscriptions carMake={carData.specs?.make || carData.make} carModel={carData.specs?.model || carData.model} />
           </div>
