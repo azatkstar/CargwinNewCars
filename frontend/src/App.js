@@ -33,6 +33,8 @@ import AboutUs from "./pages/AboutUs";
 import WhatToExpect from "./pages/WhatToExpect";
 import EarlyAccess from "./pages/EarlyAccess";
 import OffersPage from "./pages/OffersPage";
+import ServicesPage from "./pages/ServicesPage";
+import CoveragePage from "./pages/CoveragePage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
 import { AuthProvider } from "./hooks/useAuth";
