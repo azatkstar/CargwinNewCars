@@ -23,10 +23,31 @@
         <meta property="twitter:title" content="Hunter.Lease - Exclusive Fleet Pricing on New Cars" />
         <meta property="twitter:description" content="Get exclusive deals on new vehicles with real fleet pricing. No dealer markup, transparent pricing." />
         <meta property="twitter:image" content="https://images.pexels.com/photos/34549770/pexels-photo-34549770.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+        
+        <!-- PWA Manifest -->
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="hunter.lease" />
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
+        
+        <!-- Service Worker Registration -->
+        <script>
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+              navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                  console.log('SW registered:', registration);
+                })
+                .catch(err => {
+                  console.log('SW registration failed:', err);
+                });
+            });
+          }
+        </script>
         <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
