@@ -96,6 +96,8 @@ function App() {
                   <Route path="/privacy" element={<PrivacyPolicy />} />
                   <Route path="/disclaimer" element={<Disclaimer />} />
                   <Route path="/ccpa-rights" element={<CCPARights />} />
+                  <Route path="/about" element={<AboutUs />} />
+                  <Route path="/what-to-expect" element={<WhatToExpect />} />
                   <Route path="/preview/:token" element={<PreviewLot />} />
                   <Route path="/admin/login" element={<AdminLogin />} />
                   <Route path="/admin/*" element={<AdminDashboard />} />
