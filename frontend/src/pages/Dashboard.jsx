@@ -472,6 +472,11 @@ const Dashboard = () => {
         {/* Referral Program */}
         <div className="mt-6">
           <ReferralProgram />
+          
+          {/* Referral Stats Dashboard */}
+          <div className="mt-6">
+            <ReferralDashboard />
+          </div>
         </div>
           </div>
 
