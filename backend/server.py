@@ -1079,6 +1079,35 @@ async def get_model_templates(
         logger.error(f"Get templates error: {e}")
         raise HTTPException(status_code=500, detail="Failed to get templates")
 
+
+@api_router.get("/ab-test/{test_name}")
+async def get_ab_variant(
+    test_name: str,
+    user_id: Optional[str] = None
+):
+    """Get A/B test variant for user"""
+    try:
+        import sys
+        sys.path.append('/app/backend')
+        from ab_testing import get_ab_test
+        
+        # Use user_id or generate random for anonymous
+        uid = user_id or str(uuid.uuid4())
+        
+        variant = get_ab_test(test_name, uid)
+        
+        if variant:
+            return variant
+        else:
+            raise HTTPException(status_code=404, detail="Test not found")
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"A/B test error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get variant")
+
+
 @api_router.post("/admin/lots/from-template")
 async def create_lot_from_template(
     make: str,
