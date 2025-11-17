@@ -186,13 +186,25 @@ const CarDetail = () => {
       {/* Car Hero Section */}
       <CarHero car={carData} />
       
+      {/* BUILD YOUR LEASE - Top Priority (как AutoBandit) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            {/* Placeholder for main content */}
+          </div>
+          <div>
+            <BuildYourLeaseCalculator car={carData} />
+          </div>
+        </div>
+      </div>
+      
       {/* Car Gallery */}
       <CarGallery images={carData.gallery} title={carData.title} />
       
       {/* Main Content Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Left Column - Specs & Calculator */}
+          {/* Left Column - Specs & Info */}
           <div className="lg:col-span-2 space-y-12">
             <CarSpecs car={carData} />
             
