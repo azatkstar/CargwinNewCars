@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import OfferCard from './OfferCard';
+import FiltersSidebar from './FiltersSidebar';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
