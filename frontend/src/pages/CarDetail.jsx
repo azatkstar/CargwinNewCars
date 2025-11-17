@@ -147,6 +147,38 @@ const CarDetail = () => {
         <meta name="twitter:title" content={`${carData.title} - Fleet Pricing`} />
         <meta name="twitter:description" content={`Save $${carData.savings?.toLocaleString()}. Starting at $${carData.lease?.monthly}/month.`} />
         <meta name="twitter:image" content={carData.image || carData.gallery?.[0]} />
+        
+        {/* JSON-LD Structured Data for SEO */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": carData.title,
+            "image": carData.image || carData.gallery?.[0],
+            "description": `${carData.title} available for lease at hunter.lease. Save $${carData.savings?.toLocaleString()} off MSRP.`,
+            "brand": {
+              "@type": "Brand",
+              "name": carData.title?.split(' ')[1] || "Vehicle"
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": window.location.href,
+              "priceCurrency": "USD",
+              "price": carData.lease?.monthly,
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": carData.lease?.monthly,
+                "priceCurrency": "USD",
+                "unitText": "MONTH"
+              },
+              "availability": "https://schema.org/InStock",
+              "seller": {
+                "@type": "Organization",
+                "name": "hunter.lease"
+              }
+            }
+          })}
+        </script>
       </Helmet>
       
       <Header />
