@@ -54,9 +54,19 @@ const Footer = ({ hiddenVin = null }) => {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Navigation</h3>
+            <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              {navigationItems.map((item) => (
+              <li>
+                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/what-to-expect" className="text-gray-300 hover:text-white transition-colors">
+                  What to Expect
+                </Link>
+              </li>
+              {navigationItems.slice(0, 4).map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
