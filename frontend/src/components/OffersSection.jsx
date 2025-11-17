@@ -112,27 +112,37 @@ const OffersSection = () => {
           </p>
         </div>
 
-        {/* Sort Controls */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t('offers.sort_by')}
-            </label>
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select sorting" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="savings">{t('offers.sort_savings')}</SelectItem>
-                <SelectItem value="price">{t('offers.sort_price')}</SelectItem>
-                <SelectItem value="brand">{t('offers.sort_brand')}</SelectItem>
-              </SelectContent>
-            </Select>
+        {/* Main Content with Sidebar */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Left Sidebar - Filters */}
+          <div className="lg:col-span-1">
+            <FiltersSidebar 
+              onFilterChange={setActiveFilters}
+              onClear={() => setActiveFilters(null)}
+            />
           </div>
-        </div>
 
-        {/* Offers Grid */}
-        {loading ? (
+          {/* Right - Offers Grid */}
+          <div className="lg:col-span-3">
+            {/* Results count */}
+            <div className="mb-6 flex items-center justify-between">
+              <p className="text-sm text-gray-600">
+                {sortedOffers.length} {sortedOffers.length === 1 ? 'offer' : 'offers'} found
+              </p>
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-48">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="savings">Best Savings</SelectItem>
+                  <SelectItem value="price">Lowest Price</SelectItem>
+                  <SelectItem value="brand">By Brand</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Offers Grid */}
+            {loading ? (
           <div className="text-center py-16">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
             <p className="mt-4 text-gray-600">Loading offers...</p>
