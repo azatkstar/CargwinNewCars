@@ -101,7 +101,7 @@ const AutoBanditStyleCalculator = ({ car }) => {
     const acquisitionFee = 650;  // Toyota standard
     const registrationFee = 540;
     const docFee = 85;
-    const salesTaxRate = 0.0775; // 7.75% CA
+    const salesTaxRate = taxRate / 100; // Dynamic from zip code
     
     // Due at Signing breakdown (AutoBandit style)
     const firstMonthlyPayment = baseMonthly;
