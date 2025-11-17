@@ -222,10 +222,12 @@ const AnalyticsDashboard = () => {
             <p className="text-xs text-gray-500 mt-1">
               {((analytics.rejected / analytics.total) * 100).toFixed(0)}% of total
             </p>
-
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Pie Chart - Status Distribution */}
         <Card>
           <CardHeader>
