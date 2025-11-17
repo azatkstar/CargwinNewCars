@@ -99,6 +99,7 @@ function App() {
                   <Route path="/ccpa-rights" element={<CCPARights />} />
                   <Route path="/about" element={<AboutUs />} />
                   <Route path="/what-to-expect" element={<WhatToExpect />} />
+                  <Route path="/early-access" element={<EarlyAccess />} />
                   <Route path="/preview/:token" element={<PreviewLot />} />
                   <Route path="/admin/login" element={<AdminLogin />} />
                   <Route path="/admin/*" element={<AdminDashboard />} />
