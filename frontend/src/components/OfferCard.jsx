@@ -258,13 +258,12 @@ const OfferCard = ({ offer }) => {
           paymentMode={paymentMode}
         />
 
-        {/* Disclaimer */}
-        <div className="mt-4 text-xs text-gray-500 leading-relaxed">
-          <p className="mb-2">
-            * <strong>We don't share your data with dealers for cold calls.</strong> Contact — only with one dealer after 100% deal agreement without haggling.
-          </p>
-          <p>
-            * You come and pick up a fully prepared car. Important: subject to suitable credit history.
+        {/* Sticky Disclaimer at bottom of card */}
+        <div className="mt-4 p-3 bg-gray-50 rounded border border-gray-200">
+          <p className="text-xs text-gray-600 leading-relaxed">
+            <strong>Price shown for 720+ credit score.</strong> Actual terms depend on credit approval. 
+            CA residents only. Taxes, dealer fee, bank fee included. 
+            Offer subject to vehicle availability.
           </p>
         </div>
       </div>
