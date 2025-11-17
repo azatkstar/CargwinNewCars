@@ -193,7 +193,7 @@ const CarDetail = () => {
             {/* Placeholder for main content */}
           </div>
           <div>
-            <BuildYourLeaseCalculator car={carData} />
+            <AutoBanditStyleCalculator car={carData} />
           </div>
         </div>
       </div>
