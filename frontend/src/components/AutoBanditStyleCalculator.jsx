@@ -37,6 +37,10 @@ const AutoBanditStyleCalculator = ({ car }) => {
 
   useEffect(() => {
     calculateLease();
+    // Fetch tax rate for zip code
+    if (params.zipCode && params.zipCode.length === 5) {
+      fetchTaxRate(params.zipCode);
+    }
   }, [params, car]);
 
   const calculateLease = () => {
