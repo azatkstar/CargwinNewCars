@@ -152,28 +152,53 @@ export const mockInstagramReviews = [
 export const mockFAQ = [
   {
     id: 1,
-    question: "Do you share my data with dealers?",
-    answer: "No, we do not share your contact information with dealers for cold calls. Contact happens only with one dealer after 100% agreement on all deal terms."
+    question: "What exactly is a 'dump offer'?",
+    answer: "A dump offer is when a dealer needs to clear inventory fast - end of month, overstocked models, or last year's cars. Instead of keeping them on the lot, they sell at cost or below. We find these deals and pass the savings to you. That's why you see $5K-$15K off MSRP."
   },
   {
     id: 2,
-    question: "What happens after booking?",
-    answer: "After booking, we coordinate all deal details with you. Only after your complete agreement do you go to the dealer and pick up a fully prepared car."
+    question: "Is this rate real or will it change?",
+    answer: "The monthly payment is REAL for the credit tier shown (usually 720+). If your actual credit score differs, your rate adjusts accordingly. We show you the final number within 24 hours after soft check. No bait-and-switch."
   },
   {
     id: 3,
-    question: "What are the credit history requirements?",
-    answer: "Final financing terms depend on your credit profile. We do a soft check that doesn't affect your credit score."
+    question: "Will checking my credit hurt my score?",
+    answer: "No. We do soft pull first (no score impact). Only if you approve the final deal does the dealer do a hard pull. You control when that happens."
   },
   {
     id: 4,
-    question: "Can I cancel the deal?",
-    answer: "Yes, you can cancel the deal at any time before signing documents at the dealer. Deposit is fully refunded."
+    question: "What happens after I book?",
+    answer: "Within 24h: (1) Soft credit check, (2) Verify with dealer, (3) Final offer with YOUR exact rate, (4) You approve → hard pull, (5) E-sign online, (6) Pickup in 0-2 days."
   },
   {
     id: 5,
-    question: "What are fleet prices?",
-    answer: "Fleet prices are special prices for corporate clients, which are usually significantly lower than retail. We provide access to these prices for private buyers."
+    question: "Can I cancel?",
+    answer: "Yes, anytime before e-signing final contract. $97.49 deposit fully refundable if you change your mind or if dealer can't honor the deal."
+  },
+  {
+    id: 6,
+    question: "What if my credit is lower than 720?",
+    answer: "You can still qualify. Lower scores (680-719, 640-679) mean slightly higher rate and maybe more down payment. We show what's available for YOUR score. Sometimes we suggest easier-to-approve alternatives."
+  },
+  {
+    id: 7,
+    question: "Hidden fees?",
+    answer: "No. Breakdown shows: MSRP, dealer discount, your price, taxes, DMV, doc fees. Everything disclosed upfront. California law requires full transparency."
+  },
+  {
+    id: 8,
+    question: "Who is my lease with?",
+    answer: "Your lease is with the manufacturer's finance (Lexus Financial, etc.). Dealer is seller. hunter.lease just found the deal. It's a normal factory lease - not locked to us."
+  },
+  {
+    id: 9,
+    question: "Locked to one dealer for service?",
+    answer: "No. Service at ANY authorized dealer for your brand. Warranty and maintenance work nationwide."
+  },
+  {
+    id: 10,
+    question: "What if offer expires?",
+    answer: "Dump offers are time-sensitive. Book it ASAP. $97.49 deposit holds it 48h. If someone else books first, it's gone. That's dump pricing reality."
   }
 ];
 
