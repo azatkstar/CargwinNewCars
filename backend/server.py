@@ -1588,6 +1588,13 @@ async def batch_lot_action(
         # Convert lot IDs to ObjectId if needed
         object_ids = []
         for lot_id in lotIds:
+            try:
+                if len(lot_id) == 24 and all(c in '0123456789abcdef' for c in lot_id.lower()):
+                    object_ids.append(ObjectId(lot_id))
+                else:
+                    object_ids.append(lot_id)
+            except:
+                object_ids.append(lot_id)
 
 
 @api_router.get("/tax-rate/{zip_code}")
