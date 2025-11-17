@@ -1048,6 +1048,92 @@ async def create_lot(
         raise
     except Exception as e:
         logger.error(f"Create lot error: {e}")
+
+
+@api_router.get("/admin/model-templates")
+async def get_model_templates(
+    current_user: User = Depends(require_editor)
+):
+    """Get list of available model templates"""
+    try:
+        import sys
+        sys.path.append('/app/backend')
+        from model_templates import list_available_models, MODEL_TEMPLATES
+        
+        models = list_available_models()
+        
+        return {
+            "ok": True,
+            "models": models,
+            "count": len(models),
+            "templates": MODEL_TEMPLATES
+        }
+        
+    except Exception as e:
+        logger.error(f"Get templates error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get templates")
+
+@api_router.post("/admin/lots/from-template")
+async def create_lot_from_template(
+    make: str,
+    model: str,
+    year: int,
+    trim: str,
+    lot_repo: LotRepository = Depends(get_lots_repo),
+    current_user: User = Depends(require_editor)
+):
+    """Create lot from model template"""
+    try:
+        import sys
+        sys.path.append('/app/backend')
+        from model_templates import get_model_template
+        
+        template = get_model_template(make, model)
+        
+        if not template:
+            raise HTTPException(status_code=404, detail="Template not found")
+        
+        # Create lot with template data
+        lot_data = {
+            "make": make,
+            "model": model,
+            "year": year,
+            "trim": trim,
+            "msrp": template["msrp_range"][0],  # Use minimum MSRP as default
+            "discount": 0,
+            "dealer_addons": 5000,  # Default
+            "images": [{"url": template["image_url"], "alt": f"{year} {make} {model}"}],
+            "lease": {
+                "monthly": 0,  # Will be calculated
+                "dueAtSigning": 1580,
+                "termMonths": 36,
+                "milesPerYear": 10000
+            },
+            "finance": {
+                "apr": template["money_factor_base"] * 2400,  # Convert MF to APR
+                "termMonths": 60,
+                "downPayment": 3000
+            },
+            "status": "draft",
+            "template_used": f"{make} {model}"
+        }
+        
+        lot_id = await lot_repo.create_lot(lot_data)
+        
+        logger.info(f"Lot created from template: {make} {model} by {current_user.email}")
+        
+        return {
+            "ok": True,
+            "lot_id": lot_id,
+            "message": f"Lot created from {make} {model} template"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Create from template error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create lot")
+
         raise HTTPException(status_code=500, detail="Failed to create lot")
 
 @api_router.get("/admin/lots/{lot_id}")
