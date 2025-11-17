@@ -211,8 +211,12 @@ const OffersSection = () => {
         {/* Disclaimer */}
         <div className="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
           <p className="text-sm text-blue-800 leading-relaxed">
-            <strong>{t('offers.disclaimer')}</strong>
+            <strong>Disclaimer:</strong> Monthly payments shown for qualified buyers with 720+ credit score. 
+            Actual terms depend on credit approval. California residents only. 
+            All taxes, dealer fees, and bank fees included unless noted otherwise.
           </p>
+        </div>
+          </div>
         </div>
       </div>
     </section>
