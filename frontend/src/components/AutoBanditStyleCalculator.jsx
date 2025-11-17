@@ -9,10 +9,12 @@ const AutoBanditStyleCalculator = ({ car }) => {
     termMonths: 36,
     annualMileage: 10000,
     creditTier: 'tier1',
-    dueAtSigning: 1580
+    dueAtSigning: 1580,
+    zipCode: '90210'  // Beverly Hills default
   });
   
   const [calculated, setCalculated] = useState(null);
+  const [taxRate, setTaxRate] = useState(7.75);
 
   // Credit Tier adjustments (как AutoBandit)
   const creditTiers = {
