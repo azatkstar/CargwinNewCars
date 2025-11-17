@@ -116,11 +116,44 @@ const OfferCard = ({ offer }) => {
         {/* Payment Info */}
         {paymentMode === 'lease' && (
           <div className="mb-6">
-            <div className="text-3xl font-bold text-gray-900 mb-2">
-              {formatPrice(offer.lease.monthly)}/{t('offers.monthly')}
+            {/* Monthly Payment - Large and Clear */}
+            <div className="bg-gray-50 p-4 rounded-lg mb-4">
+              <div className="text-sm text-gray-600 mb-1">Your Monthly Payment</div>
+              <div className="text-4xl font-bold text-gray-900">
+                ${offer.lease.monthly}<span className="text-xl text-gray-600">/mo</span>
+              </div>
             </div>
-            <div className="text-sm text-gray-600 mb-3">
-              +{formatPrice(offer.lease.dueAtSigning)} {t('offers.down_payment')} • {offer.lease.termMonths} months / {offer.lease.milesPerYear.toLocaleString()} miles
+            
+            {/* Deal Structure - Honest breakdown */}
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-600">MSRP:</span>
+                <span className="line-through text-gray-400">${offer.msrp.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Dealer Discount:</span>
+                <span className="text-green-600 font-semibold">-${offer.savings.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between border-t pt-2">
+                <span className="font-medium">Your Price:</span>
+                <span className="font-bold">${offer.fleet.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Due at Signing:</span>
+                <span className="font-medium">${offer.lease.dueAtSigning.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between text-xs text-gray-500">
+                <span>{offer.lease.termMonths} months</span>
+                <span>{offer.lease.milesPerYear.toLocaleString()} mi/year</span>
+              </div>
+            </div>
+            
+            {/* Credit Tier Requirement */}
+            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded">
+              <div className="text-xs font-semibold text-yellow-900 mb-1">Credit Score Required:</div>
+              <div className="text-sm text-yellow-800">
+                720+ (Tier 1) for this rate. Lower scores may qualify at higher rates.
+              </div>
             </div>
             {offer.lease.incentives > 0 && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
