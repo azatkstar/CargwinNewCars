@@ -131,6 +131,11 @@ api_router = APIRouter(prefix=settings.API_V1_PREFIX)
 # Mount static files for uploads
 app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 
+
+# WebSocket setup
+from websocket_manager import sio
+socket_app = socketio.ASGIApp(sio, app)
+
 # Startup and shutdown events
 @app.on_event("startup")
 async def startup_event():
