@@ -13,7 +13,8 @@ from bs4 import BeautifulSoup
 from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv
 
-load_dotenv('/app/backend/.env')
+# Load environment variables (Kubernetes will provide them)
+load_dotenv()  # No path - uses .env if exists, K8s env vars otherwise
 
 class AutoBanditScraper:
     """Scraper for AutoBandit.com vehicle images"""
