@@ -186,12 +186,48 @@ const CarDetail = () => {
       {/* Car Hero Section */}
       <CarHero car={carData} />
       
-      {/* BUILD YOUR LEASE - Top Priority (как AutoBandit) */}
+      {/* MAIN CONTENT - Calculator + Key Info (First Screen) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            {/* Placeholder for main content */}
+          {/* Left - Price Details */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* OTD Price & Trust Points */}
+            <Card className="border-2 border-blue-300">
+              <CardContent className="pt-6">
+                <div className="mb-4">
+                  <div className="text-sm text-gray-600 mb-1">OTD Price:</div>
+                  <div className="text-3xl font-bold text-gray-900">
+                    ${((car.fleet || 0) * 1.0775 + 540 + 85).toFixed(0).toLocaleString()}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">* Includes taxes and fees for CA</p>
+                </div>
+                
+                <div className="space-y-2 text-sm">
+                  <p className="flex items-start gap-2">
+                    <span className="text-red-600">✓</span>
+                    <span><strong>No forced add-ons:</strong> dealers typically add ${car.dealer_addons?.toLocaleString() || '5,500'} — ours $0</span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span className="text-green-600">✓</span>
+                    <span>Price locked in — no haggling</span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span className="text-blue-600">✓</span>
+                    <span>Your data never shared with dealers for cold calls</span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span className="text-purple-600">✓</span>
+                    <span>Contact only after 100% terms agreement</span>
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+            
+            {/* Car Specs Preview */}
+            <CarSpecs car={carData} />
           </div>
+          
+          {/* Right - Calculator */}
           <div>
             <AutoBanditStyleCalculator car={carData} />
           </div>
