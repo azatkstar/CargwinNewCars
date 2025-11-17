@@ -44,7 +44,38 @@ const OffersSection = () => {
     fetchOffers();
   }, []);
 
-  const sortedOffers = [...offers].sort((a, b) => {
+  const applyFilters = (offersList) => {
+    if (!activeFilters) return offersList;
+    
+    return offersList.filter(offer => {
+      // Brand filter
+      if (activeFilters.brand !== 'all' && !offer.title.toLowerCase().includes(activeFilters.brand)) {
+        return false;
+      }
+      
+      // Budget filter
+      const monthly = offer.lease?.monthly || 0;
+      if (monthly < activeFilters.budgetMin || monthly > activeFilters.budgetMax) {
+        return false;
+      }
+      
+      // Term filter
+      if (activeFilters.term !== 'all' && offer.lease?.termMonths !== parseInt(activeFilters.term)) {
+        return false;
+      }
+      
+      // Mileage filter
+      if (activeFilters.mileage !== 'all' && offer.lease?.milesPerYear !== parseInt(activeFilters.mileage)) {
+        return false;
+      }
+      
+      return true;
+    });
+  };
+
+  const filteredOffers = applyFilters(offers);
+  
+  const sortedOffers = [...filteredOffers].sort((a, b) => {
     switch (sortBy) {
       case 'savings':
         return b.savings - a.savings;
