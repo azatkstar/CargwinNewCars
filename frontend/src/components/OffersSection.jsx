@@ -152,10 +152,22 @@ const OffersSection = () => {
             <p className="text-gray-600 text-lg">No offers available at the moment.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {sortedOffers.map((offer) => (
-              <OfferCard key={offer.id} offer={offer} />
-            ))}
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {sortedOffers.slice(0, 6).map((offer) => (
+                <OfferCard key={offer.id} offer={offer} />
+              ))}
+            </div>
+            
+            {sortedOffers.length > 6 && (
+              <div className="text-center">
+                <a href="/offers">
+                  <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-semibold">
+                    View All {sortedOffers.length} Offers →
+                  </button>
+                </a>
+              </div>
+            )}
           </div>
         )}
 
