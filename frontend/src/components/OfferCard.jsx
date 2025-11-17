@@ -52,12 +52,12 @@ const OfferCard = ({ offer }) => {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-      {/* Image and Badge */}
-      <div className="relative">
+      {/* Image and Badge - Clickable */}
+      <Link to={`/car/${offer.id}`} className="relative block">
         <img 
           src={offer.image || 'https://via.placeholder.com/600x400?text=No+Image'} 
           alt={`${offer.title} — front view`}
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover cursor-pointer hover:opacity-95 transition-opacity"
           loading="lazy"
           onError={(e) => {
             console.error('Offer card image failed:', offer.image);
@@ -73,7 +73,7 @@ const OfferCard = ({ offer }) => {
           <Clock className="w-4 h-4 inline mr-1" />
           {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m
         </div>
-      </div>
+      </Link>
 
       <div className="p-6">
         {/* Title */}
