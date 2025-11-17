@@ -15,12 +15,20 @@ TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
 TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER', '+17477227494')
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 
-async def send_email(to_email: str, subject: str, body: str) -> bool:
-    """Send email via SendGrid"""
+async def send_email(to_email: str, subject: str, body: str, template_type: Optional[str] = None, template_data: Optional[dict] = None) -> bool:
+    """Send email via SendGrid with HTML template support"""
     try:
+        # Use HTML template if provided
+        if template_type and template_data:
+            import sys
+            sys.path.append('/app/backend')
+            from email_templates import get_email_template
+            body = get_email_template(template_type, template_data)
+        
         if not SENDGRID_API_KEY:
             logger.warning(f"SendGrid API key not configured - mock email to {to_email}")
             logger.info(f"📧 Mock email: {subject}")
+            logger.info(f"   Template: {template_type or 'plain text'}")
             return True  # Mock success
         
         # TODO: Real SendGrid integration
