@@ -447,6 +447,49 @@ const LotForm = () => {
 
       {/* Form Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
+        {/* Template Selector - New Feature */}
+        {!isEditing && (
+          <div className="bg-blue-50 border-2 border-blue-300 rounded-lg p-4 mb-6">
+            <h3 className="font-bold text-blue-900 mb-3">🚀 Quick Start with Template</h3>
+            <p className="text-sm text-gray-700 mb-3">
+              Select a popular model to auto-fill MSRP, residuals, fees, and options:
+            </p>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              onClick={async () => {
+                try {
+                  const api = getApiClient();
+                  const response = await api.get('/api/admin/model-templates');
+                  const templates = response.data.models || [];
+                  
+                  // Show selection dialog
+                  const selected = prompt(`Available templates:\n${templates.join('\n')}\n\nEnter model (e.g., "Toyota Camry"):`);
+                  
+                  if (selected) {
+                    const [make, ...modelParts] = selected.split(' ');
+                    const model = modelParts.join(' ');
+                    
+                    const createResp = await api.post('/api/admin/lots/from-template', null, {
+                      params: { make, model, year: 2026, trim: 'Base' }
+                    });
+                    
+                    if (createResp.data.ok) {
+                      alert('Template loaded! Redirecting to edit...');
+                      window.location.href = `/admin/lots/${createResp.data.lot_id}/edit`;
+                    }
+                  }
+                } catch (error) {
+                  alert('Failed to load template: ' + (error.response?.data?.detail || error.message));
+                }
+              }}
+            >
+              📋 Browse 33 Model Templates
+            </Button>
+          </div>
+        )}
+        
         <TabsList className="grid w-full grid-cols-8">
           <TabsTrigger value="basic">{t('admin.lot_form.tabs.basic')}</TabsTrigger>
           <TabsTrigger value="media">{t('admin.lot_form.tabs.media')}</TabsTrigger>
