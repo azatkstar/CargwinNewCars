@@ -2748,6 +2748,96 @@ async def bulk_prescoring(
                     )
                     
                     results.append({"app_id": app_id, "success": True})
+
+
+# ============================================
+# Referral Tracking System
+# ============================================
+
+@api_router.post("/referrals/track")
+async def track_referral(
+    referrer_code: str,
+    current_user: User = Depends(require_auth)
+):
+    """Track referral when new user signs up"""
+    try:
+        from database import get_database
+        db = get_database()
+        
+        # Decode referrer user ID
+        import base64
+        try:
+            referrer_id = base64.b64decode(referrer_code).decode('utf-8')
+        except:
+            raise HTTPException(status_code=400, detail="Invalid referral code")
+        
+        # Check if referrer exists
+        referrer = await db.users.find_one({"_id": referrer_id})
+        if not referrer:
+            raise HTTPException(status_code=404, detail="Referrer not found")
+        
+        # Create referral record
+        referral_data = {
+            "referrer_id": referrer_id,
+            "referred_id": current_user.id,
+            "referred_email": current_user.email,
+            "status": "pending",  # pending, qualified, paid
+            "reward_amount": 200,
+            "created_at": datetime.now(timezone.utc)
+        }
+        
+        await db.referrals.insert_one(referral_data)
+        
+        logger.info(f"Referral tracked: {referrer_id} referred {current_user.id}")
+        
+        return {
+            "ok": True,
+            "message": "Referral tracked",
+            "reward": "$200 when referred user completes first lease"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Track referral error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to track referral")
+
+@api_router.get("/referrals/my-stats")
+async def get_referral_stats(
+    current_user: User = Depends(require_auth)
+):
+    """Get user's referral statistics"""
+    try:
+        from database import get_database
+        db = get_database()
+        
+        # Get all referrals by this user
+        referrals = await db.referrals.find({"referrer_id": current_user.id}).to_list(length=100)
+        
+        stats = {
+            "total_referrals": len(referrals),
+            "pending": len([r for r in referrals if r['status'] == 'pending']),
+            "qualified": len([r for r in referrals if r['status'] == 'qualified']),
+            "paid": len([r for r in referrals if r['status'] == 'paid']),
+            "total_earned": len([r for r in referrals if r['status'] == 'paid']) * 200,
+            "pending_earnings": len([r for r in referrals if r['status'] == 'qualified']) * 200,
+            "referrals": [
+                {
+                    "email": r.get('referred_email'),
+                    "status": r.get('status'),
+                    "date": r.get('created_at'),
+                    "reward": r.get('reward_amount')
+                }
+                for r in referrals
+            ]
+        }
+        
+        return stats
+        
+    except Exception as e:
+        logger.error(f"Get referral stats error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get stats")
+
             except Exception as e:
                 results.append({"app_id": app_id, "success": False, "error": str(e)})
         
