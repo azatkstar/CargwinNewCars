@@ -2857,26 +2857,6 @@ async def get_referral_stats(
         logger.error(f"Get referral stats error: {e}")
         raise HTTPException(status_code=500, detail="Failed to get stats")
 
-            except Exception as e:
-                results.append({"app_id": app_id, "success": False, "error": str(e)})
-        
-        success_count = sum(1 for r in results if r['success'])
-        
-        logger.info(f"Bulk prescoring: {success_count}/{len(application_ids)} completed")
-        
-        return {
-            "ok": True,
-            "total": len(application_ids),
-            "success": success_count,
-            "results": results
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Export error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to export")
-
 
 @api_router.post("/applications/{app_id}/invite-cosigner")
 async def invite_cosigner(
