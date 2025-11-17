@@ -197,10 +197,167 @@ MODEL_TEMPLATES = {
         "fuel_type": "Gas/Hybrid/Plugin",
         "standard_options": ["AWD", "Panoramic Sunroof", "Drive Wise Safety"],
         "image_url": "https://www.kia.com/us/en/sportage"
-    }
+    },
     
-    # NOTE: Добавлю остальные бренды (Ford, Mazda, Nissan, Subaru, VW) в следующей итерации
-    # Это базовые шаблоны для начала
+    # FORD
+    "Ford F-150": {
+        "msrp_range": [38000, 72000],
+        "residual_24mo": 63, "residual_36mo": 56, "residual_39mo": 54, "residual_48mo": 49,
+        "money_factor_base": 0.00192,
+        "acquisition_fee": 695,
+        "trims": ["XL", "STX", "XLT", "Lariat", "King Ranch", "Platinum", "Limited"],
+        "fuel_type": "Gas/Hybrid/Electric",
+        "standard_options": ["4WD", "Tow Package", "SYNC 4"],
+        "image_url": "https://www.ford.com/trucks/f150"
+    },
+    "Ford Mustang": {
+        "msrp_range": [30000, 52000],
+        "residual_24mo": 58, "residual_36mo": 51, "residual_39mo": 49, "residual_48mo": 44,
+        "money_factor_base": 0.00207,
+        "acquisition_fee": 695,
+        "trims": ["EcoBoost", "EcoBoost Premium", "GT", "GT Premium", "Mach 1"],
+        "fuel_type": "Gas",
+        "standard_options": ["RWD", "Performance Pkg", "Premium Audio"],
+        "image_url": "https://www.ford.com/cars/mustang"
+    },
+    "Ford Explorer": {
+        "msrp_range": [38000, 58000],
+        "residual_24mo": 59, "residual_36mo": 52, "residual_39mo": 50, "residual_48mo": 45,
+        "money_factor_base": 0.00197,
+        "acquisition_fee": 695,
+        "trims": ["Base", "XLT", "Limited", "ST", "Platinum"],
+        "fuel_type": "Gas/Hybrid",
+        "standard_options": ["3-Row", "4WD", "Co-Pilot360"],
+        "image_url": "https://www.ford.com/suvs/explorer"
+    },
+    
+    # MAZDA
+    "Mazda CX-5": {
+        "msrp_range": [28000, 40000],
+        "residual_24mo": 60, "residual_36mo": 53, "residual_39mo": 51, "residual_48mo": 46,
+        "money_factor_base": 0.00187,
+        "acquisition_fee": 650,
+        "trims": ["2.5 S", "2.5 S Select", "2.5 S Preferred", "2.5 S Premium", "2.5 Turbo"],
+        "fuel_type": "Gas",
+        "standard_options": ["AWD Available", "i-Activsense", "Mazda Connect"],
+        "image_url": "https://www.mazdausa.com/vehicles/cx-5"
+    },
+    "Mazda3": {
+        "msrp_range": [24000, 32000],
+        "residual_24mo": 59, "residual_36mo": 52, "residual_39mo": 50, "residual_48mo": 45,
+        "money_factor_base": 0.00177,
+        "acquisition_fee": 650,
+        "trims": ["2.5 S", "2.5 S Select", "2.5 S Preferred", "2.5 Turbo"],
+        "fuel_type": "Gas",
+        "standard_options": ["i-Activsense", "Apple CarPlay", "Premium Audio"],
+        "image_url": "https://www.mazdausa.com/vehicles/mazda3-sedan"
+    },
+    "Mazda CX-90": {
+        "msrp_range": [42000, 58000],
+        "residual_24mo": 58, "residual_36mo": 51, "residual_39mo": 49, "residual_48mo": 44,
+        "money_factor_base": 0.00197,
+        "acquisition_fee": 650,
+        "trims": ["3.3 Turbo", "3.3 Turbo S", "e-Skyactiv PHEV"],
+        "fuel_type": "Gas/Plugin Hybrid",
+        "standard_options": ["3-Row", "AWD", "i-Activsense"],
+        "image_url": "https://www.mazdausa.com/vehicles/cx-90"
+    },
+    
+    # NISSAN
+    "Nissan Altima": {
+        "msrp_range": [26000, 35000],
+        "residual_24mo": 59, "residual_36mo": 52, "residual_39mo": 50, "residual_48mo": 45,
+        "money_factor_base": 0.00177,
+        "acquisition_fee": 695,
+        "trims": ["S", "SV", "SR", "SL", "Platinum"],
+        "fuel_type": "Gas",
+        "standard_options": ["Nissan Safety Shield 360", "ProPILOT Assist", "Zero Gravity Seats"],
+        "image_url": "https://www.nissanusa.com/vehicles/sedans/altima"
+    },
+    "Nissan Rogue": {
+        "msrp_range": [29000, 40000],
+        "residual_24mo": 60, "residual_36mo": 53, "residual_39mo": 51, "residual_48mo": 46,
+        "money_factor_base": 0.00187,
+        "acquisition_fee": 695,
+        "trims": ["S", "SV", "SL", "Platinum"],
+        "fuel_type": "Gas",
+        "standard_options": ["AWD", "ProPILOT Assist", "Nissan Connect"],
+        "image_url": "https://www.nissanusa.com/vehicles/crossovers-suvs/rogue"
+    },
+    "Nissan Ariya": {
+        "msrp_range": [40000, 58000],
+        "residual_24mo": 55, "residual_36mo": 48, "residual_39mo": 46, "residual_48mo": 41,
+        "money_factor_base": 0.00207,
+        "acquisition_fee": 695,
+        "trims": ["Engage", "Venture+", "Evolve+", "Empower+", "Platinum+"],
+        "fuel_type": "Electric",
+        "standard_options": ["AWD Available", "ProPILOT Assist 2.0", "e-4ORCE"],
+        "image_url": "https://www.nissanusa.com/vehicles/electric-cars/ariya"
+    },
+    
+    # SUBARU
+    "Subaru Outback": {
+        "msrp_range": [29000, 42000],
+        "residual_24mo": 61, "residual_36mo": 54, "residual_39mo": 52, "residual_48mo": 47,
+        "money_factor_base": 0.00187,
+        "acquisition_fee": 650,
+        "trims": ["Base", "Premium", "Onyx Edition", "Limited", "Touring", "Wilderness"],
+        "fuel_type": "Gas",
+        "standard_options": ["AWD Standard", "EyeSight", "Boxer Engine"],
+        "image_url": "https://www.subaru.com/vehicles/outback"
+    },
+    "Subaru Forester": {
+        "msrp_range": [28000, 38000],
+        "residual_24mo": 60, "residual_36mo": 53, "residual_39mo": 51, "residual_48mo": 46,
+        "money_factor_base": 0.00182,
+        "acquisition_fee": 650,
+        "trims": ["Base", "Premium", "Sport", "Limited", "Touring"],
+        "fuel_type": "Gas",
+        "standard_options": ["AWD Standard", "EyeSight", "X-Mode"],
+        "image_url": "https://www.subaru.com/vehicles/forester"
+    },
+    "Subaru Crosstrek": {
+        "msrp_range": [25000, 35000],
+        "residual_24mo": 61, "residual_36mo": 54, "residual_39mo": 52, "residual_48mo": 47,
+        "money_factor_base": 0.00177,
+        "acquisition_fee": 650,
+        "trims": ["Base", "Premium", "Sport", "Limited"],
+        "fuel_type": "Gas/Hybrid",
+        "standard_options": ["AWD Standard", "EyeSight", "Ground Clearance 8.7in"],
+        "image_url": "https://www.subaru.com/vehicles/crosstrek"
+    },
+    
+    # VOLKSWAGEN
+    "Volkswagen Jetta": {
+        "msrp_range": [22000, 32000],
+        "residual_24mo": 59, "residual_36mo": 52, "residual_39mo": 50, "residual_48mo": 45,
+        "money_factor_base": 0.00182,
+        "acquisition_fee": 675,
+        "trims": ["S", "SE", "SEL", "SEL Premium"],
+        "fuel_type": "Gas",
+        "standard_options": ["IQ.Drive", "App-Connect", "LED Headlights"],
+        "image_url": "https://www.vw.com/en/models/jetta"
+    },
+    "Volkswagen Tiguan": {
+        "msrp_range": [28000, 40000],
+        "residual_24mo": 58, "residual_36mo": 51, "residual_39mo": 49, "residual_48mo": 44,
+        "money_factor_base": 0.00192,
+        "acquisition_fee": 675,
+        "trims": ["S", "SE", "SEL", "SEL Premium R-Line"],
+        "fuel_type": "Gas",
+        "standard_options": ["3-Row Available", "4MOTION AWD", "IQ.Drive"],
+        "image_url": "https://www.vw.com/en/models/tiguan"
+    },
+    "Volkswagen ID.4": {
+        "msrp_range": [40000, 52000],
+        "residual_24mo": 54, "residual_36mo": 47, "residual_39mo": 45, "residual_48mo": 40,
+        "money_factor_base": 0.00207,
+        "acquisition_fee": 675,
+        "trims": ["Standard", "Pro", "Pro S", "Pro S Plus"],
+        "fuel_type": "Electric",
+        "standard_options": ["AWD Available", "IQ.Light", "ID.Cockpit"],
+        "image_url": "https://www.vw.com/en/models/id-4"
+    }
 }
 
 # Function to get template
