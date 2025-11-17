@@ -239,6 +239,13 @@ const CarDetail = () => {
       {/* Car Gallery */}
       <CarGallery images={carData.gallery} title={carData.title} />
       
+      {/* Video Gallery - if videos available */}
+      {carData.videos && carData.videos.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <VideoGallery videos={carData.videos} />
+        </div>
+      )}
+      
       {/* Main Content Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
