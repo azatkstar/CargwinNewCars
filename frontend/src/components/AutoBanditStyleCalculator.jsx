@@ -158,6 +158,22 @@ const AutoBanditStyleCalculator = ({ car }) => {
 
         {/* Controls */}
         <div className="space-y-4">
+          {/* Zip Code */}
+          <div>
+            <div className="flex justify-between text-sm mb-2">
+              <span className="font-medium">YOUR ZIP CODE</span>
+              <span className="text-xs text-gray-500">Tax: {taxRate}%</span>
+            </div>
+            <input
+              type="text"
+              maxLength="5"
+              placeholder="90210"
+              value={params.zipCode}
+              onChange={(e) => setParams({...params, zipCode: e.target.value})}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          
           {/* Term Length */}
           <div>
             <div className="flex justify-between text-sm mb-2">
