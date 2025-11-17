@@ -357,6 +357,114 @@ MODEL_TEMPLATES = {
         "fuel_type": "Electric",
         "standard_options": ["AWD Available", "IQ.Light", "ID.Cockpit"],
         "image_url": "https://www.vw.com/en/models/id-4"
+    },
+    
+    # HONDA
+    "Honda Accord": {
+        "msrp_range": [28000, 38000],
+        "residual_24mo": 61, "residual_36mo": 54, "residual_39mo": 52, "residual_48mo": 47,
+        "money_factor_base": 0.00182,
+        "acquisition_fee": 650,
+        "trims": ["LX", "Sport", "EX", "EX-L", "Sport L", "Touring"],
+        "fuel_type": "Gas/Hybrid",
+        "standard_options": ["Honda Sensing", "Apple CarPlay", "LED Headlights"],
+        "image_url": "https://automobiles.honda.com/accord"
+    },
+    "Honda CR-V": {
+        "msrp_range": [32000, 42000],
+        "residual_24mo": 62, "residual_36mo": 55, "residual_39mo": 53, "residual_48mo": 48,
+        "money_factor_base": 0.00187,
+        "acquisition_fee": 650,
+        "trims": ["LX", "EX", "EX-L", "Sport", "Sport Touring"],
+        "fuel_type": "Gas/Hybrid",
+        "standard_options": ["AWD", "Honda Sensing", "Hands-Free Liftgate"],
+        "image_url": "https://automobiles.honda.com/cr-v"
+    },
+    "Honda Pilot": {
+        "msrp_range": [40000, 53000],
+        "residual_24mo": 61, "residual_36mo": 54, "residual_39mo": 52, "residual_48mo": 47,
+        "money_factor_base": 0.00192,
+        "acquisition_fee": 650,
+        "trims": ["Sport", "EX-L", "TrailSport", "Elite"],
+        "fuel_type": "Gas",
+        "standard_options": ["3-Row", "AWD", "Honda Sensing"],
+        "image_url": "https://automobiles.honda.com/pilot"
+    },
+    "Honda Civic": {
+        "msrp_range": [24000, 32000],
+        "residual_24mo": 60, "residual_36mo": 53, "residual_39mo": 51, "residual_48mo": 46,
+        "money_factor_base": 0.00177,
+        "acquisition_fee": 650,
+        "trims": ["LX", "Sport", "EX", "Touring"],
+        "fuel_type": "Gas",
+        "standard_options": ["Honda Sensing", "Sport Mode", "Turbo Engine"],
+        "image_url": "https://automobiles.honda.com/civic-sedan"
+    },
+    
+    # AUDI
+    "Audi A4": {
+        "msrp_range": [42000, 52000],
+        "residual_24mo": 58, "residual_36mo": 51, "residual_39mo": 49, "residual_48mo": 44,
+        "money_factor_base": 0.00227,
+        "acquisition_fee": 895,
+        "trims": ["Premium", "Premium Plus", "Prestige"],
+        "fuel_type": "Gas",
+        "standard_options": ["Quattro AWD", "Virtual Cockpit", "MMI"],
+        "image_url": "https://www.audiusa.com/us/web/en/models/a4/a4-sedan"
+    },
+    "Audi Q5": {
+        "msrp_range": [46000, 58000],
+        "residual_24mo": 57, "residual_36mo": 50, "residual_39mo": 48, "residual_48mo": 43,
+        "money_factor_base": 0.00232,
+        "acquisition_fee": 895,
+        "trims": ["Premium", "Premium Plus", "Prestige", "S line"],
+        "fuel_type": "Gas/Hybrid",
+        "standard_options": ["Quattro AWD", "Virtual Cockpit Plus", "Bang & Olufsen"],
+        "image_url": "https://www.audiusa.com/us/web/en/models/q5/q5"
+    },
+    
+    # ACURA
+    "Acura TLX": {
+        "msrp_range": [42000, 54000],
+        "residual_24mo": 58, "residual_36mo": 51, "residual_39mo": 49, "residual_48mo": 44,
+        "money_factor_base": 0.00197,
+        "acquisition_fee": 695,
+        "trims": ["Base", "Technology", "A-Spec", "Advance"],
+        "fuel_type": "Gas",
+        "standard_options": ["AcuraWatch", "SH-AWD Available", "ELS Studio Audio"],
+        "image_url": "https://www.acura.com/tlx"
+    },
+    "Acura MDX": {
+        "msrp_range": [50000, 65000],
+        "residual_24mo": 59, "residual_36mo": 52, "residual_39mo": 50, "residual_48mo": 45,
+        "money_factor_base": 0.00207,
+        "acquisition_fee": 695,
+        "trims": ["Base", "Technology", "A-Spec", "Advance", "Type S"],
+        "fuel_type": "Gas",
+        "standard_options": ["3-Row", "SH-AWD", "AcuraWatch"],
+        "image_url": "https://www.acura.com/mdx"
+    },
+    
+    # INFINITI
+    "Infiniti Q50": {
+        "msrp_range": [42000, 55000],
+        "residual_24mo": 56, "residual_36mo": 49, "residual_39mo": 47, "residual_48mo": 42,
+        "money_factor_base": 0.00212,
+        "acquisition_fee": 750,
+        "trims": ["Pure", "Luxe", "Sensory", "Red Sport 400"],
+        "fuel_type": "Gas",
+        "standard_options": ["ProPILOT Assist", "Bose Audio", "Twin Turbo Available"],
+        "image_url": "https://www.infinitiusa.com/vehicles/sedans/q50"
+    },
+    "Infiniti QX60": {
+        "msrp_range": [48000, 62000],
+        "residual_24mo": 57, "residual_36mo": 50, "residual_39mo": 48, "residual_48mo": 43,
+        "money_factor_base": 0.00217,
+        "acquisition_fee": 750,
+        "trims": ["Pure", "Luxe", "Sensory", "Autograph"],
+        "fuel_type": "Gas",
+        "standard_options": ["3-Row", "AWD", "ProPILOT Assist"],
+        "image_url": "https://www.infinitiusa.com/vehicles/crossovers-suvs/qx60"
     }
 }
 
