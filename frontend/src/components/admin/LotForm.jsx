@@ -159,6 +159,38 @@ const LotForm = () => {
     }
   };
 
+
+
+  const handleTemplateSelect = (make, model, templateData) => {
+    // Auto-fill form with template data
+    setLot({
+      ...lot,
+      make,
+      model,
+      year: 2026, // Default to 2026
+      trim: templateData.trims[0] || '',
+      msrp: templateData.msrp_range[0],
+      discount: 0,
+      dealer_addons: 5000,
+      images: [{ url: templateData.image_url, alt: `${make} ${model}` }],
+      lease: {
+        monthly: 0, // Will calculate
+        dueAtSigning: 1580,
+        termMonths: 36,
+        milesPerYear: 10000,
+        incentives: 0
+      },
+      finance: {
+        apr: templateData.money_factor_base * 2400, // MF to APR
+        termMonths: 60,
+        downPayment: 3000
+      }
+    });
+    
+    alert(`Template loaded: ${make} ${model}\nMSRP: $${templateData.msrp_range[0].toLocaleString()}\nTrims: ${templateData.trims.join(', ')}`);
+    setActiveTab('basic');
+  };
+
   const validateLot = () => {
     const newErrors = {};
 
