@@ -222,6 +222,75 @@ const AnalyticsDashboard = () => {
             <p className="text-xs text-gray-500 mt-1">
               {((analytics.rejected / analytics.total) * 100).toFixed(0)}% of total
             </p>
+
+
+      {/* Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        {/* Pie Chart - Status Distribution */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Application Status Distribution</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={[
+                    { name: 'Pending', value: analytics.pending, color: '#f59e0b' },
+                    { name: 'Approved', value: analytics.approved, color: '#10b981' },
+                    { name: 'Rejected', value: analytics.rejected, color: '#ef4444' }
+                  ]}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={(entry) => `${entry.name}: ${entry.value}`}
+                  outerRadius={100}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {[
+                    { name: 'Pending', value: analytics.pending, color: '#f59e0b' },
+                    { name: 'Approved', value: analytics.approved, color: '#10b981' },
+                    { name: 'Rejected', value: analytics.rejected, color: '#ef4444' }
+                  ].map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        {/* Bar Chart - Credit Tiers */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Applications by Credit Tier</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={[
+                  { tier: 'Tier 1 (740+)', applications: analytics.tier1, approvalRate: analytics.tier1Rate },
+                  { tier: 'Tier 2 (680-739)', applications: analytics.tier2, approvalRate: analytics.tier2Rate },
+                  { tier: 'Tier 3 (640-679)', applications: analytics.tier3, approvalRate: analytics.tier3Rate }
+                ]}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="tier" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="applications" stroke="#3b82f6" strokeWidth={2} />
+                <Line type="monotone" dataKey="approvalRate" stroke="#10b981" strokeWidth={2} />
+              </LineChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
           </CardContent>
         </Card>
       </div>
