@@ -233,7 +233,10 @@ const ProfileForm = () => {
                       max="850"
                       required
                     />
-                    <p className="text-xs text-gray-500">Range: 300-850</p>
+                    <p className="text-xs text-blue-600">
+                      💡 Why we ask: Determines your interest rate and approval probability. 
+                      We do soft check only - won't hurt your score.
+                    </p>
                   </div>
 
                   <div className="space-y-2">
