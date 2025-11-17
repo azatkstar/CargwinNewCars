@@ -291,8 +291,8 @@ const AnalyticsDashboard = () => {
     </div>
   );
 };
-          </CardContent>
-        </Card>
+
+export default AnalyticsDashboard;
       </div>
     </div>
   );
