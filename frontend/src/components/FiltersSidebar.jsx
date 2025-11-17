@@ -92,19 +92,36 @@ const FiltersSidebar = ({ onFilterChange, onClear }) => {
         {/* Monthly Budget */}
         <div>
           <label className="text-sm font-medium mb-2 block">
-            Monthly Budget: ${filters.budgetMin} - ${filters.budgetMax}
+            Monthly Budget
           </label>
-          <div className="px-2">
-            <Slider
-              min={0}
-              max={2000}
-              step={50}
-              value={[filters.budgetMin, filters.budgetMax]}
-              onValueChange={([min, max]) => {
-                handleChange('budgetMin', min);
-                handleChange('budgetMax', max);
-              }}
-            />
+          <div className="space-y-3">
+            <div>
+              <label className="text-xs text-gray-600">Min: ${filters.budgetMin}</label>
+              <input
+                type="range"
+                min="0"
+                max="2000"
+                step="50"
+                value={filters.budgetMin}
+                onChange={(e) => handleChange('budgetMin', parseInt(e.target.value))}
+                className="w-full"
+              />
+            </div>
+            <div>
+              <label className="text-xs text-gray-600">Max: ${filters.budgetMax}</label>
+              <input
+                type="range"
+                min="0"
+                max="2000"
+                step="50"
+                value={filters.budgetMax}
+                onChange={(e) => handleChange('budgetMax', parseInt(e.target.value))}
+                className="w-full"
+              />
+            </div>
+            <p className="text-xs text-gray-500">
+              ${filters.budgetMin} - ${filters.budgetMax}/month
+            </p>
           </div>
         </div>
 
