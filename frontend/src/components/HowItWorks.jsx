@@ -9,34 +9,34 @@ const HowItWorks = () => {
     {
       id: 1,
       icon: Search,
-      title: t('how_it_works.step1_title'),
-      description: t('how_it_works.step1_description'),
+      title: "Find Your Deal",
+      description: "Browse real dump offers from LA dealers",
       details: [
-        t('how_it_works.step1_detail1'),
-        t('how_it_works.step1_detail2'),
-        t('how_it_works.step1_detail3')
+        "See actual monthly payment for YOUR credit score",
+        "All taxes and fees included - no surprises",
+        "Offers update monthly with fresh inventory"
       ]
     },
     {
       id: 2,
       icon: Lock,
-      title: t('how_it_works.step2_title'),
-      description: t('how_it_works.step2_description'),
+      title: "Book It",
+      description: "Reserve in minutes, soft check only",
       details: [
-        t('how_it_works.step2_detail1'),
-        t('how_it_works.step2_detail2'),
-        t('how_it_works.step2_detail3')
+        "Soft credit check - won't hurt your score",
+        "We verify the deal with the dealer",
+        "You get final offer within 24 hours"
       ]
     },
     {
       id: 3,
       icon: Car,
-      title: t('how_it_works.step3_title'),
-      description: t('how_it_works.step3_description'),
+      title: "Pick Up",
+      description: "Sign online, drive home in 0-2 days",
       details: [
-        t('how_it_works.step3_detail1'),
-        t('how_it_works.step3_detail2'),
-        t('how_it_works.step3_detail3')
+        "E-sign your contract online",
+        "Free delivery to your home or office",
+        "No dealer visits until you pick up your car"
       ]
     }
   ];
