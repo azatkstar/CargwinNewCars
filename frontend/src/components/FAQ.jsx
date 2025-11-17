@@ -23,58 +23,7 @@ const FAQ = () => {
         {/* FAQ Accordion */}
         <div className="mb-12">
           <Accordion type="single" collapsible className="space-y-4">
-  const faqs = [
-    {
-      id: 1,
-      question: "What exactly is a 'dump offer'?",
-      answer: "A dump offer is when a dealer needs to clear inventory fast - end of month, overstocked models, or last year's cars. Instead of keeping them on the lot, they sell to us at cost or below. We pass those savings directly to you. That's why you see $5K-$15K off MSRP."
-    },
-    {
-      id: 2,
-      question: "Is this rate real or will it change when I apply?",
-      answer: "The monthly payment you see is REAL for the credit tier shown (usually 720+). If your actual credit score is different, your rate will adjust - higher score = better rate, lower score = higher rate. We show you the final number within 24 hours after soft check."
-    },
-    {
-      id: 3,
-      question: "Will checking my credit hurt my score?",
-      answer: "No. We do a soft pull first (no score impact). Only if you approve the final deal and move forward, the dealer does a hard pull. You control when that happens."
-    },
-    {
-      id: 4,
-      question: "What happens after I book an offer?",
-      answer: "Within 24 hours: (1) We run soft credit check, (2) Verify deal with dealer, (3) Send you final offer with exact monthly payment for YOUR credit score, (4) If you approve, dealer does hard pull, (5) E-sign contract online, (6) Schedule pickup (0-2 days)."
-    },
-    {
-      id: 5,
-      question: "Can I cancel after booking?",
-      answer: "Yes, anytime before you e-sign the final contract. Your $97.49 deposit is fully refundable if you change your mind or if the dealer can't honor the deal."
-    },
-    {
-      id: 6,
-      question: "What if my credit score is lower than Tier 1?",
-      answer: "You can still qualify! Lower scores (680-719, 640-679) usually mean a slightly higher rate and maybe more down payment. We'll show you what's available for YOUR score. Sometimes we can suggest alternative cars that are easier to approve."
-    },
-    {
-      id: 7,
-      question: "Are there hidden fees?",
-      answer: "No. The price breakdown shows: MSRP, dealer discount, your price, taxes, DMV fees, doc fees. Everything is disclosed upfront. California requires full transparency - we follow that strictly."
-    },
-    {
-      id: 8,
-      question: "Who is my lease with - you or the dealer?",
-      answer: "Your lease is with the manufacturer's finance company (Lexus Financial, Toyota Financial, etc.). The dealer is the seller. hunter.lease is just the platform that found you the deal. You're not locked to us - it's a normal factory lease."
-    },
-    {
-      id: 9,
-      question: "Do I have to pick up at a specific dealer?",
-      answer: "The car comes from a specific dealer initially, but you can service it at ANY authorized dealer for that brand. Your warranty and prepaid maintenance (if included) work nationwide."
-    },
-    {
-      id: 10,
-      question: "What if the offer expires while I'm deciding?",
-      answer: "Dump offers are time-sensitive. If you see it and want it, book it - the $97.49 deposit holds it for 48 hours. If it sells to someone else while you're thinking, it's gone. That's the nature of dump pricing."
-    }
-  ];
+            {mockFAQ.map((faq) => (
               <AccordionItem 
                 key={faq.id} 
                 value={faq.id.toString()}
