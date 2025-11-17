@@ -2678,6 +2678,8 @@ async def bulk_prescoring(
     except HTTPException:
         raise
     except Exception as e:
+        logger.error(f"Export error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to export")
 
 
 @api_router.post("/applications/{app_id}/invite-cosigner")
