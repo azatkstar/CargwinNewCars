@@ -47,10 +47,10 @@ const HowItWorks = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('how_it_works.title')}
+            How hunter.lease Works
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {t('how_it_works.subtitle')}
+            Three simple steps. No dealer games. Just real dump pricing on new cars.
           </p>
         </div>
 
