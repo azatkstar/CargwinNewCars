@@ -1596,50 +1596,6 @@ async def batch_lot_action(
             except:
                 object_ids.append(lot_id)
 
-
-@api_router.get("/tax-rate/{zip_code}")
-async def get_tax_rate_by_zip(zip_code: str):
-    """Get tax rate for specific California zip code"""
-    try:
-        # California zip code tax rates (major LA areas)
-        zip_tax_rates = {
-            "90210": 9.5,   # Beverly Hills
-            "90001": 9.5,   # Downtown LA
-            "90012": 9.5,   # Chinatown
-            "91801": 9.5,   # Alhambra
-            "92606": 7.75,  # Irvine
-            "92602": 7.75,  # Irvine
-            "92614": 7.75,  # Irvine
-            "90015": 9.5,   # LA
-            "90028": 9.5,   # Hollywood
-            "91402": 9.5,   # Panorama City
-            "90024": 9.5,   # Westwood
-            "90245": 9.5,   # El Segundo
-            "90802": 9.5,   # Long Beach
-            "92101": 7.75,  # San Diego
-            "94102": 8.625, # San Francisco
-        }
-        
-        rate = zip_tax_rates.get(zip_code, 7.75)  # Default CA rate
-        
-        return {
-            "zip_code": zip_code,
-            "tax_rate": rate,
-            "location": "California",
-            "note": "Rate includes state + local taxes"
-        }
-        
-    except Exception as e:
-        logger.error(f"Zip tax lookup error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to lookup tax rate")
-
-            try:
-                if len(lot_id) == 24 and all(c in '0123456789abcdef' for c in lot_id.lower()):
-                    object_ids.append(ObjectId(lot_id))
-                else:
-                    object_ids.append(lot_id)
-            except:
-                object_ids.append(lot_id)
         
         # Perform action
         update_data = {}
