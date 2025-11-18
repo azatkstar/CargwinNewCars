@@ -2878,6 +2878,19 @@ async def get_referral_stats(
             "referrals": [
                 {
                     "email": r.get('referred_email'),
+                    "status": r.get('status'),
+                    "date": r.get('created_at'),
+                    "reward": r.get('reward_amount')
+                }
+                for r in referrals
+            ]
+        }
+        
+        return stats
+        
+    except Exception as e:
+        logger.error(f"Get referral stats error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get stats")
 
 
 @api_router.get("/recent-activity")
