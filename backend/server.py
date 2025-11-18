@@ -2957,20 +2957,6 @@ async def get_recent_activity():
         logger.error(f"Get recent activity error: {e}")
         return {"ok": True, "activities": [], "count": 0}  # Return empty on error
 
-                    "status": r.get('status'),
-                    "date": r.get('created_at'),
-                    "reward": r.get('reward_amount')
-                }
-                for r in referrals
-            ]
-        }
-        
-        return stats
-        
-    except Exception as e:
-        logger.error(f"Get referral stats error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to get stats")
-
 
 @api_router.post("/applications/{app_id}/invite-cosigner")
 async def invite_cosigner(
