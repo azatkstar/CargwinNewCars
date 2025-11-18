@@ -8,6 +8,7 @@ import { Upload, X, Star, Image as ImageIcon } from 'lucide-react';
 const MediaUploader = ({ images = [], onChange, error }) => {
   const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');  // Local error state for upload feedback
 
   const handleDrag = useCallback((e) => {
     e.preventDefault();
