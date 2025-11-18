@@ -194,26 +194,53 @@ const LotForm = () => {
   const validateLot = () => {
     const newErrors = {};
 
-    if (!lot.make) newErrors.make = t('admin.validation.make_required');
-    if (!lot.model) newErrors.model = t('admin.validation.model_required');
+    // Basic fields
+    if (!lot.make) newErrors.make = 'Make is required';
+    if (!lot.model) newErrors.model = 'Model is required';
     if (lot.year < 2015 || lot.year > new Date().getFullYear() + 1) {
-      newErrors.year = t('admin.validation.year_range') + (new Date().getFullYear() + 1);
+      newErrors.year = `Year must be between 2015 and ${new Date().getFullYear() + 1}`;
     }
-    if (!lot.trim) newErrors.trim = t('admin.validation.trim_required');
-    if (lot.msrp < 1000) newErrors.msrp = t('admin.validation.msrp_minimum');
-    if (lot.discount < 0) newErrors.discount = t('admin.validation.discount_negative');
-    if (lot.discount > lot.msrp) newErrors.discount = t('admin.validation.discount_exceeds');
-    if (lot.description.length < 140) newErrors.description = t('admin.validation.description_minimum');
-    if (lot.images.length === 0) newErrors.images = t('admin.validation.images_required');
-    if (lot.vin && lot.vin.length !== 17) newErrors.vin = t('admin.validation.vin_length');
+    if (!lot.trim) newErrors.trim = 'Trim is required';
+    if (lot.msrp < 1000) newErrors.msrp = 'MSRP must be at least $1,000';
+    if (lot.discount < 0) newErrors.discount = 'Discount cannot be negative';
+    if (lot.discount > lot.msrp) newErrors.discount = 'Discount cannot exceed MSRP';
+    
+    // Description - должно быть минимум 50 символов
+    if (!lot.description || lot.description.length < 50) {
+      newErrors.description = 'Description must be at least 50 characters';
+    }
+    // Проверка что description не является URL
+    if (lot.description && lot.description.startsWith('http')) {
+      newErrors.description = 'Description cannot be a URL. Please write a proper description.';
+    }
+    
+    // Images validation (критично!)
+    if (!lot.images || lot.images.length === 0) {
+      newErrors.images = 'At least one image is required';
+    } else {
+      // Validate alt text for each image
+      const imagesWithoutAlt = lot.images.filter(img => !img.alt || img.alt.trim() === '');
+      if (imagesWithoutAlt.length > 0) {
+        newErrors.images = `${imagesWithoutAlt.length} image(s) missing alt text. Please add descriptive alt text for all images.`;
+      }
+    }
+    
+    if (lot.vin && lot.vin.length !== 17) newErrors.vin = 'VIN must be exactly 17 characters';
 
     // FOMO validation
-    if (lot.fomo.mode === 'static') {
-      if (lot.fomo.viewers < 3) newErrors.fomoViewers = t('admin.validation.fomo_viewers_minimum');
-      if (lot.fomo.confirms15 < 3) newErrors.fomoConfirms = t('admin.validation.fomo_confirms_minimum');
+    if (lot.fomo?.mode === 'static') {
+      if (lot.fomo.viewers < 3) newErrors.fomoViewers = 'Minimum 3 viewers required';
+      if (lot.fomo.confirms15 < 3) newErrors.fomoConfirms = 'Minimum 3 confirms required';
     }
 
     setErrors(newErrors);
+    
+    // Show error summary if validation fails
+    if (Object.keys(newErrors).length > 0) {
+      const errorList = Object.entries(newErrors).map(([field, msg]) => `• ${field}: ${msg}`).join('\n');
+      alert(`⚠️ Please fix the following errors:\n\n${errorList}\n\nScroll to highlighted fields and correct them.`);
+    }
+    
     return Object.keys(newErrors).length === 0;
   };
 
