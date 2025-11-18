@@ -6,7 +6,29 @@ import { useI18n } from '../hooks/useI18n';
 
 const Hero = () => {
   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [abVariant, setAbVariant] = useState(null);
   const { t } = useI18n();
+
+  useEffect(() => {
+    // Fetch A/B test variant
+    const userId = localStorage.getItem('user_id') || 'anonymous';
+    fetchABVariant(userId);
+  }, []);
+
+  const fetchABVariant = async (userId) => {
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/ab-test/hero_headline?user_id=${userId}`);
+      const data = await response.json();
+      setAbVariant(data.config);
+    } catch (error) {
+      // Fallback to default
+      setAbVariant({
+        headline: "Real Dealer Dump Offers. No BS.",
+        subheadline: "We hunt down the best lease deals in LA so you don't have to."
+      });
+    }
+  };
 
   useEffect(() => {
     const updateTimer = () => {
