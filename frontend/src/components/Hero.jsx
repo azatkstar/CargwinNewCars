@@ -65,13 +65,12 @@ const Hero = () => {
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            {abVariant ? abVariant.headline : "Real Dealer Dump Offers."}<br />{!abVariant?.headline.includes("No BS") && "No BS."}
+            {abVariant?.headline || "Real Dealer Dump Offers. No BS."}
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            {abVariant ? abVariant.subheadline : "We hunt down the best lease deals in LA so you don't have to."}
-            {" "}Only real offers. Only transparent pricing.
+            {abVariant?.subheadline || "We hunt down the best lease deals in LA so you don't have to. Only real offers. Only transparent pricing."}
           </p>
 
           {/* Why Dealers Work With Us */}
