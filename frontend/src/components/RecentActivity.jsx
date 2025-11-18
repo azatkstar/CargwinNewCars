@@ -118,6 +118,11 @@ const RecentActivity = () => {
                   <span className="text-gray-600">{activity.city}</span> just{' '}
                   <span className="text-green-700 font-medium">{activity.action}</span>{' '}
                   {activity.car}
+                  {activity.isReal && (
+                    <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-semibold">
+                      LIVE
+                    </span>
+                  )}
                 </p>
                 {activity.action === 'picked up' && (
                   <p className="text-xs text-green-600 mt-1">
