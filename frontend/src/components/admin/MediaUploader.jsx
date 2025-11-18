@@ -255,14 +255,23 @@ const MediaUploader = ({ images = [], onChange, error }) => {
                 {/* Image Settings */}
                 <div className="p-4 space-y-4">
                   <div>
-                    <Label htmlFor={`alt-${image.id}`}>Alt текст *</Label>
+                    <Label htmlFor={`alt-${image.id || index}`} className="flex items-center gap-1">
+                      Alt текст <span className="text-red-600">*</span>
+                      {!image.alt && <span className="text-xs text-red-600">(обязательно)</span>}
+                    </Label>
                     <Input
-                      id={`alt-${image.id}`}
-                      value={image.alt}
-                      onChange={(e) => updateImage(image.id, 'alt', e.target.value)}
-                      placeholder="Описание изображения для SEO"
-                      className="mt-1"
+                      id={`alt-${image.id || index}`}
+                      value={image.alt || ''}
+                      onChange={(e) => updateImage(image.id || index, 'alt', e.target.value)}
+                      placeholder="Например: 2025 Toyota Camry white exterior"
+                      className={`mt-1 ${!image.alt ? 'border-red-500 border-2' : ''}`}
+                      required
                     />
+                    {!image.alt && (
+                      <p className="text-xs text-red-600 mt-1">
+                        ⚠️ Alt текст обязателен для публикации. Опишите изображение для SEO и accessibility.
+                      </p>
+                    )}
                   </div>
 
                   <div>
