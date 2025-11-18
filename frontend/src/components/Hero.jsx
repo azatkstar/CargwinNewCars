@@ -51,94 +51,193 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-slate-50 to-white py-20 md:py-32 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-grid-slate-100/50 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" />
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-red-100">
-            <MapPin className="w-4 h-4" />
-            Los Angeles & Southern California
-          </div>
+    <section className="relative bg-white overflow-hidden">
+      {/* Hero Grid Layout */}
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[600px]">
+          
+          {/* Left - Content */}
+          <div className="flex flex-col justify-center px-6 py-16 lg:px-12 lg:py-24">
+            {/* Trust Badge */}
+            <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-bold mb-6 w-fit">
+              <MapPin className="w-4 h-4" />
+              California Statewide
+            </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            {abVariant?.headline || "Real Dealer Dump Offers. No BS."}
-          </h1>
+            {/* Heading */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              New Cars.<br />
+              <span className="text-red-600">Fleet Pricing.</span><br />
+              Huge Savings.
+            </h1>
 
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            {abVariant?.subheadline || "We hunt down the best lease deals in LA so you don't have to. Only real offers. Only transparent pricing."}
-          </p>
+            {/* Subheading */}
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+              Get the same low prices big rental and logistics companies pay for their fleets.
+              <strong className="text-gray-900"> No dealer add-ons. No haggling. No BS.</strong>
+            </p>
 
-          {/* Why Dealers Work With Us */}
-          <div className="max-w-4xl mx-auto bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
-            <h3 className="font-bold text-lg text-blue-900 mb-3">
-              Why Dealers Give Us Their Best Prices
-            </h3>
-            <p className="text-gray-700 text-left">
-              Dealers need to move inventory fast - especially end-of-month, overstocked models, and last year's stock.
-              We help them sell quickly to qualified buyers. You get dump pricing. They clear their lot.
-              Everyone wins. <strong>That's why our prices beat regular retail by $5K-$15K.</strong>
+            {/* Key Benefits - Icons */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-green-700" />
+                </div>
+                <div>
+                  <div className="font-bold text-gray-900">$5K - $15K Off</div>
+                  <div className="text-sm text-gray-600">Fleet-level savings</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-blue-700" />
+                </div>
+                <div>
+                  <div className="font-bold text-gray-900">Soft Check Only</div>
+                  <div className="text-sm text-gray-600">No score impact</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-purple-700" />
+                </div>
+                <div>
+                  <div className="font-bold text-gray-900">All Credit Tiers</div>
+                  <div className="text-sm text-gray-600">680+ welcome</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-orange-700" />
+                </div>
+                <div>
+                  <div className="font-bold text-gray-900">CA Statewide</div>
+                  <div className="text-sm text-gray-600">Free delivery</div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                onClick={scrollToOffers}
+                size="lg" 
+                className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
+              >
+                See Current Deals
+              </Button>
+              <Button 
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+                size="lg" 
+                variant="outline"
+                className="border-2 border-gray-900 text-gray-900 px-8 py-6 text-lg font-semibold rounded-xl hover:bg-gray-50"
+              >
+                How It Works
+              </Button>
+            </div>
+
+            {/* Trust Line */}
+            <p className="text-sm text-gray-500 mt-6">
+              ✓ Real fleet pricing • ✓ All fees included • ✓ Updated monthly
             </p>
           </div>
 
-          {/* Key Benefits - Honest & Direct */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-              <div className="text-3xl mb-3">✓</div>
-              <h3 className="font-bold mb-2">Real Prices</h3>
-              <p className="text-sm text-gray-600">
-                No "starting at" games. You see the actual monthly payment with your credit score.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-              <div className="text-3xl mb-3">🔒</div>
-              <h3 className="font-bold mb-2">Your Data Is Safe</h3>
-              <p className="text-sm text-gray-600">
-                Soft check only. We don't share your SSN with dealers until you approve the deal.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-              <div className="text-3xl mb-3">⚡</div>
-              <h3 className="font-bold mb-2">Fast & Easy</h3>
-              <p className="text-sm text-gray-600">
-                Book in minutes. Pick up in 0-2 days. Everything online. No dealer visits until delivery.
-              </p>
+          {/* Right - Visual */}
+          <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8">
+            {/* Car Image - Premium */}
+            <div className="relative">
+              <img 
+                src="https://images.pexels.com/photos/34549770/pexels-photo-34549770.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="New car - fleet pricing available"
+                className="w-full h-auto max-w-2xl drop-shadow-2xl"
+              />
+              
+              {/* Floating Savings Badge */}
+              <div className="absolute -top-4 -right-4 bg-green-600 text-white rounded-2xl shadow-2xl p-6 transform rotate-3">
+                <div className="text-sm font-semibold">Average Savings</div>
+                <div className="text-4xl font-bold">$8,500</div>
+                <div className="text-xs">vs retail pricing</div>
+              </div>
             </div>
           </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              onClick={scrollToOffers}
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-lg"
-            >
-              🔥 See Current Deals
-            </Button>
-            <Button 
-              onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-              size="lg" 
-              variant="outline"
-              className="border-2 border-gray-300 px-8 py-6 text-lg font-semibold rounded-xl"
-            >
-              How It Works
-            </Button>
-          </div>
-          
-          {/* Trust Line */}
-          <p className="text-sm text-gray-500 mt-8">
-            Updated monthly with fresh dealer inventory. Verified offers only.
-          </p>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ChevronDown className="w-6 h-6 text-gray-400" />
+      {/* Instant Understanding Strip - Above the fold */}
+      <div className="bg-gradient-to-r from-green-50 to-blue-50 border-y border-green-200 py-8">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-center text-sm text-gray-600 mb-4 font-medium">
+            Real Savings - Verified Deals
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Example 1 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <div className="font-bold text-gray-900">2025 Toyota Camry</div>
+                  <div className="text-sm text-gray-600">SE Hybrid</div>
+                </div>
+                <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">
+                  -$6,200
+                </div>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600">Retail:</span>
+                <span className="line-through text-gray-400">$35,200</span>
+              </div>
+              <div className="flex justify-between text-sm font-bold">
+                <span>Fleet Price:</span>
+                <span className="text-green-700">$29,000</span>
+              </div>
+            </div>
+
+            {/* Example 2 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <div className="font-bold text-gray-900">2025 Honda CR-V</div>
+                  <div className="text-sm text-gray-600">EX-L AWD</div>
+                </div>
+                <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">
+                  -$8,400
+                </div>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600">Retail:</span>
+                <span className="line-through text-gray-400">$38,400</span>
+              </div>
+              <div className="flex justify-between text-sm font-bold">
+                <span>Fleet Price:</span>
+                <span className="text-green-700">$30,000</span>
+              </div>
+            </div>
+
+            {/* Example 3 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <div className="font-bold text-gray-900">2025 Lexus RX</div>
+                  <div className="text-sm text-gray-600">350 Premium</div>
+                </div>
+                <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">
+                  -$12,800
+                </div>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600">Retail:</span>
+                <span className="line-through text-gray-400">$52,000</span>
+              </div>
+              <div className="flex justify-between text-sm font-bold">
+                <span>Fleet Price:</span>
+                <span className="text-green-700">$39,200</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
