@@ -3155,7 +3155,33 @@ async def update_application_status(
         
         app = await db.applications.find_one({"_id": query_id})
         if app:
-            # Define status messages
+            # Get user
+            user = await db.users.find_one({"_id": app.get('user_id')})
+            
+            # Send email with HTML template
+            if user and status == "approved":
+                # Use HTML template for approved emails
+                import sys
+                sys.path.append('/app/backend')
+                from notifications import send_email
+                
+                template_data = {
+                    'name': user.get('name', 'Customer'),
+                    'car_title': f"{app.get('lot_data', {}).get('year', '')} {app.get('lot_data', {}).get('make', '')} {app.get('lot_data', {}).get('model', '')}",
+                    'monthly': app.get('approval_details', {}).get('monthly_payment', 0),
+                    'due_at_signing': app.get('approval_details', {}).get('down_payment', 0),
+                    'term': app.get('approval_details', {}).get('loan_term', 36)
+                }
+                
+                await send_email(
+                    user.get('email'),
+                    "🎉 You're Approved - hunter.lease",
+                    "",  # body not used when template_type provided
+                    template_type="approved",
+                    template_data=template_data
+                )
+            
+            # Define status messages for notification record
             status_messages = {
                 "contacted": "We've received your application and our team is reviewing it. We'll contact you within 24 hours with next steps.",
                 "approved": "🎉 Congratulations! Your application has been approved. Check your email for contract details and next steps.",
