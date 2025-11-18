@@ -736,7 +736,23 @@ async def create_application(
         
         app_id = await app_repo.create_application(app_data)
         
-        logger.info(f"Application created: {app_id} for user {current_user.email}")
+        # Send application received email
+        import sys
+        sys.path.append('/app/backend')
+        from notifications import send_email
+        
+        await send_email(
+            current_user.email,
+            "Application Received - hunter.lease",
+            "",
+            template_type="application_received",
+            template_data={
+                'name': user_data.get('name', 'Customer'),
+                'car_title': f"{lot.get('year')} {lot.get('make')} {lot.get('model')}"
+            }
+        )
+        
+        logger.info(f"Application created: {app_id} for user {current_user.email}, email sent")
         
         return {"ok": True, "application_id": app_id, "message": "Application submitted successfully"}
         
