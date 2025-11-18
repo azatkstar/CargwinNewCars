@@ -18,6 +18,25 @@ const OfferCard = ({ offer }) => {
   const [showReserveModal, setShowReserveModal] = useState(false);
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const { t } = useI18n();
+  const { socket, connected } = useWebSocket();
+
+  // Subscribe to offer updates via WebSocket
+  useEffect(() => {
+    if (socket && connected && offer.id) {
+      socket.emit('subscribe_to_offer', { offer_id: offer.id });
+      
+      // Listen for FOMO updates
+      socket.on('fomo_update', (data) => {
+        if (data.offer_id === offer.id) {
+          setFomoCounters({ viewers: data.viewers, confirmed: data.confirmed });
+        }
+      });
+      
+      return () => {
+        socket.off('fomo_update');
+      };
+    }
+  }, [socket, connected, offer.id]);
 
   useEffect(() => {
     const updateTimer = () => {
