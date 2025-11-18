@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = localStorage.getItem('access_token');
       if (token) {
-        await axios.post(`${BACKEND_URL}/api/auth/logout`, {}, {
+        await axios.post(`${authBase}/logout`, {}, {
           headers: {
             Authorization: `Bearer ${token}`
           },
