@@ -32,17 +32,23 @@ const MediaUploader = ({ images = [], onChange, error }) => {
 
   const handleFiles = async (files) => {
     setUploading(true);
-    setError('');
+    setUploadError('');  // Clear previous errors
     
     try {
+      console.log('🔵 Starting upload process...', files.length, 'files');
+      
       // Validate files
       const validFiles = Array.from(files).filter(file => {
+        console.log('Validating file:', file.name, file.size, file.type);
+        
         if (file.size > 10 * 1024 * 1024) {
-          setError(`Файл ${file.name} слишком большой (>10MB)`);
+          const msg = `Файл ${file.name} слишком большой (${(file.size / 1024 / 1024).toFixed(1)}MB > 10MB)`;
+          setUploadError(msg);
           return false;
         }
         if (!file.type.startsWith('image/')) {
-          setError(`Файл ${file.name} не является изображением`);
+          const msg = `Файл ${file.name} не является изображением (тип: ${file.type})`;
+          setUploadError(msg);
           return false;
         }
         return true;
@@ -52,52 +58,76 @@ const MediaUploader = ({ images = [], onChange, error }) => {
         throw new Error('Нет валидных файлов для загрузки');
       }
       
+      console.log('✅ Valid files:', validFiles.length);
+      
       const formData = new FormData();
-      validFiles.forEach(file => {
+      validFiles.forEach((file, idx) => {
         formData.append('files', file);
+        console.log(`Added file ${idx}:`, file.name);
       });
 
       // Upload to backend
       const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
       const token = localStorage.getItem('access_token');
       
+      if (!token) {
+        throw new Error('Не авторизованы. Пожалуйста, войдите снова.');
+      }
+      
       // Fix double /api issue
       const endpoint = BACKEND_URL.endsWith('/api')
         ? `${BACKEND_URL}/admin/upload`
         : `${BACKEND_URL}/api/admin/upload`;
       
-      console.log('Uploading to:', endpoint);
+      console.log('🔵 Uploading to:', endpoint);
+      console.log('🔵 FormData entries:', Array.from(formData.entries()).map(([k, v]) => `${k}: ${v.name || v}`));
       
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
+          // Do NOT set Content-Type - browser sets it with boundary
         },
         body: formData
       });
 
+      console.log('📥 Response status:', response.status);
+      
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || `HTTP ${response.status}`);
+        const errorText = await response.text();
+        console.error('Upload failed:', errorText);
+        let errorData;
+        try {
+          errorData = JSON.parse(errorText);
+        } catch {
+          errorData = { detail: errorText };
+        }
+        throw new Error(errorData.detail || `HTTP ${response.status}: ${response.statusText}`);
       }
       
       const uploadedImages = await response.json();
+      console.log('✅ Uploaded images:', uploadedImages);
       
-      // Add uploaded images to existing ones
-      const newImages = uploadedImages.map(img => ({
+      // Add uploaded images to existing ones with generated IDs
+      const newImages = uploadedImages.map((img, idx) => ({
+        id: img.id || `img_${Date.now()}_${idx}`,
         url: img.url,
-        alt: img.alt || '',
+        alt: img.alt || `Image ${images.length + idx + 1}`,
         width: img.width || 1920,
-        height: img.height || 1080
+        height: img.height || 1080,
+        ratio: img.ratio || '16:9',
+        isHero: images.length === 0 && idx === 0  // First image is hero
       }));
       
       onChange([...images, ...newImages]);
-      alert(`✅ Загружено ${newImages.length} изображений успешно!`);
+      
+      console.log('✅ Images added to form state');
+      alert(`✅ Успешно загружено ${newImages.length} изображений!\n\nНе забудьте заполнить alt-текст для каждого изображения.`);
       
     } catch (error) {
-      console.error('Upload error:', error);
-      setError(`Ошибка загрузки: ${error.message}`);
-      alert(`Не удалось загрузить изображения: ${error.message}\n\nПожалуйста, попробуйте снова или обратитесь в поддержку.`);
+      console.error('❌ Upload error:', error);
+      setUploadError(error.message);
+      alert(`❌ Не удалось загрузить изображения:\n\n${error.message}\n\nПроверьте подключение и попробуйте снова.`);
     } finally {
       setUploading(false);
     }
