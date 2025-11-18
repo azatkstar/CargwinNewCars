@@ -31,19 +31,43 @@ const MediaUploader = ({ images = [], onChange, error }) => {
 
   const handleFiles = async (files) => {
     setUploading(true);
+    setError('');
+    
     try {
-      const formData = new FormData();
-      Array.from(files).forEach(file => {
-        if (file.size <= 10 * 1024 * 1024) { // 10MB limit
-          formData.append('files', file);
+      // Validate files
+      const validFiles = Array.from(files).filter(file => {
+        if (file.size > 10 * 1024 * 1024) {
+          setError(`Файл ${file.name} слишком большой (>10MB)`);
+          return false;
         }
+        if (!file.type.startsWith('image/')) {
+          setError(`Файл ${file.name} не является изображением`);
+          return false;
+        }
+        return true;
+      });
+      
+      if (validFiles.length === 0) {
+        throw new Error('Нет валидных файлов для загрузки');
+      }
+      
+      const formData = new FormData();
+      validFiles.forEach(file => {
+        formData.append('files', file);
       });
 
       // Upload to backend
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
       const token = localStorage.getItem('access_token');
       
-      const response = await fetch(`${BACKEND_URL}/api/admin/upload`, {
+      // Fix double /api issue
+      const endpoint = BACKEND_URL.endsWith('/api')
+        ? `${BACKEND_URL}/admin/upload`
+        : `${BACKEND_URL}/api/admin/upload`;
+      
+      console.log('Uploading to:', endpoint);
+      
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -51,24 +75,28 @@ const MediaUploader = ({ images = [], onChange, error }) => {
         body: formData
       });
 
-      if (response.ok) {
-        const uploadedImages = await response.json();
-        
-        // Add uploaded images to existing ones
-        const newImages = uploadedImages.map(img => ({
-          url: img.url,
-          alt: img.alt || '',
-          width: img.width || 1920,
-          height: img.height || 1080
-        }));
-        
-        onChange([...images, ...newImages]);
-      } else {
-        throw new Error('Upload failed');
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail || `HTTP ${response.status}`);
       }
+      
+      const uploadedImages = await response.json();
+      
+      // Add uploaded images to existing ones
+      const newImages = uploadedImages.map(img => ({
+        url: img.url,
+        alt: img.alt || '',
+        width: img.width || 1920,
+        height: img.height || 1080
+      }));
+      
+      onChange([...images, ...newImages]);
+      alert(`✅ Загружено ${newImages.length} изображений успешно!`);
+      
     } catch (error) {
       console.error('Upload error:', error);
-      alert('Failed to upload images: ' + error.message);
+      setError(`Ошибка загрузки: ${error.message}`);
+      alert(`Не удалось загрузить изображения: ${error.message}\n\nПожалуйста, попробуйте снова или обратитесь в поддержку.`);
     } finally {
       setUploading(false);
     }
