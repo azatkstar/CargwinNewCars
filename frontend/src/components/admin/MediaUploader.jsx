@@ -152,10 +152,21 @@ const MediaUploader = ({ images = [], onChange, error }) => {
           <Button
             type="button"
             variant="outline"
-            onClick={() => document.getElementById('file-upload')?.click()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const input = document.getElementById('file-upload');
+              if (input) {
+                input.click();
+              } else {
+                console.error('File input not found');
+                alert('Ошибка: не найден элемент загрузки. Перезагрузите страницу.');
+              }
+            }}
             disabled={uploading}
+            className="bg-white hover:bg-gray-50"
           >
-            Выбрать файлы
+            {uploading ? 'Загрузка...' : 'Выбрать файлы'}
           </Button>
         </div>
       </div>
