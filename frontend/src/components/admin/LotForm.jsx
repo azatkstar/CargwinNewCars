@@ -890,6 +890,67 @@ const LotForm = () => {
           </Card>
         </TabsContent>
 
+          {/* Video Section */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Videos (Optional)</CardTitle>
+              <CardDescription>Add YouTube videos or upload video files</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {lot.videos?.map((video, idx) => (
+                <div key={idx} className="flex gap-3 p-3 bg-gray-50 rounded border">
+                  <Input
+                    placeholder="YouTube URL or video file URL"
+                    value={video.url || ''}
+                    onChange={(e) => {
+                      const newVideos = [...(lot.videos || [])];
+                      newVideos[idx] = { ...video, url: e.target.value };
+                      handleInputChange('videos', newVideos);
+                    }}
+                    className="flex-1"
+                  />
+                  <Input
+                    placeholder="Title (optional)"
+                    value={video.title || ''}
+                    onChange={(e) => {
+                      const newVideos = [...(lot.videos || [])];
+                      newVideos[idx] = { ...video, title: e.target.value };
+                      handleInputChange('videos', newVideos);
+                    }}
+                    className="w-48"
+                  />
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="sm"
+                    onClick={() => {
+                      const newVideos = lot.videos.filter((_, i) => i !== idx);
+                      handleInputChange('videos', newVideos);
+                    }}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              ))}
+              
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  const newVideos = [...(lot.videos || []), { url: '', title: '', type: 'youtube' }];
+                  handleInputChange('videos', newVideos);
+                }}
+              >
+                + Add Video
+              </Button>
+              
+              <p className="text-xs text-gray-500">
+                For YouTube: paste full URL (e.g., https://youtube.com/watch?v=abc123)
+              </p>
+            </CardContent>
+          </Card>
+
+
         {/* Pricing Tab */}
         <TabsContent value="pricing" className="space-y-6">
           <Card>
