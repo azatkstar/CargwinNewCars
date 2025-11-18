@@ -511,7 +511,20 @@ async def register(
         # Create tokens
         tokens = await create_user_tokens(user)
         
-        logger.info(f"User registered: {user.email}")
+        # Send welcome email
+        import sys
+        sys.path.append('/app/backend')
+        from notifications import send_email
+        
+        await send_email(
+            user.email,
+            "Welcome to hunter.lease! 🎉",
+            "",
+            template_type="welcome",
+            template_data={'name': user.name or 'there'}
+        )
+        
+        logger.info(f"User registered: {user.email}, welcome email sent")
         
         return {
             "ok": True,
