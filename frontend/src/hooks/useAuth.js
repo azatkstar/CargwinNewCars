@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
 
   // Register new user
   const register = async (email, password, name) => {
-    const response = await axios.post(`${BACKEND_URL}/api/auth/register`, {
+    const response = await axios.post(`${authBase}/register`, {
       email,
       password,
       name
