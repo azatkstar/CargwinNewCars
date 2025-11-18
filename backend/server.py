@@ -134,7 +134,9 @@ app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads"
 
 # WebSocket setup
 from websocket_manager import sio
-socket_app = socketio.ASGIApp(sio, app)
+# Mount Socket.IO to FastAPI app
+app.mount('/ws', socketio.ASGIApp(sio))
+logger.info("WebSocket server mounted at /ws")
 
 # Startup and shutdown events
 @app.on_event("startup")
