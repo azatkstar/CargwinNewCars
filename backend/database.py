@@ -107,6 +107,7 @@ class LotDocument(BaseModel):
     # Content
     description: str = ""
     tags: List[str] = []
+    videos: List[Dict[str, str]] = []  # [{type: 'youtube', videoId: 'abc123', title: 'Walk-around'}]
     
     # Media
     images: List[ImageAsset] = []
