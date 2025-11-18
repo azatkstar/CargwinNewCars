@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
-import { ChevronDown, Shield, Clock, MapPin } from 'lucide-react';
+import { ChevronDown, Shield, Clock, MapPin, DollarSign, Users, TrendingUp } from 'lucide-react';
 import { getNextMondayMidnight, formatTimeRemaining } from '../utils/timer';
 import { useI18n } from '../hooks/useI18n';
 
