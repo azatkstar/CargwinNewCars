@@ -23,17 +23,27 @@ const ModelTemplateSelector = ({ isOpen, onClose, onSelect }) => {
 
   const fetchTemplates = async () => {
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
       const token = localStorage.getItem('access_token');
       
-      const response = await fetch(`${BACKEND_URL}/api/admin/model-templates`, {
+      // Fix double /api issue
+      const endpoint = BACKEND_URL.endsWith('/api') 
+        ? `${BACKEND_URL}/admin/model-templates`
+        : `${BACKEND_URL}/api/admin/model-templates`;
+      
+      const response = await fetch(endpoint, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
       
       const data = await response.json();
       setTemplates(data.templates || {});
     } catch (error) {
       console.error('Failed to fetch templates:', error);
+      alert(`Error loading templates: ${error.message}. Please check your connection and try again.`);
     } finally {
       setLoading(false);
     }
