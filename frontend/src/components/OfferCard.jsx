@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { formatPrice, formatTimeRemaining, calculateMonthlyPayment } from '../utils/timer';
 import { getFOMOCounters } from '../mock';
 import { useI18n } from '../hooks/useI18n';
+import useWebSocket from '../hooks/useWebSocket';
 import ReserveModal from './ReserveModal';
 import PriceBreakdownModal from './PriceBreakdownModal';
 
