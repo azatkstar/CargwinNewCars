@@ -6,17 +6,64 @@ const RecentActivity = () => {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    // Generate realistic activity feed
-    const mockActivities = generateActivities();
-    setActivities(mockActivities);
+    // Fetch real + mock activities
+    fetchActivities();
 
-    // Update every 30 seconds
+    // Update every 60 seconds
     const interval = setInterval(() => {
-      setActivities(generateActivities());
-    }, 30000);
+      fetchActivities();
+    }, 60000);
 
     return () => clearInterval(interval);
   }, []);
+
+  const fetchActivities = async () => {
+    try {
+      // Fetch real activities from backend
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/recent-activity`);
+      const data = await response.json();
+      
+      const realActivities = data.activities || [];
+      
+      // Generate mock activities to fill gaps
+      const mockActivities = generateActivities();
+      
+      // Mix real + mock (70% real if available, 30% mock for volume)
+      const mixed = [];
+      
+      // Add all real activities
+      realActivities.forEach(activity => {
+        mixed.push({
+          ...activity,
+          isReal: true
+        });
+      });
+      
+      // Fill with mock to reach 5 items
+      const needed = Math.max(0, 5 - realActivities.length);
+      mockActivities.slice(0, needed).forEach(activity => {
+        mixed.push({
+          ...activity,
+          isReal: false
+        });
+      });
+      
+      // Sort by time (most recent first)
+      mixed.sort((a, b) => {
+        const timeA = a.time ? new Date(a.time) : new Date();
+        const timeB = b.time ? new Date(b.time) : new Date();
+        return timeB - timeA;
+      });
+      
+      setActivities(mixed.slice(0, 5));
+      
+    } catch (error) {
+      console.error('Failed to fetch activities:', error);
+      // Fallback to mock only
+      setActivities(generateActivities());
+    }
+  };
 
   const generateActivities = () => {
     const names = ['John', 'Sarah', 'Michael', 'Jessica', 'David', 'Emily', 'Robert', 'Lisa'];
