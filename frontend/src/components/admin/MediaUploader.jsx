@@ -230,8 +230,10 @@ const MediaUploader = ({ images = [], onChange, error }) => {
         </div>
       </div>
 
-      {error && (
-        <p className="text-sm text-red-600">{error}</p>
+      {(error || uploadError) && (
+        <div className="bg-red-50 border-2 border-red-300 rounded-lg p-4">
+          <p className="text-sm text-red-600 font-medium">{error || uploadError}</p>
+        </div>
       )}
 
       {/* Images Grid */}
