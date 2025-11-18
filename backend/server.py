@@ -2878,6 +2878,72 @@ async def get_referral_stats(
             "referrals": [
                 {
                     "email": r.get('referred_email'),
+
+
+@api_router.get("/recent-activity")
+async def get_recent_activity():
+    """Get recent activity feed (real reservations + applications)"""
+    try:
+        from database import get_database
+        db = get_database()
+        
+        # Get recent reservations (last 24h)
+        one_day_ago = datetime.now(timezone.utc) - timedelta(hours=24)
+        
+        recent_reservations = await db.reservations.find({
+            "created_at": {"$gte": one_day_ago},
+            "status": {"$in": ["active", "converted"]}
+        }).sort("created_at", -1).limit(10).to_list(length=10)
+        
+        # Get recent applications (last 24h)
+        recent_applications = await db.applications.find({
+            "created_at": {"$gte": one_day_ago}
+        }).sort("created_at", -1).limit(10).to_list(length=10)
+        
+        # Format activities
+        activities = []
+        
+        for res in recent_reservations:
+            # Get user info
+            user = await db.users.find_one({"_id": res['user_id']})
+            if user:
+                activities.append({
+                    "type": "reservation",
+                    "name": user.get('name', 'Someone').split()[0],  # First name only
+                    "city": "Los Angeles",  # Would extract from user address
+                    "car": res.get('lot_slug', '').replace('-', ' ').title(),
+                    "action": "reserved",
+                    "savings": 0,
+                    "time": res.get('created_at')
+                })
+        
+        for app in recent_applications:
+            user_data = app.get('user_data', {})
+            lot_data = app.get('lot_data', {})
+            if user_data:
+                activities.append({
+                    "type": "application",
+                    "name": user_data.get('name', 'Someone').split()[0],
+                    "city": "LA",
+                    "car": f"{lot_data.get('year', '')} {lot_data.get('make', '')} {lot_data.get('model', '')}",
+                    "action": "applied for",
+                    "savings": lot_data.get('fleet_price', 0) * 0.15,  # Estimate
+                    "time": app.get('created_at')
+                })
+        
+        # Sort by time
+        activities.sort(key=lambda x: x.get('time', datetime.now(timezone.utc)), reverse=True)
+        
+        return {
+            "ok": True,
+            "activities": activities[:10],  # Top 10 most recent
+            "count": len(activities)
+        }
+        
+    except Exception as e:
+        logger.error(f"Get recent activity error: {e}")
+        return {"ok": True, "activities": [], "count": 0}  # Return empty on error
+
                     "status": r.get('status'),
                     "date": r.get('created_at'),
                     "reward": r.get('reward_amount')
