@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       // Verify token with backend
-      const response = await axios.get(`${BACKEND_URL}/api/auth/me`, {
+      const response = await axios.get(`${authBase}/me`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
