@@ -81,7 +81,7 @@ const Hero = () => {
             <div className="grid grid-cols-2 gap-4 mb-8">
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Shield className="w-5 h-5 text-green-700" />
+                  <DollarSign className="w-5 h-5 text-green-700" />
                 </div>
                 <div>
                   <div className="font-bold text-gray-900">$5K - $15K Off</div>
@@ -101,7 +101,7 @@ const Hero = () => {
 
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Shield className="w-5 h-5 text-purple-700" />
+                  <Users className="w-5 h-5 text-purple-700" />
                 </div>
                 <div>
                   <div className="font-bold text-gray-900">All Credit Tiers</div>
@@ -111,7 +111,7 @@ const Hero = () => {
 
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Shield className="w-5 h-5 text-orange-700" />
+                  <TrendingUp className="w-5 h-5 text-orange-700" />
                 </div>
                 <div>
                   <div className="font-bold text-gray-900">CA Statewide</div>
