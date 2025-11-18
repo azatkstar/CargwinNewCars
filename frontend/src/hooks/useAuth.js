@@ -137,7 +137,7 @@ export const AuthProvider = ({ children }) => {
   const getApiClient = () => {
     const token = localStorage.getItem('access_token');
     return axios.create({
-      baseURL: BACKEND_URL,
+      baseURL: apiBase,
       headers: token ? {
         Authorization: `Bearer ${token}`
       } : {}
