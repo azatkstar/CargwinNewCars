@@ -254,6 +254,12 @@ const LotForm = () => {
   };
 
   const handleInputChange = (field, value) => {
+    // Prevent auto-fill of URL in description
+    if (field === 'description' && typeof value === 'string' && value.startsWith('http')) {
+      console.warn('Prevented URL from being set as description');
+      return;
+    }
+    
     setLot(prev => ({ ...prev, [field]: value }));
     
     // Clear error when field is updated
