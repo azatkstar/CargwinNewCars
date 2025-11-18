@@ -17,15 +17,25 @@ const Hero = () => {
 
   const fetchABVariant = async (userId) => {
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-      const response = await fetch(`${BACKEND_URL}/api/ab-test/hero_headline?user_id=${userId}`);
-      const data = await response.json();
-      setAbVariant(data.config);
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+      const endpoint = BACKEND_URL.endsWith('/api')
+        ? `${BACKEND_URL}/ab-test/hero_headline?user_id=${userId}`
+        : `${BACKEND_URL}/api/ab-test/hero_headline?user_id=${userId}`;
+      
+      const response = await fetch(endpoint, { timeout: 3000 });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setAbVariant(data.config);
+      } else {
+        throw new Error('Fallback to default');
+      }
     } catch (error) {
-      // Fallback to default
+      console.warn('A/B test failed, using default:', error.message);
+      // Fallback to default variant
       setAbVariant({
-        headline: "Real Dealer Dump Offers. No BS.",
-        subheadline: "We hunt down the best lease deals in LA so you don't have to."
+        headline: "New Cars. Fleet Pricing. Huge Savings.",
+        subheadline: "Get the same low prices big rental and logistics companies pay for their fleets. No dealer add-ons. No haggling. No BS."
       });
     }
   };
