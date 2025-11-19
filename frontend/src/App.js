@@ -19,6 +19,7 @@ import CompareVehicles from "./components/CompareVehicles";
 import Footer from "./components/Footer";
 import FOMOTicker from "./components/FOMOTicker";
 import LiveChatWidget from "./components/LiveChatWidget";
+import CargwinGPT from "./components/CargwinGPT";
 import CarDetail from "./pages/CarDetail";
 import PreviewLot from "./pages/PreviewLot";
 import Auth from "./pages/Auth";
