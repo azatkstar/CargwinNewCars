@@ -3050,13 +3050,18 @@ async def invite_cosigner(
 
 @api_router.post("/ai-chat")
 async def chat_with_ai(
-    message: str,
-    session_id: Optional[str] = None
+    request: dict
 ):
     """Chat with CargwinGPT AI assistant"""
     try:
         import uuid
         from cargwin_gpt import chat_with_cargwin_gpt
+        
+        message = request.get('message')
+        session_id = request.get('session_id')
+        
+        if not message:
+            raise HTTPException(status_code=400, detail="Message is required")
         
         # Generate session ID if not provided
         if not session_id:
