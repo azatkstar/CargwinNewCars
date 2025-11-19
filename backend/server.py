@@ -3038,6 +3038,10 @@ async def invite_cosigner(
         }
         
     except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Co-signer invite error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to send invite")
 
 
 # ============================================
