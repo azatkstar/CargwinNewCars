@@ -177,6 +177,56 @@ const FinanceManagerDashboard = () => {
                         🔍 Run Prescoring
                       </Button>
                     )}
+                    
+                    {/* Suggest Alternatives - for Low/Medium approval */}
+                    {app.prescoring_data && 
+                     (app.prescoring_data.approval_probability === 'Low' || 
+                      app.prescoring_data.approval_probability === 'Medium') && (
+                      <Button
+                        size="sm"
+                        onClick={async () => {
+                          try {
+                            const api = getApiClient();
+                            // Get auto-alternatives
+                            const altResp = await api.get(`/api/applications/${app.id}/auto-alternatives`);
+                            const alternatives = altResp.data.alternatives;
+                            
+                            // Show to manager
+                            const altList = [];
+                            if (alternatives.cheaper) altList.push(`${alternatives.cheaper.title} ($${alternatives.cheaper.monthly}/mo - Easier approval)`);
+                            if (alternatives.similar) altList.push(`${alternatives.similar.title} ($${alternatives.similar.monthly}/mo - Similar payment)`);
+                            
+                            if (altList.length > 0) {
+                              const proceed = confirm(`Suggested alternatives for better approval:\n\n${altList.join('\n')}\n\nAdd these to application?`);
+                              
+                              if (proceed) {
+                                const lotIds = [
+                                  alternatives.cheaper?.lot_id,
+                                  alternatives.similar?.lot_id
+                                ].filter(Boolean);
+                                
+                                await api.post(`/api/applications/${app.id}/add-alternatives`, {
+                                  application_id: app.id,
+                                  lot_ids: lotIds,
+                                  reason: `Better approval chance based on ${app.prescoring_data.approval_probability} probability`
+                                });
+                                
+                                alert('✅ Alternatives added! Customer will see these options.');
+                                fetchApplications();
+                              }
+                            } else {
+                              alert('No suitable alternatives found for this customer.');
+                            }
+                          } catch (error) {
+                            alert('Failed to suggest alternatives: ' + error.message);
+                          }
+                        }}
+                        className="bg-purple-600 hover:bg-purple-700"
+                      >
+                        💡 Suggest Alternatives
+                      </Button>
+                    )}
+                    
                     <CopyToFleetButton application={app} user={app.user_data} />
                     <Button
                       size="sm"
