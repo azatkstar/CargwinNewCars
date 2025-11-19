@@ -3038,6 +3038,43 @@ async def invite_cosigner(
         }
         
     except HTTPException:
+
+
+# ============================================
+# CargwinGPT AI Assistant
+# ============================================
+
+@api_router.post("/ai-chat")
+async def chat_with_ai(
+    message: str,
+    session_id: Optional[str] = None
+):
+    """Chat with CargwinGPT AI assistant"""
+    try:
+        import uuid
+        from cargwin_gpt import chat_with_cargwin_gpt
+        
+        # Generate session ID if not provided
+        if not session_id:
+            session_id = str(uuid.uuid4())
+        
+        # Get AI response
+        result = await chat_with_cargwin_gpt(message, session_id)
+        
+        return {
+            "ok": True,
+            "session_id": session_id,
+            **result
+        }
+        
+    except Exception as e:
+        logger.error(f"AI chat error: {e}")
+        return {
+            "ok": False,
+            "response": "Sorry, I'm having trouble right now. Please try again.",
+            "error": str(e)
+        }
+
         raise
     except Exception as e:
         logger.error(f"Co-signer invite error: {e}")
