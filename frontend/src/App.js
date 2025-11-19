@@ -74,6 +74,7 @@ const Home = () => {
       <Footer />
       <FOMOTicker />
       <LiveChatWidget />
+      <CargwinGPT />
       
       {/* Add bottom padding to account for FOMO ticker */}
       <div className="h-16 lg:h-12" />
