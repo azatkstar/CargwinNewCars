@@ -121,12 +121,13 @@ const Header = () => {
               </Link>
             )}
             
-            <Button 
-              onClick={() => scrollToSection('offers')}
-              className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300"
-            >
-              {t('navigation.view_offers')}
-            </Button>
+            <Link to="/offers">
+              <Button 
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300"
+              >
+                View Offers
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
