@@ -1144,12 +1144,6 @@ async def track_ab_conversion(
         logger.error(f"Conversion tracking error: {e}")
         return {"ok": False, "error": str(e)}
 
-        }
-        
-    except Exception as e:
-        logger.error(f"Get templates error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to get templates")
-
 
 @api_router.get("/ab-test/{test_name}")
 async def get_ab_variant(
