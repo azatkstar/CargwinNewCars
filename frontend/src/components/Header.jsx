@@ -181,19 +181,6 @@ const Header = () => {
               >
                 Contact
               </Link>
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-left text-gray-600 hover:text-red-600 font-medium transition-colors duration-200"
-                >
-                  {item.label}
-                </button>
-              ))}
-              <Button 
-                onClick={() => scrollToSection('offers')}
-                className="bg-red-600 hover:bg-red-700 text-white mt-4 rounded-lg font-medium"
-                size="sm"
-              >
-                {t('navigation.view_offers')}
-              </Button>
             </nav>
           </div>
         )}
