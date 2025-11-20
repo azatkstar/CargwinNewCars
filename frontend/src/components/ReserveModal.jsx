@@ -37,7 +37,7 @@ const ReserveModal = ({ isOpen, onClose, offer, paymentMode = 'lease' }) => {
     setError('');
 
     try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
       const token = localStorage.getItem('access_token');
 
       if (!token) {
@@ -59,7 +59,12 @@ const ReserveModal = ({ isOpen, onClose, offer, paymentMode = 'lease' }) => {
         return;
       }
 
-      const response = await fetch(`${BACKEND_URL}/api/reservations`, {
+      // Fix double /api issue
+      const endpoint = BACKEND_URL.endsWith('/api')
+        ? `${BACKEND_URL}/reservations`
+        : `${BACKEND_URL}/api/reservations`;
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
