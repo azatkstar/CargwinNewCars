@@ -58,15 +58,21 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-gray-600 hover:text-red-600 font-medium transition-colors duration-200"
-              >
-                {item.label}
-              </button>
-            ))}
+            <Link to="/offers" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
+              Offers
+            </Link>
+            <Link to="/about" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
+              About
+            </Link>
+            <Link to="/services" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
+              Services
+            </Link>
+            <Link to="/reviews" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
+              Reviews
+            </Link>
+            <Link to="/contact" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
+              Contact
+            </Link>
           </nav>
 
           {/* Desktop CTA + Language Switcher + Auth */}
