@@ -1104,6 +1104,11 @@ async def get_model_templates(
             "models": models,
             "count": len(models),
             "templates": MODEL_TEMPLATES
+        }
+        
+    except Exception as e:
+        logger.error(f"Get templates error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get templates")
 
 
 @api_router.post("/ab-test/{test_name}/convert")
