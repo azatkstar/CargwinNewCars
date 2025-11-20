@@ -3093,6 +3093,30 @@ async def chat_with_ai(
         
         message = request.get('message')
         session_id = request.get('session_id')
+        
+        if not message:
+            raise HTTPException(status_code=400, detail="Message is required")
+        
+        # Generate session ID if not provided
+        if not session_id:
+            session_id = str(uuid.uuid4())
+        
+        # Get AI response
+        result = await chat_with_cargwin_gpt(message, session_id)
+        
+        return {
+            "ok": True,
+            "session_id": session_id,
+            **result
+        }
+        
+    except Exception as e:
+        logger.error(f"AI chat error: {e}")
+        return {
+            "ok": False,
+            "response": "Sorry, I'm having trouble right now. Please try again.",
+            "error": str(e)
+        }
 
 
 @api_router.post("/admin/broadcast-fomo/{offer_id}")
@@ -3121,38 +3145,6 @@ async def broadcast_fomo_update(
     except Exception as e:
         logger.error(f"FOMO broadcast error: {e}")
         raise HTTPException(status_code=500, detail="Failed to broadcast")
-
-        
-        if not message:
-            raise HTTPException(status_code=400, detail="Message is required")
-        
-        # Generate session ID if not provided
-        if not session_id:
-            session_id = str(uuid.uuid4())
-        
-        # Get AI response
-        result = await chat_with_cargwin_gpt(message, session_id)
-        
-        return {
-            "ok": True,
-            "session_id": session_id,
-            **result
-        }
-        
-    except Exception as e:
-        logger.error(f"AI chat error: {e}")
-        return {
-            "ok": False,
-            "response": "Sorry, I'm having trouble right now. Please try again.",
-            "error": str(e)
-        }
-
-        raise
-    except Exception as e:
-        logger.error(f"Co-signer invite error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to send invite")
-
-        logger.error(f"Bulk prescoring error: {e}")
         raise HTTPException(status_code=500, detail="Failed to run bulk prescoring")
 
 @api_router.get("/admin/applications/export/excel")
