@@ -144,10 +144,42 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden border-t border-gray-200 py-4">
-            <nav className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
+            <nav className="flex flex-col space-y-2 px-4">
+              <Link 
+                to="/offers" 
+                className="py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Offers
+              </Link>
+              <Link 
+                to="/about"
+                className="py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link 
+                to="/services"
+                className="py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Services
+              </Link>
+              <Link 
+                to="/reviews"
+                className="py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Reviews
+              </Link>
+              <Link 
+                to="/contact"
+                className="py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
                   onClick={() => scrollToSection(item.id)}
                   className="text-left text-gray-600 hover:text-red-600 font-medium transition-colors duration-200"
                 >
