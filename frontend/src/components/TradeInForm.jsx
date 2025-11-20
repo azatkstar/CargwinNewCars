@@ -163,6 +163,40 @@ const TradeInForm = ({ applicationId, onTradeInAdded }) => {
           <p className="text-xs text-gray-500">
             * Valuation provided by KBB alternative - actual value may vary
           </p>
+          
+          {/* Negative Equity Info */}
+          <div className="bg-green-50 border-2 border-green-300 rounded-lg p-4 mt-4">
+            <button
+              type="button"
+              onClick={() => setShowNegativeEquityInfo(!showNegativeEquityInfo)}
+              className="w-full text-left flex items-center justify-between"
+            >
+              <span className="font-semibold text-green-900">💡 What if I owe more than the car is worth?</span>
+              <span className="text-green-700">{showNegativeEquityInfo ? '▼' : '▶'}</span>
+            </button>
+            
+            {showNegativeEquityInfo && (
+              <div className="mt-3 space-y-2 text-sm text-gray-700">
+                <p>
+                  <strong>Negative equity is safe with us!</strong>
+                </p>
+                <p>
+                  If your trade-in is worth less than what you owe (negative equity), we can:
+                </p>
+                <ul className="list-disc ml-5 space-y-1">
+                  <li>Roll the difference into your new lease</li>
+                  <li>Often at a LOWER interest rate than your current loan</li>
+                  <li>Spread the payment over the new lease term (36-48 months)</li>
+                  <li>You still save money overall with fleet pricing</li>
+                </ul>
+                <p className="bg-white p-3 rounded border border-green-200 mt-2">
+                  <strong>Example:</strong> You owe $18K on a car worth $15K. That's $3K negative equity.
+                  We roll it into your new $30K lease at 3.9% APR instead of your current 7.9%.
+                  You save on interest AND get a new car!
+                </p>
+              </div>
+            )}
+          </div>
         </form>
       </CardContent>
     </Card>
