@@ -1104,6 +1104,41 @@ async def get_model_templates(
             "models": models,
             "count": len(models),
             "templates": MODEL_TEMPLATES
+
+
+@api_router.post("/ab-test/{test_name}/convert")
+async def track_ab_conversion(
+    test_name: str,
+    user_id: str,
+    variant: str,
+    action: str
+):
+    """Track conversion for A/B test"""
+    try:
+        import sys
+        sys.path.append('/app/backend')
+        from ab_testing import track_conversion
+        
+        result = track_conversion(test_name, variant, user_id, action)
+        
+        # Also save to database
+        from database import get_database
+        db = get_database()
+        
+        await db.ab_conversions.insert_one({
+            "test_name": test_name,
+            "variant": variant,
+            "user_id": user_id,
+            "action": action,
+            "timestamp": datetime.now(timezone.utc)
+        })
+        
+        return {"ok": True, "message": "Conversion tracked"}
+        
+    except Exception as e:
+        logger.error(f"Conversion tracking error: {e}")
+        return {"ok": False, "error": str(e)}
+
         }
         
     except Exception as e:
