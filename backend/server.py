@@ -3145,7 +3145,6 @@ async def broadcast_fomo_update(
     except Exception as e:
         logger.error(f"FOMO broadcast error: {e}")
         raise HTTPException(status_code=500, detail="Failed to broadcast")
-        raise HTTPException(status_code=500, detail="Failed to run bulk prescoring")
 
 @api_router.get("/admin/applications/export/excel")
 async def export_applications_excel(
