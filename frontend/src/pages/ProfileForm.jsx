@@ -114,12 +114,23 @@ const ProfileForm = () => {
 
     try {
       const api = getApiClient();
-      await api.put('/api/user/profile', {
+      await api.put('/user/profile', {  // Remove /api prefix - baseURL already has it
         credit_score: parseInt(formData.credit_score),
         auto_loan_history: formData.auto_loan_history,
         employment_type: formData.employment_type,
+        employer_name: formData.employer_name,
+        job_title: formData.job_title,
+        time_at_job_months: parseInt(formData.time_at_job_months) || 0,
+        monthly_income_pretax: parseInt(formData.monthly_income_pretax) || 0,
         annual_income: parseInt(formData.annual_income),
         employment_duration_months: parseInt(formData.employment_duration_months),
+        date_of_birth: formData.date_of_birth,
+        drivers_license_number: formData.drivers_license_number,
+        immigration_status: formData.immigration_status,
+        phone: formData.phone,
+        current_address: formData.current_address || formData.address,
+        current_address_duration_months: parseInt(formData.current_address_duration_months || formData.residence_duration_months),
+        previous_address: formData.previous_address,
         address: formData.address,
         residence_duration_months: parseInt(formData.residence_duration_months),
         monthly_expenses: parseInt(formData.monthly_expenses),
