@@ -17,6 +17,7 @@ const TradeInForm = ({ applicationId, onTradeInAdded }) => {
     photos: []
   });
   const [loading, setLoading] = useState(false);
+  const [showNegativeEquityInfo, setShowNegativeEquityInfo] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
