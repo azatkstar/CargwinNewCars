@@ -3094,6 +3094,35 @@ async def chat_with_ai(
         
         message = request.get('message')
         session_id = request.get('session_id')
+
+
+@api_router.post("/admin/broadcast-fomo/{offer_id}")
+async def broadcast_fomo_update(
+    offer_id: str,
+    viewers: int,
+    confirmed: int,
+    current_user: User = Depends(require_editor)
+):
+    """Broadcast FOMO counter update to all connected clients"""
+    try:
+        from websocket_manager import update_fomo_counter
+        
+        await update_fomo_counter(offer_id, viewers, confirmed)
+        
+        logger.info(f"FOMO broadcast: {offer_id} - {viewers} viewers, {confirmed} confirmed")
+        
+        return {
+            "ok": True,
+            "message": "FOMO counters updated",
+            "offer_id": offer_id,
+            "viewers": viewers,
+            "confirmed": confirmed
+        }
+        
+    except Exception as e:
+        logger.error(f"FOMO broadcast error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to broadcast")
+
         
         if not message:
             raise HTTPException(status_code=400, detail="Message is required")
