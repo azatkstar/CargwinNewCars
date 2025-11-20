@@ -17,24 +17,65 @@ code {
 }
 
 /* Accessibility: Ensure touch targets meet minimum size requirements */
+/* Based on 2025 mobile UX best practices */
 @layer components {
+  /* Mobile-first: 48x48px touch targets (2025 standard) */
   button, 
   a.button,
   [role="button"],
   input[type="submit"],
   input[type="button"] {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 48px;
+    min-width: 48px;
+    /* Spacing between interactive elements (8-12px) */
+    margin: 4px;
   }
   
-  @media (min-width: 640px) {
+  /* Desktop: smaller targets acceptable */
+  @media (min-width: 768px) {
     button, 
     a.button,
     [role="button"],
     input[type="submit"],
     input[type="button"] {
-      min-height: 36px;
+      min-height: 40px;
       min-width: auto;
+      margin: 2px;
+    }
+  }
+  
+  /* Thumb-friendly zone: bottom 40% of screen */
+  .thumb-zone {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Primary actions in thumb reach */
+  .mobile-primary-action {
+    @apply fixed bottom-6 left-4 right-4 z-40;
+  }
+  
+  /* Mobile: larger tap areas for cards */
+  @media (max-width: 768px) {
+    .clickable-card {
+      @apply p-6 min-h-[120px];
+    }
+    
+    /* Increase spacing between sections */
+    section {
+      @apply py-8;
+    }
+    
+    /* Mobile typography adjustments */
+    h1 {
+      @apply text-3xl;
+    }
+    
+    h2 {
+      @apply text-2xl;
     }
   }
 }
