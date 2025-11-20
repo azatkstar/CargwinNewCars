@@ -47,7 +47,16 @@ const OffersPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
-        <title>All Dump Offers - hunter.lease</title>
+        <title>New Car Lease Deals California | Fleet Pricing - hunter.lease</title>
+        <meta name="description" content="Browse all current car lease deals in California with fleet pricing. Save $5K-$15K on new Toyota, Lexus, Honda, BMW. Real prices, no haggling. Updated monthly." />
+        <meta name="keywords" content="car lease deals, California lease, fleet pricing, new car deals, Toyota lease, Lexus lease, BMW lease" />
+        <link rel="canonical" href="https://cargwin-newcar.emergent.host/offers" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="All Car Lease Deals - hunter.lease" />
+        <meta property="og:description" content="Complete inventory of new car lease deals with fleet pricing. Save thousands on Toyota, Lexus, Honda, BMW and more." />
+        <meta property="og:url" content="https://cargwin-newcar.emergent.host/offers" />
+        <meta property="og:type" content="website" />
       </Helmet>
       
       <Header />
