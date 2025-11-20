@@ -110,6 +110,8 @@ function App() {
                   <Route path="/early-access" element={<EarlyAccess />} />
                   <Route path="/services" element={<ServicesPage />} />
                   <Route path="/coverage" element={<CoveragePage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/reviews" element={<ReviewsPage />} />
                   <Route path="/preview/:token" element={<PreviewLot />} />
                   <Route path="/admin/login" element={<AdminLogin />} />
                   <Route path="/admin/*" element={<AdminDashboard />} />
