@@ -29,6 +29,34 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="hunter.lease" />
+        
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXXXXX', {
+            page_title: 'hunter.lease',
+            send_page_view: true
+          });
+          
+          // Track form submissions
+          window.trackFormSubmit = function(formName) {
+            gtag('event', 'form_submit', {
+              event_category: 'engagement',
+              event_label: formName
+            });
+          };
+          
+          // Track CTA clicks
+          window.trackCTA = function(ctaName) {
+            gtag('event', 'cta_click', {
+              event_category: 'engagement',
+              event_label: ctaName
+            });
+          };
+        </script>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
