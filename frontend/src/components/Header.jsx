@@ -181,6 +181,45 @@ const Header = () => {
               >
                 Contact
               </Link>
+              
+              {/* Auth Section - Mobile */}
+              <div className="pt-4 mt-4 border-t border-gray-200">
+                {isAuthenticated ? (
+                  <div className="space-y-2">
+                    <Link
+                      to={isAdmin ? "/admin" : "/dashboard"}
+                      className="flex items-center gap-2 py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <User className="w-4 h-4" />
+                      {user?.name || user?.email}
+                    </Link>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2 py-3 px-4 text-red-600 hover:bg-red-50 rounded-lg font-medium"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    to="/auth"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Button
+                      variant="default"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white py-4 flex items-center justify-center gap-2"
+                    >
+                      <LogIn className="w-5 h-5" />
+                      Login / Sign Up
+                    </Button>
+                  </Link>
+                )}
+              </div>
             </nav>
           </div>
         )}
