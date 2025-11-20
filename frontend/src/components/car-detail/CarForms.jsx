@@ -176,7 +176,7 @@ const CarForms = ({ car }) => {
       const api = getApiClient();
       // Use slug if available, otherwise use id
       const lotIdentifier = car.slug || car.id;
-      await api.post('/api/applications', null, {
+      await api.post('/applications', null, {  // Remove /api prefix
         params: { lot_id: lotIdentifier }
       });
 
