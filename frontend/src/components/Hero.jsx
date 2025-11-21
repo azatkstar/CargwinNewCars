@@ -14,6 +14,7 @@ const Hero = () => {
     zipCode: ''
   });
   const { t } = useI18n();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch A/B test variant
