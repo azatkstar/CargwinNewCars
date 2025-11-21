@@ -38,6 +38,7 @@ import ServicesPage from "./pages/ServicesPage";
 import CoveragePage from "./pages/CoveragePage";
 import ContactPage from "./pages/ContactPage";
 import ReviewsPage from "./pages/ReviewsPage";
+import BrokerApplication from "./pages/BrokerApplication";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
 import { AuthProvider } from "./hooks/useAuth";
