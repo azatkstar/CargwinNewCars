@@ -199,7 +199,7 @@ const CarDetail = () => {
                 <div className="mb-4">
                   <div className="text-sm text-gray-600 mb-1">OTD Price:</div>
                   <div className="text-3xl font-bold text-gray-900">
-                    ${((car.fleet || 0) * 1.0775 + 540 + 85).toFixed(0).toLocaleString()}
+                    ${((carData.fleet || 0) * 1.0775 + 540 + 85).toFixed(0).toLocaleString()}
                   </div>
                   <p className="text-xs text-gray-500 mt-1">* Includes taxes and fees for CA</p>
                 </div>
@@ -207,7 +207,7 @@ const CarDetail = () => {
                 <div className="space-y-2 text-sm">
                   <p className="flex items-start gap-2">
                     <span className="text-red-600">✓</span>
-                    <span><strong>No forced add-ons:</strong> dealers typically add ${car.dealer_addons?.toLocaleString() || '5,500'} — ours $0</span>
+                    <span><strong>No forced add-ons:</strong> dealers typically add ${carData.dealer_addons?.toLocaleString() || '5,500'} — ours $0</span>
                   </p>
                   <p className="flex items-start gap-2">
                     <span className="text-green-600">✓</span>
