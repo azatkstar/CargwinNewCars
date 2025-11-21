@@ -25,6 +25,7 @@ const CarDetail = () => {
   const { carId } = useParams();
   const [carData, setCarData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [timeRemaining, setTimeRemaining] = useState({ days: 1, hours: 23, minutes: 45, seconds: 0 });
 
   useEffect(() => {
     fetchCarData();
