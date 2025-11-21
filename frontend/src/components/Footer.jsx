@@ -83,6 +83,11 @@ const Footer = ({ hiddenVin = null }) => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Services</h3>
             <ul className="space-y-3 text-gray-300">
+              <li>
+                <Link to="/broker-application" className="hover:text-white transition-colors">
+                  🔗 Broker Credit Application
+                </Link>
+              </li>
               <li>Fleet Offers</li>
               <li>Credit Check</li>
               <li>Financing Consultation</li>
