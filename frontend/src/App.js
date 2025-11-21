@@ -51,36 +51,17 @@ const Home = () => {
       <Header />
       <main role="main">
         <Hero />
-        <OffersSection />
-        
-        {/* Instant Quote & Recent Activity in grid */}
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
-              <InstantQuoteTool />
-            </div>
-            <div>
-              <RecentActivity />
-            </div>
-          </div>
-        </div>
-        
-        <DropSubscription />
-        <CoverageMap />
+        {/* Main content on separate /offers page */}
         <HowItWorks />
-        <ProcessSteps />
-        <TrustManifest />
         <TrustFAQ />
         <Reviews />
         <FAQ />
       </main>
       <Footer />
-      <FOMOTicker />
-      <LiveChatWidget />
       <CargwinGPT />
       
-      {/* Add bottom padding to account for FOMO ticker */}
-      <div className="h-16 lg:h-12" />
+      {/* Add bottom padding */}
+      <div className="h-16" />
     </div>
   );
 };
