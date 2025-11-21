@@ -10,7 +10,8 @@ const AutoBanditStyleCalculator = ({ car }) => {
     annualMileage: 10000,
     creditTier: 'tier1',
     dueAtSigning: 1580,
-    zipCode: '90210'  // Beverly Hills default
+    zipCode: '90210',
+    dealType: 'lease'  // lease or finance
   });
   
   const [calculated, setCalculated] = useState(null);
