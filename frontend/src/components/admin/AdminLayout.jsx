@@ -34,6 +34,13 @@ const AdminLayout = ({ children }) => {
       requiredRole: 'admin'
     },
     {
+      id: 'broker-applications',
+      label: 'Broker Applications',
+      icon: FileCheck,
+      path: '/admin/broker-applications',
+      requiredRole: 'admin'
+    },
+    {
       id: 'finance-manager',
       label: 'Finance Manager',
       icon: DollarSign,
