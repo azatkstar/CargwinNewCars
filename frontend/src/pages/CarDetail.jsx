@@ -185,7 +185,7 @@ const CarDetail = () => {
       
       <Header />
       
-      {/* Car Title + Basic Info - как у AutoBandit */}
+      {/* Car Title + Basic Info */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -197,6 +197,36 @@ const CarDetail = () => {
             <span className="text-green-600 font-semibold">
               {((carData.savings / carData.msrp) * 100).toFixed(1)}% off MSRP
             </span>
+          </div>
+        </div>
+      </div>
+
+      {/* СРОЧНОСТЬ И FOMO - BOOKING.COM STYLE */}
+      <div className="bg-red-50 border-y-2 border-red-600">
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-red-900">
+                <Clock className="w-5 h-5" />
+                <span className="font-bold">DEAL ENDS IN:</span>
+                <span className="text-2xl font-bold">{timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m</span>
+              </div>
+              <div className="h-6 w-px bg-red-300"></div>
+              <div className="flex items-center gap-2 text-red-900">
+                <AlertCircle className="w-5 h-5" />
+                <span className="font-bold">Only 1 car left at this price!</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-1 text-blue-700">
+                <Eye className="w-4 h-4" />
+                <span><strong>127</strong> viewing now</span>
+              </div>
+              <div className="flex items-center gap-1 text-green-700">
+                <TrendingUp className="w-4 h-4" />
+                <span><strong>18</strong> reserved today</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
