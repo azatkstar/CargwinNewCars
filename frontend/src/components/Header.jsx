@@ -61,6 +61,10 @@ const Header = () => {
             <Link to="/offers" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
               Offers
             </Link>
+            <Link to="/my-favorites" className="flex items-center gap-1.5 text-gray-600 hover:text-red-600 font-medium transition-colors">
+              <Heart className="w-4 h-4" />
+              My Favorites
+            </Link>
             <Link to="/about" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
               About
             </Link>
