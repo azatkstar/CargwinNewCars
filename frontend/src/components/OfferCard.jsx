@@ -168,13 +168,6 @@ const OfferCard = ({ offer }) => {
               </div>
             </div>
             
-            {/* Credit Tier Requirement */}
-            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded">
-              <div className="text-xs font-semibold text-yellow-900 mb-1">Credit Score Required:</div>
-              <div className="text-sm text-yellow-800">
-                720+ (Tier 1) for this rate. Lower scores may qualify at higher rates.
-              </div>
-            </div>
             {offer.lease.incentives > 0 && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
                 <div className="text-sm font-medium text-green-800">
