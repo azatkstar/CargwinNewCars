@@ -99,6 +99,14 @@ const Header = () => {
                     >
                       {isAdmin ? 'Admin Panel' : 'My Dashboard'}
                     </Link>
+                    <Link
+                      to="/my-favorites"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <Heart className="w-4 h-4" />
+                      My Favorites
+                    </Link>
                     <button
                       onClick={handleLogout}
                       className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2"
