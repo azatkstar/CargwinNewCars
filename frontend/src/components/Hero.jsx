@@ -7,6 +7,11 @@ import { useI18n } from '../hooks/useI18n';
 const Hero = () => {
   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [abVariant, setAbVariant] = useState(null);
+  const [searchParams, setSearchParams] = useState({
+    budget: 'all',
+    bodyStyle: 'all',
+    zipCode: ''
+  });
   const { t } = useI18n();
 
   useEffect(() => {
