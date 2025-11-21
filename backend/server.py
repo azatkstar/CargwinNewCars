@@ -3259,42 +3259,6 @@ async def get_broker_applications(
         logger.error(f"Get broker applications error: {e}")
         raise HTTPException(status_code=500, detail="Failed to get applications")
 
-    status: Optional[str] = None,
-    current_user: User = Depends(require_auth)
-):
-    """Export applications to Excel"""
-    try:
-        from database import get_database
-        db = get_database()
-        
-        query = {}
-        if status and status != 'all':
-            query['status'] = status
-        
-        apps = await db.applications.find(query).to_list(length=1000)
-        
-        # Convert to CSV-like format (in production: use openpyxl for real Excel)
-        csv_data = "ID,Customer,Email,Vehicle,Status,Credit Score,Income,Applied Date\\n"
-        
-        for app in apps:
-            csv_data += f"{app.get('_id', '')},{app.get('user_data', {}).get('name', '')},"
-            csv_data += f"{app.get('user_data', {}).get('email', '')},{app.get('lot_data', {}).get('year', '')} {app.get('lot_data', {}).get('make', '')},"
-            csv_data += f"{app.get('status', '')},{app.get('user_data', {}).get('credit_score', '')},"
-            csv_data += f"{app.get('user_data', {}).get('annual_income', '')},{app.get('created_at', '')}\\n"
-        
-        logger.info(f"Exported {len(apps)} applications to Excel")
-        
-        return {
-            "ok": True,
-            "data": csv_data,
-            "count": len(apps),
-            "message": "Export ready"
-        }
-        
-    except Exception as e:
-        logger.error(f"Export error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to export")
-
 @api_router.get("/subscriptions")
 async def get_my_subscriptions(
     current_user: User = Depends(require_auth)
