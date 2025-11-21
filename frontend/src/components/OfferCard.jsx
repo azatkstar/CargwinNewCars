@@ -270,15 +270,6 @@ const OfferCard = ({ offer }) => {
           offer={offer}
           paymentMode={paymentMode}
         />
-
-        {/* Sticky Disclaimer at bottom of card */}
-        <div className="mt-4 p-3 bg-gray-50 rounded border border-gray-200">
-          <p className="text-xs text-gray-600 leading-relaxed">
-            <strong>Price shown for 720+ credit score.</strong> Actual terms depend on credit approval. 
-            CA residents only. Taxes, dealer fee, bank fee included. 
-            Offer subject to vehicle availability.
-          </p>
-        </div>
       </div>
     </div>
   );
