@@ -93,7 +93,21 @@ const BrokerApplicationsAdmin = () => {
                         <div><strong>Phone:</strong> {app.phone}</div>
                         <div><strong>DOB:</strong> {app.date_of_birth}</div>
                         <div><strong>DL#:</strong> {app.drivers_license}</div>
-                        <div><strong>SSN:</strong> ***-**-{app.ssn?.slice(-4) || 'N/A'}</div>
+                        <div className="flex items-center gap-2">
+                          <strong>SSN:</strong> 
+                          <span>***-**-{app.ssn?.slice(-4) || 'N/A'}</span>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setSelectedSSN({ ssn: app.ssn, name: `${app.first_name} ${app.last_name}` });
+                              setShowSSNModal(true);
+                            }}
+                            className="ml-2 text-xs"
+                          >
+                            View Full SSN
+                          </Button>
+                        </div>
                       </div>
                     </div>
                     
