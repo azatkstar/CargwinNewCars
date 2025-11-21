@@ -288,6 +288,65 @@ class SubscriptionDocument(BaseModel):
     class Config:
         arbitrary_types_allowed = True
         json_encoders = {
+
+
+class BrokerApplicationDocument(BaseModel):
+    """Broker application from external sources"""
+    # Personal Info
+    first_name: str
+    last_name: str
+    email: str
+    date_of_birth: str
+    drivers_license: str
+    phone: str
+    ssn: str
+    
+    # Vehicle Preferences
+    desired_cars: str  # "Toyota Camry, Honda Accord"
+    color_preferences: str
+    financing_type: str  # lease, finance, cash, help_decide
+    expected_payment: int
+    
+    # Employment
+    employer: str
+    job_title: str
+    employer_address: Optional[str] = None
+    time_at_job_months: int
+    income_type: str  # 1099, W2, self_employed, unknown
+    monthly_income_pretax: int
+    employer_phone: Optional[str] = None
+    additional_income: Optional[int] = None
+    
+    # Address & Status
+    immigration_status: str
+    current_address: str
+    previous_address: Optional[str] = None
+    
+    # Financial
+    has_cosigner: bool
+    down_payment_comfortable: int
+    down_payment_max: int
+    
+    # Alternatives
+    alternative_vehicles: str
+    
+    # Consent
+    signature_name: str
+    consent_credit_check: bool
+    consent_contact: bool
+    
+    # Metadata
+    source: str = "broker"
+    status: str = "pending"
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat(),
+            ObjectId: str
+        }
+
             datetime: lambda v: v.isoformat(),
             ObjectId: str
         }
