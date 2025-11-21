@@ -107,29 +107,31 @@ const OfferCard = ({ offer }) => {
             e.target.src = 'https://via.placeholder.com/600x400?text=Image+Error';
           }}
         />
-        <Badge className="absolute top-4 left-4 bg-green-600 text-white">
-          Verified Fleet Deal
-        </Badge>
         
-        {/* Save Button */}
+        {/* Minimal Badge - Just checkmark */}
+        <div className="absolute top-3 left-3 bg-green-600 text-white p-1.5 rounded-full shadow-md">
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        
+        {/* Save Button - Compact */}
         <button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             toggleSaved();
           }}
-          className="absolute top-4 right-14 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all z-10"
-          title={isSaved ? "Remove from Saved" : "Save for later"}
+          className="absolute top-3 right-3 bg-white/90 hover:bg-white p-1.5 rounded-full shadow-md transition-all"
         >
           <Heart 
-            className={`w-5 h-5 ${isSaved ? 'fill-red-600 text-red-600' : 'text-gray-600'}`}
+            className={`w-4 h-4 ${isSaved ? 'fill-red-600 text-red-600' : 'text-gray-600'}`}
           />
         </button>
         
-        {/* Timer */}
-        <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-          <Clock className="w-4 h-4 inline mr-1" />
-          {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m
+        {/* Minimal Timer - Compact */}
+        <div className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded text-xs font-semibold">
+          {timeRemaining.days}d {timeRemaining.hours}h
         </div>
       </Link>
 
