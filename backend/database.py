@@ -349,31 +349,6 @@ class BrokerApplicationDocument(BaseModel):
             ObjectId: str
         }
 
-            datetime: lambda v: v.isoformat(),
-            ObjectId: str
-        }
-
-    due_at_signing: float
-    
-    # Deposit management (до 5 резерваций, авто исчезает когда кто-то платит депозит)
-    deposit_paid: bool = False
-    deposit_amount: float = 97.49
-    
-    status: str = "active"  # active, expired, converted, cancelled, deposit_paid
-    expires_at: datetime
-    
-    # If converted to application
-    application_id: Optional[str] = None
-    
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            datetime: lambda v: v.isoformat(),
-            ObjectId: str
-        }
-
 class AuditLogDocument(BaseModel):
     """Audit log document model for MongoDB"""
     user_id: Optional[str] = None
