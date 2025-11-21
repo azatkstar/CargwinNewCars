@@ -96,11 +96,11 @@ const OfferCard = ({ offer }) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       {/* Image and Badge - Clickable */}
-      <Link to={`/car/${offer.id}`} className="relative block">
+      <Link to={`/car/${offer.id}`} className="relative block group">
         <img 
           src={offer.image || 'https://via.placeholder.com/600x400?text=No+Image'} 
           alt={`${offer.title} — front view`}
-          className="w-full h-48 object-cover cursor-pointer hover:opacity-95 transition-opacity"
+          className="w-full h-48 object-cover cursor-pointer group-hover:opacity-95 transition-opacity"
           loading="lazy"
           onError={(e) => {
             console.error('Offer card image failed:', offer.image);
@@ -110,6 +110,21 @@ const OfferCard = ({ offer }) => {
         <Badge className="absolute top-4 left-4 bg-green-600 text-white">
           Verified Fleet Deal
         </Badge>
+        
+        {/* Save Button */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSaved();
+          }}
+          className="absolute top-4 right-14 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all z-10"
+          title={isSaved ? "Remove from Saved" : "Save for later"}
+        >
+          <Heart 
+            className={`w-5 h-5 ${isSaved ? 'fill-red-600 text-red-600' : 'text-gray-600'}`}
+          />
+        </button>
         
         {/* Timer */}
         <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
