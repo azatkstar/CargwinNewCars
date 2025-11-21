@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Card, CardContent } from '../components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import CarHero from '../components/car-detail/CarHero';
 import CarGallery from '../components/car-detail/CarGallery';
 import CarSpecs from '../components/car-detail/CarSpecs';
