@@ -88,17 +88,46 @@ const Hero = () => {
       </div>
 
       {/* Content - Centered */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 text-center text-white">
         
-        {/* Headline */}
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
-          Drive away with your dream car
+        {/* Philosophy Badge */}
+        <div className="inline-flex items-center gap-2 bg-green-600/90 text-white px-6 py-3 rounded-full text-sm font-bold mb-6 backdrop-blur-sm">
+          <MapPin className="w-4 h-4" />
+          California Fleet Pricing
+        </div>
+        
+        {/* Headline with Philosophy */}
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          New Cars.<br />
+          <span className="text-red-500">Fleet Pricing.</span><br />
+          Huge Savings.
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-xl md:text-2xl mb-12 text-gray-100">
-          Vehicle Leasing and Financing Simplified
+        {/* Philosophy Subheadline */}
+        <p className="text-xl md:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto">
+          Get the same low prices rental companies pay for their fleets.
+          <strong className="text-white block mt-2">No dealer add-ons. No haggling. No BS.</strong>
         </p>
+        
+        {/* Quick Benefits - Above Search */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+            <div className="text-2xl font-bold text-white">$5K-$15K</div>
+            <div className="text-xs text-gray-200">Average Savings</div>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+            <div className="text-2xl font-bold text-white">680+</div>
+            <div className="text-xs text-gray-200">All Credit Tiers</div>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+            <div className="text-2xl font-bold text-white">0-2 Days</div>
+            <div className="text-xs text-gray-200">Free Delivery</div>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+            <div className="text-2xl font-bold text-white">24/7</div>
+            <div className="text-xs text-gray-200">AI Assistant</div>
+          </div>
+        </div>
 
         {/* Search Form - AutoBandit Style */}
         <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-3xl mx-auto">
