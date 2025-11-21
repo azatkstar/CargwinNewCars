@@ -94,7 +94,18 @@ const OfferCard = ({ offer }) => {
   );
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300">
+      {/* TIMER НАД КАРТОЧКОЙ - КЛЮЧЕВОЙ ЭЛЕМЕНТ */}
+      <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Clock className="w-4 h-4" />
+          <span className="text-sm font-bold">ENDS IN:</span>
+        </div>
+        <div className="text-lg font-bold">
+          {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m
+        </div>
+      </div>
+
       {/* Image and Badge - Clickable */}
       <Link to={`/car/${offer.id}`} className="relative block group">
         <img 
@@ -108,31 +119,27 @@ const OfferCard = ({ offer }) => {
           }}
         />
         
-        {/* Minimal Badge - Just checkmark */}
-        <div className="absolute top-3 left-3 bg-green-600 text-white p-1.5 rounded-full shadow-md">
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        {/* VERIFIED BADGE - С ТЕКСТОМ, ВИДНО */}
+        <div className="absolute top-3 left-3 bg-green-600 text-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
           </svg>
+          <span className="text-xs font-bold">VERIFIED</span>
         </div>
         
-        {/* Save Button - Compact */}
+        {/* Save Button - Heart */}
         <button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             toggleSaved();
           }}
-          className="absolute top-3 right-3 bg-white/90 hover:bg-white p-1.5 rounded-full shadow-md transition-all"
+          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-lg hover:scale-110 transition-transform"
         >
           <Heart 
-            className={`w-4 h-4 ${isSaved ? 'fill-red-600 text-red-600' : 'text-gray-600'}`}
+            className={`w-5 h-5 ${isSaved ? 'fill-red-600 text-red-600' : 'text-gray-600'}`}
           />
         </button>
-        
-        {/* Minimal Timer - Compact */}
-        <div className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded text-xs font-semibold">
-          {timeRemaining.days}d {timeRemaining.hours}h
-        </div>
       </Link>
 
       <div className="p-6">
