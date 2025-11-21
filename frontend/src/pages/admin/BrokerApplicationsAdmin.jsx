@@ -49,29 +49,94 @@ const BrokerApplicationsAdmin = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-3 gap-4 text-sm">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm mb-4">
                   <div>
-                    <span className="text-gray-600">Car:</span>
+                    <span className="text-gray-600">Desired Car:</span>
                     <p className="font-medium">{app.desired_cars}</p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Payment:</span>
+                    <span className="text-gray-600">Financing:</span>
+                    <p className="font-medium">{app.financing_type}</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-600">Expected Payment:</span>
                     <p className="font-medium">${app.expected_payment}/mo</p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Income:</span>
+                    <span className="text-gray-600">Monthly Income:</span>
                     <p className="font-medium">${app.monthly_income_pretax}/mo</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-600">Income Type:</span>
+                    <p className="font-medium">{app.income_type}</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-600">Submitted:</span>
+                    <p className="font-medium">{new Date(app.created_at).toLocaleDateString()}</p>
                   </div>
                 </div>
                 
-                <details className="mt-4">
-                  <summary className="cursor-pointer text-blue-600">Full Details</summary>
-                  <div className="mt-3 p-4 bg-gray-50 rounded text-sm space-y-1">
-                    <div><strong>Employer:</strong> {app.employer}</div>
-                    <div><strong>Address:</strong> {app.current_address}</div>
-                    <div><strong>Down:</strong> ${app.down_payment_comfortable} - ${app.down_payment_max}</div>
+                {/* FULL DETAILS - Always visible */}
+                <div className="bg-gray-50 border rounded-lg p-4 space-y-3 text-sm">
+                  <h4 className="font-bold text-gray-900 mb-3">Complete Application Data</h4>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <h5 className="font-semibold text-gray-700 mb-2">Personal</h5>
+                      <div className="space-y-1">
+                        <div><strong>Name:</strong> {app.first_name} {app.last_name}</div>
+                        <div><strong>Email:</strong> {app.email}</div>
+                        <div><strong>Phone:</strong> {app.phone}</div>
+                        <div><strong>DOB:</strong> {app.date_of_birth}</div>
+                        <div><strong>DL#:</strong> {app.drivers_license}</div>
+                        <div><strong>SSN:</strong> ***-**-{app.ssn?.slice(-4) || 'N/A'}</div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h5 className="font-semibold text-gray-700 mb-2">Vehicle Preferences</h5>
+                      <div className="space-y-1">
+                        <div><strong>Desired:</strong> {app.desired_cars}</div>
+                        <div><strong>Colors/Options:</strong> {app.color_preferences}</div>
+                        <div><strong>Alternatives:</strong> {app.alternative_vehicles}</div>
+                        <div><strong>Financing:</strong> {app.financing_type}</div>
+                      </div>
+                    </div>
                   </div>
-                </details>
+                  
+                  <div className="grid grid-cols-2 gap-4 pt-3 border-t">
+                    <div>
+                      <h5 className="font-semibold text-gray-700 mb-2">Employment</h5>
+                      <div className="space-y-1">
+                        <div><strong>Employer:</strong> {app.employer}</div>
+                        <div><strong>Job Title:</strong> {app.job_title}</div>
+                        <div><strong>Employer Address:</strong> {app.employer_address || 'N/A'}</div>
+                        <div><strong>Employer Phone:</strong> {app.employer_phone || 'N/A'}</div>
+                        <div><strong>Time at Job:</strong> {app.time_at_job_months} months</div>
+                        <div><strong>Income Type:</strong> {app.income_type}</div>
+                        <div><strong>Additional Income:</strong> ${app.additional_income || 0}</div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h5 className="font-semibold text-gray-700 mb-2">Residence & Financial</h5>
+                      <div className="space-y-1">
+                        <div><strong>Immigration:</strong> {app.immigration_status}</div>
+                        <div><strong>Current Address:</strong> {app.current_address}</div>
+                        <div><strong>Previous Address:</strong> {app.previous_address || 'N/A'}</div>
+                        <div><strong>Co-signer:</strong> {app.has_cosigner ? 'Yes' : 'No'}</div>
+                        <div><strong>Down Payment:</strong> ${app.down_payment_comfortable} - ${app.down_payment_max}</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-3 border-t">
+                    <h5 className="font-semibold text-gray-700 mb-2">Signature & Consent</h5>
+                    <div><strong>Signed by:</strong> {app.signature_name}</div>
+                    <div><strong>Credit Check:</strong> {app.consent_credit_check ? '✅ Authorized' : '❌ Not authorized'}</div>
+                    <div><strong>Contact:</strong> {app.consent_contact ? '✅ Consented' : '❌ No consent'}</div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           ))}
