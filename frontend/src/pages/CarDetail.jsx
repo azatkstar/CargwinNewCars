@@ -188,6 +188,34 @@ const CarDetail = () => {
       {/* Car Hero Section */}
       <CarHero car={carData} />
       
+      {/* MSRP & SAVINGS BLOCK - СРАЗУ ПОСЛЕ HERO (скрин 1 на место скрина 2) */}
+      <div className="bg-gradient-to-r from-green-50 to-blue-50 border-y-4 border-green-600 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center gap-12">
+            <div className="text-center">
+              <div className="text-sm text-gray-600 mb-1">MSRP</div>
+              <div className="text-3xl font-bold line-through text-gray-400">
+                ${carData.msrp?.toLocaleString() || '52,000'}
+              </div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-sm text-gray-600 mb-1">YOU SAVE</div>
+              <div className="text-5xl font-bold text-green-600 border-4 border-red-600 px-8 py-4 rounded-xl bg-white shadow-lg">
+                ${carData.savings?.toLocaleString() || '33,228'}
+              </div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-sm text-gray-600 mb-1">YOUR PRICE</div>
+              <div className="text-3xl font-bold text-gray-900">
+                ${carData.fleet?.toLocaleString() || '18,772'}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       {/* MAIN CONTENT - Calculator + Key Info (First Screen) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
