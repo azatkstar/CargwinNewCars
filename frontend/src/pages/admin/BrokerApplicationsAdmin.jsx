@@ -8,6 +8,8 @@ import { useAuth } from '../../hooks/useAuth';
 const BrokerApplicationsAdmin = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedSSN, setSelectedSSN] = useState(null);
+  const [showSSNModal, setShowSSNModal] = useState(false);
   const { getApiClient } = useAuth();
 
   useEffect(() => {
