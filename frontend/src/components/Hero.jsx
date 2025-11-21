@@ -90,129 +90,84 @@ const Hero = () => {
       {/* Content - Centered */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-center text-white">
         
-        {/* Philosophy Badge */}
-        <div className="inline-flex items-center gap-2 bg-green-600/90 text-white px-6 py-3 rounded-full text-sm font-bold mb-6 backdrop-blur-sm">
-          <MapPin className="w-4 h-4" />
-          California Fleet Pricing
+        {/* Compact Philosophy Badge */}
+        <div className="inline-flex items-center gap-2 bg-green-600/90 text-white px-4 py-2 rounded-full text-xs font-bold mb-4 backdrop-blur-sm">
+          California Fleet Pricing • All Credit Tiers Welcome
         </div>
         
-        {/* Headline with Philosophy */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-          New Cars.<br />
-          <span className="text-red-500">Fleet Pricing.</span><br />
-          Huge Savings.
+        {/* Compact Headline */}
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-3 leading-tight">
+          New Cars. <span className="text-red-500">Fleet Pricing.</span>
         </h1>
 
-        {/* Philosophy Subheadline */}
-        <p className="text-xl md:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto">
-          Get the same low prices rental companies pay for their fleets.
-          <strong className="text-white block mt-2">No dealer add-ons. No haggling. No BS.</strong>
+        {/* Compact Subheadline */}
+        <p className="text-base md:text-lg mb-6 text-gray-100 max-w-2xl mx-auto">
+          Same prices rental companies pay. No dealer games. No BS.
         </p>
         
-        {/* Quick Benefits - Above Search */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
-            <div className="text-2xl font-bold text-white">$5K-$15K</div>
-            <div className="text-xs text-gray-200">Average Savings</div>
+        {/* Compact Benefits - 2 cards only */}
+        <div className="grid grid-cols-2 gap-3 mb-6 max-w-md mx-auto">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 border border-white/20">
+            <div className="text-xl font-bold text-white">$5K-$15K</div>
+            <div className="text-xs text-gray-200">Avg Savings</div>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
-            <div className="text-2xl font-bold text-white">680+</div>
-            <div className="text-xs text-gray-200">All Credit Tiers</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
-            <div className="text-2xl font-bold text-white">0-2 Days</div>
-            <div className="text-xs text-gray-200">Free Delivery</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
-            <div className="text-2xl font-bold text-white">24/7</div>
-            <div className="text-xs text-gray-200">AI Assistant</div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 border border-white/20">
+            <div className="text-xl font-bold text-white">24/7 AI</div>
+            <div className="text-xs text-gray-200">Assistant</div>
           </div>
         </div>
 
-        {/* Search Form - AutoBandit Style */}
-        <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Compact Search Form */}
+        <div className="bg-white rounded-xl shadow-2xl p-4 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             
-            {/* Monthly Budget */}
-            <div className="text-left">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Monthly Budget
-              </label>
-              <select
-                value={searchParams.budget}
-                onChange={(e) => setSearchParams({...searchParams, budget: e.target.value})}
-                className="w-full p-3 border border-gray-300 rounded-lg text-gray-900 bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
-              >
-                <option value="all">Any Budget</option>
-                <option value="300">Up to $300/mo</option>
-                <option value="400">Up to $400/mo</option>
-                <option value="500">Up to $500/mo</option>
-                <option value="600">Up to $600/mo</option>
-                <option value="800">Up to $800/mo</option>
-                <option value="1000">$1000+/mo</option>
-              </select>
-            </div>
+            {/* Budget */}
+            <select
+              value={searchParams.budget}
+              onChange={(e) => setSearchParams({...searchParams, budget: e.target.value})}
+              className="w-full p-2 text-sm border border-gray-300 rounded-lg text-gray-900"
+            >
+              <option value="all">Any Budget</option>
+              <option value="300">$300/mo</option>
+              <option value="500">$500/mo</option>
+              <option value="800">$800/mo</option>
+            </select>
 
-            {/* Body Style */}
-            <div className="text-left">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Body Style
-              </label>
-              <select
-                value={searchParams.bodyStyle}
-                onChange={(e) => setSearchParams({...searchParams, bodyStyle: e.target.value})}
-                className="w-full p-3 border border-gray-300 rounded-lg text-gray-900 bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
-              >
-                <option value="all">All Styles</option>
-                <option value="sedan">Sedan</option>
-                <option value="suv">SUV</option>
-                <option value="truck">Truck</option>
-                <option value="coupe">Coupe</option>
-                <option value="hatchback">Hatchback</option>
-                <option value="van">Van/Minivan</option>
-              </select>
-            </div>
+            {/* Body */}
+            <select
+              value={searchParams.bodyStyle}
+              onChange={(e) => setSearchParams({...searchParams, bodyStyle: e.target.value})}
+              className="w-full p-2 text-sm border border-gray-300 rounded-lg text-gray-900"
+            >
+              <option value="all">All Styles</option>
+              <option value="sedan">Sedan</option>
+              <option value="suv">SUV</option>
+              <option value="truck">Truck</option>
+            </select>
 
-            {/* Zip Code */}
-            <div className="text-left">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your Zip Code
-              </label>
-              <input
-                type="text"
-                maxLength="5"
-                placeholder="90210"
-                value={searchParams.zipCode}
-                onChange={(e) => setSearchParams({...searchParams, zipCode: e.target.value})}
-                className="w-full p-3 border border-gray-300 rounded-lg text-gray-900 bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
-              />
-            </div>
+            {/* Zip */}
+            <input
+              type="text"
+              maxLength="5"
+              placeholder="90210"
+              value={searchParams.zipCode}
+              onChange={(e) => setSearchParams({...searchParams, zipCode: e.target.value})}
+              className="w-full p-2 text-sm border border-gray-300 rounded-lg text-gray-900"
+            />
           </div>
 
-          {/* Search Button */}
+          {/* Compact Button */}
           <Button
             onClick={handleSearch}
-            className="w-full mt-6 bg-red-600 hover:bg-red-700 text-white py-6 text-lg font-bold rounded-xl shadow-lg"
-            size="lg"
+            className="w-full mt-3 bg-red-600 hover:bg-red-700 text-white py-3 text-base font-bold rounded-lg"
           >
             Find My Perfect Deal
           </Button>
-
-          {/* AI Badge */}
-          <div className="mt-4 text-center">
-            <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-              </span>
-              AI-Powered Search with CargwinGPT
-            </span>
-          </div>
         </div>
 
-        {/* Trust Line */}
-        <p className="text-sm text-gray-200 mt-8">
-          ✓ Fleet Pricing • ✓ All Fees Included • ✓ 24/7 AI Assistant
+        {/* Compact Trust Line */}
+        <p className="text-xs text-gray-200 mt-4">
+          ✓ Fleet Pricing • ✓ AI Assistant • ✓ Free Delivery
         </p>
       </div>
     </section>
