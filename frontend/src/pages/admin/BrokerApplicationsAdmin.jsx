@@ -160,6 +160,14 @@ const BrokerApplicationsAdmin = () => {
           ))}
         </div>
       )}
+      
+      {/* SSN Modal */}
+      <ViewSSNModal
+        isOpen={showSSNModal}
+        onClose={() => setShowSSNModal(false)}
+        ssn={selectedSSN?.ssn}
+        clientName={selectedSSN?.name}
+      />
     </div>
   );
 };
