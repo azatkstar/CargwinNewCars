@@ -9,6 +9,7 @@ import AdminUsers from './AdminUsers';
 import AdminApplications from './AdminApplications';
 import FinanceManagerDashboard from './FinanceManagerDashboard';
 import AnalyticsDashboard from './AnalyticsDashboard';
+import BrokerApplicationsAdmin from './BrokerApplicationsAdmin';
 import AdminSettings from './AdminSettings';
 import AuditLog from './AuditLog';
 
