@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ChevronDown, Shield, Clock, MapPin, DollarSign, Users, TrendingUp } from 'lucide-react';
 import { getNextMondayMidnight, formatTimeRemaining } from '../utils/timer';
