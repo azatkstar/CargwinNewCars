@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
-import { Clock, Eye, TrendingUp, Car, DollarSign, ArrowRight, FileText } from 'lucide-react';
+import { Clock, Eye, TrendingUp, Car, DollarSign, ArrowRight, FileText, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { formatPrice, formatTimeRemaining, calculateMonthlyPayment } from '../utils/timer';
 import { getFOMOCounters } from '../mock';
@@ -17,8 +17,31 @@ const OfferCard = ({ offer }) => {
   const [fomoCounters, setFomoCounters] = useState({ viewers: 0, confirmed: 0 });
   const [showReserveModal, setShowReserveModal] = useState(false);
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const { t } = useI18n();
   const { socket, connected } = useWebSocket();
+
+  // Check if car is saved
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem('hunter_saved_cars') || '[]');
+    setIsSaved(saved.includes(offer.id));
+  }, [offer.id]);
+
+  const toggleSaved = () => {
+    const saved = JSON.parse(localStorage.getItem('hunter_saved_cars') || '[]');
+    
+    if (isSaved) {
+      // Remove from saved
+      const updated = saved.filter(id => id !== offer.id);
+      localStorage.setItem('hunter_saved_cars', JSON.stringify(updated));
+      setIsSaved(false);
+    } else {
+      // Add to saved
+      saved.push(offer.id);
+      localStorage.setItem('hunter_saved_cars', JSON.stringify(saved));
+      setIsSaved(true);
+    }
+  };
 
   // Subscribe to offer updates via WebSocket
   useEffect(() => {
