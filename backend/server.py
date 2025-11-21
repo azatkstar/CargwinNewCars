@@ -3148,6 +3148,83 @@ async def broadcast_fomo_update(
 
 @api_router.get("/admin/applications/export/excel")
 async def export_applications_excel(
+
+
+# ============================================
+# Broker Applications
+# ============================================
+
+@api_router.post("/broker-application")
+async def submit_broker_application(
+    application_data: dict
+):
+    """Submit application from broker/external source"""
+    try:
+        from database import get_database
+        db = get_database()
+        
+        # Add timestamp
+        application_data['created_at'] = datetime.now(timezone.utc)
+        application_data['status'] = 'pending'
+        application_data['source'] = 'broker'
+        
+        # Insert into database
+        result = await db.broker_applications.insert_one(application_data)
+        
+        # Send notification email to admin
+        admin_emails = ['admin@hunter.lease', 'info@cargwin.com']
+        for admin_email in admin_emails:
+            import sys
+            sys.path.append('/app/backend')
+            from notifications import send_email
+            
+            await send_email(
+                admin_email,
+                f"New Broker Application - {application_data.get('first_name')} {application_data.get('last_name')}",
+                f"New broker application received for {application_data.get('desired_cars')}\n\nReview in admin panel."
+            )
+        
+        logger.info(f"Broker application created: {result.inserted_id}")
+        
+        return {
+            "ok": True,
+            "application_id": str(result.inserted_id),
+            "message": "Application submitted successfully. We'll contact you within 24 hours."
+        }
+        
+    except Exception as e:
+        logger.error(f"Broker application error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to submit application")
+
+@api_router.get("/admin/broker-applications")
+async def get_broker_applications(
+    status: Optional[str] = None,
+    current_user: User = Depends(require_admin)
+):
+    """Get all broker applications (admin only)"""
+    try:
+        from database import get_database
+        db = get_database()
+        
+        query = {}
+        if status:
+            query['status'] = status
+        
+        applications = await db.broker_applications.find(query).sort('created_at', -1).to_list(length=100)
+        
+        for app in applications:
+            app['id'] = str(app.pop('_id'))
+        
+        return {
+            "ok": True,
+            "applications": applications,
+            "total": len(applications)
+        }
+        
+    except Exception as e:
+        logger.error(f"Get broker applications error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get applications")
+
     status: Optional[str] = None,
     current_user: User = Depends(require_auth)
 ):
