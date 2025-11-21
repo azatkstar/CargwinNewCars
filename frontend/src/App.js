@@ -113,6 +113,7 @@ function App() {
                   <Route path="/coverage" element={<CoveragePage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/reviews" element={<ReviewsPage />} />
+                  <Route path="/broker-application" element={<BrokerApplication />} />
                   <Route path="/preview/:token" element={<PreviewLot />} />
                   <Route path="/admin/login" element={<AdminLogin />} />
                   <Route path="/admin/*" element={<AdminDashboard />} />
