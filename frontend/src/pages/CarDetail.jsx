@@ -185,165 +185,151 @@ const CarDetail = () => {
       
       <Header />
       
-      {/* Car Hero Section */}
-      <CarHero car={carData} />
-      
-      {/* MSRP & SAVINGS BLOCK - СРАЗУ ПОСЛЕ HERO (скрин 1 на место скрина 2) */}
-      <div className="bg-gradient-to-r from-green-50 to-blue-50 border-y-4 border-green-600 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center gap-12">
-            <div className="text-center">
-              <div className="text-sm text-gray-600 mb-1">MSRP</div>
-              <div className="text-3xl font-bold line-through text-gray-400">
-                ${carData.msrp?.toLocaleString() || '52,000'}
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-sm text-gray-600 mb-1">YOU SAVE</div>
-              <div className="text-5xl font-bold text-green-600 border-4 border-red-600 px-8 py-4 rounded-xl bg-white shadow-lg">
-                ${carData.savings?.toLocaleString() || '33,228'}
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-sm text-gray-600 mb-1">YOUR PRICE</div>
-              <div className="text-3xl font-bold text-gray-900">
-                ${carData.fleet?.toLocaleString() || '18,772'}
-              </div>
-            </div>
+      {/* Car Title + Basic Info - как у AutoBandit */}
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {carData.title || 'Loading...'}
+          </h1>
+          <div className="flex items-center gap-4 text-sm text-gray-600">
+            <span>MSRP ${carData.msrp?.toLocaleString()}</span>
+            <span>•</span>
+            <span className="text-green-600 font-semibold">
+              {((carData.savings / carData.msrp) * 100).toFixed(1)}% off MSRP
+            </span>
           </div>
         </div>
       </div>
-      
-      {/* MAIN CONTENT - Calculator + Key Info (First Screen) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      {/* Main Content - ТОЧНО КАК AUTOBANDIT */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left - Price Details */}
+          
+          {/* LEFT COLUMN - Calculator (КАК У AUTOBANDIT) */}
+          <div className="lg:col-span-1">
+            <AutoBanditStyleCalculator car={carData} />
+          </div>
+
+          {/* RIGHT COLUMN - Info & Gallery */}
           <div className="lg:col-span-2 space-y-6">
-            {/* OTD Price & Trust Points */}
-            <Card className="border-2 border-blue-300">
-              <CardContent className="pt-6">
-                <div className="mb-4">
-                  <div className="text-sm text-gray-600 mb-1">OTD Price:</div>
-                  <div className="text-3xl font-bold text-gray-900">
-                    ${((carData.fleet || 0) * 1.0775 + 540 + 85).toFixed(0).toLocaleString()}
+            
+            {/* Car Image */}
+            <div className="relative">
+              <img
+                src={carData.image || carData.gallery?.[0]}
+                alt={carData.title}
+                className="w-full rounded-xl"
+              />
+              <div className="absolute top-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg font-bold">
+                ✓ VERIFIED FLEET DEAL
+              </div>
+            </div>
+
+            {/* SAVINGS HIGHLIGHT */}
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
+              <div className="grid grid-cols-3 gap-6 text-center">
+                <div>
+                  <div className="text-sm text-gray-600 mb-1">MSRP</div>
+                  <div className="text-2xl font-bold line-through text-gray-400">
+                    ${carData.msrp?.toLocaleString()}
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">* Includes taxes and fees for CA</p>
                 </div>
                 
-                <div className="space-y-2 text-sm">
-                  <p className="flex items-start gap-2">
-                    <span className="text-red-600">✓</span>
-                    <span><strong>No forced add-ons:</strong> dealers typically add ${carData.dealer_addons?.toLocaleString() || '5,500'} — ours $0</span>
-                  </p>
-                  <p className="flex items-start gap-2">
-                    <span className="text-green-600">✓</span>
-                    <span>Price locked in — no haggling</span>
-                  </p>
-                  <p className="flex items-start gap-2">
-                    <span className="text-blue-600">✓</span>
-                    <span>Your data never shared with dealers for cold calls</span>
-                  </p>
-                  <p className="flex items-start gap-2">
-                    <span className="text-purple-600">✓</span>
-                    <span>Contact only after 100% terms agreement</span>
-                  </p>
+                <div>
+                  <div className="text-sm text-gray-600 mb-1">YOU SAVE</div>
+                  <div className="text-4xl font-bold text-green-600 border-4 border-red-600 rounded-lg px-6 py-3 bg-white">
+                    ${carData.savings?.toLocaleString()}
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="text-sm text-gray-600 mb-1">YOUR PRICE</div>
+                  <div className="text-2xl font-bold text-gray-900">
+                    ${carData.fleet?.toLocaleString()}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* DEAL INSIGHTS - как у AutoBandit */}
+            <Card>
+              <CardHeader>
+                <CardTitle>DEAL INSIGHTS</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">MSRP</span>
+                  <span className="font-bold">${carData.msrp?.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">DISCOUNT</span>
+                  <span className="font-bold text-green-600">
+                    ${carData.savings?.toLocaleString()} ({((carData.savings / carData.msrp) * 100).toFixed(2)}%)
+                  </span>
+                </div>
+                <div className="flex justify-between border-t pt-3">
+                  <span className="text-gray-600">SELLING PRICE</span>
+                  <span className="font-bold text-xl">${carData.fleet?.toLocaleString()}</span>
                 </div>
               </CardContent>
             </Card>
-            
-            {/* Car Specs Preview */}
-            <CarSpecs car={carData} />
-          </div>
-          
-          {/* Right - Calculator */}
-          <div>
-            <AutoBanditStyleCalculator car={carData} />
-          </div>
-        </div>
-      </div>
-      
-      {/* Car Gallery */}
-      <CarGallery images={carData.gallery} title={carData.title} />
-      
-      {/* Video Gallery - if videos available */}
-      {carData.videos && carData.videos.length > 0 && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <VideoGallery videos={carData.videos} />
-        </div>
-      )}
-      
-      {/* Main Content Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Left Column - Specs & Info */}
-          <div className="lg:col-span-2 space-y-12">
-            <CarSpecs car={carData} />
-            
-            {/* Price Comparison - Only show if competitor data exists */}
-            <PriceComparison car={carData} />
-            
-            {/* Who This Offer Is For */}
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-300 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
-                ✓ Who This Offer Is For
-              </h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="text-green-600 font-bold">✓</span>
-                  <div>
-                    <strong>California Residents Only</strong>
-                    <p className="text-sm text-gray-600">Must have valid CA address and CA driver's license</p>
+
+            {/* SPECS - как у AutoBandit */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Specs</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Year</span>
+                    <span className="font-medium">{carData.specs?.year || carData.title?.split(' ')[0]}</span>
                   </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-green-600 font-bold">✓</span>
-                  <div>
-                    <strong>Credit Score 720+ (Tier 1)</strong>
-                    <p className="text-sm text-gray-600">Lower scores may qualify with higher rate or more down payment</p>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Model</span>
+                    <span className="font-medium">{carData.specs?.model || carData.title?.split(' ')[1]}</span>
                   </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-green-600 font-bold">✓</span>
-                  <div>
-                    <strong>Annual Income $60K+ Recommended</strong>
-                    <p className="text-sm text-gray-600">Based on typical approval for this payment range</p>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Trim</span>
+                    <span className="font-medium">{carData.specs?.trim || 'Base'}</span>
                   </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-green-600 font-bold">✓</span>
-                  <div>
-                    <strong>Valid Driver's License & Insurance</strong>
-                    <p className="text-sm text-gray-600">Required before delivery - bring proof of insurance</p>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Miles</span>
+                    <span className="font-medium">0 mi (new)</span>
                   </div>
-                </li>
-              </ul>
-              <div className="mt-4 p-3 bg-yellow-50 rounded border border-yellow-300">
-                <p className="text-xs text-yellow-900">
-                  <strong>Note:</strong> If you don't meet all requirements, we can often find alternative vehicles 
-                  that fit your profile. Contact us for options.
+                  <div className="flex justify-between col-span-2 border-t pt-3">
+                    <span className="text-gray-600">MSRP</span>
+                    <span className="font-bold">${carData.msrp?.toLocaleString()}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* hunter.lease PHILOSOPHY */}
+            <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
+              <h3 className="font-bold text-lg mb-4">Why hunter.lease?</h3>
+              <div className="space-y-2 text-sm">
+                <p className="flex gap-2">
+                  <span className="text-green-600">✓</span>
+                  <span><strong>Fleet Pricing:</strong> Same prices rental companies pay</span>
+                </p>
+                <p className="flex gap-2">
+                  <span className="text-green-600">✓</span>
+                  <span><strong>No Dealer Add-ons:</strong> They charge ${carData.dealer_addons?.toLocaleString() || '5,500'} - we charge $0</span>
+                </p>
+                <p className="flex gap-2">
+                  <span className="text-green-600">✓</span>
+                  <span><strong>100% Online:</strong> No dealer visits, no haggling, no BS</span>
+                </p>
+                <p className="flex gap-2">
+                  <span className="text-green-600">✓</span>
+                  <span><strong>All Credit Tiers:</strong> 680+ welcome, we work with you</span>
                 </p>
               </div>
             </div>
-            
-            {/* Lease vs Finance Comparison */}
-            <LeaseVsFinanceComparison car={carData} />
-            
-            {/* Alternative Vehicles - auto-suggested */}
-            <AlternativeVehicles selectedCar={carData} />
-          </div>
-          
-          {/* Right Column - Forms Only */}
-          <div className="space-y-8">
-            <CarForms car={carData} />
-            <ModelSubscriptions carMake={carData.specs?.make || carData.make} carModel={carData.specs?.model || carData.model} />
           </div>
         </div>
       </div>
-      
-      {/* Similar Offers */}
-      <SimilarOffers currentCarId={carId} />
       
       <Footer hiddenVin={carData?.specs?.vin} />
       <FOMOTicker />
