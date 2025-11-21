@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Clock, Eye, TrendingUp, AlertCircle } from 'lucide-react';
 import CarHero from '../components/car-detail/CarHero';
 import CarGallery from '../components/car-detail/CarGallery';
 import CarSpecs from '../components/car-detail/CarSpecs';
