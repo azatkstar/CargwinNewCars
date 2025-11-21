@@ -3148,6 +3148,40 @@ async def broadcast_fomo_update(
 
 @api_router.get("/admin/applications/export/excel")
 async def export_applications_excel(
+    status: Optional[str] = None,
+    current_user: User = Depends(require_auth)
+):
+    """Export applications to Excel"""
+    try:
+        from database import get_database
+        db = get_database()
+        
+        query = {}
+        if status and status != 'all':
+            query['status'] = status
+        
+        apps = await db.applications.find(query).to_list(length=1000)
+        
+        # Convert to CSV format
+        csv_data = "ID,Customer,Email,Vehicle,Status,Credit Score,Income,Applied Date\\n"
+        
+        for app in apps:
+            csv_data += f"{app.get('_id', '')},{app.get('user_data', {}).get('name', '')},"
+            csv_data += f"{app.get('user_data', {}).get('email', '')},{app.get('lot_data', {}).get('year', '')} {app.get('lot_data', {}).get('make', '')},"
+            csv_data += f"{app.get('status', '')},{app.get('user_data', {}).get('credit_score', '')},"
+            csv_data += f"{app.get('user_data', {}).get('annual_income', '')},{app.get('created_at', '')}\\n"
+        
+        logger.info(f"Exported {len(apps)} applications")
+        
+        return {
+            "ok": True,
+            "data": csv_data,
+            "count": len(apps)
+        }
+        
+    except Exception as e:
+        logger.error(f"Export error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to export")
 
 
 # ============================================
