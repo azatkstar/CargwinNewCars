@@ -323,8 +323,32 @@ const BrokerApplication = () => {
                   </div>
                   
                   <div>
-                    <Label>Social Security Number *</Label>
-                    <Input type="password" required maxLength="11" value={formData.ssn} onChange={e => setFormData({...formData, ssn: e.target.value})} placeholder="XXX-XX-XXXX" />
+                    <Label className="flex items-center gap-2">
+                      Social Security Number *
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const ssnInput = document.getElementById('ssn-input');
+                          ssnInput.type = ssnInput.type === 'password' ? 'text' : 'password';
+                        }}
+                        className="text-xs text-blue-600 hover:underline"
+                      >
+                        {'{'}Show/Hide{'}'}
+                      </button>
+                    </Label>
+                    <Input 
+                      id="ssn-input"
+                      type="password" 
+                      required 
+                      maxLength="11" 
+                      value={formData.ssn} 
+                      onChange={e => setFormData({...formData, ssn: e.target.value})} 
+                      placeholder="XXX-XX-XXXX"
+                      className="font-mono"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                      ✓ Your SSN is encrypted and secure. Click "Show/Hide" to verify your entry.
+                    </p>
                   </div>
                   
                   <div className="space-y-3">
