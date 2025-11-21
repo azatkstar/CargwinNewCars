@@ -141,49 +141,39 @@ const AutoBanditStyleCalculator = ({ car }) => {
   if (!calculated) return null;
 
   return (
-    <Card className="border-2 border-green-300 bg-white shadow-xl">
+    <Card className="border-2 border-gray-200 bg-white shadow-xl sticky top-4">
       <CardContent className="p-6 space-y-6">
-        {/* Header */}
-        <div className="text-center pb-4 border-b">
-          <div className="text-sm text-gray-600 mb-1">Monthly payment</div>
-          <div className="text-sm text-gray-500 mb-2">{calculated.lender}</div>
-          <div className="text-5xl font-bold text-gray-900 mb-2">
-            ${calculated.monthly}
-            <span className="text-xl text-gray-600"> per month</span>
-          </div>
-          <div className="text-sm text-gray-600">
-            (+${calculated.dueAtSigning.toLocaleString()} due at signing)
-          </div>
+        {/* Tab Switches - LEASE / FINANCE */}
+        <div className="grid grid-cols-2 gap-2 bg-gray-100 p-1 rounded-lg">
+          <button
+            onClick={() => setParams({...params, dealType: 'lease'})}
+            className={`py-3 px-4 rounded-md font-bold transition-all ${
+              params.dealType === 'lease'
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-600'
+            }`}
+          >
+            LEASE
+          </button>
+          <button
+            onClick={() => setParams({...params, dealType: 'finance'})}
+            className={`py-3 px-4 rounded-md font-bold transition-all ${
+              params.dealType === 'finance'
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-600'
+            }`}
+          >
+            FINANCE
+          </button>
         </div>
 
-        {/* Controls */}
-        <div className="space-y-4">
-          {/* Zip Code */}
-          <div>
-            <div className="flex justify-between text-sm mb-2">
-              <span className="font-medium">YOUR ZIP CODE</span>
-              <span className="text-xs text-gray-500">Tax: {taxRate}%</span>
-            </div>
-            <input
-              type="text"
-              maxLength="5"
-              placeholder="90210"
-              value={params.zipCode}
-              onChange={(e) => setParams({...params, zipCode: e.target.value})}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-          
+        {/* Selectors Grid */}
+        <div className="grid grid-cols-2 gap-4">
           {/* Term Length */}
           <div>
-            <div className="flex justify-between text-sm mb-2">
-              <span className="font-medium">TERM LENGTH</span>
-            </div>
-            <Select 
-              value={params.termMonths.toString()} 
-              onValueChange={(val) => setParams({...params, termMonths: parseInt(val)})}
-            >
-              <SelectTrigger className="w-full">
+            <div className="text-xs font-semibold text-gray-500 uppercase mb-2">TERM LENGTH</div>
+            <Select value={params.termMonths.toString()} onValueChange={(val) => setParams({...params, termMonths: parseInt(val)})}>
+              <SelectTrigger className="border-gray-300">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -198,14 +188,9 @@ const AutoBanditStyleCalculator = ({ car }) => {
 
           {/* Annual Mileage */}
           <div>
-            <div className="flex justify-between text-sm mb-2">
-              <span className="font-medium">ANNUAL MILEAGE</span>
-            </div>
-            <Select 
-              value={params.annualMileage.toString()} 
-              onValueChange={(val) => setParams({...params, annualMileage: parseInt(val)})}
-            >
-              <SelectTrigger>
+            <div className="text-xs font-semibold text-gray-500 uppercase mb-2">ANNUAL MILEAGE</div>
+            <Select value={params.annualMileage.toString()} onValueChange={(val) => setParams({...params, annualMileage: parseInt(val)})}>
+              <SelectTrigger className="border-gray-300">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -220,14 +205,9 @@ const AutoBanditStyleCalculator = ({ car }) => {
 
           {/* Credit Tier */}
           <div>
-            <div className="flex justify-between text-sm mb-2">
-              <span className="font-medium">CREDIT TIER</span>
-            </div>
-            <Select 
-              value={params.creditTier} 
-              onValueChange={(val) => setParams({...params, creditTier: val})}
-            >
-              <SelectTrigger>
+            <div className="text-xs font-semibold text-gray-500 uppercase mb-2">CREDIT TIER</div>
+            <Select value={params.creditTier} onValueChange={(val) => setParams({...params, creditTier: val})}>
+              <SelectTrigger className="border-gray-300">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -239,43 +219,67 @@ const AutoBanditStyleCalculator = ({ car }) => {
               </SelectContent>
             </Select>
           </div>
-        </div>
 
-        {/* Price Transparency Button */}
-        <Button 
-          variant="outline"
-          className="w-full border-2 border-blue-500 text-blue-700 hover:bg-blue-50"
-          onClick={() => {/* Open detailed breakdown */}}
-        >
-          <Info className="w-4 h-4 mr-2" />
-          Price Transparency - See Full Breakdown
-        </Button>
-
-        {/* Quick Summary */}
-        <div className="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
-          <div className="flex justify-between">
-            <span className="text-gray-600">Residual Value:</span>
-            <span className="font-semibold">${calculated.residualValue.toLocaleString()}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Money Factor:</span>
-            <span className="font-semibold">{calculated.moneyFactor} (≈{calculated.equivalentAPR}% APR)</span>
-          </div>
-          <div className="flex justify-between border-t pt-2">
-            <span className="font-medium">Total Lease Cost:</span>
-            <span className="font-bold text-lg">${calculated.totalCost.toLocaleString()}</span>
+          {/* Due at Signing */}
+          <div>
+            <div className="text-xs font-semibold text-gray-500 uppercase mb-2">DUE AT SIGNING</div>
+            <Select value={params.dueAtSigning.toString()} onValueChange={(val) => setParams({...params, dueAtSigning: parseInt(val)})}>
+              <SelectTrigger className="border-gray-300">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="0">$0</SelectItem>
+                <SelectItem value="1000">$1,000</SelectItem>
+                <SelectItem value="1500">$1,500</SelectItem>
+                <SelectItem value="2000">$2,000</SelectItem>
+                <SelectItem value="2500">$2,500</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
-        {/* LEASE IT NOW Button */}
-        <Button className="w-full bg-red-600 hover:bg-red-700 text-white py-6 text-lg font-bold">
-          RESERVE NOW - ${calculated.monthly}/mo
-        </Button>
+        {/* LEASE IT NOW Section - COMMERCIAL */}
+        <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl p-6">
+          <div className="text-center mb-6">
+            <div className="text-sm text-gray-600 mb-2">
+              <span className="inline-flex items-center gap-1">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6z"/>
+                </svg>
+                {calculated.lender}
+              </span>
+            </div>
+            
+            <div className="text-6xl font-bold text-gray-900 mb-2">
+              ${calculated.monthly}
+            </div>
+            
+            <div className="text-lg text-gray-600 mb-4">
+              per month
+            </div>
+            
+            <div className="text-sm text-gray-600">
+              (+${calculated.dueAtSigning.toLocaleString()} due at signing)
+            </div>
+          </div>
 
-        <p className="text-xs text-gray-500 text-center">
-          Prices shown for {creditTiers[params.creditTier].label} credit. 
-          Actual rate depends on credit approval.
-        </p>
+          {/* BIG RED BUTTON */}
+          <Button className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-6 text-xl font-bold rounded-xl shadow-lg">
+            LEASE IT NOW
+          </Button>
+        </div>
+
+        {/* Details Breakdown */}
+        <div className="text-xs text-gray-500 space-y-1">
+          <div className="flex justify-between">
+            <span>Residual Value:</span>
+            <span className="font-medium">${calculated.residualValue.toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Money Factor:</span>
+            <span className="font-medium">{calculated.moneyFactor}</span>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
