@@ -26,9 +26,18 @@ const CarDetail = () => {
   const [carData, setCarData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState({ days: 1, hours: 23, minutes: 45, seconds: 0 });
+  const [showStickyBar, setShowStickyBar] = useState(false);
 
   useEffect(() => {
     fetchCarData();
+    
+    // Sticky bar on scroll
+    const handleScroll = () => {
+      setShowStickyBar(window.scrollY > 400);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [carId]);
 
   const fetchCarData = async () => {
