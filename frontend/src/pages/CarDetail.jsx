@@ -379,6 +379,34 @@ const CarDetail = () => {
         </div>
       </div>
       
+      {/* STICKY CTA BAR - Amazon/Walmart Style */}
+      {showStickyBar && carData && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-300 shadow-2xl z-50 py-4">
+          <div className="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <img src={carData.image} alt="" className="w-16 h-16 object-cover rounded" />
+              <div>
+                <div className="font-bold text-gray-900">{carData.title}</div>
+                <div className="text-sm text-gray-600">${carData.lease?.monthly || 577}/mo</div>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <div className="text-right">
+                <div className="text-xs text-gray-600">Ends in</div>
+                <div className="text-lg font-bold text-red-600">
+                  {timeRemaining.days}d {timeRemaining.hours}h
+                </div>
+              </div>
+              
+              <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg">
+                RESERVE NOW
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <Footer hiddenVin={carData?.specs?.vin} />
       <FOMOTicker />
       
