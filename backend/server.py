@@ -3218,6 +3218,60 @@ async def submit_broker_application(
                 f"New broker application received for {application_data.get('desired_cars')}\n\nReview in admin panel."
             )
         
+
+
+# ============================================
+# Professional Lease Calculator
+# ============================================
+
+@api_router.post("/calc/lease")
+async def calculate_lease_payment(
+    request: dict
+):
+    """Professional lease calculation with MF/Residual system"""
+    try:
+        from lease_calculator import calculate_lease
+        from database import get_database
+        
+        db = get_database()
+        
+        # Extract params
+        deal_external_id = request.get('dealExternalId')
+        term_months = request.get('termMonths', 36)
+        annual_mileage = request.get('annualMileage', 10000)
+        credit_tier_code = request.get('creditTierCode', 'SUPER_ELITE')
+        with_incentives = request.get('withIncentives', True)
+        customer_down_payment = request.get('customer_down_payment', 0)
+        zip_code = request.get('zip')
+        tax_rate_override = request.get('taxRateOverride')
+        
+        if not deal_external_id:
+            raise HTTPException(status_code=400, detail="dealExternalId required")
+        
+        # Calculate
+        result = await calculate_lease(
+            db,
+            deal_external_id,
+            term_months,
+            annual_mileage,
+            credit_tier_code,
+            with_incentives,
+            customer_down_payment,
+            zip_code,
+            tax_rate_override
+        )
+        
+        return {
+            "ok": True,
+            **result
+        }
+        
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        logger.error(f"Lease calc API error: {e}")
+        raise HTTPException(status_code=500, detail="Calculation failed")
+
         logger.info(f"Broker application created: {result.inserted_id}")
         
         return {
