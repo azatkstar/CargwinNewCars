@@ -205,18 +205,13 @@ const CarDetail = () => {
 
       {/* СРОЧНОСТЬ И FOMO - BOOKING.COM STYLE */}
       <div className="bg-red-50 border-y-2 border-red-600">
-        <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex items-center justify-between flex-wrap gap-4">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-3">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-red-900">
                 <Clock className="w-5 h-5" />
                 <span className="font-bold">DEAL ENDS IN:</span>
                 <span className="text-2xl font-bold">{timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m</span>
-              </div>
-              <div className="h-6 w-px bg-red-300"></div>
-              <div className="flex items-center gap-2 text-red-900">
-                <AlertCircle className="w-5 h-5" />
-                <span className="font-bold">Only 1 car left at this price!</span>
               </div>
             </div>
             <div className="flex items-center gap-4 text-sm">
@@ -229,6 +224,18 @@ const CarDetail = () => {
                 <span><strong>18</strong> reserved today</span>
               </div>
             </div>
+          </div>
+          
+          {/* Progress Bar - Amazon Style */}
+          <div>
+            <div className="flex justify-between text-sm mb-1">
+              <span className="text-red-900 font-semibold">Fleet allocation for this trim</span>
+              <span className="text-red-900 font-bold">7/8 reserved</span>
+            </div>
+            <div className="w-full bg-red-200 rounded-full h-3 overflow-hidden">
+              <div className="bg-red-600 h-3 rounded-full" style={{width: '87.5%'}}></div>
+            </div>
+            <p className="text-xs text-red-700 mt-1">⚠️ Only 1 car left at this price!</p>
           </div>
         </div>
       </div>
