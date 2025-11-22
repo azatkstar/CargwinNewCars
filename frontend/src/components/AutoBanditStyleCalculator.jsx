@@ -8,14 +8,21 @@ const AutoBanditStyleCalculator = ({ car }) => {
   const [params, setParams] = useState({
     termMonths: 36,
     annualMileage: 10000,
-    creditTier: 'tier1',
-    dueAtSigning: 1580,
+    creditTier: 'SUPER_ELITE',
+    dueAtSigning: 2500,
     zipCode: '90210',
-    dealType: 'lease'  // lease or finance
+    dealType: 'lease',
+    customerDownPayment: 2500,
+    withIncentives: true
   });
   
   const [calculated, setCalculated] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [showReserveModal, setShowReserveModal] = useState(false);
   const [taxRate, setTaxRate] = useState(7.75);
+  
+  // Down payment options до $15k
+  const downPaymentOptions = [0, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 7500, 10000, 12000, 15000];
 
   // Credit Tier adjustments (как AutoBandit)
   const creditTiers = {
