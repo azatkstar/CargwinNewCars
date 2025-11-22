@@ -213,19 +213,19 @@ const AutoBanditStyleCalculator = ({ car }) => {
             </Select>
           </div>
 
-          {/* Due at Signing */}
+          {/* Down Payment - До $15k */}
           <div>
-            <div className="text-xs font-semibold text-gray-500 uppercase mb-2">DUE AT SIGNING</div>
-            <Select value={params.dueAtSigning.toString()} onValueChange={(val) => setParams({...params, dueAtSigning: parseInt(val)})}>
+            <div className="text-xs font-semibold text-gray-500 uppercase mb-2">DOWN PAYMENT</div>
+            <Select value={params.customerDownPayment.toString()} onValueChange={(val) => setParams({...params, customerDownPayment: parseInt(val)})}>
               <SelectTrigger className="border-gray-300">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="0">$0</SelectItem>
-                <SelectItem value="1000">$1,000</SelectItem>
-                <SelectItem value="1500">$1,500</SelectItem>
-                <SelectItem value="2000">$2,000</SelectItem>
-                <SelectItem value="2500">$2,500</SelectItem>
+                {downPaymentOptions.map(amt => (
+                  <SelectItem key={amt} value={amt.toString()}>
+                    ${amt.toLocaleString()}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
