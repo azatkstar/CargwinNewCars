@@ -299,6 +299,76 @@ const CarDetail = () => {
               </div>
             </div>
 
+
+            {/* WHAT HAPPENS NEXT - Amazon Delivery Style */}
+            <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
+              <h3 className="font-bold text-lg mb-4">What Happens After You Reserve?</h3>
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Reserve Online (2 min)</div>
+                    <div className="text-sm text-gray-600">No payment now. We hold the car and price for you.</div>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Soft Credit Check (24h)</div>
+                    <div className="text-sm text-gray-600">No score impact. We confirm exact monthly payment for YOUR credit tier.</div>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Delivery (0-2 days)</div>
+                    <div className="text-sm text-gray-600">E-sign contract, schedule pickup or free home delivery.</div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 p-3 bg-white rounded border border-blue-200">
+                <p className="text-xs text-blue-900">
+                  ✓ Cancel anytime before final contract. Full deposit refund if you change your mind.
+                </p>
+              </div>
+            </div>
+
+            {/* MINI FAQ - Amazon Q&A Style */}
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="font-bold text-lg mb-4">Quick Answers</h3>
+              <div className="space-y-3 text-sm">
+                <details className="group">
+                  <summary className="cursor-pointer font-semibold text-gray-900 flex justify-between items-center">
+                    Why is this price so low?
+                    <span className="group-open:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <p className="mt-2 text-gray-600">
+                    Fleet pricing. Same rates rental companies pay for bulk orders. Dealer needs to move inventory fast - you get the savings.
+                  </p>
+                </details>
+                
+                <details className="group">
+                  <summary className="cursor-pointer font-semibold text-gray-900 flex justify-between items-center">
+                    Are there hidden fees?
+                    <span className="group-open:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <p className="mt-2 text-gray-600">
+                    No. Price includes CA taxes, DMV registration, doc fees. No dealer add-ons ($5,500 typical - we charge $0).
+                  </p>
+                </details>
+                
+                <details className="group">
+                  <summary className="cursor-pointer font-semibold text-gray-900 flex justify-between items-center">
+                    What if my credit score is lower?
+                    <span className="group-open:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <p className="mt-2 text-gray-600">
+                    Still qualify! Lower scores (680-719) may have slightly higher monthly or more down payment. We work with Tier 1-6.
+                  </p>
+                </details>
+              </div>
+            </div>
+
             {/* DEAL INSIGHTS - как у AutoBandit */}
             <Card>
               <CardHeader>
