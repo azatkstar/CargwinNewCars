@@ -231,46 +231,49 @@ const AutoBanditStyleCalculator = ({ car }) => {
           </div>
         </div>
 
-        {/* LEASE IT NOW Section - COMMERCIAL */}
-        <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl p-6">
-          <div className="text-center mb-6">
-            <div className="text-sm text-gray-600 mb-2">
-              <span className="inline-flex items-center gap-1">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6z"/>
-                </svg>
-                {calculated.lender}
-              </span>
-            </div>
-            
-            <div className="text-6xl font-bold text-gray-900 mb-2">
-              ${calculated.monthly}
-            </div>
-            
-            <div className="text-lg text-gray-600 mb-4">
-              per month
-            </div>
-            
-            <div className="text-sm text-gray-600">
-              (+${calculated.dueAtSigning.toLocaleString()} due at signing)
-            </div>
-          </div>
-
-          {/* BIG RED BUTTON */}
-          <Button className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-6 text-xl font-bold rounded-xl shadow-lg">
-            LEASE IT NOW
-          </Button>
+        {/* Incentives Toggle */}
+        <div className="flex items-center justify-between bg-gray-50 p-3 rounded">
+          <span className="text-sm font-medium">Apply available incentives</span>
+          <button
+            onClick={() => setParams({...params, withIncentives: !params.withIncentives})}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+              params.withIncentives ? 'bg-green-600' : 'bg-gray-300'
+            }`}
+          >
+            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+              params.withIncentives ? 'translate-x-6' : 'translate-x-1'
+            }`} />
+          </button>
         </div>
 
-        {/* Details Breakdown */}
+        {/* LEASE IT NOW Button - Функциональный */}
+        <Button
+          onClick={() => setShowReserveModal(true)}
+          disabled={loading}
+          className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-6 text-xl font-bold rounded-xl shadow-lg"
+        >
+          {loading ? 'CALCULATING...' : 'LEASE IT NOW'}
+        </Button>
+        
+        {/* Reserve Modal */}
+        {showReserveModal && car && (
+          <ReserveModal
+            isOpen={showReserveModal}
+            onClose={() => setShowReserveModal(false)}
+            offer={car}
+            paymentMode="lease"
+          />
+        )}
+
+        {/* Details */}
         <div className="text-xs text-gray-500 space-y-1">
           <div className="flex justify-between">
             <span>Residual Value:</span>
-            <span className="font-medium">${calculated.residualValue.toLocaleString()}</span>
+            <span className="font-medium">${calculated?.residualValue?.toLocaleString() || '0'}</span>
           </div>
           <div className="flex justify-between">
             <span>Money Factor:</span>
-            <span className="font-medium">{calculated.moneyFactor}</span>
+            <span className="font-medium">{calculated?.moneyFactor || '0.00200'}</span>
           </div>
         </div>
       </CardContent>
