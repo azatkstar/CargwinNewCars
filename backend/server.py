@@ -3218,6 +3218,17 @@ async def submit_broker_application(
                 f"New broker application received for {application_data.get('desired_cars')}\n\nReview in admin panel."
             )
         
+        logger.info(f"Broker application created: {result.inserted_id}")
+        
+        return {
+            "ok": True,
+            "application_id": str(result.inserted_id),
+            "message": "Application submitted successfully. We'll contact you within 24 hours."
+        }
+        
+    except Exception as e:
+        logger.error(f"Broker application error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to submit application")
 
 
 # ============================================
