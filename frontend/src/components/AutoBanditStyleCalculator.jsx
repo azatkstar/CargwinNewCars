@@ -247,6 +247,28 @@ const AutoBanditStyleCalculator = ({ car }) => {
           </button>
         </div>
 
+        {/* MONTHLY PAYMENT DISPLAY - ОГРОМНЫЙ */}
+        <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl p-6 text-center">
+          {loading ? (
+            <div className="py-8">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+            </div>
+          ) : calculated ? (
+            <>
+              <div className="text-sm text-gray-600 mb-2">{calculated.lender}</div>
+              <div className="text-6xl font-bold text-gray-900 mb-2">
+                ${calculated.monthly}
+              </div>
+              <div className="text-lg text-gray-600 mb-4">per month</div>
+              <div className="text-sm text-gray-600">
+                (+${calculated.dueAtSigning?.toLocaleString()} due at signing)
+              </div>
+            </>
+          ) : (
+            <div className="text-gray-500">Calculating...</div>
+          )}
+        </div>
+
         {/* LEASE IT NOW Button - Функциональный */}
         <Button
           onClick={() => setShowReserveModal(true)}
