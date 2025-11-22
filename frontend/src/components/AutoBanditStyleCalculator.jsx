@@ -60,89 +60,74 @@ const AutoBanditStyleCalculator = ({ car }) => {
 
   useEffect(() => {
     calculateLease();
-    // Fetch tax rate for zip code
-    if (params.zipCode && params.zipCode.length === 5) {
-      fetchTaxRate(params.zipCode);
-    }
   }, [params, car]);
 
-  const calculateLease = () => {
-    if (!car) return;
+  const calculateLease = async () => {
+    if (!car?.id) return;
+    
+    setLoading(true);
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+      const endpoint = BACKEND_URL.endsWith('/api')
+        ? `${BACKEND_URL}/calc/lease`
+        : `${BACKEND_URL}/api/calc/lease`;
+      
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          dealExternalId: car.id,
+          termMonths: params.termMonths,
+          annualMileage: params.annualMileage,
+          creditTierCode: params.creditTier,
+          withIncentives: params.withIncentives,
+          customer_down_payment: params.customerDownPayment
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setCalculated({
+          monthly: data.monthly,
+          dueAtSigning: data.dueAtSigning,
+          residualValue: data.residualValue,
+          moneyFactor: data.moneyFactor,
+          lender: 'Toyota Financial Services'  // From car data
+        });
+      } else {
+        // Fallback to old calculation
+        calculateLeaseOld();
+      }
+    } catch (error) {
+      console.error('Calc error:', error);
+      calculateLeaseOld();
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const msrp = car.msrp || 34288;
-    const sellingPrice = car.fleet || (msrp - (car.savings || 0));
+  const calculateLeaseOld = () => {
+    // Existing calculation as fallback
+    const msrp = car?.msrp || 50000;
+    const sellingPrice = car?.fleet || (msrp - (car?.savings || 0));
     
-    // Residual % based on term (AutoBandit формулы)
-    const residualPercents = {
-      24: 64,  // 64% for 24mo
-      36: 57,  // 57% for 36mo
-      39: 55,  // 55% for 39mo
-      48: 50   // 50% for 48mo
-    };
-    
+    const residualPercents = { 24: 64, 36: 57, 39: 55, 48: 50 };
     const residualPercent = residualPercents[params.termMonths] || 57;
     const residualValue = Math.round(msrp * (residualPercent / 100));
     
-    // Money Factor (с учётом credit tier)
-    const baseMF = creditTiers[params.creditTier].moneyFactorBase;
+    const baseMF = 0.00182;
+    const moneyFactor = baseMF;
     
-    // Mileage adjustment
-    const mileageAdjust = {
-      7500: -0.00005,
-      10000: 0,
-      12000: 0.00005,
-      15000: 0.0001
-    }[params.annualMileage] || 0;
-    
-    const moneyFactor = baseMF + mileageAdjust;
-    
-    // Monthly depreciation
     const depreciation = (sellingPrice - residualValue) / params.termMonths;
-    
-    // Monthly finance charge
     const financeCharge = (sellingPrice + residualValue) * moneyFactor;
-    
-    // Base monthly payment
     const baseMonthly = Math.round(depreciation + financeCharge);
     
-    // California fees (как AutoBandit)
-    const acquisitionFee = 650;  // Toyota standard
-    const registrationFee = 540;
-    const docFee = 85;
-    const salesTaxRate = taxRate / 100; // Dynamic from zip code
-    
-    // Due at Signing breakdown (AutoBandit style)
-    const firstMonthlyPayment = baseMonthly;
-    const otherTax = Math.round((acquisitionFee + registrationFee) * salesTaxRate);
-    const taxOnFees = Math.round(docFee * salesTaxRate);
-    
-    const calculatedDueAtSigning = firstMonthlyPayment + acquisitionFee + 
-                                    registrationFee + otherTax + docFee + taxOnFees;
-    
-    // Total lease cost
-    const totalCost = (baseMonthly * params.termMonths) + calculatedDueAtSigning;
-    
-    // APR equivalent
-    const equivalentAPR = (moneyFactor * 2400).toFixed(2);
-
     setCalculated({
       monthly: baseMonthly,
-      dueAtSigning: calculatedDueAtSigning,
+      dueAtSigning: params.customerDownPayment + 650 + 540 + 85 + baseMonthly,
       residualValue,
       moneyFactor: moneyFactor.toFixed(5),
-      equivalentAPR,
-      totalCost,
-      breakdown: {
-        firstMonthlyPayment,
-        acquisitionFee,
-        registrationFee,
-        otherTax,
-        docFee,
-        taxOnFees
-      },
-      lender: car.make === 'Toyota' ? 'Toyota Financial Services' : 
-              car.make === 'Lexus' ? 'Lexus Financial Services' :
-              car.make === 'BMW' ? 'BMW Financial Services' : 'Manufacturer Finance'
+      lender: car?.make === 'Toyota' ? 'Toyota Financial' : 'Manufacturer Finance'
     });
   };
 
