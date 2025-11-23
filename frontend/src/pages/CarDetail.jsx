@@ -5,8 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Clock, Eye, TrendingUp, AlertCircle } from 'lucide-react';
 import CarHero from '../components/car-detail/CarHero';
 import CarGallery from '../components/car-detail/CarGallery';
+import CarGallery from '../components/car-detail/CarGallery';
 import CarSpecs from '../components/car-detail/CarSpecs';
 import AutoBanditStyleCalculator from '../components/AutoBanditStyleCalculator';
+import PriceTrendChart from '../components/PriceTrendChart';
 import CarForms from '../components/car-detail/CarForms';
 import SimilarOffers from '../components/car-detail/SimilarOffers';
 import PriceComparison from '../components/car-detail/PriceComparison';
