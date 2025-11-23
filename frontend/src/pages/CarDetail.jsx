@@ -497,9 +497,15 @@ const CarDetail = () => {
                 </p>
               </div>
             </div>
+
+            {/* Price Trend Chart */}
+            <PriceTrendChart car={carData} />
           </div>
         </div>
       </div>
+      
+      {/* GALLERY - ПОСЛЕ CALCULATOR */}
+      <CarGallery images={carData.gallery || [carData.image]} title={carData.title} />
       
       {/* STICKY CTA BAR - Amazon/Walmart Style */}
       {showStickyBar && carData && (
