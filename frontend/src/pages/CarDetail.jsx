@@ -325,9 +325,9 @@ const CarDetail = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="space-y-8">
           
-          {/* SAVINGS HIGHLIGHT (одна версия) */}
+          {/* SAVINGS HIGHLIGHT */}
           <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
-              <div className="grid grid-cols-3 gap-6 text-center">
+            <div className="grid grid-cols-3 gap-6 text-center">
                 <div>
                   <div className="text-sm text-gray-600 mb-1">MSRP</div>
                   <div className="text-2xl font-bold line-through text-gray-400">
