@@ -300,34 +300,33 @@ const CarDetail = () => {
         </div>
       </div>
 
-      
-      {/* TWO-COLUMN SECTION - Calculator Left, Gallery Right */}
+      {/* Main Content - ТОЧНО КАК AUTOBANDIT */}
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          {/* LEFT - Calculator (55-60%) */}
-          <div className="w-full lg:w-[58%]">
+          {/* LEFT COLUMN - Calculator (КАК У AUTOBANDIT) */}
+          <div className="lg:col-span-1">
             <AutoBanditStyleCalculator car={carData} />
           </div>
-          
-          {/* RIGHT - Gallery (40-45%) */}
-          <div className="w-full lg:w-[42%]">
-            <CarGallery 
-              images={carData.gallery?.slice(1) || []}  
-              title={carData.title} 
-            />
-          </div>
-        </div>
-      </div>
 
-      
-      {/* CONTENT BELOW - Full Width */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="space-y-8">
-          
-          {/* SAVINGS HIGHLIGHT */}
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
-            <div className="grid grid-cols-3 gap-6 text-center">
+          {/* RIGHT COLUMN - Info & Gallery */}
+          <div className="lg:col-span-2 space-y-6">
+            
+            {/* Car Image */}
+            <div className="relative">
+              <img
+                src={carData.image || carData.gallery?.[0]}
+                alt={carData.title}
+                className="w-full rounded-xl"
+              />
+              <div className="absolute top-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg font-bold">
+                ✓ VERIFIED FLEET DEAL
+              </div>
+            </div>
+
+            {/* SAVINGS HIGHLIGHT */}
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
+              <div className="grid grid-cols-3 gap-6 text-center">
                 <div>
                   <div className="text-sm text-gray-600 mb-1">MSRP</div>
                   <div className="text-2xl font-bold line-through text-gray-400">
@@ -503,6 +502,9 @@ const CarDetail = () => {
           </div>
         </div>
       </div>
+      
+      {/* GALLERY - ПОСЛЕ CALCULATOR */}
+      <CarGallery images={carData.gallery || [carData.image]} title={carData.title} />
       
       {/* STICKY CTA BAR - Amazon/Walmart Style */}
       {showStickyBar && carData && (
