@@ -133,11 +133,23 @@ const OfferCard = ({ offer, userZip }) => {
         />
         
         {/* VERIFIED BADGE - С ТЕКСТОМ, ВИДНО */}
-        <div className="absolute top-3 left-3 bg-green-600 text-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-          </svg>
-          <span className="text-xs font-bold">VERIFIED</span>
+        <div className="absolute top-3 left-3 flex flex-col gap-2">
+          <div className="bg-green-600 text-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-xs font-bold">VERIFIED</span>
+          </div>
+          
+          {/* Near You Badge */}
+          {isNearby && (
+            <div className="bg-blue-600 text-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              <span className="text-xs font-bold">NEAR YOU</span>
+            </div>
+          )}
         </div>
         
         {/* Save Button - Heart */}
