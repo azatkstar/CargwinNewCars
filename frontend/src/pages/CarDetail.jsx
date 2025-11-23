@@ -320,13 +320,13 @@ const CarDetail = () => {
         </div>
       </div>
 
-      {/* Main Content - BELOW calculator/gallery */}
-
-          {/* RIGHT COLUMN - Info & Gallery */}
-          <div className="lg:col-span-2 space-y-6">
-            
-            {/* SAVINGS HIGHLIGHT - БЕЗ ДУБЛЯ ИЗОБРАЖЕНИЯ */}
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
+      
+      {/* CONTENT BELOW - Full Width */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="space-y-8">
+          
+          {/* SAVINGS HIGHLIGHT (одна версия) */}
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
               <div className="grid grid-cols-3 gap-6 text-center">
                 <div>
                   <div className="text-sm text-gray-600 mb-1">MSRP</div>
