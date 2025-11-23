@@ -280,13 +280,31 @@ const AutoBanditStyleCalculator = ({ car }) => {
           {loading ? 'CALCULATING...' : 'LEASE IT NOW'}
         </Button>
         
-        {/* Reserve Modal */}
+        {/* Price Transparency Button */}
+        <Button
+          variant="outline"
+          onClick={() => setShowPriceBreakdown(true)}
+          className="w-full border-2 border-blue-500 text-blue-700 hover:bg-blue-50 flex items-center justify-center gap-2"
+        >
+          <Info className="w-4 h-4" />
+          Price Transparency - Full Breakdown
+        </Button>
+        
+        {/* Modals */}
         {showReserveModal && car && (
           <ReserveModal
             isOpen={showReserveModal}
             onClose={() => setShowReserveModal(false)}
             offer={car}
             paymentMode="lease"
+          />
+        )}
+        
+        {showPriceBreakdown && car && (
+          <PriceBreakdownModal
+            isOpen={showPriceBreakdown}
+            onClose={() => setShowPriceBreakdown(false)}
+            car={car}
           />
         )}
 
