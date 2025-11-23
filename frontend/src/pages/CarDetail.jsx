@@ -322,19 +322,7 @@ const CarDetail = () => {
           {/* RIGHT COLUMN - Info & Gallery */}
           <div className="lg:col-span-2 space-y-6">
             
-            {/* Car Image */}
-            <div className="relative">
-              <img
-                src={carData.image || carData.gallery?.[0]}
-                alt={carData.title}
-                className="w-full rounded-xl"
-              />
-              <div className="absolute top-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg font-bold">
-                ✓ VERIFIED FLEET DEAL
-              </div>
-            </div>
-
-            {/* SAVINGS HIGHLIGHT */}
+            {/* SAVINGS HIGHLIGHT - БЕЗ ДУБЛЯ ИЗОБРАЖЕНИЯ */}
             <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
               <div className="grid grid-cols-3 gap-6 text-center">
                 <div>
