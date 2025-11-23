@@ -81,6 +81,27 @@ const FiltersSidebar = ({ onFilterChange, onClear }) => {
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
+        {/* YOUR LOCATION - ПЕРВЫЙ */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <label className="text-sm font-medium mb-2 block">📍 Your ZIP Code</label>
+          <input
+            type="text"
+            maxLength="5"
+            placeholder="90210"
+            value={filters.userZip}
+            onChange={(e) => handleChange('userZip', e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded text-center font-mono text-lg"
+          />
+          {detectedLocation && (
+            <p className="text-xs text-blue-700 mt-2 text-center">
+              ✓ Detected: {detectedLocation.city}
+            </p>
+          )}
+          <p className="text-xs text-gray-500 mt-2">
+            We'll show you deals near {filters.userZip ? `ZIP ${filters.userZip}` : 'your area'}
+          </p>
+        </div>
+        
         {/* Deal Type */}
         <div>
           <label className="text-sm font-medium mb-2 block">Deal Type</label>
