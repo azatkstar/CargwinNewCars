@@ -300,24 +300,27 @@ const CarDetail = () => {
         </div>
       </div>
 
-      {/* GALLERY - СРАЗУ ПОСЛЕ HERO (Amazon/AutoBandit style) */}
-      <div className="bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4">
-          <CarGallery 
-            images={carData.gallery?.slice(1) || []}  
-            title={carData.title} 
-          />
+      
+      {/* TWO-COLUMN SECTION - Calculator Left, Gallery Right */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          
+          {/* LEFT - Calculator (55-60%) */}
+          <div className="w-full lg:w-[58%]">
+            <AutoBanditStyleCalculator car={carData} />
+          </div>
+          
+          {/* RIGHT - Gallery (40-45%) */}
+          <div className="w-full lg:w-[42%]">
+            <CarGallery 
+              images={carData.gallery?.slice(1) || []}  
+              title={carData.title} 
+            />
+          </div>
         </div>
       </div>
 
-      {/* Main Content - Calculator + Info */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* LEFT COLUMN - Calculator (КАК У AUTOBANDIT) */}
-          <div className="lg:col-span-1">
-            <AutoBanditStyleCalculator car={carData} />
-          </div>
+      {/* Main Content - BELOW calculator/gallery */}
 
           {/* RIGHT COLUMN - Info & Gallery */}
           <div className="lg:col-span-2 space-y-6">
