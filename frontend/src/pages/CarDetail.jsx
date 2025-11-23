@@ -300,30 +300,15 @@ const CarDetail = () => {
         </div>
       </div>
 
-      {/* Main Content - ТОЧНО КАК AUTOBANDIT */}
+      {/* TWO-COLUMN: Calculator Left (2/3), Gallery Right (1/3) */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          {/* LEFT COLUMN - Calculator (КАК У AUTOBANDIT) */}
-          <div className="lg:col-span-1">
-            <AutoBanditStyleCalculator car={carData} />
-          </div>
-
-          {/* RIGHT COLUMN - Info & Gallery */}
+          {/* LEFT - Calculator + Info (2/3) */}
           <div className="lg:col-span-2 space-y-6">
             
-            {/* Car Image */}
-            <div className="relative">
-              <img
-                src={carData.image || carData.gallery?.[0]}
-                alt={carData.title}
-                className="w-full rounded-xl"
-              />
-              <div className="absolute top-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg font-bold">
-                ✓ VERIFIED FLEET DEAL
-              </div>
-            </div>
-
+            <AutoBanditStyleCalculator car={carData} />
+            
             {/* SAVINGS HIGHLIGHT */}
             <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
               <div className="grid grid-cols-3 gap-6 text-center">
