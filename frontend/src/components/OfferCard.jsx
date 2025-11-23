@@ -11,15 +11,28 @@ import useWebSocket from '../hooks/useWebSocket';
 import ReserveModal from './ReserveModal';
 import PriceBreakdownModal from './PriceBreakdownModal';
 
-const OfferCard = ({ offer }) => {
+const OfferCard = ({ offer, userZip }) => {
   const [paymentMode, setPaymentMode] = useState('lease');
   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [fomoCounters, setFomoCounters] = useState({ viewers: 0, confirmed: 0 });
   const [showReserveModal, setShowReserveModal] = useState(false);
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [isNearby, setIsNearby] = useState(false);
   const { t } = useI18n();
   const { socket, connected } = useWebSocket();
+
+  // Check if nearby
+  useEffect(() => {
+    if (userZip && offer.dealerZip) {
+      const { getDistanceFromZip } = require('../utils/geolocation');
+      const distance = getDistanceFromZip(userZip, offer.dealerZip);
+      setIsNearby(distance < 50); // Within 50 miles
+    } else if (userZip) {
+      // Если нет dealer zip, считаем nearby для CA zips
+      setIsNearby(true);
+    }
+  }, [userZip, offer.dealerZip]);
 
   // Check if car is saved
   useEffect(() => {
