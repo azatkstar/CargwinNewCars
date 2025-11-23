@@ -15,8 +15,35 @@ const FiltersSidebar = ({ onFilterChange, onClear }) => {
     creditScore: 'all',
     term: 'all',
     mileage: 'all',
-    fuelType: 'all'
+    fuelType: 'all',
+    userZip: ''
   });
+  
+  const [detectedLocation, setDetectedLocation] = useState(null);
+
+  useEffect(() => {
+    // Auto-detect location
+    detectUserLocation();
+  }, []);
+
+  const detectUserLocation = async () => {
+    try {
+      const { getUserLocation } = await import('../utils/geolocation');
+      const location = await getUserLocation();
+      
+      if (location.zip) {
+        setDetectedLocation(location);
+        setFilters(prev => ({ ...prev, userZip: location.zip }));
+        
+        // Notify parent
+        if (onFilterChange) {
+          onFilterChange({ ...filters, userZip: location.zip });
+        }
+      }
+    } catch (error) {
+      console.error('Location detection failed:', error);
+    }
+  };
 
   const handleChange = (key, value) => {
     const newFilters = { ...filters, [key]: value };
