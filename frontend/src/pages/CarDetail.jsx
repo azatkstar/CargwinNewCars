@@ -300,7 +300,17 @@ const CarDetail = () => {
         </div>
       </div>
 
-      {/* Main Content - ТОЧНО КАК AUTOBANDIT */}
+      {/* GALLERY - СРАЗУ ПОСЛЕ HERO (Amazon/AutoBandit style) */}
+      <div className="bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <CarGallery 
+            images={carData.gallery?.slice(1) || []}  
+            title={carData.title} 
+          />
+        </div>
+      </div>
+
+      {/* Main Content - Calculator + Info */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
