@@ -513,9 +513,6 @@ const CarDetail = () => {
         </div>
       </div>
       
-      {/* GALLERY - ПОСЛЕ CALCULATOR */}
-      <CarGallery images={carData.gallery || [carData.image]} title={carData.title} />
-      
       {/* STICKY CTA BAR - Amazon/Walmart Style */}
       {showStickyBar && carData && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-300 shadow-2xl z-50 py-4">
