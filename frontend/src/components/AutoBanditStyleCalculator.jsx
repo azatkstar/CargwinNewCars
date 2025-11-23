@@ -21,6 +21,7 @@ const AutoBanditStyleCalculator = ({ car }) => {
   const [calculated, setCalculated] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showReserveModal, setShowReserveModal] = useState(false);
+  const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const [taxRate, setTaxRate] = useState(7.75);
   
   // Down payment options до $15k
