@@ -112,19 +112,19 @@ const OfferCard = ({ offer, userZip }) => {
       <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4" />
-          <span className="text-sm font-bold">ENDS IN:</span>
+          <span className="text-xs font-bold">ENDS IN:</span>
         </div>
-        <div className="text-lg font-bold">
+        <div className="text-base font-bold">
           {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m
         </div>
       </div>
 
-      {/* Image and Badge - Clickable */}
+      {/* Image - КРУПНОЕ */}
       <Link to={`/car/${offer.id}`} className="relative block group">
         <img 
           src={offer.image || 'https://via.placeholder.com/600x400?text=No+Image'} 
           alt={`${offer.title} — front view`}
-          className="w-full h-48 object-cover cursor-pointer group-hover:opacity-95 transition-opacity"
+          className="w-full h-56 object-cover cursor-pointer group-hover:opacity-95 transition-opacity"
           loading="lazy"
           onError={(e) => {
             console.error('Offer card image failed:', offer.image);
@@ -132,47 +132,107 @@ const OfferCard = ({ offer, userZip }) => {
           }}
         />
         
-        {/* VERIFIED BADGE - С ТЕКСТОМ, ВИДНО */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
-          <div className="bg-green-600 text-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="text-xs font-bold">VERIFIED</span>
-          </div>
-          
-          {/* Near You Badge */}
-          {isNearby && (
-            <div className="bg-blue-600 text-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-              </svg>
-              <span className="text-xs font-bold">NEAR YOU</span>
-            </div>
-          )}
+        {/* VERIFIED BADGE */}
+        <div className="absolute top-3 left-3 bg-orange-600 text-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+          </svg>
+          <span className="text-xs font-bold">VERIFIED</span>
         </div>
         
-        {/* Save Button - Heart */}
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleSaved();
-          }}
-          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-lg hover:scale-110 transition-transform"
-        >
-          <Heart 
-            className={`w-5 h-5 ${isSaved ? 'fill-red-600 text-red-600' : 'text-gray-600'}`}
-          />
-        </button>
+        {/* Near You + Save Heart */}
+        <div className="absolute top-3 right-3 flex flex-col gap-2">
+          {isNearby && (
+            <div className="bg-blue-600 text-white px-3 py-1.5 rounded-lg shadow-lg text-xs font-bold">
+              📍 NEAR YOU
+            </div>
+          )}
+          
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleSaved();
+            }}
+            className="bg-white p-2 rounded-full shadow-lg hover:scale-110 transition-transform"
+          >
+            <Heart 
+              className={`w-5 h-5 ${isSaved ? 'fill-red-600 text-red-600' : 'text-gray-600'}`}
+            />
+          </button>
+        </div>
       </Link>
 
-      <div className="p-6">
-        {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 mb-4">{offer.title}</h3>
+      <div className="p-5 space-y-4">
+        
+        {/* Title - КРУПНЕЕ */}
+        <h3 className="font-bold text-lg text-gray-900 hover:text-red-600 transition-colors">
+          <Link to={`/car/${offer.id}`}>{offer.title}</Link>
+        </h3>
 
-        {/* Payment Mode Toggle */}
-        <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
+        {/* SAVINGS BLOCK - AMAZON STYLE (КРИТИЧНО!) */}
+        <div className="bg-gradient-to-r from-green-50 to-green-100 border-2 border-green-600 rounded-xl p-4">
+          <div className="text-center">
+            <div className="text-xs text-gray-600 mb-1">YOU SAVE</div>
+            <div className="text-4xl font-bold text-green-600 mb-1">
+              ${offer.savings?.toLocaleString()}
+            </div>
+            <div className="text-lg font-bold text-red-600">
+              {((offer.savings / offer.msrp) * 100).toFixed(1)}% OFF
+            </div>
+          </div>
+        </div>
+
+        {/* Payment Info - Компактно */}
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600">MSRP:</span>
+            <span className="line-through text-gray-400">${offer.msrp?.toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between text-sm font-bold">
+            <span>Your Price:</span>
+            <span className="text-gray-900">${offer.fleet?.toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600">Monthly:</span>
+            <span className="text-2xl font-bold text-gray-900">${offer.lease?.monthly || 0}/mo</span>
+          </div>
+          <div className="flex justify-between text-xs text-gray-500">
+            <span>{offer.lease?.termMonths}mo</span>
+            <span>{offer.lease?.milesPerYear?.toLocaleString()} mi/yr</span>
+          </div>
+        </div>
+
+        {/* FOMO - Selling Fast */}
+        <div className="bg-red-50 border border-red-300 rounded-lg p-2">
+          <div className="text-xs text-red-900 font-semibold text-center">
+            🔥 Selling Fast — {Math.floor(Math.random() * 20 + 70)}% Claimed
+          </div>
+        </div>
+
+        {/* CTA Buttons - КРУПНЫЕ */}
+        <div className="space-y-2">
+          <Link to={`/car/${offer.id}`} className="block">
+            <Button className="w-full bg-gray-900 hover:bg-black text-white py-4 font-bold rounded-lg">
+              View Deal Details →
+            </Button>
+          </Link>
+          
+          <Button
+            onClick={() => setShowReserveModal(true)}
+            className="w-full bg-red-600 hover:bg-red-700 text-white py-4 font-bold rounded-lg"
+          >
+            Reserve at Fleet Price
+          </Button>
+        </div>
+
+        {/* Dealer Add-ons - МЕЛКО */}
+        <p className="text-xs text-gray-500 text-center">
+          Zero dealer add-ons (save ${offer.dealer_addons?.toLocaleString() || '5,500'})
+        </p>
+
+        {/* Payment Mode Toggle - MOVED DOWN */}
+        <div className="flex bg-gray-100 rounded-lg p-1">
           <button
             onClick={() => setPaymentMode('lease')}
             className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
