@@ -328,6 +328,14 @@ const AutoBanditStyleCalculator = ({ car }) => {
             car={car}
           />
         )}
+        
+        {showQualifyCheck && (
+          <QualifyCheckModal
+            isOpen={showQualifyCheck}
+            onClose={() => setShowQualifyCheck(false)}
+            carTitle={car?.title}
+          />
+        )}
 
         {/* Details */}
         <div className="text-xs text-gray-500 space-y-1">
