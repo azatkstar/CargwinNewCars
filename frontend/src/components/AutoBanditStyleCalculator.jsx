@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import ReserveModal from './ReserveModal';
 import PriceBreakdownModal from './PriceBreakdownModal';
+import QualifyCheckModal from './QualifyCheckModal';
 import { Info } from 'lucide-react';
 
 const AutoBanditStyleCalculator = ({ car }) => {
