@@ -311,32 +311,6 @@ const AutoBanditStyleCalculator = ({ car }) => {
           Price Transparency - Full Breakdown
         </Button>
         
-        {/* Modals */}
-        {showReserveModal && car && (
-          <ReserveModal
-            isOpen={showReserveModal}
-            onClose={() => setShowReserveModal(false)}
-            offer={car}
-            paymentMode="lease"
-          />
-        )}
-        
-        {showPriceBreakdown && car && (
-          <PriceBreakdownModal
-            isOpen={showPriceBreakdown}
-            onClose={() => setShowPriceBreakdown(false)}
-            car={car}
-          />
-        )}
-        
-        {showQualifyCheck && (
-          <QualifyCheckModal
-            isOpen={showQualifyCheck}
-            onClose={() => setShowQualifyCheck(false)}
-            carTitle={car?.title}
-          />
-        )}
-
         {/* Details */}
         <div className="text-xs text-gray-500 space-y-1">
           <div className="flex justify-between">
