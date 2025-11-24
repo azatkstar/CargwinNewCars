@@ -350,6 +350,33 @@ const AutoBanditStyleCalculator = ({ car }) => {
         </div>
       </CardContent>
     </Card>
+    
+    {/* MODALS - OUTSIDE Card для избежания DOM errors */}
+    {showReserveModal && car && (
+      <ReserveModal
+        isOpen={showReserveModal}
+        onClose={() => setShowReserveModal(false)}
+        offer={car}
+        paymentMode="lease"
+      />
+    )}
+    
+    {showPriceBreakdown && car && (
+      <PriceBreakdownModal
+        isOpen={showPriceBreakdown}
+        onClose={() => setShowPriceBreakdown(false)}
+        car={car}
+      />
+    )}
+    
+    {showQualifyCheck && (
+      <QualifyCheckModal
+        isOpen={showQualifyCheck}
+        onClose={() => setShowQualifyCheck(false)}
+        carTitle={car?.title}
+      />
+    )}
+    </>
   );
 };
 
