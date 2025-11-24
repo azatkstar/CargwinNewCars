@@ -3417,16 +3417,6 @@ async def calculate_lease_detailed(
         logger.error(f"Calculate lease error: {e}")
         raise HTTPException(status_code=500, detail="Calculation failed")
 
-            "ok": True,
-            **result
-        }
-        
-    except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
-    except Exception as e:
-        logger.error(f"Lease calc API error: {e}")
-        raise HTTPException(status_code=500, detail="Calculation failed")
-
         logger.info(f"Broker application created: {result.inserted_id}")
         
         return {
