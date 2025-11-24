@@ -139,6 +139,7 @@ const AutoBanditStyleCalculator = ({ car }) => {
   if (!calculated) return null;
 
   return (
+    <>
     <Card className="border-2 border-gray-200 bg-white shadow-lg">
       <CardContent className="p-4 space-y-4">
         {/* Tab Switches - КОМПАКТНЕЕ */}
