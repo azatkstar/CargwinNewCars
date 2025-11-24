@@ -492,6 +492,22 @@ const CarDetail = () => {
 
             {/* Price Trend Chart */}
             <PriceTrendChart car={carData} />
+            
+            {/* Live Social Proof */}
+            <LiveSocialProof />
+            
+            {/* Dealer vs Our Price */}
+            <DealerVsOurPrice 
+              msrp={carData.msrp}
+              ourPrice={carData.fleet}
+              savings={carData.savings}
+            />
+            
+            {/* Why Deal Available */}
+            <WhyDealAvailable />
+            
+            {/* Mini Testimonials */}
+            <MiniTestimonials />
           </div>
           
           {/* RIGHT - Calculator (1/3) - КОМПАКТНЫЙ, STICKY */}
