@@ -249,21 +249,21 @@ const AutoBanditStyleCalculator = ({ car }) => {
           </button>
         </div>
 
-        {/* MONTHLY PAYMENT DISPLAY - ОГРОМНЫЙ */}
-        <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl p-6 text-center">
+        {/* MONTHLY PAYMENT DISPLAY - КОМПАКТНЕЕ */}
+        <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl p-4 text-center">
           {loading ? (
-            <div className="py-8">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+            <div className="py-4">
+              <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-red-600"></div>
             </div>
           ) : calculated ? (
             <>
-              <div className="text-sm text-gray-600 mb-2">{calculated.lender}</div>
-              <div className="text-6xl font-bold text-gray-900 mb-2">
+              <div className="text-xs text-gray-600 mb-1">{calculated.lender}</div>
+              <div className="text-4xl font-bold text-gray-900 mb-1">
                 ${calculated.monthly}
               </div>
-              <div className="text-lg text-gray-600 mb-4">per month</div>
-              <div className="text-sm text-gray-600">
-                (+${calculated.dueAtSigning?.toLocaleString()} due at signing)
+              <div className="text-sm text-gray-600 mb-2">per month</div>
+              <div className="text-xs text-gray-600">
+                +${calculated.dueAtSigning?.toLocaleString()} due at signing
               </div>
             </>
           ) : (
@@ -271,11 +271,11 @@ const AutoBanditStyleCalculator = ({ car }) => {
           )}
         </div>
 
-        {/* LEASE IT NOW Button - Функциональный */}
+        {/* LEASE IT NOW Button - КОМПАКТНЕЕ */}
         <Button
           onClick={() => setShowReserveModal(true)}
           disabled={loading}
-          className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-6 text-xl font-bold rounded-xl shadow-lg"
+          className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-4 text-lg font-bold rounded-xl shadow-lg"
         >
           {loading ? 'CALCULATING...' : 'LEASE IT NOW'}
         </Button>
