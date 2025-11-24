@@ -486,14 +486,12 @@ const CarDetail = () => {
             <PriceTrendChart car={carData} />
           </div>
           
-          {/* RIGHT - Gallery (1/3) */}
+          {/* RIGHT - Gallery (1/3) - БЕЗ STICKY */}
           <div className="lg:col-span-1">
-            <div className="sticky top-4">
-              <CarGallery 
-                images={carData.gallery?.slice(1) || []}
-                title={carData.title}
-              />
-            </div>
+            <CarGallery 
+              images={carData.gallery?.slice(1) || []}
+              title={carData.title}
+            />
           </div>
         </div>
       </div>
