@@ -3273,6 +3273,141 @@ async def calculate_lease_payment(
         )
         
         return {
+
+
+# ============================================
+# Deal Calculator Management
+# ============================================
+
+@api_router.get("/deals/{deal_id}/calculator")
+async def get_deal_calculator(
+    deal_id: str,
+    current_user: User = Depends(require_editor)
+):
+    """Get calculator settings for deal"""
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        db = get_database()
+        
+        query_id = ObjectId(deal_id) if len(deal_id) == 24 else deal_id
+        deal = await db.lots.find_one({"_id": query_id})
+        
+        if not deal:
+            raise HTTPException(status_code=404, detail="Deal not found")
+        
+        return {
+            "ok": True,
+            "calculator": deal.get('dealCalculator', {})
+        }
+        
+    except Exception as e:
+        logger.error(f"Get calculator error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get calculator")
+
+@api_router.post("/deals/{deal_id}/calculator")
+async def update_deal_calculator(
+    deal_id: str,
+    calculator_data: dict,
+    current_user: User = Depends(require_editor)
+):
+    """Update calculator settings for deal"""
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        db = get_database()
+        
+        query_id = ObjectId(deal_id) if len(deal_id) == 24 else deal_id
+        
+        result = await db.lots.update_one(
+            {"_id": query_id},
+            {"$set": {"dealCalculator": calculator_data}}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Deal not found")
+        
+        return {"ok": True, "message": "Calculator updated"}
+        
+    except Exception as e:
+        logger.error(f"Update calculator error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update calculator")
+
+@api_router.post("/calculate/lease")
+async def calculate_lease_detailed(
+    request: dict
+):
+    """Calculate lease with full breakdown"""
+    try:
+        selling_price = request.get('sellingPrice')
+        residual_value = request.get('residualValue')
+        residual_percent = request.get('residualPercent')
+        money_factor = request.get('moneyFactor')
+        term = request.get('term')
+        tax_rate = request.get('taxes', 0.0775)
+        fees = request.get('fees', {})
+        incentives = request.get('incentives', [])
+        
+        # Apply incentives
+        total_incentives = sum(inc.get('amount', 0) for inc in incentives)
+        
+        # Calculate residual if not provided
+        if not residual_value and residual_percent:
+            residual_value = selling_price * residual_percent
+        
+        # Adjusted cap cost
+        adjusted_cap = selling_price - total_incentives
+        
+        # Monthly depreciation
+        depreciation = (adjusted_cap - residual_value) / term
+        
+        # Finance charge
+        finance_charge = (adjusted_cap + residual_value) * money_factor
+        
+        # Base payment
+        base_payment = depreciation + finance_charge
+        
+        # Tax on payment
+        tax_on_payment = base_payment * tax_rate
+        
+        # Monthly payment
+        monthly = round(base_payment + tax_on_payment, 2)
+        
+        # Due at signing
+        acquisition = fees.get('acquisitionFee', 650)
+        doc = fees.get('docFee', 85)
+        registration = fees.get('registrationFee', 540)
+        
+        tax_on_fees = (acquisition + doc + registration) * tax_rate
+        
+        due_at_signing = round(
+            monthly + acquisition + doc + registration + tax_on_fees,
+            2
+        )
+        
+        return {
+            "ok": True,
+            "monthlyPayment": monthly,
+            "dueAtSigning": due_at_signing,
+            "breakdown": {
+                "depreciation": round(depreciation, 2),
+                "financeCharge": round(finance_charge, 2),
+                "basePayment": round(base_payment, 2),
+                "taxOnPayment": round(tax_on_payment, 2),
+                "acquisition": acquisition,
+                "docFee": doc,
+                "registration": registration,
+                "taxOnFees": round(tax_on_fees, 2),
+                "totalIncentives": total_incentives
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Calculate lease error: {e}")
+        raise HTTPException(status_code=500, detail="Calculation failed")
+
             "ok": True,
             **result
         }
