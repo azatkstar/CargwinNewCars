@@ -489,12 +489,11 @@ const CarDetail = () => {
             <PriceTrendChart car={carData} />
           </div>
           
-          {/* RIGHT - Gallery (1/3) - БЕЗ STICKY */}
+          {/* RIGHT - Calculator (1/3) - КОМПАКТНЫЙ, STICKY */}
           <div className="lg:col-span-1">
-            <CarGallery 
-              images={carData.gallery?.slice(1) || []}
-              title={carData.title}
-            />
+            <div className="sticky top-4">
+              <AutoBanditStyleCalculator car={carData} />
+            </div>
           </div>
         </div>
       </div>
