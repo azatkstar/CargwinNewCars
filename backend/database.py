@@ -109,6 +109,13 @@ class LotDocument(BaseModel):
     tags: List[str] = []
     videos: List[Dict[str, str]] = []  # [{type: 'youtube', videoId: 'abc123', title: 'Walk-around'}]
     
+    # Professional Calculator Settings
+    dealCalculator: Optional[Dict[str, Any]] = None  # Full calculator config
+    
+    # Legacy fields (keep for compatibility)
+    lease: Optional[Dict[str, Any]] = None
+    finance: Optional[Dict[str, Any]] = None
+    
     # Media
     images: List[ImageAsset] = []
     
