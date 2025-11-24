@@ -272,8 +272,22 @@ const AutoBanditStyleCalculator = ({ car }) => {
             <div className="text-gray-500">Calculating...</div>
           )}
         </div>
+        
+        {/* Price includes taxes */}
+        <p className="text-xs text-center text-gray-600">
+          Price includes taxes & DMV fees
+        </p>
 
-        {/* LEASE IT NOW Button - КОМПАКТНЕЕ */}
+        {/* CHECK IF YOU QUALIFY - ПЕРЕД RESERVE */}
+        <Button
+          variant="outline"
+          onClick={() => setShowQualifyCheck(true)}
+          className="w-full border-2 border-blue-500 text-blue-700 hover:bg-blue-50 py-3"
+        >
+          Check if you qualify — 30 seconds, no impact to credit score
+        </Button>
+
+        {/* LEASE IT NOW Button */}
         <Button
           onClick={() => setShowReserveModal(true)}
           disabled={loading}
@@ -281,6 +295,11 @@ const AutoBanditStyleCalculator = ({ car }) => {
         >
           {loading ? 'CALCULATING...' : 'LEASE IT NOW'}
         </Button>
+        
+        {/* Trust text under button */}
+        <p className="text-xs text-center text-gray-600">
+          No payment today. Free 24h price hold. Cancel anytime before final contract.
+        </p>
         
         {/* Price Transparency Button */}
         <Button
