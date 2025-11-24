@@ -549,6 +549,14 @@ const CarDetail = () => {
         </div>
       )}
       
+      {/* Price Match Guarantee - внизу */}
+      <div className="max-w-7xl mx-auto px-4 pb-8">
+        <PriceMatchGuarantee />
+      </div>
+      
+      {/* Talk to Specialist button */}
+      <TalkToSpecialist />
+      
       <Footer hiddenVin={carData?.specs?.vin} />
       <FOMOTicker />
       
