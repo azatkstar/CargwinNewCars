@@ -137,13 +137,13 @@ const AutoBanditStyleCalculator = ({ car }) => {
   if (!calculated) return null;
 
   return (
-    <Card className="border-2 border-gray-200 bg-white shadow-xl sticky top-4">
-      <CardContent className="p-6 space-y-6">
-        {/* Tab Switches - LEASE / FINANCE */}
-        <div className="grid grid-cols-2 gap-2 bg-gray-100 p-1 rounded-lg">
+    <Card className="border-2 border-gray-200 bg-white shadow-lg">
+      <CardContent className="p-4 space-y-4">
+        {/* Tab Switches - КОМПАКТНЕЕ */}
+        <div className="grid grid-cols-2 gap-1 bg-gray-100 p-1 rounded-lg">
           <button
             onClick={() => setParams({...params, dealType: 'lease'})}
-            className={`py-3 px-4 rounded-md font-bold transition-all ${
+            className={`py-2 px-3 rounded-md font-bold text-sm transition-all ${
               params.dealType === 'lease'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-600'
@@ -153,7 +153,7 @@ const AutoBanditStyleCalculator = ({ car }) => {
           </button>
           <button
             onClick={() => setParams({...params, dealType: 'finance'})}
-            className={`py-3 px-4 rounded-md font-bold transition-all ${
+            className={`py-2 px-3 rounded-md font-bold text-sm transition-all ${
               params.dealType === 'finance'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-600'
@@ -163,8 +163,8 @@ const AutoBanditStyleCalculator = ({ car }) => {
           </button>
         </div>
 
-        {/* Selectors Grid */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* Selectors Grid - КОМПАКТНЕЕ */}
+        <div className="grid grid-cols-2 gap-3">
           {/* Term Length */}
           <div>
             <div className="text-xs font-semibold text-gray-500 uppercase mb-2">TERM LENGTH</div>
