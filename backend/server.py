@@ -3417,17 +3417,6 @@ async def calculate_lease_detailed(
         logger.error(f"Calculate lease error: {e}")
         raise HTTPException(status_code=500, detail="Calculation failed")
 
-        logger.info(f"Broker application created: {result.inserted_id}")
-        
-        return {
-            "ok": True,
-            "application_id": str(result.inserted_id),
-            "message": "Application submitted successfully. We'll contact you within 24 hours."
-        }
-        
-    except Exception as e:
-        logger.error(f"Broker application error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to submit application")
 
 @api_router.get("/admin/broker-applications")
 async def get_broker_applications(
