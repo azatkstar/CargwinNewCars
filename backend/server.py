@@ -4061,6 +4061,50 @@ async def get_public_car(
         logger.error(f"Get public car error: {e}")
         raise HTTPException(status_code=500, detail="Failed to fetch car data")
 
+@api_router.get("/cars/{car_slug}/calculator-config")
+async def get_calculator_config(
+    car_slug: str,
+    lot_repo: LotRepository = Depends(get_lots_repo)
+):
+    """Get calculator configuration for a specific car"""
+    try:
+        # Get lot by slug
+        lot = await lot_repo.get_lot_by_slug(car_slug)
+        
+        if not lot or lot.get('status') != 'published':
+            raise HTTPException(status_code=404, detail="Car not found")
+        
+        msrp = lot.get('msrp', 0)
+        discount = lot.get('discount', 0)
+        final_price = msrp - discount
+        state = lot.get('state', 'CA')
+        
+        # Get custom calculator config or generate default
+        calculator_config = lot.get('calculator_config', {})
+        
+        # If no custom config, generate default
+        if not calculator_config:
+            calculator_config = get_default_calculator_config(msrp, discount, state)
+        
+        # Always include car-specific data
+        return {
+            "car_id": car_slug,
+            "make": lot.get('make', ''),
+            "model": lot.get('model', ''),
+            "year": lot.get('year', 0),
+            "trim": lot.get('trim', ''),
+            "msrp": msrp,
+            "discount": discount,
+            "final_price": final_price,
+            "state": state,
+            **calculator_config
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get calculator config error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch calculator configuration")
+
 @api_router.get("/preview/{token}")
 async def get_preview_lot(token: str):
     """Get lot data for preview by token"""
