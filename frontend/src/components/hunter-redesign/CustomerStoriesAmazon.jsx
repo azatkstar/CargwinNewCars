@@ -22,7 +22,7 @@ const CustomerStoriesAmazon = () => {
       location: 'Riverside',
       avatar: 'https://i.pravatar.cc/150?img=33',
       rating: 5,
-      text: 'Thought I wouldn't qualify. They found a bank - picked up in 24h.'
+      text: "Thought I wouldn't qualify. They found a bank - picked up in 24h."
     }
   ];
 
