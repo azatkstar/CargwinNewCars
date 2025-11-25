@@ -28,6 +28,8 @@ const CarDetail = () => {
   const [loading, setLoading] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState({ days: 1, hours: 23, minutes: 45, seconds: 0 });
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [showGalleryModal, setShowGalleryModal] = useState(false);
+  const [galleryStartIndex, setGalleryStartIndex] = useState(0);
 
   useEffect(() => {
     fetchCarData();
