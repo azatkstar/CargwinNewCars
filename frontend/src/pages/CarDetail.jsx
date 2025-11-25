@@ -144,370 +144,192 @@ const CarDetail = () => {
     );
   }
 
+  // Prepare all images for gallery
+  const allGalleryImages = carData.gallery || [carData.image];
+
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>{carData.title} - Exclusive Fleet Pricing | CargwinNewCar</title>
-        <meta name="description" content={`Get exclusive fleet pricing on ${carData.title}. MSRP $${carData.msrp?.toLocaleString()}, Fleet Price $${carData.fleet?.toLocaleString()}. Save $${carData.savings?.toLocaleString()} with transparent pricing.`} />
-        
-        {/* Open Graph */}
+        <title>{carData.title} - Fleet Pricing | hunter.lease</title>
+        <meta name="description" content={`Fleet-level pricing on ${carData.title}. MSRP $${carData.msrp?.toLocaleString()}, You Save $${carData.savings?.toLocaleString()}. Transparent online leasing.`} />
         <meta property="og:type" content="product" />
         <meta property="og:title" content={`${carData.title} - Fleet Pricing`} />
-        <meta property="og:description" content={`Save $${carData.savings?.toLocaleString()} on ${carData.title}. Starting at $${carData.lease?.monthly}/month.`} />
         <meta property="og:image" content={carData.image || carData.gallery?.[0]} />
-        <meta property="og:price:amount" content={carData.fleet} />
-        <meta property="og:price:currency" content="USD" />
-        
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${carData.title} - Fleet Pricing`} />
-        <meta name="twitter:description" content={`Save $${carData.savings?.toLocaleString()}. Starting at $${carData.lease?.monthly}/month.`} />
-        <meta name="twitter:image" content={carData.image || carData.gallery?.[0]} />
-        
-        {/* JSON-LD Structured Data for SEO */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": carData.title,
-            "image": carData.image || carData.gallery?.[0],
-            "description": `${carData.title} available for lease at hunter.lease. Save $${carData.savings?.toLocaleString()} off MSRP.`,
-            "brand": {
-              "@type": "Brand",
-              "name": carData.title?.split(' ')[1] || "Vehicle"
-            },
-            "offers": {
-              "@type": "Offer",
-              "url": window.location.href,
-              "priceCurrency": "USD",
-              "price": carData.lease?.monthly,
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": carData.lease?.monthly,
-                "priceCurrency": "USD",
-                "unitText": "MONTH"
-              },
-              "availability": "https://schema.org/InStock",
-              "seller": {
-                "@type": "Organization",
-                "name": "hunter.lease"
-              }
-            }
-          })}
-        </script>
       </Helmet>
       
       <Header />
       
-      {/* HERO - ПОЛНЫЙ ЭКРАН С LEXUS */}
+      {/* ============================================ */}
+      {/* HERO BLOCK - FULL SCREEN */}
+      {/* ============================================ */}
       <div className="relative w-full h-screen min-h-[700px] bg-black">
-        {/* Car Image - Full Screen */}
         <img
           src={carData.image || carData.gallery?.[0]}
           alt={carData.title}
           className="w-full h-full object-cover opacity-90"
         />
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
         
-        {/* Content Overlay */}
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="max-w-7xl mx-auto px-6 pb-16 w-full">
             
-            {/* Top Badges */}
-            <div className="flex items-center gap-3 mb-6">
-              <div className="bg-green-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg flex items-center gap-2">
+            {/* Badge */}
+            <div className="mb-4">
+              <div className="inline-flex items-center gap-2 bg-green-600 text-white px-5 py-2 rounded-lg font-bold shadow-lg">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
                 </svg>
-                VERIFIED FLEET DEAL
-              </div>
-              <div className="bg-orange-600 text-white px-4 py-2 rounded-lg font-bold">
-                🔥 SELLING FAST
+                Verified Fleet Deal
               </div>
             </div>
             
             {/* Title */}
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
               {carData.title}
             </h1>
             
-            {/* Price Strip */}
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              <div className="bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-lg">
-                <div className="text-xs opacity-80">MSRP</div>
-                <div className="text-2xl font-bold line-through">${carData.msrp?.toLocaleString()}</div>
+            {/* Price Flow - SIMPLIFIED */}
+            <div className="flex flex-wrap items-center gap-3 mb-6 text-white">
+              <div>
+                <div className="text-sm opacity-70">MSRP</div>
+                <div className="text-2xl font-bold line-through opacity-80">${carData.msrp?.toLocaleString()}</div>
               </div>
               
-              <div className="text-4xl font-bold text-white">→</div>
+              <div className="text-3xl">→</div>
               
-              <div className="bg-green-600 text-white px-8 py-4 rounded-xl shadow-2xl">
+              <div className="bg-green-600 px-6 py-3 rounded-xl">
                 <div className="text-xs">YOU SAVE</div>
                 <div className="text-3xl font-bold">${carData.savings?.toLocaleString()}</div>
               </div>
               
-              <div className="text-4xl font-bold text-white">→</div>
+              <div className="text-3xl">→</div>
               
               <div className="bg-white text-gray-900 px-8 py-4 rounded-xl shadow-2xl">
                 <div className="text-xs text-gray-600">YOUR PRICE</div>
-                <div className="text-3xl font-bold">${carData.fleet?.toLocaleString()}</div>
-              </div>
-              
-              <div className="bg-red-600 text-white px-6 py-3 rounded-lg">
-                <div className="text-xs">DISCOUNT</div>
-                <div className="text-xl font-bold">{((carData.savings / carData.msrp) * 100).toFixed(1)}%</div>
+                <div className="text-4xl font-bold">${carData.fleet?.toLocaleString()}</div>
               </div>
             </div>
             
-            {/* CTA - КРУПНЫЙ */}
-            <button className="bg-red-600 hover:bg-red-700 text-white px-12 py-6 rounded-xl font-bold text-2xl shadow-2xl transform hover:scale-105 transition-transform">
-              RESERVE FOR FREE →
+            {/* Estimated Payment */}
+            <div className="text-white mb-6">
+              <div className="text-3xl font-bold">
+                Estimated Payment: ${carData.lease?.monthly || 310}/mo
+              </div>
+              <div className="text-sm opacity-70">(700+ credit, 36 mo, 10k mi)</div>
+            </div>
+            
+            {/* FOMO Line - ONE ROW */}
+            <div className="flex items-center gap-6 text-white mb-8 text-sm">
+              <div className="flex items-center gap-2">
+                🔥 <strong>127</strong> people viewed today
+              </div>
+              <div>•</div>
+              <div className="flex items-center gap-2">
+                💥 <strong>18</strong> reservations in last 24h
+              </div>
+              <div>•</div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                <span>⏳ Deal ends in <strong>{timeRemaining.days}d {timeRemaining.hours}h</strong></span>
+              </div>
+            </div>
+            
+            {/* CTA - HUGE */}
+            <button 
+              onClick={() => {/* Open reserve modal */}}
+              className="bg-red-600 hover:bg-red-700 text-white px-16 py-6 rounded-xl font-bold text-3xl shadow-2xl transform hover:scale-105 transition-all mb-3"
+            >
+              RESERVE FOR FREE
             </button>
             
-            <p className="text-sm text-white/80 mt-3">
-              No payment now. Cancel anytime before final contract.
+            <p className="text-sm text-white/80">
+              Takes 30 seconds. No payment today. Cancel anytime.
             </p>
           </div>
         </div>
-        
-        {/* Timer - Top Right */}
-        <div className="absolute top-6 right-6 bg-red-600 text-white rounded-xl p-6 shadow-2xl">
-          <div className="text-xs uppercase mb-2">DEAL ENDS IN</div>
-          <div className="text-4xl font-bold">
-            {timeRemaining.days}d {timeRemaining.hours}h
-          </div>
-          <div className="text-xs mt-2 opacity-80">
-            {timeRemaining.minutes} minutes remaining
-          </div>
-        </div>
       </div>
 
-      {/* Social Proof Bar - Under Image */}
-      <div className="bg-blue-50 border-y border-blue-300 py-3">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-center gap-8 text-sm">
-            <div className="flex items-center gap-2">
-              <Eye className="w-4 h-4 text-blue-600" />
-              <span><strong>127 people</strong> viewing in last 24h</span>
-            </div>
-            <div className="h-4 w-px bg-blue-300"></div>
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-green-600" />
-              <span><strong>18 reserved</strong> today</span>
-            </div>
-            <div className="h-4 w-px bg-blue-300"></div>
-            <div className="text-xs text-gray-500">Updated in real-time</div>
-          </div>
-        </div>
-      </div>
-
-      {/* TWO-COLUMN: Gallery Left (2/3), Calculator Right (1/3) */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* ============================================ */}
+      {/* TWO-COLUMN LAYOUT */}
+      {/* ============================================ */}
+      <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           
-          {/* LEFT - Gallery + Info (2/3) - БОЛЬШАЯ */}
-          <div className="lg:col-span-2 space-y-6">
+          {/* LEFT COLUMN (2/3) */}
+          <div className="lg:col-span-2 space-y-8">
             
-            <CarGallery 
-              images={carData.gallery?.slice(1) || []}
-              title={carData.title}
+            {/* Photo Gallery - Clickable to fullscreen */}
+            <div className="bg-white rounded-xl border-2 border-gray-200 shadow-sm overflow-hidden">
+              <div className="relative">
+                <img
+                  src={allGalleryImages[0]}
+                  alt={carData.title}
+                  className="w-full h-[500px] object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                  onClick={() => {
+                    setGalleryStartIndex(0);
+                    setShowGalleryModal(true);
+                  }}
+                />
+                <div className="absolute bottom-4 right-4 bg-black/70 text-white px-4 py-2 rounded-lg text-sm">
+                  Click to view all photos
+                </div>
+              </div>
+              
+              {/* Thumbnails */}
+              <div className="p-4 flex gap-2 overflow-x-auto">
+                {allGalleryImages.slice(1, 6).map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setGalleryStartIndex(idx + 1);
+                      setShowGalleryModal(true);
+                    }}
+                    className="flex-shrink-0 w-24 h-20 rounded-lg overflow-hidden border-2 border-gray-300 hover:border-red-600 transition-colors"
+                  >
+                    <img src={img} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Why This Price */}
+            <WhyThisPriceBlock />
+            
+            {/* What Happens After Reserve */}
+            <ReservationStepsCards />
+            
+            {/* Quick Answers */}
+            <QuickAnswersAccordion />
+            
+            {/* Deal Insights - MINIMAL (3 lines only) */}
+            <DealInsightsMinimal 
+              msrp={carData.msrp}
+              discount={carData.savings}
+              finalPrice={carData.fleet}
             />
             
-            {/* SAVINGS HIGHLIGHT */}
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-600 rounded-xl p-6">
-              <div className="grid grid-cols-3 gap-6 text-center">
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">MSRP</div>
-                  <div className="text-2xl font-bold line-through text-gray-400">
-                    ${carData.msrp?.toLocaleString()}
-                  </div>
-                </div>
-                
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">YOU SAVE</div>
-                  <div className="text-4xl font-bold text-green-600 border-4 border-red-600 rounded-lg px-6 py-3 bg-white">
-                    ${carData.savings?.toLocaleString()}
-                  </div>
-                </div>
-                
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">YOUR PRICE</div>
-                  <div className="text-2xl font-bold text-gray-900">
-                    ${carData.fleet?.toLocaleString()}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            {/* WHAT HAPPENS NEXT - Amazon Delivery Style */}
-            <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
-              <h3 className="font-bold text-lg mb-4">What Happens After You Reserve?</h3>
-              <div className="space-y-4">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Reserve Online (2 min)</div>
-                    <div className="text-sm text-gray-600">No payment now. We hold the car and price for you.</div>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Soft Credit Check (24h)</div>
-                    <div className="text-sm text-gray-600">No score impact. We confirm exact monthly payment for YOUR credit tier.</div>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Delivery (0-2 days)</div>
-                    <div className="text-sm text-gray-600">E-sign contract, schedule pickup or free home delivery.</div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-4 p-3 bg-white rounded border border-blue-200">
-                <p className="text-xs text-blue-900">
-                  ✓ Cancel anytime before final contract. Full deposit refund if you change your mind.
-                </p>
-              </div>
-            </div>
-
-            {/* MINI FAQ - Amazon Q&A Style */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="font-bold text-lg mb-4">Quick Answers</h3>
-              <div className="space-y-3 text-sm">
-                <details className="group">
-                  <summary className="cursor-pointer font-semibold text-gray-900 flex justify-between items-center">
-                    Why is this price so low?
-                    <span className="group-open:rotate-180 transition-transform">▼</span>
-                  </summary>
-                  <p className="mt-2 text-gray-600">
-                    Fleet pricing. Same rates rental companies pay for bulk orders. Dealer needs to move inventory fast - you get the savings.
-                  </p>
-                </details>
-                
-                <details className="group">
-                  <summary className="cursor-pointer font-semibold text-gray-900 flex justify-between items-center">
-                    Are there hidden fees?
-                    <span className="group-open:rotate-180 transition-transform">▼</span>
-                  </summary>
-                  <p className="mt-2 text-gray-600">
-                    No. Price includes CA taxes, DMV registration, doc fees. No dealer add-ons ($5,500 typical - we charge $0).
-                  </p>
-                </details>
-                
-                <details className="group">
-                  <summary className="cursor-pointer font-semibold text-gray-900 flex justify-between items-center">
-                    What if my credit score is lower?
-                    <span className="group-open:rotate-180 transition-transform">▼</span>
-                  </summary>
-                  <p className="mt-2 text-gray-600">
-                    Still qualify! Lower scores (680-719) may have slightly higher monthly or more down payment. We work with Tier 1-6.
-                  </p>
-                </details>
-              </div>
-            </div>
-
-            {/* DEAL INSIGHTS - как у AutoBandit */}
-            <Card>
-              <CardHeader>
-                <CardTitle>DEAL INSIGHTS</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">MSRP</span>
-                  <span className="font-bold">${carData.msrp?.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">DISCOUNT</span>
-                  <span className="font-bold text-green-600">
-                    ${carData.savings?.toLocaleString()} ({((carData.savings / carData.msrp) * 100).toFixed(2)}%)
-                  </span>
-                </div>
-                <div className="flex justify-between border-t pt-3">
-                  <span className="text-gray-600">SELLING PRICE</span>
-                  <span className="font-bold text-xl">${carData.fleet?.toLocaleString()}</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* SPECS - как у AutoBandit */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Specs</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Year</span>
-                    <span className="font-medium">{carData.specs?.year || carData.title?.split(' ')[0]}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Model</span>
-                    <span className="font-medium">{carData.specs?.model || carData.title?.split(' ')[1]}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Trim</span>
-                    <span className="font-medium">{carData.specs?.trim || 'Base'}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Miles</span>
-                    <span className="font-medium">0 mi (new)</span>
-                  </div>
-                  <div className="flex justify-between col-span-2 border-t pt-3">
-                    <span className="text-gray-600">MSRP</span>
-                    <span className="font-bold">${carData.msrp?.toLocaleString()}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* hunter.lease PHILOSOPHY */}
-            <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
-              <h3 className="font-bold text-lg mb-4">Why hunter.lease?</h3>
-              <div className="space-y-2 text-sm">
-                <p className="flex gap-2">
-                  <span className="text-green-600">✓</span>
-                  <span><strong>Fleet Pricing:</strong> Same prices rental companies pay</span>
-                </p>
-                <p className="flex gap-2">
-                  <span className="text-green-600">✓</span>
-                  <span><strong>No Dealer Add-ons:</strong> They charge ${carData.dealer_addons?.toLocaleString() || '5,500'} - we charge $0</span>
-                </p>
-                <p className="flex gap-2">
-                  <span className="text-green-600">✓</span>
-                  <span><strong>100% Online:</strong> No dealer visits, no haggling, no BS</span>
-                </p>
-                <p className="flex gap-2">
-                  <span className="text-green-600">✓</span>
-                  <span><strong>All Credit Tiers:</strong> 680+ welcome, we work with you</span>
-                </p>
-              </div>
-            </div>
-
-            {/* Price Trend Chart */}
-            <PriceTrendChart car={carData} />
+            {/* Specs with Features */}
+            <SpecsWithFeatures car={carData} />
             
-            {/* Live Social Proof */}
-            <LiveSocialProof />
+            {/* Why Hunter.Lease - 4 CARDS */}
+            <WhyHunterLeaseCards />
             
-            {/* Dealer vs Our Price */}
-            <DealerVsOurPrice 
+            {/* Payment Trend - SIMPLIFIED */}
+            <PaymentTrendSimple monthlyPayment={carData.lease?.monthly || 310} />
+            
+            {/* Dealer vs Our Price - BIG GREEN */}
+            <DealerVsOurPriceBig 
               msrp={carData.msrp}
               ourPrice={carData.fleet}
               savings={carData.savings}
             />
             
-            {/* Why Deal Available */}
-            <WhyDealAvailable />
-            
-            {/* Mini Testimonials */}
-            <MiniTestimonials />
+            {/* Customer Stories - Amazon Style */}
+            <CustomerStoriesAmazon />
           </div>
           
-          {/* RIGHT - Calculator (1/3) - КОМПАКТНЫЙ, STICKY */}
+          {/* RIGHT COLUMN (1/3) - STICKY CALCULATOR */}
           <div className="lg:col-span-1">
             <div className="sticky top-4">
               <AutoBanditStyleCalculator car={carData} />
@@ -516,27 +338,41 @@ const CarDetail = () => {
         </div>
       </div>
       
-      {/* STICKY CTA BAR - Amazon/Walmart Style */}
-      {showStickyBar && carData && (
+      {/* ============================================ */}
+      {/* BOTTOM CTA BLOCK */}
+      {/* ============================================ */}
+      <div className="max-w-7xl mx-auto px-4 pb-12">
+        <BottomCTABlock 
+          car={carData}
+          timeRemaining={timeRemaining}
+          onReserve={() => {/* Open reserve modal */}}
+        />
+      </div>
+      
+      {/* STICKY BOTTOM BAR - On Scroll */}
+      {showStickyBar && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-300 shadow-2xl z-50 py-4">
           <div className="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <img src={carData.image} alt="" className="w-16 h-16 object-cover rounded" />
               <div>
                 <div className="font-bold text-gray-900">{carData.title}</div>
-                <div className="text-sm text-gray-600">${carData.lease?.monthly || 577}/mo</div>
+                <div className="text-sm text-gray-600">${carData.lease?.monthly || 310}/mo</div>
               </div>
             </div>
             
             <div className="flex items-center gap-3">
-              <div className="text-right">
-                <div className="text-xs text-gray-600">Ends in</div>
+              <div className="text-right hidden md:block">
+                <div className="text-xs text-gray-600">Deal ends in</div>
                 <div className="text-lg font-bold text-red-600">
                   {timeRemaining.days}d {timeRemaining.hours}h
                 </div>
               </div>
               
-              <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg">
+              <button 
+                onClick={() => {/* Open reserve modal */}}
+                className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg"
+              >
                 RESERVE NOW
               </button>
             </div>
@@ -544,18 +380,19 @@ const CarDetail = () => {
         </div>
       )}
       
-      {/* Price Match Guarantee - внизу */}
-      <div className="max-w-7xl mx-auto px-4 pb-8">
-        <PriceMatchGuarantee />
-      </div>
+      {/* Fullscreen Gallery Modal */}
+      {showGalleryModal && (
+        <FullscreenGalleryModal
+          images={allGalleryImages}
+          initialIndex={galleryStartIndex}
+          onClose={() => setShowGalleryModal(false)}
+        />
+      )}
       
-      {/* Talk to Specialist button */}
       <TalkToSpecialist />
-      
       <Footer hiddenVin={carData?.specs?.vin} />
       <FOMOTicker />
       
-      {/* Add bottom padding for FOMO ticker */}
       <div className="h-16 lg:h-12" />
     </div>
   );
