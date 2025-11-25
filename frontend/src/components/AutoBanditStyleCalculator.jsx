@@ -243,16 +243,33 @@ const AutoBanditStyleCalculator = ({ car }) => {
         </Button>
         
         {/* Details */}
-        <div className="text-xs text-gray-500 space-y-1">
-          <div className="flex justify-between">
-            <span>Residual Value:</span>
-            <span className="font-medium">${calculated?.residualValue?.toLocaleString() || '0'}</span>
+        {calculation && !calculation.error && (
+          <div className="text-xs text-gray-500 space-y-1">
+            {params.mode === 'lease' ? (
+              <>
+                <div className="flex justify-between">
+                  <span>Residual Value:</span>
+                  <span className="font-medium">${calculation.residualValue?.toLocaleString() || '0'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Money Factor:</span>
+                  <span className="font-medium">{calculation.moneyFactor || '0.00000'}</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex justify-between">
+                  <span>APR:</span>
+                  <span className="font-medium">{calculation.apr}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Amount Financed:</span>
+                  <span className="font-medium">${calculation.amountFinanced?.toLocaleString() || '0'}</span>
+                </div>
+              </>
+            )}
           </div>
-          <div className="flex justify-between">
-            <span>Money Factor:</span>
-            <span className="font-medium">{calculated?.moneyFactor || '0.00200'}</span>
-          </div>
-        </div>
+        )}
       </CardContent>
     </Card>
     
