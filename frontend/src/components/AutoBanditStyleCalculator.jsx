@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
@@ -6,25 +6,23 @@ import ReserveModal from './ReserveModal';
 import PriceBreakdownModal from './PriceBreakdownModal';
 import QualifyCheckModal from './QualifyCheckModal';
 import { Info } from 'lucide-react';
+import { usePaymentCalculator } from '../hooks/usePaymentCalculator';
 
 const AutoBanditStyleCalculator = ({ car }) => {
-  const [params, setParams] = useState({
-    termMonths: 36,
-    annualMileage: 10000,
-    creditTier: 'SUPER_ELITE',
-    dueAtSigning: 2500,
-    zipCode: '90210',
-    dealType: 'lease',
-    customerDownPayment: 2500,
-    withIncentives: true
-  });
-  
-  const [calculated, setCalculated] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [showReserveModal, setShowReserveModal] = useState(false);
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const [showQualifyCheck, setShowQualifyCheck] = useState(false);
-  const [taxRate, setTaxRate] = useState(7.75);
+
+  // Use payment calculator hook
+  const {
+    config,
+    loading,
+    error,
+    params,
+    updateParam,
+    switchMode,
+    calculation
+  } = usePaymentCalculator(car?.id || car?.slug);
   
   // Down payment options до $15k
   const downPaymentOptions = [0, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 7500, 10000, 12000, 15000];
