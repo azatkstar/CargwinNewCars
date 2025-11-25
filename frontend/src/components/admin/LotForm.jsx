@@ -1421,22 +1421,155 @@ const LotForm = () => {
         </TabsContent>
 
         {/* Continue with other tabs... */}
-        <TabsContent value="fomo">
-          <div className="text-center py-8 text-gray-500">
-            {t('admin.lot_form.fomo_settings')}
-          </div>
+        <TabsContent value="fomo" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>FOMO Settings</CardTitle>
+              <CardDescription>Configure urgency and social proof elements</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>FOMO Mode</Label>
+                <Select
+                  value={lot.fomo?.mode || 'inherit'}
+                  onValueChange={(value) => handleInputChange('fomo', { ...lot.fomo, mode: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="inherit">Inherit (Global)</SelectItem>
+                    <SelectItem value="custom">Custom</SelectItem>
+                    <SelectItem value="off">Off</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              {lot.fomo?.mode === 'custom' && (
+                <>
+                  <div>
+                    <Label>Viewers Count</Label>
+                    <Input
+                      type="number"
+                      value={lot.fomo?.viewers || 25}
+                      onChange={(e) => handleInputChange('fomo', { ...lot.fomo, viewers: parseInt(e.target.value) || 0 })}
+                    />
+                  </div>
+                  <div>
+                    <Label>Recent Reservations (last 15 min)</Label>
+                    <Input
+                      type="number"
+                      value={lot.fomo?.confirms15 || 5}
+                      onChange={(e) => handleInputChange('fomo', { ...lot.fomo, confirms15: parseInt(e.target.value) || 0 })}
+                    />
+                  </div>
+                </>
+              )}
+            </CardContent>
+          </Card>
         </TabsContent>
 
-        <TabsContent value="seo">
-          <div className="text-center py-8 text-gray-500">
-            {t('admin.lot_form.seo_settings')}
-          </div>
+        <TabsContent value="seo" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>SEO Settings</CardTitle>
+              <CardDescription>Optimize for search engines</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>SEO Title (optional)</Label>
+                <Input
+                  value={lot.seo?.title || ''}
+                  onChange={(e) => handleInputChange('seo', { ...lot.seo, title: e.target.value })}
+                  placeholder="Leave empty to auto-generate from vehicle details"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  {lot.seo?.title ? `${lot.seo.title.length} / 60 characters` : 'Auto: 2024 Lexus RX350 - Fleet Pricing | hunter.lease'}
+                </p>
+              </div>
+              
+              <div>
+                <Label>Meta Description (optional)</Label>
+                <Textarea
+                  value={lot.seo?.description || ''}
+                  onChange={(e) => handleInputChange('seo', { ...lot.seo, description: e.target.value })}
+                  placeholder="Leave empty to auto-generate"
+                  rows={3}
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  {lot.seo?.description ? `${lot.seo.description.length} / 160 characters` : 'Auto-generated from offer details'}
+                </p>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <Switch
+                  checked={lot.seo?.noindex || false}
+                  onCheckedChange={(checked) => handleInputChange('seo', { ...lot.seo, noindex: checked })}
+                />
+                <Label>No Index (hide from search engines)</Label>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
-        <TabsContent value="technical">
-          <div className="text-center py-8 text-gray-500">
-            {t('admin.lot_form.technical_settings')}
-          </div>
+        <TabsContent value="technical" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>🧮 Calculator Configuration</CardTitle>
+              <CardDescription>
+                Leave empty to use defaults. Configure custom lease/finance parameters for this specific offer.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h4 className="font-semibold text-sm mb-2">💡 How it works:</h4>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• <strong>Empty = Default:</strong> Auto-generated realistic values</li>
+                  <li>• <strong>Custom JSON:</strong> Override for special deals</li>
+                  <li>• Format: {"{ lease_available: true, lease_terms: [36,48], ... }"}</li>
+                  <li>• <a href="#" className="text-blue-600 hover:underline">View documentation</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <Label>Calculator Config (Advanced JSON)</Label>
+                <Textarea
+                  value={typeof lot.calculator_config === 'string' 
+                    ? lot.calculator_config 
+                    : JSON.stringify(lot.calculator_config || {}, null, 2)
+                  }
+                  onChange={(e) => {
+                    try {
+                      const parsed = e.target.value ? JSON.parse(e.target.value) : {};
+                      handleInputChange('calculator_config', parsed);
+                    } catch (err) {
+                      // Keep as string if invalid JSON
+                      handleInputChange('calculator_config', e.target.value);
+                    }
+                  }}
+                  placeholder='Leave empty for defaults or enter JSON: { "lease_available": true, "lease_terms": [36, 48] }'
+                  rows={8}
+                  className="font-mono text-sm"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  ✅ Empty = Uses smart defaults based on MSRP and state
+                </p>
+              </div>
+              
+              <div className="border-t pt-4">
+                <h4 className="font-semibold mb-2">Other Technical Settings</h4>
+                <div>
+                  <Label>Internal Notes</Label>
+                  <Textarea
+                    value={lot.internal_notes || ''}
+                    onChange={(e) => handleInputChange('internal_notes', e.target.value)}
+                    placeholder="Private notes for admin team only (not visible to customers)"
+                    rows={3}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
