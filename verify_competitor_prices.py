@@ -8,17 +8,17 @@ import json
 
 def verify_competitor_prices():
     # Get auth token
-    auth_response = requests.post('https://autosales-platform-1.preview.emergentagent.com/api/auth/magic', 
+    auth_response = requests.post('https://carlease-pro.preview.emergentagent.com/api/auth/magic', 
                                  json={'email': 'admin@cargwin.com'})
     token = auth_response.json()['debug_token']
 
-    verify_response = requests.post('https://autosales-platform-1.preview.emergentagent.com/api/auth/verify',
+    verify_response = requests.post('https://carlease-pro.preview.emergentagent.com/api/auth/verify',
                                    json={'token': token})
     access_token = verify_response.json()['access_token']
 
     # Get the RX350 Premium lot
     headers = {'Authorization': f'Bearer {access_token}'}
-    response = requests.get('https://autosales-platform-1.preview.emergentagent.com/api/admin/lots/690bbe50e52e2fafa277660e', 
+    response = requests.get('https://carlease-pro.preview.emergentagent.com/api/admin/lots/690bbe50e52e2fafa277660e', 
                            headers=headers)
 
     if response.status_code == 200:
