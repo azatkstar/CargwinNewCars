@@ -278,6 +278,60 @@ class Lot(BaseModel):
     # Calculator Configuration
     calculator_config: Optional[Dict[str, Any]] = Field(default_factory=dict)
 
+# Helper function to generate default calculator config
+def get_default_calculator_config(msrp: int, discount: int, state: str = "CA") -> dict:
+    """Generate default calculator configuration based on offer data"""
+    final_price = msrp - discount
+    
+    return {
+        # Lease Settings
+        "lease_available": True,
+        "lease_terms": [24, 36, 39, 48],
+        "lease_mileages": [7500, 10000, 12000, 15000],
+        "lease_residuals": {
+            "24": {"7500": 0.64, "10000": 0.62, "12000": 0.60, "15000": 0.58},
+            "36": {"7500": 0.59, "10000": 0.57, "12000": 0.55, "15000": 0.53},
+            "39": {"7500": 0.57, "10000": 0.55, "12000": 0.53, "15000": 0.51},
+            "48": {"7500": 0.52, "10000": 0.50, "12000": 0.48, "15000": 0.46}
+        },
+        "money_factor_by_tier": {
+            "tier1": 0.00182,  # Super Elite 740+
+            "tier2": 0.00197,  # Elite 720-739
+            "tier3": 0.00212,  # Excellent 700-719
+            "tier4": 0.00227   # Good 680-699
+        },
+        "acquisition_fee": 695,
+        "dealer_fees": 0,
+        "doc_fee": 85,
+        "dmv_fee": 540,
+        "tax_rate": 0.0775 if state == "CA" else 0.07,
+        "default_lease_down_payments": [0, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 7500, 10000],
+        "rebates_taxable": 0,
+        "rebates_non_taxable": 0,
+        
+        # Finance Settings
+        "finance_available": True,
+        "finance_terms": [36, 48, 60, 72],
+        "apr_by_tier": {
+            "tier1": 5.99,   # Super Elite 740+
+            "tier2": 6.99,   # Elite 720-739
+            "tier3": 8.99,   # Excellent 700-719
+            "tier4": 10.99   # Good 680-699
+        },
+        "default_finance_down_payments": [0, 1000, 2500, 5000, 7500, 10000, 15000],
+        "finance_fees": 0,
+        
+        # Options
+        "allow_incentives_toggle": True,
+        "incentives_default_on": True,
+        "credit_tiers": [
+            {"code": "tier1", "label": "Super Elite 740+"},
+            {"code": "tier2", "label": "Elite 720-739"},
+            {"code": "tier3", "label": "Excellent 700-719"},
+            {"code": "tier4", "label": "Good 680-699"}
+        ]
+    }
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
