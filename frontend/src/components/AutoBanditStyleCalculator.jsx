@@ -218,13 +218,13 @@ const AutoBanditStyleCalculator = ({ car }) => {
           Check if you qualify — 30 seconds, no impact to credit score
         </Button>
 
-        {/* LEASE IT NOW Button */}
+        {/* RESERVE/APPLY BUTTON */}
         <Button
           onClick={() => setShowReserveModal(true)}
-          disabled={loading}
+          disabled={!calculation || calculation.error}
           className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-4 text-lg font-bold rounded-xl shadow-lg"
         >
-          {loading ? 'CALCULATING...' : 'LEASE IT NOW'}
+          {params.mode === 'lease' ? 'LEASE IT NOW' : 'APPLY FOR FINANCING'}
         </Button>
         
         {/* Trust text under button */}
