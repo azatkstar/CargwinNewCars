@@ -121,6 +121,13 @@ export const usePaymentCalculator = (carId, initialParams = {}) => {
       // Net cap cost for payment calculation (adjusted cap cost - down payment as cap cost reduction)
       const netCapCost = adjustedCapCost - downPayment;
 
+      // Validate: Net cap cost should be greater than residual value
+      if (netCapCost < residualValue) {
+        return { 
+          error: `Invalid lease configuration: Net cap cost ($${netCapCost.toLocaleString()}) is less than residual value ($${residualValue.toLocaleString()}). Please adjust down payment or contact dealer.`
+        };
+      }
+
       // Calculate depreciation and rent charge
       const depreciation = (netCapCost - residualValue) / termMonths;
       const rentCharge = (netCapCost + residualValue) * moneyFactor;
