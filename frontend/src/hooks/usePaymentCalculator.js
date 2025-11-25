@@ -107,23 +107,23 @@ export const usePaymentCalculator = (carId, initialParams = {}) => {
         return { error: 'Money factor not available for selected credit tier' };
       }
 
-      // Calculate cap cost
-      let capCost = final_price;
+      // Calculate adjusted cap cost (selling price + fees - incentives)
+      let adjustedCapCost = final_price;
       
-      // Apply incentives if enabled
+      // Apply incentives if enabled (these reduce the cap cost)
       if (withIncentives) {
-        capCost -= (rebates_taxable + rebates_non_taxable);
+        adjustedCapCost -= (rebates_taxable + rebates_non_taxable);
       }
 
-      // Add fees to cap cost
-      capCost += acquisition_fee + dealer_fees;
+      // Add capitalized fees
+      adjustedCapCost += acquisition_fee + dealer_fees;
 
-      // Subtract down payment from cap cost
-      capCost -= downPayment;
+      // Net cap cost for payment calculation (adjusted cap cost - down payment as cap cost reduction)
+      const netCapCost = adjustedCapCost - downPayment;
 
       // Calculate depreciation and rent charge
-      const depreciation = (capCost - residualValue) / termMonths;
-      const rentCharge = (capCost + residualValue) * moneyFactor;
+      const depreciation = (netCapCost - residualValue) / termMonths;
+      const rentCharge = (netCapCost + residualValue) * moneyFactor;
 
       // Base payment (before tax)
       const basePayment = depreciation + rentCharge;
