@@ -166,39 +166,41 @@ const AutoBanditStyleCalculator = ({ car }) => {
         </div>
 
         {/* Incentives Toggle */}
-        <div className="flex items-center justify-between bg-gray-50 p-3 rounded">
-          <span className="text-sm font-medium">Apply available incentives</span>
-          <button
-            onClick={() => setParams({...params, withIncentives: !params.withIncentives})}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-              params.withIncentives ? 'bg-green-600' : 'bg-gray-300'
-            }`}
-          >
-            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-              params.withIncentives ? 'translate-x-6' : 'translate-x-1'
-            }`} />
-          </button>
-        </div>
+        {config.allow_incentives_toggle && (
+          <div className="flex items-center justify-between bg-gray-50 p-3 rounded">
+            <span className="text-sm font-medium">Apply available incentives</span>
+            <button
+              onClick={() => updateParam('withIncentives', !params.withIncentives)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                params.withIncentives ? 'bg-green-600' : 'bg-gray-300'
+              }`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                params.withIncentives ? 'translate-x-6' : 'translate-x-1'
+              }`} />
+            </button>
+          </div>
+        )}
 
-        {/* MONTHLY PAYMENT DISPLAY - КОМПАКТНЕЕ */}
+        {/* MONTHLY PAYMENT DISPLAY */}
         <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl p-4 text-center">
-          {loading ? (
-            <div className="py-4">
-              <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-red-600"></div>
-            </div>
-          ) : calculated ? (
+          {calculation?.error ? (
+            <div className="py-4 text-red-600 text-sm">{calculation.error}</div>
+          ) : calculation ? (
             <>
-              <div className="text-xs text-gray-600 mb-1">{calculated.lender}</div>
+              <div className="text-xs text-gray-600 mb-1">{calculation.lender || 'Manufacturer Finance'}</div>
               <div className="text-4xl font-bold text-gray-900 mb-1">
-                ${calculated.monthly}
+                ${calculation.monthlyPayment?.toLocaleString()}
               </div>
               <div className="text-sm text-gray-600 mb-2">per month</div>
               <div className="text-xs text-gray-600">
-                +${calculated.dueAtSigning?.toLocaleString()} due at signing
+                +${calculation.dueAtSigning?.toLocaleString()} due at signing
               </div>
             </>
           ) : (
-            <div className="text-gray-500">Calculating...</div>
+            <div className="py-4">
+              <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-red-600"></div>
+            </div>
           )}
         </div>
         
