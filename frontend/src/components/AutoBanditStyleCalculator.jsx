@@ -23,118 +23,42 @@ const AutoBanditStyleCalculator = ({ car }) => {
     switchMode,
     calculation
   } = usePaymentCalculator(car?.id || car?.slug);
+  // Show loading or error state
+  if (loading) {
+    return (
+      <Card className="border-2 border-gray-200 bg-white shadow-lg">
+        <CardContent className="p-6 text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mb-4"></div>
+          <p className="text-gray-600">Loading calculator...</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (error || !config) {
+    return (
+      <Card className="border-2 border-gray-200 bg-white shadow-lg">
+        <CardContent className="p-6 text-center">
+          <p className="text-red-600">{error || 'Calculator unavailable'}</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Get options from config
+  const termOptions = params.mode === 'lease' 
+    ? (config.lease_terms || [36]).map(t => ({ months: t, label: `${t} months` }))
+    : (config.finance_terms || [48]).map(t => ({ months: t, label: `${t} months` }));
+
+  const mileageOptions = config.lease_mileages || [10000];
   
-  // Down payment options до $15k
-  const downPaymentOptions = [0, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 7500, 10000, 12000, 15000];
+  const downPaymentOptions = params.mode === 'lease'
+    ? (config.default_lease_down_payments || [2500])
+    : (config.default_finance_down_payments || [2500]);
 
-  // Credit Tier adjustments (как AutoBandit)
-  const creditTiers = {
-    'tier1': { label: 'Super Elite 740+', moneyFactorBase: 0.00182 },
-    'tier2': { label: 'Elite 720-739', moneyFactorBase: 0.00197 },
-    'tier3': { label: 'Excellent 700-719', moneyFactorBase: 0.00212 },
-    'tier4': { label: 'Good 680-699', moneyFactorBase: 0.00227 }
-  };
-
-
-  const fetchTaxRate = async (zip) => {
-    try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-      const response = await fetch(`${BACKEND_URL}/api/tax-rate/${zip}`);
-      if (response.ok) {
-        const data = await response.json();
-        setTaxRate(data.tax_rate);
-      }
-    } catch (error) {
-      console.error('Tax rate lookup failed:', error);
-    }
-  };
-
-
-  // Term options (как AutoBandit)
-  const termOptions = [
-    { months: 24, label: '24 months' },
-    { months: 36, label: '36 months' },
-    { months: 39, label: 'Best - 39 months' },
-    { months: 48, label: '48 months' }
+  const creditTiers = config.credit_tiers || [
+    { code: 'tier1', label: 'Super Elite 740+' }
   ];
-
-  // Mileage options
-  const mileageOptions = [7500, 10000, 12000, 15000];
-
-  useEffect(() => {
-    calculateLease();
-  }, [params, car]);
-
-  const calculateLease = async () => {
-    if (!car?.id) return;
-    
-    setLoading(true);
-    try {
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
-      const endpoint = BACKEND_URL.endsWith('/api')
-        ? `${BACKEND_URL}/calc/lease`
-        : `${BACKEND_URL}/api/calc/lease`;
-      
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          dealExternalId: car.id,
-          termMonths: params.termMonths,
-          annualMileage: params.annualMileage,
-          creditTierCode: params.creditTier,
-          withIncentives: params.withIncentives,
-          customer_down_payment: params.customerDownPayment
-        })
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        setCalculated({
-          monthly: data.monthly,
-          dueAtSigning: data.dueAtSigning,
-          residualValue: data.residualValue,
-          moneyFactor: data.moneyFactor,
-          lender: 'Toyota Financial Services'  // From car data
-        });
-      } else {
-        // Fallback to old calculation
-        calculateLeaseOld();
-      }
-    } catch (error) {
-      console.error('Calc error:', error);
-      calculateLeaseOld();
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const calculateLeaseOld = () => {
-    // Existing calculation as fallback
-    const msrp = car?.msrp || 50000;
-    const sellingPrice = car?.fleet || (msrp - (car?.savings || 0));
-    
-    const residualPercents = { 24: 64, 36: 57, 39: 55, 48: 50 };
-    const residualPercent = residualPercents[params.termMonths] || 57;
-    const residualValue = Math.round(msrp * (residualPercent / 100));
-    
-    const baseMF = 0.00182;
-    const moneyFactor = baseMF;
-    
-    const depreciation = (sellingPrice - residualValue) / params.termMonths;
-    const financeCharge = (sellingPrice + residualValue) * moneyFactor;
-    const baseMonthly = Math.round(depreciation + financeCharge);
-    
-    setCalculated({
-      monthly: baseMonthly,
-      dueAtSigning: params.customerDownPayment + 650 + 540 + 85 + baseMonthly,
-      residualValue,
-      moneyFactor: moneyFactor.toFixed(5),
-      lender: car?.make === 'Toyota' ? 'Toyota Financial' : 'Manufacturer Finance'
-    });
-  };
-
-  if (!calculated) return null;
 
   return (
     <>
