@@ -274,6 +274,9 @@ class Lot(BaseModel):
     createdAt: datetime = Field(default_factory=datetime.utcnow)
     updatedAt: datetime = Field(default_factory=datetime.utcnow)
     archivedAt: Optional[datetime] = None
+    
+    # Calculator Configuration
+    calculator_config: Optional[Dict[str, Any]] = Field(default_factory=dict)
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
