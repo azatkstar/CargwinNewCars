@@ -97,7 +97,7 @@ const AutoBanditStyleCalculator = ({ car }) => {
           {/* Term Length */}
           <div>
             <div className="text-xs font-semibold text-gray-500 uppercase mb-2">TERM LENGTH</div>
-            <Select value={params.termMonths.toString()} onValueChange={(val) => setParams({...params, termMonths: parseInt(val)})}>
+            <Select value={params.termMonths.toString()} onValueChange={(val) => updateParam('termMonths', parseInt(val))}>
               <SelectTrigger className="border-gray-300">
                 <SelectValue />
               </SelectTrigger>
@@ -111,33 +111,35 @@ const AutoBanditStyleCalculator = ({ car }) => {
             </Select>
           </div>
 
-          {/* Annual Mileage */}
-          <div>
-            <div className="text-xs font-semibold text-gray-500 uppercase mb-2">ANNUAL MILEAGE</div>
-            <Select value={params.annualMileage.toString()} onValueChange={(val) => setParams({...params, annualMileage: parseInt(val)})}>
-              <SelectTrigger className="border-gray-300">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {mileageOptions.map(miles => (
-                  <SelectItem key={miles} value={miles.toString()}>
-                    {miles.toLocaleString()} mi
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          {/* Annual Mileage - Only for lease mode */}
+          {params.mode === 'lease' && (
+            <div>
+              <div className="text-xs font-semibold text-gray-500 uppercase mb-2">ANNUAL MILEAGE</div>
+              <Select value={params.annualMileage.toString()} onValueChange={(val) => updateParam('annualMileage', parseInt(val))}>
+                <SelectTrigger className="border-gray-300">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {mileageOptions.map(miles => (
+                    <SelectItem key={miles} value={miles.toString()}>
+                      {miles.toLocaleString()} mi
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
 
           {/* Credit Tier */}
           <div>
             <div className="text-xs font-semibold text-gray-500 uppercase mb-2">CREDIT TIER</div>
-            <Select value={params.creditTier} onValueChange={(val) => setParams({...params, creditTier: val})}>
+            <Select value={params.creditTier} onValueChange={(val) => updateParam('creditTier', val)}>
               <SelectTrigger className="border-gray-300">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {Object.entries(creditTiers).map(([key, tier]) => (
-                  <SelectItem key={key} value={key}>
+                {creditTiers.map(tier => (
+                  <SelectItem key={tier.code} value={tier.code}>
                     {tier.label}
                   </SelectItem>
                 ))}
@@ -145,10 +147,10 @@ const AutoBanditStyleCalculator = ({ car }) => {
             </Select>
           </div>
 
-          {/* Down Payment - До $15k */}
+          {/* Down Payment */}
           <div>
             <div className="text-xs font-semibold text-gray-500 uppercase mb-2">DOWN PAYMENT</div>
-            <Select value={params.customerDownPayment.toString()} onValueChange={(val) => setParams({...params, customerDownPayment: parseInt(val)})}>
+            <Select value={params.downPayment.toString()} onValueChange={(val) => updateParam('downPayment', parseInt(val))}>
               <SelectTrigger className="border-gray-300">
                 <SelectValue />
               </SelectTrigger>
