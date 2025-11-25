@@ -64,28 +64,32 @@ const AutoBanditStyleCalculator = ({ car }) => {
     <>
     <Card className="border-2 border-gray-200 bg-white shadow-lg">
       <CardContent className="p-4 space-y-4">
-        {/* Tab Switches - КОМПАКТНЕЕ */}
+        {/* Tab Switches */}
         <div className="grid grid-cols-2 gap-1 bg-gray-100 p-1 rounded-lg">
-          <button
-            onClick={() => setParams({...params, dealType: 'lease'})}
-            className={`py-2 px-3 rounded-md font-bold text-sm transition-all ${
-              params.dealType === 'lease'
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-600'
-            }`}
-          >
-            LEASE
-          </button>
-          <button
-            onClick={() => setParams({...params, dealType: 'finance'})}
-            className={`py-2 px-3 rounded-md font-bold text-sm transition-all ${
-              params.dealType === 'finance'
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-600'
-            }`}
-          >
-            FINANCE
-          </button>
+          {config.lease_available && (
+            <button
+              onClick={() => switchMode('lease')}
+              className={`py-2 px-3 rounded-md font-bold text-sm transition-all ${
+                params.mode === 'lease'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-600'
+              }`}
+            >
+              LEASE
+            </button>
+          )}
+          {config.finance_available && (
+            <button
+              onClick={() => switchMode('finance')}
+              className={`py-2 px-3 rounded-md font-bold text-sm transition-all ${
+                params.mode === 'finance'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-600'
+              }`}
+            >
+              FINANCE
+            </button>
+          )}
         </div>
 
         {/* Selectors Grid - КОМПАКТНЕЕ */}
