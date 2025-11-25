@@ -73,6 +73,8 @@ const LotForm = () => {
       downPayment: 3000
     },
     images: [],
+    calculator_config: {},
+    internal_notes: '',
     status: 'draft',
     publishAt: null
   });
