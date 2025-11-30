@@ -145,7 +145,7 @@ const Coverage = () => {
               <ul className="space-y-2 text-sm text-gray-600">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-600" />
-                  Free within 100 miles of dealer
+                  Free within 25 miles of dealer
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-600" />
