@@ -4326,12 +4326,20 @@ async def get_calculator_config(
         final_price = msrp - discount
         state = lot.get('state', 'CA')
         
-        # Get custom calculator config or generate default
+        # Check if auto-generation enabled
+        calculator_config_auto = lot.get('calculator_config_auto', True)
         calculator_config = lot.get('calculator_config', {})
         
-        # If no custom config, generate default
-        if not calculator_config:
-            calculator_config = get_default_calculator_config(msrp, discount, state)
+        # If auto-generate OR no config exists, use service
+        if calculator_config_auto or not calculator_config:
+            from calculator_config_service import CalculatorConfigService
+            service = CalculatorConfigService(db)
+            try:
+                calculator_config = await service.generate_calculator_config(lot.get('id'))
+            except Exception as gen_error:
+                logger.warning(f"Auto-generation failed, using fallback: {gen_error}")
+                # Fallback to default if generation fails
+                calculator_config = get_default_calculator_config(msrp, discount, state)
         
         # Always include car-specific data
         return {
