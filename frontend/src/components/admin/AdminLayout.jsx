@@ -166,6 +166,17 @@ const AdminLayout = ({ children }) => {
           <div className="p-6">
             <ul className="space-y-2">
               {navItems.map((item) => {
+                // Handle dividers
+                if (item.type === 'divider') {
+                  return (
+                    <li key={item.id} className="pt-4 pb-2">
+                      <div className="px-4 text-xs font-semibold text-gray-500 uppercase">
+                        {item.label}
+                      </div>
+                    </li>
+                  );
+                }
+                
                 if (!hasPermission(item.requiredRole)) return null;
                 
                 const IconComponent = item.icon;
