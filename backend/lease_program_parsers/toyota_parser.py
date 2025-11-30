@@ -2,7 +2,7 @@
 Toyota/Lexus Financial Services (TFS/LFS) Parser
 Extracts lease program data from Toyota/Lexus PDF text
 """
-from typing import Optional
+from typing import Optional, Dict, Any
 import re
 import logging
 from models_lease_programs import LeaseProgramParsed
