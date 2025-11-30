@@ -1756,6 +1756,89 @@ async def delete_parsed_lease_program(
 
 
 
+# ==========================================
+# PRO LEASE CALCULATOR PUBLIC ENDPOINTS
+# ==========================================
+
+@api_router.post("/lease/calculate")
+async def calculate_lease_payment(request: dict):
+    """
+    Calculate lease payment using parsed program data
+    
+    Public endpoint - no authentication required
+    
+    Request body: LeaseCalculationRequest JSON
+    Returns: LeaseCalculationResult JSON with detailed breakdown
+    """
+    try:
+        from models_lease_programs import LeaseCalculationRequest
+        from lease_calculator_pro import calculate_lease_pro
+        from db_lease_programs import get_latest_parsed_program_for
+        
+        # Parse request
+        try:
+            calc_request = LeaseCalculationRequest(**request)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Invalid request format: {str(e)}")
+        
+        # Fetch parsed program
+        parsed_program = await get_latest_parsed_program_for(
+            db,
+            brand=calc_request.brand,
+            model=calc_request.model,
+            region=calc_request.region
+        )
+        
+        if not parsed_program:
+            raise HTTPException(
+                status_code=404,
+                detail=f"No lease program found for {calc_request.brand} {calc_request.model or ''} in {calc_request.region or 'any region'}"
+            )
+        
+        # Calculate
+        try:
+            result = calculate_lease_pro(calc_request, parsed_program)
+            return result.dict()
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e))
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Lease calculation error: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Calculation failed: {str(e)}")
+
+
+@api_router.get("/lease/brands-models")
+async def get_brands_and_models():
+    """
+    Get available brands and models for calculator dropdown
+    
+    Public endpoint - no authentication required
+    
+    Returns:
+        {
+            "brands": [
+                {"name": "Toyota", "models": ["Camry", "RAV4"]},
+                {"name": "Honda", "models": ["Civic", "Accord"]}
+            ]
+        }
+    """
+    try:
+        from db_lease_programs import get_available_brands_and_models
+        
+        data = await get_available_brands_and_models(db)
+        return data
+        
+    except Exception as e:
+        logger.error(f"Get brands/models error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
+
 
 @api_router.post("/ab-test/{test_name}/convert")
 async def track_ab_conversion(
