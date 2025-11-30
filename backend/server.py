@@ -4329,7 +4329,14 @@ async def get_calculator_config(
     car_slug: str,
     lot_repo: LotRepository = Depends(get_lots_repo)
 ):
-    """Get calculator configuration for a specific car"""
+    """
+    Get calculator configuration for a specific car.
+    
+    Logic:
+    1. If manual JSON exists -> use it
+    2. If cached config exists -> use it
+    3. Otherwise -> generate on-the-fly
+    """
     try:
         # Get lot by slug
         lot = await lot_repo.get_lot_by_slug(car_slug)
@@ -4342,18 +4349,45 @@ async def get_calculator_config(
         final_price = msrp - discount
         state = lot.get('state', 'CA')
         
-        # Check if auto-generation enabled
-        calculator_config_auto = lot.get('calculator_config_auto', True)
-        calculator_config = lot.get('calculator_config', {})
+        calculator_config = None
         
-        # If auto-generate OR no config exists, use service
-        if calculator_config_auto or not calculator_config:
+        # 1. Check for manual JSON override
+        manual_json = lot.get('calculator_config_manual_json')
+        if manual_json and manual_json.strip():
+            try:
+                import json
+                if isinstance(manual_json, str):
+                    calculator_config = json.loads(manual_json)
+                else:
+                    calculator_config = manual_json
+                logger.info(f"Using manual calculator config for {car_slug}")
+            except Exception as parse_error:
+                logger.error(f"Failed to parse manual JSON for {car_slug}: {parse_error}")
+        
+        # 2. Check for cached config
+        if not calculator_config:
+            cached_config = lot.get('calculator_config_cached')
+            if cached_config and isinstance(cached_config, dict) and cached_config:
+                calculator_config = cached_config
+                logger.info(f"Using cached calculator config for {car_slug}")
+        
+        # 3. Generate on-the-fly if nothing found
+        if not calculator_config:
+            logger.info(f"Generating calculator config on-the-fly for {car_slug}")
             from calculator_config_service import CalculatorConfigService
             service = CalculatorConfigService(db)
             try:
                 calculator_config = await service.generate_calculator_config(lot.get('id'))
+                
+                # Optionally cache it for future requests
+                if lot.get('calculator_config_auto', True):
+                    await db.lots.update_one(
+                        {"id": lot.get('id')},
+                        {"$set": {"calculator_config_cached": calculator_config}}
+                    )
+                    logger.info(f"Cached generated config for {car_slug}")
             except Exception as gen_error:
-                logger.warning(f"Auto-generation failed, using fallback: {gen_error}")
+                logger.warning(f"Auto-generation failed for {car_slug}, using fallback: {gen_error}")
                 # Fallback to default if generation fails
                 calculator_config = get_default_calculator_config(msrp, discount, state)
         
