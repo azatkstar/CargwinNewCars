@@ -132,31 +132,6 @@ The next phase will implement:
    - Kia Finance
    - And more...
 
-## File Structure
-
-```
-/app/backend/
-├── pdf_import_service.py    # PDF extraction logic (NEW)
-├── server.py                 # Added PDF import endpoints
-└── requirements.txt          # Updated with new dependencies
-```
-
-## Logs
-
-Check backend logs for PDF processing:
-```bash
-tail -f /var/log/supervisor/backend.*.log | grep "PDF import"
-```
-
-## Error Handling
-
-The service handles:
-- Invalid PDF files (validation)
-- Size limits (50MB max)
-- OCR fallback for scanned documents
-- Database save failures
-- Extraction errors with detailed messages
-
 ## Status: ✅ Complete
 
 All Step 1 requirements implemented:
