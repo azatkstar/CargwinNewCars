@@ -136,6 +136,18 @@ const AdminLayout = ({ children }) => {
       icon: Tag,
       path: '/admin/featured-deals',
       requiredRole: 'editor'
+    },
+    {
+      id: 'divider-sync',
+      type: 'divider',
+      label: 'Sync Engine'
+    },
+    {
+      id: 'sync-engine',
+      label: 'Lease Sync',
+      icon: Zap,
+      path: '/admin/sync',
+      requiredRole: 'admin'
     }
   ];
 
