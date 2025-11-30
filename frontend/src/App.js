@@ -61,11 +61,13 @@ const Home = () => {
       <Header />
       <main role="main">
         <Hero />
-        {/* Main content on separate /offers page */}
+        <FeaturedDealsSection />
         <HowItWorks />
+        <WhyHunterLease />
         <TrustFAQ />
         <Reviews />
         <FAQ />
+        <FinalCTA />
       </main>
       <Footer />
       <CargwinGPT />
