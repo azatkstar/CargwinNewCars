@@ -155,6 +155,81 @@ async def get_programs_by_pdf_id(db: AsyncIOMotorDatabase, pdf_id: str) -> List[
     programs = await db.lease_programs_parsed.find(
         {"pdf_id": pdf_id},
         {"_id": 0}
+
+
+
+async def get_latest_parsed_program_for(
+    db: AsyncIOMotorDatabase,
+    brand: str,
+    model: Optional[str] = None,
+    region: Optional[str] = None
+) -> Optional[Dict[str, Any]]:
+    """
+    Get the latest parsed program for given brand/model/region
+    
+    Args:
+        db: MongoDB database instance
+        brand: Brand name (case-insensitive)
+        model: Optional model name
+        region: Optional region
+        
+    Returns:
+        Most recent program dict or None
+    """
+    query: Dict[str, Any] = {
+        "brand": {"$regex": f"^{brand}$", "$options": "i"}
+    }
+    
+    if model:
+        query["model"] = {"$regex": f"^{model}$", "$options": "i"}
+    
+    if region:
+        query["region"] = {"$regex": region, "$options": "i"}
+    
+    program = await db.lease_programs_parsed.find_one(
+        query,
+        {"_id": 0}
+    )
+    
+    logger.info(f"Fetched latest program for {brand}/{model}/{region}: {'Found' if program else 'Not found'}")
+    
+    return program
+
+
+async def get_available_brands_and_models(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
+    """
+    Get list of available brands and their models from parsed programs
+    
+    Returns:
+        dict with brands list containing name and models
+    """
+    pipeline = [
+        {
+            "$group": {
+                "_id": "$brand",
+                "models": {"$addToSet": "$model"}
+            }
+        },
+        {
+            "$sort": {"_id": 1}
+        }
+    ]
+    
+    results = await db.lease_programs_parsed.aggregate(pipeline).to_list(length=None)
+    
+    brands = []
+    for item in results:
+        brand_name = item["_id"]
+        models = [m for m in item["models"] if m]  # Filter out None values
+        models.sort()
+        
+        brands.append({
+            "name": brand_name,
+            "models": models
+        })
+    
+    return {"brands": brands}
+
     ).to_list(length=None)
     
     return programs
