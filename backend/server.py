@@ -1591,6 +1591,17 @@ async def update_lot(
         if 'feesHint' in lot_data:
             lot_data['fees_hint'] = max(0, lot_data.pop('feesHint'))
         
+        # Merge with existing lot data for calculator generation
+        merged_lot_data = {**existing_lot, **lot_data, 'id': lot_id}
+        
+        # Auto-generate calculator config if needed
+        from auto_calculator_hooks import update_lot_calculator_config
+        merged_lot_data = await update_lot_calculator_config(merged_lot_data, db)
+        
+        # Update lot_data with any calculator changes
+        if 'calculator_config_cached' in merged_lot_data:
+            lot_data['calculator_config_cached'] = merged_lot_data['calculator_config_cached']
+        
         # Update lot in database
         success = await lot_repo.update_lot(lot_id, lot_data)
         if not success:
