@@ -155,7 +155,9 @@ async def get_programs_by_pdf_id(db: AsyncIOMotorDatabase, pdf_id: str) -> List[
     programs = await db.lease_programs_parsed.find(
         {"pdf_id": pdf_id},
         {"_id": 0}
-
+    ).to_list(length=None)
+    
+    return programs
 
 
 async def get_latest_parsed_program_for(
