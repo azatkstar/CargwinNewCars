@@ -20,6 +20,8 @@ import UploadPDF from './UploadPDF';
 import ParsedPrograms from './ParsedPrograms';
 import FeaturedDealsAdmin from './FeaturedDealsAdmin';
 import CreateDeal from './CreateDeal';
+import SyncEngine from './SyncEngine';
+import SyncLogs from './SyncLogs';
 
 const AdminDashboard = () => {
   const { isAuthenticated, loading } = useAuth();
