@@ -92,9 +92,10 @@ function App() {
                   <Route path="/ccpa-rights" element={<CCPARights />} />
                   <Route path="/about" element={<AboutUs />} />
                   <Route path="/what-to-expect" element={<WhatToExpect />} />
+                  <Route path="/how-it-works" element={<HowItWorksPage />} />
                   <Route path="/early-access" element={<EarlyAccess />} />
                   <Route path="/services" element={<ServicesPage />} />
-                  <Route path="/coverage" element={<CoveragePage />} />
+                  <Route path="/coverage" element={<Coverage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/reviews" element={<ReviewsPage />} />
                   <Route path="/my-favorites" element={<MyFavorites />} />
