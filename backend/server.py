@@ -146,6 +146,7 @@ db = None
 @app.on_event("startup")
 async def startup_event():
     """Initialize all application components"""
+    global db
     try:
         # Setup logging first
         setup_logging(settings.LOG_LEVEL, settings.LOG_FORMAT)
@@ -154,6 +155,7 @@ async def startup_event():
         # Initialize database
         await connect_to_mongo()
         await initialize_repositories()
+        db = get_database()  # Initialize global db instance
         logger.info("Database connections established")
         
         # Initialize performance components
