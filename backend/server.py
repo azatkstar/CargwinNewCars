@@ -347,9 +347,10 @@ class Lot(BaseModel):
     updatedAt: datetime = Field(default_factory=datetime.utcnow)
     archivedAt: Optional[datetime] = None
     
-    # Calculator Configuration (can be auto-generated or manual override)
-    calculator_config: Optional[Dict[str, Any]] = Field(default_factory=dict)
+    # Calculator Configuration
     calculator_config_auto: bool = True  # True = auto-generate, False = manual override
+    calculator_config_manual_json: Optional[str] = None  # Manual JSON override
+    calculator_config_cached: Optional[Dict[str, Any]] = Field(default_factory=dict)  # Cached generated config
 
 # Helper function to generate default calculator config
 def get_default_calculator_config(msrp: int, discount: int, state: str = "CA") -> dict:
