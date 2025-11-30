@@ -231,7 +231,3 @@ async def get_available_brands_and_models(db: AsyncIOMotorDatabase) -> Dict[str,
         })
     
     return {"brands": brands}
-
-    ).to_list(length=None)
-    
-    return programs
