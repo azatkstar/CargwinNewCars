@@ -2028,6 +2028,130 @@ async def delete_featured_deal(
 
 
 
+# ==========================================
+# AUTO SYNC ENGINE ENDPOINTS
+# ==========================================
+
+@api_router.post("/admin/sync/run")
+async def run_sync_engine(current_user: User = Depends(require_admin)):
+    """
+    Run AutoSync Engine manually
+    
+    Scans for updated lease programs and recalculates affected deals
+    """
+    try:
+        from auto_sync_engine import run_auto_sync
+        
+        logger.info(f"AutoSync triggered by {current_user.email}")
+        
+        result = await run_auto_sync(db)
+        
+        return {
+            "ok": True,
+            "programs_updated": result["programs_updated"],
+            "deals_recalculated": result["deals_recalculated"],
+            "logs_created": result["logs_created"],
+            "changes": result["changes"]
+        }
+        
+    except Exception as e:
+        logger.error(f"Sync error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/admin/sync/recalculate-all")
+async def recalculate_all_deals(current_user: User = Depends(require_admin)):
+    """
+    Forcefully recalculate all Featured Deals
+    
+    Useful when:
+    - New lease programs are uploaded
+    - Calculator logic is updated
+    - Manual sync needed
+    """
+    try:
+        from auto_sync_engine import full_recalculate_all_deals
+        
+        logger.info(f"Full recalculation triggered by {current_user.email}")
+        
+        result = await full_recalculate_all_deals(db)
+        
+        return {
+            "ok": True,
+            "total": result["total"],
+            "success": result["success"],
+            "failed": result["failed"],
+            "failed_deals": result["failed_deals"]
+        }
+        
+    except Exception as e:
+        logger.error(f"Recalculate all error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/sync/logs")
+async def get_sync_logs(
+    limit: int = 50,
+    current_user: User = Depends(require_editor)
+):
+    """
+    Get AutoSync logs history
+    """
+    try:
+        logs = await db.auto_sync_logs.find(
+            {},
+            {"_id": 0}
+        ).sort("timestamp", -1).limit(limit).to_list(limit)
+        
+        return {
+            "logs": logs,
+            "total": len(logs)
+        }
+        
+    except Exception as e:
+        logger.error(f"Get sync logs error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/sync/stats")
+async def get_sync_stats(current_user: User = Depends(require_editor)):
+    """
+    Get AutoSync statistics
+    
+    Returns:
+        - Total parsed programs
+        - Total featured deals
+        - Last sync time
+        - Deals updated in last sync
+    """
+    try:
+        # Count programs
+        programs_count = await db.lease_programs_parsed.count_documents({})
+        
+        # Count deals
+        deals_count = await db.featured_deals.count_documents({})
+        
+        # Get last sync log
+        last_sync = await db.auto_sync_logs.find_one(
+            {},
+            {"_id": 0},
+            sort=[("timestamp", -1)]
+        )
+        
+        return {
+            "total_programs": programs_count,
+            "total_deals": deals_count,
+            "last_sync_time": last_sync.get("timestamp") if last_sync else None,
+            "last_sync_deals_updated": last_sync.get("deals_count", 0) if last_sync else 0
+        }
+        
+    except Exception as e:
+        logger.error(f"Get sync stats error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
+
 
 
 
