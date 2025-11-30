@@ -54,6 +54,10 @@ const AdminDashboard = () => {
         <Route path="finance-programs" element={<FinancePrograms />} />
         <Route path="tax-configs" element={<TaxConfigs />} />
         <Route path="calculator-tools" element={<CalculatorTools />} />
+        <Route path="upload-pdf" element={<UploadPDF />} />
+        <Route path="parsed-programs" element={<ParsedPrograms />} />
+        <Route path="featured-deals" element={<FeaturedDealsAdmin />} />
+        <Route path="featured-deals/create" element={<CreateDeal />} />
       </Routes>
     </AdminLayout>
   );
