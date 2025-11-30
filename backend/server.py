@@ -139,6 +139,9 @@ from websocket_manager import sio
 app.mount('/ws', socketio.ASGIApp(sio))
 logger.info("WebSocket server mounted at /ws")
 
+# Global database instance
+db = None
+
 # Startup and shutdown events
 @app.on_event("startup")
 async def startup_event():
