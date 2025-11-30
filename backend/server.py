@@ -1838,6 +1838,197 @@ async def get_brands_and_models():
 
 
 
+# ==========================================
+# FEATURED DEALS ENDPOINTS
+# ==========================================
+
+@api_router.post("/deals/create")
+async def create_featured_deal(
+    request: dict,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Create a new featured deal with auto-calculation
+    
+    Admin-only endpoint
+    
+    Automatically calculates:
+    - Monthly payment
+    - Drive-off
+    - One-pay
+    - MF, Residual
+    - Savings
+    """
+    try:
+        from models_featured_deals import CreateDealRequest, FeaturedDeal
+        from db_featured_deals import create_deal, update_calculated_fields
+        from models_lease_programs import LeaseCalculationRequest
+        from lease_calculator_pro import calculate_lease_pro
+        from db_lease_programs import get_latest_parsed_program_for
+        
+        # Parse request
+        try:
+            create_request = CreateDealRequest(**request)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Invalid request: {str(e)}")
+        
+        # Create initial deal
+        deal_dict = create_request.dict()
+        deal_id = await create_deal(db, deal_dict)
+        
+        # Run PRO calculator
+        try:
+            # Fetch parsed program
+            parsed_program = await get_latest_parsed_program_for(
+                db,
+                brand=create_request.brand,
+                model=create_request.model,
+                region=create_request.region
+            )
+            
+            if parsed_program:
+                # Calculate
+                calc_request = LeaseCalculationRequest(
+                    brand=create_request.brand,
+                    model=create_request.model,
+                    msrp=create_request.msrp,
+                    selling_price=create_request.selling_price,
+                    term_months=create_request.term_months,
+                    annual_mileage=create_request.annual_mileage,
+                    region=create_request.region
+                )
+                
+                calc_result = calculate_lease_pro(calc_request, parsed_program)
+                
+                # Update calculated fields
+                calc_fields = {
+                    "calculated_payment": calc_result.monthly_payment_with_tax,
+                    "calculated_driveoff": calc_result.estimated_drive_off,
+                    "calculated_onepay": calc_result.one_pay_estimated,
+                    "mf_used": calc_result.mf_used,
+                    "residual_percent_used": calc_result.residual_percent_used,
+                    "savings_vs_msrp": calc_result.estimated_savings_vs_msrp_deal
+                }
+                
+                await update_calculated_fields(db, deal_id, calc_fields)
+                
+                logger.info(f"Auto-calculated deal: {deal_id} - ${calc_result.monthly_payment_with_tax:.2f}/mo")
+            else:
+                logger.warning(f"No parsed program found for deal {deal_id}, calculations skipped")
+        
+        except Exception as e:
+            logger.error(f"Auto-calculation failed for deal {deal_id}: {e}")
+            # Continue without calculations
+        
+        # Return created deal
+        from db_featured_deals import get_deal
+        created_deal = await get_deal(db, deal_id)
+        
+        return {
+            "ok": True,
+            "deal_id": deal_id,
+            "deal": created_deal
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Create featured deal error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/deals/list")
+async def list_featured_deals(
+    brand: Optional[str] = None,
+    region: Optional[str] = None,
+    limit: int = 100,
+    sort: str = "created_at"
+):
+    """
+    List featured deals (public endpoint)
+    
+    Query params:
+        brand: Filter by brand
+        region: Filter by region
+        limit: Max results (default 100)
+        sort: Sort by field (created_at, calculated_payment)
+    """
+    try:
+        from db_featured_deals import list_deals
+        
+        # Determine sort order based on field
+        sort_order = 1 if sort == "calculated_payment" else -1
+        
+        deals = await list_deals(
+            db,
+            brand=brand,
+            region=region,
+            limit=limit,
+            sort_by=sort,
+            sort_order=sort_order
+        )
+        
+        return {
+            "deals": deals,
+            "total": len(deals)
+        }
+        
+    except Exception as e:
+        logger.error(f"List deals error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/deals/{deal_id}")
+async def get_featured_deal(deal_id: str):
+    """
+    Get a single featured deal (public endpoint)
+    """
+    try:
+        from db_featured_deals import get_deal
+        
+        deal = await get_deal(db, deal_id)
+        
+        if not deal:
+            raise HTTPException(status_code=404, detail="Deal not found")
+        
+        return deal
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get deal error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.delete("/deals/{deal_id}")
+async def delete_featured_deal(
+    deal_id: str,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Delete a featured deal (admin-only)
+    """
+    try:
+        from db_featured_deals import delete_deal
+        
+        success = await delete_deal(db, deal_id)
+        
+        if not success:
+            raise HTTPException(status_code=404, detail="Deal not found")
+        
+        logger.info(f"Deleted deal: {deal_id} by {current_user.email}")
+        
+        return {"ok": True, "id": deal_id}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete deal error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
+
 
 
 @api_router.post("/ab-test/{test_name}/convert")
