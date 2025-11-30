@@ -30,22 +30,32 @@ const Hero = () => {
         
         {/* Headline - КРУПНЫЙ */}
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          Fleet Pricing on New Cars<br />
-          <span className="text-red-500">Save $5,000 to $30,000</span>
+          Instant Best Lease Deals<br />
+          <span className="text-red-500">Save $3,000 to $8,000</span>
         </h1>
 
         {/* Subheadline */}
         <p className="text-xl md:text-2xl mb-10 text-gray-100">
-          Verified corporate fleet deals. No dealer fees. Full transparency.
+          Real bank programs. Automatic calculations. Full transparency.
         </p>
 
         {/* BIG CTA */}
-        <Button
-          onClick={() => navigate('/offers')}
-          className="bg-red-600 hover:bg-red-700 text-white px-12 py-8 text-2xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-transform mb-8"
-        >
-          Find My Perfect Deal <ArrowRight className="w-8 h-8 inline ml-2" />
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <Button
+            onClick={() => navigate('/calculator')}
+            className="bg-red-600 hover:bg-red-700 text-white px-12 py-8 text-2xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
+          >
+            Find My Perfect Deal <ArrowRight className="w-8 h-8 inline ml-2" />
+          </Button>
+          
+          <Button
+            onClick={() => navigate('/deals')}
+            variant="outline"
+            className="bg-white/10 border-2 border-white text-white hover:bg-white/20 px-10 py-8 text-xl font-bold rounded-2xl backdrop-blur-sm"
+          >
+            Browse Deals
+          </Button>
+        </div>
 
         {/* Trust Icons */}
         <div className="flex items-center justify-center gap-8 text-sm">
