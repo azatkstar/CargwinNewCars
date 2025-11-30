@@ -1267,7 +1267,13 @@ async def create_lease_program(program: LeaseProgram, current_user: User = Depen
     try:
         program_dict = program.dict()
         await db.lease_programs.insert_one(program_dict)
-        return {"ok": True, "id": program.id, "program": program_dict}
+        
+        # Trigger auto-update for matching lots
+        from auto_calculator_hooks import update_lots_for_lease_program
+        updated_count = await update_lots_for_lease_program(program_dict, db)
+        logger.info(f"Auto-updated {updated_count} lots after creating lease program")
+        
+        return {"ok": True, "id": program.id, "program": program_dict, "lots_updated": updated_count}
     except Exception as e:
         logger.error(f"Create lease program error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
