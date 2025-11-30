@@ -29,6 +29,7 @@ from database import (
     connect_to_mongo, 
     close_mongo_connection, 
     initialize_repositories,
+    get_database,
     get_lot_repository,
     get_user_repository,
     get_audit_repository,
