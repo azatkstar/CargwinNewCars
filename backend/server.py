@@ -246,6 +246,78 @@ class LotCreate(BaseModel):
     isWeeklyDrop: bool = False
     status: str = "draft"
 
+# Calculator Program Models
+class IncentiveItem(BaseModel):
+    name: str
+    amount: float
+    stackable: bool = True
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+
+class LeaseProgram(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    brand: str
+    model_pattern: str = ""
+    trim_pattern: str = ""
+    year_from: int
+    year_to: int
+    states: List[str] = ["ALL"]
+    credit_tier_min_score: int = 680
+    lease_terms: List[int] = [24, 36, 39]
+    default_term: int = 36
+    mileage_options: List[int] = [7500, 10000, 12000]
+    default_mileage: int = 10000
+    residual_percent: float = 56.0
+    money_factor: float = 0.00191
+    acquisition_fee: float = 695
+    doc_fee: float = 85
+    registration_fee_base: float = 540
+    other_fees: float = 0
+    due_at_signing_type: str = "first_plus_fees"
+    fixed_due_at_signing: Optional[float] = None
+    lender_name: str = "Manufacturer Financial"
+    incentives: List[IncentiveItem] = []
+    program_start: datetime
+    program_end: datetime
+    is_active: bool = True
+    createdAt: datetime = Field(default_factory=datetime.utcnow)
+    updatedAt: datetime = Field(default_factory=datetime.utcnow)
+
+class FinanceProgram(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    brand: str
+    model_pattern: str = ""
+    trim_pattern: str = ""
+    year_from: int
+    year_to: int
+    states: List[str] = ["ALL"]
+    credit_tier_min_score: int = 680
+    apr_options: List[float] = [2.9, 3.9, 4.9]
+    default_apr: float = 3.9
+    terms: List[int] = [48, 60, 72]
+    default_term: int = 60
+    down_payment_options: List[int] = [0, 1000, 2000, 3000, 5000]
+    lender_name: str = "Manufacturer Financial"
+    program_start: datetime
+    program_end: datetime
+    is_active: bool = True
+    createdAt: datetime = Field(default_factory=datetime.utcnow)
+    updatedAt: datetime = Field(default_factory=datetime.utcnow)
+
+class TaxConfig(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    state: str
+    zip_prefixes: List[str] = []
+    tax_rate: float = 0.075
+    tax_on_fees: bool = True
+    acquisition_tax_rate: float = 0.0
+    doc_tax_rate: float = 0.0
+    registration_tax_rate: float = 0.0
+    other_tax_rate: float = 0.0
+    is_active: bool = True
+    createdAt: datetime = Field(default_factory=datetime.utcnow)
+    updatedAt: datetime = Field(default_factory=datetime.utcnow)
+
 class Lot(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     slug: str
@@ -275,8 +347,9 @@ class Lot(BaseModel):
     updatedAt: datetime = Field(default_factory=datetime.utcnow)
     archivedAt: Optional[datetime] = None
     
-    # Calculator Configuration
+    # Calculator Configuration (can be auto-generated or manual override)
     calculator_config: Optional[Dict[str, Any]] = Field(default_factory=dict)
+    calculator_config_auto: bool = True  # True = auto-generate, False = manual override
 
 # Helper function to generate default calculator config
 def get_default_calculator_config(msrp: int, discount: int, state: str = "CA") -> dict:
