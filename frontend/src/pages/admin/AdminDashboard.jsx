@@ -12,6 +12,10 @@ import AnalyticsDashboard from './AnalyticsDashboard';
 import BrokerApplicationsAdmin from './BrokerApplicationsAdmin';
 import AdminSettings from './AdminSettings';
 import AuditLog from './AuditLog';
+import LeasePrograms from './LeasePrograms';
+import FinancePrograms from './FinancePrograms';
+import TaxConfigs from './TaxConfigs';
+import CalculatorTools from './CalculatorTools';
 
 const AdminDashboard = () => {
   const { isAuthenticated, loading } = useAuth();
