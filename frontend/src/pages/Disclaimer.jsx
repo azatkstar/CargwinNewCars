@@ -1,180 +1,127 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const Disclaimer = () => {
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Disclaimer - Cargwin LLC</title>
+      </Helmet>
+      
       <Header />
       
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Disclaimer</h1>
-        <p className="text-gray-600 mb-8">Important Legal Information</p>
-
-        <div className="prose prose-lg max-w-none space-y-6">
-          <div className="bg-red-50 border-2 border-red-200 p-6 rounded-lg">
-            <h2 className="text-2xl font-bold text-red-900 mb-4">IMPORTANT NOTICE</h2>
-            <p className="text-gray-800 font-medium">
-              Cargwin LLC is an automotive information service and licensed broker. We DO NOT own, sell, 
-              or lease vehicles. We are NOT a dealership.
-            </p>
-          </div>
-
+      <div className="max-w-4xl mx-auto px-4 py-16">
+        <h1 className="text-4xl font-bold mb-8">Disclaimer</h1>
+        
+        <div className="prose prose-gray max-w-none space-y-8">
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">No Vehicle Ownership</h2>
-            <p className="text-gray-700">
-              CARGWIN LLC HAS NEVER: (1) Held title for any vehicle listed on our platform, 
-              (2) Inspected any vehicle listed on our services, or (3) Had any vehicle in its legal possession.
-            </p>
-            <p className="text-gray-700 mt-3">
-              We act solely as an information intermediary connecting consumers with licensed dealerships 
-              and financing providers.
+            <h2 className="text-2xl font-bold mb-4">General Disclaimer</h2>
+            <p className="text-gray-700 leading-relaxed">
+              The information provided on hunter.lease and by Cargwin LLC is for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">No Warranties or Guarantees</h2>
-            <p className="text-gray-700">
-              We expressly disclaim any responsibility and liability for:
+            <h2 className="text-2xl font-bold mb-4">Pricing and Availability</h2>
+            <p className="text-gray-700 leading-relaxed mb-3">
+              <strong>Estimated Pricing:</strong> All prices displayed on our website are estimates based on fleet pricing, manufacturer incentives, and typical credit tiers. Your final monthly payment and total cost may vary based on:
             </p>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Vehicle condition, quality, or fitness for any particular purpose</li>
-              <li>Accuracy of vehicle descriptions or specifications</li>
-              <li>Dealership practices or service quality</li>
-              <li>Financing terms or credit approval decisions</li>
-              <li>Vehicle availability or delivery timelines</li>
-              <li>Compliance with any laws, regulations, or safety codes</li>
+            <ul className="list-disc pl-6 space-y-2 text-gray-700">
+              <li>Your actual credit score and approved credit tier</li>
+              <li>Changes in interest rates or money factors</li>
+              <li>Changes to manufacturer incentives or rebates</li>
+              <li>Your selected down payment, term, and mileage</li>
+              <li>State-specific taxes, fees, and registration costs</li>
+              <li>Vehicle availability and dealer allocation</li>
+            </ul>
+            <p className="text-gray-700 leading-relaxed mt-3">
+              <strong>Inventory:</strong> Vehicle availability is subject to change without notice. Reserving a vehicle does not guarantee availability until confirmed by our team.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-4">Broker Relationship</h2>
+            <p className="text-gray-700 leading-relaxed">
+              Cargwin LLC is a licensed auto broker. We facilitate transactions between customers and automotive manufacturers, dealerships, and financial institutions. We are not:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-gray-700 mt-3">
+              <li>A lender or lessor (we broker financing, not provide it)</li>
+              <li>A vehicle manufacturer or authorized dealer</li>
+              <li>Responsible for vehicle defects, recalls, or warranty claims</li>
+              <li>Able to guarantee credit approval or specific terms</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Pricing Information</h2>
-            <p className="text-gray-700">
-              All prices, payments, and terms shown are estimates based on information provided by 
-              dealerships and lenders. Final pricing is subject to:
+            <h2 className="text-2xl font-bold mb-4">Credit and Financing</h2>
+            <p className="text-gray-700 leading-relaxed">
+              <strong>Credit Decisions:</strong> All credit decisions are made by lending institutions, not Cargwin LLC. We submit your application to multiple lenders to find the best rates, but approval and terms are at the lender's sole discretion.
             </p>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Credit approval and individual creditworthiness</li>
-              <li>Dealer confirmation and availability</li>
-              <li>Incentive qualification and substantiation</li>
-              <li>Applicable taxes, fees, and charges</li>
-              <li>Changes in market conditions</li>
-            </ul>
-            <p className="text-gray-700 mt-3">
-              We cannot guarantee that any displayed price or payment will be honored by dealerships.
+            <p className="text-gray-700 leading-relaxed mt-3">
+              <strong>Credit Impact:</strong> While we initially perform a soft credit inquiry (no score impact), applying for financing requires a hard credit pull which may temporarily affect your credit score.
+            </p>
+            <p className="text-gray-700 leading-relaxed mt-3">
+              <strong>Income Verification:</strong> All stated income and employment information is subject to verification. False information may result in application denial and potential legal consequences.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Reservation Terms</h2>
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-              <p className="font-semibold text-gray-900">Price Reservations:</p>
-              <ul className="list-disc ml-6 mt-2 space-y-1 text-gray-700">
-                <li>Are informational holds only and non-binding</li>
-                <li>Valid for 48 hours from creation</li>
-                <li>Do not guarantee vehicle availability</li>
-                <li>Subject to dealer confirmation upon conversion to application</li>
-                <li>Prices may change based on credit approval</li>
-              </ul>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Third-Party Transactions</h2>
-            <p className="text-gray-700">
-              Any purchase, lease, or finance agreement is directly between you and the dealership/lender. 
-              Cargwin LLC is NOT a party to these contracts and cannot be held responsible for:
-            </p>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Contract terms or conditions</li>
-              <li>Vehicle delivery or condition</li>
-              <li>Warranty coverage or service</li>
-              <li>Payment disputes or collection issues</li>
-              <li>Post-sale support or returns</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Credit Information</h2>
-            <p className="text-gray-700">
-              Credit scores and pre-qualification results are estimates only. We use FICO scoring models, 
-              but dealerships may use different models resulting in different scores or terms. We are not 
-              responsible for credit approval decisions made by lenders.
+            <h2 className="text-2xl font-bold mb-4">Third-Party Links</h2>
+            <p className="text-gray-700 leading-relaxed">
+              Our website may contain links to third-party websites (manufacturer sites, credit bureaus, financial institutions). We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">"As-Is" Disclaimer</h2>
-            <div className="bg-red-50 border-2 border-red-200 p-4 rounded-lg">
-              <p className="font-semibold text-red-900">THE PLATFORM IS PROVIDED "AS IS"</p>
-              <p className="text-gray-700 mt-2">
-                WE MAKE NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY, COMPLETENESS, OR 
-                RELIABILITY OF ANY INFORMATION, PRICING, OR VEHICLE LISTINGS. YOUR USE OF OUR 
-                SERVICES IS AT YOUR SOLE RISK.
-              </p>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">California Specific Disclosures</h2>
-            <p className="text-gray-700">
-              <strong>Broker License:</strong> Cargwin LLC operates as a licensed automotive broker in California.
-            </p>
-            <p className="text-gray-700 mt-3">
-              <strong>Location:</strong> 2855 Michelle Dr, Office 180, Irvine, CA 92606
-            </p>
-            <p className="text-gray-700 mt-3">
-              <strong>Consumer Protection:</strong> California consumers may file complaints with the 
-              California Department of Consumer Affairs at (800) 952-5210.
+            <h2 className="text-2xl font-bold mb-4">No Professional Advice</h2>
+            <p className="text-gray-700 leading-relaxed">
+              The information on our website does not constitute financial, legal, or tax advice. You should consult with appropriate professionals regarding your specific circumstances before making any financial decisions.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Limitation of Liability</h2>
-            <p className="text-gray-700">
-              TO THE MAXIMUM EXTENT PERMITTED BY LAW, CARGWIN LLC SHALL NOT BE LIABLE FOR ANY 
-              DAMAGES ARISING FROM YOUR USE OF OUR SERVICES, INCLUDING BUT NOT LIMITED TO VEHICLE 
-              PURCHASE ISSUES, FINANCING PROBLEMS, OR DEALERSHIP DISPUTES.
+            <h2 className="text-2xl font-bold mb-4">Limitation of Liability</h2>
+            <p className="text-gray-700 leading-relaxed">
+              Cargwin LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of our services, even if advised of the possibility of such damages.
             </p>
-            <p className="text-gray-700 mt-3">
-              Maximum liability is limited to $500 per incident.
+            <p className="text-gray-700 leading-relaxed mt-3">
+              Our maximum liability for any claims shall not exceed the fees paid to us for our services.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Indemnification</h2>
-            <p className="text-gray-700">
-              You agree to indemnify and hold harmless Cargwin LLC from any claims, damages, or 
-              expenses arising from:
+            <h2 className="text-2xl font-bold mb-4">Changes and Updates</h2>
+            <p className="text-gray-700 leading-relaxed">
+              We reserve the right to modify, suspend, or discontinue any aspect of our service at any time without notice. We also reserve the right to modify this disclaimer without prior notice.
             </p>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Your use of our platform or services</li>
-              <li>Your dealings with dealerships or lenders</li>
-              <li>Any misrepresentation of your information</li>
-              <li>Violation of these terms or applicable laws</li>
-            </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Contact for Questions</h2>
+            <h2 className="text-2xl font-bold mb-4">Licensing Information</h2>
             <div className="bg-gray-50 p-6 rounded-lg">
-              <p className="font-semibold text-lg mb-3">Cargwin LLC</p>
-              <p className="text-gray-700">2855 Michelle Dr, Office 180</p>
-              <p className="text-gray-700">Irvine, CA 92606</p>
-              <p className="text-gray-700 mt-3">📞 Phone: +1 (747) CARGWIN</p>
-              <p className="text-gray-700">📧 Email: info@cargwin.com</p>
+              <p className="text-gray-700"><strong>Legal Name:</strong> Cargwin LLC</p>
+              <p className="text-gray-700"><strong>Business Address:</strong> 2855 Michelle Dr, Office 180, Irvine, CA 92606</p>
+              <p className="text-gray-700"><strong>California Auto Broker License:</strong> [License Number]</p>
+              <p className="text-gray-700"><strong>NMLS ID:</strong> [NMLS Number]</p>
+              <p className="text-gray-700 mt-3 text-sm">Licensed to operate in: California (additional states may apply)</p>
             </div>
           </section>
-        </div>
 
-        <div className="mt-12 pt-6 border-t">
-          <Link to="/" className="text-red-600 hover:underline">
-            ← Back to Home
-          </Link>
+          <section>
+            <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              For questions about this disclaimer:
+            </p>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <p className="text-gray-700">Email: legal@cargwin.com</p>
+              <p className="text-gray-700">Phone: +1 (747) CARGWIN</p>
+            </div>
+          </section>
         </div>
       </div>
-
+      
       <Footer />
     </div>
   );
