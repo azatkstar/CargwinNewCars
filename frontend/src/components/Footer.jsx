@@ -66,16 +66,21 @@ const Footer = ({ hiddenVin = null }) => {
                   What to Expect
                 </Link>
               </li>
-              {navigationItems.slice(0, 4).map((item) => (
-                <li key={item.id}>
-                  <button
-                    onClick={() => scrollToSection(item.id)}
-                    className="text-gray-300 hover:text-white transition-colors duration-200"
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
+              <li>
+                <Link to="/offers" className="text-gray-300 hover:text-white transition-colors">
+                  Offers
+                </Link>
+              </li>
+              <li>
+                <Link to="/how-it-works" className="text-gray-300 hover:text-white transition-colors">
+                  How It Works
+                </Link>
+              </li>
+              <li>
+                <Link to="/coverage" className="text-gray-300 hover:text-white transition-colors">
+                  Coverage
+                </Link>
+              </li>
             </ul>
           </div>
 
