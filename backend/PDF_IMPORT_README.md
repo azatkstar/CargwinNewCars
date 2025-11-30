@@ -143,3 +143,72 @@ All Step 1 requirements implemented:
 - ✅ Tested successfully
 
 Ready for Step 2: Parser implementation.
+
+
+---
+
+# 🔥 STEP 2 — Lease Program Parsers ✅
+
+## Overview
+
+Step 2 extends the PDF import functionality with **brand-specific parsers** that extract structured data from raw PDF text and save it to a dedicated MongoDB collection.
+
+### What's New
+
+1. **Brand-Specific Parsers** - Intelligent text parsing for:
+   - Toyota/Lexus (TFS/LFS)
+   - Honda/Acura (AHFC)
+   - Kia/Hyundai
+   - BMW Financial Services
+   - Mercedes-Benz Financial Services (MBFS)
+
+2. **Structured Data Model** - `LeaseProgramParsed` with extracted MF, residuals, incentives
+
+3. **New MongoDB Collection** - `lease_programs_parsed`
+
+4. **New API Endpoints** - Parse, list, retrieve parsed programs
+
+## New API Endpoints
+
+### POST `/api/admin/lease-programs/parse-from-pdf`
+Parse uploaded PDF using brand-specific parser.
+
+**Query Params**: `pdf_id`, `brand`, `model` (optional)
+
+**Example**:
+```bash
+curl -X POST "$API/api/admin/lease-programs/parse-from-pdf?pdf_id=abc&brand=Toyota&model=Camry" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### GET `/api/admin/lease-programs/parsed`
+List all parsed programs with filters.
+
+**Query Params**: `brand`, `model`, `month`, `region`, `limit`
+
+### GET `/api/admin/lease-programs/parsed/{id}`
+Get specific parsed program.
+
+### DELETE `/api/admin/lease-programs/parsed/{id}`
+Delete parsed program.
+
+## Testing
+
+```bash
+cd /app/backend
+python3 tests/test_lease_program_parsers.py
+```
+
+**Result**: ✅ All 6 tests passed
+
+## Status: ✅ STEP 2 COMPLETE
+
+All requirements implemented:
+- ✅ 5 brand-specific parsers
+- ✅ Pydantic models & MongoDB CRUD
+- ✅ 4 new API endpoints
+- ✅ Unit tests
+- ✅ Documentation
+
+**Ready for Step 3**: UI & auto-population
+
