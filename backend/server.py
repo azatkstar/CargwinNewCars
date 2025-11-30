@@ -1426,6 +1426,158 @@ async def regenerate_calculator_configs(current_user: User = Depends(require_adm
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# ==========================================
+# PDF IMPORT ENDPOINTS
+# ==========================================
+
+@api_router.post("/admin/lease-programs/import-pdf")
+async def import_lease_program_pdf(
+    file: UploadFile,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Import lease program PDF - Step 1: Extract text
+    
+    Accepts a PDF file containing lease/finance program data,
+    extracts text using OCR if needed, and stores in database
+    for later parsing.
+    
+    Returns:
+        - success: bool
+        - text: Extracted text content
+        - page_count: Number of pages
+        - warnings: List of any warnings
+        - pdf_id: Database ID for this PDF
+    """
+    try:
+        from pdf_import_service import (
+            extract_pdf_text,
+            validate_pdf_file,
+            save_pdf_to_database,
+            clean_extracted_text
+        )
+        
+        # Read file content
+        file_content = await file.read()
+        filename = file.filename or "unknown.pdf"
+        
+        logger.info(f"PDF import started by {current_user.email}: {filename} ({len(file_content)} bytes)")
+        
+        # Validate PDF
+        try:
+            validate_pdf_file(file_content, filename)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e))
+        
+        # Extract text
+        try:
+            result = extract_pdf_text(file_content, filename)
+        except Exception as e:
+            logger.error(f"PDF extraction failed: {e}")
+            raise HTTPException(status_code=500, detail=f"Failed to extract text from PDF: {str(e)}")
+        
+        # Clean text
+        cleaned_text = clean_extracted_text(result["text"])
+        
+        # Save to database
+        try:
+            pdf_id = await save_pdf_to_database(
+                db,
+                filename=filename,
+                text=cleaned_text,
+                page_count=result["page_count"],
+                method=result["method"],
+                original_file_size=len(file_content)
+            )
+        except Exception as e:
+            logger.error(f"Failed to save PDF to database: {e}")
+            raise HTTPException(status_code=500, detail=f"Failed to save PDF data: {str(e)}")
+        
+        logger.info(f"PDF import successful: {pdf_id} - {result['page_count']} pages, {result['char_count']} chars")
+        
+        return {
+            "success": True,
+            "text": cleaned_text,
+            "page_count": result["page_count"],
+            "char_count": result["char_count"],
+            "extraction_method": result["method"],
+            "warnings": result["warnings"],
+            "pdf_id": pdf_id,
+            "filename": filename
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"PDF import error: {e}")
+        raise HTTPException(status_code=500, detail=f"PDF import failed: {str(e)}")
+
+
+@api_router.get("/admin/raw-pdfs")
+async def get_raw_pdfs(
+    current_user: User = Depends(require_editor),
+    limit: int = 50
+):
+    """Get list of uploaded PDF imports"""
+    try:
+        pdfs = await db.raw_program_pdfs.find(
+            {},
+            {"_id": 0}
+        ).sort("uploaded_at", -1).limit(limit).to_list(limit)
+        
+        return {
+            "ok": True,
+            "pdfs": pdfs,
+            "count": len(pdfs)
+        }
+    except Exception as e:
+        logger.error(f"Get raw PDFs error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/raw-pdfs/{pdf_id}")
+async def get_raw_pdf(
+    pdf_id: str,
+    current_user: User = Depends(require_editor)
+):
+    """Get specific uploaded PDF content"""
+    try:
+        pdf = await db.raw_program_pdfs.find_one({"id": pdf_id}, {"_id": 0})
+        
+        if not pdf:
+            raise HTTPException(status_code=404, detail="PDF not found")
+        
+        return pdf
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get raw PDF error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.delete("/admin/raw-pdfs/{pdf_id}")
+async def delete_raw_pdf(
+    pdf_id: str,
+    current_user: User = Depends(require_admin)
+):
+    """Delete uploaded PDF"""
+    try:
+        result = await db.raw_program_pdfs.delete_one({"id": pdf_id})
+        
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="PDF not found")
+        
+        logger.info(f"Deleted PDF: {pdf_id} by {current_user.email}")
+        
+        return {"ok": True, "id": pdf_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete PDF error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
 @api_router.post("/ab-test/{test_name}/convert")
 async def track_ab_conversion(
     test_name: str,
