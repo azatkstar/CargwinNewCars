@@ -106,6 +106,10 @@ function App() {
                   <Route path="/broker-application" element={<BrokerApplication />} />
                   <Route path="/preview/:token" element={<PreviewLot />} />
                   <Route path="/admin/login" element={<AdminLogin />} />
+                  <Route path="/admin/lease-programs" element={<LeasePrograms />} />
+                  <Route path="/admin/finance-programs" element={<FinancePrograms />} />
+                  <Route path="/admin/tax-configs" element={<TaxConfigs />} />
+                  <Route path="/admin/calculator-tools" element={<CalculatorTools />} />
                   <Route path="/admin/*" element={<AdminDashboard />} />
                 </Routes>
               </AuthProvider>
