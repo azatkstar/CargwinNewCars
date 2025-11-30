@@ -105,6 +105,37 @@ const AdminLayout = ({ children }) => {
       icon: Wrench,
       path: '/admin/calculator-tools',
       requiredRole: 'editor'
+    },
+    {
+      id: 'divider-pdf',
+      type: 'divider',
+      label: 'PDF Programs'
+    },
+    {
+      id: 'upload-pdf',
+      label: 'Upload PDF',
+      icon: Upload,
+      path: '/admin/upload-pdf',
+      requiredRole: 'editor'
+    },
+    {
+      id: 'parsed-programs',
+      label: 'Parsed Programs',
+      icon: FileSpreadsheet,
+      path: '/admin/parsed-programs',
+      requiredRole: 'editor'
+    },
+    {
+      id: 'divider-deals',
+      type: 'divider',
+      label: 'Deals Management'
+    },
+    {
+      id: 'featured-deals',
+      label: 'Featured Deals',
+      icon: Tag,
+      path: '/admin/featured-deals',
+      requiredRole: 'editor'
     }
   ];
 
