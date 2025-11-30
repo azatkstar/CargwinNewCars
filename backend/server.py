@@ -1174,6 +1174,10 @@ async def create_lot(
                 "alt": f"{lot_data.get('year', '')} {lot_data.get('make', '')} {lot_data.get('model', '')} — предпросмотр"
             }]
         
+        # Auto-generate calculator config if needed
+        from auto_calculator_hooks import update_lot_calculator_config
+        lot_data = await update_lot_calculator_config(lot_data, db)
+        
         # Create lot in database
         lot_id = await lot_repo.create_lot(lot_data)
         created_lot = await lot_repo.get_lot_by_id(lot_id)
