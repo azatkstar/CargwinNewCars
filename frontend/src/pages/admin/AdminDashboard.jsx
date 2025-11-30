@@ -60,6 +60,8 @@ const AdminDashboard = () => {
         <Route path="parsed-programs" element={<ParsedPrograms />} />
         <Route path="featured-deals" element={<FeaturedDealsAdmin />} />
         <Route path="featured-deals/create" element={<CreateDeal />} />
+        <Route path="sync" element={<SyncEngine />} />
+        <Route path="sync/logs" element={<SyncLogs />} />
       </Routes>
     </AdminLayout>
   );
