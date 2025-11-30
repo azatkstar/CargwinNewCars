@@ -1583,6 +1583,179 @@ async def delete_raw_pdf(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# ==========================================
+# PARSED LEASE PROGRAMS ENDPOINTS
+# ==========================================
+
+@api_router.post("/admin/lease-programs/parse-from-pdf")
+async def parse_lease_program_from_pdf(
+    pdf_id: str,
+    brand: str,
+    model: Optional[str] = None,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Parse a lease program from uploaded PDF
+    
+    Request body:
+        pdf_id: ID of raw PDF in raw_program_pdfs collection
+        brand: Brand name (Toyota, Honda, Kia, BMW, Mercedes)
+        model: Optional model name to filter
+        
+    Returns:
+        Parsed program data
+    """
+    try:
+        from lease_program_parsers import parse_lease_program
+        from db_lease_programs import create_parsed_program
+        
+        # Get raw PDF
+        raw_pdf = await db.raw_program_pdfs.find_one({"id": pdf_id}, {"_id": 0})
+        
+        if not raw_pdf:
+            raise HTTPException(status_code=404, detail=f"PDF not found: {pdf_id}")
+        
+        # Get text
+        text = raw_pdf.get("text", "")
+        
+        if not text:
+            raise HTTPException(status_code=400, detail="PDF has no text content")
+        
+        logger.info(f"Parsing PDF {pdf_id} as {brand} by {current_user.email}")
+        
+        # Parse
+        try:
+            parsed_result = parse_lease_program(
+                brand=brand,
+                text=text,
+                model=model,
+                pdf_id=pdf_id
+            )
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e))
+        except Exception as e:
+            logger.error(f"Parse error: {e}")
+            raise HTTPException(status_code=500, detail=f"Failed to parse: {str(e)}")
+        
+        # Save to database
+        parsed_dict = parsed_result.dict()
+        program_id = await create_parsed_program(db, parsed_dict)
+        
+        # Get saved program
+        from db_lease_programs import get_parsed_program
+        saved_program = await get_parsed_program(db, program_id)
+        
+        logger.info(f"Successfully parsed and saved program: {program_id}")
+        
+        return {
+            "success": True,
+            "parsed_program": saved_program
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Parse from PDF error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to parse program: {str(e)}")
+
+
+@api_router.get("/admin/lease-programs/parsed")
+async def get_parsed_lease_programs(
+    brand: Optional[str] = None,
+    model: Optional[str] = None,
+    month: Optional[str] = None,
+    region: Optional[str] = None,
+    limit: int = 100,
+    current_user: User = Depends(require_editor)
+):
+    """
+    Get list of parsed lease programs
+    
+    Query params:
+        brand: Filter by brand
+        model: Filter by model  
+        month: Filter by month
+        region: Filter by region
+        limit: Max results (default 100)
+        
+    Returns:
+        List of parsed programs
+    """
+    try:
+        from db_lease_programs import get_parsed_programs
+        
+        programs = await get_parsed_programs(
+            db,
+            brand=brand,
+            model=model,
+            month=month,
+            region=region,
+            limit=limit
+        )
+        
+        return {
+            "items": programs,
+            "total": len(programs)
+        }
+        
+    except Exception as e:
+        logger.error(f"Get parsed programs error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/lease-programs/parsed/{program_id}")
+async def get_parsed_lease_program(
+    program_id: str,
+    current_user: User = Depends(require_editor)
+):
+    """
+    Get a single parsed lease program by ID
+    """
+    try:
+        from db_lease_programs import get_parsed_program
+        
+        program = await get_parsed_program(db, program_id)
+        
+        if not program:
+            raise HTTPException(status_code=404, detail="Program not found")
+        
+        return program
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get parsed program error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.delete("/admin/lease-programs/parsed/{program_id}")
+async def delete_parsed_lease_program(
+    program_id: str,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Delete a parsed lease program
+    """
+    try:
+        from db_lease_programs import delete_parsed_program
+        
+        success = await delete_parsed_program(db, program_id)
+        
+        if not success:
+            raise HTTPException(status_code=404, detail="Program not found")
+        
+        logger.info(f"Deleted parsed program: {program_id} by {current_user.email}")
+        
+        return {"ok": True, "id": program_id}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete parsed program error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
 
 @api_router.post("/ab-test/{test_name}/convert")
 async def track_ab_conversion(
