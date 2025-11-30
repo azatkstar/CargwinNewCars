@@ -1,183 +1,140 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Terms of Service - Cargwin LLC</title>
+      </Helmet>
+      
       <Header />
       
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
-        <p className="text-gray-600 mb-8">Last updated: November 2025</p>
-
-        <div className="prose prose-lg max-w-none space-y-6">
+      <div className="max-w-4xl mx-auto px-4 py-16">
+        <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
+        <div className="text-sm text-gray-600 mb-8">Last Updated: January 2025</div>
+        
+        <div className="prose prose-gray max-w-none space-y-8">
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Agreement to Terms</h2>
-            <p className="text-gray-700">
-              These Terms and Conditions constitute a legally binding agreement between you and 
-              <strong> Cargwin LLC</strong> ("we," "us" or "our"), a California-licensed automotive broker, 
-              concerning your access to and use of the CargwinNewCar website and services.
-            </p>
-            <p className="text-gray-700 mt-3">
-              <strong>IMPORTANT:</strong> Cargwin LLC operates as an <strong>automotive information service and broker</strong>, 
-              NOT as a dealership or vehicle seller. We connect potential automobile consumers with dealerships 
-              and financing providers but DO NOT own, sell, lease, or hold title to any vehicles listed on our platform.
+            <h2 className="text-2xl font-bold mb-4">1. Acceptance of Terms</h2>
+            <p className="text-gray-700 leading-relaxed">
+              By accessing and using hunter.lease and services provided by Cargwin LLC ("we", "us", "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use our services.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Our Role as Broker</h2>
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-4">
-              <p className="font-semibold text-gray-900">CARGWIN LLC DOES NOT:</p>
-              <ul className="list-disc ml-6 mt-2 space-y-1 text-gray-700">
-                <li>Own or sell vehicles directly</li>
-                <li>Hold title to any vehicle listed on our platform</li>
-                <li>Inspect vehicles or guarantee their condition</li>
-                <li>Have legal possession of any vehicles</li>
-                <li>Provide warranties or guarantees about vehicle quality</li>
-              </ul>
-            </div>
-            <p className="text-gray-700">
-              We provide an <strong>informational marketplace platform</strong> that connects you with licensed 
-              dealerships and financing providers. The actual purchase, lease, or finance contract is 
-              directly between you and the dealership/lender, NOT with Cargwin LLC.
+            <h2 className="text-2xl font-bold mb-4">2. Services Description</h2>
+            <p className="text-gray-700 leading-relaxed">
+              Cargwin LLC operates as a licensed California auto broker, facilitating vehicle leases and financing between customers and automotive manufacturers, financial institutions, and dealerships. We provide:
             </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Information Services</h2>
-            <p className="text-gray-700">
-              Cargwin LLC provides the following information services:
-            </p>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Vehicle pricing information and fleet pricing access</li>
-              <li>Connection to licensed dealerships and financing providers</li>
-              <li>Comparison of financing options and terms</li>
-              <li>Credit pre-qualification assistance (soft check)</li>
-              <li>Price reservation and tracking services</li>
-            </ul>
-            <p className="text-gray-700 mt-3">
-              We are compensated by dealerships and lenders for successful referrals but maintain 
-              transparency in all pricing shown to consumers.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Price Reservations</h2>
-            <p className="text-gray-700">
-              When you reserve a price through our platform:
-            </p>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>The reservation holds the displayed price for 48 hours</li>
-              <li>Reservations are non-binding and can be cancelled anytime</li>
-              <li>Converting a reservation to an application is binding upon dealer acceptance</li>
-              <li>Final pricing is subject to credit approval and dealer confirmation</li>
-              <li>Incentives and rebates must be substantiated with proof of eligibility</li>
+            <ul className="list-disc pl-6 space-y-2 text-gray-700 mt-3">
+              <li>Online marketplace for vehicle lease and finance offers</li>
+              <li>Credit application processing and approval coordination</li>
+              <li>Vehicle reservation and delivery coordination</li>
+              <li>Customer support throughout the leasing process</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Disclaimer of Warranties</h2>
-            <div className="bg-red-50 border-l-4 border-red-400 p-4 my-4">
-              <p className="font-semibold text-gray-900">THE PLATFORM IS PROVIDED "AS IS"</p>
-              <p className="text-gray-700 mt-2">
-                TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, 
-                INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND 
-                NON-INFRINGEMENT REGARDING ANY VEHICLES, DEALERSHIPS, OR FINANCING PROVIDERS.
-              </p>
-            </div>
-            <p className="text-gray-700">
-              We make no representations about vehicle condition, dealership practices, or financing terms 
-              beyond the information provided to us by third parties.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Limitation of Liability</h2>
-            <p className="text-gray-700">
-              IN NO EVENT WILL CARGWIN LLC BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
-              OR CONSEQUENTIAL DAMAGES ARISING FROM:
-            </p>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Vehicle condition or quality issues</li>
-              <li>Dealership practices or conduct</li>
-              <li>Financing terms or credit approval decisions</li>
-              <li>Delivery delays or vehicle availability</li>
-              <li>Price changes or discontinued offers</li>
+            <h2 className="text-2xl font-bold mb-4">3. Eligibility</h2>
+            <p className="text-gray-700 leading-relaxed mb-3">To use our services, you must:</p>
+            <ul className="list-disc pl-6 space-y-2 text-gray-700">
+              <li>Be at least 18 years of age</li>
+              <li>Have a valid U.S. driver's license</li>
+              <li>Provide accurate and truthful information</li>
+              <li>Have the legal capacity to enter into binding contracts</li>
+              <li>Reside in a state where we are licensed to operate</li>
             </ul>
-            <p className="text-gray-700 mt-3">
-              Our maximum liability is limited to <strong>$500</strong> per transaction.
-            </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Credit Authorization</h2>
-            <p className="text-gray-700">
-              By using our services, you authorize us to:
+            <h2 className="text-2xl font-bold mb-4">4. Pricing and Payments</h2>
+            <p className="text-gray-700 leading-relaxed mb-3">
+              <strong>Fleet Pricing:</strong> Our displayed prices represent fleet-level pricing obtained through our relationships with manufacturers and lenders. Final pricing may vary based on:
             </p>
-            <ul className="list-disc ml-6 space-y-2 text-gray-700">
-              <li>Obtain and review your credit report for pre-qualification purposes</li>
-              <li>Share your application information with financing providers and dealerships</li>
-              <li>Facilitate credit applications on your behalf</li>
+            <ul className="list-disc pl-6 space-y-2 text-gray-700">
+              <li>Your credit profile and approved credit tier</li>
+              <li>Selected lease term, mileage, and down payment</li>
+              <li>Available manufacturer incentives and rebates</li>
+              <li>State taxes, registration, and required fees</li>
             </ul>
-            <p className="text-gray-700 mt-3">
-              We use industry-standard FICO scoring models. Variations may occur if dealerships use 
-              different scoring models, which may affect pricing or eligibility.
+            <p className="text-gray-700 leading-relaxed mt-3">
+              <strong>Price Match Guarantee:</strong> If you find a lower price for the same vehicle configuration from a licensed California dealer within 24 hours of your reservation, we will match it or refund your deposit.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">User Eligibility</h2>
-            <p className="text-gray-700">
-              You must be at least 18 years old and a California resident to use our services. 
-              You represent that all information provided is true, accurate, and complete.
+            <h2 className="text-2xl font-bold mb-4">5. Reservations and Cancellations</h2>
+            <p className="text-gray-700 leading-relaxed">
+              <strong>Free Reservations:</strong> Reserving a vehicle on our platform is free and does not obligate you to complete the lease. You may cancel your reservation at any time before signing the final contract.
+            </p>
+            <p className="text-gray-700 leading-relaxed mt-3">
+              <strong>Refunds:</strong> Any deposit paid (if applicable) will be fully refunded if you cancel before final contract execution. After signing, standard lease cancellation terms apply.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Governing Law</h2>
-            <p className="text-gray-700">
-              These Terms are governed by the laws of the State of California, without regard to 
-              conflict of law principles. Any disputes will be resolved through binding arbitration 
-              in Orange County, California.
+            <h2 className="text-2xl font-bold mb-4">6. Credit Authorization</h2>
+            <p className="text-gray-700 leading-relaxed">
+              By submitting an application, you authorize Cargwin LLC and its lending partners to:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-gray-700 mt-3">
+              <li>Obtain your credit report from consumer reporting agencies</li>
+              <li>Verify your employment and income information</li>
+              <li>Share your application with financial institutions for approval</li>
+              <li>Perform identity verification and fraud prevention checks</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-4">7. Limitation of Liability</h2>
+            <p className="text-gray-700 leading-relaxed">
+              Cargwin LLC acts as a broker and is not the lessor or lender. We are not liable for:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-gray-700 mt-3">
+              <li>Vehicle defects, recalls, or warranty issues (contact manufacturer)</li>
+              <li>Lender decisions regarding credit approval or terms</li>
+              <li>Delays in vehicle delivery due to manufacturer or carrier issues</li>
+              <li>Changes in interest rates or incentives between quote and approval</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-4">8. Intellectual Property</h2>
+            <p className="text-gray-700 leading-relaxed">
+              All content on hunter.lease, including text, graphics, logos, and software, is owned by Cargwin LLC and protected by copyright and trademark laws. You may not reproduce, distribute, or create derivative works without our written permission.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">California Residents</h2>
-            <p className="text-gray-700">
-              If you have a complaint that is not satisfactorily resolved, you may contact:
+            <h2 className="text-2xl font-bold mb-4">9. Dispute Resolution</h2>
+            <p className="text-gray-700 leading-relaxed">
+              Any disputes arising from these Terms or our services shall be resolved through binding arbitration in Orange County, California, in accordance with the rules of the American Arbitration Association.
             </p>
-            <div className="bg-gray-50 p-4 rounded-lg my-3">
-              <p className="font-semibold">California Department of Consumer Affairs</p>
-              <p className="text-sm text-gray-600">Complaint Assistance Unit</p>
-              <p className="text-sm text-gray-600">1625 North Market Blvd., Suite N 112</p>
-              <p className="text-sm text-gray-600">Sacramento, CA 95834</p>
-              <p className="text-sm text-gray-600">Phone: (800) 952-5210 or (916) 445-1254</p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-4">10. Modifications</h2>
+            <p className="text-gray-700 leading-relaxed">
+              We reserve the right to modify these Terms at any time. Material changes will be communicated via email or prominent notice on our website. Continued use after modifications constitutes acceptance.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-4">11. Contact Information</h2>
+            <div className="bg-gray-50 p-6 rounded-lg mt-4">
+              <p className="font-semibold">Cargwin LLC</p>
+              <p className="text-gray-700">2855 Michelle Dr, Office 180, Irvine, CA 92606</p>
+              <p className="text-gray-700 mt-2">Email: legal@cargwin.com</p>
+              <p className="text-gray-700">Phone: +1 (747) CARGWIN</p>
+              <p className="text-gray-700 mt-2 text-sm">CA Auto Broker License: [License Number]</p>
             </div>
           </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Contact Us</h2>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <p className="font-semibold text-lg mb-3">Cargwin LLC</p>
-              <p className="text-gray-700">2855 Michelle Dr, Office 180</p>
-              <p className="text-gray-700">Irvine, CA 92606</p>
-              <p className="text-gray-700 mt-3">📞 Phone: +1 (747) CARGWIN</p>
-              <p className="text-gray-700">📧 Email: info@cargwin.com</p>
-            </div>
-          </section>
-        </div>
-
-        <div className="mt-12 pt-6 border-t">
-          <Link to="/" className="text-red-600 hover:underline">
-            ← Back to Home
-          </Link>
         </div>
       </div>
-
+      
       <Footer />
     </div>
   );
