@@ -32,6 +32,8 @@ import Disclaimer from "./pages/Disclaimer";
 import CCPARights from "./pages/CCPARights";
 import AboutUs from "./pages/AboutUs";
 import WhatToExpect from "./pages/WhatToExpect";
+import HowItWorksPage from "./pages/HowItWorks";
+import Coverage from "./pages/Coverage";
 import EarlyAccess from "./pages/EarlyAccess";
 import OffersPage from "./pages/OffersPage";
 import ServicesPage from "./pages/ServicesPage";
