@@ -16,6 +16,10 @@ import LeasePrograms from './LeasePrograms';
 import FinancePrograms from './FinancePrograms';
 import TaxConfigs from './TaxConfigs';
 import CalculatorTools from './CalculatorTools';
+import UploadPDF from './UploadPDF';
+import ParsedPrograms from './ParsedPrograms';
+import FeaturedDealsAdmin from './FeaturedDealsAdmin';
+import CreateDeal from './CreateDeal';
 
 const AdminDashboard = () => {
   const { isAuthenticated, loading } = useAuth();
