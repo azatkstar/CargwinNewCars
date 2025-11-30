@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 # Configuration
-BASE_URL = "https://carlease-pro.preview.emergentagent.com/api"
+BASE_URL = "https://smart-lease-hub-2.preview.emergentagent.com/api"
 
 # Test credentials
 ADMIN_TEST_CREDENTIALS = {
