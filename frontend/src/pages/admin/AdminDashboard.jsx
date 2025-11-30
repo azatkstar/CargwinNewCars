@@ -46,6 +46,10 @@ const AdminDashboard = () => {
         <Route path="analytics" element={<AnalyticsDashboard />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="audit" element={<AuditLog />} />
+        <Route path="lease-programs" element={<LeasePrograms />} />
+        <Route path="finance-programs" element={<FinancePrograms />} />
+        <Route path="tax-configs" element={<TaxConfigs />} />
+        <Route path="calculator-tools" element={<CalculatorTools />} />
       </Routes>
     </AdminLayout>
   );
