@@ -1241,6 +1241,180 @@ async def get_model_templates(
         raise HTTPException(status_code=500, detail="Failed to get templates")
 
 
+
+# ==========================================
+# CALCULATOR PROGRAMS ENDPOINTS
+# ==========================================
+
+@api_router.get("/admin/lease-programs")
+async def get_lease_programs(current_user: User = Depends(require_editor)):
+    """Get all lease programs"""
+    try:
+        programs = await db.lease_programs.find().to_list(length=None)
+        return {"ok": True, "programs": programs, "count": len(programs)}
+    except Exception as e:
+        logger.error(f"Get lease programs error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/admin/lease-programs")
+async def create_lease_program(program: LeaseProgram, current_user: User = Depends(require_admin)):
+    """Create new lease program"""
+    try:
+        program_dict = program.dict()
+        await db.lease_programs.insert_one(program_dict)
+        return {"ok": True, "id": program.id, "program": program_dict}
+    except Exception as e:
+        logger.error(f"Create lease program error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.put("/admin/lease-programs/{program_id}")
+async def update_lease_program(program_id: str, program: LeaseProgram, current_user: User = Depends(require_admin)):
+    """Update lease program"""
+    try:
+        program_dict = program.dict()
+        program_dict["updatedAt"] = datetime.now(timezone.utc)
+        result = await db.lease_programs.update_one({"id": program_id}, {"$set": program_dict})
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Program not found")
+        return {"ok": True, "id": program_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Update lease program error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.delete("/admin/lease-programs/{program_id}")
+async def delete_lease_program(program_id: str, current_user: User = Depends(require_admin)):
+    """Delete lease program"""
+    try:
+        result = await db.lease_programs.delete_one({"id": program_id})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Program not found")
+        return {"ok": True, "id": program_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete lease program error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Finance Programs
+@api_router.get("/admin/finance-programs")
+async def get_finance_programs(current_user: User = Depends(require_editor)):
+    """Get all finance programs"""
+    try:
+        programs = await db.finance_programs.find().to_list(length=None)
+        return {"ok": True, "programs": programs, "count": len(programs)}
+    except Exception as e:
+        logger.error(f"Get finance programs error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/admin/finance-programs")
+async def create_finance_program(program: FinanceProgram, current_user: User = Depends(require_admin)):
+    """Create new finance program"""
+    try:
+        program_dict = program.dict()
+        await db.finance_programs.insert_one(program_dict)
+        return {"ok": True, "id": program.id, "program": program_dict}
+    except Exception as e:
+        logger.error(f"Create finance program error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.put("/admin/finance-programs/{program_id}")
+async def update_finance_program(program_id: str, program: FinanceProgram, current_user: User = Depends(require_admin)):
+    """Update finance program"""
+    try:
+        program_dict = program.dict()
+        program_dict["updatedAt"] = datetime.now(timezone.utc)
+        result = await db.finance_programs.update_one({"id": program_id}, {"$set": program_dict})
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Program not found")
+        return {"ok": True, "id": program_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Update finance program error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.delete("/admin/finance-programs/{program_id}")
+async def delete_finance_program(program_id: str, current_user: User = Depends(require_admin)):
+    """Delete finance program"""
+    try:
+        result = await db.finance_programs.delete_one({"id": program_id})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Program not found")
+        return {"ok": True, "id": program_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete finance program error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Tax Configs
+@api_router.get("/admin/tax-configs")
+async def get_tax_configs(current_user: User = Depends(require_editor)):
+    """Get all tax configurations"""
+    try:
+        configs = await db.tax_configs.find().to_list(length=None)
+        return {"ok": True, "configs": configs, "count": len(configs)}
+    except Exception as e:
+        logger.error(f"Get tax configs error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/admin/tax-configs")
+async def create_tax_config(config: TaxConfig, current_user: User = Depends(require_admin)):
+    """Create new tax configuration"""
+    try:
+        config_dict = config.dict()
+        await db.tax_configs.insert_one(config_dict)
+        return {"ok": True, "id": config.id, "config": config_dict}
+    except Exception as e:
+        logger.error(f"Create tax config error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.put("/admin/tax-configs/{config_id}")
+async def update_tax_config(config_id: str, config: TaxConfig, current_user: User = Depends(require_admin)):
+    """Update tax configuration"""
+    try:
+        config_dict = config.dict()
+        config_dict["updatedAt"] = datetime.now(timezone.utc)
+        result = await db.tax_configs.update_one({"id": config_id}, {"$set": config_dict})
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Config not found")
+        return {"ok": True, "id": config_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Update tax config error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.delete("/admin/tax-configs/{config_id}")
+async def delete_tax_config(config_id: str, current_user: User = Depends(require_admin)):
+    """Delete tax configuration"""
+    try:
+        result = await db.tax_configs.delete_one({"id": config_id})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Config not found")
+        return {"ok": True, "id": config_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete tax config error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Regenerate calculator configs
+@api_router.post("/admin/regenerate-calculator-configs")
+async def regenerate_calculator_configs(current_user: User = Depends(require_admin)):
+    """Regenerate all auto-generated calculator configs"""
+    try:
+        from calculator_config_service import CalculatorConfigService
+        service = CalculatorConfigService(db)
+        count = await service.regenerate_all_auto_configs()
+        return {"ok": True, "regenerated": count}
+    except Exception as e:
+        logger.error(f"Regenerate configs error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @api_router.post("/ab-test/{test_name}/convert")
 async def track_ab_conversion(
     test_name: str,
