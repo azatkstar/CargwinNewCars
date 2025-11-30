@@ -67,6 +67,44 @@ const AdminLayout = ({ children }) => {
       icon: FileText,
       path: '/admin/audit',
       requiredRole: 'viewer'
+    },
+    {
+      id: 'divider-programs',
+      type: 'divider',
+      label: 'Calculator Programs'
+    },
+    {
+      id: 'lease-programs',
+      label: 'Lease Programs',
+      icon: Calculator,
+      path: '/admin/lease-programs',
+      requiredRole: 'editor'
+    },
+    {
+      id: 'finance-programs',
+      label: 'Finance Programs',
+      icon: Percent,
+      path: '/admin/finance-programs',
+      requiredRole: 'editor'
+    },
+    {
+      id: 'tax-configs',
+      label: 'Tax Configs',
+      icon: MapPin,
+      path: '/admin/tax-configs',
+      requiredRole: 'editor'
+    },
+    {
+      id: 'divider-tools',
+      type: 'divider',
+      label: 'Tools'
+    },
+    {
+      id: 'calculator-tools',
+      label: 'Calculator Tools',
+      icon: Wrench,
+      path: '/admin/calculator-tools',
+      requiredRole: 'editor'
     }
   ];
 
