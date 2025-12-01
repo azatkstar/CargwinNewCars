@@ -20,6 +20,7 @@ import FeaturedDealsAdmin from './FeaturedDealsAdmin';
 import CreateDeal from './CreateDeal';
 import SyncEngine from './SyncEngine';
 import SyncLogs from './SyncLogs';
+import Monitoring from './Monitoring';
 
 const AdminDashboard = () => {
   const { isAuthenticated, loading } = useAuth();
