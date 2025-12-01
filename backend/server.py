@@ -2544,6 +2544,21 @@ async def search_deals_endpoint(q: str = "", limit: int = 20, req: Request = Non
     """
     try:
         from search_engine import search_deals, get_index_status, index_deals
+        from rate_limiter import get_rate_limiter
+        
+        # Rate limiting
+        if req:
+            client_ip = req.client.host
+            limiter = get_rate_limiter()
+            
+            if not limiter.is_allowed(client_ip, max_requests=10, window_seconds=10):
+                raise HTTPException(
+                    status_code=429,
+                    detail="Too many search requests. Please slow down."
+                )
+        
+        # Sanitize query
+        q = q.strip()[:64]  # Max 64 chars
         
         # Build index if not built
         status = get_index_status()
