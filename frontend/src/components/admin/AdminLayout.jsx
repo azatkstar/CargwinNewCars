@@ -143,6 +143,13 @@ const AdminLayout = ({ children }) => {
       requiredRole: 'admin'
     },
     {
+      id: 'multi-sync',
+      label: 'Multi-Brand Sync',
+      icon: Zap,
+      path: '/admin/multi-sync',
+      requiredRole: 'admin'
+    },
+    {
       id: 'monitoring',
       label: 'Monitoring',
       icon: Activity,
