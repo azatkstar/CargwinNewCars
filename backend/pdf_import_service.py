@@ -228,9 +228,19 @@ def validate_pdf_file(file_bytes: bytes, filename: str) -> None:
     if len(file_bytes) < 1024:
         raise ValueError(f"File '{filename}' is too small to be a valid PDF")
     
-    # Check maximum size (50MB)
-    max_size = 50 * 1024 * 1024  # 50MB
+    # Check maximum size (5MB for security)
+    max_size = 5 * 1024 * 1024  # 5MB
     if len(file_bytes) > max_size:
-        raise ValueError(f"File '{filename}' exceeds maximum size of 50MB")
+        raise ValueError(f"File '{filename}' exceeds maximum size of 5MB")
     
-    logger.info(f"PDF validation passed: {filename} ({len(file_bytes)} bytes)")
+    # Check for encrypted PDF (basic check)
+    if b'/Encrypt' in file_bytes[:10000]:
+        raise ValueError(f"File '{filename}' appears to be encrypted. Please upload unencrypted PDF.")
+    
+    # Estimate page count (basic heuristic)
+    # Count '/Type /Page' occurrences
+    page_count_estimate = file_bytes.count(b'/Type /Page') + file_bytes.count(b'/Type/Page')
+    if page_count_estimate > 200:
+        raise ValueError(f"File '{filename}' has too many pages ({page_count_estimate}). Maximum 200 pages allowed.")
+    
+    logger.info(f"PDF validation passed: {filename} ({len(file_bytes)} bytes, est. {page_count_estimate} pages)")
