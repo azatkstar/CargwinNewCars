@@ -2138,6 +2138,131 @@ async def get_sync_logs(
         
         return {
             "logs": logs,
+
+
+# ==========================================
+# ANALYTICS ENDPOINTS
+# ==========================================
+
+@api_router.get("/admin/analytics/overview")
+async def get_analytics_overview(current_user: User = Depends(require_editor)):
+    """Get analytics overview for Featured Deals"""
+    try:
+        from analytics_service import get_deals_overview
+        
+        overview = await get_deals_overview(db)
+        return overview
+        
+    except Exception as e:
+        logger.error(f"Analytics overview error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/analytics/top-brands-models")
+async def get_top_brands_models_analytics(
+    limit: int = 10,
+    current_user: User = Depends(require_editor)
+):
+    """Get top brands and models by deal count"""
+    try:
+        from analytics_service import get_top_brands_models
+        
+        top = await get_top_brands_models(db, limit=limit)
+        return {"items": top, "total": len(top)}
+        
+    except Exception as e:
+        logger.error(f"Top brands/models error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/analytics/distribution")
+async def get_distribution_analytics(current_user: User = Depends(require_editor)):
+    """Get distribution by banks, terms, mileage"""
+    try:
+        from analytics_service import (
+            get_distribution_by_banks,
+            get_distribution_by_terms,
+            get_distribution_by_mileage
+        )
+        
+        banks = await get_distribution_by_banks(db)
+        terms = await get_distribution_by_terms(db)
+        mileage = await get_distribution_by_mileage(db)
+        
+        return {
+            "by_bank": banks,
+            "by_term": terms,
+            "by_mileage": mileage
+        }
+        
+    except Exception as e:
+        logger.error(f"Distribution analytics error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/analytics/trends")
+async def get_payment_trends_analytics(
+    days: int = 30,
+    current_user: User = Depends(require_editor)
+):
+    """Get payment trends over time"""
+    try:
+        from analytics_service import get_payment_trends
+        
+        trends = await get_payment_trends(db, days=days)
+        return {"trends": trends, "period_days": days}
+        
+    except Exception as e:
+        logger.error(f"Payment trends error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ==========================================
+# SETTINGS ENDPOINTS
+# ==========================================
+
+@api_router.get("/admin/settings")
+async def get_system_settings(current_user: User = Depends(require_admin)):
+    """Get system settings"""
+    try:
+        from db_settings import get_settings, initialize_default_settings
+        
+        # Initialize if not exists
+        await initialize_default_settings(db)
+        
+        settings = await get_settings(db)
+        return settings or {}
+        
+    except Exception as e:
+        logger.error(f"Get settings error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.put("/admin/settings")
+async def update_system_settings(
+    updates: dict,
+    current_user: User = Depends(require_admin)
+):
+    """Update system settings"""
+    try:
+        from db_settings import update_settings
+        
+        success = await update_settings(db, updates, updated_by=current_user.email)
+        
+        if success:
+            from db_settings import get_settings
+            updated = await get_settings(db)
+            return {"ok": True, "settings": updated}
+        else:
+            raise HTTPException(status_code=500, detail="Failed to update settings")
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Update settings error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
             "total": len(logs)
         }
         
