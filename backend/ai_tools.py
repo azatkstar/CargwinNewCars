@@ -98,6 +98,7 @@ def generate_cta(deal: Dict[str, Any]) -> List[str]:
     """
     brand = deal.get("brand", "")
     model = deal.get("model", "")
+    year = deal.get("year", "")
     payment = int(deal.get("calculated_payment", 0))
     
     ctas = [
