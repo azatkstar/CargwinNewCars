@@ -58,7 +58,7 @@ def upload_media(
     uploaded_by: Optional[str] = None
 ) -> Dict[str, Any]:
     """
-    Upload media file
+    Upload media file with MIME validation
     
     Args:
         file_content: File bytes
@@ -77,6 +77,37 @@ def upload_media(
     ext = Path(filename).suffix.lower()
     if ext not in ALLOWED_EXTENSIONS:
         raise ValueError(f"File type {ext} not allowed. Allowed: {ALLOWED_EXTENSIONS}")
+    
+    # MIME type validation (by magic bytes)
+    mime_signatures = {
+        'jpg': [b'\xff\xd8\xff'],
+        'jpeg': [b'\xff\xd8\xff'],
+        'png': [b'\x89PNG'],
+        'webp': [b'RIFF', b'WEBP'],
+        'gif': [b'GIF87a', b'GIF89a']
+    }
+    
+    # Check MIME for images (skip SVG as it's XML-based)
+    if ext in ['.jpg', '.jpeg', '.png', '.webp', '.gif']:
+        ext_key = ext[1:]  # Remove dot
+        valid_mime = False
+        
+        if ext_key in mime_signatures:
+            for signature in mime_signatures[ext_key]:
+                if file_content.startswith(signature) or signature in file_content[:20]:
+                    valid_mime = True
+                    break
+        
+        if not valid_mime:
+            raise ValueError(f"File MIME type does not match extension {ext}. Possible file type mismatch.")
+    
+    # SVG validation - check for dangerous content
+    if ext == '.svg':
+        content_str = file_content.decode('utf-8', errors='ignore').lower()
+        dangerous_patterns = ['<script', 'javascript:', 'onerror=', 'onload=']
+        for pattern in dangerous_patterns:
+            if pattern in content_str:
+                raise ValueError(f"SVG file contains potentially dangerous content: {pattern}")
     
     # Validate size (max 10MB)
     if len(file_content) > 10 * 1024 * 1024:
