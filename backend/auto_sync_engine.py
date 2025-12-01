@@ -299,15 +299,18 @@ async def write_sync_log(
 
 async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
     """
-    Run full AutoSync workflow
+    Run full AutoSync workflow with monitoring
     
     Returns:
         Sync statistics and logs
     """
+    from monitoring import log_sync_status, send_alert_email
+    
     logger.info("Starting AutoSync Engine")
     
-    # Scan for changes
-    changes = await scan_for_updated_programs(db)
+    try:
+        # Scan for changes
+        changes = await scan_for_updated_programs(db)
     
     total_deals_updated = 0
     logs_created = []
