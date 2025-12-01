@@ -351,6 +351,15 @@ async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
     # Log successful sync to monitoring
     log_sync_status("OK", f"{len(changes)} programs, {total_deals_updated} deals updated")
     
+    # Add notification if significant updates
+    if total_deals_updated > 0:
+        from notifications import add_in_app_notification
+        add_in_app_notification(
+            "info",
+            f"AutoSync completed: {total_deals_updated} deals updated",
+            {"programs": len(changes), "deals": total_deals_updated}
+        )
+    
     return {
         "programs_updated": len(changes),
         "deals_recalculated": total_deals_updated,
@@ -363,5 +372,10 @@ async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
         logger.error(f"AutoSync failed: {e}")
         log_sync_status("FAIL", str(e))
         send_alert_email(f"AutoSync Engine failed: {e}")
+        
+        # Add error notification
+        from notifications import add_in_app_notification
+        add_in_app_notification("error", f"AutoSync failed: {str(e)}")
+        
         raise
     }
