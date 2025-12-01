@@ -2331,6 +2331,72 @@ async def mark_notifications_read(current_user: User = Depends(require_admin)):
         if success:
             return {"ok": True, "message": "All notifications marked as read"}
         else:
+
+
+
+# ==========================================
+# AI DEAL GENERATOR (PHASE 8)
+# ==========================================
+
+@api_router.post("/admin/ai/generate")
+async def generate_deal_content(
+    deal_id: str,
+    mode: str = "full",
+    current_user: User = Depends(require_editor)
+):
+    """
+    Generate AI content for a deal
+    
+    Args:
+        deal_id: Featured deal ID
+        mode: "short", "long", "cta", "seo", "full"
+        
+    Returns:
+        Generated content based on mode
+    """
+    try:
+        from ai_tools import (
+            generate_short_post,
+            generate_long_description,
+            generate_cta,
+            generate_seo,
+            generate_full_bundle
+        )
+        from db_featured_deals import get_deal
+        
+        # Get deal
+        deal = await get_deal(db, deal_id)
+        
+        if not deal:
+            raise HTTPException(status_code=404, detail="Deal not found")
+        
+        # Generate based on mode
+        if mode == "short":
+            content = generate_short_post(deal)
+        elif mode == "long":
+            content = generate_long_description(deal)
+        elif mode == "cta":
+            content = generate_cta(deal)
+        elif mode == "seo":
+            content = generate_seo(deal)
+        elif mode == "full":
+            content = generate_full_bundle(deal)
+        else:
+            raise HTTPException(status_code=400, detail="Invalid mode")
+        
+        return {
+            "ok": True,
+            "mode": mode,
+            "deal_id": deal_id,
+            "content": content
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"AI generate error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
             raise HTTPException(status_code=500, detail="Failed to mark as read")
         
     except Exception as e:
