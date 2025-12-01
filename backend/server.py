@@ -2674,24 +2674,6 @@ async def run_all_brands_sync(current_user: User = Depends(require_admin)):
         logger.error(f"Delete media error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-        return {
-            "ok": True,
-            "mode": mode,
-            "deal_id": deal_id,
-            "content": content
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"AI generate error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-            raise HTTPException(status_code=500, detail="Failed to mark as read")
-        
-    except Exception as e:
-        logger.error(f"Mark notifications error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
 
 # ==========================================
 
