@@ -58,6 +58,7 @@ const AdminDashboard = () => {
         <Route path="featured-deals/create" element={<CreateDeal />} />
         <Route path="sync" element={<SyncEngine />} />
         <Route path="sync/logs" element={<SyncLogs />} />
+        <Route path="monitoring" element={<Monitoring />} />
       </Routes>
     </AdminLayout>
   );
