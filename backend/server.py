@@ -1907,7 +1907,9 @@ async def create_featured_deal(
                     "calculated_onepay": calc_result.one_pay_estimated,
                     "mf_used": calc_result.mf_used,
                     "residual_percent_used": calc_result.residual_percent_used,
-                    "savings_vs_msrp": calc_result.estimated_savings_vs_msrp_deal
+                    "savings_vs_msrp": calc_result.estimated_savings_vs_msrp_deal,
+                    "tax_rate": calc_result.tax_rate,
+                    "updated_at": datetime.now(timezone.utc)
                 }
                 
                 await update_calculated_fields(db, deal_id, calc_fields)
@@ -1919,6 +1921,37 @@ async def create_featured_deal(
         except Exception as e:
             logger.error(f"Auto-calculation failed for deal {deal_id}: {e}")
             # Continue without calculations
+        
+        # Auto-generate SEO and AI Summary
+        try:
+            from seo_ai_generator import auto_generate_metadata, get_image_fallback
+            from db_featured_deals import get_deal
+            
+            # Get updated deal with calculated fields
+            deal_with_calc = await get_deal(db, deal_id)
+            
+            # Apply fallback image if missing
+            if not deal_with_calc.get('image_url'):
+                fallback_img = get_image_fallback(deal_with_calc.get('brand'), deal_with_calc.get('model'))
+                await update_calculated_fields(db, deal_id, {"image_url": fallback_img})
+                deal_with_calc['image_url'] = fallback_img
+            
+            # Generate metadata
+            updated_deal = auto_generate_metadata(deal_with_calc)
+            
+            # Save SEO and AI fields
+            metadata_fields = {
+                "seo": updated_deal.get('seo'),
+                "ai_summary": updated_deal.get('ai_summary')
+            }
+            
+            await update_calculated_fields(db, deal_id, metadata_fields)
+            
+            logger.info(f"Auto-generated SEO and AI metadata for deal: {deal_id}")
+            
+        except Exception as e:
+            logger.error(f"SEO/AI generation failed for deal {deal_id}: {e}")
+            # Continue without metadata
         
         # Return created deal
         from db_featured_deals import get_deal
