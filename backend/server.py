@@ -2545,6 +2545,75 @@ async def search_deals_endpoint(q: str = "", limit: int = 20):
             await index_deals(db)
         
         # Search
+
+
+
+# ==========================================
+# MULTI-BRAND SYNC (PHASE 12)
+# ==========================================
+
+@api_router.get("/admin/sync/brands")
+async def get_brand_sync_status(current_user: User = Depends(require_editor)):
+    """Get sync status for all supported brands"""
+    try:
+        from auto_sync_multi import get_supported_brands, get_brand_status
+        
+        brands = get_supported_brands()
+        
+        statuses = []
+        for brand in brands:
+            status = await get_brand_status(db, brand)
+            statuses.append(status)
+        
+        return {
+            "brands": statuses,
+            "total": len(statuses)
+        }
+        
+    except Exception as e:
+        logger.error(f"Get brands error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/admin/sync/run-brand")
+async def run_brand_sync(brand: str, current_user: User = Depends(require_admin)):
+    """
+    Run sync for specific brand
+    
+    Query param: brand (e.g., "Toyota")
+    """
+    try:
+        from auto_sync_multi import run_sync_for_brand
+        
+        result = await run_sync_for_brand(db, brand)
+        
+        return {
+            "ok": True,
+            **result
+        }
+        
+    except Exception as e:
+        logger.error(f"Brand sync error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/admin/sync/run-all-brands")
+async def run_all_brands_sync(current_user: User = Depends(require_admin)):
+    """Run sync for all supported brands"""
+    try:
+        from auto_sync_multi import run_all_brand_syncs
+        
+        result = await run_all_brand_syncs(db)
+        
+        return {
+            "ok": True,
+            **result
+        }
+        
+    except Exception as e:
+        logger.error(f"All brands sync error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
         results = search_deals(q, max_results=limit)
         
         return {
