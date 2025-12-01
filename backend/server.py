@@ -2500,9 +2500,10 @@ async def delete_media_file(
 # ==========================================
 
 @api_router.post("/compare")
-async def compare_deals_endpoint(deal_ids: List[str]):
+async def compare_deals_endpoint(deal_ids: List[str], req: Request):
     """
     Compare up to 3 deals side-by-side
+    Rate limited: 10 requests per 10 seconds per IP
     
     Request: {"deal_ids": ["id1", "id2", "id3"]}
     Returns: Comparison data with best value indicators
@@ -2510,6 +2511,17 @@ async def compare_deals_endpoint(deal_ids: List[str]):
     try:
         from comparison_engine import compare_deals, get_comparison_summary
         from db_featured_deals import get_deal
+        from rate_limiter import get_rate_limiter
+        
+        # Rate limiting
+        client_ip = req.client.host
+        limiter = get_rate_limiter()
+        
+        if not limiter.is_allowed(client_ip, max_requests=10, window_seconds=10):
+            raise HTTPException(
+                status_code=429,
+                detail="Too many comparison requests. Please slow down."
+            )
         
         # Validate
         if not deal_ids or len(deal_ids) > 3:
