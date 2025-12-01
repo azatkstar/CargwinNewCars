@@ -13,13 +13,6 @@ const AdminLayout = ({ children }) => {
 
   const navItems = [
     {
-      id: 'lots',
-      label: 'Lots Management',
-      icon: Package,
-      path: '/admin/lots',
-      requiredRole: 'viewer'
-    },
-    {
       id: 'users',
       label: 'Users',
       icon: Users,
