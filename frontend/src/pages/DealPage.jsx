@@ -54,8 +54,22 @@ export default function DealPage() {
   const onePay = deal.calculated_onepay || 0;
   const savings = deal.savings_vs_msrp || 0;
 
+  // SEO from deal data (auto-generated or A/B variant)
+  const seoTitle = deal.seo?.title || `${deal.year} ${deal.brand} ${deal.model} Lease | Hunter.Lease`;
+  const seoDescription = deal.seo?.meta_description || `Lease ${deal.year} ${deal.brand} ${deal.model} with real bank programs.`;
+  const seoImage = deal.seo?.og_image_url || deal.image_url;
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        {seoImage && <meta property="og:image" content={seoImage} />}
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="container max-w-6xl mx-auto px-4">
         {/* Back button */}
         <Link to="/deals" className="inline-block mb-6 text-blue-600 hover:underline">
