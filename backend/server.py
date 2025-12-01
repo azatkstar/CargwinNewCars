@@ -132,6 +132,11 @@ api_router = APIRouter(prefix=settings.API_V1_PREFIX)
 # Mount static files for uploads
 app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 
+# Mount media directory (PHASE 9)
+from pathlib import Path
+Path("/app/media").mkdir(parents=True, exist_ok=True)
+app.mount("/media", StaticFiles(directory="/app/media"), name="media")
+
 
 # WebSocket setup
 from websocket_manager import sio
