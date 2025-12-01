@@ -172,6 +172,14 @@ async def startup_event():
         await start_background_tasks()
         logger.info("Background tasks started")
         
+        # Build search index (PHASE 11)
+        try:
+            from search_engine import index_deals
+            await index_deals(db)
+            logger.info("Search index built")
+        except Exception as e:
+            logger.warning(f"Search index build failed (non-critical): {e}")
+        
         logger.info("🚀 Application startup completed successfully")
         
     except Exception as e:
