@@ -60,6 +60,7 @@ const AdminDashboard = () => {
         <Route path="sync" element={<SyncEngine />} />
         <Route path="sync/logs" element={<SyncLogs />} />
         <Route path="monitoring" element={<Monitoring />} />
+        <Route path="advanced-analytics" element={<AdminAnalytics />} />
       </Routes>
     </AdminLayout>
   );
