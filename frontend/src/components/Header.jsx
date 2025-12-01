@@ -58,11 +58,10 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6">
-            <Link to="/offers" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
-              Offers
+            <Link to="/deals" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
+              Deals
             </Link>
-            <Link to="/my-favorites" className="flex items-center gap-1.5 text-gray-600 hover:text-red-600 font-medium transition-colors">
-              <Heart className="w-4 h-4" />
+            <Link to="/my-favorites" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
               My Favorites
             </Link>
             <Link to="/about" className="text-gray-600 hover:text-red-600 font-medium transition-colors">
