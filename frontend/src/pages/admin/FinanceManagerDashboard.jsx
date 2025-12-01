@@ -250,7 +250,7 @@ const FinanceManagerDashboard = () => {
                       ) : (
                         <div className="bg-yellow-50 p-4 rounded border border-yellow-200">
                           <p className="text-sm text-yellow-900">
-                            Prescoring not run yet. Click "Run Prescoring" to see credit details.
+                            Prescoring not run yet. Click &quot;Run Prescoring&quot; to see credit details.
                           </p>
                         </div>
                       )}
