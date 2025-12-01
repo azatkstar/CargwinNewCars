@@ -64,8 +64,52 @@ export default function Deals() {
           </p>
         </div>
 
+        {/* Filters */}
+        <div className="flex justify-center gap-3 mb-8">
+          <button
+            onClick={() => setActiveFilter('all')}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+              activeFilter === 'all'
+                ? 'bg-red-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            All Deals
+          </button>
+          <button
+            onClick={() => setActiveFilter('low-payment')}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+              activeFilter === 'low-payment'
+                ? 'bg-red-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            💰 Low Payment
+          </button>
+          <button
+            onClick={() => setActiveFilter('zero-down')}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+              activeFilter === 'zero-down'
+                ? 'bg-red-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            🎯 Zero Down
+          </button>
+          <button
+            onClick={() => setActiveFilter('luxury')}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+              activeFilter === 'luxury'
+                ? 'bg-red-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            ✨ Luxury
+          </button>
+        </div>
+
         {/* Deals Grid */}
-        {deals.length === 0 ? (
+        {filteredDeals.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
             No deals available right now. Check back soon!
           </div>
