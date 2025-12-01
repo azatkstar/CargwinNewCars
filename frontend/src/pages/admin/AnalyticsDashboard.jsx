@@ -234,5 +234,3 @@ export default function AnalyticsDashboard() {
     </div>
   );
 }
-
-export default AnalyticsDashboard;
