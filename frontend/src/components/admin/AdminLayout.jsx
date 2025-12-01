@@ -141,6 +141,13 @@ const AdminLayout = ({ children }) => {
       icon: Zap,
       path: '/admin/sync',
       requiredRole: 'admin'
+    },
+    {
+      id: 'monitoring',
+      label: 'Monitoring',
+      icon: Activity,
+      path: '/admin/monitoring',
+      requiredRole: 'admin'
     }
   ];
 
