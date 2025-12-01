@@ -2227,7 +2227,13 @@ async def get_distribution_analytics(current_user: User = Depends(require_editor
         
         return {
             "by_bank": banks,
-
+            "by_term": terms,
+            "by_mileage": mileage
+        }
+        
+    except Exception as e:
+        logger.error(f"Distribution analytics error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @api_router.get("/admin/analytics/summary")
