@@ -66,6 +66,7 @@ const AdminDashboard = () => {
         <Route path="advanced-analytics" element={<AdminAnalytics />} />
         <Route path="notifications" element={<AdminNotifications />} />
         <Route path="ai-generator" element={<AIGenerator />} />
+        <Route path="media" element={<AdminMedia />} />
       </Routes>
     </AdminLayout>
   );
