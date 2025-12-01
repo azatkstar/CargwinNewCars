@@ -2342,7 +2342,7 @@ async def mark_notifications_read(current_user: User = Depends(require_admin)):
         if success:
             return {"ok": True, "message": "All notifications marked as read"}
         else:
-
+            raise HTTPException(status_code=500, detail="Failed to mark notifications as read")
 
 
 # ==========================================
