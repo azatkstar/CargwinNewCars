@@ -2508,6 +2508,47 @@ async def compare_deals_endpoint(deal_ids: List[str]):
             "ok": True,
             "comparison": comparison,
             "summary": summary
+
+
+
+# ==========================================
+# SEARCH ENGINE (PHASE 11)
+# ==========================================
+
+@api_router.get("/search")
+async def search_deals_endpoint(q: str = "", limit: int = 20):
+    """
+    Full-text search across Featured Deals
+    
+    Query params:
+        q: Search query (brand, model, trim, bank, or payment range)
+        limit: Max results (default 20)
+        
+    Returns:
+        List of matching deals
+    """
+    try:
+        from search_engine import search_deals, get_index_status, index_deals
+        
+        # Build index if not built
+        status = get_index_status()
+        if not status["built"]:
+            logger.info("Building search index on first search request...")
+            await index_deals(db)
+        
+        # Search
+        results = search_deals(q, max_results=limit)
+        
+        return {
+            "results": results,
+            "total": len(results),
+            "query": q
+        }
+        
+    except Exception as e:
+        logger.error(f"Search error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
         }
         
     except HTTPException:
