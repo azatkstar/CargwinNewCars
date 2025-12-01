@@ -2395,7 +2395,17 @@ async def generate_deal_content(
         else:
             raise HTTPException(status_code=400, detail="Invalid mode")
         
-
+        return {
+            "ok": True,
+            "content": content,
+            "mode": mode
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"AI generation error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ==========================================
