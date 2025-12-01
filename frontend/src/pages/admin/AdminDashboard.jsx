@@ -21,6 +21,7 @@ import CreateDeal from './CreateDeal';
 import SyncEngine from './SyncEngine';
 import SyncLogs from './SyncLogs';
 import Monitoring from './Monitoring';
+import AdminAnalytics from './AdminAnalytics';
 
 const AdminDashboard = () => {
   const { isAuthenticated, loading } = useAuth();
