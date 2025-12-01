@@ -19,21 +19,21 @@ export default function FeaturedDealsSection() {
   if (deals.length === 0) return null;
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-12 sm:py-20 bg-gray-50">
       <div className="container max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <div className="inline-block bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
             🔥 HOT DEALS
           </div>
-          <h2 className="text-4xl font-bold mb-3">Featured Deals This Week</h2>
-          <p className="text-gray-600 text-lg">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3">Featured Deals This Week</h2>
+          <p className="text-gray-600 text-base sm:text-lg px-4">
             Best lease offers with automatic bank program pricing
           </p>
         </div>
 
-        {/* Deals Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        {/* Deals Grid - Responsive */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
           {deals.map(deal => (
             <DealCard key={deal.id} deal={deal} />
           ))}
@@ -42,7 +42,7 @@ export default function FeaturedDealsSection() {
         {/* View All Button */}
         <div className="text-center">
           <Link to="/deals">
-            <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg">
+            <Button className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg">
               View All Deals <ArrowRight className="w-5 h-5 inline ml-2" />
             </Button>
           </Link>
