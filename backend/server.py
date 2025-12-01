@@ -2284,14 +2284,6 @@ async def get_full_analytics_summary_endpoint(current_user: User = Depends(requi
         logger.error(f"Analytics summary error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-            "by_term": terms,
-            "by_mileage": mileage
-        }
-        
-    except Exception as e:
-        logger.error(f"Distribution analytics error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
 
 @api_router.get("/admin/analytics/trends")
 async def get_payment_trends_analytics(
