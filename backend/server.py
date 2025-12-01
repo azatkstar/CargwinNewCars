@@ -2168,11 +2168,25 @@ async def get_sync_logs(
 
 @api_router.get("/admin/analytics/overview")
 async def get_analytics_overview(current_user: User = Depends(require_editor)):
-    """Get analytics overview for Featured Deals"""
+    """Get analytics overview for Featured Deals (cached 5 min)"""
     try:
         from analytics_service import get_deals_overview
+        from simple_cache import get_analytics_cache
         
+        cache = get_analytics_cache()
+        cache_key = "analytics_overview"
+        
+        # Try cache first
+        cached = cache.get(cache_key)
+        if cached:
+            return cached
+        
+        # Compute
         overview = await get_deals_overview(db)
+        
+        # Cache for 5 minutes
+        cache.set(cache_key, overview, ttl_seconds=300)
+        
         return overview
         
     except Exception as e:
