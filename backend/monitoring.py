@@ -386,5 +386,3 @@ def send_alert_email(message: str):
 
 
 from pathlib import Path
-
-    return metrics_collector
