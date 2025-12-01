@@ -8,6 +8,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001'
 export default function Deals() {
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState('all');
 
   useEffect(() => {
     fetch(`${BACKEND_URL}/api/deals/list?limit=50&sort=calculated_payment`)
@@ -21,6 +22,26 @@ export default function Deals() {
         setLoading(false);
       });
   }, []);
+
+  // Client-side filtering
+  const filteredDeals = deals.filter(deal => {
+    if (activeFilter === 'all') return true;
+    
+    if (activeFilter === 'low-payment') {
+      return (deal.calculated_payment || 0) < 350;
+    }
+    
+    if (activeFilter === 'zero-down') {
+      return (deal.calculated_driveoff || 0) === 0 || (deal.calculated_driveoff || 0) < 100;
+    }
+    
+    if (activeFilter === 'luxury') {
+      const luxuryBrands = ['BMW', 'Mercedes', 'Mercedes-Benz', 'Audi', 'Lexus'];
+      return luxuryBrands.includes(deal.brand);
+    }
+    
+    return true;
+  });
 
   if (loading) {
     return (
@@ -36,7 +57,7 @@ export default function Deals() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-3">Featured Fleet Deals</h1>
           <p className="text-gray-600 text-lg">
             Best lease offers with real bank programs and transparent pricing
