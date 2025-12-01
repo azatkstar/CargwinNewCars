@@ -162,6 +162,18 @@ const AdminLayout = ({ children }) => {
       icon: Bell,
       path: '/admin/notifications',
       requiredRole: 'editor'
+    },
+    {
+      id: 'divider-tools2',
+      type: 'divider',
+      label: 'AI Tools'
+    },
+    {
+      id: 'ai-generator',
+      label: 'AI Generator',
+      icon: Sparkles,
+      path: '/admin/ai-generator',
+      requiredRole: 'editor'
     }
   ];
 
