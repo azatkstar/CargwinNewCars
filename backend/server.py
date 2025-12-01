@@ -2646,28 +2646,8 @@ async def run_all_brands_sync(current_user: User = Depends(require_admin)):
         logger.error(f"All brands sync error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-        results = search_deals(q, max_results=limit)
-        
-        return {
-            "results": results,
-            "total": len(results),
-            "query": q
-        }
-        
-    except Exception as e:
-        logger.error(f"Search error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
 
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Comparison error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-        
-        success = delete_media(media_id)
+# ==========================================
         
         if not success:
             raise HTTPException(status_code=404, detail="Media not found")
