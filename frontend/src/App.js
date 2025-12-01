@@ -46,6 +46,7 @@ import ReviewsPage from "./pages/ReviewsPage";
 import LeaseCalculator from "./pages/LeaseCalculator";
 import Deals from "./pages/Deals";
 import DealPage from "./pages/DealPage";
+import Compare from "./pages/Compare";
 import BrokerApplication from "./pages/BrokerApplication";
 import MyFavorites from "./pages/MyFavorites";
 import AdminDashboard from "./pages/admin/AdminDashboard";
