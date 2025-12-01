@@ -148,6 +148,13 @@ const AdminLayout = ({ children }) => {
       icon: Activity,
       path: '/admin/monitoring',
       requiredRole: 'admin'
+    },
+    {
+      id: 'advanced-analytics',
+      label: 'Advanced Analytics',
+      icon: BarChart3,
+      path: '/admin/advanced-analytics',
+      requiredRole: 'admin'
     }
   ];
 
