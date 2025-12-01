@@ -2668,20 +2668,7 @@ async def run_all_brands_sync(current_user: User = Depends(require_admin)):
 
 
 # ==========================================
-        
-        if not success:
-            raise HTTPException(status_code=404, detail="Media not found")
-        
-        return {"ok": True, "id": media_id}
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Delete media error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-# ==========================================
+# COMPARISON ENGINE (PHASE 10)
 
 @api_router.get("/admin/settings")
 async def get_system_settings(current_user: User = Depends(require_admin)):
