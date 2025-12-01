@@ -75,7 +75,7 @@ const Hero = () => {
       </div>
 
       {/* FOMO Block - Right */}
-      <div className="absolute top-8 right-8 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl max-w-xs">
+      <div className="hidden lg:block absolute top-8 right-8 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl max-w-xs z-20">
         <div className="space-y-4 text-gray-900">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
