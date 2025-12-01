@@ -318,35 +318,35 @@ async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
         # For each change, recalculate affected deals
         for change in changes:
             brand = change["brand"]
-        model = change["model"]
+            model = change["model"]
+            
+            # Recalculate deals
+            updated_count = await recalc_featured_deals_for_brand_model(db, brand, model)
+            
+            # Get updated deal IDs
+            query = {"brand": {"$regex": f"^{brand}$", "$options": "i"}}
+            if model:
+                query["model"] = {"$regex": f"^{model}$", "$options": "i"}
+            
+            updated_deals = await db.featured_deals.find(query, {"_id": 0, "id": 1}).to_list(length=None)
+            updated_deal_ids = [d["id"] for d in updated_deals]
+            
+            # Write log
+            log_id = await write_sync_log(
+                db,
+                brand=brand,
+                model=model,
+                changes={
+                    "mf_changes": change.get("mf_changes", {}),
+                    "rv_changes": change.get("rv_changes", {})
+                },
+                deals_updated=updated_deal_ids
+            )
+            
+            logs_created.append(log_id)
+            total_deals_updated += updated_count
         
-        # Recalculate deals
-        updated_count = await recalc_featured_deals_for_brand_model(db, brand, model)
-        
-        # Get updated deal IDs
-        query = {"brand": {"$regex": f"^{brand}$", "$options": "i"}}
-        if model:
-            query["model"] = {"$regex": f"^{model}$", "$options": "i"}
-        
-        updated_deals = await db.featured_deals.find(query, {"_id": 0, "id": 1}).to_list(length=None)
-        updated_deal_ids = [d["id"] for d in updated_deals]
-        
-        # Write log
-        log_id = await write_sync_log(
-            db,
-            brand=brand,
-            model=model,
-            changes={
-                "mf_changes": change.get("mf_changes", {}),
-                "rv_changes": change.get("rv_changes", {})
-            },
-            deals_updated=updated_deal_ids
-        )
-        
-        logs_created.append(log_id)
-        total_deals_updated += updated_count
-    
-    logger.info(f"AutoSync complete: {len(changes)} programs updated, {total_deals_updated} deals recalculated")
+        logger.info(f"AutoSync complete: {len(changes)} programs updated, {total_deals_updated} deals recalculated")
     
     # Log successful sync to monitoring
     log_sync_status("OK", f"{len(changes)} programs, {total_deals_updated} deals updated")
