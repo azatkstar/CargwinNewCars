@@ -2516,7 +2516,13 @@ async def compare_deals_endpoint(deal_ids: List[str]):
             "ok": True,
             "comparison": comparison,
             "summary": summary
-
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Comparison error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ==========================================
@@ -2524,9 +2530,10 @@ async def compare_deals_endpoint(deal_ids: List[str]):
 # ==========================================
 
 @api_router.get("/search")
-async def search_deals_endpoint(q: str = "", limit: int = 20):
+async def search_deals_endpoint(q: str = "", limit: int = 20, req: Request = None):
     """
     Full-text search across Featured Deals
+    Rate limited: 10 requests per 10 seconds per IP
     
     Query params:
         q: Search query (brand, model, trim, bank, or payment range)
