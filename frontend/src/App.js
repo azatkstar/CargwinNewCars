@@ -93,8 +93,8 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/offers" element={<OffersPage />} />
-                  <Route path="/calculator" element={<LeaseCalculator />} />
-                  <Route path="/deals" element={<Deals />} />
+                  <Route path="/deals-old" element={<Deals />} />
+                  <Route path="/deals" element={<OffersPage />} />
                   <Route path="/deal/:id" element={<DealPage />} />
                   <Route path="/compare" element={<Compare />} />
                   <Route path="/car/:carId" element={<CarDetail />} />
