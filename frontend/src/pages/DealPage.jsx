@@ -103,7 +103,10 @@ export default function DealPage() {
                   {deal.year} {deal.brand} {deal.model}
                 </h1>
                 {deal.trim && (
-                  <p className="text-xl text-gray-600 mb-4">{deal.trim}</p>
+                  <p className="text-xl text-gray-600 mb-2">{deal.trim}</p>
+                )}
+                {deal.bank && (
+                  <p className="text-sm text-blue-600 font-medium mb-4">{deal.bank}</p>
                 )}
                 <div className="flex gap-4 text-sm text-gray-600">
                   <span>{deal.term_months} months</span>
