@@ -56,6 +56,7 @@ function DealCard({ deal }) {
   const monthlyPayment = deal.calculated_payment || 0;
   const driveOff = deal.calculated_driveoff || 0;
   const savings = deal.savings_vs_msrp || 0;
+  const bankName = deal.bank || null;
 
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
@@ -78,7 +79,10 @@ function DealCard({ deal }) {
           {deal.year} {deal.brand} {deal.model}
         </h3>
         {deal.trim && (
-          <p className="text-sm text-gray-600 mb-4">{deal.trim}</p>
+          <p className="text-sm text-gray-600 mb-2">{deal.trim}</p>
+        )}
+        {bankName && (
+          <p className="text-xs text-blue-600 mb-4">{bankName}</p>
         )}
 
         <div className="mb-4">
