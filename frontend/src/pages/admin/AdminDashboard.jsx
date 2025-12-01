@@ -68,6 +68,7 @@ const AdminDashboard = () => {
         <Route path="notifications" element={<AdminNotifications />} />
         <Route path="ai-generator" element={<AIGenerator />} />
         <Route path="media" element={<AdminMedia />} />
+        <Route path="multi-sync" element={<AdminMultiSync />} />
       </Routes>
     </AdminLayout>
   );
