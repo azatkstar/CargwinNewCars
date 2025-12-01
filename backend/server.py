@@ -2269,14 +2269,6 @@ async def update_system_settings(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-            "total": len(logs)
-        }
-        
-    except Exception as e:
-        logger.error(f"Get sync logs error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
 @api_router.get("/admin/sync/stats")
 async def get_sync_stats(current_user: User = Depends(require_editor)):
     """
