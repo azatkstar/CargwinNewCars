@@ -96,6 +96,7 @@ function App() {
                   <Route path="/calculator" element={<LeaseCalculator />} />
                   <Route path="/deals" element={<Deals />} />
                   <Route path="/deal/:id" element={<DealPage />} />
+                  <Route path="/compare" element={<Compare />} />
                   <Route path="/car/:carId" element={<CarDetail />} />
                   <Route path="/cars/:carId" element={<CarDetail />} />
                   <Route path="/auth" element={<Auth />} />
