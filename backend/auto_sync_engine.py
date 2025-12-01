@@ -348,9 +348,20 @@ async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
     
     logger.info(f"AutoSync complete: {len(changes)} programs updated, {total_deals_updated} deals recalculated")
     
+    # Log successful sync to monitoring
+    log_sync_status("OK", f"{len(changes)} programs, {total_deals_updated} deals updated")
+    
     return {
         "programs_updated": len(changes),
         "deals_recalculated": total_deals_updated,
         "logs_created": logs_created,
         "changes": changes
+    }
+    
+    except Exception as e:
+        # Log failure
+        logger.error(f"AutoSync failed: {e}")
+        log_sync_status("FAIL", str(e))
+        send_alert_email(f"AutoSync Engine failed: {e}")
+        raise
     }
