@@ -2293,6 +2293,50 @@ async def get_payment_trends_analytics(
 
 # ==========================================
 # SETTINGS ENDPOINTS
+
+
+
+# ==========================================
+# NOTIFICATIONS ENDPOINTS (PHASE 7)
+# ==========================================
+
+@api_router.get("/admin/notifications")
+async def get_notifications(current_user: User = Depends(require_editor)):
+    """Get all in-app notifications"""
+    try:
+        from notifications import load_notifications_from_file
+        
+        notifications = load_notifications_from_file()
+        unread = [n for n in notifications if not n.get("read", False)]
+        
+        return {
+            "notifications": notifications,
+            "total": len(notifications),
+            "unread": len(unread)
+        }
+        
+    except Exception as e:
+        logger.error(f"Get notifications error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/admin/notifications/mark-read")
+async def mark_notifications_read(current_user: User = Depends(require_admin)):
+    """Mark all notifications as read"""
+    try:
+        from notifications import mark_all_notifications_read
+        
+        success = mark_all_notifications_read()
+        
+        if success:
+            return {"ok": True, "message": "All notifications marked as read"}
+        else:
+            raise HTTPException(status_code=500, detail="Failed to mark as read")
+        
+    except Exception as e:
+        logger.error(f"Mark notifications error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # ==========================================
 
 @api_router.get("/admin/settings")
