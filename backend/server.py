@@ -2464,6 +2464,58 @@ async def delete_media_file(
     """Delete media file"""
     try:
         from media_manager import delete_media
+
+
+
+# ==========================================
+# COMPARISON ENGINE (PHASE 10)
+# ==========================================
+
+@api_router.post("/compare")
+async def compare_deals_endpoint(deal_ids: List[str]):
+    """
+    Compare up to 3 deals side-by-side
+    
+    Request: {"deal_ids": ["id1", "id2", "id3"]}
+    Returns: Comparison data with best value indicators
+    """
+    try:
+        from comparison_engine import compare_deals, get_comparison_summary
+        from db_featured_deals import get_deal
+        
+        # Validate
+        if not deal_ids or len(deal_ids) > 3:
+            raise HTTPException(
+                status_code=400,
+                detail="Must provide 1-3 deal IDs for comparison"
+            )
+        
+        # Fetch deals
+        deals = []
+        for deal_id in deal_ids:
+            deal = await get_deal(db, deal_id)
+            if deal:
+                deals.append(deal)
+        
+        if not deals:
+            raise HTTPException(status_code=404, detail="No deals found")
+        
+        # Compare
+        comparison = compare_deals(deals)
+        summary = get_comparison_summary(deals)
+        
+        return {
+            "ok": True,
+            "comparison": comparison,
+            "summary": summary
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Comparison error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
         
         success = delete_media(media_id)
         
