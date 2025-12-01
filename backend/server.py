@@ -1761,11 +1761,12 @@ async def delete_parsed_lease_program(
 # ==========================================
 
 @api_router.post("/lease/calculate")
-async def calculate_lease_payment(request: dict):
+async def calculate_lease_payment(request: dict, req: Request):
     """
     Calculate lease payment using parsed program data
     
     Public endpoint - no authentication required
+    Rate limited: 20 requests per minute per IP
     
     Request body: LeaseCalculationRequest JSON
     Returns: LeaseCalculationResult JSON with detailed breakdown
@@ -1774,6 +1775,17 @@ async def calculate_lease_payment(request: dict):
         from models_lease_programs import LeaseCalculationRequest
         from lease_calculator_pro import calculate_lease_pro
         from db_lease_programs import get_latest_parsed_program_for
+        from rate_limiter import get_rate_limiter
+        
+        # Rate limiting
+        client_ip = req.client.host
+        limiter = get_rate_limiter()
+        
+        if not limiter.is_allowed(client_ip, max_requests=20, window_seconds=60):
+            raise HTTPException(
+                status_code=429,
+                detail="Too many requests. Please slow down. Try again in a minute."
+            )
         
         # Parse request
         try:
