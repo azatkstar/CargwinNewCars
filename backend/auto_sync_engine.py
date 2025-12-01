@@ -378,4 +378,4 @@ async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
         add_in_app_notification("error", f"AutoSync failed: {str(e)}")
         
         raise
-    }
+
