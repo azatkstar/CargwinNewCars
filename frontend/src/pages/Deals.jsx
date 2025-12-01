@@ -111,11 +111,11 @@ export default function Deals() {
         {/* Deals Grid */}
         {filteredDeals.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
-            No deals available right now. Check back soon!
+            No deals match the selected filter. Try another filter!
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {deals.map(deal => (
+            {filteredDeals.map(deal => (
               <DealCard key={deal.id} deal={deal} />
             ))}
           </div>
