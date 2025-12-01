@@ -174,6 +174,13 @@ const AdminLayout = ({ children }) => {
       icon: Sparkles,
       path: '/admin/ai-generator',
       requiredRole: 'editor'
+    },
+    {
+      id: 'media-manager',
+      label: 'Media Manager',
+      icon: ImageIcon,
+      path: '/admin/media',
+      requiredRole: 'editor'
     }
   ];
 
