@@ -13,7 +13,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Full-Screen Car Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
@@ -26,39 +26,39 @@ const Hero = () => {
       </div>
 
       {/* Content - Centered */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center text-white">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center text-white py-20">
         
-        {/* Headline - КРУПНЫЙ */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+        {/* Headline - Responsive */}
+        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
           Instant Best Lease Deals<br />
           <span className="text-red-500">Save $3,000 to $8,000</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="text-xl md:text-2xl mb-10 text-gray-100">
+        <p className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-10 text-gray-100 px-4">
           Real bank programs. Automatic calculations. Full transparency.
         </p>
 
         {/* BIG CTA */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 sm:mb-8 px-4">
           <Button
             onClick={() => navigate('/deals')}
-            className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-12 py-8 text-2xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
+            className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-8 sm:px-12 py-6 sm:py-8 text-xl sm:text-2xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
           >
-            Find My Perfect Deal <ArrowRight className="w-8 h-8 inline ml-2" />
+            Find My Perfect Deal <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 inline ml-2" />
           </Button>
           
           <Button
             onClick={() => navigate('/calculator')}
             variant="outline"
-            className="w-full sm:w-auto bg-white/10 border-2 border-white text-white hover:bg-white/20 px-10 py-8 text-xl font-bold rounded-2xl backdrop-blur-sm"
+            className="w-full sm:w-auto bg-white/10 border-2 border-white text-white hover:bg-white/20 px-8 sm:px-10 py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-2xl backdrop-blur-sm"
           >
             Calculate Custom
           </Button>
         </div>
 
-        {/* Trust Icons */}
-        <div className="flex items-center justify-center gap-8 text-sm">
+        {/* Trust Icons - Responsive */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm px-4">
           <div className="flex items-center gap-2">
             <span className="text-green-400">✓</span>
             <span>Same prices rental companies pay</span>
@@ -67,14 +67,14 @@ const Hero = () => {
             <span className="text-green-400">✓</span>
             <span>All credit tiers welcome</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-2">
             <span className="text-green-400">✓</span>
             <span>Free delivery</span>
           </div>
         </div>
       </div>
 
-      {/* FOMO Block - Right */}
+      {/* FOMO Block - Desktop Only */}
       <div className="hidden lg:block absolute top-8 right-8 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl max-w-xs z-20">
         <div className="space-y-4 text-gray-900">
           <div className="flex items-center gap-3">
