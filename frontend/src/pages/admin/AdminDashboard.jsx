@@ -39,10 +39,7 @@ const AdminDashboard = () => {
   return (
     <AdminLayout>
       <Routes>
-        <Route index element={<Navigate to="lots" replace />} />
-        <Route path="lots" element={<LotsList />} />
-        <Route path="lots/new" element={<LotForm />} />
-        <Route path="lots/:id/edit" element={<LotForm />} />
+        <Route index element={<Navigate to="featured-deals" replace />} />
         <Route path="users" element={<AdminUsers />} />
         <Route path="applications" element={<AdminApplications />} />
         <Route path="broker-applications" element={<BrokerApplicationsAdmin />} />
