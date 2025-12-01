@@ -2390,6 +2390,89 @@ async def generate_deal_content(
         else:
             raise HTTPException(status_code=400, detail="Invalid mode")
         
+
+
+
+# ==========================================
+# MEDIA MANAGER (PHASE 9)
+# ==========================================
+
+@api_router.post("/admin/media/upload")
+async def upload_media_file(
+    file: UploadFile,
+    current_user: User = Depends(require_editor)
+):
+    """Upload media file to internal storage"""
+    try:
+        from media_manager import upload_media
+        
+        # Read file
+        content = await file.read()
+        
+        # Upload
+        media_entry = upload_media(
+            file_content=content,
+            filename=file.filename,
+            uploaded_by=current_user.email
+        )
+        
+        return {
+            "ok": True,
+            "media": media_entry
+        }
+        
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Media upload error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/media/list")
+async def list_media_files(
+    limit: int = 100,
+    current_user: User = Depends(require_editor)
+):
+    """Get list of uploaded media"""
+    try:
+        from media_manager import list_media, get_media_stats
+        
+        media_list = list_media(limit=limit)
+        stats = get_media_stats()
+        
+        return {
+            "media": media_list,
+            "total": len(media_list),
+            "stats": stats
+        }
+        
+    except Exception as e:
+        logger.error(f"List media error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.delete("/admin/media/{media_id}")
+async def delete_media_file(
+    media_id: str,
+    current_user: User = Depends(require_admin)
+):
+    """Delete media file"""
+    try:
+        from media_manager import delete_media
+        
+        success = delete_media(media_id)
+        
+        if not success:
+            raise HTTPException(status_code=404, detail="Media not found")
+        
+        return {"ok": True, "id": media_id}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete media error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
         return {
             "ok": True,
             "mode": mode,
