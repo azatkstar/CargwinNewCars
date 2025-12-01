@@ -16,10 +16,10 @@ export default function FinalCTA() {
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
-            onClick={() => navigate('/calculator')}
+            onClick={() => navigate('/deals')}
             className="bg-white text-red-600 hover:bg-gray-100 px-10 py-6 text-xl font-bold rounded-xl"
           >
-            🧮 Calculate My Deal
+            🎯 Find My Deal
           </Button>
           
           <Button
