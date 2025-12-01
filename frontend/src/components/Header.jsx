@@ -132,11 +132,11 @@ const Header = () => {
               </Link>
             )}
             
-            <Link to="/offers">
+            <Link to="/deals">
               <Button 
                 className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300"
               >
-                View Offers
+                View Deals
               </Button>
             </Link>
           </div>
@@ -158,11 +158,11 @@ const Header = () => {
           <div className="lg:hidden border-t border-gray-200 py-4">
             <nav className="flex flex-col space-y-2 px-4">
               <Link 
-                to="/offers" 
+                to="/deals" 
                 className="py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Offers
+                Deals
               </Link>
               <Link 
                 to="/about"
