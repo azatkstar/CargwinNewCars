@@ -2138,6 +2138,12 @@ async def get_sync_logs(
         
         return {
             "logs": logs,
+            "total": len(logs)
+        }
+        
+    except Exception as e:
+        logger.error(f"Get sync logs error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ==========================================
