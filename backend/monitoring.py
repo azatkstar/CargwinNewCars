@@ -329,4 +329,62 @@ async def monitoring_background_task():
 
 def get_metrics_collector() -> MetricsCollector:
     """Get global metrics collector"""
+
+
+
+# ==========================================
+# AUTOSYNC MONITORING (Added for Stage 3)
+# ==========================================
+
+def log_sync_status(status: str, details: Optional[str] = None):
+    """
+    Log AutoSync execution status
+    
+    Args:
+        status: "OK" or "FAIL"
+        details: Optional details message
+    """
+    try:
+        log_dir = Path("/app/backend/logs")
+        log_dir.mkdir(parents=True, exist_ok=True)
+        
+        log_file = log_dir / "autosync_monitor.log"
+        
+        timestamp = datetime.now(timezone.utc).isoformat()
+        log_entry = f"{timestamp} | STATUS: {status}"
+        
+        if details:
+            log_entry += f" | {details}"
+        
+        # Write to file
+        with open(log_file, 'a') as f:
+            f.write(log_entry + "\n")
+        
+        # Also use standard logger
+        log_func = logging.info if status == "OK" else logging.error
+        log_func(f"AutoSync monitor: {status} - {details or 'No details'}")
+        
+    except Exception as e:
+        # Never break sync due to monitoring
+        logging.error(f"Monitoring failed (non-critical): {e}")
+
+
+def send_alert_email(message: str):
+    """
+    Send alert email (placeholder implementation)
+    
+    Args:
+        message: Alert message
+        
+    Note:
+        This is a placeholder. SMTP not implemented.
+        Safe no-op - never breaks sync.
+    """
+    # Placeholder: just print and log
+    print(f"EMAIL ALERT: {message}")
+    logging.warning(f"Email alert triggered (not sent - SMTP not configured): {message}")
+
+
+from pathlib import Path
+
     return metrics_collector
