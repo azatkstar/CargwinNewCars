@@ -42,18 +42,18 @@ const Hero = () => {
         {/* BIG CTA */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
           <Button
-            onClick={() => navigate('/calculator')}
-            className="bg-red-600 hover:bg-red-700 text-white px-12 py-8 text-2xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
+            onClick={() => navigate('/deals')}
+            className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-12 py-8 text-2xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
           >
             Find My Perfect Deal <ArrowRight className="w-8 h-8 inline ml-2" />
           </Button>
           
           <Button
-            onClick={() => navigate('/deals')}
+            onClick={() => navigate('/calculator')}
             variant="outline"
-            className="bg-white/10 border-2 border-white text-white hover:bg-white/20 px-10 py-8 text-xl font-bold rounded-2xl backdrop-blur-sm"
+            className="w-full sm:w-auto bg-white/10 border-2 border-white text-white hover:bg-white/20 px-10 py-8 text-xl font-bold rounded-2xl backdrop-blur-sm"
           >
-            Browse Deals
+            Calculate Custom
           </Button>
         </div>
 
