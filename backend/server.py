@@ -2567,7 +2567,17 @@ async def search_deals_endpoint(q: str = "", limit: int = 20, req: Request = Non
             await index_deals(db)
         
         # Search
-
+        results = search_deals(q, max_results=limit)
+        
+        return {
+            "results": results,
+            "total": len(results),
+            "query": q
+        }
+        
+    except Exception as e:
+        logger.error(f"Search error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ==========================================
