@@ -2136,6 +2136,10 @@ async def get_sync_logs(
             {"_id": 0}
         ).sort("timestamp", -1).limit(limit).to_list(limit)
         
+        # Ensure logs is always a list
+        if logs is None:
+            logs = []
+        
         return {
             "logs": logs,
             "total": len(logs)
