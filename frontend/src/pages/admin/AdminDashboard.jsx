@@ -3,8 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import AdminLogin from './AdminLogin';
 import AdminLayout from '../../components/admin/AdminLayout';
-import LotsList from '../../components/admin/LotsList';
-import LotForm from '../../components/admin/LotForm';
 import AdminUsers from './AdminUsers';
 import AdminApplications from './AdminApplications';
 import FinanceManagerDashboard from './FinanceManagerDashboard';
