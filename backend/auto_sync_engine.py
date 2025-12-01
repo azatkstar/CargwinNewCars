@@ -312,12 +312,12 @@ async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
         # Scan for changes
         changes = await scan_for_updated_programs(db)
     
-    total_deals_updated = 0
-    logs_created = []
-    
-    # For each change, recalculate affected deals
-    for change in changes:
-        brand = change["brand"]
+        total_deals_updated = 0
+        logs_created = []
+        
+        # For each change, recalculate affected deals
+        for change in changes:
+            brand = change["brand"]
         model = change["model"]
         
         # Recalculate deals
