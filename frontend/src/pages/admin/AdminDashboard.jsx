@@ -25,6 +25,7 @@ import AdminAnalytics from './AdminAnalytics';
 import AdminNotifications from './AdminNotifications';
 import AIGenerator from './AIGenerator';
 import AdminMedia from './AdminMedia';
+import AdminMultiSync from './AdminMultiSync';
 
 const AdminDashboard = () => {
   const { isAuthenticated, loading } = useAuth();
