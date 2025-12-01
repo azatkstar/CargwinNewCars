@@ -2227,6 +2227,44 @@ async def get_distribution_analytics(current_user: User = Depends(require_editor
         
         return {
             "by_bank": banks,
+
+
+
+@api_router.get("/admin/analytics/summary")
+async def get_full_analytics_summary_endpoint(current_user: User = Depends(require_editor)):
+    """
+    Get complete analytics summary (cached 5 min)
+    
+    Returns all analytics sections for dashboard:
+    - Payments distribution
+    - Avg payment per brand
+    - Deals timeline
+    - Program changes trend
+    """
+    try:
+        from analytics_engine import get_full_analytics_summary
+        from simple_cache import get_analytics_cache
+        
+        cache = get_analytics_cache()
+        cache_key = "analytics_full_summary"
+        
+        # Try cache first
+        cached = cache.get(cache_key)
+        if cached:
+            return cached
+        
+        # Compute
+        summary = await get_full_analytics_summary(db)
+        
+        # Cache for 5 minutes
+        cache.set(cache_key, summary, ttl_seconds=300)
+        
+        return summary
+        
+    except Exception as e:
+        logger.error(f"Analytics summary error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
             "by_term": terms,
             "by_mileage": mileage
         }
