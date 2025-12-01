@@ -155,6 +155,13 @@ const AdminLayout = ({ children }) => {
       icon: BarChart3,
       path: '/admin/advanced-analytics',
       requiredRole: 'admin'
+    },
+    {
+      id: 'notifications',
+      label: 'Notifications',
+      icon: Bell,
+      path: '/admin/notifications',
+      requiredRole: 'editor'
     }
   ];
 
