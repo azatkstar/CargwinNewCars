@@ -6,19 +6,14 @@ const I18nContext = createContext();
 
 export const I18nProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    // Check localStorage first, then browser language, default to English
+    // Check localStorage first - ONLY manual choice
     const savedLanguage = localStorage.getItem('cargwin_language');
     if (savedLanguage) {
       return savedLanguage;
     }
     
-    // Check browser language
-    const browserLang = navigator.language.toLowerCase();
-    if (browserLang.startsWith('ru')) {
-      return 'ru';
-    }
-    
-    return 'en'; // Default to English
+    // Always default to EN (ignore browser language)
+    return 'en';
   });
   
   const [translations, setTranslations] = useState(enTranslations);
