@@ -360,12 +360,12 @@ async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
             {"programs": len(changes), "deals": total_deals_updated}
         )
     
-    return {
-        "programs_updated": len(changes),
-        "deals_recalculated": total_deals_updated,
-        "logs_created": logs_created,
-        "changes": changes
-    }
+        return {
+            "programs_updated": len(changes),
+            "deals_recalculated": total_deals_updated,
+            "logs_created": logs_created,
+            "changes": changes
+        }
     
     except Exception as e:
         # Log failure
