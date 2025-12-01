@@ -224,6 +224,22 @@ async def full_recalculate_all_deals(db: AsyncIOMotorDatabase) -> Dict[str, Any]
             
             await update_calculated_fields(db, deal.get("id"), calc_fields)
             
+            # Regenerate SEO with updated payment
+            try:
+                from seo_ai_generator import auto_generate_metadata
+                
+                # Get updated deal
+                updated_deal_data = {**deal, **calc_fields}
+                metadata = auto_generate_metadata(updated_deal_data)
+                
+                # Update SEO and AI
+                await update_calculated_fields(db, deal.get("id"), {
+                    "seo": metadata.get("seo"),
+                    "ai_summary": metadata.get("ai_summary")
+                })
+            except Exception as e:
+                logger.error(f"Failed to regenerate SEO for deal {deal.get('id')}: {e}")
+            
             success_count += 1
             
         except Exception as e:
