@@ -346,20 +346,20 @@ async def run_auto_sync(db: AsyncIOMotorDatabase) -> Dict[str, Any]:
             logs_created.append(log_id)
             total_deals_updated += updated_count
         
-        logger.info(f"AutoSync complete: {len(changes)} programs updated, {total_deals_updated} deals recalculated")
-    
-    # Log successful sync to monitoring
-    log_sync_status("OK", f"{len(changes)} programs, {total_deals_updated} deals updated")
-    
-    # Add notification if significant updates
-    if total_deals_updated > 0:
-        from notifications import add_in_app_notification
-        add_in_app_notification(
-            "info",
-            f"AutoSync completed: {total_deals_updated} deals updated",
-            {"programs": len(changes), "deals": total_deals_updated}
-        )
-    
+            logger.info(f"AutoSync complete: {len(changes)} programs updated, {total_deals_updated} deals recalculated")
+        
+        # Log successful sync to monitoring
+        log_sync_status("OK", f"{len(changes)} programs, {total_deals_updated} deals updated")
+        
+        # Add notification if significant updates
+        if total_deals_updated > 0:
+            from notifications import add_in_app_notification
+            add_in_app_notification(
+                "info",
+                f"AutoSync completed: {total_deals_updated} deals updated",
+                {"programs": len(changes), "deals": total_deals_updated}
+            )
+        
         return {
             "programs_updated": len(changes),
             "deals_recalculated": total_deals_updated,
