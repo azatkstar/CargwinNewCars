@@ -44,8 +44,11 @@ const AdminLogin = () => {
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               {t('admin.login.success')}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mb-4">
               Проверьте email {email} и перейдите по ссылке для входа в админ-панель
+            </p>
+            <p className="text-sm text-yellow-600 bg-yellow-50 p-3 rounded">
+              💡 If the email did not arrive, please check Spam/Promotions folder.
             </p>
           </CardContent>
         </Card>
