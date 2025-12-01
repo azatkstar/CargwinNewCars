@@ -23,6 +23,7 @@ import SyncLogs from './SyncLogs';
 import Monitoring from './Monitoring';
 import AdminAnalytics from './AdminAnalytics';
 import AdminNotifications from './AdminNotifications';
+import AIGenerator from './AIGenerator';
 
 const AdminDashboard = () => {
   const { isAuthenticated, loading } = useAuth();
