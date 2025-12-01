@@ -2474,7 +2474,19 @@ async def delete_media_file(
     """Delete media file"""
     try:
         from media_manager import delete_media
-
+        
+        success = delete_media(media_id)
+        
+        if success:
+            return {"ok": True, "message": "Media deleted"}
+        else:
+            raise HTTPException(status_code=404, detail="Media not found")
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Media delete error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ==========================================
