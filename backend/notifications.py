@@ -158,3 +158,82 @@ Don't miss out: https://cargwin-newcar.emergent.host/car/{slug}
     except Exception as e:
         logger.error(f"Notify subscriber error: {e}")
         return False
+
+
+
+# ==========================================
+# IN-APP NOTIFICATIONS (PHASE 7)
+# ==========================================
+
+from pathlib import Path
+from uuid import uuid4
+
+NOTIFICATIONS_FILE = Path("/app/backend/notifications_db.json")
+
+
+def ensure_notifications_file():
+    """Ensure notifications file exists"""
+    if not NOTIFICATIONS_FILE.exists():
+        NOTIFICATIONS_FILE.write_text(json.dumps([]))
+
+
+def load_notifications_from_file() -> list:
+    """Load notifications from JSON"""
+    try:
+        ensure_notifications_file()
+        with open(NOTIFICATIONS_FILE, 'r') as f:
+            return json.load(f)
+    except:
+        return []
+
+
+def save_notifications_to_file(notifications: list):
+    """Save notifications to JSON"""
+    try:
+        ensure_notifications_file()
+        with open(NOTIFICATIONS_FILE, 'w') as f:
+            json.dump(notifications, f, indent=2, default=str)
+    except Exception as e:
+        logging.error(f"Failed to save notifications: {e}")
+
+
+def add_in_app_notification(notification_type: str, message: str, details: dict = None) -> str:
+    """Add notification to JSON storage"""
+    try:
+        notifications = load_notifications_from_file()
+        
+        notif_id = str(uuid4())
+        notification = {
+            "id": notif_id,
+            "type": notification_type,
+            "message": message,
+            "details": details or {},
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "read": False
+        }
+        
+        notifications.append(notification)
+        
+        # Keep last 100
+        if len(notifications) > 100:
+            notifications = notifications[-100:]
+        
+        save_notifications_to_file(notifications)
+        
+        return notif_id
+    except Exception as e:
+        logging.error(f"Failed to add notification: {e}")
+        return ""
+
+
+def mark_all_notifications_read():
+    """Mark all as read"""
+    try:
+        notifications = load_notifications_from_file()
+        for n in notifications:
+            n["read"] = True
+        save_notifications_to_file(notifications)
+        return True
+    except:
+        return False
+
