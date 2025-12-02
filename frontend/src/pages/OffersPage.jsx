@@ -104,10 +104,15 @@ const OffersPage = () => {
 
           {/* Right - All Offers */}
           <div className="lg:col-span-3">
-            <div className="mb-6">
+            <div className="mb-6 flex justify-between items-center">
               <p className="text-sm text-gray-600">
                 {filteredOffers.length} {filteredOffers.length === 1 ? 'offer' : 'offers'} available
               </p>
+              {activeFilters && (
+                <Button variant="outline" size="sm" onClick={handleClearFilters}>
+                  Clear Filters
+                </Button>
+              )}
             </div>
 
             {loading ? (
