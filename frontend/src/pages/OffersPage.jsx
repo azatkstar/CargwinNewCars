@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet-async';
 
 const OffersPage = () => {
   const [offers, setOffers] = useState([]);
+  const [filteredOffers, setFilteredOffers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilters, setActiveFilters] = useState(null);
 
@@ -20,6 +21,7 @@ const OffersPage = () => {
       const response = await fetch(`${BACKEND_URL}/api/cars`);
       const data = await response.json();
       setOffers(data);
+      setFilteredOffers(data);
     } catch (error) {
       console.error('Failed to fetch offers:', error);
     } finally {
@@ -27,22 +29,42 @@ const OffersPage = () => {
     }
   };
 
-  const applyFilters = (offersList) => {
-    if (!activeFilters) return offersList;
+  const applyFilters = (filters) => {
+    setActiveFilters(filters);
     
-    return offersList.filter(offer => {
-      if (activeFilters.brand !== 'all' && !offer.title.toLowerCase().includes(activeFilters.brand)) {
+    if (!filters) {
+      setFilteredOffers(offers);
+      return;
+    }
+    
+    let result = offers.filter(offer => {
+      // Brand filter
+      if (filters.brand !== 'all' && !offer.title.toLowerCase().includes(filters.brand.toLowerCase())) {
         return false;
       }
-      const monthly = offer.lease?.monthly || 0;
-      if (monthly < activeFilters.budgetMin || monthly > activeFilters.budgetMax) {
+      
+      // Payment filter
+      const monthly = offer.lease?.monthly || offer.finance?.monthly || 0;
+      if (monthly < filters.budgetMin || monthly > filters.budgetMax) {
         return false;
       }
+      
+      // Deal type filter
+      if (filters.dealType !== 'all') {
+        if (filters.dealType === 'lease' && !offer.lease) return false;
+        if (filters.dealType === 'finance' && !offer.finance) return false;
+      }
+      
       return true;
     });
+    
+    setFilteredOffers(result);
   };
 
-  const filteredOffers = applyFilters(offers);
+  const handleClearFilters = () => {
+    setActiveFilters(null);
+    setFilteredOffers(offers);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
