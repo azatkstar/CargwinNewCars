@@ -2665,14 +2665,10 @@ async def get_deals_xml_feed():
         logger.error(f"XML feed error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-            "total": len(results),
-            "query": q
-        }
-        
-    except Exception as e:
-        logger.error(f"Search error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
 
+# ==========================================
+# COMPARISON ENGINE (PHASE 10)
+# ==========================================
 
 # ==========================================
 # MULTI-BRAND SYNC (PHASE 12)
