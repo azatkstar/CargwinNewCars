@@ -1,333 +1,115 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Card, CardContent } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Filter, Heart, TrendingDown } from 'lucide-react';
+import FiltersSidebar from '../components/FiltersSidebar';
+import OfferCard from '../components/OfferCard';
+import { Helmet } from 'react-helmet-async';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
-
-export default function OffersPage() {
-  const [deals, setDeals] = useState([]);
-  const [filteredDeals, setFilteredDeals] = useState([]);
+const OffersPage = () => {
+  const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  // Filters
-  const [brand, setBrand] = useState('all');
-  const [paymentMax, setPaymentMax] = useState(1000);
-  const [sortBy, setSortBy] = useState('payment');
-  const [showFilters, setShowFilters] = useState(false);
+  const [activeFilters, setActiveFilters] = useState(null);
 
-  // Load deals
   useEffect(() => {
-    fetch(`${BACKEND_URL}/api/deals/list?limit=50`)
-      .then(res => res.json())
-      .then(data => {
-        setDeals(data.deals || []);
-        setFilteredDeals(data.deals || []);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Error loading deals:', err);
-        setLoading(false);
-      });
+    fetchOffers();
   }, []);
 
-  // Apply filters
-  useEffect(() => {
-    let result = [...deals];
-
-    // Brand filter
-    if (brand !== 'all') {
-      result = result.filter(d => d.brand?.toLowerCase() === brand.toLowerCase());
+  const fetchOffers = async () => {
+    try {
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/cars`);
+      const data = await response.json();
+      setOffers(data);
+    } catch (error) {
+      console.error('Failed to fetch offers:', error);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    // Payment filter
-    result = result.filter(d => (d.calculated_payment || 0) <= paymentMax);
+  const applyFilters = (offersList) => {
+    if (!activeFilters) return offersList;
+    
+    return offersList.filter(offer => {
+      if (activeFilters.brand !== 'all' && !offer.title.toLowerCase().includes(activeFilters.brand)) {
+        return false;
+      }
+      const monthly = offer.lease?.monthly || 0;
+      if (monthly < activeFilters.budgetMin || monthly > activeFilters.budgetMax) {
+        return false;
+      }
+      return true;
+    });
+  };
 
-    // Sorting
-    if (sortBy === 'payment') {
-      result.sort((a, b) => (a.calculated_payment || 0) - (b.calculated_payment || 0));
-    } else if (sortBy === 'savings') {
-      result.sort((a, b) => (b.savings_vs_msrp || 0) - (a.savings_vs_msrp || 0));
-    }
-
-    setFilteredDeals(result);
-
-    // Analytics event
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'filter_change', {
-        brand,
-        payment_max: paymentMax,
-        sort: sortBy
-      });
-    }
-  }, [brand, paymentMax, sortBy, deals]);
-
-  const brands = ['all', ...new Set(deals.map(d => d.brand).filter(Boolean))];
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <div className="container mx-auto px-4 py-20 text-center">
-          <div className="text-gray-500">Loading deals...</div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+  const filteredOffers = applyFilters(offers);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
-        {/* Primary SEO */}
-        <title>Best Car Lease Deals in California | Hunter.Lease</title>
-        <meta name="description" content="Exclusive discounted lease deals. Updated daily. Transparent fleet pricing. Browse Toyota, Honda, BMW, Mercedes and more." />
-        <meta name="keywords" content="car lease deals, California lease specials, best lease rates, fleet pricing" />
+        <title>New Car Lease Deals California | Fleet Pricing - hunter.lease</title>
+        <meta name="description" content="Browse all current car lease deals in California with fleet pricing. Save $5K-$15K on new Toyota, Lexus, Honda, BMW. Real prices, no haggling. Updated monthly." />
+        <meta name="keywords" content="car lease deals, California lease, fleet pricing, new car deals, Toyota lease, Lexus lease, BMW lease" />
+        <link rel="canonical" href="https://cargwin-newcar.emergent.host/offers" />
         
         {/* Open Graph */}
+        <meta property="og:title" content="All Car Lease Deals - hunter.lease" />
+        <meta property="og:description" content="Complete inventory of new car lease deals with fleet pricing. Save thousands on Toyota, Lexus, Honda, BMW and more." />
+        <meta property="og:url" content="https://cargwin-newcar.emergent.host/offers" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Best Car Lease Deals in California" />
-        <meta property="og:description" content="Exclusive discounted lease deals. Updated daily." />
-        <meta property="og:url" content="https://hunter.lease/deals" />
-        
-        {/* AI Signals */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "name": "Car Lease Deals",
-            "description": "Best car lease deals in California",
-            "numberOfItems": filteredDeals.length
-          })}
-        </script>
-        
-        <script type="application/ld+json" id="ai-signals">
-          {JSON.stringify({
-            "entity_type": "Lease Deal Listing",
-            "region": "California",
-            "inventory_dynamic": true,
-            "total_offers": filteredDeals.length,
-            "update_frequency": "hourly"
-          })}
-        </script>
       </Helmet>
-
+      
       <Header />
-
-      <div className="container max-w-7xl mx-auto px-4 py-8">
-        {/* Page Title */}
-        <div className="mb-6">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Car Lease Deals</h1>
-          <p className="text-gray-600">
-            {filteredDeals.length} deals found
+      
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            All Current Dump Offers
+          </h1>
+          <p className="text-xl text-gray-600">
+            Complete inventory. Real prices. Updated monthly.
           </p>
         </div>
 
-        {/* Filters - Desktop */}
-        <div className="hidden md:flex gap-4 mb-6 items-center flex-wrap">
-          <Select value={brand} onValueChange={setBrand}>
-            <SelectTrigger className="w-48">
-              <SelectValue placeholder="All Brands" />
-            </SelectTrigger>
-            <SelectContent>
-              {brands.map(b => (
-                <SelectItem key={b} value={b}>
-                  {b === 'all' ? 'All Brands' : b}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600">Max Payment:</span>
-            <Select value={paymentMax.toString()} onValueChange={(v) => setPaymentMax(parseInt(v))}>
-              <SelectTrigger className="w-32">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="500">$500</SelectItem>
-                <SelectItem value="700">$700</SelectItem>
-                <SelectItem value="1000">$1000</SelectItem>
-                <SelectItem value="5000">Any</SelectItem>
-              </SelectContent>
-            </Select>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Left - Filters */}
+          <div className="lg:col-span-1">
+            <FiltersSidebar 
+              onFilterChange={setActiveFilters}
+              onClear={() => setActiveFilters(null)}
+            />
           </div>
 
-          <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-48">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="payment">Lowest Payment</SelectItem>
-              <SelectItem value="savings">Biggest Savings</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Filters - Mobile */}
-        <div className="md:hidden mb-6">
-          <Button
-            onClick={() => setShowFilters(!showFilters)}
-            variant="outline"
-            className="w-full"
-          >
-            <Filter className="w-4 h-4 mr-2" />
-            Filters ({filteredDeals.length} deals)
-          </Button>
-          
-          {showFilters && (
-            <div className="mt-4 space-y-3 bg-white p-4 rounded-lg border">
-              <Select value={brand} onValueChange={setBrand}>
-                <SelectTrigger>
-                  <SelectValue placeholder="All Brands" />
-                </SelectTrigger>
-                <SelectContent>
-                  {brands.map(b => (
-                    <SelectItem key={b} value={b}>{b === 'all' ? 'All Brands' : b}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select value={paymentMax.toString()} onValueChange={(v) => setPaymentMax(parseInt(v))}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Max Payment" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="500">Under $500</SelectItem>
-                  <SelectItem value="700">Under $700</SelectItem>
-                  <SelectItem value="1000">Under $1000</SelectItem>
-                  <SelectItem value="5000">Any Price</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="payment">Lowest Payment</SelectItem>
-                  <SelectItem value="savings">Biggest Savings</SelectItem>
-                </SelectContent>
-              </Select>
+          {/* Right - All Offers */}
+          <div className="lg:col-span-3">
+            <div className="mb-6">
+              <p className="text-sm text-gray-600">
+                {filteredOffers.length} {filteredOffers.length === 1 ? 'offer' : 'offers'} available
+              </p>
             </div>
-          )}
-        </div>
 
-        {/* Deals Grid - Compact Cards */}
-        {filteredDeals.length === 0 ? (
-          <div className="text-center py-20 text-gray-500">
-            No deals match your filters. Try adjusting them!
+            {loading ? (
+              <div className="text-center py-20">
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+              </div>
+            ) : filteredOffers.length === 0 ? (
+              <div className="text-center py-20">
+                <p className="text-gray-500">No offers match your filters</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredOffers.map(offer => (
+                  <OfferCard key={offer.id} offer={offer} />
+                ))}
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {filteredDeals.map(deal => (
-              <CompactDealCard key={deal.id} deal={deal} />
-            ))}
-          </div>
-        )}
+        </div>
       </div>
 
       <Footer />
     </div>
   );
-}
+};
 
-// Compact Deal Card Component
-function CompactDealCard({ deal }) {
-  const monthlyPayment = deal.calculated_payment || 0;
-  const savings = deal.savings_vs_msrp || 0;
-
-  const handleCardClick = () => {
-    // Analytics
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'deal_card_click', {
-        deal_id: deal.id,
-        brand: deal.brand,
-        model: deal.model
-      });
-    }
-  };
-
-  return (
-    <Link to={`/deal/${deal.id}`} onClick={handleCardClick}>
-      <Card className="overflow-hidden hover:shadow-xl transition-all duration-200 cursor-pointer">
-        {/* Image */}
-        <div className="h-48 sm:h-56 bg-gray-200 overflow-hidden">
-          {deal.image_url ? (
-            <img
-              src={deal.image_url}
-              alt={`${deal.year} ${deal.brand} ${deal.model}`}
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              loading="lazy"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-400">
-              <span className="text-6xl">🚗</span>
-            </div>
-          )}
-        </div>
-
-        <CardContent className="p-4">
-          {/* Title */}
-          <h3 className="font-bold text-lg mb-1">
-            {deal.year} {deal.brand} {deal.model}
-          </h3>
-          {deal.trim && (
-            <p className="text-sm text-gray-600 mb-3">{deal.trim}</p>
-          )}
-
-          {/* Price - Big & Bold */}
-          <div className="mb-3">
-            <div className="text-3xl font-bold text-red-600">
-              ${monthlyPayment.toFixed(0)}
-              <span className="text-base text-gray-600 font-normal">/mo</span>
-            </div>
-            <div className="text-sm text-gray-500">
-              {deal.term_months}mo • {(deal.annual_mileage / 1000).toFixed(1)}k mi/yr
-            </div>
-          </div>
-
-          {/* Savings Badge */}
-          {savings > 0 && (
-            <div className="mb-3">
-              <Badge variant="secondary" className="bg-green-100 text-green-700">
-                <TrendingDown className="w-3 h-3 mr-1 inline" />
-                Save ${savings.toFixed(0)}
-              </Badge>
-            </div>
-          )}
-
-          {/* FOMO - Simple */}
-          {deal.stock_count && deal.stock_count <= 3 && (
-            <div className="text-xs text-orange-600 mb-3">
-              🔥 Only {deal.stock_count} left
-            </div>
-          )}
-
-          {/* CTA */}
-          <div className="flex gap-2">
-            <Button className="flex-1 bg-red-600 hover:bg-red-700">
-              View Deal
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={(e) => {
-                e.preventDefault();
-                // Add to favorites logic
-              }}
-            >
-              <Heart className="w-4 h-4" />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
-  );
-}
+export default OffersPage;
