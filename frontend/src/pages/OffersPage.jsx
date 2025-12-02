@@ -69,23 +69,48 @@ const OffersPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
-        <title>New Car Lease Deals California | Fleet Pricing - hunter.lease</title>
-        <meta name="description" content="Browse all current car lease deals in California with fleet pricing. Save $5K-$15K on new Toyota, Lexus, Honda, BMW. Real prices, no haggling. Updated monthly." />
-        <meta name="keywords" content="car lease deals, California lease, fleet pricing, new car deals, Toyota lease, Lexus lease, BMW lease" />
-        <link rel="canonical" href="https://cargwin-newcar.emergent.host/offers" />
+        <title>Hunter.Lease – Best Lease Deals | Updated Monthly</title>
+        <meta name="description" content="Exclusive lease and finance deals on all brands. Real prices. Updated monthly. No hidden fees." />
+        <meta name="keywords" content="car lease deals, California lease specials, best lease rates, fleet pricing, Honda lease, Toyota lease, BMW lease" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="All Car Lease Deals - hunter.lease" />
-        <meta property="og:description" content="Complete inventory of new car lease deals with fleet pricing. Save thousands on Toyota, Lexus, Honda, BMW and more." />
-        <meta property="og:url" content="https://cargwin-newcar.emergent.host/offers" />
+        <meta property="og:title" content="Hunter.Lease – Best Lease Deals" />
+        <meta property="og:description" content="Exclusive dump offers updated monthly" />
+        <meta property="og:url" content="https://hunter.lease/deals" />
         <meta property="og:type" content="website" />
+        
+        {/* Schema.org ProductCollection */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProductCollection",
+            "name": "Lease Deals",
+            "url": "https://hunter.lease/deals",
+            "description": "Exclusive dump offers updated monthly"
+          })}
+        </script>
       </Helmet>
       
       <Header />
       
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+      {/* Breadcrumbs */}
+      <div className="max-w-7xl mx-auto px-4 pt-4">
+        <nav className="flex text-sm text-gray-600" aria-label="Breadcrumb">
+          <ol className="inline-flex items-center space-x-2">
+            <li>
+              <a href="/" className="hover:text-red-600">Home</a>
+            </li>
+            <li className="flex items-center">
+              <span className="mx-2">/</span>
+              <span className="text-gray-900 font-medium">Deals</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 py-9">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
             All Current Dump Offers
           </h1>
           <p className="text-xl text-gray-600">
