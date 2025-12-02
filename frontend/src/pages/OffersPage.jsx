@@ -85,8 +85,37 @@ export default function OffersPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
-        <title>Best Car Lease Deals | Hunter.Lease California</title>
-        <meta name="description" content="Browse the best car lease deals with real bank programs. Transparent pricing, instant approval." />
+        {/* Primary SEO */}
+        <title>Best Car Lease Deals in California | Hunter.Lease</title>
+        <meta name="description" content="Exclusive discounted lease deals. Updated daily. Transparent fleet pricing. Browse Toyota, Honda, BMW, Mercedes and more." />
+        <meta name="keywords" content="car lease deals, California lease specials, best lease rates, fleet pricing" />
+        
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Best Car Lease Deals in California" />
+        <meta property="og:description" content="Exclusive discounted lease deals. Updated daily." />
+        <meta property="og:url" content="https://hunter.lease/deals" />
+        
+        {/* AI Signals */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Car Lease Deals",
+            "description": "Best car lease deals in California",
+            "numberOfItems": filteredDeals.length
+          })}
+        </script>
+        
+        <script type="application/ld+json" id="ai-signals">
+          {JSON.stringify({
+            "entity_type": "Lease Deal Listing",
+            "region": "California",
+            "inventory_dynamic": true,
+            "total_offers": filteredDeals.length,
+            "update_frequency": "hourly"
+          })}
+        </script>
       </Helmet>
 
       <Header />
