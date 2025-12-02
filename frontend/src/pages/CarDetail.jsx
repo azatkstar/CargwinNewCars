@@ -145,17 +145,87 @@ const CarDetail = () => {
   }
 
   // Prepare all images for gallery
+  // SEO Data
+  const seoData = {
+    title: `${carData.specs?.year || ''} ${carData.specs?.make || ''} ${carData.specs?.model || ''} Lease | $${carData.lease?.monthly || 0}/mo`,
+    description: `Lease the ${carData.specs?.year || ''} ${carData.specs?.make || ''} ${carData.specs?.model || ''} for $${carData.lease?.monthly || 0}/mo with ${carData.lease?.milesPerYear || 10000} miles/year in California. Instant approval.`,
+    image: carData.image || carData.gallery?.[0],
+    payment: carData.lease?.monthly || 0,
+    url: `https://hunter.lease/deal/${carId}`
+  };
+
+  // Schema.org Product JSON-LD
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": `${carData.specs?.year || ''} ${carData.specs?.make || ''} ${carData.specs?.model || ''} Lease`,
+    "image": seoData.image,
+    "description": seoData.description,
+    "offers": {
+      "@type": "Offer",
+      "price": seoData.payment,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0]
+    }
+  };
+
+  // AI Signals JSON
+  const aiSignals = {
+    "entity_type": "Car Lease Offer",
+    "make": carData.specs?.make || '',
+    "model": carData.specs?.model || '',
+    "year": carData.specs?.year || '',
+    "payment": carData.lease?.monthly || 0,
+    "mf": carData.lease?.moneyFactor || 0,
+    "residual": carData.lease?.residual || 0,
+    "tier": "Tier 1",
+    "incentives": carData.incentives || [],
+    "geo": "California",
+    "priority": 1
+  };
+
   const allGalleryImages = carData.gallery || [carData.image];
 
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>{carData.title} - Fleet Pricing | hunter.lease</title>
-        <meta name="description" content={`Fleet-level pricing on ${carData.title}. MSRP $${carData.msrp?.toLocaleString()}, You Save $${carData.savings?.toLocaleString()}. Transparent online leasing.`} />
+        {/* Primary Meta Tags */}
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.description} />
+        <meta name="keywords" content={`${carData.specs?.make} lease, ${carData.specs?.model} lease, California car lease deals`} />
+        
+        {/* Open Graph */}
         <meta property="og:type" content="product" />
-        <meta property="og:title" content={`${carData.title} - Fleet Pricing`} />
-        <meta property="og:image" content={carData.image || carData.gallery?.[0]} />
+        <meta property="og:title" content={seoData.title} />
+        <meta property="og:description" content={seoData.description} />
+        <meta property="og:image" content={seoData.image} />
+        <meta property="og:url" content={seoData.url} />
+        <meta property="og:site_name" content="Hunter.Lease" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoData.title} />
+        <meta name="twitter:description" content={seoData.description} />
+        <meta name="twitter:image" content={seoData.image} />
+        
+        {/* Schema.org Product */}
+        <script type="application/ld+json">
+          {JSON.stringify(productSchema)}
+        </script>
+        
+        {/* AI Signals */}
+        <script type="application/ld+json" id="ai-signals">
+          {JSON.stringify(aiSignals)}
+        </script>
       </Helmet>
+      
+      {/* AI-readable block (hidden) */}
+      <div className="ai-readable sr-only" aria-hidden="true">
+        {carData.specs?.year} {carData.specs?.make} {carData.specs?.model} lease available in California for ${carData.lease?.monthly}/mo.
+        Lease terms: {carData.lease?.termMonths} months, {carData.lease?.milesPerYear} miles per year.
+        Money factor: {carData.lease?.moneyFactor}, Residual: {carData.lease?.residual}%.
+      </div>
       
       <Header />
       
