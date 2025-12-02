@@ -2603,6 +2603,62 @@ async def search_deals_endpoint(q: str = "", limit: int = 20, req: Request = Non
         
         return {
             "results": results,
+
+
+
+# ==========================================
+# AI FEEDS (SEO + AI INDEXING)
+# ==========================================
+
+@api_router.get("/feed/deals.json")
+async def get_deals_json_feed():
+    """JSON feed for AI indexing (public)"""
+    try:
+        from ai_feed_generator import generate_deals_json_feed
+        
+        deals = await generate_deals_json_feed(db)
+        
+        return {
+            "items": deals,
+            "total": len(deals),
+            "last_updated": datetime.now(timezone.utc).isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"JSON feed error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/feed/deals-ai.json")
+async def get_deals_ai_feed():
+    """Enhanced AI feed (public)"""
+    try:
+        from ai_feed_generator import generate_deals_ai_feed
+        
+        feed = await generate_deals_ai_feed(db)
+        return feed
+        
+    except Exception as e:
+        logger.error(f"AI feed error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/feed/deals.xml")
+async def get_deals_xml_feed():
+    """XML feed for RSS readers (public)"""
+    try:
+        from ai_feed_generator import generate_deals_json_feed, generate_deals_xml_feed
+        from fastapi.responses import Response
+        
+        deals = await generate_deals_json_feed(db)
+        xml_content = generate_deals_xml_feed(deals)
+        
+        return Response(content=xml_content, media_type="application/xml")
+        
+    except Exception as e:
+        logger.error(f"XML feed error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
             "total": len(results),
             "query": q
         }
