@@ -97,8 +97,8 @@ const OffersPage = () => {
           {/* Left - Filters */}
           <div className="lg:col-span-1">
             <FiltersSidebar 
-              onFilterChange={setActiveFilters}
-              onClear={() => setActiveFilters(null)}
+              onFilterChange={applyFilters}
+              onClear={handleClearFilters}
             />
           </div>
 
