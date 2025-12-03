@@ -145,6 +145,3 @@ def generate_full_bundle(deal: Dict[str, Any]) -> Dict[str, Any]:
         "seo_package": generate_seo(deal),
         "generated_at": datetime.now().isoformat()
     }
-
-
-from datetime import datetime
