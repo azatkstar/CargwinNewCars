@@ -16,6 +16,7 @@ const FiltersSidebar = ({ onFilterChange, onClear }) => {
     term: 'all',
     mileage: 'all',
     fuelType: 'all',
+    availableNow: false,
     userZip: ''
   });
   
