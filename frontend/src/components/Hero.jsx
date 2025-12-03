@@ -59,7 +59,7 @@ const Hero = () => {
             onClick={() => navigate('/deals')}
             className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-8 sm:px-12 py-6 sm:py-8 text-xl sm:text-2xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
           >
-            Find My Perfect Deal <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 inline ml-2" />
+            Browse Deals <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 inline ml-2" />
           </Button>
           
           <Button
@@ -67,7 +67,7 @@ const Hero = () => {
             variant="outline"
             className="w-full sm:w-auto bg-white/10 border-2 border-white text-white hover:bg-white/20 px-8 sm:px-10 py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-2xl backdrop-blur-sm"
           >
-            Calculate Custom
+            Calculate Payment
           </Button>
         </div>
 
