@@ -4,7 +4,8 @@ AI Deal Generator
 Template-based text generation for deals
 No external AI APIs - pure template logic
 """
-from typing import Dict, Any
+from typing import Dict, Any, List
+from datetime import datetime
 
 
 def generate_short_post(deal: Dict[str, Any]) -> str:
