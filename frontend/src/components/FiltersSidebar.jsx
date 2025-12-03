@@ -138,6 +138,24 @@ const FiltersSidebar = ({ onFilterChange, onClear }) => {
           </Select>
         </div>
 
+        {/* Model */}
+        <div>
+          <label className="text-sm font-medium mb-2 block">Model</label>
+          <Select value={filters.model} onValueChange={(v) => handleChange('model', v)}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Models</SelectItem>
+              <SelectItem value="camry">Camry</SelectItem>
+              <SelectItem value="accord">Accord</SelectItem>
+              <SelectItem value="civic">Civic</SelectItem>
+              <SelectItem value="3-series">3 Series</SelectItem>
+              <SelectItem value="c-class">C-Class</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
         {/* Monthly Budget */}
         <div>
           <label className="text-sm font-medium mb-2 block">
