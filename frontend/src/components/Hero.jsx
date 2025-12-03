@@ -12,6 +12,20 @@ const Hero = () => {
   });
   const navigate = useNavigate();
 
+  // Auto-update FOMO stats every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFomoStats(prev => ({
+        viewing: Math.floor(Math.random() * 50) + 150,
+        expiring: Math.floor(Math.random() * 10) + 20,
+        unitsLeft: Math.floor(Math.random() * 5) + 1,
+        timeLeft: { hours: 3, minutes: Math.floor(Math.random() * 60) }
+      }));
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Full-Screen Car Image */}
