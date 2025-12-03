@@ -2500,7 +2500,7 @@ async def delete_media_file(
 # ==========================================
 
 @api_router.post("/compare")
-async def compare_deals_endpoint(deal_ids: List[str], req: Request):
+async def compare_deals_endpoint(request: dict, req: Request):
     """
     Compare up to 3 deals side-by-side
     Rate limited: 10 requests per 10 seconds per IP
@@ -2522,6 +2522,9 @@ async def compare_deals_endpoint(deal_ids: List[str], req: Request):
                 status_code=429,
                 detail="Too many comparison requests. Please slow down."
             )
+        
+        # Extract deal_ids from request
+        deal_ids = request.get("deal_ids", [])
         
         # Validate
         if not deal_ids or len(deal_ids) > 3:
