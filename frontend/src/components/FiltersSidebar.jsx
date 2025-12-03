@@ -240,10 +240,21 @@ const FiltersSidebar = ({ onFilterChange, onClear }) => {
           </Select>
         </div>
 
+        {/* Available Now Toggle */}
+        <div className="flex items-center justify-between p-3 bg-blue-50 rounded">
+          <label className="text-sm font-medium">Available Now</label>
+          <input
+            type="checkbox"
+            checked={filters.availableNow || false}
+            onChange={(e) => handleChange('availableNow', e.target.checked)}
+            className="w-5 h-5"
+          />
+        </div>
+
         {/* Active Filters Count */}
         <div className="pt-4 border-t">
           <p className="text-xs text-gray-500">
-            {Object.values(filters).filter(v => v !== 'all' && v !== 0 && v !== 2000).length} active filters
+            {Object.values(filters).filter(v => v !== 'all' && v !== 0 && v !== 2000 && v !== false).length} active filters
           </p>
         </div>
       </CardContent>
