@@ -39,9 +39,9 @@ const OfferCard = ({ offer }) => {
 
   return (
     <Link to={`/car/${slug}`}>
-      <div className="bg-white rounded-lg shadow hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer">
+      <div className="bg-white rounded-lg shadow hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer h-full">
         {/* Image */}
-        <div className="h-48 bg-gray-200 overflow-hidden">
+        <div className="h-40 sm:h-48 bg-gray-200 overflow-hidden">
           <img
             src={offer.image || 'https://via.placeholder.com/400x300'}
             alt={title}
@@ -51,24 +51,24 @@ const OfferCard = ({ offer }) => {
         </div>
 
         {/* Content - Compact */}
-        <div className="p-4">
+        <div className="p-3 sm:p-4">
           {/* Title */}
-          <h3 className="font-bold text-lg mb-1 line-clamp-1">
+          <h3 className="font-bold text-base sm:text-lg mb-1 line-clamp-1">
             {title}
           </h3>
 
           {/* Deal Type + Term */}
           <div className="flex gap-2 mb-2 text-xs">
-            <Badge variant="secondary">{dealType}</Badge>
+            <Badge variant="secondary" className="text-xs">{dealType}</Badge>
             {term > 0 && <span className="text-gray-600">{term}mo</span>}
             {miles > 0 && <span className="text-gray-600">• {(miles / 1000).toFixed(1)}k mi/yr</span>}
           </div>
 
           {/* Payment - Bold */}
           <div className="mb-2">
-            <div className="text-2xl font-bold text-red-600">
+            <div className="text-xl sm:text-2xl font-bold text-red-600">
               ${payment.toFixed(0)}
-              <span className="text-sm text-gray-600 font-normal">/mo</span>
+              <span className="text-xs sm:text-sm text-gray-600 font-normal">/mo</span>
             </div>
           </div>
 
