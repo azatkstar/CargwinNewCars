@@ -44,13 +44,13 @@ const Hero = () => {
         
         {/* Headline - Responsive */}
         <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
-          Instant Best Lease Deals<br />
-          <span className="text-red-500">Save $3,000 to $8,000</span>
+          Exclusive Fleet Pricing on New Cars<br />
+          <span className="text-red-500">Save up to $7,000</span>
         </h1>
 
         {/* Subheadline */}
         <p className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-10 text-gray-100 px-4">
-          Real bank programs. Automatic calculations. Full transparency.
+          Hunter.Lease — the best lease deals in California
         </p>
 
         {/* BIG CTA */}
