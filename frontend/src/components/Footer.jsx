@@ -67,8 +67,8 @@ const Footer = ({ hiddenVin = null }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/offers" className="text-gray-300 hover:text-white transition-colors">
-                  Offers
+                <Link to="/deals" className="text-gray-300 hover:text-white transition-colors">
+                  Deals
                 </Link>
               </li>
               <li>
