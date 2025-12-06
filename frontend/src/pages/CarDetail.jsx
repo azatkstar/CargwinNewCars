@@ -323,13 +323,13 @@ const CarDetail = () => {
       </div>
 
       {/* ============================================ */}
-      {/* TWO-COLUMN LAYOUT */}
+      {/* TWO-COLUMN LAYOUT: 55% Gallery + 45% Calculator */}
       {/* ============================================ */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* LEFT COLUMN (2/3) */}
-          <div className="lg:col-span-2 space-y-8">
+          {/* LEFT COLUMN (7/12 = 58%) - Gallery */}
+          <div className="lg:col-span-7 space-y-6">
             
             {/* Photo Gallery - Clickable to fullscreen */}
             <div className="bg-white rounded-xl border-2 border-gray-200 shadow-sm overflow-hidden">
