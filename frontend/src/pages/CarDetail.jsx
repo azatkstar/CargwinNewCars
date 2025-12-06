@@ -263,92 +263,61 @@ const CarDetail = () => {
       <Header />
       
       {/* ============================================ */}
-      {/* HERO BLOCK - FULL SCREEN */}
+      {/* COMPACT SUMMARY CARD */}
       {/* ============================================ */}
-      <div className="relative w-full h-screen min-h-[700px] bg-black">
-        <img
-          src={carData.image || carData.gallery?.[0]}
-          alt={carData.title}
-          className="w-full h-full object-cover opacity-90"
-        />
-        
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-        
-        <div className="absolute inset-0 flex flex-col justify-end">
-          <div className="max-w-7xl mx-auto px-6 pb-16 w-full">
-            
-            {/* Badge */}
-            <div className="mb-4">
-              <div className="inline-flex items-center gap-2 bg-green-600 text-white px-5 py-2 rounded-lg font-bold shadow-lg">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                </svg>
-                Verified Fleet Deal
+      <div className="bg-gray-50 border-b">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              {/* Small Image */}
+              <div className="md:col-span-3">
+                <img
+                  src={carData.image || carData.gallery?.[0]}
+                  alt={carData.title}
+                  className="w-full h-32 object-cover rounded-lg"
+                />
+              </div>
+              
+              {/* Info */}
+              <div className="md:col-span-6">
+                <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1 rounded text-xs font-bold mb-2">
+                  ✓ Verified Fleet Deal
+                </div>
+                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                  {carData.title}
+                </h1>
+                <div className="flex gap-4 text-sm text-gray-600 mb-3">
+                  <span>MSRP: <span className="line-through">${carData.msrp?.toLocaleString()}</span></span>
+                  <span className="text-green-600 font-bold">Save ${carData.savings?.toLocaleString()}</span>
+                  <span>Your Price: <span className="font-bold text-gray-900">${carData.fleet?.toLocaleString()}</span></span>
+                </div>
+                <div className="text-sm text-gray-600">
+                  {carData.specs?.year} • {carData.specs?.transmission} • {carData.specs?.drivetrain} • {carData.specs?.exteriorColor}
+                </div>
+              </div>
+              
+              {/* Quick CTA */}
+              <div className="md:col-span-3 text-center">
+                <div className="text-3xl font-bold text-red-600 mb-1">
+                  ${carData.lease?.monthly || 310}<span className="text-lg text-gray-600">/mo</span>
+                </div>
+                <div className="text-xs text-gray-500 mb-3">Est. 700+ credit, 36mo</div>
+                <button className="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-bold">
+                  RESERVE NOW
+                </button>
               </div>
             </div>
             
-            {/* Title */}
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              {carData.title}
-            </h1>
-            
-            {/* Price Flow - SIMPLIFIED */}
-            <div className="flex flex-wrap items-center gap-3 mb-6 text-white">
-              <div>
-                <div className="text-sm opacity-70">MSRP</div>
-                <div className="text-2xl font-bold line-through opacity-80">${carData.msrp?.toLocaleString()}</div>
-              </div>
-              
-              <div className="text-3xl">→</div>
-              
-              <div className="bg-green-600 px-6 py-3 rounded-xl">
-                <div className="text-xs">YOU SAVE</div>
-                <div className="text-3xl font-bold">${carData.savings?.toLocaleString()}</div>
-              </div>
-              
-              <div className="text-3xl">→</div>
-              
-              <div className="bg-white text-gray-900 px-8 py-4 rounded-xl shadow-2xl">
-                <div className="text-xs text-gray-600">YOUR PRICE</div>
-                <div className="text-4xl font-bold">${carData.fleet?.toLocaleString()}</div>
-              </div>
+            {/* FOMO Strip */}
+            <div className="flex items-center gap-4 mt-4 pt-4 border-t text-xs text-gray-600 flex-wrap justify-center">
+              <span>🔥 <strong>127</strong> views today</span>
+              <span>•</span>
+              <span>💥 <strong>18</strong> reservations 24h</span>
+              <span>•</span>
+              <span className="text-red-600 font-bold">
+                ⏳ Ends in {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m {timeRemaining.seconds}s
+              </span>
             </div>
-            
-            {/* Estimated Payment */}
-            <div className="text-white mb-6">
-              <div className="text-3xl font-bold">
-                Estimated Payment: ${carData.lease?.monthly || 310}/mo
-              </div>
-              <div className="text-sm opacity-70">(700+ credit, 36 mo, 10k mi)</div>
-            </div>
-            
-            {/* FOMO Line - WITH SECONDS */}
-            <div className="flex items-center gap-6 text-white mb-8 text-sm flex-wrap">
-              <div className="flex items-center gap-2">
-                🔥 <strong>127</strong> people viewed today
-              </div>
-              <div>•</div>
-              <div className="flex items-center gap-2">
-                💥 <strong>18</strong> reservations in last 24h
-              </div>
-              <div>•</div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>⏳ Deal ends in <strong>{timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m {timeRemaining.seconds}s</strong></span>
-              </div>
-            </div>
-            
-            {/* CTA - HUGE */}
-            <button 
-              onClick={() => {/* Open reserve modal */}}
-              className="bg-red-600 hover:bg-red-700 text-white px-16 py-6 rounded-xl font-bold text-3xl shadow-2xl transform hover:scale-105 transition-all mb-3"
-            >
-              RESERVE FOR FREE
-            </button>
-            
-            <p className="text-sm text-white/80">
-              Takes 30 seconds. No payment today. Cancel anytime.
-            </p>
           </div>
         </div>
       </div>
