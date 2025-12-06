@@ -468,7 +468,7 @@ const CarDetail = () => {
               <div className="text-right hidden md:block">
                 <div className="text-xs text-gray-600">Deal ends in</div>
                 <div className="text-lg font-bold text-red-600">
-                  {timeRemaining.days}d {timeRemaining.hours}h
+                  {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m {timeRemaining.seconds}s
                 </div>
               </div>
               
