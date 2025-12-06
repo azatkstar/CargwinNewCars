@@ -34,13 +34,46 @@ const CarDetail = () => {
   useEffect(() => {
     fetchCarData();
     
+    // Countdown ticker (updates every second)
+    const countdownInterval = setInterval(() => {
+      setTimeRemaining(prev => {
+        let { days, hours, minutes, seconds } = prev;
+        
+        seconds--;
+        if (seconds < 0) {
+          seconds = 59;
+          minutes--;
+          if (minutes < 0) {
+            minutes = 59;
+            hours--;
+            if (hours < 0) {
+              hours = 23;
+              days--;
+              if (days < 0) {
+                days = 0;
+                hours = 0;
+                minutes = 0;
+                seconds = 0;
+              }
+            }
+          }
+        }
+        
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+    
     // Sticky bar on scroll
     const handleScroll = () => {
       setShowStickyBar(window.scrollY > 400);
     };
     
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return () => {
+      clearInterval(countdownInterval);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [carId]);
 
   const fetchCarData = async () => {
