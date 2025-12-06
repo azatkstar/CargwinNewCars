@@ -322,8 +322,8 @@ const CarDetail = () => {
               <div className="text-sm opacity-70">(700+ credit, 36 mo, 10k mi)</div>
             </div>
             
-            {/* FOMO Line - ONE ROW */}
-            <div className="flex items-center gap-6 text-white mb-8 text-sm">
+            {/* FOMO Line - WITH SECONDS */}
+            <div className="flex items-center gap-6 text-white mb-8 text-sm flex-wrap">
               <div className="flex items-center gap-2">
                 🔥 <strong>127</strong> people viewed today
               </div>
@@ -334,7 +334,7 @@ const CarDetail = () => {
               <div>•</div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>⏳ Deal ends in <strong>{timeRemaining.days}d {timeRemaining.hours}h</strong></span>
+                <span>⏳ Deal ends in <strong>{timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m {timeRemaining.seconds}s</strong></span>
               </div>
             </div>
             
