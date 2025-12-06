@@ -401,9 +401,9 @@ const CarDetail = () => {
             <CustomerStoriesAmazon />
           </div>
           
-          {/* RIGHT COLUMN (1/3) - STICKY CALCULATOR */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-4">
+          {/* RIGHT COLUMN (5/12 = 42%) - Calculator + CTAs */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-4 space-y-4">
               <AutoBanditStyleCalculator car={carData} />
             </div>
           </div>
