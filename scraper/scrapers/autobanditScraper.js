@@ -59,46 +59,117 @@ class AutoBanditScraper {
         timeout: this.config.timeout
       });
       
-      // Wait for listings to load
-      await page.waitForSelector('.deal-card, .offer-card, [data-testid="deal"]', {
-        timeout: 10000
-      });
+      // Try multiple selectors (fallback logic)
+      const cardSelectors = [
+        '.deal-card',
+        '.offer-card', 
+        '[data-testid="deal"]',
+        '.vehicle-card',
+        'article.deal',
+        'div[class*="deal"]'
+      ];
+      
+      let selector = null;
+      for (const sel of cardSelectors) {
+        const found = await page.$(sel);
+        if (found) {
+          selector = sel;
+          break;
+        }
+      }
+      
+      if (!selector) {
+        throw new Error('Could not find deal cards on page');
+      }
+      
+      console.log(`[Scraper] Using selector: ${selector}`);
+      
+      // Wait for listings
+      await page.waitForSelector(selector, { timeout: 10000 });
       
       console.log('[Scraper] Page loaded, extracting data...');
       
-      // Extract all offer cards
-      const offers = await page.evaluate(() => {
-        const cards = Array.from(document.querySelectorAll('.deal-card, .offer-card, [data-testid="deal"]'));
+      // Extract all offer cards with comprehensive selectors
+      const offers = await page.evaluate((cardSelector) => {
+        const cards = Array.from(document.querySelectorAll(cardSelector));
         
-        return cards.map(card => {
-          // Extract basic data
-          const title = card.querySelector('h2, h3, .title')?.textContent?.trim() || '';
-          const price = card.querySelector('.price, .monthly-payment')?.textContent?.trim() || '';
-          const image = card.querySelector('img')?.src || '';
-          const link = card.querySelector('a')?.href || '';
+        return cards.map((card, index) => {
+          // Helper function to extract text from multiple possible selectors
+          const getText = (...selectors) => {
+            for (const sel of selectors) {
+              const el = card.querySelector(sel);
+              if (el) return el.textContent.trim();
+            }
+            return '';
+          };
           
-          // Extract additional data
-          const msrp = card.querySelector('.msrp, [data-field="msrp"]')?.textContent?.trim() || '';
-          const term = card.querySelector('.term, [data-field="term"]')?.textContent?.trim() || '';
-          const mileage = card.querySelector('.mileage, [data-field="miles"]')?.textContent?.trim() || '';
+          // Helper to extract number from text
+          const extractNumber = (text) => {
+            const match = text.match(/[\d,]+/);
+            return match ? parseInt(match[0].replace(/,/g, '')) : 0;
+          };
+          
+          // Extract data with fallbacks
+          const title = getText('h2', 'h3', '.title', '[class*="title"]', '[data-field="title"]');
+          
+          const priceText = getText(
+            '.price', '.monthly-payment', '[data-field="payment"]',
+            '[class*="payment"]', '[class*="price"]'
+          );
+          const payment = extractNumber(priceText);
+          
+          const msrpText = getText(
+            '.msrp', '[data-field="msrp"]', '[class*="msrp"]'
+          );
+          const msrp = extractNumber(msrpText);
+          
+          const termText = getText(
+            '.term', '[data-field="term"]', '[class*="term"]', '[class*="month"]'
+          );
+          const term = extractNumber(termText);
+          
+          const mileageText = getText(
+            '.mileage', '.miles', '[data-field="miles"]', '[class*="mile"]'
+          );
+          const mileage = extractNumber(mileageText);
+          
+          // Extract image
+          const imgEl = card.querySelector('img');
+          const image = imgEl ? (imgEl.src || imgEl.dataset.src || '') : '';
+          
+          // Extract link
+          const linkEl = card.querySelector('a');
+          const link = linkEl ? linkEl.href : '';
+          
+          // Parse title to extract make/model/year
+          const titleParts = title.split(' ');
+          const year = titleParts.find(p => /^20(2[0-9]|3[0-9])$/.test(p)) || '';
+          const make = titleParts[titleParts.indexOf(year) + 1] || '';
+          const model = titleParts.slice(titleParts.indexOf(make) + 1).join(' ') || '';
           
           return {
+            id: `ab-${index}`,
             title,
-            price,
+            year: parseInt(year) || 2025,
+            make,
+            model,
+            payment,
+            msrp,
+            term: term || 36,
+            mileage: mileage || 10000,
             image,
             link,
-            msrp,
-            term,
-            mileage,
             scrapedAt: new Date().toISOString()
           };
         });
-      });
+      }, selector);
       
-      this.results = offers;
-      console.log(`[Scraper] Extracted ${offers.length} offers`);
+      // Filter out empty results
+      this.results = offers.filter(o => o.title && o.payment > 0);
       
-      return offers;
+      console.log(`[Scraper] Extracted ${this.results.length} valid offers`);
+      
+      return this.results;
       
     } catch (error) {
       console.error('[Scraper] Error:', error.message);
