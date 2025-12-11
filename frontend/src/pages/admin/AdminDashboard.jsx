@@ -70,6 +70,7 @@ const AdminDashboard = () => {
         <Route path="ai-generator" element={<AIGenerator />} />
         <Route path="media" element={<AdminMedia />} />
         <Route path="multi-sync" element={<AdminMultiSync />} />
+        <Route path="scraper" element={<ScraperControl />} />
       </Routes>
     </AdminLayout>
   );
