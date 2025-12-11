@@ -18,17 +18,25 @@ export default function OfferEditor() {
     model: '',
     year: 2025,
     trim: '',
+    vin: '',
     msrp: 0,
     discount: 0,
+    sellingPrice: 0,
     description: '',
     image: '',
+    images: [],
     status: 'active',
-    source: 'autobandit',
+    source: 'manual',
     lease: {
       monthly: 0,
       dueAtSigning: 0,
       termMonths: 36,
-      milesPerYear: 10000
+      milesPerYear: 10000,
+      moneyFactor: 0.00150,
+      residual: 60,
+      acquisitionFee: 695,
+      taxRate: 0.0925,
+      region: 'California'
     },
     specs: {
       make: '',
@@ -37,7 +45,20 @@ export default function OfferEditor() {
       transmission: '',
       drivetrain: '',
       exteriorColor: '',
-      interiorColor: ''
+      interiorColor: '',
+      bodyStyle: '',
+      fuelType: ''
+    },
+    seo: {
+      title: '',
+      metaDescription: '',
+      keywords: '',
+      slug: '',
+      tags: []
+    },
+    aiSignals: {
+      priority: 1,
+      verified: true
     }
   });
   const [saving, setSaving] = useState(false);
