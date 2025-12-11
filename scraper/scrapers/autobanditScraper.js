@@ -81,61 +81,58 @@ class AutoBanditScraper {
         const cards = Array.from(document.querySelectorAll(cardSelector));
         
         return cards.map((card, index) => {
-          // Helper: safe text extraction
-          const getText = (...selectors) => {
-            for (const sel of selectors) {
-              const el = card.querySelector(sel);
-              if (el) return el.textContent.trim();
-            }
-            return '';
-          };
-          
-          // Helper: extract number
+          // Helper: extract number from text
           const getNum = (text) => {
             if (!text) return 0;
+            // Remove $, commas, spaces, then parse
             const cleaned = text.replace(/[$,\s]/g, '');
             const num = parseFloat(cleaned);
             return isNaN(num) ? 0 : num;
           };
           
-          // AutoBandit specific extraction
-          // Title format: "2026 Hyundai Kona"
-          const allText = card.textContent;
+          // Get all text from card
+          const allText = card.textContent || '';
           
           // Extract year (20XX format)
-          const yearMatch = allText.match(/\b(20[2-9][0-9])\b/);
+          const yearMatch = allText.match(/\b(202[4-9]|203[0-9])\b/);
           const year = yearMatch ? parseInt(yearMatch[1]) : 2025;
           
-          // Extract make and model (after year)
-          const afterYear = allText.substring(allText.indexOf(yearMatch?.[0] || '') + 4);
-          const titleMatch = afterYear.match(/^([A-Z][a-z]+)\s+([A-Za-z0-9\s]+?)(?:MSRP|From|\$)/);
-          const make = titleMatch?.[1] || '';
-          const model = titleMatch?.[2]?.trim() || '';
+          // Extract make and model (format: "2026 Hyundai Kona")
+          // Pattern: YEAR MAKE MODEL
+          const titlePattern = new RegExp(`${year}\\s+([A-Z][a-z]+(?:-[A-Z][a-z]+)?)\\s+([A-Za-z0-9\\s]+?)(?=MSRP|From|\\$|$)`);
+          const titleMatch = allText.match(titlePattern);
           
+          const make = titleMatch?.[1] || '';
+          const model = titleMatch?.[2]?.trim().split(/\s+/).slice(0, 3).join(' ') || '';
           const title = `${year} ${make} ${model}`.trim();
           
-          // Extract payment ($XXX/mo format)
-          const paymentMatch = allText.match(/\$(\d+,?\d*)\s*\/\s*mo/i);
-          const payment = paymentMatch ? getNum(paymentMatch[0]) : 0;
+          // Extract payment: "$169/mo" or "$169‍/mo" (with zero-width joiner)
+          const paymentPattern = /\$(\d{1,4})[^\d]*\/\s*mo/i;
+          const paymentMatch = allText.match(paymentPattern);
+          const payment = paymentMatch ? parseInt(paymentMatch[1]) : 0;
           
-          // Extract MSRP
-          const msrpMatch = allText.match(/MSRP.*?\$(\d+,?\d+)/);
-          const msrp = msrpMatch ? getNum(msrpMatch[0]) : 0;
+          // Extract MSRP: "MSRP from $27,190" or "MSRP $27,190"
+          const msrpPattern = /MSRP[^\d]*\$?([\d,]+)/i;
+          const msrpMatch = allText.match(msrpPattern);
+          const msrp = msrpMatch ? getNum(msrpMatch[1]) : 0;
           
-          // Extract incentives
-          const incentivesMatch = allText.match(/\$(\d+,?\d+)\s*in\s*incentives/);
-          const incentives = incentivesMatch ? getNum(incentivesMatch[0]) : 0;
+          // Extract incentives: "$5,750 in incentives"
+          const incentivesPattern = /\$([\d,]+)\s*in\s*incentives/i;
+          const incentivesMatch = allText.match(incentivesPattern);
+          const incentives = incentivesMatch ? getNum(incentivesMatch[1]) : 0;
           
-          // Image
+          // Extract image
           const img = card.querySelector('img');
-          const imageUrl = img ? (img.src || '') : '';
+          const imageUrl = img ? (img.src || img.dataset.src || '') : '';
           
-          // Link
-          const link = card.querySelector('a, button');
-          const dealUrl = link ? (link.href || `https://autobandit.com/deal/${make}-${model}`) : '';
+          // Extract link (button or a tag)
+          const linkEl = card.querySelector('button[class*="card"], a');
+          const dealUrl = linkEl ? 
+            (linkEl.href || `https://autobandit.com/deals/${make.toLowerCase()}-${model.toLowerCase().replace(/\s+/g, '-')}`) 
+            : '';
           
           return {
-            id: `ab-${index}`,
+            id: `ab-${Date.now()}-${index}`,
             source: 'autobandit',
             scrapedAt: new Date().toISOString(),
             url: dealUrl,
@@ -145,18 +142,33 @@ class AutoBanditScraper {
             trim: '',
             year,
             msrp,
-            payment,
+            monthlyPayment: payment,
             incentives,
-            image: imageUrl,
+            downPayment: 0,
+            termMonths: 36,
+            mileagePerYear: 10000,
+            moneyFactor: null,
+            residualPercent: null,
+            imageUrl,
             raw: {
-              allText: allText.substring(0, 200)
+              allText: allText.substring(0, 300),
+              paymentRaw: paymentMatch?.[0] || '',
+              msrpRaw: msrpMatch?.[0] || ''
             }
           };
-        }).filter(o => o.title && o.payment > 0);
+        });
       }, cardSelector);
       
-      // Filter out empty results
-      this.results = offers.filter(o => o.title && o.payment > 0);
+      console.log(`[Scraper] Extracted ${offers.length} raw offers`);
+      
+      // Filter valid offers (has title AND payment)
+      this.results = offers.filter(o => {
+        const valid = o.title && o.title.length > 5 && o.monthlyPayment > 0;
+        if (!valid) {
+          console.log(`[Scraper] Filtered out: ${o.title || 'untitled'} (payment: ${o.monthlyPayment})`);
+        }
+        return valid;
+      });
       
       console.log(`[Scraper] Extracted ${this.results.length} valid offers`);
       
