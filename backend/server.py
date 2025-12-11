@@ -2728,7 +2728,16 @@ async def import_scraped_offer(
             action = "created"
         
         logger.info(f"Imported offer from scraper: {car_data['make']} {car_data['model']} - {action}")
-
+        
+        return {
+            "ok": True,
+            "id": car_id,
+            "action": action
+        }
+        
+    except Exception as e:
+        logger.error(f"Import offer error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ==========================================
