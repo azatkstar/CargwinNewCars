@@ -291,6 +291,7 @@ export default function OfferEditor() {
                 step="0.00001"
                 value={offer.lease?.moneyFactor || 0}
                 onChange={(e) => updateField('lease.moneyFactor', parseFloat(e.target.value))}
+                placeholder="0.00150"
               />
             </div>
             <div>
@@ -299,19 +300,24 @@ export default function OfferEditor() {
                 type="number"
                 value={offer.lease?.residual || 0}
                 onChange={(e) => updateField('lease.residual', parseFloat(e.target.value))}
+                placeholder="60"
               />
             </div>
             <div>
-              <Label>Acquisition Fee</Label>
+              <Label>Residual Value ($)</Label>
               <Input
                 type="number"
-                value={offer.lease?.acquisitionFee || 0}
-                onChange={(e) => updateField('lease.acquisitionFee', parseFloat(e.target.value))}
+                value={offer.msrp && offer.lease?.residual 
+                  ? Math.round(offer.msrp * (offer.lease.residual / 100))
+                  : 0}
+                readOnly
+                className="bg-gray-100"
+                placeholder="Auto-calculated"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <Label>Tax Rate</Label>
               <Input
