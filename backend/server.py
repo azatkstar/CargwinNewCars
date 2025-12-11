@@ -2728,6 +2728,87 @@ async def import_scraped_offer(
             action = "created"
         
         logger.info(f"Imported offer from scraper: {car_data['make']} {car_data['model']} - {action}")
+
+
+
+# ==========================================
+# SCRAPER CONTROL ENDPOINTS
+# ==========================================
+
+@api_router.get("/admin/scraper/status")
+async def get_scraper_status(current_user: User = Depends(require_admin)):
+    """Get scraper status and stats"""
+    try:
+        import os
+        import json
+        from pathlib import Path
+        
+        scraper_dir = Path("/app/scraper")
+        state_file = scraper_dir / "state" / "lastRun.json"
+        
+        # Read last run data
+        if state_file.exists():
+            with open(state_file) as f:
+                last_run = json.load(f)
+        else:
+            last_run = {}
+        
+        return {
+            "running": False,
+            "lastRun": last_run.get("timestamp"),
+            "totalScraped": last_run.get("scrapedCount", 0),
+            "totalImported": last_run.get("updates", {}).get("imported", 0),
+            "recentLogs": []
+        }
+        
+    except Exception as e:
+        logger.error(f"Scraper status error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/admin/scraper/run")
+async def run_scraper(force: bool = False, current_user: User = Depends(require_admin)):
+    """
+    Run scraper (calls Node.js scraper via subprocess)
+    """
+    try:
+        import subprocess
+        import os
+        
+        scraper_dir = "/app/scraper"
+        
+        # Check if scraper exists
+        if not os.path.exists(os.path.join(scraper_dir, "run.js")):
+            raise HTTPException(status_code=404, detail="Scraper not found")
+        
+        # Prepare command
+        cmd = ["node", "run.js"]
+        if force:
+            cmd.append("--force")
+        
+        # Run in background
+        logger.info(f"Starting scraper: {' '.join(cmd)}")
+        
+        process = subprocess.Popen(
+            cmd,
+            cwd=scraper_dir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env={**os.environ, "HUNTER_API_URL": os.getenv("BACKEND_URL", "http://localhost:8001")}
+        )
+        
+        # Don't wait - run in background
+        
+        return {
+            "ok": True,
+            "message": f"Scraper started (PID: {process.pid})",
+            "force": force
+        }
+        
+    except Exception as e:
+        logger.error(f"Scraper run error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
         
         return {
             "ok": True,
