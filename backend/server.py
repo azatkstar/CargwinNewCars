@@ -2687,23 +2687,30 @@ async def import_scraped_offer(
     try:
         # Map scraper data to our schema
         car_data = {
+            "title": offer_data.get("title", ""),
             "make": offer_data.get("make", ""),
             "model": offer_data.get("model", ""),
             "year": offer_data.get("year", 2025),
             "trim": offer_data.get("trim", ""),
             "msrp": offer_data.get("msrp", 0),
-            "discount": offer_data.get("discountAmount", 0),
+            "discount": offer_data.get("incentives", 0),
             "description": offer_data.get("title", ""),
-            "images": [{"url": img, "alt": ""} for img in offer_data.get("images", [])[:5]],
+            "image": offer_data.get("imageUrl", ""),
+            "images": [{"url": offer_data.get("imageUrl", ""), "alt": offer_data.get("title", "")}],
             "lease": {
                 "monthly": offer_data.get("monthlyPayment", 0),
                 "dueAtSigning": offer_data.get("downPayment", 0),
                 "termMonths": offer_data.get("termMonths", 36),
                 "milesPerYear": offer_data.get("mileagePerYear", 10000)
             },
+            "specs": {
+                "make": offer_data.get("make", ""),
+                "model": offer_data.get("model", ""),
+                "year": offer_data.get("year", 2025)
+            },
             "status": "active",
             "source": "autobandit",
-            "sourceId": offer_data.get("id", "") or offer_data.get("sourceId", "")
+            "sourceId": offer_data.get("id", "")
         }
         
         # Create in database
