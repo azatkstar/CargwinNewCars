@@ -29,12 +29,17 @@ class AutoBanditScraper {
     console.log('[Scraper] Initializing browser...');
     
     this.browser = await puppeteer.launch({
-      headless: this.config.headless,
+      headless: 'new',
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium',
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
-        '--disable-blink-features=AutomationControlled'
+        '--disable-blink-features=AutomationControlled',
+        '--disable-features=IsolateOrigins,site-per-process',
+        '--disable-gpu',
+        '--disable-software-rasterizer',
+        '--single-process'
       ]
     });
     
