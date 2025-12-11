@@ -2797,9 +2797,17 @@ async def get_scraper_status(current_user: User = Depends(require_admin)):
 
 
 @api_router.post("/admin/scraper/run")
-async def run_scraper(force: bool = False, current_user: User = Depends(require_admin)):
+async def run_scraper(
+    force: bool = False,
+    brands: str = "all",
+    current_user: User = Depends(require_admin)
+):
     """
-    Run scraper (calls Node.js scraper via subprocess)
+    Run scraper with brand filtering
+    
+    Args:
+        force: Force full scrape
+        brands: Comma-separated brands or "all"
     """
     try:
         import subprocess
@@ -2817,14 +2825,17 @@ async def run_scraper(force: bool = False, current_user: User = Depends(require_
         cmd = ["node", str(run_script)]
         if force:
             cmd.append("--force")
+        if brands and brands != "all":
+            cmd.append(f"--brands={brands}")
         
         # Set environment
         env = os.environ.copy()
         env["HUNTER_API_URL"] = os.getenv("BACKEND_URL", "http://localhost:8001")
-        env["HUNTER_ADMIN_TOKEN"] = "admin_token_here"  # TODO: Use real token
+        env["HUNTER_ADMIN_TOKEN"] = os.getenv("SECRET_KEY", "")  # Use from config
+        env["SELECTED_BRANDS"] = brands
         
         # Log scraper start
-        logger.info(f"Starting scraper: {' '.join(cmd)}")
+        logger.info(f"Starting scraper: {' '.join(cmd)} | Brands: {brands}")
         
         # Write start log
         log_file = scraper_dir / "logs" / "scraper.log"
@@ -2833,7 +2844,7 @@ async def run_scraper(force: bool = False, current_user: User = Depends(require_
         start_log = json.dumps({
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "action": "start",
-            "message": f"Scraper started (force={force})",
+            "message": f"Scraper started (force={force}, brands={brands})",
             "user": current_user.email
         })
         
@@ -2847,16 +2858,17 @@ async def run_scraper(force: bool = False, current_user: User = Depends(require_
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             env=env,
-            start_new_session=True  # Detach from parent
+            start_new_session=True
         )
         
         logger.info(f"Scraper started with PID: {process.pid}")
         
         return {
             "ok": True,
-            "message": f"Scraper started",
+            "message": f"Scraper started for {brands}",
             "pid": process.pid,
-            "force": force
+            "force": force,
+            "brands": brands
         }
         
     except Exception as e:
