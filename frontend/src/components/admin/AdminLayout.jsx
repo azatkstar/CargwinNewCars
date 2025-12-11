@@ -188,6 +188,18 @@ const AdminLayout = ({ children }) => {
       icon: ImageIcon,
       path: '/admin/media',
       requiredRole: 'editor'
+    },
+    {
+      id: 'divider-scraper',
+      type: 'divider',
+      label: 'AutoBandit Integration'
+    },
+    {
+      id: 'scraper-control',
+      label: 'Scraper Control',
+      icon: Download,
+      path: '/admin/scraper',
+      requiredRole: 'admin'
     }
   ];
 
