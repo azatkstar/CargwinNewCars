@@ -139,15 +139,53 @@ if (require.main === module) {
   const runner = new ScraperRunner();
   const force = process.argv.includes('--force');
   
-  runner.run({ force })
-    .then(result => {
-      console.log('Result:', result);
+  // Wrap in try/catch with logging
+  (async () => {
+    const fs = require('fs');
+    const path = require('path');
+    const logFile = path.join(__dirname, 'logs/scraper.log');
+    
+    const writeLog = (entry) => {
+      try {
+        fs.mkdirSync(path.dirname(logFile), { recursive: true });
+        fs.appendFileSync(logFile, JSON.stringify(entry) + '\n');
+      } catch (err) {
+        console.error('Log write error:', err);
+      }
+    };
+    
+    try {
+      writeLog({
+        timestamp: new Date().toISOString(),
+        action: 'start',
+        message: `Scraper started (force=${force})`
+      });
+      
+      const result = await runner.run({ force });
+      
+      writeLog({
+        timestamp: new Date().toISOString(),
+        action: 'complete',
+        message: 'Scraper completed successfully',
+        scraped: result.scraped || 0,
+        imported: result.syncResults?.imported || 0
+      });
+      
+      console.log('✅ Scraper complete:', result);
       process.exit(0);
-    })
-    .catch(error => {
-      console.error('Error:', error);
+      
+    } catch (error) {
+      writeLog({
+        timestamp: new Date().toISOString(),
+        action: 'error',
+        message: error.message,
+        stack: error.stack
+      });
+      
+      console.error('❌ Scraper error:', error);
       process.exit(1);
-    });
+    }
+  })();
 }
 
 module.exports = ScraperRunner;
