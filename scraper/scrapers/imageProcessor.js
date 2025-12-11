@@ -1,10 +1,9 @@
 /**
  * Image Processing Pipeline
- * Download, convert to WebP, optimize
+ * Download images (without Sharp for ARM64 compatibility)
  */
 
 const axios = require('axios');
-const sharp = require('sharp');
 const fs = require('fs').promises;
 const path = require('path');
 const crypto = require('crypto');
@@ -12,8 +11,6 @@ const crypto = require('crypto');
 class ImageProcessor {
   constructor(config = {}) {
     this.outputDir = config.outputDir || './output/images';
-    this.quality = config.quality || 85;
-    this.maxWidth = config.maxWidth || 1200;
   }
 
   async ensureDir(dir) {
@@ -24,7 +21,7 @@ class ImageProcessor {
     }
   }
 
-  async downloadAndProcess(imageUrl, dealId) {
+  async downloadImage(imageUrl, dealId) {
     try {
       // Download image
       const response = await axios.get(imageUrl, {
@@ -39,22 +36,17 @@ class ImageProcessor {
       
       // Generate filename
       const hash = crypto.createHash('md5').update(imageUrl).digest('hex').substring(0, 8);
-      const filename = `${dealId}_${hash}.webp`;
+      const ext = path.extname(new URL(imageUrl).pathname) || '.jpg';
+      const filename = `${dealId}_${hash}${ext}`;
       const outputPath = path.join(this.outputDir, dealId, filename);
       
       // Ensure directory
       await this.ensureDir(path.join(this.outputDir, dealId));
       
-      // Process and save
-      await sharp(buffer)
-        .resize(this.maxWidth, null, { 
-          fit: 'inside',
-          withoutEnlargement: true
-        })
-        .webp({ quality: this.quality })
-        .toFile(outputPath);
+      // Save original
+      await fs.writeFile(outputPath, buffer);
       
-      console.log(`[Images] Processed: ${filename}`);
+      console.log(`[Images] Downloaded: ${filename}`);
       
       return {
         original: imageUrl,
@@ -63,7 +55,7 @@ class ImageProcessor {
       };
       
     } catch (error) {
-      console.error(`[Images] Failed to process ${imageUrl}: ${error.message}`);
+      console.error(`[Images] Failed to download ${imageUrl}: ${error.message}`);
       return null;
     }
   }
@@ -75,7 +67,7 @@ class ImageProcessor {
     for (const imageUrl of images) {
       if (!imageUrl) continue;
       
-      const result = await this.downloadAndProcess(imageUrl, offer.id);
+      const result = await this.downloadImage(imageUrl, offer.id);
       if (result) {
         processed.push(result);
       }
