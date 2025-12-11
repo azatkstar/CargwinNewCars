@@ -63,42 +63,25 @@ class AutoBanditScraper {
         timeout: this.config.timeout
       });
       
-      // Try multiple selectors (fallback logic)
-      const cardSelectors = [
-        '.deal-card',
-        '.offer-card', 
-        '[data-testid="deal"]',
-        '.vehicle-card',
-        'article.deal',
-        'div[class*="deal"]'
-      ];
+      // AutoBandit uses MUI Grid with specific card classes
+      const cardSelector = 'div[class*="js-offer-card"]';
       
-      let selector = null;
-      for (const sel of cardSelectors) {
-        const found = await page.$(sel);
-        if (found) {
-          selector = sel;
-          break;
-        }
-      }
+      console.log(`[Scraper] Waiting for cards: ${cardSelector}`);
       
-      if (!selector) {
-        throw new Error('Could not find deal cards on page');
-      }
+      await page.waitForSelector(cardSelector, { timeout: 10000 });
       
-      console.log(`[Scraper] Using selector: ${selector}`);
+      const cardCount = await page.evaluate((sel) => {
+        return document.querySelectorAll(sel).length;
+      }, cardSelector);
       
-      // Wait for listings
-      await page.waitForSelector(selector, { timeout: 10000 });
+      console.log(`[Scraper] Found ${cardCount} deal cards`);
       
-      console.log('[Scraper] Page loaded, extracting data...');
-      
-      // Extract all offer cards with comprehensive selectors
+      // Extract all offer cards with AutoBandit-specific selectors
       const offers = await page.evaluate((cardSelector) => {
         const cards = Array.from(document.querySelectorAll(cardSelector));
         
         return cards.map((card, index) => {
-          // Helper function to extract text from multiple possible selectors
+          // Helper: safe text extraction
           const getText = (...selectors) => {
             for (const sel of selectors) {
               const el = card.querySelector(sel);
@@ -107,66 +90,58 @@ class AutoBanditScraper {
             return '';
           };
           
-          // Helper to extract number from text
-          const extractNumber = (text) => {
-            const match = text.match(/[\d,]+/);
-            return match ? parseInt(match[0].replace(/,/g, '')) : 0;
+          // Helper: extract number
+          const getNum = (text) => {
+            if (!text) return 0;
+            const cleaned = text.replace(/[$,\s]/g, '');
+            const num = parseFloat(cleaned);
+            return isNaN(num) ? 0 : num;
           };
           
-          // Extract data with fallbacks
-          const title = getText('h2', 'h3', '.title', '[class*="title"]', '[data-field="title"]');
+          // Extract all data
+          const title = getText('h2', 'h3', '[class*="title"]', 'a');
+          const paymentText = getText('[class*="payment"]', '[class*="month"]', 'p:has-text("mo")');
+          const msrpText = getText('[class*="msrp"]', '[class*="price"]');
           
-          const priceText = getText(
-            '.price', '.monthly-payment', '[data-field="payment"]',
-            '[class*="payment"]', '[class*="price"]'
-          );
-          const payment = extractNumber(priceText);
+          // Image
+          const img = card.querySelector('img');
+          const imageUrl = img ? (img.src || img.dataset.src || '') : '';
           
-          const msrpText = getText(
-            '.msrp', '[data-field="msrp"]', '[class*="msrp"]'
-          );
-          const msrp = extractNumber(msrpText);
+          // Link
+          const link = card.querySelector('a');
+          const dealUrl = link ? link.href : '';
           
-          const termText = getText(
-            '.term', '[data-field="term"]', '[class*="term"]', '[class*="month"]'
-          );
-          const term = extractNumber(termText);
+          // Parse title for year/make/model
+          const titleParts = title.split(' ').filter(Boolean);
+          const yearMatch = title.match(/\b(20[2-9][0-9])\b/);
+          const year = yearMatch ? parseInt(yearMatch[1]) : 2025;
           
-          const mileageText = getText(
-            '.mileage', '.miles', '[data-field="miles"]', '[class*="mile"]'
-          );
-          const mileage = extractNumber(mileageText);
-          
-          // Extract image
-          const imgEl = card.querySelector('img');
-          const image = imgEl ? (imgEl.src || imgEl.dataset.src || '') : '';
-          
-          // Extract link
-          const linkEl = card.querySelector('a');
-          const link = linkEl ? linkEl.href : '';
-          
-          // Parse title to extract make/model/year
-          const titleParts = title.split(' ');
-          const year = titleParts.find(p => /^20(2[0-9]|3[0-9])$/.test(p)) || '';
-          const make = titleParts[titleParts.indexOf(year) + 1] || '';
-          const model = titleParts.slice(titleParts.indexOf(make) + 1).join(' ') || '';
+          // Try to extract make/model from title
+          const yearIndex = titleParts.findIndex(p => p === year.toString());
+          const make = titleParts[yearIndex + 1] || '';
+          const model = titleParts.slice(yearIndex + 2).join(' ') || '';
           
           return {
             id: `ab-${index}`,
+            source: 'autobandit',
+            scrapedAt: new Date().toISOString(),
+            url: dealUrl,
             title,
-            year: parseInt(year) || 2025,
             make,
             model,
-            payment,
-            msrp,
-            term: term || 36,
-            mileage: mileage || 10000,
-            image,
-            link,
-            scrapedAt: new Date().toISOString()
+            trim: '',
+            year,
+            msrp: getNum(msrpText),
+            payment: getNum(paymentText),
+            image: imageUrl,
+            raw: {
+              titleRaw: title,
+              paymentRaw: paymentText,
+              msrpRaw: msrpText
+            }
           };
-        });
-      }, selector);
+        }).filter(o => o.title && o.payment > 0);
+      }, cardSelector);
       
       // Filter out empty results
       this.results = offers.filter(o => o.title && o.payment > 0);
