@@ -90,20 +90,29 @@ class AutoBanditScraper {
             const make = titleMatch?.[1] || '';
             const model = titleMatch?.[2]?.trim().split(/\s+/).slice(0, 3).join(' ') || '';
             
-            // Extract payment (handle zero-width joiners and various formats)
+            // Extract payment (handle "From$169" format specifically)
             let payment = 0;
-            const paymentPatterns = [
-              /From\s*\$(\d+)/i,           // "From$169"
-              /\$(\d+)[^\d]{0,3}\/\s*mo/i, // "$169‍/mo" with zero-width chars
-              /month.*?\$(\d+)/i,          // "month $169"
-              /\$(\d+)\s*per\s*mo/i        // "$169 per mo"
-            ];
             
-            for (const pattern of paymentPatterns) {
-              const match = allText.match(pattern);
-              if (match && match[1]) {
-                payment = parseInt(match[1]);
-                if (payment > 0) break;
+            // First try: "From$XXX" pattern
+            let match = allText.match(/From\s*\$(\d+)/i);
+            if (match && match[1]) {
+              payment = parseInt(match[1]);
+            }
+            
+            // If not found, try other patterns
+            if (!payment) {
+              const patterns = [
+                /\$(\d+)[^\d]{0,5}\/\s*mo/i,  // "$169‍/mo" with special chars
+                /month.*?\$(\d+)/i,             // "month $169"
+                /\$(\d+)\s*per\s*mo/i           // "$169 per mo"
+              ];
+              
+              for (const pattern of patterns) {
+                const m = allText.match(pattern);
+                if (m && m[1]) {
+                  payment = parseInt(m[1]);
+                  break;
+                }
               }
             }
             
