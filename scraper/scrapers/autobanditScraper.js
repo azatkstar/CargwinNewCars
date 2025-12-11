@@ -169,6 +169,31 @@ class AutoBanditScraper {
           raw: { allText: o.allText }
         }));
         
+        console.log(`[Scraper] Mapped ${fullOffers.length} full offers`);
+        
+        // Brand filtering
+        const selectedBrands = process.env.SELECTED_BRANDS;
+        let filteredOffers = fullOffers;
+        
+        if (selectedBrands && selectedBrands !== 'all') {
+          const brandList = selectedBrands.toLowerCase().split(',').map(b => b.trim());
+          filteredOffers = fullOffers.filter(o => {
+            const make = o.make.toLowerCase();
+            return brandList.some(brand => make.includes(brand) || brand.includes(make));
+          });
+          
+          console.log(`[Scraper] Brand filter: ${fullOffers.length} → ${filteredOffers.length}`);
+        }
+        
+        // Validate and filter
+        this.results = filteredOffers.filter(o => 
+          o.make && o.model && o.monthlyPayment > 0
+        );
+        
+        console.log(`[Scraper] Final valid offers: ${this.results.length}`);
+        
+        return this.results;
+        
       } catch (error) {
         console.error(`[Scraper] Attempt ${attempt} failed:`, error.message);
         
