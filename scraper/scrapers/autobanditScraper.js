@@ -161,8 +161,23 @@ class AutoBanditScraper {
       
       console.log(`[Scraper] Extracted ${offers.length} raw offers`);
       
+      // Brand filtering if specified
+      const selectedBrands = process.env.SELECTED_BRANDS;
+      let filteredOffers = offers;
+      
+      if (selectedBrands && selectedBrands !== 'all') {
+        const brandList = selectedBrands.toLowerCase().split(',').map(b => b.trim());
+        filteredOffers = offers.filter(o => {
+          const make = o.make.toLowerCase();
+          return brandList.some(brand => make.includes(brand) || brand.includes(make));
+        });
+        
+        console.log(`[Scraper] Brand filter applied: ${selectedBrands}`);
+        console.log(`[Scraper] Filtered: ${offers.length} → ${filteredOffers.length} offers`);
+      }
+      
       // Filter valid offers (has title AND payment)
-      this.results = offers.filter(o => {
+      this.results = filteredOffers.filter(o => {
         const valid = o.title && o.title.length > 5 && o.monthlyPayment > 0;
         if (!valid) {
           console.log(`[Scraper] Filtered out: ${o.title || 'untitled'} (payment: ${o.monthlyPayment})`);
