@@ -92,6 +92,28 @@ const AdminLogin = () => {
         
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Login Method Toggle */}
+            <div className="flex gap-2 p-1 bg-gray-100 rounded-lg">
+              <button
+                type="button"
+                onClick={() => setUseMagicLink(false)}
+                className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition ${
+                  !useMagicLink ? 'bg-white shadow' : 'text-gray-600'
+                }`}
+              >
+                Password
+              </button>
+              <button
+                type="button"
+                onClick={() => setUseMagicLink(true)}
+                className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition ${
+                  useMagicLink ? 'bg-white shadow' : 'text-gray-600'
+                }`}
+              >
+                Magic Link
+              </button>
+            </div>
+
             <div>
               <Label htmlFor="email">{t('admin.login.email_label')}</Label>
               <div className="relative mt-2">
@@ -108,6 +130,19 @@ const AdminLogin = () => {
               </div>
             </div>
 
+            {!useMagicLink && (
+              <div>
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password"
+                  required={!useMagicLink}
+                />
+              </div>
+            )}
             <Button
               type="submit"
               disabled={!email || loading}
