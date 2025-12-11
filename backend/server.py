@@ -2749,6 +2749,114 @@ async def import_scraped_offer(
 
 # ==========================================
 # SCRAPER CONTROL ENDPOINTS
+
+
+
+@api_router.post("/admin/offers")
+async def create_offer_manual(
+    offer_data: dict,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Create offer manually from admin panel
+    Simplified - does not require all calculator fields
+    """
+    try:
+        logger.info(f"Creating manual offer by {current_user.email}")
+        logger.debug(f"Offer data: {offer_data}")
+        
+        # Extract required fields
+        title = offer_data.get("title", "")
+        make = offer_data.get("make", "")
+        model = offer_data.get("model", "")
+        year = offer_data.get("year", 2025)
+        msrp = offer_data.get("msrp", 0)
+        
+        # Validate required fields
+        if not all([title, make, model, year, msrp]):
+            return {
+                "success": False,
+                "error": "Required fields missing: title, make, model, year, msrp"
+            }
+        
+        # Process images if provided
+        images_list = offer_data.get("images", [])
+        if not images_list and offer_data.get("image"):
+            images_list = [offer_data["image"]]
+        
+        # Image validation
+        if not images_list:
+            return {
+                "success": False,
+                "error": "At least 1 image is required"
+            }
+        
+        # Prepare car data
+        car_data = {
+            "title": title,
+            "make": make,
+            "model": model,
+            "year": year,
+            "trim": offer_data.get("trim", ""),
+            "vin": offer_data.get("vin", ""),
+            "msrp": msrp,
+            "discount": offer_data.get("discount", 0),
+            "description": offer_data.get("description", ""),
+            "image": images_list[0] if images_list else "",
+            "images": [{"url": url, "alt": title} for url in images_list],
+            "lease": offer_data.get("lease", {
+                "monthly": 0,
+                "dueAtSigning": 0,
+                "termMonths": 36,
+                "milesPerYear": 10000
+            }),
+            "specs": offer_data.get("specs", {
+                "make": make,
+                "model": model,
+                "year": year
+            }),
+            "seo": offer_data.get("seo", {}),
+            "status": offer_data.get("status", "active"),
+            "source": offer_data.get("source", "manual")
+        }
+        
+        # Generate slug if not provided
+        if not car_data.get("slug"):
+            slug = f"{year}-{make}-{model}".lower().replace(" ", "-")
+            car_data["slug"] = slug
+        
+        # Save to database
+        from database import get_database
+        db_instance = get_database()
+        
+        result = await db_instance.cars.insert_one(car_data)
+        offer_id = str(result.inserted_id)
+        
+        logger.info(f"Created offer: {offer_id} - {title}")
+        
+        # Try to process images (non-blocking)
+        image_warning = None
+        try:
+            from image_processor import process_offer_images
+            processed = process_offer_images(offer_id, images_list)
+            logger.info(f"Processed {len(processed)} images")
+        except Exception as img_err:
+            logger.warning(f"Image processing failed (non-critical): {img_err}")
+            image_warning = "Image processing failed, using original URLs"
+        
+        return {
+            "success": True,
+            "offerId": offer_id,
+            "warning": image_warning
+        }
+        
+    except Exception as e:
+        logger.error(f"Create offer error: {e}", exc_info=True)
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
 # ==========================================
 
 @api_router.get("/admin/scraper/status")
