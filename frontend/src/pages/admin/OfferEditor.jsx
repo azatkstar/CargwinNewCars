@@ -417,6 +417,110 @@ export default function OfferEditor() {
         </CardContent>
       </Card>
 
+      {/* Vehicle Specs */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Vehicle Specifications</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <Label>Body Style</Label>
+              <Input
+                value={offer.specs?.bodyStyle || ''}
+                onChange={(e) => updateField('specs.bodyStyle', e.target.value)}
+                placeholder="Sedan, SUV, Truck"
+              />
+            </div>
+            <div>
+              <Label>Transmission</Label>
+              <Input
+                value={offer.specs?.transmission || ''}
+                onChange={(e) => updateField('specs.transmission', e.target.value)}
+              />
+            </div>
+            <div>
+              <Label>Drivetrain</Label>
+              <Input
+                value={offer.specs?.drivetrain || ''}
+                onChange={(e) => updateField('specs.drivetrain', e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <Label>Exterior Color</Label>
+              <Input
+                value={offer.specs?.exteriorColor || ''}
+                onChange={(e) => updateField('specs.exteriorColor', e.target.value)}
+              />
+            </div>
+            <div>
+              <Label>Interior Color</Label>
+              <Input
+                value={offer.specs?.interiorColor || ''}
+                onChange={(e) => updateField('specs.interiorColor', e.target.value)}
+              />
+            </div>
+            <div>
+              <Label>Fuel Type</Label>
+              <Input
+                value={offer.specs?.fuelType || ''}
+                onChange={(e) => updateField('specs.fuelType', e.target.value)}
+                placeholder="Gas, Hybrid, Electric"
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* SEO Fields */}
+      <Card>
+        <CardHeader>
+          <CardTitle>SEO & Marketing</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <Label>SEO Title</Label>
+            <Input
+              value={offer.seo?.title || ''}
+              onChange={(e) => updateField('seo.title', e.target.value)}
+              placeholder="2025 Toyota Camry Lease | Hunter.Lease"
+            />
+          </div>
+
+          <div>
+            <Label>Meta Description</Label>
+            <Textarea
+              value={offer.seo?.metaDescription || ''}
+              onChange={(e) => updateField('seo.metaDescription', e.target.value)}
+              rows={2}
+              placeholder="Lease description for search engines..."
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label>Keywords</Label>
+              <Input
+                value={offer.seo?.keywords || ''}
+                onChange={(e) => updateField('seo.keywords', e.target.value)}
+                placeholder="toyota, camry, lease, california"
+              />
+            </div>
+            <div>
+              <Label>URL Slug</Label>
+              <Input
+                value={offer.seo?.slug || ''}
+                onChange={(e) => updateField('seo.slug', e.target.value)}
+                placeholder="2025-toyota-camry-le"
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Save Button */}
       <div className="flex justify-end gap-2">
         <Button onClick={() => navigate('/admin/offers')} variant="outline">
