@@ -2754,20 +2754,41 @@ async def get_scraper_status(current_user: User = Depends(require_admin)):
         
         scraper_dir = Path("/app/scraper")
         state_file = scraper_dir / "state" / "lastRun.json"
+        log_file = scraper_dir / "logs" / "scraper.log"
         
         # Read last run data
+        last_run_data = {}
         if state_file.exists():
-            with open(state_file) as f:
-                last_run = json.load(f)
-        else:
-            last_run = {}
+            try:
+                with open(state_file) as f:
+                    last_run_data = json.load(f)
+            except:
+                pass
+        
+        # Read recent logs
+        recent_logs = []
+        if log_file.exists():
+            try:
+                with open(log_file) as f:
+                    lines = f.readlines()
+                    for line in lines[-10:]:  # Last 10 lines
+                        try:
+                            log_entry = json.loads(line)
+                            recent_logs.append(log_entry)
+                        except:
+                            recent_logs.append({
+                                "timestamp": "",
+                                "message": line.strip()
+                            })
+            except:
+                pass
         
         return {
-            "running": False,
-            "lastRun": last_run.get("timestamp"),
-            "totalScraped": last_run.get("scrapedCount", 0),
-            "totalImported": last_run.get("updates", {}).get("imported", 0),
-            "recentLogs": []
+            "running": False,  # TODO: Check if process is actually running
+            "lastRun": last_run_data.get("timestamp"),
+            "totalScraped": last_run_data.get("scrapedCount", 0),
+            "totalImported": last_run_data.get("updates", {}).get("imported", 0),
+            "recentLogs": recent_logs
         }
         
     except Exception as e:
@@ -2783,39 +2804,80 @@ async def run_scraper(force: bool = False, current_user: User = Depends(require_
     try:
         import subprocess
         import os
+        from pathlib import Path
         
-        scraper_dir = "/app/scraper"
+        scraper_dir = Path("/app/scraper")
         
         # Check if scraper exists
-        if not os.path.exists(os.path.join(scraper_dir, "run.js")):
-            raise HTTPException(status_code=404, detail="Scraper not found")
+        run_script = scraper_dir / "run.js"
+        if not run_script.exists():
+            raise HTTPException(status_code=404, detail="Scraper not found at /app/scraper/run.js")
         
         # Prepare command
-        cmd = ["node", "run.js"]
+        cmd = ["node", str(run_script)]
         if force:
             cmd.append("--force")
         
-        # Run in background
+        # Set environment
+        env = os.environ.copy()
+        env["HUNTER_API_URL"] = os.getenv("BACKEND_URL", "http://localhost:8001")
+        env["HUNTER_ADMIN_TOKEN"] = "admin_token_here"  # TODO: Use real token
+        
+        # Log scraper start
         logger.info(f"Starting scraper: {' '.join(cmd)}")
         
+        # Write start log
+        log_file = scraper_dir / "logs" / "scraper.log"
+        log_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        start_log = json.dumps({
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "action": "start",
+            "message": f"Scraper started (force={force})",
+            "user": current_user.email
+        })
+        
+        with open(log_file, 'a') as f:
+            f.write(start_log + "\n")
+        
+        # Run in background
         process = subprocess.Popen(
             cmd,
-            cwd=scraper_dir,
+            cwd=str(scraper_dir),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            env={**os.environ, "HUNTER_API_URL": os.getenv("BACKEND_URL", "http://localhost:8001")}
+            env=env,
+            start_new_session=True  # Detach from parent
         )
         
-        # Don't wait - run in background
+        logger.info(f"Scraper started with PID: {process.pid}")
         
         return {
             "ok": True,
-            "message": f"Scraper started (PID: {process.pid})",
+            "message": f"Scraper started",
+            "pid": process.pid,
             "force": force
         }
         
     except Exception as e:
         logger.error(f"Scraper run error: {e}")
+        
+        # Log error
+        try:
+            error_log = json.dumps({
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "action": "error",
+                "message": str(e)
+            })
+            
+            log_file = Path("/app/scraper/logs/scraper.log")
+            log_file.parent.mkdir(parents=True, exist_ok=True)
+            
+            with open(log_file, 'a') as f:
+                f.write(error_log + "\n")
+        except:
+            pass
+        
         raise HTTPException(status_code=500, detail=str(e))
 
         
