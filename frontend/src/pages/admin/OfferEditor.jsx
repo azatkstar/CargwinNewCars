@@ -319,6 +319,15 @@ export default function OfferEditor() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
+              <Label>Acquisition Fee</Label>
+              <Input
+                type="number"
+                value={offer.lease?.acquisitionFee || 0}
+                onChange={(e) => updateField('lease.acquisitionFee', parseFloat(e.target.value))}
+                placeholder="695"
+              />
+            </div>
+            <div>
               <Label>Tax Rate</Label>
               <Input
                 type="number"
@@ -328,6 +337,9 @@ export default function OfferEditor() {
                 placeholder="0.0925"
               />
             </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <Label>Region</Label>
               <Input
