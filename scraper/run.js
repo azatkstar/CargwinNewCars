@@ -13,18 +13,18 @@ const path = require('path');
 
 class ScraperRunner {
   constructor() {
-    // Detect if we can use real Puppeteer or need mock
-    this.useMock = process.env.USE_MOCK_SCRAPER === 'true' || this.isSandboxEnvironment();
+    // Use mock only if explicitly set
+    this.useMock = process.env.USE_MOCK_SCRAPER === 'true';
     
     if (this.useMock) {
-      console.log('[Runner] Using Mock Scraper (sandbox environment)');
+      console.log('[Runner] Using Mock Scraper (USE_MOCK_SCRAPER=true)');
       const MockScraper = require('./scrapers/mockScraper');
       this.scraper = { run: async () => {
         const mock = new MockScraper();
         return await mock.run();
       }};
     } else {
-      console.log('[Runner] Using Real Scraper (Puppeteer)');
+      console.log('[Runner] Using Real Scraper (Puppeteer with Chromium)');
       this.scraper = new AutoBanditScraper();
     }
     
