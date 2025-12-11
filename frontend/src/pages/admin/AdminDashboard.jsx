@@ -73,6 +73,9 @@ const AdminDashboard = () => {
         <Route path="media" element={<AdminMedia />} />
         <Route path="multi-sync" element={<AdminMultiSync />} />
         <Route path="scraper" element={<ScraperControl />} />
+        <Route path="offers" element={<OffersManagement />} />
+        <Route path="offers/new" element={<OfferEditor />} />
+        <Route path="offers/:id/edit" element={<OfferEditor />} />
       </Routes>
     </AdminLayout>
   );
