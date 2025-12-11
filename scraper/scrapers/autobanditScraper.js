@@ -49,153 +49,176 @@ class AutoBanditScraper {
   async scrapeListing() {
     const page = await this.browser.newPage();
     
-    try {
-      // Set realistic viewport
-      await page.setViewport({ width: 1920, height: 1080 });
-      
-      // Set user agent
-      await page.setUserAgent(this.config.userAgent);
-      
-      // Navigate to deals page
-      console.log('[Scraper] Navigating to AutoBandit...');
-      await page.goto(this.config.targetUrl, {
-        waitUntil: 'networkidle2',
-        timeout: this.config.timeout
-      });
-      
-      // AutoBandit uses MUI Grid with specific card classes
-      const cardSelector = 'div[class*="js-offer-card"]';
-      
-      console.log(`[Scraper] Waiting for cards: ${cardSelector}`);
-      
-      await page.waitForSelector(cardSelector, { timeout: 10000 });
-      
-      const cardCount = await page.evaluate((sel) => {
-        return document.querySelectorAll(sel).length;
-      }, cardSelector);
-      
-      console.log(`[Scraper] Found ${cardCount} deal cards`);
-      
-      // Extract all offer cards with AutoBandit-specific selectors
-      const offers = await page.evaluate((cardSelector) => {
-        const cards = Array.from(document.querySelectorAll(cardSelector));
+    // Retry logic (3 attempts)
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        // Set realistic viewport
+        await page.setViewport({ width: 1920, height: 1080 });
+        await page.setUserAgent(this.config.userAgent);
         
-        return cards.map((card, index) => {
-          // Helper: extract number from text
-          const getNum = (text) => {
-            if (!text) return 0;
-            // Remove $, commas, spaces, then parse
-            const cleaned = text.replace(/[$,\s]/g, '');
-            const num = parseFloat(cleaned);
-            return isNaN(num) ? 0 : num;
-          };
-          
-          // Get all text from card
-          const allText = card.textContent || '';
-          
-          // Extract year (20XX format)
-          const yearMatch = allText.match(/\b(202[4-9]|203[0-9])\b/);
-          const year = yearMatch ? parseInt(yearMatch[1]) : 2025;
-          
-          // Extract make and model (format: "2026 Hyundai Kona")
-          // Pattern: YEAR MAKE MODEL
-          const titlePattern = new RegExp(`${year}\\s+([A-Z][a-z]+(?:-[A-Z][a-z]+)?)\\s+([A-Za-z0-9\\s]+?)(?=MSRP|From|\\$|$)`);
-          const titleMatch = allText.match(titlePattern);
-          
-          const make = titleMatch?.[1] || '';
-          const model = titleMatch?.[2]?.trim().split(/\s+/).slice(0, 3).join(' ') || '';
-          const title = `${year} ${make} ${model}`.trim();
-          
-          // Extract payment: "$169/mo" or "$169‍/mo" (with zero-width joiner)
-          const paymentPattern = /\$(\d{1,4})[^\d]*\/\s*mo/i;
-          const paymentMatch = allText.match(paymentPattern);
-          const payment = paymentMatch ? parseInt(paymentMatch[1]) : 0;
-          
-          // Extract MSRP: "MSRP from $27,190" or "MSRP $27,190"
-          const msrpPattern = /MSRP[^\d]*\$?([\d,]+)/i;
-          const msrpMatch = allText.match(msrpPattern);
-          const msrp = msrpMatch ? getNum(msrpMatch[1]) : 0;
-          
-          // Extract incentives: "$5,750 in incentives"
-          const incentivesPattern = /\$([\d,]+)\s*in\s*incentives/i;
-          const incentivesMatch = allText.match(incentivesPattern);
-          const incentives = incentivesMatch ? getNum(incentivesMatch[1]) : 0;
-          
-          // Extract image
-          const img = card.querySelector('img');
-          const imageUrl = img ? (img.src || img.dataset.src || '') : '';
-          
-          // Extract link (button or a tag)
-          const linkEl = card.querySelector('button[class*="card"], a');
-          const dealUrl = linkEl ? 
-            (linkEl.href || `https://autobandit.com/deals/${make.toLowerCase()}-${model.toLowerCase().replace(/\s+/g, '-')}`) 
-            : '';
-          
-          return {
-            id: `ab-${Date.now()}-${index}`,
-            source: 'autobandit',
-            scrapedAt: new Date().toISOString(),
-            url: dealUrl,
-            title,
-            make,
-            model,
-            trim: '',
-            year,
-            msrp,
-            monthlyPayment: payment,
-            incentives,
-            downPayment: 0,
-            termMonths: 36,
-            mileagePerYear: 10000,
-            moneyFactor: null,
-            residualPercent: null,
-            imageUrl,
-            sourceId: `AB-${make}-${model}-${year}`.toLowerCase().replace(/\s+/g, '-'),
-            raw: {
-              allText: allText.substring(0, 300),
-              paymentRaw: paymentMatch?.[0] || '',
-              msrpRaw: msrpMatch?.[0] || ''
-            }
-          };
-        });
-      }, cardSelector);
-      
-      console.log(`[Scraper] Extracted ${offers.length} raw offers`);
-      
-      // Brand filtering if specified
-      const selectedBrands = process.env.SELECTED_BRANDS;
-      let filteredOffers = offers;
-      
-      if (selectedBrands && selectedBrands !== 'all') {
-        const brandList = selectedBrands.toLowerCase().split(',').map(b => b.trim());
-        filteredOffers = offers.filter(o => {
-          const make = o.make.toLowerCase();
-          return brandList.some(brand => make.includes(brand) || brand.includes(make));
+        console.log(`[Scraper] Attempt ${attempt}: Navigating to AutoBandit...`);
+        await page.goto(this.config.targetUrl, {
+          waitUntil: 'networkidle2',
+          timeout: this.config.timeout
         });
         
-        console.log(`[Scraper] Brand filter applied: ${selectedBrands}`);
-        console.log(`[Scraper] Filtered: ${offers.length} → ${filteredOffers.length} offers`);
-      }
-      
-      // Filter valid offers (has title AND payment)
-      this.results = filteredOffers.filter(o => {
-        const valid = o.title && o.title.length > 5 && o.monthlyPayment > 0;
-        if (!valid) {
-          console.log(`[Scraper] Filtered out: ${o.title || 'untitled'} (payment: ${o.monthlyPayment})`);
+        await page.waitForSelector('body', { timeout: 5000 });
+        
+        // Find all deal cards using XPath
+        const cardElements = await page.$x("//div[contains(@class, 'js-offer-card')]");
+        
+        if (cardElements.length === 0) {
+          throw new Error('No deal cards found');
         }
-        return valid;
-      });
-      
-      console.log(`[Scraper] Extracted ${this.results.length} valid offers`);
-      
-      return this.results;
-      
-    } catch (error) {
-      console.error('[Scraper] Error:', error.message);
-      throw error;
-    } finally {
-      await page.close();
+        
+        console.log(`[Scraper] Found ${cardElements.length} deal cards`);
+        
+        // Extract data from each card
+        const offers = [];
+        
+        for (let i = 0; i < cardElements.length; i++) {
+          const card = cardElements[i];
+          
+          try {
+            // Get all text from card
+            const allText = await page.evaluate(el => el.textContent, card);
+            
+            // MSRP using XPath
+            let msrp = null;
+            try {
+              const msrpElements = await card.$x(".//*[contains(translate(text(),'MSRP','msrp'),'msrp') and contains(text(),'$')]");
+              if (msrpElements.length > 0) {
+                const raw = await page.evaluate(el => el.textContent, msrpElements[0]);
+                const match = raw.match(/\$[\d,]+/);
+                if (match) msrp = match[0].replace(/[$,]/g, '');
+              }
+            } catch (err) {
+              console.warn(`[Scraper] MSRP parse error for card ${i}:`, err.message);
+            }
+            
+            // Monthly payment
+            let monthly = null;
+            try {
+              const paymentElements = await card.$x(".//*[contains(text(), '/mo')]");
+              if (paymentElements.length > 0) {
+                const text = await page.evaluate(el => el.textContent, paymentElements[0]);
+                const match = text.match(/\$[\d,]+/);
+                if (match) monthly = match[0].replace(/[$,]/g, '');
+              }
+            } catch (err) {
+              console.warn(`[Scraper] Monthly payment parse error for card ${i}:`, err.message);
+            }
+            
+            // Term (months)
+            let term = null;
+            try {
+              const termMatch = allText.match(/(\d+)\s*mo(?:nths?)?/i);
+              if (termMatch) term = termMatch[1];
+            } catch (err) {
+              console.warn(`[Scraper] Term parse error for card ${i}:`, err.message);
+            }
+            
+            // Incentives
+            let incentives = null;
+            try {
+              const incElements = await card.$x(".//*[contains(translate(text(),'INCENTIVES','incentives'),'incentives') and contains(text(),'$')]");
+              if (incElements.length > 0) {
+                const incText = await page.evaluate(el => el.textContent, incElements[0]);
+                const match = incText.match(/\$[\d,]+/);
+                if (match) incentives = match[0].replace(/[$,]/g, '');
+              }
+            } catch (err) {
+              console.warn(`[Scraper] Incentives parse error for card ${i}:`, err.message);
+            }
+            
+            // Extract year, make, model from text
+            const yearMatch = allText.match(/\b(202[4-9]|203[0-9])\b/);
+            const year = yearMatch ? parseInt(yearMatch[1]) : 2025;
+            
+            const titlePattern = new RegExp(`${year}\\s+([A-Z][a-z]+(?:-[A-Z][a-z]+)?)\\s+([A-Za-z0-9\\s]+?)(?=MSRP|From|\\$|$)`);
+            const titleMatch = allText.match(titlePattern);
+            
+            const make = titleMatch?.[1] || '';
+            const model = titleMatch?.[2]?.trim().split(/\s+/).slice(0, 3).join(' ') || '';
+            
+            // Extract image
+            const img = await card.$('img');
+            const imageUrl = img ? await page.evaluate(el => el.src || el.dataset.src || '', img) : '';
+            
+            // Validate required fields
+            if (!monthly || !msrp || !make || !model) {
+              console.warn(`[Scraper] Skipping card ${i} - missing required data`);
+              continue;
+            }
+            
+            const offer = {
+              id: `ab-${Date.now()}-${i}`,
+              source: 'autobandit',
+              scrapedAt: new Date().toISOString(),
+              url: `https://autobandit.com/deals/${make.toLowerCase()}-${model.toLowerCase().replace(/\s+/g, '-')}`,
+              title: `${year} ${make} ${model}`.trim(),
+              make,
+              model,
+              trim: '',
+              year,
+              msrp: parseInt(msrp) || 0,
+              monthlyPayment: parseInt(monthly) || 0,
+              incentives: incentives ? parseInt(incentives) : 0,
+              downPayment: 0,
+              termMonths: parseInt(term) || 36,
+              mileagePerYear: 10000,
+              moneyFactor: null,
+              residualPercent: null,
+              imageUrl,
+              sourceId: `AB-${make}-${model}-${year}`.toLowerCase().replace(/\s+/g, '-'),
+              raw: {
+                allText: allText.substring(0, 300),
+                msrpRaw: msrp,
+                monthlyRaw: monthly
+              }
+            };
+            
+            offers.push(offer);
+            
+          } catch (cardErr) {
+            console.error(`[Scraper] Error processing card ${i}:`, cardErr.message);
+          }
+        }
+        
+        console.log(`[Scraper] Extracted ${offers.length} valid offers`);
+        
+        // Brand filtering
+        const selectedBrands = process.env.SELECTED_BRANDS;
+        if (selectedBrands && selectedBrands !== 'all') {
+          const brandList = selectedBrands.toLowerCase().split(',').map(b => b.trim());
+          const filtered = offers.filter(o => {
+            const make = o.make.toLowerCase();
+            return brandList.some(brand => make.includes(brand) || brand.includes(make));
+          });
+          
+          console.log(`[Scraper] Brand filter: ${offers.length} → ${filtered.length} offers`);
+          this.results = filtered;
+        } else {
+          this.results = offers;
+        }
+        
+        return this.results;
+        
+      } catch (error) {
+        console.error(`[Scraper] Attempt ${attempt} failed:`, error.message);
+        
+        if (attempt < 3) {
+          console.log('[Scraper] Retrying in 2 seconds...');
+          await page.waitForTimeout(2000);
+          continue;
+        }
+        
+        throw error;
+      }
     }
+    
+    // If all retries failed
+    throw new Error('All 3 scraping attempts failed');
   }
 
   async scrapeDetailPage(dealUrl) {
