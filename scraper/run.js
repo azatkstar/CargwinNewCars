@@ -1,0 +1,127 @@
+/**
+ * Main Runner - Orchestrates scraping workflow
+ */
+
+const AutoBanditScraper = require('./scrapers/autobanditScraper');
+const DiffEngine = require('./scrapers/diffEngine');
+const HunterLeaseAPI = require('./scrapers/hunterLeaseAPI');
+const SmartScheduler = require('./scheduler/smartScheduler');
+const fs = require('fs').promises;
+const path = require('path');
+
+class ScraperRunner {
+  constructor() {
+    this.scraper = new AutoBanditScraper();
+    this.diffEngine = new DiffEngine();
+    this.scheduler = new SmartScheduler();
+    this.api = new HunterLeaseAPI({
+      apiUrl: process.env.HUNTER_API_URL || 'http://localhost:8001/api',
+      adminToken: process.env.HUNTER_ADMIN_TOKEN
+    });
+    
+    this.hunterIdMap = {};
+  }
+
+  async loadHunterIdMap() {
+    try {
+      const file = path.join(__dirname, 'state/hunterIdMap.json');
+      const data = await fs.readFile(file, 'utf8');
+      this.hunterIdMap = JSON.parse(data);
+    } catch {
+      this.hunterIdMap = {};
+    }
+  }
+
+  async saveHunterIdMap() {
+    const file = path.join(__dirname, 'state/hunterIdMap.json');
+    await fs.writeFile(file, JSON.stringify(this.hunterIdMap, null, 2));
+  }
+
+  async run(options = {}) {
+    console.log('[Runner] Starting scrape workflow...');
+    
+    // Initialize
+    await this.scheduler.init();
+    await this.loadHunterIdMap();
+    
+    // Check if scraping needed
+    const decision = await this.scheduler.shouldScrape(options);
+    
+    if (!decision.scrape) {
+      console.log(`[Runner] Scraping skipped: ${decision.reason}`);
+      return { skipped: true, reason: decision.reason };
+    }
+    
+    console.log(`[Runner] Scraping required: ${decision.reason}`);
+    
+    // Load previous snapshot
+    const previousOffers = await this.diffEngine.loadPreviousSnapshot();
+    
+    // Scrape current data
+    const currentOffers = await this.scraper.run();
+    
+    // Detect changes
+    const changes = this.diffEngine.detectChanges(
+      Object.values(previousOffers),
+      currentOffers
+    );
+    
+    console.log(`[Runner] Changes: +${changes.added.length} -${changes.removed.length} ~${changes.modified.length}`);
+    
+    // Save diff log
+    await this.diffEngine.saveDiffLog(changes);
+    
+    // Sync with Hunter.Lease
+    const syncResults = await this.api.syncOffers(
+      [...changes.added, ...changes.modified.map(m => m.new)],
+      this.hunterIdMap
+    );
+    
+    console.log(`[Runner] Sync: ${syncResults.imported} imported, ${syncResults.updated} updated`);
+    
+    // Mark removed as inactive
+    for (const removed of changes.removed) {
+      const hunterId = this.hunterIdMap[removed.id];
+      if (hunterId) {
+        await this.api.markInactive(hunterId);
+      }
+    }
+    
+    // Save state
+    await this.scheduler.updateInventory(
+      currentOffers.reduce((map, offer) => {
+        map[offer.id] = offer;
+        return map;
+      }, {})
+    );
+    
+    await this.scheduler.recordRun(currentOffers.length, syncResults);
+    await this.saveHunterIdMap();
+    
+    console.log('[Runner] Workflow complete');
+    
+    return {
+      scraped: currentOffers.length,
+      changes,
+      syncResults
+    };
+  }
+}
+
+// CLI support
+if (require.main === module) {
+  const runner = new ScraperRunner();
+  const force = process.argv.includes('--force');
+  
+  runner.run({ force })
+    .then(result => {
+      console.log('Result:', result);
+      process.exit(0);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      process.exit(1);
+    });
+}
+
+module.exports = ScraperRunner;
