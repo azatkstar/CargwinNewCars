@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import FiltersSidebar from '../components/FiltersSidebar';
 import OfferCard from '../components/OfferCard';
 import { Helmet } from 'react-helmet-async';
+import { Button } from '../components/ui/button';
 
 const OffersPage = () => {
   const [offers, setOffers] = useState([]);
