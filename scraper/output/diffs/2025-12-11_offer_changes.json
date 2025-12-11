@@ -1,5 +1,6 @@
 {
-  "added": [
+  "added": [],
+  "removed": [
     {
       "id": "mock-0",
       "title": "2024 Mercedes-Benz GLC GLC 300 4MATIC",
@@ -5701,7 +5702,6 @@
       "taxRate": 0.0925
     }
   ],
-  "removed": [],
   "modified": [],
   "unchanged": []
 }
