@@ -1,1 +1,1654 @@
-{}
+{
+  "ab-1765427948662-1": {
+    "id": "ab-1765427948662-1",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-elantra",
+    "title": "2025 Hyundai Elantra",
+    "make": "Hyundai",
+    "model": "Elantra",
+    "trim": "",
+    "year": 2025,
+    "msrp": 23945,
+    "monthlyPayment": 23,
+    "incentives": 5250,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FCmM4StO1O3pEBMr4ZP_vs9FvXlkOmpCCMYHQfeGLlAIjmFMujNmhtQYS1AKQSupyQpJ3_1HRDPsSffuB09UfYJTi5CrlcEEqKf4JdNHc4EC6OREuYkLgDk3CS-lI3b9VZWQzNCC0RpeOGHoDWJX57ODj1SC49qalrCzhR2gYfeE30yAcIRn8gw%2Fcc_2025HYC021979745_01_2100_M6T.png&w=3840&q=100",
+    "sourceId": "ab-hyundai-elantra-2025",
+    "raw": {
+      "allText": "Best Deal2025 Hyundai ElantraMSRP from $23,945From$173‍/mo.Up to $5,250 in incentivesPick a trim to see exact offersShow  6 Trims"
+    },
+    "discountAmount": 1197,
+    "sellingPrice": 22748,
+    "residualValue": 14367,
+    "mfTable": {
+      "740+": 0.0036,
+      "700-739": 0.0039,
+      "675-699": 0.0042,
+      "640-674": 0.0045,
+      "601-639": 0.005,
+      "0-600": 0.0057
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 400.31,
+      "700-739": 412.48,
+      "675-699": 424.64,
+      "640-674": 373.22,
+      "601-639": 393.5,
+      "0-600": 421.88
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-2": {
+    "id": "ab-1765427948662-2",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-elantra-hybrid",
+    "title": "2025 Hyundai Elantra Hybrid",
+    "make": "Hyundai",
+    "model": "Elantra Hybrid",
+    "trim": "",
+    "year": 2025,
+    "msrp": 27380,
+    "monthlyPayment": 27,
+    "incentives": 6000,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FCmM4StO1O3pOdxjar_fPetmS09zWOrwEIxkLCG5yMX93Ot7WdMfSU7aJxlzkE8UjYwE0_J5HjSGcFwIHbmooCo52-inJg0xBiFJi4UWzpk4zBAeo9GEKqyBnb0euaSddVnfC-MSTM3CPli-K27Xg64GkwbyTZFVZmCv6olq73MTLBKP9yOFzaw%2Fcc_2025HYC191980216_01_2100_A5G.png&w=3840&q=100",
+    "sourceId": "ab-hyundai-elantra-hybrid-2025",
+    "raw": {
+      "allText": "Best Deal2025 Hyundai Elantra HybridMSRP from $27,380From$223‍/mo.Up to $6,000 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1369,
+    "sellingPrice": 26011,
+    "residualValue": 16428,
+    "mfTable": {
+      "740+": 0.0024,
+      "700-739": 0.0025,
+      "675-699": 0.0027,
+      "640-674": 0.0029,
+      "601-639": 0.0033,
+      "0-600": 0.0038
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 402.09,
+      "700-739": 406.73,
+      "675-699": 416,
+      "640-674": 352.57,
+      "601-639": 371.12,
+      "0-600": 394.3
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-3": {
+    "id": "ab-1765427948662-3",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/nissan-sentra",
+    "title": "2025 Nissan Sentra",
+    "make": "Nissan",
+    "model": "Sentra",
+    "trim": "",
+    "year": 2025,
+    "msrp": 24180,
+    "monthlyPayment": 24,
+    "incentives": 4125,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FAMMuNVMsODc9NvxtTeVK8xBgHYzU_9qTRyF8C-UG6hmdjR1c5SlZXqjauQemiirNwlLjPNZlHUTI1tV6okJ1pWRZ75q4OHZ1kloP704DYoXb3uSuJRrrG1ePcXBIzFGZk9MqSGg-4sx2Nn9DFAXPNQ%2F2025NIC061924644_2100_01.png&w=3840&q=100",
+    "sourceId": "ab-nissan-sentra-2025",
+    "raw": {
+      "allText": "Best Deal2025 Nissan SentraMSRP from $24,180From$224‍/mo.Up to $4,125 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1209,
+    "sellingPrice": 22971,
+    "residualValue": 14508,
+    "mfTable": {
+      "740+": 0.0035,
+      "700-739": 0.0038,
+      "675-699": 0.0041,
+      "640-674": 0.0044,
+      "601-639": 0.0049,
+      "0-600": 0.0056
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 400.14,
+      "700-739": 412.42,
+      "675-699": 424.71,
+      "640-674": 372.78,
+      "601-639": 393.26,
+      "0-600": 421.92
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-4": {
+    "id": "ab-1765427948662-4",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/nissan-kicks",
+    "title": "2025 Nissan Kicks",
+    "make": "Nissan",
+    "model": "Kicks",
+    "trim": "",
+    "year": 2025,
+    "msrp": 28020,
+    "monthlyPayment": 28,
+    "incentives": 4650,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2F34JgArPCrvsQT9U76d6PaB8oMtHZA-ujq4tSflGG0D5p960kXw_SMXJQy1X2epe_ZizvB2jT7laVvexR-81RNWfklL_5FxQfVXJ5Xlc-ptEM5ouqIoYRkoNsVOG8ubL1rWGABc1meqSoda46XVHTHtvglLDBV749CGaWrntyC3_n56yHwi80YA%2Fcc_2025NIS262007925_01_2100_NBL.png&w=3840&q=100",
+    "sourceId": "ab-nissan-kicks-2025",
+    "raw": {
+      "allText": "Best Deal2025 Nissan KicksMSRP from $28,020From$230‍/mo.Up to $4,650 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1401,
+    "sellingPrice": 26619,
+    "residualValue": 16812,
+    "mfTable": {
+      "740+": 0.0022,
+      "700-739": 0.0023,
+      "675-699": 0.0025,
+      "640-674": 0.0027,
+      "601-639": 0.003,
+      "0-600": 0.0035
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 402,
+      "700-739": 406.75,
+      "675-699": 416.24,
+      "640-674": 351.32,
+      "601-639": 365.56,
+      "0-600": 389.28
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-5": {
+    "id": "ab-1765427948662-5",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/toyota-tacoma-2wd",
+    "title": "2025 Toyota Tacoma 2WD",
+    "make": "Toyota",
+    "model": "Tacoma 2WD",
+    "trim": "",
+    "year": 2025,
+    "msrp": 34548,
+    "monthlyPayment": 34,
+    "incentives": 4500,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FpTMKVhRTbHn3DyXt1HX9rff4cA3nbS5eTfvTLZ70r-aUUpm3A3PGBY0XJ4M9eeQpG6BbvNYjI3xgJWDJSRU5KnkajRt_kNzErLrUlBSPv375gzcHZxPh8a0kTib17xFvTz6Ung_gNk6NDs1V-VkmTXoLFuvdXdZMv1J3DzIFlRP7lJ4iZ3DfODEg-2kttLocAvj8Bmow6N4%2Fcc_2025TOT092004073_01_2100_040.png&w=3840&q=100",
+    "sourceId": "ab-toyota-tacoma-2wd-2025",
+    "raw": {
+      "allText": "Best Deal2025 Toyota Tacoma 2WDMSRP from $34,548From$251‍/mo.Up to $4,500 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1727,
+    "sellingPrice": 32821,
+    "residualValue": 20729,
+    "mfTable": {
+      "740+": 0.0006,
+      "700-739": 0.0006,
+      "675-699": 0.0007,
+      "640-674": 0.0007,
+      "601-639": 0.0008,
+      "0-600": 0.0009
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 402.06,
+      "700-739": 402.06,
+      "675-699": 407.91,
+      "640-674": 316.17,
+      "601-639": 322.02,
+      "0-600": 327.87
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-6": {
+    "id": "ab-1765427948662-6",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/kia-niro-ev",
+    "title": "2025 Kia Niro EV",
+    "make": "Kia",
+    "model": "Niro EV",
+    "trim": "",
+    "year": 2025,
+    "msrp": 42705,
+    "monthlyPayment": 42,
+    "incentives": 14937,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FT8KN3cplYDlxu7A0V4BblBd9fY0ZFLRorCwVqVKYFCRSrKgvuk9LjKWim7z620TsfjGgYsU63qjZxncRBh_6L5jypocoaS8o36BO7Kj9VZeR-5fc8iSButNDbOr_eDPs2A2dGP2WJnkN3X5t8_KQlc55a3Q6Dv03E69u3y_8e9yJB-g49x42_Q%2Fcc_2025KIS072011229_01_2100_KLG.png&w=3840&q=100",
+    "sourceId": "ab-kia-niro-ev-2025",
+    "raw": {
+      "allText": "Best Deal2025 Kia Niro EVMSRP from $42,705From$253‍/mo.Up to $14,937 in incentivesPick a trim to see exact offersShow  2 Trims"
+    },
+    "discountAmount": 2135,
+    "sellingPrice": 40570,
+    "residualValue": 25623,
+    "mfTable": {
+      "740+": 0,
+      "700-739": 0,
+      "675-699": 0,
+      "640-674": 0,
+      "601-639": 0,
+      "0-600": 0
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 453.6,
+      "700-739": 453.6,
+      "675-699": 453.6,
+      "640-674": 340.2,
+      "601-639": 340.2,
+      "0-600": 340.2
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-7": {
+    "id": "ab-1765427948662-7",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/toyota-corolla",
+    "title": "2026 Toyota Corolla",
+    "make": "Toyota",
+    "model": "Corolla",
+    "trim": "",
+    "year": 2026,
+    "msrp": 24229,
+    "monthlyPayment": 24,
+    "incentives": 750,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FaQrLCYuDE_uMlYW0NkQwG8Y9DjLEG3CVxgOKdkjWyaovTbphGVWTFKD8JEVmm5k5Dyaw47HctB1Ky_UrniFaYmFyQge8Z9uJwGA_9-A73ILLRGCMZczR8zbfCCM3TKJsmLOYDmef58jRzE7cMk7cGmEzQsrOME7xM5WudRVZXjqlkZQRLfy5EQ%2Fcc_2026TOC041987636_01_2100_1L7.png&w=3840&q=100",
+    "sourceId": "ab-toyota-corolla-2026",
+    "raw": {
+      "allText": "2026 Toyota CorollaMSRP from $24,229From$254‍/mo.Up to $750 in incentivesPick a trim to see exact offersShow  6 Trims"
+    },
+    "discountAmount": 1211,
+    "sellingPrice": 23018,
+    "residualValue": 14537,
+    "mfTable": {
+      "740+": 0.0035,
+      "700-739": 0.0038,
+      "675-699": 0.004,
+      "640-674": 0.0043,
+      "601-639": 0.0049,
+      "0-600": 0.0056
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 400.98,
+      "700-739": 413.28,
+      "675-699": 421.49,
+      "640-674": 369.46,
+      "601-639": 394.07,
+      "0-600": 422.79
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-8": {
+    "id": "ab-1765427948662-8",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-ioniq-5",
+    "title": "2025 Hyundai IONIQ 5",
+    "make": "Hyundai",
+    "model": "IONIQ 5",
+    "trim": "",
+    "year": 2025,
+    "msrp": 48395,
+    "monthlyPayment": 48,
+    "incentives": 18250,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FCmM4StO1O3pdTEtEesuAQEk6ZM54Aenvp86CxHugXd5RZyl-7SttxZcYnkViXGS5HLKW_YlGj1fDUiHIzuVc_TL2JeCnaAuSMFuTwQv22rT7FeIs5_zrBFanqx5-648v3AuntwzaCbkicluEDmHB8Vhg5AcvAeTFK-zQ98hM0lwCOiz0IDn87Q%2Fcc_2025HYS231968902_01_2100_M9U.png&w=3840&q=100",
+    "sourceId": "ab-hyundai-ioniq-5-2025",
+    "raw": {
+      "allText": "Best Deal Tariff-Free Deal2025 Hyundai IONIQ 5MSRP from $48,395From$256‍/mo.Up to $18,250 in incentivesPick a trim to see exact offersShow  5 Trims"
+    },
+    "discountAmount": 2420,
+    "sellingPrice": 45975,
+    "residualValue": 29037,
+    "mfTable": {
+      "740+": 0,
+      "700-739": 0,
+      "675-699": 0,
+      "640-674": 0,
+      "601-639": 0,
+      "0-600": 0
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 514.02,
+      "700-739": 514.02,
+      "675-699": 514.02,
+      "640-674": 385.52,
+      "601-639": 385.52,
+      "0-600": 385.52
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-9": {
+    "id": "ab-1765427948662-9",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-tucson",
+    "title": "2025 Hyundai Tucson",
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "",
+    "year": 2025,
+    "msrp": 31765,
+    "monthlyPayment": 31,
+    "incentives": 7900,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FCmM4StO1O3qWAWQARiCo11JiTNXtWgZSPupuqGNLH1iHTh04MMgnyXWzJeFxIyZykPbmaKHbiz7lcGoXWNhnBK2Q81ZNHHgOlk_GeaajpPaKPXvYdg6J1AcTc0rwAPU5gODOw7PYT6bsylt1pPeNtI7wlBtpbpIvT5p0j8mwvsZTY_CUs8rldA%2Fcc_2025HYS021990705_01_2100_S3B.png&w=3840&q=100",
+    "sourceId": "ab-hyundai-tucson-2025",
+    "raw": {
+      "allText": "Best Deal2025 Hyundai TucsonMSRP from $31,765From$265‍/mo.Up to $7,900 in incentivesPick a trim to see exact offersShow  6 Trims"
+    },
+    "discountAmount": 1588,
+    "sellingPrice": 30177,
+    "residualValue": 19059,
+    "mfTable": {
+      "740+": 0.0012,
+      "700-739": 0.0013,
+      "675-699": 0.0013,
+      "640-674": 0.0015,
+      "601-639": 0.0016,
+      "0-600": 0.0019
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 401.95,
+      "700-739": 407.33,
+      "675-699": 407.33,
+      "640-674": 333.74,
+      "601-639": 339.11,
+      "0-600": 355.25
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-10": {
+    "id": "ab-1765427948662-10",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/subaru-impreza",
+    "title": "2025 Subaru Impreza",
+    "make": "Subaru",
+    "model": "Impreza",
+    "trim": "",
+    "year": 2025,
+    "msrp": 25545,
+    "monthlyPayment": 25,
+    "incentives": 1500,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FqSWYp5VnHfhUkvP78gFw8IiSQRyK7OvQSxwC4J6q0XHFPNM_LFc7Xa5fV_yrDDDoN73nMf8XhticbUhaPS4DJ4t8cZc4MfFrpGltFtUtVe1bCh-zu6IEV_rMEjnChGlv3ugBQ6C3Q5m8No5kaLa9hjSO4vZl9K-w0Xaz3ILnS46zNGml-lE5sw%2Fcc_2025SUC042019529_01_2100_PRD.png&w=3840&q=100",
+    "sourceId": "ab-subaru-impreza-2025",
+    "raw": {
+      "allText": " Tariff-Free Deal2025 Subaru ImprezaMSRP from $25,545From$274‍/mo.Up to $1,500 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1277,
+    "sellingPrice": 24268,
+    "residualValue": 15327,
+    "mfTable": {
+      "740+": 0.003,
+      "700-739": 0.0032,
+      "675-699": 0.0035,
+      "640-674": 0.0037,
+      "601-639": 0.0042,
+      "0-600": 0.0048
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 401.11,
+      "700-739": 409.76,
+      "675-699": 422.74,
+      "640-674": 363.55,
+      "601-639": 385.18,
+      "0-600": 411.14
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-11": {
+    "id": "ab-1765427948662-11",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/kia-k4",
+    "title": "2025 Kia K4",
+    "make": "Kia",
+    "model": "K4",
+    "trim": "",
+    "year": 2025,
+    "msrp": 24185,
+    "monthlyPayment": 24,
+    "incentives": 3455,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FT8KN3cplYDk_C2OyZ_IVSUrQVE-6sRI7nmC7kFw76qs5G-6T2p_lS_osMwa1s8K83hIX4tsvw2uEtArVuVpuzXHmqZlPmY1MAcSi1kKM7JUdhC3sBHx0pCIycZDc52yEH_tszFROPS9uxu1Fm-p00gWaJjlGYtRiLlvxuOexa3oDd_TOX9zMbA%2Fcc_2025KIC211930940_01_2100_B2R.png&w=3840&q=100",
+    "sourceId": "ab-kia-k4-2025",
+    "raw": {
+      "allText": "2025 Kia K4MSRP from $24,185From$275‍/mo.Up to $3,455 in incentivesPick a trim to see exact offersShow  5 Trims"
+    },
+    "discountAmount": 1209,
+    "sellingPrice": 22976,
+    "residualValue": 14511,
+    "mfTable": {
+      "740+": 0.0035,
+      "700-739": 0.0038,
+      "675-699": 0.0041,
+      "640-674": 0.0044,
+      "601-639": 0.0049,
+      "0-600": 0.0056
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 400.23,
+      "700-739": 412.52,
+      "675-699": 424.8,
+      "640-674": 372.87,
+      "601-639": 393.34,
+      "0-600": 422.01
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-12": {
+    "id": "ab-1765427948662-12",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-ioniq-6",
+    "title": "2025 Hyundai IONIQ 6",
+    "make": "Hyundai",
+    "model": "IONIQ 6",
+    "trim": "",
+    "year": 2025,
+    "msrp": 39530,
+    "monthlyPayment": 39,
+    "incentives": 14751,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=https://leasebandit-image.s3.us-west-2.amazonaws.com/prod/Hyundai_IONIQ6_2025_SEStandardRange_CuratedSilver_Black_18x7.5JAlloy_front.png&w=320&q=75",
+    "sourceId": "ab-hyundai-ioniq-6-2025",
+    "raw": {
+      "allText": "Best Deal2025 Hyundai IONIQ 6MSRP from $39,530From$282‍/mo.Up to $14,751 in incentivesPick a trim to see exact offersShow  4 Trims"
+    },
+    "discountAmount": 1977,
+    "sellingPrice": 37553,
+    "residualValue": 23718,
+    "mfTable": {
+      "740+": 0,
+      "700-739": 0,
+      "675-699": 0,
+      "640-674": 0,
+      "601-639": 0,
+      "0-600": 0
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 419.85,
+      "700-739": 419.85,
+      "675-699": 419.85,
+      "640-674": 314.89,
+      "601-639": 314.89,
+      "0-600": 314.89
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-13": {
+    "id": "ab-1765427948662-13",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/nissan-altima",
+    "title": "2025 Nissan Altima",
+    "make": "Nissan",
+    "model": "Altima",
+    "trim": "",
+    "year": 2025,
+    "msrp": 30265,
+    "monthlyPayment": 30,
+    "incentives": 4675,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http://media.chromedata.com/MediaGallery/media/MzI0NDIxXk1lZGlhIEdhbGxlcnk/34JgArPCrvtx6rJiMnvUi1AyHHQll7Ncx39y4-fl021blU7Q7ydBXj7vF9ELGzqbF1HiMApnoXkI6B-s5q9Vk7COYJSpQFB2Hdn_KvX8zsIY3tQfzb79c8M3MHxz5mnMYFca9mEbWjIfnjiC6f4dLtR27SuTU-xRfp0L8mjbMl-RX7JhS5a8lw/cc_2025NIC042008878_01_2100_KAD.png&w=320&q=75",
+    "sourceId": "ab-nissan-altima-2025",
+    "raw": {
+      "allText": "Best Deal Tariff-Free Deal2025 Nissan AltimaMSRP from $30,265From$286‍/mo.Up to $4,675 in incentivesPick a trim to see exact offersShow  5 Trims"
+    },
+    "discountAmount": 1513,
+    "sellingPrice": 28752,
+    "residualValue": 18159,
+    "mfTable": {
+      "740+": 0.0015,
+      "700-739": 0.0017,
+      "675-699": 0.0018,
+      "640-674": 0.0019,
+      "601-639": 0.0021,
+      "0-600": 0.0025
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 398.34,
+      "700-739": 408.59,
+      "675-699": 413.72,
+      "640-674": 338.48,
+      "601-639": 348.73,
+      "0-600": 369.23
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-14": {
+    "id": "ab-1765427948662-14",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-venue",
+    "title": "2025 Hyundai Venue",
+    "make": "Hyundai",
+    "model": "Venue",
+    "trim": "",
+    "year": 2025,
+    "msrp": 24385,
+    "monthlyPayment": 24,
+    "incentives": 3000,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http://media.chromedata.com/MediaGallery/media/MzI0NDIxXk1lZGlhIEdhbGxlcnk/CmM4StO1O3pDwCg-eQ3VkdyBpg9Ix0AdWwh5xsVkgb0Y4Ae8hIMOx2wj5StCdZcoNql2xNOKQK7aU2ZcXDH-oiPMvh6OsJM6FN2P80RNCvww0hHMvWCd_FRwhsWKcV518gJ25IvZj_Comr_32uMhdCOcUmi7XSvw-pLfrv7zryv6Uw5lLtUmGg/cc_2025HYS202018374_01_2100_PE2.png&w=320&q=75",
+    "sourceId": "ab-hyundai-venue-2025",
+    "raw": {
+      "allText": "2025 Hyundai VenueMSRP from $24,385From$288‍/mo.Up to $3,000 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1219,
+    "sellingPrice": 23166,
+    "residualValue": 14631,
+    "mfTable": {
+      "740+": 0.0034,
+      "700-739": 0.0037,
+      "675-699": 0.004,
+      "640-674": 0.0043,
+      "601-639": 0.0048,
+      "0-600": 0.0055
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 399.41,
+      "700-739": 411.8,
+      "675-699": 424.19,
+      "640-674": 371.82,
+      "601-639": 392.47,
+      "0-600": 421.37
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-16": {
+    "id": "ab-1765427948662-16",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-elantra",
+    "title": "2025 Hyundai Elantra",
+    "make": "Hyundai",
+    "model": "Elantra",
+    "trim": "",
+    "year": 2025,
+    "msrp": 23945,
+    "monthlyPayment": 23,
+    "incentives": 5250,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FCmM4StO1O3pEBMr4ZP_vs9FvXlkOmpCCMYHQfeGLlAIjmFMujNmhtQYS1AKQSupyQpJ3_1HRDPsSffuB09UfYJTi5CrlcEEqKf4JdNHc4EC6OREuYkLgDk3CS-lI3b9VZWQzNCC0RpeOGHoDWJX57ODj1SC49qalrCzhR2gYfeE30yAcIRn8gw%2Fcc_2025HYC021979745_01_2100_M6T.png&w=3840&q=100",
+    "sourceId": "ab-hyundai-elantra-2025",
+    "raw": {
+      "allText": "Best Deal2025 Hyundai ElantraMSRP from $23,945From$173‍/mo.Up to $5,250 in incentivesPick a trim to see exact offersShow  6 Trims"
+    },
+    "discountAmount": 1197,
+    "sellingPrice": 22748,
+    "residualValue": 14367,
+    "mfTable": {
+      "740+": 0.0036,
+      "700-739": 0.0039,
+      "675-699": 0.0042,
+      "640-674": 0.0045,
+      "601-639": 0.005,
+      "0-600": 0.0057
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 400.31,
+      "700-739": 412.48,
+      "675-699": 424.64,
+      "640-674": 373.22,
+      "601-639": 393.5,
+      "0-600": 421.88
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-17": {
+    "id": "ab-1765427948662-17",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-elantra-hybrid",
+    "title": "2025 Hyundai Elantra Hybrid",
+    "make": "Hyundai",
+    "model": "Elantra Hybrid",
+    "trim": "",
+    "year": 2025,
+    "msrp": 27380,
+    "monthlyPayment": 27,
+    "incentives": 6000,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FCmM4StO1O3pOdxjar_fPetmS09zWOrwEIxkLCG5yMX93Ot7WdMfSU7aJxlzkE8UjYwE0_J5HjSGcFwIHbmooCo52-inJg0xBiFJi4UWzpk4zBAeo9GEKqyBnb0euaSddVnfC-MSTM3CPli-K27Xg64GkwbyTZFVZmCv6olq73MTLBKP9yOFzaw%2Fcc_2025HYC191980216_01_2100_A5G.png&w=3840&q=100",
+    "sourceId": "ab-hyundai-elantra-hybrid-2025",
+    "raw": {
+      "allText": "Best Deal2025 Hyundai Elantra HybridMSRP from $27,380From$223‍/mo.Up to $6,000 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1369,
+    "sellingPrice": 26011,
+    "residualValue": 16428,
+    "mfTable": {
+      "740+": 0.0024,
+      "700-739": 0.0025,
+      "675-699": 0.0027,
+      "640-674": 0.0029,
+      "601-639": 0.0033,
+      "0-600": 0.0038
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 402.09,
+      "700-739": 406.73,
+      "675-699": 416,
+      "640-674": 352.57,
+      "601-639": 371.12,
+      "0-600": 394.3
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-18": {
+    "id": "ab-1765427948662-18",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/nissan-sentra",
+    "title": "2025 Nissan Sentra",
+    "make": "Nissan",
+    "model": "Sentra",
+    "trim": "",
+    "year": 2025,
+    "msrp": 24180,
+    "monthlyPayment": 24,
+    "incentives": 4125,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FAMMuNVMsODc9NvxtTeVK8xBgHYzU_9qTRyF8C-UG6hmdjR1c5SlZXqjauQemiirNwlLjPNZlHUTI1tV6okJ1pWRZ75q4OHZ1kloP704DYoXb3uSuJRrrG1ePcXBIzFGZk9MqSGg-4sx2Nn9DFAXPNQ%2F2025NIC061924644_2100_01.png&w=3840&q=100",
+    "sourceId": "ab-nissan-sentra-2025",
+    "raw": {
+      "allText": "Best Deal2025 Nissan SentraMSRP from $24,180From$224‍/mo.Up to $4,125 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1209,
+    "sellingPrice": 22971,
+    "residualValue": 14508,
+    "mfTable": {
+      "740+": 0.0035,
+      "700-739": 0.0038,
+      "675-699": 0.0041,
+      "640-674": 0.0044,
+      "601-639": 0.0049,
+      "0-600": 0.0056
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 400.14,
+      "700-739": 412.42,
+      "675-699": 424.71,
+      "640-674": 372.78,
+      "601-639": 393.26,
+      "0-600": 421.92
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-19": {
+    "id": "ab-1765427948662-19",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/nissan-kicks",
+    "title": "2025 Nissan Kicks",
+    "make": "Nissan",
+    "model": "Kicks",
+    "trim": "",
+    "year": 2025,
+    "msrp": 28020,
+    "monthlyPayment": 28,
+    "incentives": 4650,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2F34JgArPCrvsQT9U76d6PaB8oMtHZA-ujq4tSflGG0D5p960kXw_SMXJQy1X2epe_ZizvB2jT7laVvexR-81RNWfklL_5FxQfVXJ5Xlc-ptEM5ouqIoYRkoNsVOG8ubL1rWGABc1meqSoda46XVHTHtvglLDBV749CGaWrntyC3_n56yHwi80YA%2Fcc_2025NIS262007925_01_2100_NBL.png&w=3840&q=100",
+    "sourceId": "ab-nissan-kicks-2025",
+    "raw": {
+      "allText": "Best Deal2025 Nissan KicksMSRP from $28,020From$230‍/mo.Up to $4,650 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1401,
+    "sellingPrice": 26619,
+    "residualValue": 16812,
+    "mfTable": {
+      "740+": 0.0022,
+      "700-739": 0.0023,
+      "675-699": 0.0025,
+      "640-674": 0.0027,
+      "601-639": 0.003,
+      "0-600": 0.0035
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 402,
+      "700-739": 406.75,
+      "675-699": 416.24,
+      "640-674": 351.32,
+      "601-639": 365.56,
+      "0-600": 389.28
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-20": {
+    "id": "ab-1765427948662-20",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/toyota-tacoma-2wd",
+    "title": "2025 Toyota Tacoma 2WD",
+    "make": "Toyota",
+    "model": "Tacoma 2WD",
+    "trim": "",
+    "year": 2025,
+    "msrp": 34548,
+    "monthlyPayment": 34,
+    "incentives": 4500,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FpTMKVhRTbHn3DyXt1HX9rff4cA3nbS5eTfvTLZ70r-aUUpm3A3PGBY0XJ4M9eeQpG6BbvNYjI3xgJWDJSRU5KnkajRt_kNzErLrUlBSPv375gzcHZxPh8a0kTib17xFvTz6Ung_gNk6NDs1V-VkmTXoLFuvdXdZMv1J3DzIFlRP7lJ4iZ3DfODEg-2kttLocAvj8Bmow6N4%2Fcc_2025TOT092004073_01_2100_040.png&w=3840&q=100",
+    "sourceId": "ab-toyota-tacoma-2wd-2025",
+    "raw": {
+      "allText": "Best Deal2025 Toyota Tacoma 2WDMSRP from $34,548From$251‍/mo.Up to $4,500 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1727,
+    "sellingPrice": 32821,
+    "residualValue": 20729,
+    "mfTable": {
+      "740+": 0.0006,
+      "700-739": 0.0006,
+      "675-699": 0.0007,
+      "640-674": 0.0007,
+      "601-639": 0.0008,
+      "0-600": 0.0009
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 402.06,
+      "700-739": 402.06,
+      "675-699": 407.91,
+      "640-674": 316.17,
+      "601-639": 322.02,
+      "0-600": 327.87
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-21": {
+    "id": "ab-1765427948662-21",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/kia-niro-ev",
+    "title": "2025 Kia Niro EV",
+    "make": "Kia",
+    "model": "Niro EV",
+    "trim": "",
+    "year": 2025,
+    "msrp": 42705,
+    "monthlyPayment": 42,
+    "incentives": 14937,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FT8KN3cplYDlxu7A0V4BblBd9fY0ZFLRorCwVqVKYFCRSrKgvuk9LjKWim7z620TsfjGgYsU63qjZxncRBh_6L5jypocoaS8o36BO7Kj9VZeR-5fc8iSButNDbOr_eDPs2A2dGP2WJnkN3X5t8_KQlc55a3Q6Dv03E69u3y_8e9yJB-g49x42_Q%2Fcc_2025KIS072011229_01_2100_KLG.png&w=3840&q=100",
+    "sourceId": "ab-kia-niro-ev-2025",
+    "raw": {
+      "allText": "Best Deal2025 Kia Niro EVMSRP from $42,705From$253‍/mo.Up to $14,937 in incentivesPick a trim to see exact offersShow  2 Trims"
+    },
+    "discountAmount": 2135,
+    "sellingPrice": 40570,
+    "residualValue": 25623,
+    "mfTable": {
+      "740+": 0,
+      "700-739": 0,
+      "675-699": 0,
+      "640-674": 0,
+      "601-639": 0,
+      "0-600": 0
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 453.6,
+      "700-739": 453.6,
+      "675-699": 453.6,
+      "640-674": 340.2,
+      "601-639": 340.2,
+      "0-600": 340.2
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-22": {
+    "id": "ab-1765427948662-22",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/toyota-corolla",
+    "title": "2026 Toyota Corolla",
+    "make": "Toyota",
+    "model": "Corolla",
+    "trim": "",
+    "year": 2026,
+    "msrp": 24229,
+    "monthlyPayment": 24,
+    "incentives": 750,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FaQrLCYuDE_uMlYW0NkQwG8Y9DjLEG3CVxgOKdkjWyaovTbphGVWTFKD8JEVmm5k5Dyaw47HctB1Ky_UrniFaYmFyQge8Z9uJwGA_9-A73ILLRGCMZczR8zbfCCM3TKJsmLOYDmef58jRzE7cMk7cGmEzQsrOME7xM5WudRVZXjqlkZQRLfy5EQ%2Fcc_2026TOC041987636_01_2100_1L7.png&w=3840&q=100",
+    "sourceId": "ab-toyota-corolla-2026",
+    "raw": {
+      "allText": "2026 Toyota CorollaMSRP from $24,229From$254‍/mo.Up to $750 in incentivesPick a trim to see exact offersShow  6 Trims"
+    },
+    "discountAmount": 1211,
+    "sellingPrice": 23018,
+    "residualValue": 14537,
+    "mfTable": {
+      "740+": 0.0035,
+      "700-739": 0.0038,
+      "675-699": 0.004,
+      "640-674": 0.0043,
+      "601-639": 0.0049,
+      "0-600": 0.0056
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 400.98,
+      "700-739": 413.28,
+      "675-699": 421.49,
+      "640-674": 369.46,
+      "601-639": 394.07,
+      "0-600": 422.79
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-23": {
+    "id": "ab-1765427948662-23",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-ioniq-5",
+    "title": "2025 Hyundai IONIQ 5",
+    "make": "Hyundai",
+    "model": "IONIQ 5",
+    "trim": "",
+    "year": 2025,
+    "msrp": 48395,
+    "monthlyPayment": 48,
+    "incentives": 18250,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FCmM4StO1O3pdTEtEesuAQEk6ZM54Aenvp86CxHugXd5RZyl-7SttxZcYnkViXGS5HLKW_YlGj1fDUiHIzuVc_TL2JeCnaAuSMFuTwQv22rT7FeIs5_zrBFanqx5-648v3AuntwzaCbkicluEDmHB8Vhg5AcvAeTFK-zQ98hM0lwCOiz0IDn87Q%2Fcc_2025HYS231968902_01_2100_M9U.png&w=3840&q=100",
+    "sourceId": "ab-hyundai-ioniq-5-2025",
+    "raw": {
+      "allText": "Best Deal Tariff-Free Deal2025 Hyundai IONIQ 5MSRP from $48,395From$256‍/mo.Up to $18,250 in incentivesPick a trim to see exact offersShow  5 Trims"
+    },
+    "discountAmount": 2420,
+    "sellingPrice": 45975,
+    "residualValue": 29037,
+    "mfTable": {
+      "740+": 0,
+      "700-739": 0,
+      "675-699": 0,
+      "640-674": 0,
+      "601-639": 0,
+      "0-600": 0
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 514.02,
+      "700-739": 514.02,
+      "675-699": 514.02,
+      "640-674": 385.52,
+      "601-639": 385.52,
+      "0-600": 385.52
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-24": {
+    "id": "ab-1765427948662-24",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-tucson",
+    "title": "2025 Hyundai Tucson",
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "",
+    "year": 2025,
+    "msrp": 31765,
+    "monthlyPayment": 31,
+    "incentives": 7900,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FCmM4StO1O3qWAWQARiCo11JiTNXtWgZSPupuqGNLH1iHTh04MMgnyXWzJeFxIyZykPbmaKHbiz7lcGoXWNhnBK2Q81ZNHHgOlk_GeaajpPaKPXvYdg6J1AcTc0rwAPU5gODOw7PYT6bsylt1pPeNtI7wlBtpbpIvT5p0j8mwvsZTY_CUs8rldA%2Fcc_2025HYS021990705_01_2100_S3B.png&w=3840&q=100",
+    "sourceId": "ab-hyundai-tucson-2025",
+    "raw": {
+      "allText": "Best Deal2025 Hyundai TucsonMSRP from $31,765From$265‍/mo.Up to $7,900 in incentivesPick a trim to see exact offersShow  6 Trims"
+    },
+    "discountAmount": 1588,
+    "sellingPrice": 30177,
+    "residualValue": 19059,
+    "mfTable": {
+      "740+": 0.0012,
+      "700-739": 0.0013,
+      "675-699": 0.0013,
+      "640-674": 0.0015,
+      "601-639": 0.0016,
+      "0-600": 0.0019
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 401.95,
+      "700-739": 407.33,
+      "675-699": 407.33,
+      "640-674": 333.74,
+      "601-639": 339.11,
+      "0-600": 355.25
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-25": {
+    "id": "ab-1765427948662-25",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/subaru-impreza",
+    "title": "2025 Subaru Impreza",
+    "make": "Subaru",
+    "model": "Impreza",
+    "trim": "",
+    "year": 2025,
+    "msrp": 25545,
+    "monthlyPayment": 25,
+    "incentives": 1500,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FqSWYp5VnHfhUkvP78gFw8IiSQRyK7OvQSxwC4J6q0XHFPNM_LFc7Xa5fV_yrDDDoN73nMf8XhticbUhaPS4DJ4t8cZc4MfFrpGltFtUtVe1bCh-zu6IEV_rMEjnChGlv3ugBQ6C3Q5m8No5kaLa9hjSO4vZl9K-w0Xaz3ILnS46zNGml-lE5sw%2Fcc_2025SUC042019529_01_2100_PRD.png&w=3840&q=100",
+    "sourceId": "ab-subaru-impreza-2025",
+    "raw": {
+      "allText": " Tariff-Free Deal2025 Subaru ImprezaMSRP from $25,545From$274‍/mo.Up to $1,500 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1277,
+    "sellingPrice": 24268,
+    "residualValue": 15327,
+    "mfTable": {
+      "740+": 0.003,
+      "700-739": 0.0032,
+      "675-699": 0.0035,
+      "640-674": 0.0037,
+      "601-639": 0.0042,
+      "0-600": 0.0048
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 401.11,
+      "700-739": 409.76,
+      "675-699": 422.74,
+      "640-674": 363.55,
+      "601-639": 385.18,
+      "0-600": 411.14
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-26": {
+    "id": "ab-1765427948662-26",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/kia-k4",
+    "title": "2025 Kia K4",
+    "make": "Kia",
+    "model": "K4",
+    "trim": "",
+    "year": 2025,
+    "msrp": 24185,
+    "monthlyPayment": 24,
+    "incentives": 3455,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http%3A%2F%2Fmedia.chromedata.com%2FMediaGallery%2Fmedia%2FMzI0NDIxXk1lZGlhIEdhbGxlcnk%2FT8KN3cplYDk_C2OyZ_IVSUrQVE-6sRI7nmC7kFw76qs5G-6T2p_lS_osMwa1s8K83hIX4tsvw2uEtArVuVpuzXHmqZlPmY1MAcSi1kKM7JUdhC3sBHx0pCIycZDc52yEH_tszFROPS9uxu1Fm-p00gWaJjlGYtRiLlvxuOexa3oDd_TOX9zMbA%2Fcc_2025KIC211930940_01_2100_B2R.png&w=3840&q=100",
+    "sourceId": "ab-kia-k4-2025",
+    "raw": {
+      "allText": "2025 Kia K4MSRP from $24,185From$275‍/mo.Up to $3,455 in incentivesPick a trim to see exact offersShow  5 Trims"
+    },
+    "discountAmount": 1209,
+    "sellingPrice": 22976,
+    "residualValue": 14511,
+    "mfTable": {
+      "740+": 0.0035,
+      "700-739": 0.0038,
+      "675-699": 0.0041,
+      "640-674": 0.0044,
+      "601-639": 0.0049,
+      "0-600": 0.0056
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 400.23,
+      "700-739": 412.52,
+      "675-699": 424.8,
+      "640-674": 372.87,
+      "601-639": 393.34,
+      "0-600": 422.01
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-27": {
+    "id": "ab-1765427948662-27",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-ioniq-6",
+    "title": "2025 Hyundai IONIQ 6",
+    "make": "Hyundai",
+    "model": "IONIQ 6",
+    "trim": "",
+    "year": 2025,
+    "msrp": 39530,
+    "monthlyPayment": 39,
+    "incentives": 14751,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=https://leasebandit-image.s3.us-west-2.amazonaws.com/prod/Hyundai_IONIQ6_2025_SEStandardRange_CuratedSilver_Black_18x7.5JAlloy_front.png&w=320&q=75",
+    "sourceId": "ab-hyundai-ioniq-6-2025",
+    "raw": {
+      "allText": "Best Deal2025 Hyundai IONIQ 6MSRP from $39,530From$282‍/mo.Up to $14,751 in incentivesPick a trim to see exact offersShow  4 Trims"
+    },
+    "discountAmount": 1977,
+    "sellingPrice": 37553,
+    "residualValue": 23718,
+    "mfTable": {
+      "740+": 0,
+      "700-739": 0,
+      "675-699": 0,
+      "640-674": 0,
+      "601-639": 0,
+      "0-600": 0
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 419.85,
+      "700-739": 419.85,
+      "675-699": 419.85,
+      "640-674": 314.89,
+      "601-639": 314.89,
+      "0-600": 314.89
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-28": {
+    "id": "ab-1765427948662-28",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/nissan-altima",
+    "title": "2025 Nissan Altima",
+    "make": "Nissan",
+    "model": "Altima",
+    "trim": "",
+    "year": 2025,
+    "msrp": 30265,
+    "monthlyPayment": 30,
+    "incentives": 4675,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http://media.chromedata.com/MediaGallery/media/MzI0NDIxXk1lZGlhIEdhbGxlcnk/34JgArPCrvtx6rJiMnvUi1AyHHQll7Ncx39y4-fl021blU7Q7ydBXj7vF9ELGzqbF1HiMApnoXkI6B-s5q9Vk7COYJSpQFB2Hdn_KvX8zsIY3tQfzb79c8M3MHxz5mnMYFca9mEbWjIfnjiC6f4dLtR27SuTU-xRfp0L8mjbMl-RX7JhS5a8lw/cc_2025NIC042008878_01_2100_KAD.png&w=320&q=75",
+    "sourceId": "ab-nissan-altima-2025",
+    "raw": {
+      "allText": "Best Deal Tariff-Free Deal2025 Nissan AltimaMSRP from $30,265From$286‍/mo.Up to $4,675 in incentivesPick a trim to see exact offersShow  5 Trims"
+    },
+    "discountAmount": 1513,
+    "sellingPrice": 28752,
+    "residualValue": 18159,
+    "mfTable": {
+      "740+": 0.0015,
+      "700-739": 0.0017,
+      "675-699": 0.0018,
+      "640-674": 0.0019,
+      "601-639": 0.0021,
+      "0-600": 0.0025
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 398.34,
+      "700-739": 408.59,
+      "675-699": 413.72,
+      "640-674": 338.48,
+      "601-639": 348.73,
+      "0-600": 369.23
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  },
+  "ab-1765427948662-29": {
+    "id": "ab-1765427948662-29",
+    "source": "autobandit",
+    "scrapedAt": "2025-12-11T04:39:08.662Z",
+    "url": "https://autobandit.com/deals/hyundai-venue",
+    "title": "2025 Hyundai Venue",
+    "make": "Hyundai",
+    "model": "Venue",
+    "trim": "",
+    "year": 2025,
+    "msrp": 24385,
+    "monthlyPayment": 24,
+    "incentives": 3000,
+    "downPayment": 0,
+    "termMonths": 36,
+    "mileagePerYear": 10000,
+    "moneyFactor": null,
+    "residualPercent": 60,
+    "imageUrl": "https://autobandit.com/_next/image?url=http://media.chromedata.com/MediaGallery/media/MzI0NDIxXk1lZGlhIEdhbGxlcnk/CmM4StO1O3pDwCg-eQ3VkdyBpg9Ix0AdWwh5xsVkgb0Y4Ae8hIMOx2wj5StCdZcoNql2xNOKQK7aU2ZcXDH-oiPMvh6OsJM6FN2P80RNCvww0hHMvWCd_FRwhsWKcV518gJ25IvZj_Comr_32uMhdCOcUmi7XSvw-pLfrv7zryv6Uw5lLtUmGg/cc_2025HYS202018374_01_2100_PE2.png&w=320&q=75",
+    "sourceId": "ab-hyundai-venue-2025",
+    "raw": {
+      "allText": "2025 Hyundai VenueMSRP from $24,385From$288‍/mo.Up to $3,000 in incentivesPick a trim to see exact offersShow  3 Trims"
+    },
+    "discountAmount": 1219,
+    "sellingPrice": 23166,
+    "residualValue": 14631,
+    "mfTable": {
+      "740+": 0.0034,
+      "700-739": 0.0037,
+      "675-699": 0.004,
+      "640-674": 0.0043,
+      "601-639": 0.0048,
+      "0-600": 0.0055
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 399.41,
+      "700-739": 411.8,
+      "675-699": 424.19,
+      "640-674": 371.82,
+      "601-639": 392.47,
+      "0-600": 421.37
+    },
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 450,
+      "otherTaxes": 0,
+      "taxOnFees": true
+    }
+  }
+}
