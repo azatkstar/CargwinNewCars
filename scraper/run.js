@@ -96,13 +96,17 @@ class ScraperRunner {
         this.mfCalculator.enrichOffer(offer)
       );
       
-      // Process images
-      console.log('[Runner] Processing images...');
-      for (const offer of enrichedOffers) {
-        const processedImages = await this.imageProcessor.processOfferImages(offer);
-        if (processedImages.length > 0) {
-          offer.images = processedImages.map(img => img.url);
+      // Skip image processing in mock mode
+      if (!this.useMock) {
+        console.log('[Runner] Processing images...');
+        for (const offer of enrichedOffers) {
+          const processedImages = await this.imageProcessor.processOfferImages(offer);
+          if (processedImages.length > 0) {
+            offer.images = processedImages.map(img => img.url);
+          }
         }
+      } else {
+        console.log('[Runner] Skipping image processing in mock mode');
       }
       
       // Detect changes
