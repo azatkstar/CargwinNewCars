@@ -11,6 +11,20 @@ export default function ScraperControl() {
   const [logs, setLogs] = useState([]);
   const [running, setRunning] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [selectedBrands, setSelectedBrands] = useState(['all']);
+
+  const brands = [
+    { value: 'all', label: 'All Brands' },
+    { value: 'toyota', label: 'Toyota' },
+    { value: 'lexus', label: 'Lexus' },
+    { value: 'honda', label: 'Honda' },
+    { value: 'hyundai', label: 'Hyundai' },
+    { value: 'kia', label: 'Kia' },
+    { value: 'nissan', label: 'Nissan' },
+    { value: 'bmw', label: 'BMW' },
+    { value: 'mercedes', label: 'Mercedes-Benz' },
+    { value: 'subaru', label: 'Subaru' }
+  ];
 
   useEffect(() => {
     loadStatus();
