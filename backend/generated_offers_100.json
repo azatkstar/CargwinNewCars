@@ -1,0 +1,5502 @@
+[
+  {
+    "id": "offer-0001",
+    "year": 2024,
+    "make": "Mercedes-Benz",
+    "model": "GLC",
+    "trim": "GLC 300 4MATIC",
+    "msrp": 52225,
+    "discountAmount": 5044,
+    "sellingPrice": 47181,
+    "residualPercent": 58,
+    "residualValue": 30290,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 493,
+      "otherTaxes": 122,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00121,
+      "700-739": 0.00131,
+      "675-699": 0.0014,
+      "640-674": 0.00151,
+      "601-639": 0.00169,
+      "0-600": 0.00194
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 863.33,
+      "700-739": 578.69,
+      "675-699": 625.31,
+      "640-674": 507.56,
+      "601-639": 522.65,
+      "0-600": 543.62
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1664629692704?w=800&q=80",
+      "https://images.unsplash.com/photo-1625948184944?w=800&q=80",
+      "https://images.unsplash.com/photo-1663799921435?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-MER-0001",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.956863",
+    "status": "active"
+  },
+  {
+    "id": "offer-0002",
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "Limited",
+    "msrp": 29172,
+    "discountAmount": 2207,
+    "sellingPrice": 26965,
+    "residualPercent": 63,
+    "residualValue": 18378,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 795,
+      "doc": 85,
+      "registration": 374,
+      "otherTaxes": 115,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00151,
+      "700-739": 0.00163,
+      "675-699": 0.00175,
+      "640-674": 0.00189,
+      "601-639": 0.00212,
+      "0-600": 0.00242
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 309.57,
+      "700-739": 335.09,
+      "675-699": 340.92,
+      "640-674": 283.78,
+      "601-639": 294.96,
+      "0-600": 309.55
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1643069945840?w=800&q=80",
+      "https://images.unsplash.com/photo-1618052367239?w=800&q=80",
+      "https://images.unsplash.com/photo-1620465342932?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-HYU-0002",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.956906",
+    "status": "active"
+  },
+  {
+    "id": "offer-0003",
+    "year": 2026,
+    "make": "Kia",
+    "model": "Sportage",
+    "trim": "SX",
+    "msrp": 32344,
+    "discountAmount": 2678,
+    "sellingPrice": 29666,
+    "residualPercent": 58,
+    "residualValue": 18760,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 548,
+      "otherTaxes": 126,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00147,
+      "700-739": 0.00158,
+      "675-699": 0.0017,
+      "640-674": 0.00183,
+      "601-639": 0.00205,
+      "0-600": 0.00235
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 563.71,
+      "700-739": 406.97,
+      "675-699": 413.2,
+      "640-674": 419.95,
+      "601-639": 350.15,
+      "0-600": 365.73
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1612842001614?w=800&q=80",
+      "https://images.unsplash.com/photo-1622691436104?w=800&q=80",
+      "https://images.unsplash.com/photo-1649896007616?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-KIA-0003",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.956933",
+    "status": "active"
+  },
+  {
+    "id": "offer-0004",
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "SEL",
+    "msrp": 27103,
+    "discountAmount": 3327,
+    "sellingPrice": 23776,
+    "residualPercent": 62,
+    "residualValue": 16804,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 394,
+      "otherTaxes": 129,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00141,
+      "700-739": 0.00152,
+      "675-699": 0.00163,
+      "640-674": 0.00176,
+      "601-639": 0.00197,
+      "0-600": 0.00225
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 257.82,
+      "700-739": 262.69,
+      "675-699": 283.84,
+      "640-674": 236.71,
+      "601-639": 246.02,
+      "0-600": 258.44
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1649702293279?w=800&q=80",
+      "https://images.unsplash.com/photo-1671190512294?w=800&q=80",
+      "https://images.unsplash.com/photo-1675123912276?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HYU-0004",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.956957",
+    "status": "active"
+  },
+  {
+    "id": "offer-0005",
+    "year": 2024,
+    "make": "Honda",
+    "model": "Pilot",
+    "trim": "Touring",
+    "msrp": 42239,
+    "discountAmount": 3898,
+    "sellingPrice": 38341,
+    "residualPercent": 58,
+    "residualValue": 24499,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 795,
+      "doc": 105,
+      "registration": 406,
+      "otherTaxes": 5,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00187,
+      "700-739": 0.00202,
+      "675-699": 0.00217,
+      "640-674": 0.00234,
+      "601-639": 0.00262,
+      "0-600": 0.003
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 538.41,
+      "700-739": 516.79,
+      "675-699": 558.63,
+      "640-674": 570.08,
+      "601-639": 485.86,
+      "0-600": 511.47
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1624740625660?w=800&q=80",
+      "https://images.unsplash.com/photo-1696541184190?w=800&q=80",
+      "https://images.unsplash.com/photo-1666928250387?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-HON-0005",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.956984",
+    "status": "active"
+  },
+  {
+    "id": "offer-0006",
+    "year": 2025,
+    "make": "BMW",
+    "model": "X3",
+    "trim": "M40i",
+    "msrp": 46019,
+    "discountAmount": 3903,
+    "sellingPrice": 42116,
+    "residualPercent": 67,
+    "residualValue": 30833,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 795,
+      "doc": 105,
+      "registration": 475,
+      "otherTaxes": 137,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00181,
+      "700-739": 0.00196,
+      "675-699": 0.0021,
+      "640-674": 0.00227,
+      "601-639": 0.00254,
+      "0-600": 0.0029
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 477.75,
+      "700-739": 489.49,
+      "675-699": 500.44,
+      "640-674": 513.74,
+      "601-639": 450.83,
+      "0-600": 478.99
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1645889563884?w=800&q=80",
+      "https://images.unsplash.com/photo-1678799374610?w=800&q=80",
+      "https://images.unsplash.com/photo-1637557774461?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-BMW-0006",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957008",
+    "status": "active"
+  },
+  {
+    "id": "offer-0007",
+    "year": 2025,
+    "make": "Kia",
+    "model": "Sportage",
+    "trim": "SX Prestige",
+    "msrp": 32920,
+    "discountAmount": 3901,
+    "sellingPrice": 29019,
+    "residualPercent": 54,
+    "residualValue": 17777,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 105,
+      "registration": 546,
+      "otherTaxes": 74,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.0013,
+      "700-739": 0.00141,
+      "675-699": 0.00151,
+      "640-674": 0.00163,
+      "601-639": 0.00182,
+      "0-600": 0.00208
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 409.49,
+      "700-739": 415.14,
+      "675-699": 420.28,
+      "640-674": 340.76,
+      "601-639": 350.52,
+      "0-600": 363.87
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1614629606078?w=800&q=80",
+      "https://images.unsplash.com/photo-1660334161516?w=800&q=80",
+      "https://images.unsplash.com/photo-1680866929245?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-KIA-0007",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957031",
+    "status": "active"
+  },
+  {
+    "id": "offer-0008",
+    "year": 2026,
+    "make": "Honda",
+    "model": "Accord",
+    "trim": "Sport",
+    "msrp": 32998,
+    "discountAmount": 2923,
+    "sellingPrice": 30075,
+    "residualPercent": 59,
+    "residualValue": 19469,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 105,
+      "registration": 501,
+      "otherTaxes": 76,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00135,
+      "700-739": 0.00146,
+      "675-699": 0.00156,
+      "640-674": 0.00168,
+      "601-639": 0.00189,
+      "0-600": 0.00216
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 363.4,
+      "700-739": 369.24,
+      "675-699": 398.86,
+      "640-674": 326.25,
+      "601-639": 337.4,
+      "0-600": 351.75
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1699423898971?w=800&q=80",
+      "https://images.unsplash.com/photo-1609008668753?w=800&q=80",
+      "https://images.unsplash.com/photo-1624083292856?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HON-0008",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957058",
+    "status": "active"
+  },
+  {
+    "id": "offer-0009",
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "GLC",
+    "trim": "GLC 300",
+    "msrp": 48921,
+    "discountAmount": 5482,
+    "sellingPrice": 43439,
+    "residualPercent": 57,
+    "residualValue": 27885,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 105,
+      "registration": 513,
+      "otherTaxes": 98,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00141,
+      "700-739": 0.00152,
+      "675-699": 0.00164,
+      "640-674": 0.00176,
+      "601-639": 0.00198,
+      "0-600": 0.00226
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 817.9,
+      "700-739": 554.15,
+      "675-699": 599.81,
+      "640-674": 609.16,
+      "601-639": 508.3,
+      "0-600": 530.12
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1615521597404?w=800&q=80",
+      "https://images.unsplash.com/photo-1626566973893?w=800&q=80",
+      "https://images.unsplash.com/photo-1664032517306?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-MER-0009",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957084",
+    "status": "active"
+  },
+  {
+    "id": "offer-0010",
+    "year": 2026,
+    "make": "Honda",
+    "model": "Pilot",
+    "trim": "EX-L",
+    "msrp": 38721,
+    "discountAmount": 3250,
+    "sellingPrice": 35471,
+    "residualPercent": 55,
+    "residualValue": 21297,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 795,
+      "doc": 95,
+      "registration": 472,
+      "otherTaxes": 155,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00181,
+      "700-739": 0.00195,
+      "675-699": 0.0021,
+      "640-674": 0.00226,
+      "601-639": 0.00253,
+      "0-600": 0.00289
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 760.93,
+      "700-739": 520.36,
+      "675-699": 562.95,
+      "640-674": 572.91,
+      "601-639": 481.71,
+      "0-600": 504.14
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1600465278327?w=800&q=80",
+      "https://images.unsplash.com/photo-1677753291898?w=800&q=80",
+      "https://images.unsplash.com/photo-1645993495872?w=800&q=80"
+    ],
+    "color": "Silver",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HON-0010",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957130",
+    "status": "active"
+  },
+  {
+    "id": "offer-0011",
+    "year": 2024,
+    "make": "Kia",
+    "model": "K5",
+    "trim": "GT-Line",
+    "msrp": 28106,
+    "discountAmount": 2213,
+    "sellingPrice": 25893,
+    "residualPercent": 52,
+    "residualValue": 14615,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 795,
+      "doc": 95,
+      "registration": 389,
+      "otherTaxes": 95,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00189,
+      "700-739": 0.00204,
+      "675-699": 0.00219,
+      "640-674": 0.00236,
+      "601-639": 0.00265,
+      "0-600": 0.00302
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 599.76,
+      "700-739": 434.52,
+      "675-699": 441.18,
+      "640-674": 448.74,
+      "601-639": 375.68,
+      "0-600": 392.13
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1648095945716?w=800&q=80",
+      "https://images.unsplash.com/photo-1654319946734?w=800&q=80",
+      "https://images.unsplash.com/photo-1649460240987?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-KIA-0011",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957155",
+    "status": "active"
+  },
+  {
+    "id": "offer-0012",
+    "year": 2024,
+    "make": "Honda",
+    "model": "CR-V",
+    "trim": "EX-L",
+    "msrp": 34433,
+    "discountAmount": 3458,
+    "sellingPrice": 30975,
+    "residualPercent": 54,
+    "residualValue": 18594,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 795,
+      "doc": 105,
+      "registration": 507,
+      "otherTaxes": 165,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00142,
+      "700-739": 0.00154,
+      "675-699": 0.00165,
+      "640-674": 0.00178,
+      "601-639": 0.00199,
+      "0-600": 0.00227
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 419.85,
+      "700-739": 454.92,
+      "675-699": 460.83,
+      "640-674": 374.73,
+      "601-639": 386.0,
+      "0-600": 401.02
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1636377325404?w=800&q=80",
+      "https://images.unsplash.com/photo-1673753940710?w=800&q=80",
+      "https://images.unsplash.com/photo-1693638302492?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HON-0012",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957180",
+    "status": "active"
+  },
+  {
+    "id": "offer-0013",
+    "year": 2026,
+    "make": "Toyota",
+    "model": "Camry",
+    "trim": "TRD",
+    "msrp": 31956,
+    "discountAmount": 2489,
+    "sellingPrice": 29467,
+    "residualPercent": 68,
+    "residualValue": 21730,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 595,
+      "doc": 105,
+      "registration": 498,
+      "otherTaxes": 146,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.0013,
+      "700-739": 0.00141,
+      "675-699": 0.00151,
+      "640-674": 0.00163,
+      "601-639": 0.00182,
+      "0-600": 0.00209
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 417.13,
+      "700-739": 290.19,
+      "675-699": 313.41,
+      "640-674": 320.0,
+      "601-639": 272.81,
+      "0-600": 287.63
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1661249337414?w=800&q=80",
+      "https://images.unsplash.com/photo-1633880494253?w=800&q=80",
+      "https://images.unsplash.com/photo-1618174606005?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-TOY-0013",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957202",
+    "status": "active"
+  },
+  {
+    "id": "offer-0014",
+    "year": 2026,
+    "make": "Mercedes-Benz",
+    "model": "E-Class",
+    "trim": "E 350",
+    "msrp": 64559,
+    "discountAmount": 6997,
+    "sellingPrice": 57562,
+    "residualPercent": 52,
+    "residualValue": 33571,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 105,
+      "registration": 508,
+      "otherTaxes": 200,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00206,
+      "700-739": 0.00222,
+      "675-699": 0.00239,
+      "640-674": 0.00257,
+      "601-639": 0.00288,
+      "0-600": 0.00329
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 881.17,
+      "700-739": 897.17,
+      "675-699": 970.44,
+      "640-674": 805.59,
+      "601-639": 836.6,
+      "0-600": 877.6
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1612378926202?w=800&q=80",
+      "https://images.unsplash.com/photo-1609384902230?w=800&q=80",
+      "https://images.unsplash.com/photo-1688897880918?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-MER-0014",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957224",
+    "status": "active"
+  },
+  {
+    "id": "offer-0015",
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "Limited",
+    "msrp": 31737,
+    "discountAmount": 2617,
+    "sellingPrice": 29120,
+    "residualPercent": 65,
+    "residualValue": 20629,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 384,
+      "otherTaxes": 10,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00155,
+      "700-739": 0.00168,
+      "675-699": 0.0018,
+      "640-674": 0.00194,
+      "601-639": 0.00218,
+      "0-600": 0.00249
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 462.14,
+      "700-739": 323.14,
+      "675-699": 349.0,
+      "640-674": 356.47,
+      "601-639": 306.04,
+      "0-600": 322.58
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1610705550640?w=800&q=80",
+      "https://images.unsplash.com/photo-1600430033563?w=800&q=80",
+      "https://images.unsplash.com/photo-1634748035617?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HYU-0015",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957245",
+    "status": "active"
+  },
+  {
+    "id": "offer-0016",
+    "year": 2024,
+    "make": "Hyundai",
+    "model": "Sonata",
+    "trim": "Limited",
+    "msrp": 27166,
+    "discountAmount": 2581,
+    "sellingPrice": 24585,
+    "residualPercent": 60,
+    "residualValue": 16300,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 105,
+      "registration": 475,
+      "otherTaxes": 8,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00145,
+      "700-739": 0.00156,
+      "675-699": 0.00168,
+      "640-674": 0.00181,
+      "601-639": 0.00203,
+      "0-600": 0.00231
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 443.93,
+      "700-739": 322.58,
+      "675-699": 327.96,
+      "640-674": 270.65,
+      "601-639": 280.52,
+      "0-600": 293.09
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1637192355244?w=800&q=80",
+      "https://images.unsplash.com/photo-1688924285362?w=800&q=80",
+      "https://images.unsplash.com/photo-1629127270622?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-HYU-0016",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957272",
+    "status": "active"
+  },
+  {
+    "id": "offer-0017",
+    "year": 2026,
+    "make": "Honda",
+    "model": "CR-V",
+    "trim": "EX",
+    "msrp": 34121,
+    "discountAmount": 2897,
+    "sellingPrice": 31224,
+    "residualPercent": 65,
+    "residualValue": 22179,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 347,
+      "otherTaxes": 120,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00192,
+      "700-739": 0.00207,
+      "675-699": 0.00222,
+      "640-674": 0.0024,
+      "601-639": 0.00268,
+      "0-600": 0.00307
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 367.07,
+      "700-739": 397.07,
+      "675-699": 405.86,
+      "640-674": 416.41,
+      "601-639": 363.88,
+      "0-600": 386.74
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1690989221070?w=800&q=80",
+      "https://images.unsplash.com/photo-1658076319515?w=800&q=80",
+      "https://images.unsplash.com/photo-1607986590291?w=800&q=80"
+    ],
+    "color": "Gray",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HON-0017",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957296",
+    "status": "active"
+  },
+  {
+    "id": "offer-0018",
+    "year": 2024,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "N Line",
+    "msrp": 27299,
+    "discountAmount": 3667,
+    "sellingPrice": 23632,
+    "residualPercent": 55,
+    "residualValue": 15014,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 335,
+      "otherTaxes": 66,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00176,
+      "700-739": 0.0019,
+      "675-699": 0.00204,
+      "640-674": 0.0022,
+      "601-639": 0.00246,
+      "0-600": 0.00281
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 315.72,
+      "700-739": 321.63,
+      "675-699": 347.66,
+      "640-674": 289.03,
+      "601-639": 300.01,
+      "0-600": 314.79
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1698796847062?w=800&q=80",
+      "https://images.unsplash.com/photo-1611020503508?w=800&q=80",
+      "https://images.unsplash.com/photo-1674782876259?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-HYU-0018",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957319",
+    "status": "active"
+  },
+  {
+    "id": "offer-0019",
+    "year": 2024,
+    "make": "Lexus",
+    "model": "ES",
+    "trim": "ES 350",
+    "msrp": 40667,
+    "discountAmount": 2600,
+    "sellingPrice": 38067,
+    "residualPercent": 52,
+    "residualValue": 21147,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 565,
+      "otherTaxes": 21,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00178,
+      "700-739": 0.00193,
+      "675-699": 0.00207,
+      "640-674": 0.00223,
+      "601-639": 0.0025,
+      "0-600": 0.00286
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 583.73,
+      "700-739": 632.49,
+      "675-699": 641.46,
+      "640-674": 524.52,
+      "601-639": 541.83,
+      "0-600": 564.9
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1621363976125?w=800&q=80",
+      "https://images.unsplash.com/photo-1639572069193?w=800&q=80",
+      "https://images.unsplash.com/photo-1680079620830?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-LEX-0019",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957342",
+    "status": "active"
+  },
+  {
+    "id": "offer-0020",
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "N Line",
+    "msrp": 27825,
+    "discountAmount": 2861,
+    "sellingPrice": 24964,
+    "residualPercent": 62,
+    "residualValue": 17252,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 795,
+      "doc": 95,
+      "registration": 439,
+      "otherTaxes": 85,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00206,
+      "700-739": 0.00222,
+      "675-699": 0.00239,
+      "640-674": 0.00257,
+      "601-639": 0.00288,
+      "0-600": 0.00329
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 305.35,
+      "700-739": 312.59,
+      "675-699": 337.96,
+      "640-674": 346.11,
+      "601-639": 302.71,
+      "0-600": 321.28
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1622897478245?w=800&q=80",
+      "https://images.unsplash.com/photo-1622790997927?w=800&q=80",
+      "https://images.unsplash.com/photo-1605391417817?w=800&q=80"
+    ],
+    "color": "Silver",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-HYU-0020",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957362",
+    "status": "active"
+  },
+  {
+    "id": "offer-0021",
+    "year": 2024,
+    "make": "Mercedes-Benz",
+    "model": "GLC",
+    "trim": "GLC 300",
+    "msrp": 52875,
+    "discountAmount": 3910,
+    "sellingPrice": 48965,
+    "residualPercent": 65,
+    "residualValue": 34369,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 484,
+      "otherTaxes": 150,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00146,
+      "700-739": 0.00158,
+      "675-699": 0.00169,
+      "640-674": 0.00182,
+      "601-639": 0.00204,
+      "0-600": 0.00233
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 565.33,
+      "700-739": 542.6,
+      "675-699": 585.88,
+      "640-674": 488.79,
+      "601-639": 508.46,
+      "0-600": 534.37
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1611656295037?w=800&q=80",
+      "https://images.unsplash.com/photo-1664007708052?w=800&q=80",
+      "https://images.unsplash.com/photo-1671942412889?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-MER-0021",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957383",
+    "status": "active"
+  },
+  {
+    "id": "offer-0022",
+    "year": 2026,
+    "make": "Honda",
+    "model": "Civic",
+    "trim": "Touring",
+    "msrp": 24067,
+    "discountAmount": 1754,
+    "sellingPrice": 22313,
+    "residualPercent": 54,
+    "residualValue": 12996,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 596,
+      "otherTaxes": 134,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00162,
+      "700-739": 0.00175,
+      "675-699": 0.00188,
+      "640-674": 0.00203,
+      "601-639": 0.00227,
+      "0-600": 0.0026
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 342.08,
+      "700-739": 347.05,
+      "675-699": 352.01,
+      "640-674": 287.71,
+      "601-639": 296.88,
+      "0-600": 309.49
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1693706391423?w=800&q=80",
+      "https://images.unsplash.com/photo-1636427791569?w=800&q=80",
+      "https://images.unsplash.com/photo-1645615861564?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HON-0022",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957405",
+    "status": "active"
+  },
+  {
+    "id": "offer-0023",
+    "year": 2025,
+    "make": "Kia",
+    "model": "K5",
+    "trim": "GT",
+    "msrp": 29330,
+    "discountAmount": 1838,
+    "sellingPrice": 27492,
+    "residualPercent": 67,
+    "residualValue": 19651,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 595,
+      "doc": 85,
+      "registration": 320,
+      "otherTaxes": 80,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00155,
+      "700-739": 0.00167,
+      "675-699": 0.0018,
+      "640-674": 0.00194,
+      "601-639": 0.00217,
+      "0-600": 0.00248
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 436.76,
+      "700-739": 323.96,
+      "675-699": 330.66,
+      "640-674": 278.38,
+      "601-639": 290.23,
+      "0-600": 306.19
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1659838571332?w=800&q=80",
+      "https://images.unsplash.com/photo-1649931980053?w=800&q=80",
+      "https://images.unsplash.com/photo-1637688994481?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-KIA-0023",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957429",
+    "status": "active"
+  },
+  {
+    "id": "offer-0024",
+    "year": 2024,
+    "make": "BMW",
+    "model": "5 Series",
+    "trim": "540i",
+    "msrp": 62213,
+    "discountAmount": 5705,
+    "sellingPrice": 56508,
+    "residualPercent": 59,
+    "residualValue": 36706,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 322,
+      "otherTaxes": 34,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00135,
+      "700-739": 0.00146,
+      "675-699": 0.00157,
+      "640-674": 0.00169,
+      "601-639": 0.00189,
+      "0-600": 0.00216
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 1043.64,
+      "700-739": 706.61,
+      "675-699": 764.3,
+      "640-674": 776.58,
+      "601-639": 646.12,
+      "0-600": 673.74
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1698126905221?w=800&q=80",
+      "https://images.unsplash.com/photo-1673168915092?w=800&q=80",
+      "https://images.unsplash.com/photo-1623702429564?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-BMW-0024",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957451",
+    "status": "active"
+  },
+  {
+    "id": "offer-0025",
+    "year": 2025,
+    "make": "Hyundai",
+    "model": "Sonata",
+    "trim": "Limited",
+    "msrp": 28986,
+    "discountAmount": 2006,
+    "sellingPrice": 26980,
+    "residualPercent": 58,
+    "residualValue": 16812,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 595,
+      "doc": 85,
+      "registration": 552,
+      "otherTaxes": 91,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00146,
+      "700-739": 0.00157,
+      "675-699": 0.00169,
+      "640-674": 0.00182,
+      "601-639": 0.00204,
+      "0-600": 0.00233
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 374.96,
+      "700-739": 380.17,
+      "675-699": 385.86,
+      "640-674": 392.02,
+      "601-639": 326.02,
+      "0-600": 339.76
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1620967283934?w=800&q=80",
+      "https://images.unsplash.com/photo-1641475764157?w=800&q=80",
+      "https://images.unsplash.com/photo-1698346519175?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HYU-0025",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957474",
+    "status": "active"
+  },
+  {
+    "id": "offer-0026",
+    "year": 2025,
+    "make": "Lexus",
+    "model": "ES",
+    "trim": "ES 350",
+    "msrp": 42690,
+    "discountAmount": 3367,
+    "sellingPrice": 39323,
+    "residualPercent": 65,
+    "residualValue": 27748,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 361,
+      "otherTaxes": 65,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00125,
+      "700-739": 0.00135,
+      "675-699": 0.00145,
+      "640-674": 0.00156,
+      "601-639": 0.00175,
+      "0-600": 0.002
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 607.17,
+      "700-739": 441.95,
+      "675-699": 449.14,
+      "640-674": 370.85,
+      "601-639": 384.51,
+      "0-600": 402.5
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1601251116798?w=800&q=80",
+      "https://images.unsplash.com/photo-1600475641613?w=800&q=80",
+      "https://images.unsplash.com/photo-1680846682346?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-LEX-0026",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957495",
+    "status": "active"
+  },
+  {
+    "id": "offer-0027",
+    "year": 2026,
+    "make": "Toyota",
+    "model": "Camry",
+    "trim": "TRD",
+    "msrp": 27842,
+    "discountAmount": 2756,
+    "sellingPrice": 25086,
+    "residualPercent": 55,
+    "residualValue": 15313,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 518,
+      "otherTaxes": 126,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00154,
+      "700-739": 0.00167,
+      "675-699": 0.00179,
+      "640-674": 0.00193,
+      "601-639": 0.00216,
+      "0-600": 0.00247
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 503.46,
+      "700-739": 341.12,
+      "675-699": 368.71,
+      "640-674": 374.78,
+      "601-639": 311.95,
+      "0-600": 325.39
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1627013680750?w=800&q=80",
+      "https://images.unsplash.com/photo-1618960880989?w=800&q=80",
+      "https://images.unsplash.com/photo-1667631868234?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-TOY-0027",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957517",
+    "status": "active"
+  },
+  {
+    "id": "offer-0028",
+    "year": 2026,
+    "make": "BMW",
+    "model": "X3",
+    "trim": "sDrive30i",
+    "msrp": 52487,
+    "discountAmount": 4259,
+    "sellingPrice": 48228,
+    "residualPercent": 55,
+    "residualValue": 28868,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 795,
+      "doc": 95,
+      "registration": 450,
+      "otherTaxes": 1,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00152,
+      "700-739": 0.00164,
+      "675-699": 0.00176,
+      "640-674": 0.0019,
+      "601-639": 0.00213,
+      "0-600": 0.00243
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 990.83,
+      "700-739": 668.0,
+      "675-699": 722.29,
+      "640-674": 589.68,
+      "601-639": 608.7,
+      "0-600": 633.5
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1690103467638?w=800&q=80",
+      "https://images.unsplash.com/photo-1627037896947?w=800&q=80",
+      "https://images.unsplash.com/photo-1630689498107?w=800&q=80"
+    ],
+    "color": "Gray",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-BMW-0028",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957539",
+    "status": "active"
+  },
+  {
+    "id": "offer-0029",
+    "year": 2026,
+    "make": "Honda",
+    "model": "Civic",
+    "trim": "EX",
+    "msrp": 25102,
+    "discountAmount": 2175,
+    "sellingPrice": 22927,
+    "residualPercent": 68,
+    "residualValue": 17069,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 376,
+      "otherTaxes": 62,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00197,
+      "700-739": 0.00213,
+      "675-699": 0.00228,
+      "640-674": 0.00246,
+      "601-639": 0.00276,
+      "0-600": 0.00315
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 352.74,
+      "700-739": 257.17,
+      "675-699": 277.4,
+      "640-674": 285.27,
+      "601-639": 253.93,
+      "0-600": 270.97
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1690115612747?w=800&q=80",
+      "https://images.unsplash.com/photo-1646253854263?w=800&q=80",
+      "https://images.unsplash.com/photo-1655405244939?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HON-0029",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957561",
+    "status": "active"
+  },
+  {
+    "id": "offer-0030",
+    "year": 2025,
+    "make": "Lexus",
+    "model": "RX",
+    "trim": "RX 450h",
+    "msrp": 51815,
+    "discountAmount": 4842,
+    "sellingPrice": 46973,
+    "residualPercent": 61,
+    "residualValue": 31607,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 595,
+      "doc": 105,
+      "registration": 357,
+      "otherTaxes": 82,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00167,
+      "700-739": 0.0018,
+      "675-699": 0.00193,
+      "640-674": 0.00208,
+      "601-639": 0.00233,
+      "0-600": 0.00267
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 846.7,
+      "700-739": 623.68,
+      "675-699": 634.9,
+      "640-674": 530.72,
+      "601-639": 552.28,
+      "0-600": 581.6
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1691191482168?w=800&q=80",
+      "https://images.unsplash.com/photo-1686522355642?w=800&q=80",
+      "https://images.unsplash.com/photo-1666931239460?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-LEX-0030",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957595",
+    "status": "active"
+  },
+  {
+    "id": "offer-0031",
+    "year": 2026,
+    "make": "Lexus",
+    "model": "RX",
+    "trim": "RX 350",
+    "msrp": 52129,
+    "discountAmount": 4638,
+    "sellingPrice": 47491,
+    "residualPercent": 66,
+    "residualValue": 34405,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 459,
+      "otherTaxes": 167,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00184,
+      "700-739": 0.00199,
+      "675-699": 0.00214,
+      "640-674": 0.0023,
+      "601-639": 0.00258,
+      "0-600": 0.00295
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 760.31,
+      "700-739": 575.17,
+      "675-699": 588.59,
+      "640-674": 602.91,
+      "601-639": 528.68,
+      "0-600": 561.78
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1615882425872?w=800&q=80",
+      "https://images.unsplash.com/photo-1683156019748?w=800&q=80",
+      "https://images.unsplash.com/photo-1602364096459?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-LEX-0031",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957622",
+    "status": "active"
+  },
+  {
+    "id": "offer-0032",
+    "year": 2025,
+    "make": "Lexus",
+    "model": "ES",
+    "trim": "ES 350 F Sport",
+    "msrp": 46729,
+    "discountAmount": 2129,
+    "sellingPrice": 44600,
+    "residualPercent": 64,
+    "residualValue": 29907,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 400,
+      "otherTaxes": 129,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00191,
+      "700-739": 0.00206,
+      "675-699": 0.00221,
+      "640-674": 0.00239,
+      "601-639": 0.00267,
+      "0-600": 0.00306
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 604.12,
+      "700-739": 616.38,
+      "675-699": 628.65,
+      "640-674": 643.37,
+      "601-639": 554.28,
+      "0-600": 586.17
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1670680764294?w=800&q=80",
+      "https://images.unsplash.com/photo-1674729203981?w=800&q=80",
+      "https://images.unsplash.com/photo-1644207740214?w=800&q=80"
+    ],
+    "color": "Gray",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-LEX-0032",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957645",
+    "status": "active"
+  },
+  {
+    "id": "offer-0033",
+    "year": 2025,
+    "make": "BMW",
+    "model": "5 Series",
+    "trim": "530i",
+    "msrp": 59650,
+    "discountAmount": 7933,
+    "sellingPrice": 51717,
+    "residualPercent": 55,
+    "residualValue": 32808,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 406,
+      "otherTaxes": 195,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00196,
+      "700-739": 0.00211,
+      "675-699": 0.00227,
+      "640-674": 0.00245,
+      "601-639": 0.00274,
+      "0-600": 0.00313
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 741.01,
+      "700-739": 711.28,
+      "675-699": 769.11,
+      "640-674": 785.43,
+      "601-639": 670.89,
+      "0-600": 706.24
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1690800757777?w=800&q=80",
+      "https://images.unsplash.com/photo-1603661229220?w=800&q=80",
+      "https://images.unsplash.com/photo-1613743829325?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-BMW-0033",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957675",
+    "status": "active"
+  },
+  {
+    "id": "offer-0034",
+    "year": 2024,
+    "make": "Lexus",
+    "model": "RX",
+    "trim": "RX 450h",
+    "msrp": 50009,
+    "discountAmount": 4353,
+    "sellingPrice": 45656,
+    "residualPercent": 61,
+    "residualValue": 30505,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 795,
+      "doc": 105,
+      "registration": 546,
+      "otherTaxes": 179,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00161,
+      "700-739": 0.00174,
+      "675-699": 0.00187,
+      "640-674": 0.00201,
+      "601-639": 0.00226,
+      "0-600": 0.00258
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 593.75,
+      "700-739": 604.57,
+      "675-699": 615.39,
+      "640-674": 512.09,
+      "601-639": 532.89,
+      "0-600": 559.51
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1603628689129?w=800&q=80",
+      "https://images.unsplash.com/photo-1631234198665?w=800&q=80",
+      "https://images.unsplash.com/photo-1691023124642?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-LEX-0034",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957698",
+    "status": "active"
+  },
+  {
+    "id": "offer-0035",
+    "year": 2026,
+    "make": "BMW",
+    "model": "3 Series",
+    "trim": "330i",
+    "msrp": 44201,
+    "discountAmount": 3354,
+    "sellingPrice": 40847,
+    "residualPercent": 52,
+    "residualValue": 22985,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 795,
+      "doc": 85,
+      "registration": 411,
+      "otherTaxes": 137,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00164,
+      "700-739": 0.00177,
+      "675-699": 0.00191,
+      "640-674": 0.00205,
+      "601-639": 0.0023,
+      "0-600": 0.00263
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 927.46,
+      "700-739": 665.5,
+      "675-699": 675.26,
+      "640-674": 549.51,
+      "601-639": 566.94,
+      "0-600": 589.95
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1638486160553?w=800&q=80",
+      "https://images.unsplash.com/photo-1694118721631?w=800&q=80",
+      "https://images.unsplash.com/photo-1689313984550?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-BMW-0035",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957720",
+    "status": "active"
+  },
+  {
+    "id": "offer-0036",
+    "year": 2025,
+    "make": "Kia",
+    "model": "Sportage",
+    "trim": "LX",
+    "msrp": 27335,
+    "discountAmount": 2882,
+    "sellingPrice": 24453,
+    "residualPercent": 63,
+    "residualValue": 17221,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 515,
+      "otherTaxes": 167,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00167,
+      "700-739": 0.00181,
+      "675-699": 0.00194,
+      "640-674": 0.00209,
+      "601-639": 0.00234,
+      "0-600": 0.00268
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 296.86,
+      "700-739": 286.3,
+      "675-699": 309.21,
+      "640-674": 260.95,
+      "601-639": 272.38,
+      "0-600": 287.93
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1688802212921?w=800&q=80",
+      "https://images.unsplash.com/photo-1675591652190?w=800&q=80",
+      "https://images.unsplash.com/photo-1696326467247?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-KIA-0036",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957742",
+    "status": "active"
+  },
+  {
+    "id": "offer-0037",
+    "year": 2026,
+    "make": "Toyota",
+    "model": "Corolla",
+    "trim": "SE",
+    "msrp": 26683,
+    "discountAmount": 1690,
+    "sellingPrice": 24993,
+    "residualPercent": 61,
+    "residualValue": 16277,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 337,
+      "otherTaxes": 1,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00121,
+      "700-739": 0.00131,
+      "675-699": 0.00141,
+      "640-674": 0.00152,
+      "601-639": 0.0017,
+      "0-600": 0.00194
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 453.38,
+      "700-739": 304.61,
+      "675-699": 329.58,
+      "640-674": 334.56,
+      "601-639": 276.29,
+      "0-600": 287.16
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1663510496733?w=800&q=80",
+      "https://images.unsplash.com/photo-1673102083398?w=800&q=80",
+      "https://images.unsplash.com/photo-1686024615242?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-TOY-0037",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957768",
+    "status": "active"
+  },
+  {
+    "id": "offer-0038",
+    "year": 2024,
+    "make": "Lexus",
+    "model": "ES",
+    "trim": "ES 350 F Sport",
+    "msrp": 46700,
+    "discountAmount": 4128,
+    "sellingPrice": 42572,
+    "residualPercent": 57,
+    "residualValue": 26619,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 362,
+      "otherTaxes": 55,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00131,
+      "700-739": 0.00141,
+      "675-699": 0.00152,
+      "640-674": 0.00163,
+      "601-639": 0.00183,
+      "0-600": 0.00209
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 545.91,
+      "700-739": 590.71,
+      "675-699": 599.03,
+      "640-674": 607.34,
+      "601-639": 501.43,
+      "0-600": 521.08
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1686890750021?w=800&q=80",
+      "https://images.unsplash.com/photo-1699532523466?w=800&q=80",
+      "https://images.unsplash.com/photo-1613097251926?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-LEX-0038",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957791",
+    "status": "active"
+  },
+  {
+    "id": "offer-0039",
+    "year": 2026,
+    "make": "Honda",
+    "model": "Pilot",
+    "trim": "Touring",
+    "msrp": 38780,
+    "discountAmount": 4662,
+    "sellingPrice": 34118,
+    "residualPercent": 59,
+    "residualValue": 22880,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 795,
+      "doc": 95,
+      "registration": 507,
+      "otherTaxes": 69,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00128,
+      "700-739": 0.00138,
+      "675-699": 0.00148,
+      "640-674": 0.0016,
+      "601-639": 0.00179,
+      "0-600": 0.00204
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 413.05,
+      "700-739": 393.4,
+      "675-699": 425.27,
+      "640-674": 348.91,
+      "601-639": 360.52,
+      "0-600": 375.8
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1622105302938?w=800&q=80",
+      "https://images.unsplash.com/photo-1623424087633?w=800&q=80",
+      "https://images.unsplash.com/photo-1604008887387?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HON-0039",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957813",
+    "status": "active"
+  },
+  {
+    "id": "offer-0040",
+    "year": 2024,
+    "make": "Kia",
+    "model": "Telluride",
+    "trim": "LX",
+    "msrp": 38510,
+    "discountAmount": 4093,
+    "sellingPrice": 34417,
+    "residualPercent": 66,
+    "residualValue": 25417,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 384,
+      "otherTaxes": 61,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.0019,
+      "700-739": 0.00206,
+      "675-699": 0.00221,
+      "640-674": 0.00238,
+      "601-639": 0.00266,
+      "0-600": 0.00305
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 529.0,
+      "700-739": 404.05,
+      "675-699": 413.77,
+      "640-674": 357.12,
+      "601-639": 375.26,
+      "0-600": 400.52
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1683061244568?w=800&q=80",
+      "https://images.unsplash.com/photo-1678982341301?w=800&q=80",
+      "https://images.unsplash.com/photo-1690717392690?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-KIA-0040",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957836",
+    "status": "active"
+  },
+  {
+    "id": "offer-0041",
+    "year": 2024,
+    "make": "Mercedes-Benz",
+    "model": "C-Class",
+    "trim": "C 300 4MATIC",
+    "msrp": 50406,
+    "discountAmount": 4118,
+    "sellingPrice": 46288,
+    "residualPercent": 61,
+    "residualValue": 30748,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 795,
+      "doc": 85,
+      "registration": 452,
+      "otherTaxes": 110,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00156,
+      "700-739": 0.00169,
+      "675-699": 0.00182,
+      "640-674": 0.00196,
+      "601-639": 0.00219,
+      "0-600": 0.0025
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 838.69,
+      "700-739": 577.55,
+      "675-699": 624.77,
+      "640-674": 518.65,
+      "601-639": 538.01,
+      "0-600": 564.1
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1694694090139?w=800&q=80",
+      "https://images.unsplash.com/photo-1698585914274?w=800&q=80",
+      "https://images.unsplash.com/photo-1603669154705?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-MER-0041",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957858",
+    "status": "active"
+  },
+  {
+    "id": "offer-0042",
+    "year": 2026,
+    "make": "Mercedes-Benz",
+    "model": "C-Class",
+    "trim": "AMG C 43",
+    "msrp": 48771,
+    "discountAmount": 5259,
+    "sellingPrice": 43512,
+    "residualPercent": 68,
+    "residualValue": 33164,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 895,
+      "doc": 105,
+      "registration": 348,
+      "otherTaxes": 91,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00199,
+      "700-739": 0.00214,
+      "675-699": 0.0023,
+      "640-674": 0.00248,
+      "601-639": 0.00278,
+      "0-600": 0.00318
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 476.33,
+      "700-739": 488.78,
+      "675-699": 502.06,
+      "640-674": 439.21,
+      "601-639": 464.11,
+      "0-600": 497.31
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1642330988786?w=800&q=80",
+      "https://images.unsplash.com/photo-1668214546523?w=800&q=80",
+      "https://images.unsplash.com/photo-1644303358096?w=800&q=80"
+    ],
+    "color": "Gray",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-MER-0042",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957879",
+    "status": "active"
+  },
+  {
+    "id": "offer-0043",
+    "year": 2025,
+    "make": "BMW",
+    "model": "3 Series",
+    "trim": "M340i",
+    "msrp": 43547,
+    "discountAmount": 3026,
+    "sellingPrice": 40521,
+    "residualPercent": 65,
+    "residualValue": 28306,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 595,
+      "doc": 105,
+      "registration": 589,
+      "otherTaxes": 6,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00188,
+      "700-739": 0.00203,
+      "675-699": 0.00218,
+      "640-674": 0.00235,
+      "601-639": 0.00263,
+      "0-600": 0.003
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 502.68,
+      "700-739": 513.75,
+      "675-699": 524.83,
+      "640-674": 446.4,
+      "601-639": 467.07,
+      "0-600": 494.38
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1671587919955?w=800&q=80",
+      "https://images.unsplash.com/photo-1659427592907?w=800&q=80",
+      "https://images.unsplash.com/photo-1679101203831?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-BMW-0043",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957901",
+    "status": "active"
+  },
+  {
+    "id": "offer-0044",
+    "year": 2026,
+    "make": "Lexus",
+    "model": "NX",
+    "trim": "NX 250",
+    "msrp": 43290,
+    "discountAmount": 3504,
+    "sellingPrice": 39786,
+    "residualPercent": 55,
+    "residualValue": 23810,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 595,
+      "doc": 105,
+      "registration": 413,
+      "otherTaxes": 174,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00165,
+      "700-739": 0.00178,
+      "675-699": 0.00191,
+      "640-674": 0.00206,
+      "601-639": 0.00231,
+      "0-600": 0.00264
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 593.98,
+      "700-739": 602.93,
+      "675-699": 611.88,
+      "640-674": 502.11,
+      "601-639": 519.32,
+      "0-600": 542.04
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1631884144607?w=800&q=80",
+      "https://images.unsplash.com/photo-1655321543178?w=800&q=80",
+      "https://images.unsplash.com/photo-1686363801298?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-LEX-0044",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957926",
+    "status": "active"
+  },
+  {
+    "id": "offer-0045",
+    "year": 2026,
+    "make": "Kia",
+    "model": "K5",
+    "trim": "GT-Line",
+    "msrp": 27202,
+    "discountAmount": 1893,
+    "sellingPrice": 25309,
+    "residualPercent": 56,
+    "residualValue": 15233,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 105,
+      "registration": 465,
+      "otherTaxes": 34,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.0017,
+      "700-739": 0.00183,
+      "675-699": 0.00197,
+      "640-674": 0.00212,
+      "601-639": 0.00238,
+      "0-600": 0.00272
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 381.08,
+      "700-739": 363.31,
+      "675-699": 393.03,
+      "640-674": 399.68,
+      "601-639": 334.75,
+      "0-600": 349.81
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1686646702856?w=800&q=80",
+      "https://images.unsplash.com/photo-1638912540492?w=800&q=80",
+      "https://images.unsplash.com/photo-1601613369109?w=800&q=80"
+    ],
+    "color": "Silver",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-KIA-0045",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957947",
+    "status": "active"
+  },
+  {
+    "id": "offer-0046",
+    "year": 2025,
+    "make": "Toyota",
+    "model": "RAV4",
+    "trim": "XLE",
+    "msrp": 33578,
+    "discountAmount": 3342,
+    "sellingPrice": 30236,
+    "residualPercent": 60,
+    "residualValue": 20147,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 599,
+      "otherTaxes": 86,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00172,
+      "700-739": 0.00186,
+      "675-699": 0.00199,
+      "640-674": 0.00215,
+      "601-639": 0.00241,
+      "0-600": 0.00275
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 397.18,
+      "700-739": 381.48,
+      "675-699": 411.9,
+      "640-674": 344.79,
+      "601-639": 358.97,
+      "0-600": 377.51
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1629698749189?w=800&q=80",
+      "https://images.unsplash.com/photo-1627183202231?w=800&q=80",
+      "https://images.unsplash.com/photo-1632325119634?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-TOY-0046",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957968",
+    "status": "active"
+  },
+  {
+    "id": "offer-0047",
+    "year": 2025,
+    "make": "BMW",
+    "model": "5 Series",
+    "trim": "M550i",
+    "msrp": 61255,
+    "discountAmount": 7297,
+    "sellingPrice": 53958,
+    "residualPercent": 52,
+    "residualValue": 31853,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 595,
+      "doc": 85,
+      "registration": 488,
+      "otherTaxes": 33,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00137,
+      "700-739": 0.00148,
+      "675-699": 0.00159,
+      "640-674": 0.00172,
+      "601-639": 0.00192,
+      "0-600": 0.0022
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 1139.87,
+      "700-739": 813.28,
+      "675-699": 823.64,
+      "640-674": 835.88,
+      "601-639": 686.24,
+      "0-600": 712.61
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1677652982014?w=800&q=80",
+      "https://images.unsplash.com/photo-1604361853535?w=800&q=80",
+      "https://images.unsplash.com/photo-1624750814854?w=800&q=80"
+    ],
+    "color": "Silver",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-BMW-0047",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.957989",
+    "status": "active"
+  },
+  {
+    "id": "offer-0048",
+    "year": 2024,
+    "make": "Hyundai",
+    "model": "Santa Fe",
+    "trim": "SE",
+    "msrp": 35815,
+    "discountAmount": 4977,
+    "sellingPrice": 30838,
+    "residualPercent": 59,
+    "residualValue": 21131,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 534,
+      "otherTaxes": 7,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00163,
+      "700-739": 0.00176,
+      "675-699": 0.00189,
+      "640-674": 0.00204,
+      "601-639": 0.00228,
+      "0-600": 0.00261
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 387.13,
+      "700-739": 371.85,
+      "675-699": 401.89,
+      "640-674": 336.76,
+      "601-639": 350.38,
+      "0-600": 369.12
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1633527600582?w=800&q=80",
+      "https://images.unsplash.com/photo-1689160689717?w=800&q=80",
+      "https://images.unsplash.com/photo-1600828786505?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HYU-0048",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958010",
+    "status": "active"
+  },
+  {
+    "id": "offer-0049",
+    "year": 2024,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "SEL",
+    "msrp": 30397,
+    "discountAmount": 3981,
+    "sellingPrice": 26416,
+    "residualPercent": 61,
+    "residualValue": 18542,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 795,
+      "doc": 105,
+      "registration": 484,
+      "otherTaxes": 24,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00149,
+      "700-739": 0.00161,
+      "675-699": 0.00173,
+      "640-674": 0.00186,
+      "601-639": 0.00209,
+      "0-600": 0.00239
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 306.42,
+      "700-739": 312.21,
+      "675-699": 318.0,
+      "640-674": 265.62,
+      "601-639": 276.71,
+      "0-600": 291.17
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1648008770570?w=800&q=80",
+      "https://images.unsplash.com/photo-1615208387702?w=800&q=80",
+      "https://images.unsplash.com/photo-1658288638957?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-HYU-0049",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958032",
+    "status": "active"
+  },
+  {
+    "id": "offer-0050",
+    "year": 2026,
+    "make": "Kia",
+    "model": "Sportage",
+    "trim": "SX Prestige",
+    "msrp": 29198,
+    "discountAmount": 3308,
+    "sellingPrice": 25890,
+    "residualPercent": 67,
+    "residualValue": 19563,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 509,
+      "otherTaxes": 24,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00129,
+      "700-739": 0.00139,
+      "675-699": 0.0015,
+      "640-674": 0.00161,
+      "601-639": 0.0018,
+      "0-600": 0.00206
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 251.38,
+      "700-739": 256.25,
+      "675-699": 261.61,
+      "640-674": 219.85,
+      "601-639": 229.12,
+      "0-600": 241.79
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1616983745180?w=800&q=80",
+      "https://images.unsplash.com/photo-1693924473760?w=800&q=80",
+      "https://images.unsplash.com/photo-1607918751832?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-KIA-0050",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958052",
+    "status": "active"
+  },
+  {
+    "id": "offer-0051",
+    "year": 2026,
+    "make": "Honda",
+    "model": "Accord",
+    "trim": "Sport",
+    "msrp": 28408,
+    "discountAmount": 2245,
+    "sellingPrice": 26163,
+    "residualPercent": 55,
+    "residualValue": 15624,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 595,
+      "doc": 95,
+      "registration": 483,
+      "otherTaxes": 113,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00205,
+      "700-739": 0.00221,
+      "675-699": 0.00237,
+      "640-674": 0.00256,
+      "601-639": 0.00287,
+      "0-600": 0.00328
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 390.59,
+      "700-739": 397.93,
+      "675-699": 429.98,
+      "640-674": 438.7,
+      "601-639": 372.59,
+      "0-600": 391.39
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1676270833466?w=800&q=80",
+      "https://images.unsplash.com/photo-1608636621771?w=800&q=80",
+      "https://images.unsplash.com/photo-1652204545237?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HON-0051",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958078",
+    "status": "active"
+  },
+  {
+    "id": "offer-0052",
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "C-Class",
+    "trim": "C 300",
+    "msrp": 45674,
+    "discountAmount": 6255,
+    "sellingPrice": 39419,
+    "residualPercent": 67,
+    "residualValue": 30602,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 353,
+      "otherTaxes": 10,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00127,
+      "700-739": 0.00137,
+      "675-699": 0.00147,
+      "640-674": 0.00158,
+      "601-639": 0.00177,
+      "0-600": 0.00203
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 366.39,
+      "700-739": 353.4,
+      "675-699": 381.76,
+      "640-674": 323.02,
+      "601-639": 337.62,
+      "0-600": 357.6
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1648556213510?w=800&q=80",
+      "https://images.unsplash.com/photo-1677494815091?w=800&q=80",
+      "https://images.unsplash.com/photo-1665450826904?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-MER-0052",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958101",
+    "status": "active"
+  },
+  {
+    "id": "offer-0053",
+    "year": 2024,
+    "make": "BMW",
+    "model": "3 Series",
+    "trim": "330i",
+    "msrp": 48378,
+    "discountAmount": 5396,
+    "sellingPrice": 42982,
+    "residualPercent": 52,
+    "residualValue": 25157,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 105,
+      "registration": 487,
+      "otherTaxes": 191,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00144,
+      "700-739": 0.00155,
+      "675-699": 0.00167,
+      "640-674": 0.0018,
+      "601-639": 0.00202,
+      "0-600": 0.0023
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 918.61,
+      "700-739": 656.32,
+      "675-699": 665.26,
+      "640-674": 539.7,
+      "601-639": 556.08,
+      "0-600": 576.92
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1646556150931?w=800&q=80",
+      "https://images.unsplash.com/photo-1699284432676?w=800&q=80",
+      "https://images.unsplash.com/photo-1627013468819?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-BMW-0053",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958129",
+    "status": "active"
+  },
+  {
+    "id": "offer-0054",
+    "year": 2026,
+    "make": "Kia",
+    "model": "K5",
+    "trim": "LX",
+    "msrp": 26673,
+    "discountAmount": 2531,
+    "sellingPrice": 24142,
+    "residualPercent": 53,
+    "residualValue": 14137,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 595,
+      "doc": 95,
+      "registration": 554,
+      "otherTaxes": 128,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00205,
+      "700-739": 0.00221,
+      "675-699": 0.00238,
+      "640-674": 0.00256,
+      "601-639": 0.00287,
+      "0-600": 0.00328
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 541.17,
+      "700-739": 396.05,
+      "675-699": 403.16,
+      "640-674": 334.78,
+      "601-639": 347.74,
+      "0-600": 364.89
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1671814993965?w=800&q=80",
+      "https://images.unsplash.com/photo-1698090899009?w=800&q=80",
+      "https://images.unsplash.com/photo-1664739772651?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-KIA-0054",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958150",
+    "status": "active"
+  },
+  {
+    "id": "offer-0055",
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "E-Class",
+    "trim": "E 450 4MATIC",
+    "msrp": 58283,
+    "discountAmount": 5873,
+    "sellingPrice": 52410,
+    "residualPercent": 66,
+    "residualValue": 38467,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 374,
+      "otherTaxes": 163,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00195,
+      "700-739": 0.00211,
+      "675-699": 0.00227,
+      "640-674": 0.00244,
+      "601-639": 0.00274,
+      "0-600": 0.00313
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 616.73,
+      "700-739": 600.07,
+      "675-699": 648.5,
+      "640-674": 559.6,
+      "601-639": 589.38,
+      "0-600": 628.1
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1647297303399?w=800&q=80",
+      "https://images.unsplash.com/photo-1639570876346?w=800&q=80",
+      "https://images.unsplash.com/photo-1685297847598?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-MER-0055",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958171",
+    "status": "active"
+  },
+  {
+    "id": "offer-0056",
+    "year": 2026,
+    "make": "BMW",
+    "model": "X3",
+    "trim": "sDrive30i",
+    "msrp": 51103,
+    "discountAmount": 4998,
+    "sellingPrice": 46105,
+    "residualPercent": 64,
+    "residualValue": 32706,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 542,
+      "otherTaxes": 150,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00143,
+      "700-739": 0.00155,
+      "675-699": 0.00166,
+      "640-674": 0.00179,
+      "601-639": 0.00201,
+      "0-600": 0.00229
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 489.34,
+      "700-739": 530.19,
+      "675-699": 539.49,
+      "640-674": 450.68,
+      "601-639": 469.28,
+      "0-600": 492.95
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1667859609466?w=800&q=80",
+      "https://images.unsplash.com/photo-1648319248719?w=800&q=80",
+      "https://images.unsplash.com/photo-1606511723109?w=800&q=80"
+    ],
+    "color": "Gray",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-BMW-0056",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958191",
+    "status": "active"
+  },
+  {
+    "id": "offer-0057",
+    "year": 2025,
+    "make": "Honda",
+    "model": "Accord",
+    "trim": "Touring",
+    "msrp": 32128,
+    "discountAmount": 1571,
+    "sellingPrice": 30557,
+    "residualPercent": 64,
+    "residualValue": 20562,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 596,
+      "otherTaxes": 46,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00134,
+      "700-739": 0.00145,
+      "675-699": 0.00156,
+      "640-674": 0.00168,
+      "601-639": 0.00188,
+      "0-600": 0.00215
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 374.69,
+      "700-739": 357.66,
+      "675-699": 386.87,
+      "640-674": 393.51,
+      "601-639": 329.44,
+      "0-600": 344.38
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1681596296946?w=800&q=80",
+      "https://images.unsplash.com/photo-1646983786301?w=800&q=80",
+      "https://images.unsplash.com/photo-1688570988546?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-HON-0057",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958214",
+    "status": "active"
+  },
+  {
+    "id": "offer-0058",
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "GLC",
+    "trim": "AMG GLC 43",
+    "msrp": 51621,
+    "discountAmount": 4385,
+    "sellingPrice": 47236,
+    "residualPercent": 64,
+    "residualValue": 33037,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 556,
+      "otherTaxes": 96,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00207,
+      "700-739": 0.00224,
+      "675-699": 0.0024,
+      "640-674": 0.00259,
+      "601-639": 0.0029,
+      "0-600": 0.00332
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 812.73,
+      "700-739": 583.32,
+      "675-699": 629.63,
+      "640-674": 645.99,
+      "601-639": 566.93,
+      "0-600": 603.09
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1606984454191?w=800&q=80",
+      "https://images.unsplash.com/photo-1606981673053?w=800&q=80",
+      "https://images.unsplash.com/photo-1653185889631?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-MER-0058",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958239",
+    "status": "active"
+  },
+  {
+    "id": "offer-0059",
+    "year": 2025,
+    "make": "Lexus",
+    "model": "ES",
+    "trim": "ES 350 F Sport",
+    "msrp": 40553,
+    "discountAmount": 3593,
+    "sellingPrice": 36960,
+    "residualPercent": 55,
+    "residualValue": 22304,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 504,
+      "otherTaxes": 9,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00182,
+      "700-739": 0.00196,
+      "675-699": 0.00211,
+      "640-674": 0.00227,
+      "601-639": 0.00254,
+      "0-600": 0.00291
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 530.81,
+      "700-739": 574.29,
+      "675-699": 584.04,
+      "640-674": 594.45,
+      "601-639": 500.31,
+      "0-600": 524.38
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1698835984602?w=800&q=80",
+      "https://images.unsplash.com/photo-1606373821997?w=800&q=80",
+      "https://images.unsplash.com/photo-1617475771221?w=800&q=80"
+    ],
+    "color": "Gray",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-LEX-0059",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958261",
+    "status": "active"
+  },
+  {
+    "id": "offer-0060",
+    "year": 2025,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "SE",
+    "msrp": 30220,
+    "discountAmount": 2744,
+    "sellingPrice": 27476,
+    "residualPercent": 55,
+    "residualValue": 16621,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 554,
+      "otherTaxes": 102,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00138,
+      "700-739": 0.00149,
+      "675-699": 0.0016,
+      "640-674": 0.00173,
+      "601-639": 0.00194,
+      "0-600": 0.00221
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 395.9,
+      "700-739": 375.86,
+      "675-699": 406.5,
+      "640-674": 412.76,
+      "601-639": 340.53,
+      "0-600": 353.53
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1643637163540?w=800&q=80",
+      "https://images.unsplash.com/photo-1694110238751?w=800&q=80",
+      "https://images.unsplash.com/photo-1675248849107?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HYU-0060",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958283",
+    "status": "active"
+  },
+  {
+    "id": "offer-0061",
+    "year": 2024,
+    "make": "BMW",
+    "model": "3 Series",
+    "trim": "330i",
+    "msrp": 49868,
+    "discountAmount": 3303,
+    "sellingPrice": 46565,
+    "residualPercent": 60,
+    "residualValue": 29921,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 795,
+      "doc": 105,
+      "registration": 443,
+      "otherTaxes": 47,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.0013,
+      "700-739": 0.00141,
+      "675-699": 0.00151,
+      "640-674": 0.00163,
+      "601-639": 0.00182,
+      "0-600": 0.00208
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 569.61,
+      "700-739": 578.72,
+      "675-699": 625.5,
+      "640-674": 635.43,
+      "601-639": 526.05,
+      "0-600": 547.57
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1694317924161?w=800&q=80",
+      "https://images.unsplash.com/photo-1662527370326?w=800&q=80",
+      "https://images.unsplash.com/photo-1621109758776?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-BMW-0061",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958303",
+    "status": "active"
+  },
+  {
+    "id": "offer-0062",
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "N Line",
+    "msrp": 31884,
+    "discountAmount": 2903,
+    "sellingPrice": 28981,
+    "residualPercent": 62,
+    "residualValue": 19768,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 595,
+      "doc": 105,
+      "registration": 592,
+      "otherTaxes": 55,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00194,
+      "700-739": 0.0021,
+      "675-699": 0.00225,
+      "640-674": 0.00243,
+      "601-639": 0.00272,
+      "0-600": 0.00311
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 375.9,
+      "700-739": 384.27,
+      "675-699": 392.11,
+      "640-674": 332.9,
+      "601-639": 348.06,
+      "0-600": 368.45
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1677653655031?w=800&q=80",
+      "https://images.unsplash.com/photo-1635746633009?w=800&q=80",
+      "https://images.unsplash.com/photo-1677904935041?w=800&q=80"
+    ],
+    "color": "Silver",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-HYU-0062",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958323",
+    "status": "active"
+  },
+  {
+    "id": "offer-0063",
+    "year": 2026,
+    "make": "Honda",
+    "model": "Pilot",
+    "trim": "EX-L",
+    "msrp": 39297,
+    "discountAmount": 2505,
+    "sellingPrice": 36792,
+    "residualPercent": 65,
+    "residualValue": 25543,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 595,
+      "doc": 95,
+      "registration": 575,
+      "otherTaxes": 138,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00185,
+      "700-739": 0.002,
+      "675-699": 0.00215,
+      "640-674": 0.00231,
+      "601-639": 0.00259,
+      "0-600": 0.00296
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 632.21,
+      "700-739": 473.21,
+      "675-699": 483.33,
+      "640-674": 494.12,
+      "601-639": 428.46,
+      "0-600": 453.42
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1616853627571?w=800&q=80",
+      "https://images.unsplash.com/photo-1684154945121?w=800&q=80",
+      "https://images.unsplash.com/photo-1680893797873?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-HON-0063",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958344",
+    "status": "active"
+  },
+  {
+    "id": "offer-0064",
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "SEL",
+    "msrp": 29651,
+    "discountAmount": 2868,
+    "sellingPrice": 26783,
+    "residualPercent": 57,
+    "residualValue": 16901,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 595,
+      "doc": 95,
+      "registration": 563,
+      "otherTaxes": 184,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00146,
+      "700-739": 0.00157,
+      "675-699": 0.00169,
+      "640-674": 0.00182,
+      "601-639": 0.00204,
+      "0-600": 0.00233
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 510.0,
+      "700-739": 367.96,
+      "675-699": 373.58,
+      "640-674": 379.67,
+      "601-639": 316.38,
+      "0-600": 329.96
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1654825732590?w=800&q=80",
+      "https://images.unsplash.com/photo-1646143480489?w=800&q=80",
+      "https://images.unsplash.com/photo-1671358797724?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-HYU-0064",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958368",
+    "status": "active"
+  },
+  {
+    "id": "offer-0065",
+    "year": 2024,
+    "make": "Toyota",
+    "model": "Highlander",
+    "trim": "LE",
+    "msrp": 42609,
+    "discountAmount": 3906,
+    "sellingPrice": 38703,
+    "residualPercent": 61,
+    "residualValue": 25991,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 795,
+      "doc": 85,
+      "registration": 504,
+      "otherTaxes": 121,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.0017,
+      "700-739": 0.00183,
+      "675-699": 0.00197,
+      "640-674": 0.00212,
+      "601-639": 0.00237,
+      "0-600": 0.00271
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 508.24,
+      "700-739": 517.47,
+      "675-699": 527.41,
+      "640-674": 441.18,
+      "601-639": 458.93,
+      "0-600": 483.07
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1684453928077?w=800&q=80",
+      "https://images.unsplash.com/photo-1654346239471?w=800&q=80",
+      "https://images.unsplash.com/photo-1698561932399?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-TOY-0065",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958393",
+    "status": "active"
+  },
+  {
+    "id": "offer-0066",
+    "year": 2024,
+    "make": "Toyota",
+    "model": "Corolla",
+    "trim": "LE",
+    "msrp": 22116,
+    "discountAmount": 1863,
+    "sellingPrice": 20253,
+    "residualPercent": 62,
+    "residualValue": 13712,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 446,
+      "otherTaxes": 37,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.0013,
+      "700-739": 0.00141,
+      "675-699": 0.00151,
+      "640-674": 0.00163,
+      "601-639": 0.00182,
+      "0-600": 0.00208
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 347.57,
+      "700-739": 236.63,
+      "675-699": 255.7,
+      "640-674": 260.17,
+      "601-639": 217.4,
+      "0-600": 227.09
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1668330660595?w=800&q=80",
+      "https://images.unsplash.com/photo-1642514798314?w=800&q=80",
+      "https://images.unsplash.com/photo-1677656014084?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-TOY-0066",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958414",
+    "status": "active"
+  },
+  {
+    "id": "offer-0067",
+    "year": 2024,
+    "make": "BMW",
+    "model": "3 Series",
+    "trim": "330i xDrive",
+    "msrp": 48269,
+    "discountAmount": 3583,
+    "sellingPrice": 44686,
+    "residualPercent": 56,
+    "residualValue": 27031,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 357,
+      "otherTaxes": 165,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00163,
+      "700-739": 0.00176,
+      "675-699": 0.00189,
+      "640-674": 0.00203,
+      "601-639": 0.00228,
+      "0-600": 0.0026
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 610.89,
+      "700-739": 661.34,
+      "675-699": 671.34,
+      "640-674": 550.62,
+      "601-639": 569.85,
+      "0-600": 594.46
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1640090851877?w=800&q=80",
+      "https://images.unsplash.com/photo-1645067591712?w=800&q=80",
+      "https://images.unsplash.com/photo-1679957000373?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-BMW-0067",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958435",
+    "status": "active"
+  },
+  {
+    "id": "offer-0068",
+    "year": 2025,
+    "make": "BMW",
+    "model": "3 Series",
+    "trim": "M340i",
+    "msrp": 47177,
+    "discountAmount": 5389,
+    "sellingPrice": 41788,
+    "residualPercent": 63,
+    "residualValue": 29722,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 795,
+      "doc": 95,
+      "registration": 520,
+      "otherTaxes": 165,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00177,
+      "700-739": 0.00191,
+      "675-699": 0.00205,
+      "640-674": 0.00221,
+      "601-639": 0.00247,
+      "0-600": 0.00283
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 478.46,
+      "700-739": 517.75,
+      "675-699": 528.73,
+      "640-674": 541.29,
+      "601-639": 469.74,
+      "0-600": 497.99
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1673023327756?w=800&q=80",
+      "https://images.unsplash.com/photo-1652613824424?w=800&q=80",
+      "https://images.unsplash.com/photo-1648235632367?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-BMW-0068",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958456",
+    "status": "active"
+  },
+  {
+    "id": "offer-0069",
+    "year": 2026,
+    "make": "BMW",
+    "model": "3 Series",
+    "trim": "M340i",
+    "msrp": 43220,
+    "discountAmount": 3033,
+    "sellingPrice": 40187,
+    "residualPercent": 65,
+    "residualValue": 28093,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 595,
+      "doc": 85,
+      "registration": 484,
+      "otherTaxes": 154,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00196,
+      "700-739": 0.00212,
+      "675-699": 0.00227,
+      "640-674": 0.00245,
+      "601-639": 0.00274,
+      "0-600": 0.00313
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 487.21,
+      "700-739": 527.57,
+      "675-699": 538.81,
+      "640-674": 460.12,
+      "601-639": 481.85,
+      "0-600": 511.08
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1647092832436?w=800&q=80",
+      "https://images.unsplash.com/photo-1606935778272?w=800&q=80",
+      "https://images.unsplash.com/photo-1664466690765?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-BMW-0069",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958480",
+    "status": "active"
+  },
+  {
+    "id": "offer-0070",
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "GLC",
+    "trim": "GLC 300 4MATIC",
+    "msrp": 52618,
+    "discountAmount": 5324,
+    "sellingPrice": 47294,
+    "residualPercent": 66,
+    "residualValue": 34728,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 567,
+      "otherTaxes": 0,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00135,
+      "700-739": 0.00146,
+      "675-699": 0.00157,
+      "640-674": 0.00169,
+      "601-639": 0.00189,
+      "0-600": 0.00216
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 472.98,
+      "700-739": 512.17,
+      "675-699": 522.03,
+      "640-674": 532.78,
+      "601-639": 455.37,
+      "0-600": 479.56
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1615918381520?w=800&q=80",
+      "https://images.unsplash.com/photo-1634788296966?w=800&q=80",
+      "https://images.unsplash.com/photo-1605429462844?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-MER-0070",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958503",
+    "status": "active"
+  },
+  {
+    "id": "offer-0071",
+    "year": 2025,
+    "make": "Lexus",
+    "model": "ES",
+    "trim": "ES 350",
+    "msrp": 44347,
+    "discountAmount": 2078,
+    "sellingPrice": 42269,
+    "residualPercent": 53,
+    "residualValue": 23504,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 329,
+      "otherTaxes": 85,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00172,
+      "700-739": 0.00186,
+      "675-699": 0.002,
+      "640-674": 0.00215,
+      "601-639": 0.00241,
+      "0-600": 0.00275
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 696.23,
+      "700-739": 662.33,
+      "675-699": 716.44,
+      "640-674": 727.27,
+      "601-639": 603.02,
+      "0-600": 627.57
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1630067452301?w=800&q=80",
+      "https://images.unsplash.com/photo-1652587060499?w=800&q=80",
+      "https://images.unsplash.com/photo-1676095282037?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-LEX-0071",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958523",
+    "status": "active"
+  },
+  {
+    "id": "offer-0072",
+    "year": 2024,
+    "make": "Hyundai",
+    "model": "Sonata",
+    "trim": "Limited",
+    "msrp": 28394,
+    "discountAmount": 1789,
+    "sellingPrice": 26605,
+    "residualPercent": 60,
+    "residualValue": 17036,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 595,
+      "doc": 105,
+      "registration": 557,
+      "otherTaxes": 73,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00131,
+      "700-739": 0.00141,
+      "675-699": 0.00152,
+      "640-674": 0.00163,
+      "601-639": 0.00183,
+      "0-600": 0.00209
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 332.03,
+      "700-739": 359.25,
+      "675-699": 364.52,
+      "640-674": 369.79,
+      "601-639": 306.44,
+      "0-600": 318.89
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1675364083421?w=800&q=80",
+      "https://images.unsplash.com/photo-1629000738842?w=800&q=80",
+      "https://images.unsplash.com/photo-1659687831090?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-HYU-0072",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958549",
+    "status": "active"
+  },
+  {
+    "id": "offer-0073",
+    "year": 2025,
+    "make": "Lexus",
+    "model": "NX",
+    "trim": "NX 250",
+    "msrp": 43601,
+    "discountAmount": 2501,
+    "sellingPrice": 41100,
+    "residualPercent": 62,
+    "residualValue": 27033,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 795,
+      "doc": 105,
+      "registration": 467,
+      "otherTaxes": 161,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00206,
+      "700-739": 0.00223,
+      "675-699": 0.00239,
+      "640-674": 0.00258,
+      "601-639": 0.00289,
+      "0-600": 0.0033
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 582.89,
+      "700-739": 562.61,
+      "675-699": 607.56,
+      "640-674": 514.56,
+      "601-639": 537.74,
+      "0-600": 568.4
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1672112532159?w=800&q=80",
+      "https://images.unsplash.com/photo-1604732896102?w=800&q=80",
+      "https://images.unsplash.com/photo-1679258035644?w=800&q=80"
+    ],
+    "color": "Gray",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-LEX-0073",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958570",
+    "status": "active"
+  },
+  {
+    "id": "offer-0074",
+    "year": 2025,
+    "make": "BMW",
+    "model": "3 Series",
+    "trim": "M340i",
+    "msrp": 45399,
+    "discountAmount": 5605,
+    "sellingPrice": 39794,
+    "residualPercent": 65,
+    "residualValue": 29509,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 105,
+      "registration": 553,
+      "otherTaxes": 48,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00169,
+      "700-739": 0.00183,
+      "675-699": 0.00196,
+      "640-674": 0.00212,
+      "601-639": 0.00237,
+      "0-600": 0.00271
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 440.08,
+      "700-739": 426.67,
+      "675-699": 460.52,
+      "640-674": 394.6,
+      "601-639": 413.53,
+      "0-600": 439.27
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1657388769005?w=800&q=80",
+      "https://images.unsplash.com/photo-1633351852484?w=800&q=80",
+      "https://images.unsplash.com/photo-1654890398365?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-BMW-0074",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958595",
+    "status": "active"
+  },
+  {
+    "id": "offer-0075",
+    "year": 2024,
+    "make": "Toyota",
+    "model": "Highlander",
+    "trim": "Platinum",
+    "msrp": 40323,
+    "discountAmount": 2612,
+    "sellingPrice": 37711,
+    "residualPercent": 59,
+    "residualValue": 23791,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 497,
+      "otherTaxes": 79,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00179,
+      "700-739": 0.00193,
+      "675-699": 0.00208,
+      "640-674": 0.00224,
+      "601-639": 0.00251,
+      "0-600": 0.00286
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 542.71,
+      "700-739": 552.11,
+      "675-699": 562.19,
+      "640-674": 572.94,
+      "601-639": 485.47,
+      "0-600": 508.99
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1659626590684?w=800&q=80",
+      "https://images.unsplash.com/photo-1612674131978?w=800&q=80",
+      "https://images.unsplash.com/photo-1664417992796?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-TOY-0075",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958617",
+    "status": "active"
+  },
+  {
+    "id": "offer-0076",
+    "year": 2025,
+    "make": "Hyundai",
+    "model": "Santa Fe",
+    "trim": "SE",
+    "msrp": 38401,
+    "discountAmount": 4543,
+    "sellingPrice": 33858,
+    "residualPercent": 62,
+    "residualValue": 23809,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 405,
+      "otherTaxes": 6,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00191,
+      "700-739": 0.00206,
+      "675-699": 0.00221,
+      "640-674": 0.00238,
+      "601-639": 0.00267,
+      "0-600": 0.00305
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 403.67,
+      "700-739": 436.73,
+      "675-699": 446.22,
+      "640-674": 380.4,
+      "601-639": 398.75,
+      "0-600": 422.8
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1655557603500?w=800&q=80",
+      "https://images.unsplash.com/photo-1692423851202?w=800&q=80",
+      "https://images.unsplash.com/photo-1682401483107?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-HYU-0076",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958641",
+    "status": "active"
+  },
+  {
+    "id": "offer-0077",
+    "year": 2024,
+    "make": "Honda",
+    "model": "Civic",
+    "trim": "Sport",
+    "msrp": 22948,
+    "discountAmount": 1078,
+    "sellingPrice": 21870,
+    "residualPercent": 58,
+    "residualValue": 13310,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 795,
+      "doc": 95,
+      "registration": 315,
+      "otherTaxes": 153,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00132,
+      "700-739": 0.00142,
+      "675-699": 0.00153,
+      "640-674": 0.00164,
+      "601-639": 0.00184,
+      "0-600": 0.00211
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 307.66,
+      "700-739": 291.67,
+      "675-699": 315.66,
+      "640-674": 255.5,
+      "601-639": 263.12,
+      "0-600": 273.4
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1668218410077?w=800&q=80",
+      "https://images.unsplash.com/photo-1670252061671?w=800&q=80",
+      "https://images.unsplash.com/photo-1670827782016?w=800&q=80"
+    ],
+    "color": "Gray",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HON-0077",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958685",
+    "status": "active"
+  },
+  {
+    "id": "offer-0078",
+    "year": 2025,
+    "make": "Lexus",
+    "model": "ES",
+    "trim": "ES 350 F Sport",
+    "msrp": 40920,
+    "discountAmount": 2707,
+    "sellingPrice": 38213,
+    "residualPercent": 59,
+    "residualValue": 24143,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 105,
+      "registration": 401,
+      "otherTaxes": 19,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00187,
+      "700-739": 0.00202,
+      "675-699": 0.00217,
+      "640-674": 0.00234,
+      "601-639": 0.00262,
+      "0-600": 0.00299
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 523.92,
+      "700-739": 534.18,
+      "675-699": 577.45,
+      "640-674": 481.84,
+      "601-639": 501.01,
+      "0-600": 526.33
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1606113459333?w=800&q=80",
+      "https://images.unsplash.com/photo-1671754202179?w=800&q=80",
+      "https://images.unsplash.com/photo-1627122657177?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-LEX-0078",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958710",
+    "status": "active"
+  },
+  {
+    "id": "offer-0079",
+    "year": 2025,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "SE",
+    "msrp": 32970,
+    "discountAmount": 3136,
+    "sellingPrice": 29834,
+    "residualPercent": 68,
+    "residualValue": 22420,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 562,
+      "otherTaxes": 9,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00178,
+      "700-739": 0.00192,
+      "675-699": 0.00206,
+      "640-674": 0.00222,
+      "601-639": 0.00249,
+      "0-600": 0.00284
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 323.62,
+      "700-739": 314.39,
+      "675-699": 339.46,
+      "640-674": 348.51,
+      "601-639": 308.05,
+      "0-600": 327.85
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1680536860448?w=800&q=80",
+      "https://images.unsplash.com/photo-1646562565898?w=800&q=80",
+      "https://images.unsplash.com/photo-1657236945250?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-HYU-0079",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958734",
+    "status": "active"
+  },
+  {
+    "id": "offer-0080",
+    "year": 2024,
+    "make": "Hyundai",
+    "model": "Santa Fe",
+    "trim": "Calligraphy",
+    "msrp": 35492,
+    "discountAmount": 2765,
+    "sellingPrice": 32727,
+    "residualPercent": 59,
+    "residualValue": 20940,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 595,
+      "doc": 85,
+      "registration": 383,
+      "otherTaxes": 110,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00174,
+      "700-739": 0.00188,
+      "675-699": 0.00202,
+      "640-674": 0.00218,
+      "601-639": 0.00244,
+      "0-600": 0.00279
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 638.57,
+      "700-739": 440.41,
+      "675-699": 476.14,
+      "640-674": 396.09,
+      "601-639": 411.34,
+      "0-600": 431.86
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1630847492415?w=800&q=80",
+      "https://images.unsplash.com/photo-1615054467429?w=800&q=80",
+      "https://images.unsplash.com/photo-1675706270268?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HYU-0080",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958759",
+    "status": "active"
+  },
+  {
+    "id": "offer-0081",
+    "year": 2026,
+    "make": "BMW",
+    "model": "5 Series",
+    "trim": "530i",
+    "msrp": 58527,
+    "discountAmount": 5277,
+    "sellingPrice": 53250,
+    "residualPercent": 68,
+    "residualValue": 39798,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 595,
+      "doc": 95,
+      "registration": 396,
+      "otherTaxes": 66,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00142,
+      "700-739": 0.00153,
+      "675-699": 0.00164,
+      "640-674": 0.00177,
+      "601-639": 0.00198,
+      "0-600": 0.00226
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 742.84,
+      "700-739": 553.44,
+      "675-699": 564.42,
+      "640-674": 577.39,
+      "601-639": 498.16,
+      "0-600": 526.1
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1605820385213?w=800&q=80",
+      "https://images.unsplash.com/photo-1617694092682?w=800&q=80",
+      "https://images.unsplash.com/photo-1635510352603?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-BMW-0081",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958814",
+    "status": "active"
+  },
+  {
+    "id": "offer-0082",
+    "year": 2026,
+    "make": "BMW",
+    "model": "5 Series",
+    "trim": "530i",
+    "msrp": 60739,
+    "discountAmount": 5157,
+    "sellingPrice": 55582,
+    "residualPercent": 63,
+    "residualValue": 38266,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 595,
+      "doc": 85,
+      "registration": 391,
+      "otherTaxes": 101,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00129,
+      "700-739": 0.00139,
+      "675-699": 0.00149,
+      "640-674": 0.00161,
+      "601-639": 0.0018,
+      "0-600": 0.00206
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 645.71,
+      "700-739": 616.1,
+      "675-699": 665.84,
+      "640-674": 677.92,
+      "601-639": 568.08,
+      "0-600": 594.25
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1624062914185?w=800&q=80",
+      "https://images.unsplash.com/photo-1645217750689?w=800&q=80",
+      "https://images.unsplash.com/photo-1684435468771?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-BMW-0082",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958836",
+    "status": "active"
+  },
+  {
+    "id": "offer-0083",
+    "year": 2025,
+    "make": "Honda",
+    "model": "Accord",
+    "trim": "LX",
+    "msrp": 30630,
+    "discountAmount": 1660,
+    "sellingPrice": 28970,
+    "residualPercent": 54,
+    "residualValue": 16540,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 795,
+      "doc": 85,
+      "registration": 447,
+      "otherTaxes": 86,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00163,
+      "700-739": 0.00176,
+      "675-699": 0.00189,
+      "640-674": 0.00204,
+      "601-639": 0.00228,
+      "0-600": 0.00261
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 460.36,
+      "700-739": 437.7,
+      "675-699": 473.34,
+      "640-674": 386.1,
+      "601-639": 398.09,
+      "0-600": 414.57
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1692390956049?w=800&q=80",
+      "https://images.unsplash.com/photo-1673900647011?w=800&q=80",
+      "https://images.unsplash.com/photo-1643944665132?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HON-0083",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958859",
+    "status": "active"
+  },
+  {
+    "id": "offer-0084",
+    "year": 2026,
+    "make": "Mercedes-Benz",
+    "model": "C-Class",
+    "trim": "AMG C 43",
+    "msrp": 50474,
+    "discountAmount": 5797,
+    "sellingPrice": 44677,
+    "residualPercent": 61,
+    "residualValue": 30789,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 595,
+      "doc": 105,
+      "registration": 353,
+      "otherTaxes": 103,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00153,
+      "700-739": 0.00165,
+      "675-699": 0.00177,
+      "640-674": 0.00191,
+      "601-639": 0.00214,
+      "0-600": 0.00244
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 542.59,
+      "700-739": 552.4,
+      "675-699": 562.2,
+      "640-674": 573.64,
+      "601-639": 488.02,
+      "0-600": 512.53
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1673046306002?w=800&q=80",
+      "https://images.unsplash.com/photo-1614289134407?w=800&q=80",
+      "https://images.unsplash.com/photo-1619772935862?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-MER-0084",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958881",
+    "status": "active"
+  },
+  {
+    "id": "offer-0085",
+    "year": 2026,
+    "make": "BMW",
+    "model": "X3",
+    "trim": "sDrive30i",
+    "msrp": 50818,
+    "discountAmount": 6355,
+    "sellingPrice": 44463,
+    "residualPercent": 57,
+    "residualValue": 28966,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 320,
+      "otherTaxes": 145,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00121,
+      "700-739": 0.00131,
+      "675-699": 0.00141,
+      "640-674": 0.00152,
+      "601-639": 0.0017,
+      "0-600": 0.00194
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 787.81,
+      "700-739": 564.85,
+      "675-699": 572.72,
+      "640-674": 465.97,
+      "601-639": 480.14,
+      "0-600": 499.04
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1654876418538?w=800&q=80",
+      "https://images.unsplash.com/photo-1616687050966?w=800&q=80",
+      "https://images.unsplash.com/photo-1604867875230?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-BMW-0085",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958902",
+    "status": "active"
+  },
+  {
+    "id": "offer-0086",
+    "year": 2026,
+    "make": "Kia",
+    "model": "Telluride",
+    "trim": "EX",
+    "msrp": 37641,
+    "discountAmount": 2762,
+    "sellingPrice": 34879,
+    "residualPercent": 59,
+    "residualValue": 22208,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 105,
+      "registration": 308,
+      "otherTaxes": 77,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00124,
+      "700-739": 0.00134,
+      "675-699": 0.00144,
+      "640-674": 0.00155,
+      "601-639": 0.00173,
+      "0-600": 0.00198
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 434.26,
+      "700-739": 440.53,
+      "675-699": 476.51,
+      "640-674": 386.83,
+      "601-639": 398.11,
+      "0-600": 413.77
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1694015461415?w=800&q=80",
+      "https://images.unsplash.com/photo-1679908004392?w=800&q=80",
+      "https://images.unsplash.com/photo-1688395051972?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-KIA-0086",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958923",
+    "status": "active"
+  },
+  {
+    "id": "offer-0087",
+    "year": 2026,
+    "make": "Kia",
+    "model": "K5",
+    "trim": "LXS",
+    "msrp": 24475,
+    "discountAmount": 2663,
+    "sellingPrice": 21812,
+    "residualPercent": 60,
+    "residualValue": 14685,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 795,
+      "doc": 105,
+      "registration": 439,
+      "otherTaxes": 102,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.002,
+      "700-739": 0.00216,
+      "675-699": 0.00232,
+      "640-674": 0.00249,
+      "601-639": 0.00279,
+      "0-600": 0.00319
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 297.39,
+      "700-739": 303.79,
+      "675-699": 310.2,
+      "640-674": 262.69,
+      "601-639": 274.71,
+      "0-600": 290.73
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1677710388214?w=800&q=80",
+      "https://images.unsplash.com/photo-1623268289951?w=800&q=80",
+      "https://images.unsplash.com/photo-1660895818515?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-KIA-0087",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958947",
+    "status": "active"
+  },
+  {
+    "id": "offer-0088",
+    "year": 2024,
+    "make": "Mercedes-Benz",
+    "model": "GLC",
+    "trim": "AMG GLC 43",
+    "msrp": 53656,
+    "discountAmount": 6464,
+    "sellingPrice": 47192,
+    "residualPercent": 62,
+    "residualValue": 33267,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 895,
+      "doc": 105,
+      "registration": 579,
+      "otherTaxes": 88,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00154,
+      "700-739": 0.00167,
+      "675-699": 0.00179,
+      "640-674": 0.00193,
+      "601-639": 0.00216,
+      "0-600": 0.00247
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 552.85,
+      "700-739": 564.17,
+      "675-699": 574.62,
+      "640-674": 482.13,
+      "601-639": 502.17,
+      "0-600": 529.17
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1633727943811?w=800&q=80",
+      "https://images.unsplash.com/photo-1659956488382?w=800&q=80",
+      "https://images.unsplash.com/photo-1647581440163?w=800&q=80"
+    ],
+    "color": "Silver",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-MER-0088",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958972",
+    "status": "active"
+  },
+  {
+    "id": "offer-0089",
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "GLC",
+    "trim": "GLC 300",
+    "msrp": 51601,
+    "discountAmount": 3641,
+    "sellingPrice": 47960,
+    "residualPercent": 64,
+    "residualValue": 33025,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 85,
+      "registration": 445,
+      "otherTaxes": 191,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00135,
+      "700-739": 0.00146,
+      "675-699": 0.00157,
+      "640-674": 0.00169,
+      "601-639": 0.00189,
+      "0-600": 0.00216
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 802.95,
+      "700-739": 585.08,
+      "675-699": 594.85,
+      "640-674": 605.52,
+      "601-639": 509.47,
+      "0-600": 533.47
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1611952730100?w=800&q=80",
+      "https://images.unsplash.com/photo-1652352869011?w=800&q=80",
+      "https://images.unsplash.com/photo-1619239909506?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-MER-0089",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.958994",
+    "status": "active"
+  },
+  {
+    "id": "offer-0090",
+    "year": 2024,
+    "make": "Kia",
+    "model": "K5",
+    "trim": "GT",
+    "msrp": 28812,
+    "discountAmount": 2176,
+    "sellingPrice": 26636,
+    "residualPercent": 63,
+    "residualValue": 18152,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 547,
+      "otherTaxes": 80,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00141,
+      "700-739": 0.00153,
+      "675-699": 0.00164,
+      "640-674": 0.00177,
+      "601-639": 0.00198,
+      "0-600": 0.00226
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 308.06,
+      "700-739": 333.85,
+      "675-699": 339.26,
+      "640-674": 280.99,
+      "601-639": 291.31,
+      "0-600": 305.07
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1628270334272?w=800&q=80",
+      "https://images.unsplash.com/photo-1618430418625?w=800&q=80",
+      "https://images.unsplash.com/photo-1694293636731?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Gray Cloth",
+    "dealSourceId": "SRC-KIA-0090",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959016",
+    "status": "active"
+  },
+  {
+    "id": "offer-0091",
+    "year": 2025,
+    "make": "Lexus",
+    "model": "NX",
+    "trim": "NX 250",
+    "msrp": 43073,
+    "discountAmount": 3452,
+    "sellingPrice": 39621,
+    "residualPercent": 53,
+    "residualValue": 22829,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 595,
+      "doc": 85,
+      "registration": 559,
+      "otherTaxes": 50,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00161,
+      "700-739": 0.00173,
+      "675-699": 0.00186,
+      "640-674": 0.00201,
+      "601-639": 0.00225,
+      "0-600": 0.00257
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 582.89,
+      "700-739": 591.12,
+      "675-699": 639.41,
+      "640-674": 649.69,
+      "601-639": 538.15,
+      "0-600": 560.09
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1635169990945?w=800&q=80",
+      "https://images.unsplash.com/photo-1624187322329?w=800&q=80",
+      "https://images.unsplash.com/photo-1606617912180?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-LEX-0091",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959037",
+    "status": "active"
+  },
+  {
+    "id": "offer-0092",
+    "year": 2026,
+    "make": "Lexus",
+    "model": "NX",
+    "trim": "NX 350",
+    "msrp": 42009,
+    "discountAmount": 4542,
+    "sellingPrice": 37467,
+    "residualPercent": 67,
+    "residualValue": 28146,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 365,
+      "otherTaxes": 21,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00176,
+      "700-739": 0.0019,
+      "675-699": 0.00204,
+      "640-674": 0.0022,
+      "601-639": 0.00247,
+      "0-600": 0.00282
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 410.9,
+      "700-739": 399.12,
+      "675-699": 431.06,
+      "640-674": 371.54,
+      "601-639": 390.99,
+      "0-600": 416.19
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1695487914624?w=800&q=80",
+      "https://images.unsplash.com/photo-1689501843779?w=800&q=80",
+      "https://images.unsplash.com/photo-1624283319916?w=800&q=80"
+    ],
+    "color": "Silver",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-LEX-0092",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959059",
+    "status": "active"
+  },
+  {
+    "id": "offer-0093",
+    "year": 2024,
+    "make": "Lexus",
+    "model": "ES",
+    "trim": "ES 250",
+    "msrp": 45977,
+    "discountAmount": 2081,
+    "sellingPrice": 43896,
+    "residualPercent": 62,
+    "residualValue": 28506,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 85,
+      "registration": 321,
+      "otherTaxes": 9,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00166,
+      "700-739": 0.0018,
+      "675-699": 0.00193,
+      "640-674": 0.00208,
+      "601-639": 0.00233,
+      "0-600": 0.00266
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 601.09,
+      "700-739": 612.21,
+      "675-699": 622.54,
+      "640-674": 634.46,
+      "601-639": 537.03,
+      "0-600": 563.25
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1673428411015?w=800&q=80",
+      "https://images.unsplash.com/photo-1699106392921?w=800&q=80",
+      "https://images.unsplash.com/photo-1677002620267?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-LEX-0093",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959079",
+    "status": "active"
+  },
+  {
+    "id": "offer-0094",
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Tucson",
+    "trim": "Limited",
+    "msrp": 28503,
+    "discountAmount": 3600,
+    "sellingPrice": 24903,
+    "residualPercent": 59,
+    "residualValue": 16817,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 595,
+      "doc": 85,
+      "registration": 566,
+      "otherTaxes": 90,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00123,
+      "700-739": 0.00133,
+      "675-699": 0.00143,
+      "640-674": 0.00154,
+      "601-639": 0.00173,
+      "0-600": 0.00197
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 424.14,
+      "700-739": 287.13,
+      "675-699": 310.57,
+      "640-674": 315.58,
+      "601-639": 262.89,
+      "0-600": 273.83
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1667857149549?w=800&q=80",
+      "https://images.unsplash.com/photo-1656845608626?w=800&q=80",
+      "https://images.unsplash.com/photo-1664575795958?w=800&q=80"
+    ],
+    "color": "Green",
+    "interior": "Black Cloth",
+    "dealSourceId": "SRC-HYU-0094",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959102",
+    "status": "active"
+  },
+  {
+    "id": "offer-0095",
+    "year": 2025,
+    "make": "Toyota",
+    "model": "Highlander",
+    "trim": "XLE",
+    "msrp": 36032,
+    "discountAmount": 2569,
+    "sellingPrice": 33463,
+    "residualPercent": 54,
+    "residualValue": 19457,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 562,
+      "otherTaxes": 73,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00176,
+      "700-739": 0.0019,
+      "675-699": 0.00204,
+      "640-674": 0.0022,
+      "601-639": 0.00246,
+      "0-600": 0.00282
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 496.36,
+      "700-739": 537.34,
+      "675-699": 545.47,
+      "640-674": 448.02,
+      "601-639": 463.12,
+      "0-600": 484.03
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1696522594376?w=800&q=80",
+      "https://images.unsplash.com/photo-1616604141018?w=800&q=80",
+      "https://images.unsplash.com/photo-1639881495845?w=800&q=80"
+    ],
+    "color": "Brown",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-TOY-0095",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959134",
+    "status": "active"
+  },
+  {
+    "id": "offer-0096",
+    "year": 2026,
+    "make": "Honda",
+    "model": "CR-V",
+    "trim": "EX",
+    "msrp": 32752,
+    "discountAmount": 2105,
+    "sellingPrice": 30647,
+    "residualPercent": 62,
+    "residualValue": 20306,
+    "taxRate": 0.0925,
+    "fees": {
+      "acquisition": 695,
+      "doc": 95,
+      "registration": 358,
+      "otherTaxes": 120,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00122,
+      "700-739": 0.00132,
+      "675-699": 0.00141,
+      "640-674": 0.00152,
+      "601-639": 0.00171,
+      "0-600": 0.00195
+    },
+    "termTable": {
+      "740+": 39,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 357.59,
+      "700-739": 387.3,
+      "675-699": 392.31,
+      "640-674": 319.98,
+      "601-639": 330.55,
+      "0-600": 343.91
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1621362124316?w=800&q=80",
+      "https://images.unsplash.com/photo-1600092393192?w=800&q=80",
+      "https://images.unsplash.com/photo-1609542150523?w=800&q=80"
+    ],
+    "color": "Black",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-HON-0096",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959157",
+    "status": "active"
+  },
+  {
+    "id": "offer-0097",
+    "year": 2024,
+    "make": "Toyota",
+    "model": "Corolla",
+    "trim": "SE",
+    "msrp": 23972,
+    "discountAmount": 1143,
+    "sellingPrice": 22829,
+    "residualPercent": 59,
+    "residualValue": 14143,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 695,
+      "doc": 105,
+      "registration": 513,
+      "otherTaxes": 87,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00209,
+      "700-739": 0.00226,
+      "675-699": 0.00243,
+      "640-674": 0.00262,
+      "601-639": 0.00293,
+      "0-600": 0.00335
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 36,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 349.61,
+      "700-739": 356.51,
+      "675-699": 363.4,
+      "640-674": 371.11,
+      "601-639": 317.49,
+      "0-600": 334.53
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1604924319508?w=800&q=80",
+      "https://images.unsplash.com/photo-1633824583445?w=800&q=80",
+      "https://images.unsplash.com/photo-1602491265538?w=800&q=80"
+    ],
+    "color": "Red",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-TOY-0097",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959179",
+    "status": "active"
+  },
+  {
+    "id": "offer-0098",
+    "year": 2025,
+    "make": "Kia",
+    "model": "K5",
+    "trim": "LXS",
+    "msrp": 23474,
+    "discountAmount": 2208,
+    "sellingPrice": 21266,
+    "residualPercent": 59,
+    "residualValue": 13850,
+    "taxRate": 0.0725,
+    "fees": {
+      "acquisition": 895,
+      "doc": 105,
+      "registration": 554,
+      "otherTaxes": 48,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.0015,
+      "700-739": 0.00162,
+      "675-699": 0.00174,
+      "640-674": 0.00187,
+      "601-639": 0.0021,
+      "0-600": 0.00239
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 387.9,
+      "700-739": 264.95,
+      "675-699": 286.47,
+      "640-674": 291.36,
+      "601-639": 244.79,
+      "0-600": 255.71
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1699730750624?w=800&q=80",
+      "https://images.unsplash.com/photo-1629042346440?w=800&q=80",
+      "https://images.unsplash.com/photo-1658653952880?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Beige Leather",
+    "dealSourceId": "SRC-KIA-0098",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959200",
+    "status": "active"
+  },
+  {
+    "id": "offer-0099",
+    "year": 2024,
+    "make": "Kia",
+    "model": "Sportage",
+    "trim": "SX Prestige",
+    "msrp": 29780,
+    "discountAmount": 3535,
+    "sellingPrice": 26245,
+    "residualPercent": 66,
+    "residualValue": 19655,
+    "taxRate": 0.0825,
+    "fees": {
+      "acquisition": 895,
+      "doc": 95,
+      "registration": 574,
+      "otherTaxes": 30,
+      "taxOnFees": true
+    },
+    "mfTable": {
+      "740+": 0.00158,
+      "700-739": 0.00171,
+      "675-699": 0.00184,
+      "640-674": 0.00198,
+      "601-639": 0.00222,
+      "0-600": 0.00253
+    },
+    "termTable": {
+      "740+": 24,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 48,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 375.74,
+      "700-739": 267.88,
+      "675-699": 289.58,
+      "640-674": 247.0,
+      "601-639": 258.92,
+      "0-600": 274.33
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1653642602101?w=800&q=80",
+      "https://images.unsplash.com/photo-1646378509480?w=800&q=80",
+      "https://images.unsplash.com/photo-1675335273929?w=800&q=80"
+    ],
+    "color": "Blue",
+    "interior": "Black Leather",
+    "dealSourceId": "SRC-KIA-0099",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959221",
+    "status": "active"
+  },
+  {
+    "id": "offer-0100",
+    "year": 2026,
+    "make": "Kia",
+    "model": "Sportage",
+    "trim": "LX",
+    "msrp": 28040,
+    "discountAmount": 2043,
+    "sellingPrice": 25997,
+    "residualPercent": 60,
+    "residualValue": 16824,
+    "taxRate": 0.0975,
+    "fees": {
+      "acquisition": 795,
+      "doc": 95,
+      "registration": 401,
+      "otherTaxes": 55,
+      "taxOnFees": false
+    },
+    "mfTable": {
+      "740+": 0.00179,
+      "700-739": 0.00193,
+      "675-699": 0.00208,
+      "640-674": 0.00224,
+      "601-639": 0.00251,
+      "0-600": 0.00286
+    },
+    "termTable": {
+      "740+": 36,
+      "700-739": 39,
+      "675-699": 36,
+      "640-674": 36,
+      "601-639": 48,
+      "0-600": 48
+    },
+    "paymentTable": {
+      "740+": 363.77,
+      "700-739": 348.84,
+      "675-699": 377.4,
+      "640-674": 384.92,
+      "601-639": 327.7,
+      "0-600": 344.15
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1663816757813?w=800&q=80",
+      "https://images.unsplash.com/photo-1627288106421?w=800&q=80",
+      "https://images.unsplash.com/photo-1662691985719?w=800&q=80"
+    ],
+    "color": "White",
+    "interior": "Tan Leather",
+    "dealSourceId": "SRC-KIA-0100",
+    "region": "California",
+    "createdAt": "2025-12-11T01:56:34.959245",
+    "status": "active"
+  }
+]
