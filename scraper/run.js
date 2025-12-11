@@ -11,6 +11,9 @@ const MFCalculator = require('./scrapers/mfCalculator');
 const fs = require('fs').promises;
 const path = require('path');
 
+// Load environment variables
+require('dotenv').config();
+
 class ScraperRunner {
   constructor() {
     // Use mock only if explicitly set
