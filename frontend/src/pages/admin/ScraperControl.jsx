@@ -61,8 +61,14 @@ export default function ScraperControl() {
 
     try {
       const token = localStorage.getItem('access_token');
+      
+      // Prepare brands parameter
+      const brandsParam = selectedBrands.includes('all') 
+        ? 'all' 
+        : selectedBrands.join(',');
+      
       const response = await fetch(
-        `${BACKEND_URL}/api/admin/scraper/run?force=${force}`,
+        `${BACKEND_URL}/api/admin/scraper/run?force=${force}&brands=${brandsParam}`,
         {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${token}` }
@@ -72,7 +78,7 @@ export default function ScraperControl() {
       const data = await response.json();
       
       if (data.ok) {
-        alert(`Scraper запущен: ${data.message || 'Success'}`);
+        alert(`Scraper запущен для брендов: ${brandsParam}\n${data.message || 'Success'}`);
         setTimeout(loadStatus, 2000);
       } else {
         alert('Ошибка запуска scraper');
@@ -82,6 +88,21 @@ export default function ScraperControl() {
       alert('Ошибка запуска scraper');
     } finally {
       setRunning(false);
+    }
+  };
+
+  const toggleBrand = (brandValue) => {
+    if (brandValue === 'all') {
+      setSelectedBrands(['all']);
+    } else {
+      const newSelection = selectedBrands.filter(b => b !== 'all');
+      
+      if (newSelection.includes(brandValue)) {
+        const updated = newSelection.filter(b => b !== brandValue);
+        setSelectedBrands(updated.length > 0 ? updated : ['all']);
+      } else {
+        setSelectedBrands([...newSelection, brandValue]);
+      }
     }
   };
 
