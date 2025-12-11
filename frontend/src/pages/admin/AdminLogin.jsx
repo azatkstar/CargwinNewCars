@@ -145,19 +145,21 @@ const AdminLogin = () => {
             )}
             <Button
               type="submit"
-              disabled={!email || loading}
+              disabled={!email || (!useMagicLink && !password) || loading}
               className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 py-3 text-lg font-semibold"
             >
-              {loading ? t('admin.login.sending') : t('admin.login.send_link')}
+              {loading ? 'Loading...' : (useMagicLink ? 'Send Magic Link' : 'Login')}
             </Button>
           </form>
 
-          <div className="mt-8 text-center">
-            <div className="text-sm text-gray-500">
-              <p>Демо доступы:</p>
-              <p><strong>admin@cargwin.com</strong> - Администратор</p>
-              <p><strong>editor@cargwin.com</strong> - Редактор</p>
-              <p><strong>viewer@cargwin.com</strong> - Просмотр</p>
+          <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="text-sm text-gray-700">
+              <p className="font-semibold mb-2">💡 Demo Credentials (Password Login):</p>
+              <div className="space-y-1 text-xs">
+                <p><strong>Email:</strong> testadmin@hunter.lease</p>
+                <p><strong>Password:</strong> testpass123</p>
+                <p className="text-gray-500 mt-2">Or use Magic Link with any email</p>
+              </div>
             </div>
           </div>
         </CardContent>
