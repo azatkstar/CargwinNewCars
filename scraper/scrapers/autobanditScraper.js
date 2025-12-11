@@ -6,7 +6,6 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const axios = require('axios');
-const sharp = require('sharp');
 const fs = require('fs').promises;
 const path = require('path');
 
