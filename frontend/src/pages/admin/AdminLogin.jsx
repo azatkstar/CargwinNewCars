@@ -9,6 +9,8 @@ import { useI18n } from '../../hooks/useI18n';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [useMagicLink, setUseMagicLink] = useState(false);
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const { login } = useAuth();
@@ -19,11 +21,23 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const result = await login(email);
-      if (result.ok) {
-        setSent(true);
+      if (useMagicLink) {
+        // Magic link flow
+        const result = await login(email);
+        if (result.ok) {
+          setSent(true);
+        } else {
+          alert(t('admin.login.error'));
+        }
       } else {
-        alert(t('admin.login.error'));
+        // Password login
+        const result = await login(email, password);
+        if (result.ok) {
+          // Redirect to admin panel
+          window.location.href = '/admin';
+        } else {
+          alert('Invalid email or password');
+        }
       }
     } catch (error) {
       console.error('Login error:', error);
