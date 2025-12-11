@@ -2696,14 +2696,14 @@ async def import_scraped_offer(
             "description": offer_data.get("title", ""),
             "images": [{"url": img, "alt": ""} for img in offer_data.get("images", [])[:5]],
             "lease": {
-                "monthly": offer_data.get("paymentTable", {}).get("740+", 0),
-                "dueAtSigning": offer_data.get("fees", {}).get("acquisition", 0),
-                "termMonths": offer_data.get("termTable", {}).get("740+", 36),
-                "milesPerYear": 10000
+                "monthly": offer_data.get("monthlyPayment", 0),
+                "dueAtSigning": offer_data.get("downPayment", 0),
+                "termMonths": offer_data.get("termMonths", 36),
+                "milesPerYear": offer_data.get("mileagePerYear", 10000)
             },
-            "status": offer_data.get("status", "active"),
+            "status": "active",
             "source": "autobandit",
-            "sourceId": offer_data.get("dealSourceId", "")
+            "sourceId": offer_data.get("id", "") or offer_data.get("sourceId", "")
         }
         
         # Create in database
