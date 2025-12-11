@@ -13,7 +13,21 @@ const path = require('path');
 
 class ScraperRunner {
   constructor() {
-    this.scraper = new AutoBanditScraper();
+    // Detect if we can use real Puppeteer or need mock
+    this.useMock = process.env.USE_MOCK_SCRAPER === 'true' || this.isSandboxEnvironment();
+    
+    if (this.useMock) {
+      console.log('[Runner] Using Mock Scraper (sandbox environment)');
+      const MockScraper = require('./scrapers/mockScraper');
+      this.scraper = { run: async () => {
+        const mock = new MockScraper();
+        return await mock.run();
+      }};
+    } else {
+      console.log('[Runner] Using Real Scraper (Puppeteer)');
+      this.scraper = new AutoBanditScraper();
+    }
+    
     this.diffEngine = new DiffEngine();
     this.scheduler = new SmartScheduler();
     this.imageProcessor = new ImageProcessor();
@@ -24,6 +38,17 @@ class ScraperRunner {
     });
     
     this.hunterIdMap = {};
+  }
+
+  isSandboxEnvironment() {
+    // Detect sandbox by checking for chrome binary
+    const { execSync } = require('child_process');
+    try {
+      execSync('which google-chrome chromium-browser chrome', { stdio: 'ignore' });
+      return false; // Chrome available
+    } catch {
+      return true; // No Chrome = sandbox
+    }
   }
 
   async loadHunterIdMap() {
