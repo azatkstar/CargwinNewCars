@@ -165,6 +165,33 @@ export default function ScraperControl() {
       {/* Actions */}
       <Card>
         <CardHeader>
+          <CardTitle>Brand Selection</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            {brands.map(brand => (
+              <button
+                key={brand.value}
+                onClick={() => toggleBrand(brand.value)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                  selectedBrands.includes(brand.value)
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {brand.label}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-gray-500">
+            Selected: {selectedBrands.includes('all') ? 'All Brands' : selectedBrands.join(', ')}
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Run Actions */}
+      <Card>
+        <CardHeader>
           <CardTitle>Actions</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
