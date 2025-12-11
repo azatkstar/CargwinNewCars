@@ -243,6 +243,21 @@ export default function OfferEditor() {
   };
 
   const updateField = (path, value) => {
+    // Handle comma → dot conversion for numbers
+    if (typeof value === 'string' && /^\d+,\d+$/.test(value)) {
+      value = value.replace(',', '.');
+    }
+
+    // Auto-trim for text fields
+    if (typeof value === 'string' && ['make', 'model', 'slug'].some(f => path.includes(f))) {
+      value = value.trim();
+    }
+
+    // Auto-format slug
+    if (path.includes('slug')) {
+      value = value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    }
+
     const keys = path.split('.');
     setOffer(prev => {
       const updated = { ...prev };
@@ -256,6 +271,39 @@ export default function OfferEditor() {
       current[keys[keys.length - 1]] = value;
       return updated;
     });
+
+    // Validate on change
+    const fieldName = keys[keys.length - 1];
+    setTimeout(() => validateField(fieldName, value), 100);
+  };
+
+  const FieldError = ({ fieldName }) => {
+    if (!errors[fieldName]) return null;
+    
+    return (
+      <div className="error-text text-xs text-red-600 mt-1">
+        {errors[fieldName]}
+      </div>
+    );
+  };
+
+  const ErrorSummary = () => {
+    const errorEntries = Object.entries(errors).filter(([_, msg]) => msg);
+    
+    if (errorEntries.length === 0) return null;
+
+    return (
+      <div className="bg-red-50 border border-red-300 rounded-lg p-4 mb-6">
+        <h4 className="font-semibold text-red-800 mb-2">Исправьте ошибки:</h4>
+        <ul className="list-disc list-inside space-y-1">
+          {errorEntries.map(([field, msg]) => (
+            <li key={field} className="text-sm text-red-700">
+              <strong>{field}:</strong> {msg}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   };
 
   return (
