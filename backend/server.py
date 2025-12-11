@@ -2669,6 +2669,77 @@ async def get_deals_xml_feed():
         raise HTTPException(status_code=500, detail=str(e))
 
 
+
+
+# ==========================================
+# SCRAPER INTEGRATION
+# ==========================================
+
+@api_router.post("/admin/import-offer")
+async def import_scraped_offer(
+    offer_data: dict,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Import offer from scraper
+    Auto-creates or updates offer in database
+    """
+    try:
+        # Map scraper data to our schema
+        car_data = {
+            "make": offer_data.get("make", ""),
+            "model": offer_data.get("model", ""),
+            "year": offer_data.get("year", 2025),
+            "trim": offer_data.get("trim", ""),
+            "msrp": offer_data.get("msrp", 0),
+            "discount": offer_data.get("discountAmount", 0),
+            "description": offer_data.get("title", ""),
+            "images": [{"url": img, "alt": ""} for img in offer_data.get("images", [])[:5]],
+            "lease": {
+                "monthly": offer_data.get("paymentTable", {}).get("740+", 0),
+                "dueAtSigning": offer_data.get("fees", {}).get("acquisition", 0),
+                "termMonths": offer_data.get("termTable", {}).get("740+", 36),
+                "milesPerYear": 10000
+            },
+            "status": offer_data.get("status", "active"),
+            "source": "autobandit",
+            "sourceId": offer_data.get("dealSourceId", "")
+        }
+        
+        # Create in database
+        from database import get_database
+        db_instance = get_database()
+        
+        # Check if exists by sourceId
+        existing = await db_instance.cars.find_one({"sourceId": car_data["sourceId"]})
+        
+        if existing:
+            # Update
+            await db_instance.cars.update_one(
+                {"sourceId": car_data["sourceId"]},
+                {"$set": car_data}
+            )
+            car_id = str(existing["_id"])
+            action = "updated"
+        else:
+            # Insert
+            result = await db_instance.cars.insert_one(car_data)
+            car_id = str(result.inserted_id)
+            action = "created"
+        
+        logger.info(f"Imported offer from scraper: {car_data['make']} {car_data['model']} - {action}")
+        
+        return {
+            "ok": True,
+            "id": car_id,
+            "action": action
+        }
+        
+    except Exception as e:
+        logger.error(f"Import offer error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ==========================================
 # COMPARISON ENGINE (PHASE 10)
 # ==========================================
