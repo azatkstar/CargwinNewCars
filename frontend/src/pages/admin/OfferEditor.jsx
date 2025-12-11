@@ -319,11 +319,18 @@ export default function OfferEditor() {
           <Button onClick={() => navigate('/admin/offers')} variant="outline">
             Cancel
           </Button>
-          <Button onClick={handleSave} disabled={saving}>
+          <Button 
+            onClick={handleSave} 
+            disabled={saving || hasAnyErrors()}
+            className={hasAnyErrors() ? 'opacity-50 cursor-not-allowed' : ''}
+          >
             {saving ? 'Saving...' : 'Save Offer'}
           </Button>
         </div>
       </div>
+
+      {/* Error Summary */}
+      <ErrorSummary />
 
       {/* Basic Info */}
       <Card>
