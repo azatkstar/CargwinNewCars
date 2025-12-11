@@ -210,7 +210,6 @@ export default function OfferEditor() {
     // Validate all fields
     if (!validateAllFields()) {
       alert('Пожалуйста, исправьте ошибки в форме');
-      // Scroll to top to show Error Summary
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -221,9 +220,11 @@ export default function OfferEditor() {
       const token = localStorage.getItem('access_token');
       const url = id 
         ? `${BACKEND_URL}/api/admin/offers/${id}`
-        : `${BACKEND_URL}/api/admin/import-offer`;
+        : `${BACKEND_URL}/api/admin/offers`;
       
       const method = id ? 'PUT' : 'POST';
+
+      console.log('Saving offer:', offer);
 
       const response = await fetch(url, {
         method,
@@ -234,16 +235,28 @@ export default function OfferEditor() {
         body: JSON.stringify(offer)
       });
 
-      if (response.ok) {
-        alert('Offer saved successfully!');
+      const data = await response.json();
+      
+      console.log('Response:', data);
+
+      if (data.success || response.ok) {
+        if (data.warning) {
+          alert(`Offer saved with warning: ${data.warning}`);
+        } else {
+          alert('Offer saved successfully!');
+        }
         navigate('/admin/offers');
       } else {
-        const data = await response.json();
-        alert(`Error: ${data.detail || 'Failed to save'}`);
+        // Show detailed error
+        const errorMsg = data.error || data.detail || 'Unknown error';
+        alert(`Error saving offer:\n${errorMsg}`);
+        
+        // Log to console for debugging
+        console.error('Save failed:', data);
       }
     } catch (err) {
       console.error('Save error:', err);
-      alert('Error saving offer');
+      alert(`Error saving offer:\n${err.message}`);
     } finally {
       setSaving(false);
     }
