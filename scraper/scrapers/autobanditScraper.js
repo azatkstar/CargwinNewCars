@@ -150,6 +150,7 @@ class AutoBanditScraper {
             moneyFactor: null,
             residualPercent: null,
             imageUrl,
+            sourceId: `AB-${make}-${model}-${year}`.toLowerCase().replace(/\s+/g, '-'),
             raw: {
               allText: allText.substring(0, 300),
               paymentRaw: paymentMatch?.[0] || '',
