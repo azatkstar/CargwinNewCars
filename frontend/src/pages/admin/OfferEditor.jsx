@@ -588,17 +588,21 @@ export default function OfferEditor() {
       {/* Images */}
       <Card>
         <CardHeader>
-          <CardTitle>Images</CardTitle>
+          <CardTitle>Images (Drag to Reorder)</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <Label>Image URL</Label>
-            <Input
-              value={offer.image}
-              onChange={(e) => updateField('image', e.target.value)}
-              placeholder="https://..."
-            />
-          </div>
+        <CardContent>
+          <ImageManager
+            images={offer.images || []}
+            onChange={(newImages) => {
+              setOffer(prev => ({ ...prev, images: newImages }));
+              if (newImages.length === 0) {
+                setErrors(prev => ({ ...prev, images: 'At least 1 image required' }));
+              } else {
+                setErrors(prev => ({ ...prev, images: '' }));
+              }
+            }}
+          />
+          <FieldError fieldName="images" />
         </CardContent>
       </Card>
 
