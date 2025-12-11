@@ -44,7 +44,7 @@ const OffersPage = () => {
       }
       
       // Payment filter
-      const monthly = offer.lease?.monthly || offer.finance?.monthly || 0;
+      const monthly = (offer.lease && offer.lease.monthly) || (offer.finance && offer.finance.monthly) || 0;
       if (monthly < filters.budgetMin || monthly > filters.budgetMax) {
         return false;
       }
