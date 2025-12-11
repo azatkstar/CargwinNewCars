@@ -228,7 +228,7 @@ export default function OfferEditor() {
           <CardTitle>Pricing</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div>
               <Label>MSRP</Label>
               <Input
@@ -245,14 +245,22 @@ export default function OfferEditor() {
                 onChange={(e) => updateField('discount', parseFloat(e.target.value))}
               />
             </div>
+            <div>
+              <Label>Selling Price</Label>
+              <Input
+                type="number"
+                value={offer.sellingPrice || (offer.msrp - offer.discount)}
+                onChange={(e) => updateField('sellingPrice', parseFloat(e.target.value))}
+              />
+            </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Lease Terms */}
+      {/* Lease Terms - Extended */}
       <Card>
         <CardHeader>
-          <CardTitle>Lease Terms</CardTitle>
+          <CardTitle>Lease Calculator Parameters</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
@@ -265,11 +273,68 @@ export default function OfferEditor() {
               />
             </div>
             <div>
-              <Label>Due at Signing</Label>
+              <Label>Due at Signing (DAS)</Label>
               <Input
                 type="number"
                 value={offer.lease?.dueAtSigning || 0}
                 onChange={(e) => updateField('lease.dueAtSigning', parseFloat(e.target.value))}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <Label>Money Factor (MF)</Label>
+              <Input
+                type="number"
+                step="0.00001"
+                value={offer.lease?.moneyFactor || 0}
+                onChange={(e) => updateField('lease.moneyFactor', parseFloat(e.target.value))}
+              />
+            </div>
+            <div>
+              <Label>Residual Value (%)</Label>
+              <Input
+                type="number"
+                value={offer.lease?.residual || 0}
+                onChange={(e) => updateField('lease.residual', parseFloat(e.target.value))}
+              />
+            </div>
+            <div>
+              <Label>Acquisition Fee</Label>
+              <Input
+                type="number"
+                value={offer.lease?.acquisitionFee || 0}
+                onChange={(e) => updateField('lease.acquisitionFee', parseFloat(e.target.value))}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <Label>Tax Rate</Label>
+              <Input
+                type="number"
+                step="0.0001"
+                value={offer.lease?.taxRate || 0}
+                onChange={(e) => updateField('lease.taxRate', parseFloat(e.target.value))}
+                placeholder="0.0925"
+              />
+            </div>
+            <div>
+              <Label>Region</Label>
+              <Input
+                value={offer.lease?.region || ''}
+                onChange={(e) => updateField('lease.region', e.target.value)}
+                placeholder="California"
+              />
+            </div>
+            <div>
+              <Label>Bank Program</Label>
+              <Input
+                value={offer.lease?.bank || ''}
+                onChange={(e) => updateField('lease.bank', e.target.value)}
+                placeholder="TFS, AHFC, etc"
               />
             </div>
           </div>
