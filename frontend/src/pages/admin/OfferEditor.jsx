@@ -249,8 +249,9 @@ export default function OfferEditor() {
               <Label>Selling Price</Label>
               <Input
                 type="number"
-                value={offer.sellingPrice || (offer.msrp - offer.discount)}
+                value={offer.msrp && offer.discount ? offer.msrp - offer.discount : (offer.sellingPrice || 0)}
                 onChange={(e) => updateField('sellingPrice', parseFloat(e.target.value))}
+                placeholder="Auto-calculated from MSRP - Discount"
               />
             </div>
           </div>
