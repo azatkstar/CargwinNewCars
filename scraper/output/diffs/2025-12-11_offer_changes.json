@@ -1,0 +1,5707 @@
+{
+  "added": [
+    {
+      "id": "mock-0",
+      "title": "2024 Mercedes-Benz GLC GLC 300 4MATIC",
+      "year": 2024,
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "trim": "GLC 300 4MATIC",
+      "payment": 863.33,
+      "msrp": 52225,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1664629692704?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1664629692704?w=800&q=80",
+        "https://images.unsplash.com/photo-1625948184944?w=800&q=80",
+        "https://images.unsplash.com/photo-1663799921435?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/0",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 58,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2611,
+      "sellingPrice": 49614,
+      "residualValue": 30290,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 879.64,
+        "700-739": 879.64,
+        "675-699": 879.64,
+        "640-674": 586.43,
+        "601-639": 439.82,
+        "0-600": 439.82
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-1",
+      "title": "2026 Hyundai Tucson Limited",
+      "year": 2026,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "Limited",
+      "payment": 309.57,
+      "msrp": 29172,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1643069945840?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1643069945840?w=800&q=80",
+        "https://images.unsplash.com/photo-1618052367239?w=800&q=80",
+        "https://images.unsplash.com/photo-1620465342932?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/1",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0012,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 63,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1459,
+      "sellingPrice": 27713,
+      "residualValue": 18378,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 311.85,
+        "700-739": 311.85,
+        "675-699": 316.89,
+        "640-674": 272.89,
+        "601-639": 277.93,
+        "0-600": 288
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-2",
+      "title": "2026 Kia Sportage SX",
+      "year": 2026,
+      "make": "Kia",
+      "model": "Sportage",
+      "trim": "SX",
+      "payment": 563.71,
+      "msrp": 32344,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1612842001614?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1612842001614?w=800&q=80",
+        "https://images.unsplash.com/photo-1622691436104?w=800&q=80",
+        "https://images.unsplash.com/photo-1649896007616?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/2",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0004,
+        "700-739": 0.0004,
+        "675-699": 0.0004,
+        "640-674": 0.0004,
+        "601-639": 0.0005,
+        "0-600": 0.0006
+      },
+      "residualPercent": 58,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1617,
+      "sellingPrice": 30727,
+      "residualValue": 18760,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 566.37,
+        "700-739": 566.37,
+        "675-699": 566.37,
+        "640-674": 384.79,
+        "601-639": 299.41,
+        "0-600": 304.81
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-3",
+      "title": "2026 Hyundai Tucson SEL",
+      "year": 2026,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "SEL",
+      "payment": 257.82,
+      "msrp": 27103,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1649702293279?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1649702293279?w=800&q=80",
+        "https://images.unsplash.com/photo-1671190512294?w=800&q=80",
+        "https://images.unsplash.com/photo-1675123912276?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/3",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0002,
+        "700-739": 0.0002,
+        "675-699": 0.0002,
+        "640-674": 0.0002,
+        "601-639": 0.0002,
+        "0-600": 0.0003
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1355,
+      "sellingPrice": 25748,
+      "residualValue": 16804,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 259.84,
+        "700-739": 259.84,
+        "675-699": 259.84,
+        "640-674": 212.87,
+        "601-639": 212.87,
+        "0-600": 217.52
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-4",
+      "title": "2024 Honda Pilot Touring",
+      "year": 2024,
+      "make": "Honda",
+      "model": "Pilot",
+      "trim": "Touring",
+      "payment": 538.41,
+      "msrp": 42239,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1624740625660?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1624740625660?w=800&q=80",
+        "https://images.unsplash.com/photo-1696541184190?w=800&q=80",
+        "https://images.unsplash.com/photo-1666928250387?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/4",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0011,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 58,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2112,
+      "sellingPrice": 40127,
+      "residualValue": 24499,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 537.81,
+        "700-739": 544.87,
+        "675-699": 551.93,
+        "640-674": 433.36,
+        "601-639": 447.48,
+        "0-600": 461.61
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-5",
+      "title": "2025 BMW X3 M40i",
+      "year": 2025,
+      "make": "BMW",
+      "model": "X3",
+      "trim": "M40i",
+      "payment": 477.75,
+      "msrp": 46019,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1645889563884?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1645889563884?w=800&q=80",
+        "https://images.unsplash.com/photo-1678799374610?w=800&q=80",
+        "https://images.unsplash.com/photo-1637557774461?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/5",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0011,
+        "700-739": 0.0012,
+        "675-699": 0.0012,
+        "640-674": 0.0013,
+        "601-639": 0.0015,
+        "0-600": 0.0017
+      },
+      "residualPercent": 67,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2301,
+      "sellingPrice": 43718,
+      "residualValue": 30833,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 480.62,
+        "700-739": 488.76,
+        "675-699": 488.76,
+        "640-674": 399.15,
+        "601-639": 415.44,
+        "0-600": 431.73
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-6",
+      "title": "2025 Kia Sportage SX Prestige",
+      "year": 2025,
+      "make": "Kia",
+      "model": "Sportage",
+      "trim": "SX Prestige",
+      "payment": 409.49,
+      "msrp": 32920,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1614629606078?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1614629606078?w=800&q=80",
+        "https://images.unsplash.com/photo-1660334161516?w=800&q=80",
+        "https://images.unsplash.com/photo-1680866929245?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/6",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 54,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1646,
+      "sellingPrice": 31274,
+      "residualValue": 17777,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 409.6,
+        "700-739": 409.6,
+        "675-699": 409.6,
+        "640-674": 307.2,
+        "601-639": 307.2,
+        "0-600": 307.2
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-7",
+      "title": "2026 Honda Accord Sport",
+      "year": 2026,
+      "make": "Honda",
+      "model": "Accord",
+      "trim": "Sport",
+      "payment": 363.4,
+      "msrp": 32998,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1699423898971?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1699423898971?w=800&q=80",
+        "https://images.unsplash.com/photo-1609008668753?w=800&q=80",
+        "https://images.unsplash.com/photo-1624083292856?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/7",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0006,
+        "700-739": 0.0006,
+        "675-699": 0.0006,
+        "640-674": 0.0007,
+        "601-639": 0.0008,
+        "0-600": 0.0009
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1650,
+      "sellingPrice": 31348,
+      "residualValue": 19469,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 366.07,
+        "700-739": 366.07,
+        "675-699": 366.07,
+        "640-674": 309.23,
+        "601-639": 314.79,
+        "0-600": 320.34
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-8",
+      "title": "2025 Mercedes-Benz GLC GLC 300",
+      "year": 2025,
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "trim": "GLC 300",
+      "payment": 817.9,
+      "msrp": 48921,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1615521597404?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1615521597404?w=800&q=80",
+        "https://images.unsplash.com/photo-1626566973893?w=800&q=80",
+        "https://images.unsplash.com/photo-1664032517306?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/8",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 57,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2446,
+      "sellingPrice": 46475,
+      "residualValue": 27885,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 846.23,
+        "700-739": 846.23,
+        "675-699": 846.23,
+        "640-674": 564.15,
+        "601-639": 423.12,
+        "0-600": 423.12
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-9",
+      "title": "2026 Honda Pilot EX-L",
+      "year": 2026,
+      "make": "Honda",
+      "model": "Pilot",
+      "trim": "EX-L",
+      "payment": 760.93,
+      "msrp": 38721,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1600465278327?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1600465278327?w=800&q=80",
+        "https://images.unsplash.com/photo-1677753291898?w=800&q=80",
+        "https://images.unsplash.com/photo-1645993495872?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/9",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.001,
+        "640-674": 0.0011,
+        "601-639": 0.0012,
+        "0-600": 0.0014
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1936,
+      "sellingPrice": 36785,
+      "residualValue": 21297,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 762.14,
+        "700-739": 768.48,
+        "675-699": 768.48,
+        "640-674": 539.82,
+        "601-639": 428.66,
+        "0-600": 441.35
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-10",
+      "title": "2024 Kia K5 GT-Line",
+      "year": 2024,
+      "make": "Kia",
+      "model": "K5",
+      "trim": "GT-Line",
+      "payment": 599.76,
+      "msrp": 28106,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1648095945716?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1648095945716?w=800&q=80",
+        "https://images.unsplash.com/photo-1654319946734?w=800&q=80",
+        "https://images.unsplash.com/photo-1649460240987?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/10",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0011,
+        "700-739": 0.0012,
+        "675-699": 0.0013,
+        "640-674": 0.0014,
+        "601-639": 0.0015,
+        "0-600": 0.0018
+      },
+      "residualPercent": 52,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1405,
+      "sellingPrice": 26701,
+      "residualValue": 14615,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 599.82,
+        "700-739": 604.33,
+        "675-699": 608.84,
+        "640-674": 429.97,
+        "601-639": 342.79,
+        "0-600": 356.33
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-11",
+      "title": "2024 Honda CR-V EX-L",
+      "year": 2024,
+      "make": "Honda",
+      "model": "CR-V",
+      "trim": "EX-L",
+      "payment": 419.85,
+      "msrp": 34433,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1636377325404?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1636377325404?w=800&q=80",
+        "https://images.unsplash.com/photo-1673753940710?w=800&q=80",
+        "https://images.unsplash.com/photo-1693638302492?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/11",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0004,
+        "700-739": 0.0005,
+        "675-699": 0.0005,
+        "640-674": 0.0005,
+        "601-639": 0.0006,
+        "0-600": 0.0007
+      },
+      "residualPercent": 54,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1722,
+      "sellingPrice": 32711,
+      "residualValue": 18594,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 417.88,
+        "700-739": 423.48,
+        "675-699": 423.48,
+        "640-674": 349.33,
+        "601-639": 354.94,
+        "0-600": 360.54
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-12",
+      "title": "2026 Toyota Camry TRD",
+      "year": 2026,
+      "make": "Toyota",
+      "model": "Camry",
+      "trim": "TRD",
+      "payment": 417.13,
+      "msrp": 31956,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1661249337414?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1661249337414?w=800&q=80",
+        "https://images.unsplash.com/photo-1633880494253?w=800&q=80",
+        "https://images.unsplash.com/photo-1618174606005?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/12",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0004,
+        "700-739": 0.0005,
+        "675-699": 0.0005,
+        "640-674": 0.0005,
+        "601-639": 0.0006,
+        "0-600": 0.0007
+      },
+      "residualPercent": 68,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1598,
+      "sellingPrice": 30358,
+      "residualValue": 21730,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 415.52,
+        "700-739": 421.21,
+        "675-699": 421.21,
+        "640-674": 290.29,
+        "601-639": 230.52,
+        "0-600": 236.21
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-13",
+      "title": "2026 Mercedes-Benz E-Class E 350",
+      "year": 2026,
+      "make": "Mercedes-Benz",
+      "model": "E-Class",
+      "trim": "E 350",
+      "payment": 881.17,
+      "msrp": 64559,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1612378926202?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1612378926202?w=800&q=80",
+        "https://images.unsplash.com/photo-1609384902230?w=800&q=80",
+        "https://images.unsplash.com/photo-1688897880918?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/13",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0012,
+        "640-674": 0.0012,
+        "601-639": 0.0014,
+        "0-600": 0.0016
+      },
+      "residualPercent": 52,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 3228,
+      "sellingPrice": 61331,
+      "residualValue": 33571,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 881.32,
+        "700-739": 891.68,
+        "675-699": 902.05,
+        "640-674": 756.25,
+        "601-639": 776.98,
+        "0-600": 797.72
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-14",
+      "title": "2026 Hyundai Tucson Limited",
+      "year": 2026,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "Limited",
+      "payment": 462.14,
+      "msrp": 31737,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1610705550640?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1610705550640?w=800&q=80",
+        "https://images.unsplash.com/photo-1600430033563?w=800&q=80",
+        "https://images.unsplash.com/photo-1634748035617?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/14",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0005,
+        "700-739": 0.0006,
+        "675-699": 0.0006,
+        "640-674": 0.0006,
+        "601-639": 0.0007,
+        "0-600": 0.0008
+      },
+      "residualPercent": 65,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1587,
+      "sellingPrice": 30150,
+      "residualValue": 20629,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 461.14,
+        "700-739": 466.69,
+        "675-699": 466.69,
+        "640-674": 322.22,
+        "601-639": 255.54,
+        "0-600": 261.08
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-15",
+      "title": "2024 Hyundai Sonata Limited",
+      "year": 2024,
+      "make": "Hyundai",
+      "model": "Sonata",
+      "trim": "Limited",
+      "payment": 443.93,
+      "msrp": 27166,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1637192355244?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1637192355244?w=800&q=80",
+        "https://images.unsplash.com/photo-1688924285362?w=800&q=80",
+        "https://images.unsplash.com/photo-1629127270622?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/15",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0002,
+        "700-739": 0.0003,
+        "675-699": 0.0003,
+        "640-674": 0.0003,
+        "601-639": 0.0003,
+        "0-600": 0.0004
+      },
+      "residualPercent": 60,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1358,
+      "sellingPrice": 25808,
+      "residualValue": 16300,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 442.01,
+        "700-739": 446.61,
+        "675-699": 446.61,
+        "640-674": 302.34,
+        "601-639": 230.21,
+        "0-600": 234.81
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-16",
+      "title": "2026 Honda CR-V EX",
+      "year": 2026,
+      "make": "Honda",
+      "model": "CR-V",
+      "trim": "EX",
+      "payment": 367.07,
+      "msrp": 34121,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1690989221070?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1690989221070?w=800&q=80",
+        "https://images.unsplash.com/photo-1658076319515?w=800&q=80",
+        "https://images.unsplash.com/photo-1607986590291?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/16",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0013,
+        "700-739": 0.0015,
+        "675-699": 0.0016,
+        "640-674": 0.0017,
+        "601-639": 0.0019,
+        "0-600": 0.0022
+      },
+      "residualPercent": 65,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1706,
+      "sellingPrice": 32415,
+      "residualValue": 22179,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 364.28,
+        "700-739": 376.21,
+        "675-699": 382.17,
+        "640-674": 334.37,
+        "601-639": 346.3,
+        "0-600": 364.19
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-17",
+      "title": "2024 Hyundai Tucson N Line",
+      "year": 2024,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "N Line",
+      "payment": 315.72,
+      "msrp": 27299,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1698796847062?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1698796847062?w=800&q=80",
+        "https://images.unsplash.com/photo-1611020503508?w=800&q=80",
+        "https://images.unsplash.com/photo-1674782876259?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/17",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0002,
+        "700-739": 0.0002,
+        "675-699": 0.0003,
+        "640-674": 0.0003,
+        "601-639": 0.0003,
+        "0-600": 0.0004
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1365,
+      "sellingPrice": 25934,
+      "residualValue": 15014,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 314.85,
+        "700-739": 314.85,
+        "675-699": 319.32,
+        "640-674": 261.96,
+        "601-639": 261.96,
+        "0-600": 266.44
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-18",
+      "title": "2024 Lexus ES ES 350",
+      "year": 2024,
+      "make": "Lexus",
+      "model": "ES",
+      "trim": "ES 350",
+      "payment": 583.73,
+      "msrp": 40667,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1621363976125?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1621363976125?w=800&q=80",
+        "https://images.unsplash.com/photo-1639572069193?w=800&q=80",
+        "https://images.unsplash.com/photo-1680079620830?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/18",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0014,
+        "700-739": 0.0016,
+        "675-699": 0.0017,
+        "640-674": 0.0018,
+        "601-639": 0.002,
+        "0-600": 0.0023
+      },
+      "residualPercent": 52,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2033,
+      "sellingPrice": 38634,
+      "residualValue": 21147,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 581.3,
+        "700-739": 594.36,
+        "675-699": 600.89,
+        "640-674": 515.57,
+        "601-639": 528.63,
+        "0-600": 548.23
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-19",
+      "title": "2026 Hyundai Tucson N Line",
+      "year": 2026,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "N Line",
+      "payment": 305.35,
+      "msrp": 27825,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1622897478245?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1622897478245?w=800&q=80",
+        "https://images.unsplash.com/photo-1622790997927?w=800&q=80",
+        "https://images.unsplash.com/photo-1605391417817?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/19",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0012,
+        "640-674": 0.0013,
+        "601-639": 0.0014,
+        "0-600": 0.0016
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1391,
+      "sellingPrice": 26434,
+      "residualValue": 17252,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 304.94,
+        "700-739": 309.71,
+        "675-699": 314.49,
+        "640-674": 271.03,
+        "601-639": 275.8,
+        "0-600": 285.35
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-20",
+      "title": "2024 Mercedes-Benz GLC GLC 300",
+      "year": 2024,
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "trim": "GLC 300",
+      "payment": 565.33,
+      "msrp": 52875,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1611656295037?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1611656295037?w=800&q=80",
+        "https://images.unsplash.com/photo-1664007708052?w=800&q=80",
+        "https://images.unsplash.com/photo-1671942412889?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/20",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0011,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 65,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2644,
+      "sellingPrice": 50231,
+      "residualValue": 34369,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 564.55,
+        "700-739": 573.79,
+        "675-699": 583.04,
+        "640-674": 462.69,
+        "601-639": 481.18,
+        "0-600": 499.66
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-21",
+      "title": "2026 Honda Civic Touring",
+      "year": 2026,
+      "make": "Honda",
+      "model": "Civic",
+      "trim": "Touring",
+      "payment": 342.08,
+      "msrp": 24067,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1693706391423?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1693706391423?w=800&q=80",
+        "https://images.unsplash.com/photo-1636427791569?w=800&q=80",
+        "https://images.unsplash.com/photo-1645615861564?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/21",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0011,
+        "700-739": 0.0012,
+        "675-699": 0.0013,
+        "640-674": 0.0014,
+        "601-639": 0.0015,
+        "0-600": 0.0017
+      },
+      "residualPercent": 54,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1203,
+      "sellingPrice": 22864,
+      "residualValue": 12996,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 342.56,
+        "700-739": 346.48,
+        "675-699": 350.4,
+        "640-674": 279.45,
+        "601-639": 283.37,
+        "0-600": 291.2
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-22",
+      "title": "2025 Kia K5 GT",
+      "year": 2025,
+      "make": "Kia",
+      "model": "K5",
+      "trim": "GT",
+      "payment": 436.76,
+      "msrp": 29330,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1659838571332?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1659838571332?w=800&q=80",
+        "https://images.unsplash.com/photo-1649931980053?w=800&q=80",
+        "https://images.unsplash.com/photo-1637688994481?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/22",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0012,
+        "700-739": 0.0013,
+        "675-699": 0.0014,
+        "640-674": 0.0015,
+        "601-639": 0.0017,
+        "0-600": 0.0019
+      },
+      "residualPercent": 67,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1467,
+      "sellingPrice": 27863,
+      "residualValue": 19651,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 436.11,
+        "700-739": 441.3,
+        "675-699": 446.49,
+        "640-674": 327.07,
+        "601-639": 275.15,
+        "0-600": 285.54
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-23",
+      "title": "2024 BMW 5 Series 540i",
+      "year": 2024,
+      "make": "BMW",
+      "model": "5 Series",
+      "trim": "540i",
+      "payment": 1043.64,
+      "msrp": 62213,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1698126905221?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1698126905221?w=800&q=80",
+        "https://images.unsplash.com/photo-1673168915092?w=800&q=80",
+        "https://images.unsplash.com/photo-1623702429564?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/23",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0002,
+        "700-739": 0.0002,
+        "675-699": 0.0003,
+        "640-674": 0.0003,
+        "601-639": 0.0003,
+        "0-600": 0.0004
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 3111,
+      "sellingPrice": 59102,
+      "residualValue": 36706,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 1040.42,
+        "700-739": 1040.42,
+        "675-699": 1050.89,
+        "640-674": 711.06,
+        "601-639": 541.14,
+        "0-600": 551.61
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-24",
+      "title": "2025 Hyundai Sonata Limited",
+      "year": 2025,
+      "make": "Hyundai",
+      "model": "Sonata",
+      "trim": "Limited",
+      "payment": 374.96,
+      "msrp": 28986,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1620967283934?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1620967283934?w=800&q=80",
+        "https://images.unsplash.com/photo-1641475764157?w=800&q=80",
+        "https://images.unsplash.com/photo-1698346519175?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/24",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0012,
+        "640-674": 0.0013,
+        "601-639": 0.0014,
+        "0-600": 0.0016
+      },
+      "residualPercent": 58,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1449,
+      "sellingPrice": 27537,
+      "residualValue": 16812,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 373.93,
+        "700-739": 378.77,
+        "675-699": 383.62,
+        "640-674": 307.09,
+        "601-639": 311.94,
+        "0-600": 321.63
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-25",
+      "title": "2025 Lexus ES ES 350",
+      "year": 2025,
+      "make": "Lexus",
+      "model": "ES",
+      "trim": "ES 350",
+      "payment": 607.17,
+      "msrp": 42690,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1601251116798?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1601251116798?w=800&q=80",
+        "https://images.unsplash.com/photo-1600475641613?w=800&q=80",
+        "https://images.unsplash.com/photo-1680846682346?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/25",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0003,
+        "700-739": 0.0004,
+        "675-699": 0.0004,
+        "640-674": 0.0004,
+        "601-639": 0.0005,
+        "0-600": 0.0005
+      },
+      "residualPercent": 65,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2135,
+      "sellingPrice": 40555,
+      "residualValue": 27749,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 605.33,
+        "700-739": 612.79,
+        "675-699": 612.79,
+        "640-674": 418.48,
+        "601-639": 328.78,
+        "0-600": 328.78
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-26",
+      "title": "2026 Toyota Camry TRD",
+      "year": 2026,
+      "make": "Toyota",
+      "model": "Camry",
+      "trim": "TRD",
+      "payment": 503.46,
+      "msrp": 27842,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1627013680750?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1627013680750?w=800&q=80",
+        "https://images.unsplash.com/photo-1618960880989?w=800&q=80",
+        "https://images.unsplash.com/photo-1667631868234?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/26",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1392,
+      "sellingPrice": 26450,
+      "residualValue": 15313,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 506.97,
+        "700-739": 506.97,
+        "675-699": 506.97,
+        "640-674": 337.98,
+        "601-639": 253.48,
+        "0-600": 253.48
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-27",
+      "title": "2026 BMW X3 sDrive30i",
+      "year": 2026,
+      "make": "BMW",
+      "model": "X3",
+      "trim": "sDrive30i",
+      "payment": 990.83,
+      "msrp": 52487,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1690103467638?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1690103467638?w=800&q=80",
+        "https://images.unsplash.com/photo-1627037896947?w=800&q=80",
+        "https://images.unsplash.com/photo-1630689498107?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/27",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0004,
+        "700-739": 0.0004,
+        "675-699": 0.0005,
+        "640-674": 0.0005,
+        "601-639": 0.0006,
+        "0-600": 0.0007
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2624,
+      "sellingPrice": 49863,
+      "residualValue": 28868,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 990.12,
+        "700-739": 990.12,
+        "675-699": 998.72,
+        "640-674": 680.15,
+        "601-639": 529.46,
+        "0-600": 538.06
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-28",
+      "title": "2026 Honda Civic EX",
+      "year": 2026,
+      "make": "Honda",
+      "model": "Civic",
+      "trim": "EX",
+      "payment": 352.74,
+      "msrp": 25102,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1690115612747?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1690115612747?w=800&q=80",
+        "https://images.unsplash.com/photo-1646253854263?w=800&q=80",
+        "https://images.unsplash.com/photo-1655405244939?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/28",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0011,
+        "640-674": 0.0012,
+        "601-639": 0.0014,
+        "0-600": 0.0016
+      },
+      "residualPercent": 68,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1255,
+      "sellingPrice": 23847,
+      "residualValue": 17069,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 353.24,
+        "700-739": 357.71,
+        "675-699": 357.71,
+        "640-674": 259.33,
+        "601-639": 216.85,
+        "0-600": 225.79
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-29",
+      "title": "2025 Lexus RX RX 450h",
+      "year": 2025,
+      "make": "Lexus",
+      "model": "RX",
+      "trim": "RX 450h",
+      "payment": 846.7,
+      "msrp": 51815,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1691191482168?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1691191482168?w=800&q=80",
+        "https://images.unsplash.com/photo-1686522355642?w=800&q=80",
+        "https://images.unsplash.com/photo-1666931239460?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/29",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0005,
+        "700-739": 0.0005,
+        "675-699": 0.0006,
+        "640-674": 0.0006,
+        "601-639": 0.0007,
+        "0-600": 0.0008
+      },
+      "residualPercent": 61,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2591,
+      "sellingPrice": 49224,
+      "residualValue": 31607,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 846.09,
+        "700-739": 846.09,
+        "675-699": 854.93,
+        "640-674": 587.61,
+        "601-639": 462.79,
+        "0-600": 471.62
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-30",
+      "title": "2026 Lexus RX RX 350",
+      "year": 2026,
+      "make": "Lexus",
+      "model": "RX",
+      "trim": "RX 350",
+      "payment": 760.31,
+      "msrp": 52129,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1615882425872?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1615882425872?w=800&q=80",
+        "https://images.unsplash.com/photo-1683156019748?w=800&q=80",
+        "https://images.unsplash.com/photo-1602364096459?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/30",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0008,
+        "700-739": 0.0008,
+        "675-699": 0.0009,
+        "640-674": 0.001,
+        "601-639": 0.0011,
+        "0-600": 0.0013
+      },
+      "residualPercent": 66,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2606,
+      "sellingPrice": 49523,
+      "residualValue": 34405,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 761.54,
+        "700-739": 761.54,
+        "675-699": 770.71,
+        "640-674": 550.48,
+        "601-639": 444.95,
+        "0-600": 463.29
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-31",
+      "title": "2025 Lexus ES ES 350 F Sport",
+      "year": 2025,
+      "make": "Lexus",
+      "model": "ES",
+      "trim": "ES 350 F Sport",
+      "payment": 604.12,
+      "msrp": 46729,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1670680764294?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1670680764294?w=800&q=80",
+        "https://images.unsplash.com/photo-1674729203981?w=800&q=80",
+        "https://images.unsplash.com/photo-1644207740214?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/31",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.002,
+        "700-739": 0.0022,
+        "675-699": 0.0024,
+        "640-674": 0.0025,
+        "601-639": 0.0028,
+        "0-600": 0.0032
+      },
+      "residualPercent": 64,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2336,
+      "sellingPrice": 44393,
+      "residualValue": 29907,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 601.96,
+        "700-739": 618.19,
+        "675-699": 634.42,
+        "640-674": 532.64,
+        "601-639": 556.99,
+        "0-600": 589.46
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-32",
+      "title": "2025 BMW 5 Series 530i",
+      "year": 2025,
+      "make": "BMW",
+      "model": "5 Series",
+      "trim": "530i",
+      "payment": 741.01,
+      "msrp": 59650,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1690800757777?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1690800757777?w=800&q=80",
+        "https://images.unsplash.com/photo-1603661229220?w=800&q=80",
+        "https://images.unsplash.com/photo-1613743829325?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/32",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0002,
+        "700-739": 0.0002,
+        "675-699": 0.0002,
+        "640-674": 0.0002,
+        "601-639": 0.0002,
+        "0-600": 0.0003
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2983,
+      "sellingPrice": 56667,
+      "residualValue": 32808,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 743.6,
+        "700-739": 743.6,
+        "675-699": 743.6,
+        "640-674": 562.59,
+        "601-639": 562.59,
+        "0-600": 572.37
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-33",
+      "title": "2024 Lexus RX RX 450h",
+      "year": 2024,
+      "make": "Lexus",
+      "model": "RX",
+      "trim": "RX 450h",
+      "payment": 593.75,
+      "msrp": 50009,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1603628689129?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1603628689129?w=800&q=80",
+        "https://images.unsplash.com/photo-1631234198665?w=800&q=80",
+        "https://images.unsplash.com/photo-1691023124642?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/33",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0011,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 61,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2500,
+      "sellingPrice": 47509,
+      "residualValue": 30505,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 592.73,
+        "700-739": 601.25,
+        "675-699": 609.78,
+        "640-674": 480.77,
+        "601-639": 497.82,
+        "0-600": 514.86
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-34",
+      "title": "2026 BMW 3 Series 330i",
+      "year": 2026,
+      "make": "BMW",
+      "model": "3 Series",
+      "trim": "330i",
+      "payment": 927.46,
+      "msrp": 44201,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1638486160553?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1638486160553?w=800&q=80",
+        "https://images.unsplash.com/photo-1694118721631?w=800&q=80",
+        "https://images.unsplash.com/photo-1689313984550?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/34",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.0009,
+        "675-699": 0.001,
+        "640-674": 0.0011,
+        "601-639": 0.0012,
+        "0-600": 0.0014
+      },
+      "residualPercent": 52,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2210,
+      "sellingPrice": 41991,
+      "residualValue": 22985,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 929.06,
+        "700-739": 929.06,
+        "675-699": 936.16,
+        "640-674": 654.86,
+        "601-639": 517.77,
+        "0-600": 531.97
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-35",
+      "title": "2025 Kia Sportage LX",
+      "year": 2025,
+      "make": "Kia",
+      "model": "Sportage",
+      "trim": "LX",
+      "payment": 296.86,
+      "msrp": 27335,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1688802212921?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1688802212921?w=800&q=80",
+        "https://images.unsplash.com/photo-1675591652190?w=800&q=80",
+        "https://images.unsplash.com/photo-1696326467247?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/35",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0007,
+        "700-739": 0.0007,
+        "675-699": 0.0008,
+        "640-674": 0.0008,
+        "601-639": 0.0009,
+        "0-600": 0.0011
+      },
+      "residualPercent": 63,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1367,
+      "sellingPrice": 25968,
+      "residualValue": 17221,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 298.48,
+        "700-739": 298.48,
+        "675-699": 303.19,
+        "640-674": 236.83,
+        "601-639": 241.55,
+        "0-600": 250.99
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-36",
+      "title": "2026 Toyota Corolla SE",
+      "year": 2026,
+      "make": "Toyota",
+      "model": "Corolla",
+      "trim": "SE",
+      "payment": 453.38,
+      "msrp": 26683,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1663510496733?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1663510496733?w=800&q=80",
+        "https://images.unsplash.com/photo-1673102083398?w=800&q=80",
+        "https://images.unsplash.com/photo-1686024615242?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/36",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.001,
+        "640-674": 0.0011,
+        "601-639": 0.0012,
+        "0-600": 0.0014
+      },
+      "residualPercent": 61,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1334,
+      "sellingPrice": 25349,
+      "residualValue": 16277,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 453.89,
+        "700-739": 458.44,
+        "675-699": 458.44,
+        "640-674": 325.33,
+        "601-639": 261.05,
+        "0-600": 270.15
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-37",
+      "title": "2024 Lexus ES ES 350 F Sport",
+      "year": 2024,
+      "make": "Lexus",
+      "model": "ES",
+      "trim": "ES 350 F Sport",
+      "payment": 545.91,
+      "msrp": 46700,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1686890750021?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1686890750021?w=800&q=80",
+        "https://images.unsplash.com/photo-1699532523466?w=800&q=80",
+        "https://images.unsplash.com/photo-1613097251926?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/37",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0006,
+        "700-739": 0.0007,
+        "675-699": 0.0007,
+        "640-674": 0.0008,
+        "601-639": 0.0009,
+        "0-600": 0.001
+      },
+      "residualPercent": 57,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2335,
+      "sellingPrice": 44365,
+      "residualValue": 26619,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 543.65,
+        "700-739": 551.4,
+        "675-699": 551.4,
+        "640-674": 465.95,
+        "601-639": 473.7,
+        "0-600": 481.46
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-38",
+      "title": "2026 Honda Pilot Touring",
+      "year": 2026,
+      "make": "Honda",
+      "model": "Pilot",
+      "trim": "Touring",
+      "payment": 413.05,
+      "msrp": 38780,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1622105302938?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1622105302938?w=800&q=80",
+        "https://images.unsplash.com/photo-1623424087633?w=800&q=80",
+        "https://images.unsplash.com/photo-1604008887387?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/38",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1939,
+      "sellingPrice": 36841,
+      "residualValue": 22880,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 423.68,
+        "700-739": 423.68,
+        "675-699": 423.68,
+        "640-674": 317.76,
+        "601-639": 317.76,
+        "0-600": 317.76
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-39",
+      "title": "2024 Kia Telluride LX",
+      "year": 2024,
+      "make": "Kia",
+      "model": "Telluride",
+      "trim": "LX",
+      "payment": 529,
+      "msrp": 38510,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1683061244568?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1683061244568?w=800&q=80",
+        "https://images.unsplash.com/photo-1678982341301?w=800&q=80",
+        "https://images.unsplash.com/photo-1690717392690?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/39",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0003,
+        "700-739": 0.0003,
+        "675-699": 0.0004,
+        "640-674": 0.0004,
+        "601-639": 0.0004,
+        "0-600": 0.0005
+      },
+      "residualPercent": 66,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1926,
+      "sellingPrice": 36584,
+      "residualValue": 25417,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 528.65,
+        "700-739": 528.65,
+        "675-699": 535.43,
+        "640-674": 365.98,
+        "601-639": 281.26,
+        "0-600": 288.03
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-40",
+      "title": "2024 Mercedes-Benz C-Class C 300 4MATIC",
+      "year": 2024,
+      "make": "Mercedes-Benz",
+      "model": "C-Class",
+      "trim": "C 300 4MATIC",
+      "payment": 838.69,
+      "msrp": 50406,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1694694090139?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1694694090139?w=800&q=80",
+        "https://images.unsplash.com/photo-1698585914274?w=800&q=80",
+        "https://images.unsplash.com/photo-1603669154705?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/40",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0007,
+        "700-739": 0.0007,
+        "675-699": 0.0008,
+        "640-674": 0.0009,
+        "601-639": 0.001,
+        "0-600": 0.0011
+      },
+      "residualPercent": 61,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2520,
+      "sellingPrice": 47886,
+      "residualValue": 30748,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 840.27,
+        "700-739": 840.27,
+        "675-699": 848.86,
+        "640-674": 597.41,
+        "601-639": 475.98,
+        "0-600": 484.57
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-41",
+      "title": "2026 Mercedes-Benz C-Class AMG C 43",
+      "year": 2026,
+      "make": "Mercedes-Benz",
+      "model": "C-Class",
+      "trim": "AMG C 43",
+      "payment": 476.33,
+      "msrp": 48771,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1642330988786?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1642330988786?w=800&q=80",
+        "https://images.unsplash.com/photo-1668214546523?w=800&q=80",
+        "https://images.unsplash.com/photo-1644303358096?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/41",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.001,
+        "640-674": 0.0011,
+        "601-639": 0.0012,
+        "0-600": 0.0014
+      },
+      "residualPercent": 68,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2439,
+      "sellingPrice": 46332,
+      "residualValue": 33164,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 477.78,
+        "700-739": 486.46,
+        "675-699": 486.46,
+        "640-674": 395.24,
+        "601-639": 403.93,
+        "0-600": 421.3
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-42",
+      "title": "2025 BMW 3 Series M340i",
+      "year": 2025,
+      "make": "BMW",
+      "model": "3 Series",
+      "trim": "M340i",
+      "payment": 502.68,
+      "msrp": 43547,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1671587919955?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1671587919955?w=800&q=80",
+        "https://images.unsplash.com/photo-1659427592907?w=800&q=80",
+        "https://images.unsplash.com/photo-1679101203831?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/42",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0014,
+        "700-739": 0.0015,
+        "675-699": 0.0016,
+        "640-674": 0.0017,
+        "601-639": 0.002,
+        "0-600": 0.0022
+      },
+      "residualPercent": 65,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2177,
+      "sellingPrice": 41370,
+      "residualValue": 28306,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 503.03,
+        "700-739": 510.64,
+        "675-699": 518.25,
+        "640-674": 426.75,
+        "601-639": 449.58,
+        "0-600": 464.81
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-43",
+      "title": "2026 Lexus NX NX 250",
+      "year": 2026,
+      "make": "Lexus",
+      "model": "NX",
+      "trim": "NX 250",
+      "payment": 593.98,
+      "msrp": 43290,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1631884144607?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1631884144607?w=800&q=80",
+        "https://images.unsplash.com/photo-1655321543178?w=800&q=80",
+        "https://images.unsplash.com/photo-1686363801298?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/43",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0012,
+        "601-639": 0.0014,
+        "0-600": 0.0015
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2165,
+      "sellingPrice": 41125,
+      "residualValue": 23810,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 596.4,
+        "700-739": 596.4,
+        "675-699": 603.5,
+        "640-674": 479.23,
+        "601-639": 493.41,
+        "0-600": 500.51
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-44",
+      "title": "2026 Kia K5 GT-Line",
+      "year": 2026,
+      "make": "Kia",
+      "model": "K5",
+      "trim": "GT-Line",
+      "payment": 381.08,
+      "msrp": 27202,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1686646702856?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1686646702856?w=800&q=80",
+        "https://images.unsplash.com/photo-1638912540492?w=800&q=80",
+        "https://images.unsplash.com/photo-1601613369109?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/44",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0013,
+        "700-739": 0.0014,
+        "675-699": 0.0015,
+        "640-674": 0.0016,
+        "601-639": 0.0018,
+        "0-600": 0.0021
+      },
+      "residualPercent": 56,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1360,
+      "sellingPrice": 25842,
+      "residualValue": 15233,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 380.29,
+        "700-739": 384.78,
+        "675-699": 389.27,
+        "640-674": 313.26,
+        "601-639": 322.24,
+        "0-600": 335.7
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-45",
+      "title": "2025 Toyota RAV4 XLE",
+      "year": 2025,
+      "make": "Toyota",
+      "model": "RAV4",
+      "trim": "XLE",
+      "payment": 397.18,
+      "msrp": 33578,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1629698749189?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1629698749189?w=800&q=80",
+        "https://images.unsplash.com/photo-1627183202231?w=800&q=80",
+        "https://images.unsplash.com/photo-1632325119634?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/45",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0007,
+        "700-739": 0.0008,
+        "675-699": 0.0008,
+        "640-674": 0.0009,
+        "601-639": 0.001,
+        "0-600": 0.0011
+      },
+      "residualPercent": 60,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1679,
+      "sellingPrice": 31899,
+      "residualValue": 20147,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 396.44,
+        "700-739": 402.13,
+        "675-699": 402.13,
+        "640-674": 318.65,
+        "601-639": 324.34,
+        "0-600": 330.03
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-46",
+      "title": "2025 BMW 5 Series M550i",
+      "year": 2025,
+      "make": "BMW",
+      "model": "5 Series",
+      "trim": "M550i",
+      "payment": 1139.87,
+      "msrp": 61255,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1677652982014?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1677652982014?w=800&q=80",
+        "https://images.unsplash.com/photo-1604361853535?w=800&q=80",
+        "https://images.unsplash.com/photo-1624750814854?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/46",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 52,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 3063,
+      "sellingPrice": 58192,
+      "residualValue": 31853,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 1198.97,
+        "700-739": 1198.97,
+        "675-699": 1198.97,
+        "640-674": 799.32,
+        "601-639": 599.49,
+        "0-600": 599.49
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-47",
+      "title": "2024 Hyundai Santa Fe SE",
+      "year": 2024,
+      "make": "Hyundai",
+      "model": "Santa Fe",
+      "trim": "SE",
+      "payment": 387.13,
+      "msrp": 35815,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1633527600582?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1633527600582?w=800&q=80",
+        "https://images.unsplash.com/photo-1689160689717?w=800&q=80",
+        "https://images.unsplash.com/photo-1600828786505?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/47",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1791,
+      "sellingPrice": 34024,
+      "residualValue": 21131,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 391.27,
+        "700-739": 391.27,
+        "675-699": 391.27,
+        "640-674": 293.45,
+        "601-639": 293.45,
+        "0-600": 293.45
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-48",
+      "title": "2024 Hyundai Tucson SEL",
+      "year": 2024,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "SEL",
+      "payment": 306.42,
+      "msrp": 30397,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1648008770570?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1648008770570?w=800&q=80",
+        "https://images.unsplash.com/photo-1615208387702?w=800&q=80",
+        "https://images.unsplash.com/photo-1658288638957?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/48",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 61,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1520,
+      "sellingPrice": 28877,
+      "residualValue": 18542,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 313.64,
+        "700-739": 313.64,
+        "675-699": 313.64,
+        "640-674": 235.23,
+        "601-639": 235.23,
+        "0-600": 235.23
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-49",
+      "title": "2026 Kia Sportage SX Prestige",
+      "year": 2026,
+      "make": "Kia",
+      "model": "Sportage",
+      "trim": "SX Prestige",
+      "payment": 251.38,
+      "msrp": 29198,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1616983745180?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1616983745180?w=800&q=80",
+        "https://images.unsplash.com/photo-1693924473760?w=800&q=80",
+        "https://images.unsplash.com/photo-1607918751832?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/49",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0001,
+        "700-739": 0.0001,
+        "675-699": 0.0001,
+        "640-674": 0.0001,
+        "601-639": 0.0001,
+        "0-600": 0.0001
+      },
+      "residualPercent": 67,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1460,
+      "sellingPrice": 27738,
+      "residualValue": 19563,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 253.26,
+        "700-739": 253.26,
+        "675-699": 253.26,
+        "640-674": 191.23,
+        "601-639": 191.23,
+        "0-600": 191.23
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-50",
+      "title": "2026 Honda Accord Sport",
+      "year": 2026,
+      "make": "Honda",
+      "model": "Accord",
+      "trim": "Sport",
+      "payment": 390.59,
+      "msrp": 28408,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1676270833466?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1676270833466?w=800&q=80",
+        "https://images.unsplash.com/photo-1608636621771?w=800&q=80",
+        "https://images.unsplash.com/photo-1652204545237?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/50",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0016,
+        "700-739": 0.0017,
+        "675-699": 0.0018,
+        "640-674": 0.0019,
+        "601-639": 0.0022,
+        "0-600": 0.0025
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1420,
+      "sellingPrice": 26988,
+      "residualValue": 15624,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 392.82,
+        "700-739": 397.48,
+        "675-699": 402.13,
+        "640-674": 347.1,
+        "601-639": 361.07,
+        "0-600": 375.03
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-51",
+      "title": "2025 Mercedes-Benz C-Class C 300",
+      "year": 2025,
+      "make": "Mercedes-Benz",
+      "model": "C-Class",
+      "trim": "C 300",
+      "payment": 366.39,
+      "msrp": 45674,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1648556213510?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1648556213510?w=800&q=80",
+        "https://images.unsplash.com/photo-1677494815091?w=800&q=80",
+        "https://images.unsplash.com/photo-1665450826904?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/51",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 67,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2284,
+      "sellingPrice": 43390,
+      "residualValue": 30602,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 388.08,
+        "700-739": 388.08,
+        "675-699": 388.08,
+        "640-674": 291.06,
+        "601-639": 291.06,
+        "0-600": 291.06
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-52",
+      "title": "2024 BMW 3 Series 330i",
+      "year": 2024,
+      "make": "BMW",
+      "model": "3 Series",
+      "trim": "330i",
+      "payment": 918.61,
+      "msrp": 48378,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1646556150931?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1646556150931?w=800&q=80",
+        "https://images.unsplash.com/photo-1699284432676?w=800&q=80",
+        "https://images.unsplash.com/photo-1627013468819?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/52",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 52,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2419,
+      "sellingPrice": 45959,
+      "residualValue": 25157,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 946.92,
+        "700-739": 946.92,
+        "675-699": 946.92,
+        "640-674": 631.28,
+        "601-639": 473.46,
+        "0-600": 473.46
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-53",
+      "title": "2026 Kia K5 LX",
+      "year": 2026,
+      "make": "Kia",
+      "model": "K5",
+      "trim": "LX",
+      "payment": 541.17,
+      "msrp": 26673,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1671814993965?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1671814993965?w=800&q=80",
+        "https://images.unsplash.com/photo-1698090899009?w=800&q=80",
+        "https://images.unsplash.com/photo-1664739772651?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/53",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0007,
+        "700-739": 0.0008,
+        "675-699": 0.0008,
+        "640-674": 0.0009,
+        "601-639": 0.001,
+        "0-600": 0.0012
+      },
+      "residualPercent": 53,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1334,
+      "sellingPrice": 25339,
+      "residualValue": 14137,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 540.11,
+        "700-739": 544.43,
+        "675-699": 544.43,
+        "640-674": 378.76,
+        "601-639": 298.09,
+        "0-600": 306.72
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-54",
+      "title": "2025 Mercedes-Benz E-Class E 450 4MATIC",
+      "year": 2025,
+      "make": "Mercedes-Benz",
+      "model": "E-Class",
+      "trim": "E 450 4MATIC",
+      "payment": 616.73,
+      "msrp": 58283,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1647297303399?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1647297303399?w=800&q=80",
+        "https://images.unsplash.com/photo-1639570876346?w=800&q=80",
+        "https://images.unsplash.com/photo-1685297847598?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/54",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0012,
+        "640-674": 0.0013,
+        "601-639": 0.0014,
+        "0-600": 0.0016
+      },
+      "residualPercent": 66,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2914,
+      "sellingPrice": 55369,
+      "residualValue": 38467,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 615.44,
+        "700-739": 625.7,
+        "675-699": 635.95,
+        "640-674": 517.97,
+        "601-639": 528.22,
+        "0-600": 548.72
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-55",
+      "title": "2026 BMW X3 sDrive30i",
+      "year": 2026,
+      "make": "BMW",
+      "model": "X3",
+      "trim": "sDrive30i",
+      "payment": 489.34,
+      "msrp": 51103,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1667859609466?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1667859609466?w=800&q=80",
+        "https://images.unsplash.com/photo-1648319248719?w=800&q=80",
+        "https://images.unsplash.com/photo-1606511723109?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/55",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0005,
+        "700-739": 0.0006,
+        "675-699": 0.0006,
+        "640-674": 0.0006,
+        "601-639": 0.0007,
+        "0-600": 0.0008
+      },
+      "residualPercent": 64,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2555,
+      "sellingPrice": 48548,
+      "residualValue": 32706,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 488.16,
+        "700-739": 497.04,
+        "675-699": 497.04,
+        "640-674": 413.83,
+        "601-639": 422.71,
+        "0-600": 431.59
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-56",
+      "title": "2025 Honda Accord Touring",
+      "year": 2025,
+      "make": "Honda",
+      "model": "Accord",
+      "trim": "Touring",
+      "payment": 374.69,
+      "msrp": 32128,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1681596296946?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1681596296946?w=800&q=80",
+        "https://images.unsplash.com/photo-1646983786301?w=800&q=80",
+        "https://images.unsplash.com/photo-1688570988546?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/56",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0013,
+        "700-739": 0.0014,
+        "675-699": 0.0015,
+        "640-674": 0.0016,
+        "601-639": 0.0018,
+        "0-600": 0.0021
+      },
+      "residualPercent": 64,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1606,
+      "sellingPrice": 30522,
+      "residualValue": 20562,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 374.81,
+        "700-739": 380.39,
+        "675-699": 385.97,
+        "640-674": 315.99,
+        "601-639": 327.15,
+        "0-600": 343.89
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-57",
+      "title": "2025 Mercedes-Benz GLC AMG GLC 43",
+      "year": 2025,
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "trim": "AMG GLC 43",
+      "payment": 812.73,
+      "msrp": 51621,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1606984454191?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1606984454191?w=800&q=80",
+        "https://images.unsplash.com/photo-1606981673053?w=800&q=80",
+        "https://images.unsplash.com/photo-1653185889631?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/57",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0012,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 64,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2581,
+      "sellingPrice": 49040,
+      "residualValue": 33037,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 809.17,
+        "700-739": 818.14,
+        "675-699": 827.11,
+        "640-674": 593.25,
+        "601-639": 480.8,
+        "0-600": 498.74
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-58",
+      "title": "2025 Lexus ES ES 350 F Sport",
+      "year": 2025,
+      "make": "Lexus",
+      "model": "ES",
+      "trim": "ES 350 F Sport",
+      "payment": 530.81,
+      "msrp": 40553,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1698835984602?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1698835984602?w=800&q=80",
+        "https://images.unsplash.com/photo-1606373821997?w=800&q=80",
+        "https://images.unsplash.com/photo-1617475771221?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/58",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0011,
+        "700-739": 0.0012,
+        "675-699": 0.0013,
+        "640-674": 0.0014,
+        "601-639": 0.0016,
+        "0-600": 0.0018
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2028,
+      "sellingPrice": 38525,
+      "residualValue": 22304,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 527.5,
+        "700-739": 534.14,
+        "675-699": 540.79,
+        "640-674": 462.23,
+        "601-639": 475.53,
+        "0-600": 488.82
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-59",
+      "title": "2025 Hyundai Tucson SE",
+      "year": 2025,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "SE",
+      "payment": 395.9,
+      "msrp": 30220,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1643637163540?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1643637163540?w=800&q=80",
+        "https://images.unsplash.com/photo-1694110238751?w=800&q=80",
+        "https://images.unsplash.com/photo-1675248849107?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/59",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0006,
+        "700-739": 0.0006,
+        "675-699": 0.0007,
+        "640-674": 0.0007,
+        "601-639": 0.0008,
+        "0-600": 0.0009
+      },
+      "residualPercent": 55,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1511,
+      "sellingPrice": 28709,
+      "residualValue": 16621,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 396.55,
+        "700-739": 396.55,
+        "675-699": 401.5,
+        "640-674": 309.79,
+        "601-639": 314.75,
+        "0-600": 319.7
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-60",
+      "title": "2024 BMW 3 Series 330i",
+      "year": 2024,
+      "make": "BMW",
+      "model": "3 Series",
+      "trim": "330i",
+      "payment": 569.61,
+      "msrp": 49868,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1694317924161?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1694317924161?w=800&q=80",
+        "https://images.unsplash.com/photo-1662527370326?w=800&q=80",
+        "https://images.unsplash.com/photo-1621109758776?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/60",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0012,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 60,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2493,
+      "sellingPrice": 47375,
+      "residualValue": 29921,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 573.38,
+        "700-739": 573.38,
+        "675-699": 581.83,
+        "640-674": 498.6,
+        "601-639": 507.04,
+        "0-600": 523.93
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-61",
+      "title": "2026 Hyundai Tucson N Line",
+      "year": 2026,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "N Line",
+      "payment": 375.9,
+      "msrp": 31884,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1677653655031?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1677653655031?w=800&q=80",
+        "https://images.unsplash.com/photo-1635746633009?w=800&q=80",
+        "https://images.unsplash.com/photo-1677904935041?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/61",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0012,
+        "640-674": 0.0013,
+        "601-639": 0.0014,
+        "0-600": 0.0017
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1594,
+      "sellingPrice": 30290,
+      "residualValue": 19768,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 374,
+        "700-739": 379.47,
+        "675-699": 384.94,
+        "640-674": 310.58,
+        "601-639": 316.05,
+        "0-600": 332.46
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-62",
+      "title": "2026 Honda Pilot EX-L",
+      "year": 2026,
+      "make": "Honda",
+      "model": "Pilot",
+      "trim": "EX-L",
+      "payment": 632.21,
+      "msrp": 39297,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1616853627571?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1616853627571?w=800&q=80",
+        "https://images.unsplash.com/photo-1684154945121?w=800&q=80",
+        "https://images.unsplash.com/photo-1680893797873?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/62",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0014,
+        "700-739": 0.0015,
+        "675-699": 0.0016,
+        "640-674": 0.0017,
+        "601-639": 0.0019,
+        "0-600": 0.0022
+      },
+      "residualPercent": 65,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1965,
+      "sellingPrice": 37332,
+      "residualValue": 25543,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 632.81,
+        "700-739": 639.68,
+        "675-699": 646.55,
+        "640-674": 474.54,
+        "601-639": 398.84,
+        "0-600": 419.44
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-63",
+      "title": "2026 Hyundai Tucson SEL",
+      "year": 2026,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "SEL",
+      "payment": 510,
+      "msrp": 29651,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1654825732590?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1654825732590?w=800&q=80",
+        "https://images.unsplash.com/photo-1646143480489?w=800&q=80",
+        "https://images.unsplash.com/photo-1671358797724?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/63",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 57,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1483,
+      "sellingPrice": 28168,
+      "residualValue": 16901,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 512.88,
+        "700-739": 512.88,
+        "675-699": 512.88,
+        "640-674": 341.92,
+        "601-639": 256.44,
+        "0-600": 256.44
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-64",
+      "title": "2024 Toyota Highlander LE",
+      "year": 2024,
+      "make": "Toyota",
+      "model": "Highlander",
+      "trim": "LE",
+      "payment": 508.24,
+      "msrp": 42609,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1684453928077?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1684453928077?w=800&q=80",
+        "https://images.unsplash.com/photo-1654346239471?w=800&q=80",
+        "https://images.unsplash.com/photo-1698561932399?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/64",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0012,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 61,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2130,
+      "sellingPrice": 40479,
+      "residualValue": 25991,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 505.03,
+        "700-739": 512.29,
+        "675-699": 519.55,
+        "640-674": 416.9,
+        "601-639": 424.16,
+        "0-600": 438.68
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-65",
+      "title": "2024 Toyota Corolla LE",
+      "year": 2024,
+      "make": "Toyota",
+      "model": "Corolla",
+      "trim": "LE",
+      "payment": 347.57,
+      "msrp": 22116,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1668330660595?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1668330660595?w=800&q=80",
+        "https://images.unsplash.com/photo-1642514798314?w=800&q=80",
+        "https://images.unsplash.com/photo-1677656014084?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/65",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0004,
+        "700-739": 0.0004,
+        "675-699": 0.0005,
+        "640-674": 0.0005,
+        "601-639": 0.0006,
+        "0-600": 0.0006
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1106,
+      "sellingPrice": 21010,
+      "residualValue": 13712,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 347.38,
+        "700-739": 347.38,
+        "675-699": 351.18,
+        "640-674": 240.44,
+        "601-639": 188.87,
+        "0-600": 188.87
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-66",
+      "title": "2024 BMW 3 Series 330i xDrive",
+      "year": 2024,
+      "make": "BMW",
+      "model": "3 Series",
+      "trim": "330i xDrive",
+      "payment": 610.89,
+      "msrp": 48269,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1640090851877?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1640090851877?w=800&q=80",
+        "https://images.unsplash.com/photo-1645067591712?w=800&q=80",
+        "https://images.unsplash.com/photo-1679957000373?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/66",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0012,
+        "640-674": 0.0013,
+        "601-639": 0.0015,
+        "0-600": 0.0017
+      },
+      "residualPercent": 56,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2413,
+      "sellingPrice": 45856,
+      "residualValue": 27031,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 606.97,
+        "700-739": 614.93,
+        "675-699": 622.9,
+        "640-674": 531.98,
+        "601-639": 547.91,
+        "0-600": 563.83
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-67",
+      "title": "2025 BMW 3 Series M340i",
+      "year": 2025,
+      "make": "BMW",
+      "model": "3 Series",
+      "trim": "M340i",
+      "payment": 478.46,
+      "msrp": 47177,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1673023327756?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1673023327756?w=800&q=80",
+        "https://images.unsplash.com/photo-1652613824424?w=800&q=80",
+        "https://images.unsplash.com/photo-1648235632367?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/67",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0007,
+        "700-739": 0.0007,
+        "675-699": 0.0008,
+        "640-674": 0.0009,
+        "601-639": 0.001,
+        "0-600": 0.0011
+      },
+      "residualPercent": 63,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2359,
+      "sellingPrice": 44818,
+      "residualValue": 29722,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 479.89,
+        "700-739": 479.89,
+        "675-699": 488.03,
+        "640-674": 416.88,
+        "601-639": 425.03,
+        "0-600": 433.17
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-68",
+      "title": "2026 BMW 3 Series M340i",
+      "year": 2026,
+      "make": "BMW",
+      "model": "3 Series",
+      "trim": "M340i",
+      "payment": 487.21,
+      "msrp": 43220,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1647092832436?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1647092832436?w=800&q=80",
+        "https://images.unsplash.com/photo-1606935778272?w=800&q=80",
+        "https://images.unsplash.com/photo-1664466690765?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/68",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0016,
+        "700-739": 0.0018,
+        "675-699": 0.0019,
+        "640-674": 0.0021,
+        "601-639": 0.0023,
+        "0-600": 0.0026
+      },
+      "residualPercent": 65,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2161,
+      "sellingPrice": 41059,
+      "residualValue": 28093,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 484.09,
+        "700-739": 499.2,
+        "675-699": 506.76,
+        "640-674": 453.76,
+        "601-639": 468.87,
+        "0-600": 491.54
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-69",
+      "title": "2025 Mercedes-Benz GLC GLC 300 4MATIC",
+      "year": 2025,
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "trim": "GLC 300 4MATIC",
+      "payment": 472.98,
+      "msrp": 52618,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1615918381520?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1615918381520?w=800&q=80",
+        "https://images.unsplash.com/photo-1634788296966?w=800&q=80",
+        "https://images.unsplash.com/photo-1605429462844?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/69",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0005,
+        "700-739": 0.0005,
+        "675-699": 0.0006,
+        "640-674": 0.0006,
+        "601-639": 0.0007,
+        "0-600": 0.0008
+      },
+      "residualPercent": 66,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2631,
+      "sellingPrice": 49987,
+      "residualValue": 34728,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 473.72,
+        "700-739": 473.72,
+        "675-699": 482.98,
+        "640-674": 402.83,
+        "601-639": 412.09,
+        "0-600": 421.34
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-70",
+      "title": "2025 Lexus ES ES 350",
+      "year": 2025,
+      "make": "Lexus",
+      "model": "ES",
+      "trim": "ES 350",
+      "payment": 696.23,
+      "msrp": 44347,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1630067452301?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1630067452301?w=800&q=80",
+        "https://images.unsplash.com/photo-1652587060499?w=800&q=80",
+        "https://images.unsplash.com/photo-1676095282037?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/70",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0018,
+        "700-739": 0.002,
+        "675-699": 0.0021,
+        "640-674": 0.0023,
+        "601-639": 0.0026,
+        "0-600": 0.0029
+      },
+      "residualPercent": 53,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2217,
+      "sellingPrice": 42130,
+      "residualValue": 23504,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 694.32,
+        "700-739": 708.66,
+        "675-699": 715.83,
+        "640-674": 588.86,
+        "601-639": 610.37,
+        "0-600": 631.88
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-71",
+      "title": "2024 Hyundai Sonata Limited",
+      "year": 2024,
+      "make": "Hyundai",
+      "model": "Sonata",
+      "trim": "Limited",
+      "payment": 332.03,
+      "msrp": 28394,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1675364083421?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1675364083421?w=800&q=80",
+        "https://images.unsplash.com/photo-1629000738842?w=800&q=80",
+        "https://images.unsplash.com/photo-1659687831090?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/71",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0011,
+        "700-739": 0.0012,
+        "675-699": 0.0013,
+        "640-674": 0.0014,
+        "601-639": 0.0016,
+        "0-600": 0.0018
+      },
+      "residualPercent": 60,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1420,
+      "sellingPrice": 26974,
+      "residualValue": 17036,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 331.28,
+        "700-739": 336.09,
+        "675-699": 340.9,
+        "640-674": 293.51,
+        "601-639": 303.12,
+        "0-600": 312.74
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-72",
+      "title": "2025 Lexus NX NX 250",
+      "year": 2025,
+      "make": "Lexus",
+      "model": "NX",
+      "trim": "NX 250",
+      "payment": 582.89,
+      "msrp": 43601,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1672112532159?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1672112532159?w=800&q=80",
+        "https://images.unsplash.com/photo-1604732896102?w=800&q=80",
+        "https://images.unsplash.com/photo-1679258035644?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/72",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.002,
+        "700-739": 0.0021,
+        "675-699": 0.0023,
+        "640-674": 0.0024,
+        "601-639": 0.0027,
+        "0-600": 0.0031
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2180,
+      "sellingPrice": 41421,
+      "residualValue": 27033,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 586.21,
+        "700-739": 593.69,
+        "675-699": 608.64,
+        "640-674": 506.96,
+        "601-639": 529.4,
+        "0-600": 559.31
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-73",
+      "title": "2025 BMW 3 Series M340i",
+      "year": 2025,
+      "make": "BMW",
+      "model": "3 Series",
+      "trim": "M340i",
+      "payment": 440.08,
+      "msrp": 45399,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1657388769005?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1657388769005?w=800&q=80",
+        "https://images.unsplash.com/photo-1633351852484?w=800&q=80",
+        "https://images.unsplash.com/photo-1654890398365?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/73",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0003,
+        "700-739": 0.0004,
+        "675-699": 0.0004,
+        "640-674": 0.0004,
+        "601-639": 0.0005,
+        "0-600": 0.0005
+      },
+      "residualPercent": 65,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2270,
+      "sellingPrice": 43129,
+      "residualValue": 29509,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 437.14,
+        "700-739": 445.07,
+        "675-699": 445.07,
+        "640-674": 341.74,
+        "601-639": 349.68,
+        "0-600": 349.68
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-74",
+      "title": "2024 Toyota Highlander Platinum",
+      "year": 2024,
+      "make": "Toyota",
+      "model": "Highlander",
+      "trim": "Platinum",
+      "payment": 542.71,
+      "msrp": 40323,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1659626590684?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1659626590684?w=800&q=80",
+        "https://images.unsplash.com/photo-1612674131978?w=800&q=80",
+        "https://images.unsplash.com/photo-1664417992796?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/74",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0015,
+        "700-739": 0.0016,
+        "675-699": 0.0017,
+        "640-674": 0.0019,
+        "601-639": 0.0021,
+        "0-600": 0.0024
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2016,
+      "sellingPrice": 38307,
+      "residualValue": 23791,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 542.28,
+        "700-739": 549.07,
+        "675-699": 555.85,
+        "640-674": 459.29,
+        "601-639": 472.86,
+        "0-600": 493.21
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-75",
+      "title": "2025 Hyundai Santa Fe SE",
+      "year": 2025,
+      "make": "Hyundai",
+      "model": "Santa Fe",
+      "trim": "SE",
+      "payment": 403.67,
+      "msrp": 38401,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1655557603500?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1655557603500?w=800&q=80",
+        "https://images.unsplash.com/photo-1692423851202?w=800&q=80",
+        "https://images.unsplash.com/photo-1682401483107?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/75",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0007,
+        "700-739": 0.0008,
+        "675-699": 0.0009,
+        "640-674": 0.0009,
+        "601-639": 0.001,
+        "0-600": 0.0012
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1920,
+      "sellingPrice": 36481,
+      "residualValue": 23809,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 401.09,
+        "700-739": 407.67,
+        "675-699": 414.26,
+        "640-674": 347.7,
+        "601-639": 354.29,
+        "0-600": 367.46
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-76",
+      "title": "2024 Honda Civic Sport",
+      "year": 2024,
+      "make": "Honda",
+      "model": "Civic",
+      "trim": "Sport",
+      "payment": 307.66,
+      "msrp": 22948,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1668218410077?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1668218410077?w=800&q=80",
+        "https://images.unsplash.com/photo-1670252061671?w=800&q=80",
+        "https://images.unsplash.com/photo-1670827782016?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/76",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0013,
+        "700-739": 0.0014,
+        "675-699": 0.0015,
+        "640-674": 0.0016,
+        "601-639": 0.0018,
+        "0-600": 0.0021
+      },
+      "residualPercent": 58,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1147,
+      "sellingPrice": 21801,
+      "residualValue": 13310,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 307.54,
+        "700-739": 311.38,
+        "675-699": 315.22,
+        "640-674": 254.63,
+        "601-639": 262.3,
+        "0-600": 273.81
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-77",
+      "title": "2025 Lexus ES ES 350 F Sport",
+      "year": 2025,
+      "make": "Lexus",
+      "model": "ES",
+      "trim": "ES 350 F Sport",
+      "payment": 523.92,
+      "msrp": 40920,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1606113459333?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1606113459333?w=800&q=80",
+        "https://images.unsplash.com/photo-1671754202179?w=800&q=80",
+        "https://images.unsplash.com/photo-1627122657177?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/77",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0016,
+        "700-739": 0.0017,
+        "675-699": 0.0019,
+        "640-674": 0.002,
+        "601-639": 0.0023,
+        "0-600": 0.0026
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2046,
+      "sellingPrice": 38874,
+      "residualValue": 24143,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 522.81,
+        "700-739": 529.7,
+        "675-699": 543.46,
+        "640-674": 472.98,
+        "601-639": 493.63,
+        "0-600": 514.28
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-78",
+      "title": "2025 Hyundai Tucson SE",
+      "year": 2025,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "SE",
+      "payment": 323.62,
+      "msrp": 32970,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1680536860448?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1680536860448?w=800&q=80",
+        "https://images.unsplash.com/photo-1646562565898?w=800&q=80",
+        "https://images.unsplash.com/photo-1657236945250?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/78",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0011,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 68,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1649,
+      "sellingPrice": 31321,
+      "residualValue": 22420,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 322.96,
+        "700-739": 328.83,
+        "675-699": 334.7,
+        "640-674": 267.17,
+        "601-639": 278.92,
+        "0-600": 290.66
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-79",
+      "title": "2024 Hyundai Santa Fe Calligraphy",
+      "year": 2024,
+      "make": "Hyundai",
+      "model": "Santa Fe",
+      "trim": "Calligraphy",
+      "payment": 638.57,
+      "msrp": 35492,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1630847492415?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1630847492415?w=800&q=80",
+        "https://images.unsplash.com/photo-1615054467429?w=800&q=80",
+        "https://images.unsplash.com/photo-1675706270268?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/79",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.001,
+        "675-699": 0.0011,
+        "640-674": 0.0012,
+        "601-639": 0.0013,
+        "0-600": 0.0015
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1775,
+      "sellingPrice": 33717,
+      "residualValue": 20940,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 641.33,
+        "700-739": 641.33,
+        "675-699": 647.3,
+        "640-674": 459.4,
+        "601-639": 368.44,
+        "0-600": 380.38
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-80",
+      "title": "2026 BMW 5 Series 530i",
+      "year": 2026,
+      "make": "BMW",
+      "model": "5 Series",
+      "trim": "530i",
+      "payment": 742.84,
+      "msrp": 58527,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1605820385213?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1605820385213?w=800&q=80",
+        "https://images.unsplash.com/photo-1617694092682?w=800&q=80",
+        "https://images.unsplash.com/photo-1635510352603?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/80",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0002,
+        "700-739": 0.0002,
+        "675-699": 0.0003,
+        "640-674": 0.0003,
+        "601-639": 0.0003,
+        "0-600": 0.0004
+      },
+      "residualPercent": 68,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2926,
+      "sellingPrice": 55601,
+      "residualValue": 39798,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 740.21,
+        "700-739": 740.21,
+        "675-699": 750.63,
+        "640-674": 510.84,
+        "601-639": 390.95,
+        "0-600": 401.37
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-81",
+      "title": "2026 BMW 5 Series 530i",
+      "year": 2026,
+      "make": "BMW",
+      "model": "5 Series",
+      "trim": "530i",
+      "payment": 645.71,
+      "msrp": 60739,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1624062914185?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1624062914185?w=800&q=80",
+        "https://images.unsplash.com/photo-1645217750689?w=800&q=80",
+        "https://images.unsplash.com/photo-1684435468771?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/81",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0005,
+        "700-739": 0.0006,
+        "675-699": 0.0006,
+        "640-674": 0.0007,
+        "601-639": 0.0007,
+        "0-600": 0.0009
+      },
+      "residualPercent": 63,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 3037,
+      "sellingPrice": 57702,
+      "residualValue": 38266,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 642.25,
+        "700-739": 652.74,
+        "675-699": 652.74,
+        "640-674": 515.76,
+        "601-639": 515.76,
+        "0-600": 536.73
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-82",
+      "title": "2025 Honda Accord LX",
+      "year": 2025,
+      "make": "Honda",
+      "model": "Accord",
+      "trim": "LX",
+      "payment": 460.36,
+      "msrp": 30630,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1692390956049?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1692390956049?w=800&q=80",
+        "https://images.unsplash.com/photo-1673900647011?w=800&q=80",
+        "https://images.unsplash.com/photo-1643944665132?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/82",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0016,
+        "700-739": 0.0017,
+        "675-699": 0.0018,
+        "640-674": 0.002,
+        "601-639": 0.0022,
+        "0-600": 0.0025
+      },
+      "residualPercent": 54,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1532,
+      "sellingPrice": 29098,
+      "residualValue": 16540,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 460.88,
+        "700-739": 465.86,
+        "675-699": 470.85,
+        "640-674": 385.54,
+        "601-639": 395.52,
+        "0-600": 410.47
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-83",
+      "title": "2026 Mercedes-Benz C-Class AMG C 43",
+      "year": 2026,
+      "make": "Mercedes-Benz",
+      "model": "C-Class",
+      "trim": "AMG C 43",
+      "payment": 542.59,
+      "msrp": 50474,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1673046306002?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1673046306002?w=800&q=80",
+        "https://images.unsplash.com/photo-1614289134407?w=800&q=80",
+        "https://images.unsplash.com/photo-1619772935862?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/83",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0003,
+        "700-739": 0.0003,
+        "675-699": 0.0003,
+        "640-674": 0.0003,
+        "601-639": 0.0004,
+        "0-600": 0.0004
+      },
+      "residualPercent": 61,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2524,
+      "sellingPrice": 47950,
+      "residualValue": 30789,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 546.6,
+        "700-739": 546.6,
+        "675-699": 546.6,
+        "640-674": 416.4,
+        "601-639": 425,
+        "0-600": 425
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-84",
+      "title": "2026 BMW X3 sDrive30i",
+      "year": 2026,
+      "make": "BMW",
+      "model": "X3",
+      "trim": "sDrive30i",
+      "payment": 787.81,
+      "msrp": 50818,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1654876418538?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1654876418538?w=800&q=80",
+        "https://images.unsplash.com/photo-1616687050966?w=800&q=80",
+        "https://images.unsplash.com/photo-1604867875230?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/84",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 57,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2541,
+      "sellingPrice": 48277,
+      "residualValue": 28966,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 879.05,
+        "700-739": 879.05,
+        "675-699": 879.05,
+        "640-674": 586.04,
+        "601-639": 439.53,
+        "0-600": 439.53
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-85",
+      "title": "2026 Kia Telluride EX",
+      "year": 2026,
+      "make": "Kia",
+      "model": "Telluride",
+      "trim": "EX",
+      "payment": 434.26,
+      "msrp": 37641,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1694015461415?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1694015461415?w=800&q=80",
+        "https://images.unsplash.com/photo-1679908004392?w=800&q=80",
+        "https://images.unsplash.com/photo-1688395051972?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/85",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.0009,
+        "675-699": 0.001,
+        "640-674": 0.0011,
+        "601-639": 0.0012,
+        "0-600": 0.0014
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1882,
+      "sellingPrice": 35759,
+      "residualValue": 22208,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 436.6,
+        "700-739": 436.6,
+        "675-699": 442.93,
+        "640-674": 378.09,
+        "601-639": 384.42,
+        "0-600": 397.09
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-86",
+      "title": "2026 Kia K5 LXS",
+      "year": 2026,
+      "make": "Kia",
+      "model": "K5",
+      "trim": "LXS",
+      "payment": 297.39,
+      "msrp": 24475,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1677710388214?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1677710388214?w=800&q=80",
+        "https://images.unsplash.com/photo-1623268289951?w=800&q=80",
+        "https://images.unsplash.com/photo-1660895818515?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/86",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0009,
+        "700-739": 0.001,
+        "675-699": 0.001,
+        "640-674": 0.0011,
+        "601-639": 0.0013,
+        "0-600": 0.0014
+      },
+      "residualPercent": 60,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1224,
+      "sellingPrice": 23251,
+      "residualValue": 14685,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 297.25,
+        "700-739": 301.4,
+        "675-699": 301.4,
+        "640-674": 240.56,
+        "601-639": 248.84,
+        "0-600": 252.99
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-87",
+      "title": "2024 Mercedes-Benz GLC AMG GLC 43",
+      "year": 2024,
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "trim": "AMG GLC 43",
+      "payment": 552.85,
+      "msrp": 53656,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1633727943811?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1633727943811?w=800&q=80",
+        "https://images.unsplash.com/photo-1659956488382?w=800&q=80",
+        "https://images.unsplash.com/photo-1647581440163?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/87",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0002,
+        "700-739": 0.0002,
+        "675-699": 0.0002,
+        "640-674": 0.0002,
+        "601-639": 0.0002,
+        "0-600": 0.0003
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2683,
+      "sellingPrice": 50973,
+      "residualValue": 33267,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 555.73,
+        "700-739": 555.73,
+        "675-699": 555.73,
+        "640-674": 421.4,
+        "601-639": 421.4,
+        "0-600": 430.61
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-88",
+      "title": "2025 Mercedes-Benz GLC GLC 300",
+      "year": 2025,
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "trim": "GLC 300",
+      "payment": 802.95,
+      "msrp": 51601,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1611952730100?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1611952730100?w=800&q=80",
+        "https://images.unsplash.com/photo-1652352869011?w=800&q=80",
+        "https://images.unsplash.com/photo-1619239909506?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/88",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0008,
+        "700-739": 0.0009,
+        "675-699": 0.001,
+        "640-674": 0.001,
+        "601-639": 0.0012,
+        "0-600": 0.0013
+      },
+      "residualPercent": 64,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2580,
+      "sellingPrice": 49021,
+      "residualValue": 33025,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 799.86,
+        "700-739": 808.82,
+        "675-699": 817.79,
+        "640-674": 575.07,
+        "601-639": 471.64,
+        "0-600": 480.6
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-89",
+      "title": "2024 Kia K5 GT",
+      "year": 2024,
+      "make": "Kia",
+      "model": "K5",
+      "trim": "GT",
+      "payment": 308.06,
+      "msrp": 28812,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1628270334272?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1628270334272?w=800&q=80",
+        "https://images.unsplash.com/photo-1618430418625?w=800&q=80",
+        "https://images.unsplash.com/photo-1694293636731?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/89",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0012,
+        "640-674": 0.0013,
+        "601-639": 0.0014,
+        "0-600": 0.0016
+      },
+      "residualPercent": 63,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1441,
+      "sellingPrice": 27371,
+      "residualValue": 18152,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 307.98,
+        "700-739": 312.96,
+        "675-699": 317.93,
+        "640-674": 274.48,
+        "601-639": 279.46,
+        "0-600": 289.4
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-90",
+      "title": "2025 Lexus NX NX 250",
+      "year": 2025,
+      "make": "Lexus",
+      "model": "NX",
+      "trim": "NX 250",
+      "payment": 582.89,
+      "msrp": 43073,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1635169990945?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1635169990945?w=800&q=80",
+        "https://images.unsplash.com/photo-1624187322329?w=800&q=80",
+        "https://images.unsplash.com/photo-1606617912180?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/90",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0011,
+        "700-739": 0.0012,
+        "675-699": 0.0013,
+        "640-674": 0.0014,
+        "601-639": 0.0015,
+        "0-600": 0.0017
+      },
+      "residualPercent": 53,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2154,
+      "sellingPrice": 40919,
+      "residualValue": 22829,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 583.36,
+        "700-739": 590.33,
+        "675-699": 597.29,
+        "640-674": 509.24,
+        "601-639": 516.2,
+        "0-600": 530.13
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-91",
+      "title": "2026 Lexus NX NX 350",
+      "year": 2026,
+      "make": "Lexus",
+      "model": "NX",
+      "trim": "NX 350",
+      "payment": 410.9,
+      "msrp": 42009,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1695487914624?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1695487914624?w=800&q=80",
+        "https://images.unsplash.com/photo-1689501843779?w=800&q=80",
+        "https://images.unsplash.com/photo-1624283319916?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/91",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0007,
+        "700-739": 0.0008,
+        "675-699": 0.0008,
+        "640-674": 0.0009,
+        "601-639": 0.001,
+        "0-600": 0.0012
+      },
+      "residualPercent": 67,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2100,
+      "sellingPrice": 39909,
+      "residualValue": 28146,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 409.02,
+        "700-739": 416.45,
+        "675-699": 416.45,
+        "640-674": 334.65,
+        "601-639": 342.08,
+        "0-600": 356.95
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-92",
+      "title": "2024 Lexus ES ES 250",
+      "year": 2024,
+      "make": "Lexus",
+      "model": "ES",
+      "trim": "ES 250",
+      "payment": 601.09,
+      "msrp": 45977,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1673428411015?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1673428411015?w=800&q=80",
+        "https://images.unsplash.com/photo-1699106392921?w=800&q=80",
+        "https://images.unsplash.com/photo-1677002620267?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/92",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0018,
+        "700-739": 0.0019,
+        "675-699": 0.0021,
+        "640-674": 0.0022,
+        "601-639": 0.0025,
+        "0-600": 0.0029
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 2299,
+      "sellingPrice": 43678,
+      "residualValue": 28506,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 602.38,
+        "700-739": 610.26,
+        "675-699": 626.04,
+        "640-674": 518.82,
+        "601-639": 542.47,
+        "0-600": 574.02
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-93",
+      "title": "2026 Hyundai Tucson Limited",
+      "year": 2026,
+      "make": "Hyundai",
+      "model": "Tucson",
+      "trim": "Limited",
+      "payment": 424.14,
+      "msrp": 28503,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1667857149549?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1667857149549?w=800&q=80",
+        "https://images.unsplash.com/photo-1656845608626?w=800&q=80",
+        "https://images.unsplash.com/photo-1664575795958?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/93",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1425,
+      "sellingPrice": 27078,
+      "residualValue": 16817,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 467.09,
+        "700-739": 467.09,
+        "675-699": 467.09,
+        "640-674": 311.39,
+        "601-639": 233.54,
+        "0-600": 233.54
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-94",
+      "title": "2025 Toyota Highlander XLE",
+      "year": 2025,
+      "make": "Toyota",
+      "model": "Highlander",
+      "trim": "XLE",
+      "payment": 496.36,
+      "msrp": 36032,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1696522594376?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1696522594376?w=800&q=80",
+        "https://images.unsplash.com/photo-1616604141018?w=800&q=80",
+        "https://images.unsplash.com/photo-1639881495845?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/94",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0014,
+        "700-739": 0.0015,
+        "675-699": 0.0016,
+        "640-674": 0.0018,
+        "601-639": 0.002,
+        "0-600": 0.0023
+      },
+      "residualPercent": 54,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1802,
+      "sellingPrice": 34230,
+      "residualValue": 19457,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 495.95,
+        "700-739": 501.81,
+        "675-699": 507.68,
+        "640-674": 441.82,
+        "601-639": 453.55,
+        "0-600": 471.14
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-95",
+      "title": "2026 Honda CR-V EX",
+      "year": 2026,
+      "make": "Honda",
+      "model": "CR-V",
+      "trim": "EX",
+      "payment": 357.59,
+      "msrp": 32752,
+      "term": 39,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1621362124316?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1621362124316?w=800&q=80",
+        "https://images.unsplash.com/photo-1600092393192?w=800&q=80",
+        "https://images.unsplash.com/photo-1609542150523?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/95",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.001,
+        "700-739": 0.0011,
+        "675-699": 0.0011,
+        "640-674": 0.0012,
+        "601-639": 0.0014,
+        "0-600": 0.0016
+      },
+      "residualPercent": 62,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1638,
+      "sellingPrice": 31114,
+      "residualValue": 20306,
+      "termTable": {
+        "740+": 39,
+        "700-739": 39,
+        "675-699": 39,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 358.94,
+        "700-739": 364.56,
+        "675-699": 364.56,
+        "640-674": 313.41,
+        "601-639": 324.64,
+        "0-600": 335.88
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-96",
+      "title": "2024 Toyota Corolla SE",
+      "year": 2024,
+      "make": "Toyota",
+      "model": "Corolla",
+      "trim": "SE",
+      "payment": 349.61,
+      "msrp": 23972,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1604924319508?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1604924319508?w=800&q=80",
+        "https://images.unsplash.com/photo-1633824583445?w=800&q=80",
+        "https://images.unsplash.com/photo-1602491265538?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/96",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0022,
+        "700-739": 0.0023,
+        "675-699": 0.0025,
+        "640-674": 0.0027,
+        "601-639": 0.003,
+        "0-600": 0.0035
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1199,
+      "sellingPrice": 22773,
+      "residualValue": 14143,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 350.62,
+        "700-739": 354.66,
+        "675-699": 362.72,
+        "640-674": 305.32,
+        "601-639": 317.41,
+        "0-600": 337.58
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-97",
+      "title": "2025 Kia K5 LXS",
+      "year": 2025,
+      "make": "Kia",
+      "model": "K5",
+      "trim": "LXS",
+      "payment": 387.9,
+      "msrp": 23474,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1699730750624?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1699730750624?w=800&q=80",
+        "https://images.unsplash.com/photo-1629042346440?w=800&q=80",
+        "https://images.unsplash.com/photo-1658653952880?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/97",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0001,
+        "700-739": 0.0001,
+        "675-699": 0.0001,
+        "640-674": 0.0001,
+        "601-639": 0.0001,
+        "0-600": 0.0001
+      },
+      "residualPercent": 59,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1174,
+      "sellingPrice": 22300,
+      "residualValue": 13850,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 388.6,
+        "700-739": 388.6,
+        "675-699": 388.6,
+        "640-674": 260.38,
+        "601-639": 196.27,
+        "0-600": 196.27
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-98",
+      "title": "2024 Kia Sportage SX Prestige",
+      "year": 2024,
+      "make": "Kia",
+      "model": "Sportage",
+      "trim": "SX Prestige",
+      "payment": 375.74,
+      "msrp": 29780,
+      "term": 24,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1653642602101?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1653642602101?w=800&q=80",
+        "https://images.unsplash.com/photo-1646378509480?w=800&q=80",
+        "https://images.unsplash.com/photo-1675335273929?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/98",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0,
+        "700-739": 0,
+        "675-699": 0,
+        "640-674": 0,
+        "601-639": 0,
+        "0-600": 0
+      },
+      "residualPercent": 66,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1489,
+      "sellingPrice": 28291,
+      "residualValue": 19655,
+      "termTable": {
+        "740+": 24,
+        "700-739": 24,
+        "675-699": 24,
+        "640-674": 36,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 393.12,
+        "700-739": 393.12,
+        "675-699": 393.12,
+        "640-674": 262.08,
+        "601-639": 196.56,
+        "0-600": 196.56
+      },
+      "taxRate": 0.0925
+    },
+    {
+      "id": "mock-99",
+      "title": "2026 Kia Sportage LX",
+      "year": 2026,
+      "make": "Kia",
+      "model": "Sportage",
+      "trim": "LX",
+      "payment": 363.77,
+      "msrp": 28040,
+      "term": 36,
+      "mileage": 10000,
+      "image": "https://images.unsplash.com/photo-1663816757813?w=800&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1663816757813?w=800&q=80",
+        "https://images.unsplash.com/photo-1627288106421?w=800&q=80",
+        "https://images.unsplash.com/photo-1662691985719?w=800&q=80"
+      ],
+      "link": "https://autobandit.com/mock/99",
+      "scrapedAt": "2025-12-11T03:41:51.058Z",
+      "mfTable": {
+        "740+": 0.0014,
+        "700-739": 0.0015,
+        "675-699": 0.0016,
+        "640-674": 0.0017,
+        "601-639": 0.0019,
+        "0-600": 0.0022
+      },
+      "residualPercent": 60,
+      "fees": {
+        "acquisition": 695,
+        "doc": 85,
+        "registration": 450,
+        "otherTaxes": 0,
+        "taxOnFees": true
+      },
+      "source": "mock",
+      "discountAmount": 1402,
+      "sellingPrice": 26638,
+      "residualValue": 16824,
+      "termTable": {
+        "740+": 36,
+        "700-739": 36,
+        "675-699": 36,
+        "640-674": 48,
+        "601-639": 48,
+        "0-600": 48
+      },
+      "paymentTable": {
+        "740+": 364.3,
+        "700-739": 369.05,
+        "675-699": 373.8,
+        "640-674": 304.09,
+        "601-639": 313.59,
+        "0-600": 327.83
+      },
+      "taxRate": 0.0925
+    }
+  ],
+  "removed": [],
+  "modified": [],
+  "unchanged": []
+}
