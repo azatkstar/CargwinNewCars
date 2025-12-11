@@ -200,13 +200,21 @@ export default function OfferEditor() {
   };
 
   const handleSave = async () => {
+    // Validate all fields
+    if (!validateAllFields()) {
+      alert('Пожалуйста, исправьте ошибки в форме');
+      // Scroll to top to show Error Summary
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     setSaving(true);
 
     try {
       const token = localStorage.getItem('access_token');
       const url = id 
         ? `${BACKEND_URL}/api/admin/offers/${id}`
-        : `${BACKEND_URL}/api/admin/offers`;
+        : `${BACKEND_URL}/api/admin/import-offer`;
       
       const method = id ? 'PUT' : 'POST';
 
@@ -220,10 +228,11 @@ export default function OfferEditor() {
       });
 
       if (response.ok) {
-        alert('Offer saved!');
+        alert('Offer saved successfully!');
         navigate('/admin/offers');
       } else {
-        alert('Error saving offer');
+        const data = await response.json();
+        alert(`Error: ${data.detail || 'Failed to save'}`);
       }
     } catch (err) {
       console.error('Save error:', err);
