@@ -100,8 +100,8 @@ class AutoBanditScraper {
           
           // Extract all data
           const title = getText('h2', 'h3', '[class*="title"]', 'a');
-          const paymentText = getText('[class*="payment"]', '[class*="month"]', 'p:has-text("mo")');
-          const msrpText = getText('[class*="msrp"]', '[class*="price"]');
+          const paymentText = getText('[class*="payment"]', '[class*="month"]', 'p', 'span');
+          const msrpText = getText('[class*="msrp"]', '[class*="price"]', 'p', 'span');
           
           // Image
           const img = card.querySelector('img');
