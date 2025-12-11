@@ -14,6 +14,13 @@ export default function ScraperControl() {
 
   useEffect(() => {
     loadStatus();
+    
+    // Poll every 5 seconds
+    const interval = setInterval(() => {
+      loadStatus();
+    }, 5000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const loadStatus = async () => {
@@ -23,9 +30,11 @@ export default function ScraperControl() {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
-      const data = await response.json();
-      setStatus(data);
-      setLogs(data.recentLogs || []);
+      if (response.ok) {
+        const data = await response.json();
+        setStatus(data);
+        setLogs(data.recentLogs || []);
+      }
     } catch (err) {
       console.error('Error loading scraper status:', err);
     } finally {
