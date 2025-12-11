@@ -2810,73 +2810,73 @@ async def run_scraper(
     current_user: User = Depends(require_admin)
 ):
     """
-    Run scraper with brand filtering
-    
-    Args:
-        force: Force full scrape
-        brands: Comma-separated brands or "all"
+    Run scraper - Python version for production compatibility
     """
     try:
         import subprocess
         import os
         from pathlib import Path
         
-        scraper_dir = Path("/app/scraper")
+        # Use Python scraper (works in production)
+        scraper_script = Path("/app/backend/autobandit_scraper_python.py")
         
-        # Check if scraper exists
-        run_script = scraper_dir / "run.js"
-        if not run_script.exists():
-            raise HTTPException(status_code=404, detail="Scraper not found at /app/scraper/run.js")
-        
-        # Prepare command
-        cmd = ["node", str(run_script)]
-        if force:
-            cmd.append("--force")
-        if brands and brands != "all":
-            cmd.append(f"--brands={brands}")
-        
-        # Set environment
-        env = os.environ.copy()
-        env["HUNTER_API_URL"] = os.getenv("BACKEND_URL", "http://localhost:8001")
-        env["HUNTER_ADMIN_TOKEN"] = os.getenv("SECRET_KEY", "")  # Use from config
-        env["SELECTED_BRANDS"] = brands
-        
-        # Log scraper start
-        logger.info(f"Starting scraper: {' '.join(cmd)} | Brands: {brands}")
-        
-        # Write start log
-        log_file = scraper_dir / "logs" / "scraper.log"
-        log_file.parent.mkdir(parents=True, exist_ok=True)
-        
-        start_log = json.dumps({
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "action": "start",
-            "message": f"Scraper started (force={force}, brands={brands})",
-            "user": current_user.email
-        })
-        
-        with open(log_file, 'a') as f:
-            f.write(start_log + "\n")
-        
-        # Run in background
-        process = subprocess.Popen(
-            cmd,
-            cwd=str(scraper_dir),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            env=env,
-            start_new_session=True
-        )
-        
-        logger.info(f"Scraper started with PID: {process.pid}")
-        
-        return {
-            "ok": True,
-            "message": f"Scraper started for {brands}",
-            "pid": process.pid,
-            "force": force,
-            "brands": brands
-        }
+        if scraper_script.exists():
+            logger.info("Using Python scraper (production compatible)")
+            
+            # Run Python scraper
+            env = os.environ.copy()
+            env["HUNTER_API_URL"] = os.getenv("BACKEND_URL", "http://localhost:8001")
+            
+            # Get admin token
+            token = create_access_token(data={"sub": current_user.email, "role": current_user.role})
+            env["HUNTER_ADMIN_TOKEN"] = token
+            
+            process = subprocess.Popen(
+                ["python3", str(scraper_script)],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env,
+                start_new_session=True
+            )
+            
+            logger.info(f"Python scraper started with PID: {process.pid}")
+            
+            return {
+                "ok": True,
+                "message": "Python scraper started (production mode)",
+                "pid": process.pid,
+                "mode": "python"
+            }
+        else:
+            # Fallback: Try Node scraper (development only)
+            scraper_dir = Path("/app/scraper")
+            run_script = scraper_dir / "run.js"
+            
+            if not run_script.exists():
+                raise HTTPException(status_code=404, detail="Scraper not found")
+            
+            cmd = ["node", str(run_script)]
+            if force:
+                cmd.append("--force")
+            
+            env = os.environ.copy()
+            env["SELECTED_BRANDS"] = brands
+            
+            process = subprocess.Popen(
+                cmd,
+                cwd=str(scraper_dir),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env,
+                start_new_session=True
+            )
+            
+            return {
+                "ok": True,
+                "message": "Node scraper started (development mode)",
+                "pid": process.pid,
+                "mode": "nodejs"
+            }
         
     except Exception as e:
         logger.error(f"Scraper run error: {e}")
