@@ -1,0 +1,30 @@
+{
+  "name": "hunter-lease-autobandit-scraper",
+  "version": "1.0.0",
+  "description": "Production-ready distributed scraping system for AutoBandit integration with Hunter.Lease",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "scrape": "node run.js",
+    "scrape:force": "node run.js --force",
+    "schedule": "node scheduler/smartScheduler.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "axios": "^1.6.0",
+    "sharp": "^0.33.0",
+    "node-cron": "^3.0.3",
+    "ws": "^8.16.0",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
