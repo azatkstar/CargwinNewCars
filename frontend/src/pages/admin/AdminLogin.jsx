@@ -31,8 +31,8 @@ const AdminLogin = () => {
         }
       } else {
         // Password login
-        const result = await login(email, password);
-        if (result.ok) {
+        const user = await login(email, password);
+        if (user) {
           // Redirect to admin panel
           window.location.href = '/admin';
         } else {
