@@ -141,6 +141,12 @@ export default function OfferEditor() {
           error = 'Slug can only contain lowercase letters, numbers, and hyphens';
         }
         break;
+      
+      case 'images':
+        if (!value || value.length === 0) {
+          error = 'At least 1 image is required';
+        }
+        break;
     }
 
     setErrors(prev => ({ ...prev, [fieldName]: error }));
