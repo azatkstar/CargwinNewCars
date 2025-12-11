@@ -27,6 +27,8 @@ import AIGenerator from './AIGenerator';
 import AdminMedia from './AdminMedia';
 import AdminMultiSync from './AdminMultiSync';
 import ScraperControl from './ScraperControl';
+import OffersManagement from './OffersManagement';
+import OfferEditor from './OfferEditor';
 
 const AdminDashboard = () => {
   const { isAuthenticated, loading } = useAuth();
