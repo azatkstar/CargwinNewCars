@@ -412,25 +412,34 @@ export default function OfferEditor() {
               <Input
                 type="number"
                 value={offer.msrp}
-                onChange={(e) => updateField('msrp', parseFloat(e.target.value))}
+                onChange={(e) => updateField('msrp', parseFloat(e.target.value) || 0)}
+                onBlur={(e) => validateField('msrp', parseFloat(e.target.value))}
+                className={errors.msrp ? 'border-red-500 bg-red-50' : ''}
               />
+              <FieldError fieldName="msrp" />
             </div>
             <div>
               <Label>Discount</Label>
               <Input
                 type="number"
                 value={offer.discount}
-                onChange={(e) => updateField('discount', parseFloat(e.target.value))}
+                onChange={(e) => updateField('discount', parseFloat(e.target.value) || 0)}
+                onBlur={(e) => validateField('discount', parseFloat(e.target.value))}
+                className={errors.discount ? 'border-red-500 bg-red-50' : ''}
               />
+              <FieldError fieldName="discount" />
             </div>
             <div>
               <Label>Selling Price</Label>
               <Input
                 type="number"
-                value={offer.msrp && offer.discount ? offer.msrp - offer.discount : (offer.sellingPrice || 0)}
+                value={offer.msrp && offer.discount >= 0 ? offer.msrp - offer.discount : (offer.sellingPrice || 0)}
                 onChange={(e) => updateField('sellingPrice', parseFloat(e.target.value))}
+                onBlur={(e) => validateField('sellingPrice', parseFloat(e.target.value))}
                 placeholder="Auto-calculated from MSRP - Discount"
+                className={errors.sellingPrice ? 'border-red-500 bg-red-50' : ''}
               />
+              <FieldError fieldName="sellingPrice" />
             </div>
           </div>
         </CardContent>
