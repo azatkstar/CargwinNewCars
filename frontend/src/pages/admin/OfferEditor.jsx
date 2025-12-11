@@ -36,7 +36,8 @@ export default function OfferEditor() {
       residual: 60,
       acquisitionFee: 695,
       taxRate: 0.0925,
-      region: 'California'
+      region: 'California',
+      bank: ''
     },
     specs: {
       make: '',
@@ -61,7 +62,120 @@ export default function OfferEditor() {
       verified: true
     }
   });
+  
+  const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
+
+  // Validation functions
+  const validateField = (fieldName, value) => {
+    let error = '';
+
+    switch (fieldName) {
+      case 'year':
+        const currentYear = new Date().getFullYear();
+        if (!value || value < 2000 || value > currentYear + 2) {
+          error = `Year must be between 2000 and ${currentYear + 2}`;
+        }
+        break;
+      
+      case 'msrp':
+        if (!value || value <= 0) {
+          error = 'MSRP is required and must be > 0';
+        }
+        break;
+      
+      case 'discount':
+        if (value === '' || value === null || value === undefined) {
+          error = 'Discount is required (can be 0)';
+        }
+        if (value < 0) {
+          error = 'Discount cannot be negative';
+        }
+        break;
+      
+      case 'sellingPrice':
+        if (!value || value <= 0) {
+          error = 'Selling Price must be > 0';
+        }
+        break;
+      
+      case 'make':
+        if (!value || value.trim().length < 2) {
+          error = 'Make is required (min 2 characters)';
+        }
+        break;
+      
+      case 'model':
+        if (!value || value.trim().length < 1) {
+          error = 'Model is required';
+        }
+        break;
+      
+      case 'monthly':
+        if (!value || value <= 0) {
+          error = 'Monthly Payment is required and must be > 0';
+        }
+        break;
+      
+      case 'moneyFactor':
+        if (!value || value <= 0 || value > 1) {
+          error = 'Money Factor must be between 0 and 1';
+        }
+        break;
+      
+      case 'residual':
+        if (!value || value <= 0 || value > 100) {
+          error = 'Residual % must be between 0 and 100';
+        }
+        break;
+      
+      case 'taxRate':
+        if (value === '' || value < 0 || value > 1) {
+          error = 'Tax Rate must be between 0 and 1 (e.g., 0.0925)';
+        }
+        break;
+      
+      case 'slug':
+        if (value && !/^[a-z0-9-]+$/.test(value)) {
+          error = 'Slug can only contain lowercase letters, numbers, and hyphens';
+        }
+        break;
+    }
+
+    setErrors(prev => ({ ...prev, [fieldName]: error }));
+    return error === '';
+  };
+
+  const validateAllFields = () => {
+    const fieldsToValidate = [
+      ['year', offer.year],
+      ['msrp', offer.msrp],
+      ['discount', offer.discount],
+      ['sellingPrice', offer.sellingPrice || (offer.msrp - offer.discount)],
+      ['make', offer.make],
+      ['model', offer.model],
+      ['monthly', offer.lease?.monthly],
+      ['moneyFactor', offer.lease?.moneyFactor],
+      ['residual', offer.lease?.residual],
+      ['taxRate', offer.lease?.taxRate]
+    ];
+
+    let hasErrors = false;
+    const newErrors = {};
+
+    fieldsToValidate.forEach(([field, value]) => {
+      const isValid = validateField(field, value);
+      if (!isValid) {
+        hasErrors = true;
+      }
+    });
+
+    return !hasErrors;
+  };
+
+  const hasAnyErrors = () => {
+    return Object.values(errors).some(err => err !== '');
+  };
 
   useEffect(() => {
     if (id) {
