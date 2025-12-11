@@ -200,6 +200,13 @@ const AdminLayout = ({ children }) => {
       icon: Download,
       path: '/admin/scraper',
       requiredRole: 'admin'
+    },
+    {
+      id: 'offers-management',
+      label: 'Offers Management',
+      icon: Car,
+      path: '/admin/offers',
+      requiredRole: 'editor'
     }
   ];
 
