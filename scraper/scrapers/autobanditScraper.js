@@ -98,28 +98,41 @@ class AutoBanditScraper {
             return isNaN(num) ? 0 : num;
           };
           
-          // Extract all data
-          const title = getText('h2', 'h3', '[class*="title"]', 'a');
-          const paymentText = getText('[class*="payment"]', '[class*="month"]', 'p', 'span');
-          const msrpText = getText('[class*="msrp"]', '[class*="price"]', 'p', 'span');
+          // AutoBandit specific extraction
+          // Title format: "2026 Hyundai Kona"
+          const allText = card.textContent;
+          
+          // Extract year (20XX format)
+          const yearMatch = allText.match(/\b(20[2-9][0-9])\b/);
+          const year = yearMatch ? parseInt(yearMatch[1]) : 2025;
+          
+          // Extract make and model (after year)
+          const afterYear = allText.substring(allText.indexOf(yearMatch?.[0] || '') + 4);
+          const titleMatch = afterYear.match(/^([A-Z][a-z]+)\s+([A-Za-z0-9\s]+?)(?:MSRP|From|\$)/);
+          const make = titleMatch?.[1] || '';
+          const model = titleMatch?.[2]?.trim() || '';
+          
+          const title = `${year} ${make} ${model}`.trim();
+          
+          // Extract payment ($XXX/mo format)
+          const paymentMatch = allText.match(/\$(\d+,?\d*)\s*\/\s*mo/i);
+          const payment = paymentMatch ? getNum(paymentMatch[0]) : 0;
+          
+          // Extract MSRP
+          const msrpMatch = allText.match(/MSRP.*?\$(\d+,?\d+)/);
+          const msrp = msrpMatch ? getNum(msrpMatch[0]) : 0;
+          
+          // Extract incentives
+          const incentivesMatch = allText.match(/\$(\d+,?\d+)\s*in\s*incentives/);
+          const incentives = incentivesMatch ? getNum(incentivesMatch[0]) : 0;
           
           // Image
           const img = card.querySelector('img');
-          const imageUrl = img ? (img.src || img.dataset.src || '') : '';
+          const imageUrl = img ? (img.src || '') : '';
           
           // Link
-          const link = card.querySelector('a');
-          const dealUrl = link ? link.href : '';
-          
-          // Parse title for year/make/model
-          const titleParts = title.split(' ').filter(Boolean);
-          const yearMatch = title.match(/\b(20[2-9][0-9])\b/);
-          const year = yearMatch ? parseInt(yearMatch[1]) : 2025;
-          
-          // Try to extract make/model from title
-          const yearIndex = titleParts.findIndex(p => p === year.toString());
-          const make = titleParts[yearIndex + 1] || '';
-          const model = titleParts.slice(yearIndex + 2).join(' ') || '';
+          const link = card.querySelector('a, button');
+          const dealUrl = link ? (link.href || `https://autobandit.com/deal/${make}-${model}`) : '';
           
           return {
             id: `ab-${index}`,
@@ -131,13 +144,12 @@ class AutoBanditScraper {
             model,
             trim: '',
             year,
-            msrp: getNum(msrpText),
-            payment: getNum(paymentText),
+            msrp,
+            payment,
+            incentives,
             image: imageUrl,
             raw: {
-              titleRaw: title,
-              paymentRaw: paymentText,
-              msrpRaw: msrpText
+              allText: allText.substring(0, 200)
             }
           };
         }).filter(o => o.title && o.payment > 0);
