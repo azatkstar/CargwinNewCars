@@ -3408,12 +3408,13 @@ async def track_ab_conversion(
 
 @api_router.get("/cars")
 async def get_public_cars():
-    """Get all offers from cars collection"""
+    """Get all PUBLISHED offers from cars collection"""
     try:
         from database import get_database
         db = get_database()
         
-        cars_cursor = db.cars.find({})
+        # Only published offers
+        cars_cursor = db.cars.find({"published": True})
         cars = await cars_cursor.to_list(length=200)
         
         for car in cars:
@@ -3421,7 +3422,7 @@ async def get_public_cars():
                 car['id'] = str(car['_id'])
                 del car['_id']
         
-        logger.info(f"Returning {len(cars)} offers")
+        logger.info(f"Returning {len(cars)} PUBLISHED offers")
         return cars
     except Exception as e:
         logger.error(f"Get cars error: {e}")
