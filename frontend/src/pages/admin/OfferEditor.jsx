@@ -625,81 +625,33 @@ export default function OfferEditor() {
         </CardContent>
       </Card>
 
-      {/* Status */}
+      {/* Status - Controls Publishing */}
       <Card>
         <CardHeader>
-          <CardTitle>Status</CardTitle>
+          <CardTitle>Publication Status</CardTitle>
         </CardHeader>
         <CardContent>
-          <Select
-            value={offer.status}
-            onValueChange={(v) => updateField('status', v)}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="active">Active (Published)</SelectItem>
-              <SelectItem value="draft">Draft</SelectItem>
-              <SelectItem value="inactive">Inactive</SelectItem>
-            </SelectContent>
-          </Select>
-        </CardContent>
-      </Card>
-
-      {/* Vehicle Specs */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Vehicle Specifications</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <Label>Body Style</Label>
-              <Input
-                value={offer.specs?.bodyStyle || ''}
-                onChange={(e) => updateField('specs.bodyStyle', e.target.value)}
-                placeholder="Sedan, SUV, Truck"
-              />
-            </div>
-            <div>
-              <Label>Transmission</Label>
-              <Input
-                value={offer.specs?.transmission || ''}
-                onChange={(e) => updateField('specs.transmission', e.target.value)}
-              />
-            </div>
-            <div>
-              <Label>Drivetrain</Label>
-              <Input
-                value={offer.specs?.drivetrain || ''}
-                onChange={(e) => updateField('specs.drivetrain', e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <Label>Exterior Color</Label>
-              <Input
-                value={offer.specs?.exteriorColor || ''}
-                onChange={(e) => updateField('specs.exteriorColor', e.target.value)}
-              />
-            </div>
-            <div>
-              <Label>Interior Color</Label>
-              <Input
-                value={offer.specs?.interiorColor || ''}
-                onChange={(e) => updateField('specs.interiorColor', e.target.value)}
-              />
-            </div>
-            <div>
-              <Label>Fuel Type</Label>
-              <Input
-                value={offer.specs?.fuelType || ''}
-                onChange={(e) => updateField('specs.fuelType', e.target.value)}
-                placeholder="Gas, Hybrid, Electric"
-              />
+          <div className="space-y-3">
+            <Select
+              value={offer.status}
+              onValueChange={(v) => {
+                updateField('status', v);
+                // Active = published immediately
+                updateField('published', v === 'active');
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="active">Active (Published)</SelectItem>
+                <SelectItem value="draft">Draft (Not Published)</SelectItem>
+              </SelectContent>
+            </Select>
+            
+            <div className="text-xs text-gray-600 bg-blue-50 p-3 rounded">
+              ℹ️ Active = Публикуется сразу на /deals<br />
+              Draft = Сохраняется но не показывается
             </div>
           </div>
         </CardContent>
