@@ -38,7 +38,9 @@ const OffersPage = () => {
       return;
     }
     
-    let result = offers.filter(offer => {
+    let result = Array.isArray(offers) ? offers : [];
+    
+    result = result.filter(offer => {
       // Brand filter
       if (filters.brand !== 'all' && !offer.title.toLowerCase().includes(filters.brand.toLowerCase())) {
         return false;
