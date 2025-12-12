@@ -6018,7 +6018,15 @@ async def get_public_cars():
         db = get_database()
         
         # Get all offers from cars collection
-
+        cars = await db.cars.find({}, {"_id": 0}).to_list(length=200)
+        
+        logger.info(f"Returning {len(cars)} offers from cars collection")
+        
+        return cars
+        
+    except Exception as e:
+        logger.error(f"Get cars error: {e}")
+        return []
 
 
 @api_router.get("/offers/{offer_id}")
