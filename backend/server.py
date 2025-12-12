@@ -2843,6 +2843,103 @@ async def create_offer_manual(
         except Exception as img_err:
             logger.warning(f"Image processing failed (non-critical): {img_err}")
             image_warning = "Image processing failed, using original URLs"
+
+
+
+@api_router.delete("/admin/offers/delete-all")
+async def delete_all_offers(
+    confirm: str = "no",
+    current_user: User = Depends(require_admin)
+):
+    """
+    DANGER: Delete ALL offers from ALL collections
+    Requires confirm="yes" parameter
+    """
+    if confirm != "yes":
+        raise HTTPException(
+            status_code=400, 
+            detail="Must confirm with ?confirm=yes parameter"
+        )
+    
+    try:
+        from database import get_database
+        db = get_database()
+        
+        # Delete from all collections
+        result_lots = await db.lots.delete_many({})
+        result_cars = await db.cars.delete_many({})
+        result_featured = await db.featured_deals.delete_many({})
+        
+        total = result_lots.deleted_count + result_cars.deleted_count + result_featured.deleted_count
+        
+        logger.warning(f"MASS DELETE by {current_user.email}: {total} offers deleted")
+        
+        return {
+            "ok": True,
+            "deleted": {
+                "lots": result_lots.deleted_count,
+                "cars": result_cars.deleted_count,
+                "featured_deals": result_featured.deleted_count,
+                "total": total
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Mass delete error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.delete("/admin/offers/{offer_id}")
+async def delete_single_offer(
+    offer_id: str,
+    current_user: User = Depends(require_admin)
+):
+    """Delete single offer by ID"""
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        db = get_database()
+        
+        # Try to convert to ObjectId
+        try:
+            oid = ObjectId(offer_id)
+            query = {"_id": oid}
+        except:
+            # If not valid ObjectId, try as string id
+            query = {"id": offer_id}
+        
+        # Try deleting from all collections
+        deleted = False
+        
+        result = await db.lots.delete_one(query)
+        if result.deleted_count > 0:
+            deleted = True
+            logger.info(f"Deleted from lots: {offer_id}")
+        
+        if not deleted:
+            result = await db.cars.delete_one(query)
+            if result.deleted_count > 0:
+                deleted = True
+                logger.info(f"Deleted from cars: {offer_id}")
+        
+        if not deleted:
+            result = await db.featured_deals.delete_one(query)
+            if result.deleted_count > 0:
+                deleted = True
+                logger.info(f"Deleted from featured_deals: {offer_id}")
+        
+        if not deleted:
+            raise HTTPException(status_code=404, detail="Offer not found")
+        
+        return {"ok": True, "id": offer_id}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete offer error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
         
         return {
             "success": True,
