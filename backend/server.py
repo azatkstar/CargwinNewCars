@@ -3468,10 +3468,21 @@ async def create_offer_manual(offer_data: dict, current_user: User = Depends(req
         
         logger.info(f"Creating offer: {offer_data.get('title')}")
         
+        # Set published=true if status is active
+        if offer_data.get('status') == 'active':
+            offer_data['published'] = True
+        else:
+            offer_data['published'] = False
+        
+        # Auto-generate slug if not provided
+        if not offer_data.get('slug'):
+            title = offer_data.get('title', '')
+            offer_data['slug'] = title.lower().replace(' ', '-').replace('/', '-')
+        
         result = await db.cars.insert_one(offer_data)
         offer_id = str(result.inserted_id)
         
-        logger.info(f"Created: {offer_id}")
+        logger.info(f"Created: {offer_id}, published={offer_data['published']}")
         
         return {"success": True, "offerId": offer_id}
     except Exception as e:
