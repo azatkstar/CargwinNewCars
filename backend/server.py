@@ -6099,8 +6099,15 @@ async def get_public_cars():
         from database import get_database
         db = get_database()
         
-        # Get all offers from cars collection
-        cars = await db.cars.find({}, {"_id": 0}).to_list(length=200)
+        # Get all offers - INCLUDE _id as string id
+        cars_cursor = db.cars.find({})
+        cars = await cars_cursor.to_list(length=200)
+        
+        # Convert _id to id for frontend
+        for car in cars:
+            if car.get('_id'):
+                car['id'] = str(car['_id'])
+                del car['_id']
         
         logger.info(f"Returning {len(cars)} offers from cars collection")
         
