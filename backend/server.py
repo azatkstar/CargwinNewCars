@@ -6121,6 +6121,41 @@ async def get_public_cars():
 @api_router.get("/offers/{offer_id}")
 async def get_offer_by_id(offer_id: str):
     """
+
+
+
+@api_router.get("/cars/{car_id}")
+async def get_car_by_id(car_id: str):
+    """Get single car/offer by ID for detail page"""
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        db = get_database()
+        
+        # Try ObjectId first
+        try:
+            oid = ObjectId(car_id)
+            car = await db.cars.find_one({"_id": oid})
+        except:
+            car = await db.cars.find_one({"id": car_id})
+        
+        if not car:
+            raise HTTPException(status_code=404, detail="Car not found")
+        
+        # Convert _id to id
+        if car.get('_id'):
+            car['id'] = str(car['_id'])
+            del car['_id']
+        
+        return car
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get car by ID error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
     Get single offer by ID
     Unified endpoint for all offer detail pages
     """
