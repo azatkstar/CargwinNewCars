@@ -179,7 +179,7 @@ const OffersPage = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {filteredOffers.map(offer => (
-                  <OfferCard key={offer.id} offer={offer} />
+                  <OfferCard key={offer?.id || offer?._id || Math.random()} offer={offer} />
                 ))}
               </div>
             )}
