@@ -2933,7 +2933,18 @@ async def delete_single_offer(
             result = await db.cars.delete_one(query)
             if result.deleted_count > 0:
                 deleted = True
-
+                logger.info(f"Deleted from cars: {offer_id}")
+        
+        if not deleted:
+            raise HTTPException(status_code=404, detail="Offer not found")
+        
+        return {"ok": True, "id": offer_id}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Delete offer error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @api_router.get("/admin/offers/{offer_id}")
