@@ -14,6 +14,7 @@ const OfferCard = ({ offer }) => {
   const term = offer.termMonths || offer.lease?.termMonths || offer.finance?.termMonths || 0;
   const miles = offer.mileage || offer.lease?.milesPerYear || 0;
   const savings = offer.discount || offer.savings || 0;
+  const stockLeft = offer.stock || null;
   
   // CANONICAL ID - use MongoDB _id or offer.id
   const offerId = offer.id || offer._id || '';
