@@ -32,14 +32,51 @@ export default function OffersManagement() {
 
     try {
       const token = localStorage.getItem('access_token');
-      await fetch(`${BACKEND_URL}/api/admin/offers/${offerId}`, {
+      
+      console.log('Deleting offer:', offerId);
+      
+      const response = await fetch(`${BACKEND_URL}/api/admin/offers/${offerId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
-      loadOffers();
+      const data = await response.json();
+      
+      console.log('Delete response:', data);
+
+      if (data.ok) {
+        alert('Offer deleted successfully');
+        loadOffers();
+      } else {
+        alert(`Error deleting: ${data.detail || 'Unknown error'}`);
+      }
     } catch (err) {
       console.error('Delete error:', err);
+      alert('Error deleting offer');
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (!confirm('⚠️ ОПАСНО! Удалить ВСЕ офферы? Это необратимо!')) return;
+    if (!confirm('Вы уверены? Введённые данные потеряются навсегда!')) return;
+
+    try {
+      const token = localStorage.getItem('access_token');
+      const response = await fetch(`${BACKEND_URL}/api/admin/offers/delete-all?confirm=yes`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      const data = await response.json();
+      
+      if (data.ok) {
+        alert(`Удалено: ${data.deleted.total} offers`);
+        loadOffers();
+      } else {
+        alert('Error deleting all');
+      }
+    } catch (err) {
+      console.error('Mass delete error:', err);
     }
   };
 
