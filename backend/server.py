@@ -6120,8 +6120,33 @@ async def get_public_cars():
 
 @api_router.get("/offers/{offer_id}")
 async def get_offer_by_id(offer_id: str):
-    """
-
+    """Get single offer by ID"""
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        db = get_database()
+        
+        try:
+            oid = ObjectId(offer_id)
+            offer = await db.cars.find_one({"_id": oid})
+        except:
+            offer = await db.cars.find_one({"id": offer_id})
+        
+        if not offer:
+            raise HTTPException(status_code=404, detail="Offer not found")
+        
+        if offer.get('_id'):
+            offer['offerId'] = str(offer['_id'])
+            del offer['_id']
+        
+        return offer
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get offer error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @api_router.get("/cars/{car_id}")
