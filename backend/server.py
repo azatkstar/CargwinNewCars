@@ -6011,13 +6011,22 @@ async def get_audit_logs(
 
 
 @api_router.get("/cars")
-async def get_public_cars(
-    lot_repo: LotRepository = Depends(get_lots_repo)
-):
-    """Get all published cars for public homepage"""
+async def get_public_cars():
+    """Get all offers from unified cars collection"""
     try:
-        # Get all published lots
-        lots = await lot_repo.get_lots(skip=0, limit=100, status="published")
+        from database import get_database
+        db = get_database()
+        
+        # Get all offers from cars collection
+        cars = await db.cars.find({}, {"_id": 0}).to_list(length=200)
+        
+        logger.info(f"Returning {len(cars)} offers from cars collection")
+        
+        return cars
+        
+    except Exception as e:
+        logger.error(f"Get cars error: {e}")
+        return []
         
         # Format for public display
         public_cars = []
