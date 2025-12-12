@@ -2843,7 +2843,19 @@ async def create_offer_manual(
         except Exception as img_err:
             logger.warning(f"Image processing failed (non-critical): {img_err}")
             image_warning = "Image processing failed, using original URLs"
-
+        
+        return {
+            "success": True,
+            "offerId": offer_id,
+            "warning": image_warning
+        }
+        
+    except Exception as e:
+        logger.error(f"Create offer error: {e}", exc_info=True)
+        return {
+            "success": False,
+            "error": str(e)
+        }
 
 
 @api_router.delete("/admin/offers/delete-all")
