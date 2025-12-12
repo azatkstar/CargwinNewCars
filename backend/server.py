@@ -6018,6 +6018,43 @@ async def get_public_cars():
         db = get_database()
         
         # Get all offers from cars collection
+
+
+
+@api_router.get("/offers/{offer_id}")
+async def get_offer_by_id(offer_id: str):
+    """
+    Get single offer by ID
+    Unified endpoint for all offer detail pages
+    """
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        db = get_database()
+        
+        # Try ObjectId first
+        try:
+            oid = ObjectId(offer_id)
+            offer = await db.cars.find_one({"_id": oid}, {"_id": 0})
+        except:
+            # Try string id
+            offer = await db.cars.find_one({"id": offer_id}, {"_id": 0})
+        
+        if not offer:
+            raise HTTPException(status_code=404, detail="Offer not found")
+        
+        # Add computed fields
+        offer['offerId'] = offer_id
+        
+        return offer
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get offer error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
         cars = await db.cars.find({}, {"_id": 0}).to_list(length=200)
         
         logger.info(f"Returning {len(cars)} offers from cars collection")
