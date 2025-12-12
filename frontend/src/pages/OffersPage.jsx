@@ -161,7 +161,14 @@ const OffersPage = () => {
               )}
             </div>
 
-            {loading ? (
+            {error ? (
+              <div className="text-center py-20">
+                <div className="text-red-600 mb-4">Error loading offers: {error}</div>
+                <button onClick={fetchOffers} className="px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                  Retry
+                </button>
+              </div>
+            ) : loading ? (
               <div className="text-center py-20">
                 <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
               </div>
