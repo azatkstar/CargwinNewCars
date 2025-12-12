@@ -9,14 +9,15 @@ const OfferCard = ({ offer }) => {
 
   // Extract data
   const title = offer.title || `${offer.year || ''} ${offer.make || ''} ${offer.model || ''}`.trim();
-  const payment = offer.lease?.monthly || offer.finance?.monthly || 0;
-  const dealType = offer.lease ? 'Lease' : offer.finance ? 'Finance' : 'Cash';
-  const term = offer.lease?.termMonths || offer.finance?.termMonths || 0;
-  const miles = offer.lease?.milesPerYear || 0;
-  const savings = offer.savings || 0;
-  const slug = offer.slug || offer.id;
-  const stockLeft = offer.stock || null;
-
+  const payment = offer.monthlyPayment || offer.lease?.monthly || offer.finance?.monthly || 0;
+  const dealType = offer.dealType || (offer.lease ? 'Lease' : offer.finance ? 'Finance' : 'Cash');
+  const term = offer.termMonths || offer.lease?.termMonths || offer.finance?.termMonths || 0;
+  const miles = offer.mileage || offer.lease?.milesPerYear || 0;
+  const savings = offer.discount || offer.savings || 0;
+  
+  // CANONICAL ID - use MongoDB _id or offer.id
+  const offerId = offer.id || offer._id || '';
+  
   const toggleSaved = (e) => {
     e.preventDefault();
     const saved = JSON.parse(localStorage.getItem('hunter_saved_cars') || '[]');
