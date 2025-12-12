@@ -3029,24 +3029,10 @@ async def update_offer(
             "error": str(e)
         }
 
-                logger.info(f"Deleted from cars: {offer_id}")
-        
-        if not deleted:
-            result = await db.featured_deals.delete_one(query)
-            if result.deleted_count > 0:
-                deleted = True
-                logger.info(f"Deleted from featured_deals: {offer_id}")
-        
-        if not deleted:
-            raise HTTPException(status_code=404, detail="Offer not found")
-        
-        return {"ok": True, "id": offer_id}
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Delete offer error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+
+# ==========================================
+# SCRAPER CONTROL ENDPOINTS
+# ==========================================
 
         
         return {
