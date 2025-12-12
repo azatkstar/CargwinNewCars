@@ -40,7 +40,7 @@ const OfferCard = ({ offer }) => {
   }, [offer.id]);
 
   return (
-    <Link to={`/offer/${offerId}`}>
+    <Link to={`/car/${offerId}`}>
       <div className="bg-white rounded-lg shadow hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer h-full">
         {/* Image */}
         <div className="h-40 sm:h-48 bg-gray-200 overflow-hidden">
