@@ -87,12 +87,19 @@ export default function OffersManagement() {
           <h1 className="text-3xl font-bold mb-2">Управление Офферами</h1>
           <p className="text-gray-600">Редактирование офферов из scraper</p>
         </div>
-        <Link to="/admin/offers/new">
-          <Button>
-            <Plus className="w-4 h-4 mr-2" />
-            Создать Оффер
-          </Button>
-        </Link>
+        <div className="flex gap-2">
+          {offers.length > 0 && (
+            <Button onClick={handleDeleteAll} variant="destructive">
+              🗑️ Delete All
+            </Button>
+          )}
+          <Link to="/admin/offers/new">
+            <Button>
+              <Plus className="w-4 h-4 mr-2" />
+              Создать Оффер
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <Card>
