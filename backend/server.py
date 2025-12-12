@@ -3398,6 +3398,8 @@ async def track_ab_conversion(
         return {"ok": True, "message": "Conversion tracked"}
         
     except Exception as e:
+        logger.error(f"Track conversion error: {e}")
+        return {"ok": False}
 
 
 # ==========================================
