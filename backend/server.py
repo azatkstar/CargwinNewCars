@@ -2933,6 +2933,91 @@ async def delete_single_offer(
             result = await db.cars.delete_one(query)
             if result.deleted_count > 0:
                 deleted = True
+
+
+
+@api_router.get("/admin/offers/{offer_id}")
+async def get_offer_for_edit(offer_id: str, current_user: User = Depends(require_editor)):
+    """Get offer for editing in admin panel"""
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        db = get_database()
+        
+        # Try ObjectId
+        try:
+            oid = ObjectId(offer_id)
+            offer = await db.cars.find_one({"_id": oid})
+        except:
+            offer = await db.cars.find_one({"id": offer_id})
+        
+        if not offer:
+            raise HTTPException(status_code=404, detail="Offer not found")
+        
+        # Convert _id to string
+        if offer.get('_id'):
+            offer['id'] = str(offer['_id'])
+            del offer['_id']
+        
+        return offer
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get offer for edit error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.put("/admin/offers/{offer_id}")
+async def update_offer(
+    offer_id: str,
+    offer_data: dict,
+    current_user: User = Depends(require_admin)
+):
+    """Update existing offer"""
+    try:
+        from database import get_database
+        from bson import ObjectId
+        
+        db = get_database()
+        
+        # Remove id fields to avoid conflicts
+        offer_data.pop('_id', None)
+        offer_data.pop('id', None)
+        
+        # Try ObjectId
+        try:
+            oid = ObjectId(offer_id)
+            result = await db.cars.update_one(
+                {"_id": oid},
+                {"$set": offer_data}
+            )
+        except:
+            result = await db.cars.update_one(
+                {"id": offer_id},
+                {"$set": offer_data}
+            )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Offer not found")
+        
+        logger.info(f"Updated offer: {offer_id}")
+        
+        return {
+            "success": True,
+            "offerId": offer_id
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Update offer error: {e}")
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
                 logger.info(f"Deleted from cars: {offer_id}")
         
         if not deleted:
