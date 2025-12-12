@@ -10,6 +10,7 @@ const OffersPage = () => {
   const [offers, setOffers] = useState([]);
   const [filteredOffers, setFilteredOffers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [activeFilters, setActiveFilters] = useState(null);
 
   useEffect(() => {
@@ -19,12 +20,29 @@ const OffersPage = () => {
   const fetchOffers = async () => {
     try {
       const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      if (!BACKEND_URL) {
+        throw new Error('Backend URL not configured');
+      }
+
       const response = await fetch(`${BACKEND_URL}/api/cars`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
       const data = await response.json();
-      setOffers(data);
-      setFilteredOffers(data);
+      
+      // Ensure data is array
+      const offersArray = Array.isArray(data) ? data : [];
+      
+      setOffers(offersArray);
+      setFilteredOffers(offersArray);
+      setError(null);
     } catch (error) {
       console.error('Failed to fetch offers:', error);
+      setError(error.message);
+      setOffers([]);
+      setFilteredOffers([]);
     } finally {
       setLoading(false);
     }
