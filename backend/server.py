@@ -3592,4 +3592,4 @@ async def delete_all_offers(confirm: str = "no", current_user: User = Depends(re
 
 
 # Include app with API router
-app.include_router(api_router, prefix=settings.API_V1_PREFIX)
+app.include_router(api_router)
